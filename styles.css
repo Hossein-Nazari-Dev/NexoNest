@@ -1,0 +1,171 @@
+html {
+  padding: 5px 20px;
+  font-family: 'Arial Narrow';
+  background-color: #d6e9c7;
+  filter: saturate(10%);
+  margin: auto;
+  width: 90%;
+  height: 90%;
+}
+
+body {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  color: #253237;
+}
+
+
+
+.header-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header-title {
+  margin: 0;
+  padding-top: 5px;
+  font-size: 3em;
+  color: rgb(42, 92, 59);
+}
+
+.header-subtitle {
+  margin: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgb(42, 92, 59);
+}
+
+
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: green;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  background: rgba(154, 230, 166, 0.829);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: #9ae6a6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  border-top: 5px solid rgb(107, 184, 133);
+  border-bottom: 5px solid rgb(87, 148, 107);
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.nav-item {
+  position: relative;
+  padding: 10px 20px;
+}
+
+.nav-item a {
+  display: block;
+  color: #253237;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover > a {
+  color: green;
+  text-shadow: 0 1px 2px rgba(37, 50, 55, 0.5);
+}
+
+.submenu {
+  display: block; /* تغییر به block برای استفاده از transition */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px); /* حرکت اولیه به سمت بالا */
+  background: rgba(154, 230, 166, 0.8);
+  padding: 10px 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  min-width: 150px;
+  font-weight: normal;
+  font-size: 0.9em;
+  opacity: 0; /* مخفی کردن زیرمنو در حالت عادی */
+  visibility: hidden; /* جلوگیری از تعامل با زیرمنو در حالت مخفی */
+  transition: opacity 1s ease, transform 1s ease; /* انیمیشن برای opacity و transform */
+}
+
+.submenu-item {
+  padding: 10px;
+}
+
+.submenu-item a {
+  display: block;
+  color: #253237;
+}
+
+.nav-item:hover .submenu {
+  opacity: 1; /* نمایش زیرمنو */
+  visibility: visible; /* فعال کردن تعامل با زیرمنو */
+  transform: translateX(-50%) translateY(0); /* بازگشت به موقعیت اصلی */
+}
+
+.content {
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
+/* سایر استایل‌ها بدون تغییر باقی می‌مانند */
+
+.submenu-item a {
+  display: block;
+  color: #253237;
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* اضافه کردن transition برای text-shadow */
+}
+
+.submenu-item a:hover {
+  color: green;
+  text-shadow: 0 1px 2px rgba(37, 50, 55, 0.5); /* اضافه کردن text-shadow هنگام هاور */
+}
+
+.about-us {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 1000px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about-us p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.about-us strong {
+  color: #3498db;
+  font-weight: bold;
+}
