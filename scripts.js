@@ -1,19 +1,10 @@
-// تابع برای باز کردن مودال
-function openModal(modalId) {
-  document.getElementById(modalId).style.display = "block";
-}
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(function() {
+      const typingElement = document.querySelector('.typing-animation');
+      typingElement.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end';
 
-// تابع برای بستن مودال
-function closeModal(modalId) {
-  document.getElementById(modalId).style.display = "none";
-}
-
-// بستن مودال با کلیک بیرون از آن
-window.onclick = function(event) {
-  let modals = document.querySelectorAll('.modal');
-  modals.forEach(modal => {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-  });
-}
+      typingElement.addEventListener('animationend', function() {
+          typingElement.style.borderRight = 'none'; 
+      });
+  }, 3000); 
+});
