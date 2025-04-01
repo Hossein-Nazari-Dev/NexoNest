@@ -1,0 +1,103 @@
+
+/* ==================== MAIN CONTENT ==================== */
+.content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 70vh;
+  padding-bottom: 1px;
+}
+
+.fixed-grid-container {
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.grid-content {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 5px;
+  max-height: 100px;
+  background: color-mix(in srgb, var(--border-primary) 20%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--border-primary) 50%, transparent);
+  padding: 10px;
+  padding-top: 300px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--bg-tertiary), 0 0 20px var(--bg-secondary);
+  animation: softPulse 8s infinite ease-in-out;
+}
+
+.grid-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--bg-tertiary) 50%, transparent),
+    transparent
+  );
+  animation: borderSlide 3s infinite linear;
+}
+
+.grid-column {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-right: 5px;
+}
+
+.grid-column:nth-child(odd) {
+  align-items: flex-start;
+}
+
+.grid-column:nth-child(even) {
+  align-items: flex-end;
+  flex-direction: column-reverse;
+}
+
+.grid-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--pach-color);
+  transition: var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.grid-item:hover {
+  transform: scale(1.1);
+  position: relative;
+  z-index: 999;
+  box-shadow: var(--shadow-lg);
+  box-shadow: 0 0 20px
+    color-mix(in srgb, var(--border-primary) 80%, transparent);
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.grid-item:hover .overlay {
+  opacity: 1;
+}

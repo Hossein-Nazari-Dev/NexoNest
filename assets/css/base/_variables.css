@@ -1,0 +1,61 @@
+:root {
+  /* پالت رنگی اصلی */
+
+
+
+  /* پالت رنگی کهکشانی - قابل تنظیم */
+  --galaxy-dark: #020617;    /* تاریک‌ترین بخش فضا */
+  --galaxy-mid: #1a1a3a;     /* رنگ میانی */
+  --galaxy-accent: #0a0a2a;  /* نقاط تاکیدی */
+  
+  /* ابرهای کیهانی */
+  --nebula-primary: rgba(40, 42, 86, 0.8);
+  --nebula-secondary: rgba(60, 30, 80, 0.6);
+  
+  /* ستاره‌ها و نقاط نورانی */
+  --star-bright: rgba(220, 221, 221, 0.3); /* روشن‌ترین ستاره‌ها */
+  --star-dim: rgba(220, 221, 221, 0.15);    /* ستاره‌های کم‌نور */
+  --star-tiny: rgba(220, 221, 221, 0.05);   /* ستاره‌های ریز */
+  
+  /* تنظیمات انیمیشن */
+  --animation-duration: 25s;
+  --animation-pulse-speed: 15s;
+
+
+
+  --bg-primary: #020617;
+  --bg-secondary: #1a1a3a;
+  --bg-tertiary: #0a0a2a;
+  --pach-color: #def3eff1;
+
+  /* رنگ‌های حاشیه */
+  --border-primary: rgba(220, 221, 221, 0.3);
+
+  /* رنگ‌های اکسنت */
+  --accent-blue: #7ba9df;
+  --accent-green: #9fcfaf;
+  --accent-blue-hover: #163a66;
+  --accent-green-hover: #2e7a4a;
+
+  /* رنگ‌های متن */
+  --text-primary: #24262b;
+  --text-secondary: #718096;
+  --text-light: #ffffff;
+
+  /* افکت‌ها */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --glow-blue: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  --glow-green: 0 0 0 3px rgba(80, 200, 120, 0.2);
+
+  /* انیمیشن‌ها */
+  --transition-fast: all 0.15s ease-out;
+  --transition-normal: all 0.3s ease-out;
+  --transition-slow: all 0.45s ease-out;
+
+  /* افکت شیشه‌ای */
+  --glass-opacity: 0.2;
+  --glass-blur: 5px;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+}

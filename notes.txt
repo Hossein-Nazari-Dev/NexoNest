@@ -1,2 +1,0 @@
-1.bookmark will used to go on a specific topic on html page. it is good for documenting
-2. image map can help you to put some clickable area on different areas of images.

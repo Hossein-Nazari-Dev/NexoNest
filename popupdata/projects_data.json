@@ -1,0 +1,47 @@
+{
+  "octomass": {
+    "title": "OctoMass Plugin",
+    "category": "Plugin",
+    "description": "A revolutionary plugin for parametric massing in architectural design...",
+    "link": "projects/octomass.html",
+    "linkText": "View Plugin Details",
+    "imageUrl": "img/plugins/octomass-preview.jpg"
+  },
+
+
+  "octoland": {
+    "title": "OctoLand Plugin",
+    "category": "Plugin",
+    "description": "Advanced landscape design tool that integrates terrain modeling...",
+    "link": "projects/octoland.html",
+    "linkText": "Explore Plugin",
+    "imageUrl": "img/plugins/octoland-preview.jpg"
+  },
+
+  "oasis": {
+    "title": "Oasis Competition",
+    "category": "Competition",
+    "description": "A revolutionary plugin for parametric massing in architectural design...",
+    "link": "projects/octomass.html",
+    "linkText": "View Plugin Details",
+    "imageUrl": "img/plugins/octomass-preview.jpg"
+  },
+
+  "boxmorphe": {
+    "title": "Oasis Competition",
+    "category": "Competition",
+    "description": "A revolutionary plugin for parametric massing in architectural design...",
+    "link": "projects/octomass.html",
+    "linkText": "View Plugin Details",
+    "imageUrl": "img/plugins/octomass-preview.jpg"
+  },
+
+  "rhinoflow": {
+    "title": "Oasis Competition",
+    "category": "Competition",
+    "description": "A revolutionary plugin for parametric massing in architectural design...",
+    "link": "projects/octomass.html",
+    "linkText": "View Plugin Details",
+    "imageUrl": "img/plugins/octomass-preview.jpg"
+  }
+}

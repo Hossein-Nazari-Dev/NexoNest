@@ -1,0 +1,32 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px;
+}
+
+.header-group {
+  display: flex;
+}
+
+.logo-container img {
+  width: 120px;
+  height: auto;
+}
+
+.header-title {
+  margin: 0;
+  padding-top: 3px;
+  font-size: clamp(1rem, 3vw, 5rem);
+  color: var(--accent-green);
+  white-space: nowrap;
+  text-shadow: var(--glow-green);
+}
+
+.header-subtitle {
+  margin: 5px 0;
+  font-size: clamp(0.6rem, 0.9vw, 1.1rem);
+  font-weight: 100;
+  color: var(--pach-color);
+  white-space: nowrap;
+}

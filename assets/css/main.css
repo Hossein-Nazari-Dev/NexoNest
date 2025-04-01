@@ -1,0 +1,39 @@
+
+
+
+
+/* پایه */
+@import "./base/_reset.css";
+@import "./base/_variables.css";
+
+@import "./components/_header.css";
+@import "./components/_navbar.css";
+@import "./components/_particles.css";
+@import "./components/_popup.css";
+
+@import "./layouts/_grid.css";
+
+
+
+
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+  .grid-content {
+    flex-direction: column;
+  }
+
+  .popup-content {
+    padding: 20px;
+    width: 85%;
+  }
+}
+
+@media (orientation: portrait) {
+  body {
+    width: 95%;
+    height: auto;
+    min-height: 95%;
+    margin: 2.5% auto;
+  }
+}

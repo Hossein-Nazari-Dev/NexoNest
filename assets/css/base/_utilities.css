@@ -1,0 +1,14 @@
+/* کلاس‌های کمکی عمومی */
+.transition-fast {
+  transition: var(--transition-fast);
+}
+
+.transition-normal {
+  transition: var(--transition-normal);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+/* ... سایر کلاس‌های کمکی */

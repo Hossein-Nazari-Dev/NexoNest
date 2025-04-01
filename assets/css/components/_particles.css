@@ -1,0 +1,61 @@
+
+.particles-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    /* لایه‌های اصلی */
+    linear-gradient(145deg, var(--galaxy-dark) 0%, var(--galaxy-accent) 60%, var(--galaxy-mid) 100%),
+    radial-gradient(circle at 70% 20%, var(--nebula-primary) 0%, transparent 40%),
+    radial-gradient(circle at 30% 70%, var(--nebula-secondary) 0%, transparent 50%),
+    
+    /* نقاط نورانی */
+    radial-gradient(circle at 80% 30%, var(--star-bright) 0%, transparent 70%),
+    radial-gradient(circle at 20% 60%, var(--star-dim) 0%, transparent 80%),
+    
+    /* زمینه ستاره‌ای */
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      var(--star-tiny) 0px,
+      var(--star-tiny) 1px,
+      transparent 2px,
+      transparent 10px
+    );
+  
+  /* انیمیشن‌های کنترل‌شده با متغیر */
+  animation: 
+    galaxyMove var(--animation-duration) infinite alternate ease-in-out,
+    galaxyPulse var(--animation-pulse-speed) infinite alternate ease-in-out;
+}
+
+
+@keyframes galaxyMove {
+  0% {
+    background-position: 
+      0 0,
+      70% 20%, 30% 70%,
+      80% 30%, 20% 60%,
+      50% 50%;
+  }
+  100% {
+    background-position: 
+      0 0,
+      75% 25%, 35% 65%,
+      85% 35%, 25% 55%,
+      55% 45%;
+  }
+}
+
+@keyframes galaxyPulse {
+  0%, 100% {
+    opacity: 0.95;
+    filter: brightness(0.9);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.1);
+  }
+}
