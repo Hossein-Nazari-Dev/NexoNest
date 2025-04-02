@@ -3,37 +3,98 @@
 
 
 /* پایه */
-@import "./base/_reset.css";
-@import "./base/_variables.css";
+@import "./base/-reset.css";
+@import "./base/-variables.css";
 
-@import "./components/_header.css";
-@import "./components/_navbar.css";
-@import "./components/_particles.css";
-@import "./components/_popup.css";
+@import "./components/-header.css";
+@import "./components/-navbar.css";
+@import "./components/-particles.css";
+@import "./components/-popup.css";
 
-@import "./layouts/_grid.css";
-
-
+@import "./layouts/-grid.css";
 
 
-
-/* رسپانسیو */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .grid-content {
-    flex-direction: column;
-  }
-
-  .popup-content {
-    padding: 20px;
-    width: 85%;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
 }
 
-@media (orientation: portrait) {
+@media (max-width: 768px) {
+  /* Header adjustments */
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-subtitle {
+    display: none;
+  }
+  
+  /* Navbar hamburger menu */
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    display: none;
+  }
+  
+  .nav-list.active {
+    display: flex;
+  }
+  
+  .nav-item {
+    padding: 8px 0;
+  }
+  
+  .submenu {
+    position: static;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .nav-item.active .submenu {
+    max-height: 500px;
+  }
+  
+  /* Hamburger button */
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  /* Grid adjustments */
+  .grid-content {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
   body {
-    width: 95%;
-    height: auto;
-    min-height: 95%;
-    margin: 2.5% auto;
+    border-width: 2px;
+    margin: 10px auto;
+    width: calc(100% - 20px);
+  }
+  
+  .grid-content {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+  
+  .grid-item {
+    border-width: 0.5px;
   }
 }

@@ -5,6 +5,8 @@ import { setupNavigationFilter } from './modules/navigation-filter.js';
 import { initParticles } from './modules/particles.js';
 import { setupPopup } from './modules/popup.js';
 import { initSubmenu } from './modules/submenu-handler.js';
+import { initHamburgerMenu } from './modules/hamburger-menu.js'; // اضافه کردن import جدید
+
 
 
 
@@ -16,7 +18,7 @@ async function initializeApp() {
     // بارگذاری کامپوننت‌ها با مسیرهای صحیح
     await Promise.all([
       loadComponent('../../components/header.html', 'header-container'),
-      loadComponent('../../components/navbar.html', 'navigation-bar'),
+      // loadComponent('../../components/navbar.html', 'navigation-bar'),
       loadComponent('../../components/popup.html', 'popup-manager'),
       loadComponent('../../components/main-content.html', 'main-content')
     ]);
@@ -26,6 +28,8 @@ async function initializeApp() {
     initParticles();
     setupPopup();
     initSubmenu();
+    initHamburgerMenu(); // فراخوانی تابع جدید
+
 
     console.log('App initialized successfully');
   } catch (error) {

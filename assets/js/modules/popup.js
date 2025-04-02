@@ -149,7 +149,7 @@ export function setupPopup() {
    */
   const loadProjectData = async () => {
     try {
-      const response = await fetch('popupData/projects_data.json');
+      const response = await fetch('popupdata/projects_data.json');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

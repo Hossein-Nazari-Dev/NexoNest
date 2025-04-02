@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hossein Nazari - Interactive Resume</title>
+
+
+
+
+  <style>
+    :root {
+      --galaxy-dark: #020617;
+      --galaxy-mid: #1a1a3a;
+      --pach-color: #def3eff1;
+      --accent-blue: #7ba9df;
+      --accent-green: #9fcfaf;
+      --border-primary: rgba(220, 221, 221, 0.3);
+
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+
+      /* Transitions */
+      --transition-duration: 0.5s;
+      --transition-timing: ease;
+    }
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--galaxy-dark);
+      color: var(--pach-color);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* انیمیشن پارتیکل */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: var(--pach-color);
+      border-radius: 50%;
+      opacity: 0.4;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease-out;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      width: 280px;
+      background-color: var(--galaxy-mid);
+      padding: var(--space-lg) var(--space-md);
+      position: fixed;
+      height: 100vh;
+      border-right: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-duration) var(--transition-timing);
+      z-index: 10;
+    }
+
+    .sidebar:hover {
+      border-right: 1px solid;
+      border-image: linear-gradient(to bottom, transparent, var(--accent-green), transparent) 1;
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent-green);
+      margin: 0 auto var(--space-md);
+      display: block;
+      box-shadow: 0 0 20px rgba(159, 207, 175, 0.3);
+      transition: all var(--transition-duration) var(--transition-timing);
+    }
+
+    .profile-img:hover {
+      box-shadow: 0 0 30px rgba(159, 207, 175, 0.6);
+      transform: scale(1.05);
+    }
+
+    .name {
+      color: var(--accent-green);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+      font-size: 1rem;
+    }
+
+    /* ===== Navigation ===== */
+    .nav-menu {
+      margin-top: var(--space-sm);
+      flex-grow: 1;
+    }
+
+    .nav-link {
+      display: block;
+      color: var(--pach-color);
+      text-decoration: none;
+      padding: 0.8rem 1rem;
+      margin-bottom: var(--space-xs);
+      border-radius: 4px;
+      transition: all var(--transition-duration) var(--transition-timing);
+      position: relative;
+      font-size: 1rem;
+      font-weight: 500;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(123, 169, 223, 0.2), transparent);
+      transition: all var(--transition-duration) var(--transition-timing);
+    }
+
+    .nav-link:hover {
+      background-color: rgba(123, 169, 223, 0.1);
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
+    }
+
+    .nav-link.active {
+      background-color: var(--accent-blue);
+      color: white;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background-color: var(--accent-green);
+    }
+
+    /* ===== Main Content ===== */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: var(--space-xl);
+      position: relative;
+    }
+
+    .scroll-indicator::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      transform: translate(-50%, 50%);
+      transition: all 0.3s ease;
+    }
+
+    .scroll-indicator.active::after {
+      width: 12px;
+      height: 12px;
+      opacity: 1;
+    }
+
+    .scroll-indicator.inactive::after {
+      transform: translate(-50%, 50%) scale(1.5);
+      opacity: 0.5;
+    }
+
+    /* ===== Sections ===== */
+    section {
+      min-height: 100vh;
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid var(--border-primary);
+      scroll-snap-align: start;
+      transition: all var(--transition-duration) var(--transition-timing);
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    h2 {
+      color: var(--accent-green);
+      font-size: 2rem;
+      margin-bottom: var(--space-md);
+      position: relative;
+      padding-bottom: var(--space-xs);
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--accent-green);
+      transition: width var(--transition-duration) var(--transition-timing);
+    }
+
+    section:hover h2::after {
+      width: 100px;
+    }
+
+
+
+    /* ===== Timeline ===== */
+    .timeline-item {
+      display: flex;
+      margin-bottom: var(--space-lg);
+      opacity: 0.9;
+      transition: all var(--transition-duration) var(--transition-timing);
+    }
+
+    .timeline-item:hover {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    .timeline-period {
+      width: 120px;
+      color: var(--accent-blue);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      flex: 1;
+      padding-left: var(--space-sm);
+      position: relative;
+    }
+
+    .timeline-content::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--accent-green);
+    }
+
+    .timeline-content::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 15px;
+      bottom: -2rem;
+      width: 2px;
+      background-color: var(--accent-green);
+      opacity: 0.3;
+    }
+
+    .timeline-item:last-child .timeline-content::after {
+      display: none;
+    }
+
+    h3 {
+      color: white;
+      margin-bottom: 0.3rem;
+      font-size: 1.2rem;
+    }
+
+    .company,
+    .university {
+      font-style: italic;
+      opacity: 0.8;
+      margin-bottom: var(--space-xs);
+      display: block;
+      color: var(--accent-blue);
+    }
+
+
+
+    /* ===== Experience List ===== */
+    .experience-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: var(--space-sm);
+    }
+
+    .experience-point {
+      position: relative;
+      margin-bottom: var(--space-md);
+      padding-left: var(--space-sm);
+    }
+
+    .experience-title-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+
+    .experience-title {
+      position: relative;
+      cursor: pointer;
+      transition: all var(--transition-duration) var(--transition-timing);
+    }
+
+    .experience-title::before {
+      content: '▹';
+      position: absolute;
+      left: -1.2rem;
+      color: var(--accent-green);
+    }
+
+    /* اضافه کردن این استایل‌ها */
+    .experience-title-wrapper,
+    .experience-point {
+      position: relative;
+      z-index: 1;
+    }
+
+    .experience-title-wrapper::after,
+    .experience-point::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      bottom: -5px;
+      left: -5px;
+      z-index: -1;
+    }
+
+    .tooltip-connector {
+      pointer-events: none;
+    }
+
+
+
+    /* ===== Tooltip ===== */
+    .tooltip-content {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      padding: var(--space-lg);
+      box-sizing: border-box;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-duration) var(--transition-timing);
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+
+    .tooltip-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .tooltip-content li::before {
+      content: '-';
+      position: absolute;
+      left: 0;
+    }
+
+    .tooltip-content li {
+      padding: 0.3rem 0;
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* استایل لیست توضیحات تولتیپ */
+    .tooltip-content .no-bullets {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .tooltip-content .no-bullets li {
+      padding: 0.8rem 0;
+      /* افزایش فاصله عمودی */
+      position: relative;
+      padding-left: 1.2rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      /* افزایش فاصله بین خطوط */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      /* خط جداکننده ظریف */
+      transition: all 0.3s ease;
+    }
+
+    .tooltip-content .no-bullets li:last-child {
+      border-bottom: none;
+      /* حذف خط برای آخرین آیتم */
+    }
+
+    .tooltip-content .no-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-green);
+      font-size: 1.2rem;
+    }
+
+    .tooltip-content .no-bullets li:hover {
+      transform: translateX(5px);
+      color: var(--accent-green);
+    }
+
+
+    /* ===== Tooltip Content Styles ===== */
+    /* پنل شیشه‌ای */
+    .glass-tooltip-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 30%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border-left: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px 0 0 12px;
+      z-index: 999;
+      padding: 3rem;
+      overflow-y: auto;
+      transform: translateX(100%);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .glass-tooltip-panel.active {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* محتوای تولتیپ */
+    .tooltip-content {
+      display: none;
+      /* مخفی کردن محتوای اصلی */
+    }
+
+    /* استایل آیتم‌های تجربه */
+    .experience-title-wrapper {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .experience-title-wrapper:hover .experience-title {
+      color: var(--accent-green);
+      transform: translateX(5px);
+    }
+
+    /* محتوای داخل پنل */
+    .glass-tooltip-panel .no-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .glass-tooltip-panel .no-bullets li {
+      padding: 0.8rem 0;
+      position: relative;
+      padding-left: 1.8rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-tooltip-panel .no-bullets li:last-child {
+      border-bottom: none;
+    }
+
+    .glass-tooltip-panel .no-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1.1rem;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+    }
+
+
+
+
+
+
+
+
+    /* ===== Hover Effects ===== */
+    .experience-title-wrapper:hover .experience-title {
+      color: var(--accent-green);
+      transform: translateX(5px);
+    }
+
+
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 240px;
+        padding: var(--space-md) var(--space-sm);
+      }
+
+      .main-content {
+        margin-left: 240px;
+        padding: var(--space-lg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        cursor: default;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        padding: var(--space-md);
+        border-right: none;
+        border-bottom: 1px solid transparent;
+      }
+
+      .sidebar:hover {
+        border-right: none;
+        border-bottom: 1px solid;
+        border-image: linear-gradient(to right, transparent, var(--accent-green), transparent) 1;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: var(--space-md);
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .scroll-indicator,
+      .custom-cursor {
+        display: none;
+      }
+
+      section {
+        min-height: auto;
+        padding: var(--space-md) 0;
+      }
+
+      .timeline-item {
+        flex-direction: column;
+      }
+
+      .timeline-period {
+        width: 100%;
+        margin-bottom: var(--space-xs);
+      }
+
+      .timeline-content {
+        padding-left: 0;
+      }
+
+      .timeline-content::before,
+      .timeline-content::after {
+        display: none;
+      }
+
+      .tooltip-content {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20rem;
+      margin-top: 1.5rem;
+    }
+
+    .second-row {
+      gap: 0rem;
+    }
+
+    .skills-title {
+      color: var(--accent-blue);
+      margin-bottom: 1rem;
+    }
+
+    .skill {
+      margin-bottom: 1rem;
+    }
+
+    .skill-name {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+
+
+    .skill-bar {
+      height: 6px;
+      background-color: rgba(220, 221, 221, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-bar::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: var(--accent-green);
+      border-radius: 3px;
+      width: 0;
+      transition: width 1s ease-out;
+    }
+
+
+    .skill[data-level="100"] .skill-bar::after {
+      width: 100%;
+    }
+
+    .skill[data-level="95"] .skill-bar::after {
+      width: 95%;
+    }
+
+    .skill[data-level="90"] .skill-bar::after {
+      width: 90%;
+    }
+
+    .skill[data-level="85"] .skill-bar::after {
+      width: 85%;
+    }
+
+    .skill[data-level="80"] .skill-bar::after {
+      width: 80%;
+    }
+
+    .skill[data-level="75"] .skill-bar::after {
+      width: 75%;
+    }
+
+    .skill[data-level="70"] .skill-bar::after {
+      width: 70%;
+    }
+
+    .skill[data-level="65"] .skill-bar::after {
+      width: 65%;
+    }
+
+
+    #skills li {
+  font-size: 0.8rem;
+  margin-left: 3rem;  /* تنظیم فاصله لیست از چپ */
+
+}
+
+
+
+
+    /* بخش پروژه‌ها */
+    .project-list {
+      margin-top: 2rem;
+    }
+
+    .project-item {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: rgba(26, 26, 58, 0.5);
+      border-radius: 8px;
+      border-left: 3px solid transparent;
+      transition: all var(--transition-duration) ease;
+    }
+
+    .project-item:hover {
+      border-left: 3px solid var(--accent-green);
+      transform: translateX(10px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-title {
+      color: var(--accent-green);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-duration) ease;
+    }
+
+    .project-link:hover {
+      color: var(--accent-green);
+      transform: translateX(5px);
+    }
+
+
+    /* کاستوم کرسر */
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: rgba(159, 207, 175, 0.3);
+      border: 1px solid var(--accent-green);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+    }
+
+    .custom-cursor.active {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(159, 207, 175, 0.1);
+    }
+
+    /* رسپانسیو */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 240px;
+        padding: 1.5rem 1rem;
+      }
+
+      .main-content {
+        margin-left: 240px;
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        cursor: default;
+      }
+
+
+
+
+
+
+
+      .custom-cursor {
+        display: none;
+      }
+
+    }
+
+    .hobby-item {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .hobby-item::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--galaxy-mid);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+      white-space: nowrap;
+      z-index: 100;
+      border: 1px solid var(--accent-green);
+    }
+
+    .hobby-item:hover::after {
+      opacity: 1;
+      bottom: 120%;
+    }
+
+    .contact-link {
+      color: var(--pach-color);
+      text-decoration: none;
+      transition: all var(--transition-duration) ease;
+      position: relative;
+    }
+
+    .contact-link::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent-green);
+      transition: width var(--transition-duration) ease;
+    }
+
+    .contact-link:hover {
+      color: var(--accent-green);
+    }
+
+    .contact-link:hover::after {
+      width: 100%;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* Reduce spacing between experience points */
+    .experience-point {
+      margin-bottom: 0.5rem;
+      /* Reduced from original value */
+    }
+
+
+
+    /* Remove the default bullet from experience titles */
+    .experience-title::before {
+      content: none;
+    }
+  </style>
+
+
+
+</head>
+
+<body>
+  <!-- کاستوم کرسر -->
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <!-- پارتیکل‌های تعاملی -->
+  <div class="particles" id="particles"></div>
+
+  <!-- سایدبار -->
+  <aside class="sidebar">
+    <img src="../img/hossein/profile.png" alt="Hossein Nazari" class="profile-img" />
+
+    <h1 class="name">Hossein Nazari</h1>
+    <p class="title">Computational Designer</p>
+
+    <nav class="nav-menu">
+      <a href="#profile" class="nav-link active">Profile</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="../index.html" class="nav-link external-link">NexoNest</a>
+    </nav>
+  </aside>
+
+  <!-- محتوای اصلی -->
+  <main class="main-content">
+    <!-- بخش پروفایل -->
+    <section id="profile">
+      <!-- بخش پروفایل -->
+      <section id="profile">
+        <h2>Profile</h2>
+
+        <div style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 2rem;
+              margin-top: 1.5rem;
+            ">
+          <!-- بخش اطلاعات شخصی -->
+          <div class="profile-card">
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem">
+              Personal Details
+            </h3>
+
+            <div style="
+                  display: grid;
+                  grid-template-columns: 100px 1fr;
+                  gap: 0.5rem;
+                  margin-bottom: 1rem;
+                ">
+              <span style="opacity: 0.8">Full Name:</span>
+              <span>Hossein Nazari</span>
+
+              <span style="opacity: 0.8">Date of Birth:</span>
+              <span>October 12, 1991</span>
+
+              <span style="opacity: 0.8">Nationality:</span>
+              <span>Iranian</span>
+
+              <span style="opacity: 0.8">Languages:</span>
+              <span>Persian (Native), English (Conversational)</span>
+            </div>
+          </div>
+
+          <!-- بخش خلاصه حرفه‌ای -->
+          <div class="profile-card">
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem">
+              Professional Summary
+            </h3>
+            <p>
+              I am a computational designer and tool developer driven by a
+              deep curiosity for how data, computation, and AI can transform
+              architectural design. My work sits at the intersection of design
+              and technology, with a strong focus on sustainability, energy
+              analysis, human-centered design, and agent-based modeling.
+            </p>
+            <p>
+              I craft custom tools and workflows that empower designers to
+              make smarter, data-informed decisions—leveraging digital twins,
+              simulation, and optimization to push design boundaries. To me,
+              design is a constant exploration, a space where challenges fuel
+              innovation, and every problem is an opportunity to build
+              something better.
+            </p>
+          </div>
+        </div>
+
+        <br /><br />
+
+        <!-- بخش علایق و سرگرمی‌ها -->
+        <div style="margin-top: 2rem">
+          <h3 style="color: var(--accent-blue); margin-bottom: 1rem">
+            Interests & Hobbies
+          </h3>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem">
+            <div class="hobby-item"
+              data-tooltip="Philosophy & Psychology enthusiast - especially when diagnosing my own personality disorders 😅">
+              <span>🧠</span> Mind Explorer
+            </div>
+            <div class="hobby-item" data-tooltip="Creating glitch art and generative designs with Processing">
+              <span>🎨</span> Digital Art
+            </div>
+            <div class="hobby-item" data-tooltip="Certified 20,000 Leagues Under My Couch Cushions">
+              <span>📚</span> Sci-Fi Literature
+            </div>
+            <div class="hobby-item" data-tooltip="Growing 'Dragon's Breath' chili peppers on my balcony">
+              <span>🌱</span> Urban Gardening
+            </div>
+            <div class="hobby-item" data-tooltip="Conquered 3 peaks last year - next goal: Mount Damavand">
+              <span>🏔️</span> Hiking
+            </div>
+            <div class="hobby-item" data-tooltip="Rubik's cube PB: 47s (still trying to beat that)">
+
+              <span>😋</span> Experimental Cooking
+            </div>
+            <div class="hobby-item" data-tooltip="Professional listener of music even the creators don't listen to">
+              <span>🎧</span> Music Connoisseur
+            </div>
+            <div class="hobby-item" data-tooltip="Getting lost in Google Earth finding weird places at 3AM">
+              <span>🗺️</span> Digital Exploration
+            </div>
+            <div class="hobby-item" data-tooltip="Breaking things just to fix them (mostly successfully)">
+              <span>🔧</span> DIY Tinkering
+            </div>
+          </div>
+        </div>
+
+        <br /><br />
+        <!-- اطلاعات تماس (همان بخش موجود) -->
+        <div class="contact-info" style="margin-top: 2rem">
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div>
+              <a href="mailto:hossein.nazari.ac@gmail.com" class="contact-link">hossein.nazari.ac@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">LinkedIn</div>
+            <div>
+              <a href="https://www.linkedin.com/in/hossein-nazari-964322185/" target="_blank"
+                class="contact-link">../hossein-nazari</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">GitHub</div>
+            <div>
+              <a href="https://github.com/Hossein-Nazari-Dev" target="_blank"
+                class="contact-link">../Hossein-Nazari-Dev</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Telegram</div>
+            <div>
+              <a href="https://t.me/hosseinnazari91" target="_blank" class="contact-link">../hosseinnazari91</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- بخش تحصیلات -->
+    <section id="education">
+      <h2>Education</h2>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2019 - 2022</div>
+        <div class="timeline-content">
+          <h3>M.A. in Sustainable Architecture</h3>
+          <span class="university">Iran University of Science and Technology (IUST)</span>
+          <p style="margin-bottom: 0.2rem">
+            Thesis: Impact of Buildings Alignment on Energy Efficiency -
+            Design A Residential Complex as case study in Tehran.
+          </p>
+          <p style="margin-top: 0.2rem">
+            Supervisor: Dr. Mohsen Faizi - Dr. Abbas Tarkashvand
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2013 - 2016</div>
+        <div class="timeline-content">
+          <h3>B.A. in Architecture</h3>
+          <span class="university">Soore University</span>
+          <p style="margin-bottom: 0.2rem">
+            Thesis: Designing a Respiratory Rehabilitation Hotel-Hospital.
+            Design A Sample in Urmia, Iran
+          </p>
+          <p style="margin-top: 0.2rem">Supervisor: Eng. Daryoush Kasraei</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <!-- پنل شیشه‌ای ثابت -->
+      <div class="glass-tooltip-panel"></div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2021-Present</div>
+        <div class="timeline-content">
+          <h3>Founder & Computational Designer</h3>
+          <span class="company">NexoNest</span>
+          <ul class="experience-list">
+            <li class="experience-point">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-1">
+                <span class="experience-title">Developing Design Tools to Assist Designers in the Path to
+                  Sustainability</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+
+            <li class="experience-point" style="margin-top: 0.5rem;">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-2">
+                <span class="experience-title">Educational Initiatives and Knowledge Sharing</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- محتوای مخفی تولتیپ‌ها -->
+      <div class="tooltip-content" id="tooltip-1">
+        <ul class="no-bullets">
+          <li>Developed a suite of Grasshopper Plugins for Rhino...</li>
+          <li>These tools enable designers to optimize their designs...</li>
+          <li>The primary goal is to bridge the gap between research...</li>
+        </ul>
+      </div>
+
+      <div class="tooltip-content" id="tooltip-2">
+        <ul class="no-bullets">
+          <li>Conducted comprehensive training programs...</li>
+          <li>Developed and delivered specialized courses...</li>
+          <li>Established an annual Sustainable Development webinar series...</li>
+        </ul>
+      </div>
+
+
+      <div class="timeline-item">
+        <div class="timeline-period">2023-Present</div>
+        <div class="timeline-content">
+          <h3>Python Developer</h3>
+          <span class="company">Morphotect</span>
+          <ul class="experience-list">
+            <li class="experience-point">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-3">
+                <span class="experience-title">Developing Agent-Based Models for Social Digital Twin</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+
+            <li class="experience-point" style="margin-top: 0.5rem;">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-4">
+                <span class="experience-title">Automation Integration for BIM Data Flow</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+
+            <li class="experience-point" style="margin-top: 0.5rem;">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-5">
+                <span class="experience-title">Data Analysis Framework for Simulation Results</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+      <div class="tooltip-content" id="tooltip-3">
+        <ul class="no-bullets">
+          <li>Created Agent-Based Models (ABMs) to simulate human-environment interactions within a Social Digital Twin
+            framework, enabling the study of dynamic social behaviors and environmental impact.</li>
+          <li>Utilized Python for model development, integrating complex behavioral algorithms to simulate realistic
+            interactions between users and their environments in a digital replica.</li>
+          <li>Focused on improving decision-making processes and understanding the influence of human activities on
+            spatial environments and vice versa.</li>
+        </ul>
+      </div>
+
+      <div class="tooltip-content" id="tooltip-4">
+        <ul class="no-bullets">
+          <li>Designed and implemented a system for automating the BIM data extraction from Revit and importing geometry
+            into Unity, optimizing workflows for architectural visualization and simulation.</li>
+          <li>The automation system significantly reduced manual data entry time, enabling faster and more efficient
+            visual representation of architectural designs.</li>
+          <li>Facilitated real-time data synchronization, ensuring that updates in BIM models were accurately reflected
+            in Unity, improving project iteration speed.</li>
+        </ul>
+      </div>
+
+      <div class="tooltip-content" id="tooltip-5">
+        <ul class="no-bullets">
+          <li>Developed a comprehensive Data Analysis Framework using Python, designed to process and analyze simulation
+            data from various sources, including agent-based models and BIM models.</li>
+          <li>The framework included tools for generating reports and visualizations, providing stakeholders with
+            actionable insights to inform design optimization and decision-making processes.</li>
+          <li>Enabled data-driven decision-making, allowing for the identification of performance gaps, improvement
+            opportunities, and design efficiencies in architectural projects.</li>
+        </ul>
+      </div>
+
+
+      <div class="timeline-item">
+        <div class="timeline-period">2022-Present</div>
+        <div class="timeline-content">
+          <h3>Research Assistant & Teaching Assistant</h3>
+          <span class="company">Iran University of Science and Technology</span>
+          <ul class="experience-list">
+            <li class="experience-point">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-6">
+                <span class="experience-title">Research on Sustainable Architecture and Computational Design</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+
+            <li class="experience-point" style="margin-top: 0.5rem;">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-7">
+                <span class="experience-title">Teaching Assistant in Design Studio and Computational
+                  Sustainability</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="tooltip-content" id="tooltip-6">
+        <ul class="no-bullets">
+          <li>Conducted research on Energy Efficiency, Daylighting, and Prefabrication using computational design
+            methodologies to optimize architectural performance and sustainability.</li>
+          <li>Designed and executed detailed research plans, leveraging computational tools like Rhino, Grasshopper, and
+            Python to address complex architectural challenges.</li>
+          <li>Developed Python-based codes and prototypes for generative design and design optimization, contributing to
+            innovative solutions in the field of sustainable architecture.</li>
+          <li>Published findings in research papers, advancing knowledge and practices in the areas of computational
+            design and sustainable architecture.</li>
+        </ul>
+      </div>
+
+      <div class="tooltip-content" id="tooltip-7">
+        <ul class="no-bullets">
+          <li>Assisted in teaching Design Studio 1, mentoring students in conceptualizing and developing architectural
+            projects.</li>
+          <li>Delivered lectures and workshops on Computational Sustainability, focusing on the basics of sustainability
+            in the built environment.</li>
+          <li>Taught Generative Form-Finding techniques, emphasizing early-stage design and utilizing computational
+            tools like Rhino, Grasshopper, and Python.</li>
+          <li>Guided students in applying computational design methods to real-world architectural challenges, fostering
+            critical thinking and innovation.</li>
+        </ul>
+      </div>
+
+
+      <div class="timeline-item">
+        <div class="timeline-period">2024</div>
+        <div class="timeline-content">
+          <h3>Agent-Based Modeling Bootcamp</h3>
+          <span class="company">Collaboration between IUST and Morphotect</span>
+          <ul class="experience-list">
+            <li class="experience-point">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-8">
+                <span class="experience-title">Agent-Based Modeling Bootcamp for Architecture and Urban Design</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="tooltip-content" id="tooltip-8">
+        <ul class="no-bullets">
+          <li>Spearheaded the planning and execution of the Agent-Based Modeling Bootcamp, a collaboration between IUST
+            and Morphotect, focused on architecture and urban design.</li>
+          <li>Designed the curriculum to introduce participants to agent-based modeling concepts, Python programming,
+            and their applications in architecture and urban design.</li>
+          <li>Taught participants how to develop and implement agent-based models using Python, integrating them into
+            real-world design workflows for architectural and urban projects.</li>
+          <li>Managed all aspects of the bootcamp, including logistics, participant engagement, and collaboration with
+            stakeholders from IUST and Morphotect.</li>
+          <li>Trained 42 participants, guiding them through the process of defining problems, writing code, interpreting
+            results, and creating animations for their projects.</li>
+          <li>Supervised 6 mentors to support participants throughout the bootcamp, ensuring high-quality learning and
+            guidance.</li>
+        </ul>
+      </div>
+
+
+      <!-- Architectural Design Experience -->
+      <div class="timeline-item">
+        <div class="timeline-period">2019-2022</div>
+        <div class="timeline-content">
+          <h3>Architectural Designer</h3>
+          <ul class="experience-list">
+
+            <li class="experience-point" style="margin-top: 0.5rem;">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-arch2">
+                <span class="experience-title">Feasibility Studies & Conceptual Design</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+
+            <li class="experience-point" style="margin-top: 0.5rem;">
+              <div class="experience-title-wrapper" data-tooltip-id="tooltip-arch3">
+                <span class="experience-title">Design Team Management</span>
+                <div class="tooltip-connector"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="tooltip-content" id="tooltip-arch2">
+        <ul class="no-bullets">
+          <li>Conducted detailed feasibility studies analyzing zoning regulations, site conditions, and economic
+            factors.</li>
+          <li>Developed multiple conceptual alternatives for client review with cost estimates and phasing strategies.
+          </li>
+          <li>Created schematic design packages including space programs, massing studies, and circulation diagrams.
+          </li>
+          <li>Facilitated client workshops and brainstorming sessions to define project goals and design parameters.
+          </li>
+          <li>Presented design concepts to municipal authorities for preliminary approvals.</li>
+        </ul>
+      </div>
+
+      <div class="tooltip-content" id="tooltip-arch3">
+        <ul class="no-bullets">
+          <li>Managed design teams of 3-5 architects through all project phases from concept to construction documents.
+          </li>
+          <li>Conducted weekly design reviews and coordination meetings to ensure project milestones.</li>
+          <li>Implemented BIM workflows and quality control procedures for design documentation.</li>
+          <li>Mentored junior staff in design development, detailing, and presentation techniques.</li>
+          <li>Coordinated with external consultants including landscape architects and lighting designers.</li>
+        </ul>
+      </div>
+
+
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section id="skills">
+      <h2>Skills</h2>
+    
+      <div class="skills-grid">
+        <!-- Technical Skills Column -->
+        <div>
+          <h3 class="skills-title">Technical Skills</h3>
+          <div class="skill" data-level="95"><span class="skill-name">Python</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="80"><span class="skill-name">C#</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="70"><span class="skill-name">HTML/CSS/JS</span>
+            <div class="skill-bar"></div>
+          </div>
+
+          <div class="skill" data-level="70"><span class="skill-name">.NET</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="85"><span class="skill-name">Git/GitHub</span>
+            <div class="skill-bar"></div>
+          </div>
+        </div>
+    
+        <!-- Software & Tools Column -->
+        <div>
+          <h3 class="skills-title">Software & Tools</h3>
+          <div class="skill" data-level="100"><span class="skill-name">Rhino & Grasshopper</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="85"><span class="skill-name">Revit & BIM</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="90"><span class="skill-name">Rhino Inside</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="100"><span class="skill-name">Ladybug Tools</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="100"><span class="skill-name">Climate Studio</span>
+            <div class="skill-bar"></div>
+          </div>
+        </div>
+    
+        <!-- Hardware & IoT Column -->
+        <div>
+          <h3 class="skills-title">Hardware & IoT</h3>
+          <div class="skill" data-level="85"><span class="skill-name">Arduino</span>
+            <div class="skill-bar"></div>
+          </div>
+          <div class="skill" data-level="70"><span class="skill-name">Raspberry Pi</span>
+            <div class="skill-bar"></div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Second Row - Areas of Expertise & Soft Skills -->
+      <div class="skills-grid second-row">
+        <div>
+          <h3 class="skills-title">Areas of Expertise</h3>
+          <div class="skill"><span class="skill-name"> Computational Design & Development</span>
+            <ul>
+              <li>Designed and implemented plugins for Rhino, Grasshopper, and Revit to streamline workflows.</li>
+              <li>Developed algorithms for geometric analysis, optimization, and generative design.</li>
+              <li>Created simulations for human-environment interactions and urban design.</li>
+            </ul>
+          </div>
+          <div class="skill"><span class="skill-name"> Data & Optimization</span>
+            <ul>
+              <li>Built data analysis frameworks to process and visualize simulation data for decision-making.</li>
+              <li>Applied optimization techniques (e.g., genetic algorithms, machine learning) to solve design challenges.</li>
+            </ul>
+          </div>
+          
+          <div class="skill"><span class="skill-name">Software Development Practices</span>
+            <ul>
+              <li>Proficient in Git/GitHub for collaborative software development.</li>
+              <li>Experience working in Agile teams using Scrum or Kanban methodologies.</li>
+              <li>Skilled in code reviews, documentation, and debugging.</li>
+              <li>Familiar with setting up and maintaining CI/CD pipelines for automated testing and deployment.</li>
+            </ul>
+          </div>
+        </div>
+    
+        <div>
+          <h3 class="skills-title">Soft Skills</h3>
+          <div class="skill"><span class="skill-name">Analytical & Problem Solving</span>
+          <ul>
+            <li>Computational Thinking: Ability to break down complex problems into logical, solvable components, leveraging technical and analytical skills.</li>
+            <li>Problem-Solving: Skilled at identifying issues, analyzing root causes, and developing innovative, practical solutions.</li>
+            <li>Critical Thinking: Strong analytical skills to evaluate ideas, assess alternatives, and make data-driven decisions.</li>
+          </ul>
+          </div>
+          <div class="skill"><span class="skill-name">Teamwork & Collaboration</span>
+            <ul>
+              <li>Collaboration: Experience working in interdisciplinary teams, fostering open communication and shared goals.</li>
+              <li>Mentorship: Proven ability to guide and support students and team members, promoting knowledge sharing and 
+                skill development.</li>
+            </ul>
+          </div>
+          <div class="skill"><span class="skill-name">Adaptability & Learning</span>
+            <ul>
+              <li>Adaptability: Quick to learn new tools, technologies, and methodologies to adapt to changing project requirements.</li>
+              <li> Resilience: Ability to remain focused and productive under pressure or in dynamic environments.</li>
+            </ul>
+          </div>
+          <div class="skill"><span class="skill-name">Rigidity (when needed)</span>
+          <ul>
+            <li>When flexibility is overrated, I can be as rigid as a well-structured algorithm. Sometimes, a little inflexibility is the key to success!</li>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- بخش پروژه‌ها -->
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <div class="project-list">
+        <div class="project-item">
+          <h3 class="project-title">OctoMass Plugin</h3>
+          <p>
+            A parametric massing tool for architectural design that enables
+            rapid generation of complex building forms based on algorithmic
+            rules.
+          </p>
+          <a href="#" class="project-link">View Project Details</a>
+        </div>
+
+        <div class="project-item">
+          <h3 class="project-title">Urban Flow Analysis</h3>
+          <p>
+            Algorithmic approach to analyze and visualize pedestrian movement
+            patterns in urban environments using agent-based modeling.
+          </p>
+          <a href="#" class="project-link">View Project Details</a>
+        </div>
+
+        <div class="project-item">
+          <h3 class="project-title">Computational Geometry Course</h3>
+          <p>
+            Developed a comprehensive educational program teaching
+            computational geometry concepts to designers and architects.
+          </p>
+          <a href="#" class="project-link">View Project Details</a>
+        </div>
+      </div>
+    </section>
+
+  <script>
+
+
+document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute("href");
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      this.scrollToSection(targetSection);
+    }
+  });
+});
+
+
+
+    // سیستم پارتیکل تعاملی
+    class ParticleSystem {
+      constructor() {
+        this.particles = [];
+        this.mouseX = -1000;
+        this.mouseY = -1000;
+        this.mouseInView = false;
+        this.particleContainer = document.getElementById("particles");
+        this.init();
+      }
+
+      init() {
+        // ایجاد ذرات
+        const particleCount = Math.floor(
+          (window.innerWidth * window.innerHeight) / 10000
+        );
+        for (let i = 0; i < particleCount; i++) {
+          this.createParticle();
+        }
+
+        // ردیابی ماوس
+        document.addEventListener("mousemove", (e) => {
+          this.mouseX = e.clientX;
+          this.mouseY = e.clientY;
+        });
+
+        document.addEventListener("mouseenter", () => {
+          this.mouseInView = true;
+        });
+
+        document.addEventListener("mouseleave", () => {
+          this.mouseInView = false;
+        });
+
+        // شروع انیمیشن
+        this.animate();
+      }
+
+      createParticle() {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+
+        // موقعیت اولیه تصادفی
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+
+        // اندازه و شفافیت تصادفی
+        const size = Math.random() * 3 + 1;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.opacity = Math.random() * 0.4 + 0.1;
+
+        // ذخیره خصوصیات ذره
+        particle._x = x;
+        particle._y = y;
+        particle._vx = Math.random() * 2 - 1;
+        particle._vy = Math.random() * 2 - 1;
+        particle._size = size;
+
+        this.particleContainer.appendChild(particle);
+        this.particles.push(particle);
+      }
+
+      animate() {
+        // آپدیت موقعیت ذرات
+        this.particles.forEach((particle) => {
+          // حرکت پایه
+          particle._x += particle._vx * 0.5;
+          particle._y += particle._vy * 0.5;
+
+          // تعامل با ماوس
+          if (this.mouseInView) {
+            const dx = particle._x - this.mouseX;
+            const dy = particle._y - this.mouseY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // منطقه جاذبه
+            if (distance < 200) {
+              // منطقه دفع (نزدیک به ماوس)
+              if (distance < 80) {
+                const force = (80 - distance) * 0.02;
+                particle._x += (dx / distance) * force;
+                particle._y += (dy / distance) * force;
+              }
+              // منطقه جذب (دور از ماوس)
+              else {
+                const force = (1 - distance / 200) * 0.5;
+                particle._x -= (dx / distance) * force;
+                particle._y -= (dy / distance) * force;
+              }
+            }
+          }
+
+          // محدودیت مرزهای صفحه
+          if (particle._x < 0 || particle._x > window.innerWidth) {
+            particle._vx *= -1;
+          }
+          if (particle._y < 0 || particle._y > window.innerHeight) {
+            particle._vy *= -1;
+          }
+
+          // اعمال موقعیت جدید
+          particle.style.left = `${particle._x}px`;
+          particle.style.top = `${particle._y}px`;
+        });
+
+        requestAnimationFrame(() => this.animate());
+      }
+    }
+
+    // کاستوم کرسر
+    class CustomCursor {
+      constructor() {
+        this.cursor = document.getElementById("customCursor");
+        this.init();
+      }
+
+      init() {
+        document.addEventListener("mousemove", (e) => {
+          this.cursor.style.left = `${e.clientX}px`;
+          this.cursor.style.top = `${e.clientY}px`;
+        });
+
+        document.addEventListener("mousedown", () => {
+          this.cursor.classList.add("active");
+        });
+
+        document.addEventListener("mouseup", () => {
+          this.cursor.classList.remove("active");
+        });
+
+        document.querySelectorAll("a, button, .nav-link").forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            this.cursor.classList.add("active");
+          });
+
+          el.addEventListener("mouseleave", () => {
+            this.cursor.classList.remove("active");
+          });
+        });
+      }
+    }
+
+    // سیستم اسکرول و هایلایت منو
+    class ScrollSystem {
+      constructor() {
+        this.sections = document.querySelectorAll("section");
+        this.navLinks = document.querySelectorAll(".nav-link");
+        this.scrollIndicator = document.getElementById("scrollIndicator");
+        this.isScrolling = false;
+        this.lastScrollTime = 0;
+        this.init();
+      }
+
+      init() {
+  // اسکرول با کلیک روی منو (فقط برای لینک‌های بدون کلاس external-link)
+  document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
+
+      if (targetSection) {
+        this.scrollToSection(targetSection);
+      }
+    });
+  });
+
+        // تشخیص اسکرول کاربر
+        window.addEventListener(
+          "wheel",
+          (e) => {
+            if (this.isScrolling) return;
+
+            const delta = e.deltaY;
+            const currentSection = this.getCurrentSection();
+
+            if (delta > 0 && currentSection.nextElementSibling) {
+              // اسکرول به پایین - رفتن به بخش بعدی
+              this.scrollToSection(currentSection.nextElementSibling);
+            } else if (delta < 0 && currentSection.previousElementSibling) {
+              // اسکرول به بالا - رفتن به بخش قبلی
+              this.scrollToSection(currentSection.previousElementSibling);
+            }
+          },
+          { passive: false }
+        );
+
+        // به روز رسانی وضعیت منو و نشانگر
+        window.addEventListener("scroll", () => {
+          this.updateActiveNav();
+          this.updateScrollIndicator();
+        });
+
+        // مقداردهی اولیه
+        this.updateActiveNav();
+        this.updateScrollIndicator();
+      }
+
+      getCurrentSection() {
+        let closestSection = this.sections[0];
+        let minDistance = Infinity;
+        const viewportCenter = window.scrollY + window.innerHeight / 2;
+
+        this.sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          const sectionCenter = sectionTop + sectionHeight / 2;
+          const distance = Math.abs(viewportCenter - sectionCenter);
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestSection = section;
+          }
+        });
+
+        return closestSection;
+      }
+
+      scrollToSection(section) {
+        this.isScrolling = true;
+        window.scrollTo({
+          top: section.offsetTop,
+          behavior: "smooth",
+        });
+
+        // پس از پایان انیمیشن اسکرول
+        setTimeout(() => {
+          this.isScrolling = false;
+          this.updateActiveNav();
+          this.updateScrollIndicator();
+        }, 1000);
+      }
+
+      updateActiveNav() {
+        const currentSection = this.getCurrentSection();
+        const currentSectionId = `#${currentSection.id}`;
+
+        this.navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === currentSectionId) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      updateScrollIndicator() {
+        const currentSection = this.getCurrentSection();
+        const sectionIndex = Array.from(this.sections).indexOf(
+          currentSection
+        );
+        const progress = sectionIndex / (this.sections.length - 1);
+
+        const indicatorHeight = window.innerHeight * 0.6;
+        const indicatorTop =
+          window.innerHeight * 0.2 + window.innerHeight * 0.6 * progress;
+
+        this.scrollIndicator.style.height = `${indicatorHeight}px`;
+        this.scrollIndicator.style.top = `${indicatorTop}px`;
+
+        // بررسی اگر در آخرین بخش هستیم
+        if (currentSection === this.sections[this.sections.length - 1]) {
+          this.scrollIndicator.classList.add("inactive");
+          this.scrollIndicator.classList.remove("active");
+        } else {
+          this.scrollIndicator.classList.add("active");
+          this.scrollIndicator.classList.remove("inactive");
+        }
+      }
+    }
+
+    // راه‌اندازی سیستم‌ها هنگام لود صفحه
+    document.addEventListener("DOMContentLoaded", () => {
+      new ParticleSystem();
+      new CustomCursor();
+      new ScrollSystem();
+
+      // فعال کردن انیمیشن مهارت‌ها هنگام اسکرول
+      const skillsSection = document.getElementById("skills");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animated");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(skillsSection);
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const glassPanel = document.querySelector('.glass-tooltip-panel');
+      let activeWrapper = null;
+
+      // ایجاد یک پل نامرئی بین عنصر و پنل
+      const hoverBridge = document.createElement('div');
+      hoverBridge.className = 'hover-bridge';
+      document.body.appendChild(hoverBridge);
+
+      document.querySelectorAll('.experience-title-wrapper').forEach(wrapper => {
+        const tooltipId = wrapper.getAttribute('data-tooltip-id');
+        const tooltipContent = document.getElementById(tooltipId);
+
+        wrapper.addEventListener('mouseenter', () => {
+          activeWrapper = wrapper;
+          glassPanel.innerHTML = tooltipContent.innerHTML;
+          glassPanel.classList.add('active');
+
+          // موقعیت‌یابی پل
+          const wrapperRect = wrapper.getBoundingClientRect();
+          const panelRect = glassPanel.getBoundingClientRect();
+
+          hoverBridge.style.cssText = `
+        position: fixed;
+        top: ${wrapperRect.bottom}px;
+        right: ${window.innerWidth - panelRect.left}px;
+        height: ${wrapperRect.top - panelRect.bottom}px;
+        width: ${wrapperRect.right - wrapperRect.left}px;
+        z-index: 998;
+        background: transparent;
+      `;
+        });
+
+        wrapper.addEventListener('mouseleave', (e) => {
+          if (!e.relatedTarget ||
+            !(e.relatedTarget === glassPanel || e.relatedTarget === hoverBridge)) {
+            glassPanel.classList.remove('active');
+          }
+        });
+      });
+
+      glassPanel.addEventListener('mouseleave', (e) => {
+        if (!e.relatedTarget ||
+          !(e.relatedTarget === activeWrapper || e.relatedTarget === hoverBridge)) {
+          glassPanel.classList.remove('active');
+        }
+      });
+    });
+
+
+
+
+
+  </script>
+</body>
+
+</html>
