@@ -5,7 +5,6 @@ import { setupNavigationFilter } from './modules/navigation-filter.js';
 import { initParticles } from './modules/particles.js';
 import { setupPopup } from './modules/popup.js';
 import { initSubmenu } from './modules/submenu-handler.js';
-import { initHamburgerMenu } from './modules/hamburger-menu.js'; // اضافه کردن import جدید
 
 
 
