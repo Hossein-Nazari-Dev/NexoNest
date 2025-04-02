@@ -708,21 +708,22 @@
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 5rem;
-      margin-top: 1.5rem;
+      gap: 2rem;
+      margin-top: 1rem;
     }
 
     .second-row {
-      gap: 5rem;
+      gap: 1rem;
+      margin-top: 3rem;
     }
 
     .skills-title {
       color: var(--accent-blue);
-      margin-bottom: 1rem;
+      margin-bottom: 0rem;
     }
 
     .skill {
-      margin-bottom: 1rem;
+      margin-bottom: calc(0.5rem + 0.2vh); /* ترکیب rem و vw برای ریسپانسیو */
     }
 
     .skill-name {
@@ -733,7 +734,7 @@
 
 
     .skill-bar {
-      height: 6px;
+      height: 4px;
       background-color: rgba(220, 221, 221, 0.1);
       border-radius: 3px;
       overflow: hidden;
@@ -1527,7 +1528,6 @@
               <li>Proficient in Git/GitHub for collaborative software development.</li>
               <li>Experience working in Agile teams using Scrum or Kanban methodologies.</li>
               <li>Skilled in code reviews, documentation, and debugging.</li>
-              <li>Familiar with setting up and maintaining CI/CD pipelines for automated testing and deployment.</li>
             </ul>
           </div>
         </div>
@@ -1536,28 +1536,20 @@
           <h3 class="skills-title">Soft Skills</h3>
           <div class="skill"><span class="skill-name">Analytical & Problem Solving</span>
           <ul>
-            <li>Computational Thinking: Ability to break down complex problems into logical, solvable components, leveraging technical and analytical skills.</li>
-            <li>Problem-Solving: Skilled at identifying issues, analyzing root causes, and developing innovative, practical solutions.</li>
-            <li>Critical Thinking: Strong analytical skills to evaluate ideas, assess alternatives, and make data-driven decisions.</li>
+            <li>Computational Thinking & Problem-Solving: Ability to break down complex problems into logical, solvable components and identify root causes to develop innovative, practical solutions using technical and analytical skills.</li>
           </ul>
           </div>
           <div class="skill"><span class="skill-name">Teamwork & Collaboration</span>
             <ul>
-              <li>Collaboration: Experience working in interdisciplinary teams, fostering open communication and shared goals.</li>
-              <li>Mentorship: Proven ability to guide and support students and team members, promoting knowledge sharing and 
-                skill development.</li>
+              <li>Collaboration & Mentorship: Experienced in working within interdisciplinary teams to foster open communication and shared goals, while also guiding and supporting students and team members to promote knowledge sharing and skill development.</li>
             </ul>
           </div>
           <div class="skill"><span class="skill-name">Adaptability & Learning</span>
             <ul>
-              <li>Adaptability: Quick to learn new tools, technologies, and methodologies to adapt to changing project requirements.</li>
-              <li> Resilience: Ability to remain focused and productive under pressure or in dynamic environments.</li>
+              <li>Adaptability & Resilience: Quick to learn new tools, technologies, and methodologies to meet evolving project demands while maintaining focus and productivity in dynamic, high-pressure environments.</li>
+              <li>Rigidity (when needed): When flexibility is overrated, I can be as rigid as a well-structured algorithm. Sometimes, a little inflexibility is the key to success!</li>
             </ul>
           </div>
-          <div class="skill"><span class="skill-name">Rigidity (when needed)</span>
-          <ul>
-            <li>When flexibility is overrated, I can be as rigid as a well-structured algorithm. Sometimes, a little inflexibility is the key to success!</li>
-          </ul>
           </div>
         </div>
       </div>
