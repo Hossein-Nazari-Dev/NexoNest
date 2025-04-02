@@ -171,6 +171,7 @@ document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
         this.sections = document.querySelectorAll("section");
         this.navLinks = document.querySelectorAll(".nav-link");
         this.scrollIndicator = document.getElementById("scrollIndicator");
+        this.tooltips = document.querySelectorAll('.tooltip-content');
         this.isScrolling = false;
         this.init();
       }
@@ -196,6 +197,18 @@ document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add("active");
+              // فعال کردن tooltip مربوطه
+              const tooltipId = entry.target.dataset.tooltipId;
+              if (tooltipId) {
+                document.getElementById(tooltipId).classList.add('active');
+              }
+            } else {
+              entry.target.classList.remove("active");
+              // غیرفعال کردن tooltip مربوطه
+              const tooltipId = entry.target.dataset.tooltipId;
+              if (tooltipId) {
+                document.getElementById(tooltipId).classList.remove('active');
+              }
             }
           });
         }, {threshold: 0.1});
@@ -286,36 +299,6 @@ document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
 
 
 
-
-
-
-
-
-
-    // راه‌اندازی سیستم‌ها هنگام لود صفحه
-    document.addEventListener("DOMContentLoaded", () => {
-      new ParticleSystem();
-      new CustomCursor();
-      new ScrollSystem();
-
-      // فعال کردن انیمیشن مهارت‌ها هنگام اسکرول
-      const skillsSection = document.getElementById("skills");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("animated");
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(skillsSection);
-    });
-
-
-
     document.addEventListener('DOMContentLoaded', function () {
       const glassPanel = document.querySelector('.glass-tooltip-panel');
       let activeWrapper = null;
@@ -364,3 +347,34 @@ document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
         }
       });
     });
+
+
+
+
+
+
+    // راه‌اندازی سیستم‌ها هنگام لود صفحه
+    document.addEventListener("DOMContentLoaded", () => {
+      new ParticleSystem();
+      new CustomCursor();
+      new ScrollSystem();
+
+      // فعال کردن انیمیشن مهارت‌ها هنگام اسکرول
+      const skillsSection = document.getElementById("skills");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animated");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      
+      observer.observe(skillsSection);
+    });
+    
+    
+    
+    
