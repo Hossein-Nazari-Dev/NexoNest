@@ -7,965 +7,8 @@
   <title>Hossein Nazari - Interactive Resume</title>
   <link rel="icon" type="image/x-icon" href="../img/hossein/headicon.ico" />
 
+  <link rel="stylesheet" href="../assets/css/pages/hossein.css" />
 
-
-
-  <style>
-    :root {
-      --galaxy-dark: #020617;
-      --galaxy-mid: #1a1a3a;
-      --pach-color: #def3eff1;
-      --accent-blue: #7ba9df;
-      --accent-green: #9fcfaf;
-      --border-primary: rgba(220, 221, 221, 0.3);
-
-      /* Spacing */
-      --space-xs: 0.5rem;
-      --space-sm: 1rem;
-      --space-md: 1.5rem;
-      --space-lg: 2rem;
-      --space-xl: 3rem;
-
-      /* Transitions */
-      --transition-duration: 0.5s;
-      --transition-timing: ease;
-    }
-
-
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--galaxy-dark);
-      color: var(--pach-color);
-      line-height: 1.6;
-      display: flex;
-      min-height: 100vh;
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* انیمیشن پارتیکل */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background-color: var(--pach-color);
-      border-radius: 50%;
-      opacity: 0.4;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out;
-    }
-
-    /* ===== Sidebar ===== */
-    .sidebar {
-      width: 280px;
-      background-color: var(--galaxy-mid);
-      padding: var(--space-lg) var(--space-md);
-      position: fixed;
-      height: 100vh;
-      border-right: 1px solid transparent;
-      display: flex;
-      flex-direction: column;
-      transition: all var(--transition-duration) var(--transition-timing);
-      z-index: 10;
-    }
-
-    .sidebar:hover {
-      border-right: 1px solid;
-      border-image: linear-gradient(to bottom, transparent, var(--accent-green), transparent) 1;
-    }
-
-    .profile-img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent-green);
-      margin: 0 auto var(--space-md);
-      display: block;
-      box-shadow: 0 0 20px rgba(159, 207, 175, 0.3);
-      transition: all var(--transition-duration) var(--transition-timing);
-    }
-
-    .profile-img:hover {
-      box-shadow: 0 0 30px rgba(159, 207, 175, 0.6);
-      transform: scale(1.05);
-    }
-
-    .name {
-      color: var(--accent-green);
-      text-align: center;
-      margin-bottom: 0.5rem;
-      font-size: 1.8rem;
-      font-weight: 600;
-    }
-
-    .title {
-      text-align: center;
-      margin-bottom: 2rem;
-      opacity: 0.8;
-      font-size: 1rem;
-    }
-
-    /* Profile Section */
-    .profile {
-      text-align: center;
-      padding: var(--space-lg) 0;
-
-    }
-
-
-
-
-/* Contact Grid Styles */
-.contact-info {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  width: 100%;
-  margin-top: 2rem;
-}
-
-.contact-item {
-  background: rgba(26, 26, 58, 0.5);
-  padding: 1.2rem;
-  border-radius: 8px;
-  transition: all var(--transition-duration) ease;
-  border: 1px solid rgba(123, 169, 223, 0.1);
-}
-
-.contact-item:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-green);
-  box-shadow: 0 5px 15px rgba(159, 207, 175, 0.1);
-}
-
-.contact-label {
-  font-size: 0.85rem;
-  opacity: 0.7;
-  margin-bottom: 0.8rem;
-  color: var(--accent-blue);
-  font-weight: 500;
-}
-
-.contact-link {
-  color: var(--pach-color);
-  text-decoration: none;
-  transition: all var(--transition-duration) ease;
-  position: relative;
-  font-size: 0.95rem;
-  display: inline-block;
-  width: 100%;
-}
-
-.contact-link::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: var(--accent-green);
-  transition: width var(--transition-duration) ease;
-}
-
-.contact-link:hover {
-  color: var(--accent-green);
-}
-
-.contact-link:hover::after {
-  width: 100%;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1024px) {
-  .contact-info {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .contact-info {
-    grid-template-columns: 1fr;
-  }
-}
-
-    /* ===== Navigation ===== */
-    .nav-menu {
-      margin-top: var(--space-sm);
-      flex-grow: 1;
-    }
-
-    .nav-link {
-      display: block;
-      color: var(--pach-color);
-      text-decoration: none;
-      padding: 0.8rem 1rem;
-      margin-bottom: var(--space-xs);
-      border-radius: 4px;
-      transition: all var(--transition-duration) var(--transition-timing);
-      position: relative;
-      font-size: 1rem;
-      font-weight: 500;
-      overflow: hidden;
-    }
-
-    .nav-link::before {
-      content: "";
-      position: absolute;
-      left: -100%;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(123, 169, 223, 0.2), transparent);
-      transition: all var(--transition-duration) var(--transition-timing);
-    }
-
-    .nav-link:hover {
-      background-color: rgba(123, 169, 223, 0.1);
-    }
-
-    .nav-link:hover::before {
-      left: 100%;
-    }
-
-    .nav-link.active {
-      background-color: var(--accent-blue);
-      color: white;
-    }
-
-    .nav-link.active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background-color: var(--accent-green);
-    }
-
-    /* ===== Main Content ===== */
-    .main-content {
-      flex: 1;
-      margin-left: 280px;
-      padding: var(--space-xl);
-      position: relative;
-    }
-
-    .scroll-indicator::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-green);
-      border-radius: 50%;
-      transform: translate(-50%, 50%);
-      transition: all 0.3s ease;
-    }
-
-    .scroll-indicator.active::after {
-      width: 12px;
-      height: 12px;
-      opacity: 1;
-    }
-
-    .scroll-indicator.inactive::after {
-      transform: translate(-50%, 50%) scale(1.5);
-      opacity: 0.5;
-    }
-
-    /* ===== Sections ===== */
-    section {
-      min-height: 100vh;
-      padding: var(--space-lg) 0;
-      border-bottom: 1px solid var(--border-primary);
-      scroll-snap-align: start;
-      transition: all var(--transition-duration) var(--transition-timing);
-    }
-
-    section:last-child {
-      border-bottom: none;
-    }
-
-    h2 {
-      color: var(--accent-green);
-      font-size: 2rem;
-      margin-bottom: var(--space-md);
-      position: relative;
-      padding-bottom: var(--space-xs);
-    }
-
-    h2::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 50px;
-      height: 2px;
-      background-color: var(--accent-green);
-      transition: width var(--transition-duration) var(--transition-timing);
-    }
-
-    section:hover h2::after {
-      width: 100px;
-    }
-
-
-
-    /* ===== Timeline ===== */
-    .timeline-item {
-      display: flex;
-      margin-bottom: var(--space-lg);
-      opacity: 0.9;
-      transition: all var(--transition-duration) var(--transition-timing);
-    }
-
-    .timeline-item:hover {
-      opacity: 1;
-      transform: translateX(5px);
-    }
-
-    .timeline-period {
-      width: 120px;
-      color: var(--accent-blue);
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-
-    .timeline-content {
-      flex: 1;
-      padding-left: var(--space-sm);
-      position: relative;
-    }
-
-    .timeline-content::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 5px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: var(--accent-green);
-    }
-
-    .timeline-content::after {
-      content: "";
-      position: absolute;
-      left: 4px;
-      top: 15px;
-      bottom: -2rem;
-      width: 2px;
-      background-color: var(--accent-green);
-      opacity: 0.3;
-    }
-
-    .timeline-item:last-child .timeline-content::after {
-      display: none;
-    }
-
-    h3 {
-      color: white;
-      margin-bottom: 0.3rem;
-      font-size: 1.2rem;
-    }
-
-    .company,
-    .university {
-      font-style: italic;
-      opacity: 0.8;
-      margin-bottom: var(--space-xs);
-      display: block;
-      color: var(--accent-blue);
-    }
-
-
-
-    /* ===== Experience List ===== */
-    .experience-list {
-      list-style: none;
-      padding-left: 0;
-      margin-top: var(--space-sm);
-    }
-
-    .experience-point {
-      position: relative;
-      margin-bottom: var(--space-md);
-      padding-left: var(--space-sm);
-    }
-
-    .experience-title-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
-
-    .experience-title {
-      position: relative;
-      cursor: pointer;
-      transition: all var(--transition-duration) var(--transition-timing);
-    }
-
-    .experience-title::before {
-      content: '▹';
-      position: absolute;
-      left: -1.2rem;
-      color: var(--accent-green);
-    }
-
-    /* اضافه کردن این استایل‌ها */
-    .experience-title-wrapper,
-    .experience-point {
-      position: relative;
-      z-index: 1;
-    }
-
-    .experience-title-wrapper::after,
-    .experience-point::after {
-      content: '';
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      bottom: -5px;
-      left: -5px;
-      z-index: -1;
-    }
-
-    .tooltip-connector {
-      pointer-events: none;
-    }
-
-
-
-    /* ===== Tooltip ===== */
-    .tooltip-content {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 50%;
-      height: 100vh;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
-      padding: var(--space-lg);
-      box-sizing: border-box;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--transition-duration) var(--transition-timing);
-      overflow-y: auto;
-      z-index: 100;
-    }
-
-
-    .tooltip-content ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .tooltip-content li::before {
-      content: '-';
-      position: absolute;
-      left: 0;
-    }
-
-    .tooltip-content li {
-      padding: 0.3rem 0;
-      position: relative;
-      padding-left: 1rem;
-      font-size: 0.9rem;
-    }
-
-    /* استایل لیست توضیحات تولتیپ */
-    .tooltip-content .no-bullets {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    .tooltip-content .no-bullets li {
-      padding: 0.8rem 0;
-      /* افزایش فاصله عمودی */
-      position: relative;
-      padding-left: 1.2rem;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      /* افزایش فاصله بین خطوط */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      /* خط جداکننده ظریف */
-      transition: all 0.3s ease;
-    }
-
-    .tooltip-content .no-bullets li:last-child {
-      border-bottom: none;
-      /* حذف خط برای آخرین آیتم */
-    }
-
-    .tooltip-content .no-bullets li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--accent-green);
-      font-size: 1.2rem;
-    }
-
-    .tooltip-content .no-bullets li:hover {
-      transform: translateX(5px);
-      color: var(--accent-green);
-    }
-
-
-    /* ===== Tooltip Content Styles ===== */
-    /* پنل شیشه‌ای */
-    .glass-tooltip-panel {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 30%;
-      height: 100vh;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(12px);
-      border-left: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 12px 0 0 12px;
-      z-index: 999;
-      padding: 3rem;
-      overflow-y: auto;
-      transform: translateX(100%);
-      opacity: 0;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .glass-tooltip-panel.active {
-      transform: translateX(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* محتوای تولتیپ */
-    .tooltip-content {
-      display: none;
-      /* مخفی کردن محتوای اصلی */
-    }
-
-    /* استایل آیتم‌های تجربه */
-    .experience-title-wrapper {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .experience-title-wrapper:hover .experience-title {
-      color: var(--accent-green);
-      transform: translateX(5px);
-    }
-
-    /* محتوای داخل پنل */
-    .glass-tooltip-panel .no-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .glass-tooltip-panel .no-bullets li {
-      padding: 0.8rem 0;
-      position: relative;
-      padding-left: 1.8rem;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .glass-tooltip-panel .no-bullets li:last-child {
-      border-bottom: none;
-    }
-
-    .glass-tooltip-panel .no-bullets li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 1.1rem;
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-green);
-      border-radius: 50%;
-    }
-
-
-
-
-
-
-
-
-    /* ===== Hover Effects ===== */
-    .experience-title-wrapper:hover .experience-title {
-      color: var(--accent-green);
-      transform: translateX(5px);
-    }
-
-
-
-    /* ===== Responsive ===== */
-    @media (max-width: 1024px) {
-      .sidebar {
-        width: 240px;
-        padding: var(--space-md) var(--space-sm);
-      }
-
-      .main-content {
-        margin-left: 240px;
-        padding: var(--space-lg);
-      }
-    }
-
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-        cursor: default;
-      }
-
-      .sidebar {
-        width: 100%;
-        position: static;
-        height: auto;
-        padding: var(--space-md);
-        border-right: none;
-        border-bottom: 1px solid transparent;
-      }
-
-      .sidebar:hover {
-        border-right: none;
-        border-bottom: 1px solid;
-        border-image: linear-gradient(to right, transparent, var(--accent-green), transparent) 1;
-      }
-
-      .main-content {
-        margin-left: 0;
-        padding: var(--space-md);
-      }
-
-      .profile-img {
-        width: 120px;
-        height: 120px;
-      }
-
-      .scroll-indicator,
-      .custom-cursor {
-        display: none;
-      }
-
-      section {
-        min-height: auto;
-        padding: var(--space-md) 0;
-      }
-
-      .timeline-item {
-        flex-direction: column;
-      }
-
-      .timeline-period {
-        width: 100%;
-        margin-bottom: var(--space-xs);
-      }
-
-      .timeline-content {
-        padding-left: 0;
-      }
-
-      .timeline-content::before,
-      .timeline-content::after {
-        display: none;
-      }
-
-      .tooltip-content {
-        width: 100%;
-        left: 0;
-      }
-    }
-
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-
-    .second-row {
-      gap: 1rem;
-      margin-top: 3rem;
-    }
-
-    .skills-title {
-      color: var(--accent-blue);
-      margin-bottom: 0rem;
-    }
-
-    .skill {
-      margin-bottom: calc(0.5rem + 0.2vh); /* ترکیب rem و vw برای ریسپانسیو */
-    }
-
-    .skill-name {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 400;
-    }
-
-
-    .skill-bar {
-      height: 4px;
-      background-color: rgba(220, 221, 221, 0.1);
-      border-radius: 3px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .skill-bar::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background-color: var(--accent-green);
-      border-radius: 3px;
-      width: 0;
-      transition: width 1s ease-out;
-    }
-
-
-    .skill[data-level="100"] .skill-bar::after {
-      width: 100%;
-    }
-
-    .skill[data-level="95"] .skill-bar::after {
-      width: 95%;
-    }
-
-    .skill[data-level="90"] .skill-bar::after {
-      width: 90%;
-    }
-
-    .skill[data-level="85"] .skill-bar::after {
-      width: 85%;
-    }
-
-    .skill[data-level="80"] .skill-bar::after {
-      width: 80%;
-    }
-
-    .skill[data-level="75"] .skill-bar::after {
-      width: 75%;
-    }
-
-    .skill[data-level="70"] .skill-bar::after {
-      width: 70%;
-    }
-
-    .skill[data-level="65"] .skill-bar::after {
-      width: 65%;
-    }
-
-
-    #skills li {
-  font-size: 0.8rem;
-  margin-left: 3rem;  /* تنظیم فاصله لیست از چپ */
-
-}
-
-
-
-
-    /* بخش پروژه‌ها */
-    .project-list {
-      margin-top: 2rem;
-    }
-
-    .project-item {
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      background-color: rgba(26, 26, 58, 0.5);
-      border-radius: 8px;
-      border-left: 3px solid transparent;
-      transition: all var(--transition-duration) ease;
-    }
-
-    .project-item:hover {
-      border-left: 3px solid var(--accent-green);
-      transform: translateX(10px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .project-title {
-      color: var(--accent-green);
-      margin-bottom: 0.5rem;
-      font-size: 1.3rem;
-    }
-
-    .project-link {
-      display: inline-block;
-      margin-top: 1rem;
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all var(--transition-duration) ease;
-    }
-
-    .project-link:hover {
-      color: var(--accent-green);
-      transform: translateX(5px);
-    }
-
-
-    /* کاستوم کرسر */
-    .custom-cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: rgba(159, 207, 175, 0.3);
-      border: 1px solid var(--accent-green);
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: difference;
-      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
-    }
-
-    .custom-cursor.active {
-      width: 40px;
-      height: 40px;
-      background-color: rgba(159, 207, 175, 0.1);
-    }
-
-    /* رسپانسیو */
-    @media (max-width: 1024px) {
-      .sidebar {
-        width: 240px;
-        padding: 1.5rem 1rem;
-      }
-
-      .main-content {
-        margin-left: 240px;
-        padding: 2rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-        cursor: default;
-      }
-
-
-
-
-
-
-
-      .custom-cursor {
-        display: none;
-      }
-
-    }
-
-    .hobby-item {
-      position: relative;
-      cursor: pointer;
-    }
-
-    .hobby-item::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--galaxy-mid);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.3s;
-      white-space: nowrap;
-      z-index: 100;
-      border: 1px solid var(--accent-green);
-    }
-
-    .hobby-item:hover::after {
-      opacity: 1;
-      bottom: 120%;
-    }
-
-    .contact-link {
-      color: var(--pach-color);
-      text-decoration: none;
-      transition: all var(--transition-duration) ease;
-      position: relative;
-    }
-
-    .contact-link::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: var(--accent-green);
-      transition: width var(--transition-duration) ease;
-    }
-
-    .contact-link:hover {
-      color: var(--accent-green);
-    }
-
-    .contact-link:hover::after {
-      width: 100%;
-    }
-
-    .contact-item {
-  box-shadow: 0 0 15px rgba(159, 207, 175, 0.6);
-}
-
-.contact-item:hover {
-  box-shadow: 0 0 30px rgba(159, 207, 175, 1);
-}
-
-
-    /* Reduce spacing between experience points */
-    .experience-point {
-      margin-bottom: 0.5rem;
-      /* Reduced from original value */
-    }
-
-
-
-    /* Remove the default bullet from experience titles */
-    .experience-title::before {
-      content: none;
-    }
-  </style>
 
 
 
@@ -1085,8 +128,7 @@
             <div class="hobby-item" data-tooltip="Conquered 3 peaks last year - next goal: Mount Damavand">
               <span>🏔️</span> Hiking
             </div>
-            <div class="hobby-item" data-tooltip="Rubik's cube PB: 47s (still trying to beat that)">
-
+            <div class="hobby-item" data-tooltip="My cooking experiments are 50% delicious, 50% 'let's order pizza'">
               <span>😋</span> Experimental Cooking
             </div>
             <div class="hobby-item" data-tooltip="Professional listener of music even the creators don't listen to">
@@ -1136,36 +178,182 @@
 
     <!-- بخش تحصیلات -->
     <section id="education">
-      <h2>Education</h2>
+      <h2>Education & Professional Development</h2>
 
-      <div class="timeline-item">
-        <div class="timeline-period">2019 - 2022</div>
-        <div class="timeline-content">
-          <h3>M.A. in Sustainable Architecture</h3>
-          <span class="university">Iran University of Science and Technology (IUST)</span>
-          <p style="margin-bottom: 0.2rem">
-            Thesis: Impact of Buildings Alignment on Energy Efficiency -
-            Design A Residential Complex as case study in Tehran.
-          </p>
-          <p style="margin-top: 0.2rem">
-            Supervisor: Dr. Mohsen Faizi - Dr. Abbas Tarkashvand
-          </p>
+  <!-- تحصیلات آکادمیک -->
+  <div class="education-section">
+    <h3 style="color: var(--accent-blue); margin-bottom: var(--space-sm);">Academic Education</h3>
+    
+    <div class="timeline-item">
+      <div class="timeline-period">2019 - 2022</div>
+      <div class="timeline-content">
+        <h3>M.A. in Sustainable Architecture</h3>
+        <span class="university">Iran University of Science and Technology (IUST)</span>
+        <p style="margin-bottom: 0.2rem">
+          Thesis: Impact of Buildings Alignment on Energy Efficiency -
+          Design A Residential Complex as case study in Tehran.
+        </p>
+        <p style="margin-top: 0.2rem">
+          Supervisor: Dr. Mohsen Faizi - Dr. Abbas Tarkashvand
+        </p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-period">2013 - 2016</div>
+      <div class="timeline-content">
+        <h3>B.A. in Architecture</h3>
+        <span class="university">Soore University</span>
+        <p style="margin-bottom: 0.2rem">
+          Thesis: Designing a Respiratory Rehabilitation Hotel-Hospital.
+          Design A Sample in Urmia, Iran
+        </p>
+        <p style="margin-top: 0.2rem">Supervisor: Eng. Daryoush Kasraei</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="education-section">
+    <h3 style="color: var(--accent-blue); margin-bottom: var(--space-sm);">Courses & Workshops</h3>
+    
+    <div class="course-grid">
+      <!-- دوره ۱ -->
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">Advanced Grasshopper</h4>
+          <span class="course-badge">Certificate</span>
         </div>
+        <span class="course-institute">Iranian Architecture Center</span>
+        <ul class="course-skills">
+          <li>Parametric Modeling</li>
+          <li>Algorithmic Thinking</li>
+          <li>Computational Geometry</li>
+        </ul>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-period">2013 - 2016</div>
-        <div class="timeline-content">
-          <h3>B.A. in Architecture</h3>
-          <span class="university">Soore University</span>
-          <p style="margin-bottom: 0.2rem">
-            Thesis: Designing a Respiratory Rehabilitation Hotel-Hospital.
-            Design A Sample in Urmia, Iran
-          </p>
-          <p style="margin-top: 0.2rem">Supervisor: Eng. Daryoush Kasraei</p>
+      <!-- دوره ۲ -->
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">AI in Architecture and Urban Design</h4>
+          <span class="course-badge">Certificate</span>
         </div>
+        <span class="course-institute">Iranian Architecture Center</span>
+        <ul class="course-skills">
+          <li>Python for Design</li>
+          <li>Data Analysis</li>
+          <li>Machine Learning</li>
+          <li>Best Project Award</li>
+        </ul>
       </div>
+
+      <!-- دوره ۳ -->
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">Optimization and Machine Learning for Architecture</h4>
+        </div>
+        <span class="course-institute">Dr. Morteza Rahbar</span>
+        <ul class="course-skills">
+          <li>Python for Design</li>
+          <li>Data Analysis</li>
+          <li>Machine Learning</li>
+          <li>Metaheuristic Algorithms</li>
+        </ul>
+      </div>
+
+      <!-- دوره ۴ -->
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">Python</h4>
+          <span class="course-badge">Certificate</span>
+        </div>
+        <span class="course-institute">Harvard CS50</span>
+        <ul class="course-skills">
+          <li>Basics of Python</li>
+          <li>Algorithm Design</li>
+          <li>Computational Thinking</li>
+        </ul>
+      </div>
+
+      <!-- دوره ۵ -->
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">Web Development</h4>
+          <span class="course-badge">Certificate</span>
+        </div>
+        <span class="course-institute">Harvard CS50</span>
+        <ul class="course-skills">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+
+      <!-- دوره ۶ -->
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">Advanced Daylighting</h4>
+        </div>
+        <span class="course-institute">Dr. Peyman Pilechiha</span>
+        <ul class="course-skills">
+          <li>Daylighting Simulation</li>
+          <li>Daylighting Handbook Methods</li>
+          <li>Reinhart’s Method for Daylighting</li>
+        </ul>
+      </div>
+
+
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">Mastering Computational Geometry Algorithms with C++</h4>
+        </div>
+        <span class="course-institute">Kasun Liyanage</span>
+        <ul class="course-skills">
+          <li>Computational Geometry</li>
+          <li>Vector Algebra</li>
+          <li>Mathematics</li>
+        </ul>
+      </div>
+
+
+      <div class="course-item">
+        <div class="course-header">
+          <h4 class="course-title">Plugin Development for Grasshopper</h4>
+        </div>
+        <span class="course-institute">University of Stuttgart</span>
+        <ul class="course-skills">
+          <li>Computational Geometry</li>
+          <li>C# Coding</li>
+          <li>Algorithm Design</li>
+        </ul>
+      </div>
+
+
+
+
+
+
+
+      
+            
+      
+      
+  
+    </div>
+  </div>
+
+
+
+
     </section>
+
+
+
+
+
+
+
+
 
 
 
@@ -1589,375 +777,7 @@
       </div>
     </section>
 
-  <script>
-
-
-document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute("href");
-    const targetSection = document.querySelector(targetId);
-
-    if (targetSection) {
-      this.scrollToSection(targetSection);
-    }
-  });
-});
-
-
-
-    // سیستم پارتیکل تعاملی
-    class ParticleSystem {
-      constructor() {
-        this.particles = [];
-        this.mouseX = -1000;
-        this.mouseY = -1000;
-        this.mouseInView = false;
-        this.particleContainer = document.getElementById("particles");
-        this.init();
-      }
-
-      init() {
-        // ایجاد ذرات
-        const particleCount = Math.floor(
-          (window.innerWidth * window.innerHeight) / 10000
-        );
-        for (let i = 0; i < particleCount; i++) {
-          this.createParticle();
-        }
-
-        // ردیابی ماوس
-        document.addEventListener("mousemove", (e) => {
-          this.mouseX = e.clientX;
-          this.mouseY = e.clientY;
-        });
-
-        document.addEventListener("mouseenter", () => {
-          this.mouseInView = true;
-        });
-
-        document.addEventListener("mouseleave", () => {
-          this.mouseInView = false;
-        });
-
-        // شروع انیمیشن
-        this.animate();
-      }
-
-      createParticle() {
-        const particle = document.createElement("div");
-        particle.className = "particle";
-
-        // موقعیت اولیه تصادفی
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-
-        particle.style.left = `${x}px`;
-        particle.style.top = `${y}px`;
-
-        // اندازه و شفافیت تصادفی
-        const size = Math.random() * 3 + 1;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.opacity = Math.random() * 0.4 + 0.1;
-
-        // ذخیره خصوصیات ذره
-        particle._x = x;
-        particle._y = y;
-        particle._vx = Math.random() * 2 - 1;
-        particle._vy = Math.random() * 2 - 1;
-        particle._size = size;
-
-        this.particleContainer.appendChild(particle);
-        this.particles.push(particle);
-      }
-
-      animate() {
-        // آپدیت موقعیت ذرات
-        this.particles.forEach((particle) => {
-          // حرکت پایه
-          particle._x += particle._vx * 0.5;
-          particle._y += particle._vy * 0.5;
-
-          // تعامل با ماوس
-          if (this.mouseInView) {
-            const dx = particle._x - this.mouseX;
-            const dy = particle._y - this.mouseY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            // منطقه جاذبه
-            if (distance < 200) {
-              // منطقه دفع (نزدیک به ماوس)
-              if (distance < 80) {
-                const force = (80 - distance) * 0.02;
-                particle._x += (dx / distance) * force;
-                particle._y += (dy / distance) * force;
-              }
-              // منطقه جذب (دور از ماوس)
-              else {
-                const force = (1 - distance / 200) * 0.5;
-                particle._x -= (dx / distance) * force;
-                particle._y -= (dy / distance) * force;
-              }
-            }
-          }
-
-          // محدودیت مرزهای صفحه
-          if (particle._x < 0 || particle._x > window.innerWidth) {
-            particle._vx *= -1;
-          }
-          if (particle._y < 0 || particle._y > window.innerHeight) {
-            particle._vy *= -1;
-          }
-
-          // اعمال موقعیت جدید
-          particle.style.left = `${particle._x}px`;
-          particle.style.top = `${particle._y}px`;
-        });
-
-        requestAnimationFrame(() => this.animate());
-      }
-    }
-
-    // کاستوم کرسر
-    class CustomCursor {
-      constructor() {
-        this.cursor = document.getElementById("customCursor");
-        this.init();
-      }
-
-      init() {
-        document.addEventListener("mousemove", (e) => {
-          this.cursor.style.left = `${e.clientX}px`;
-          this.cursor.style.top = `${e.clientY}px`;
-        });
-
-        document.addEventListener("mousedown", () => {
-          this.cursor.classList.add("active");
-        });
-
-        document.addEventListener("mouseup", () => {
-          this.cursor.classList.remove("active");
-        });
-
-        document.querySelectorAll("a, button, .nav-link").forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            this.cursor.classList.add("active");
-          });
-
-          el.addEventListener("mouseleave", () => {
-            this.cursor.classList.remove("active");
-          });
-        });
-      }
-    }
-
-    // سیستم اسکرول و هایلایت منو
-    class ScrollSystem {
-      constructor() {
-        this.sections = document.querySelectorAll("section");
-        this.navLinks = document.querySelectorAll(".nav-link");
-        this.scrollIndicator = document.getElementById("scrollIndicator");
-        this.isScrolling = false;
-        this.lastScrollTime = 0;
-        this.init();
-      }
-
-      init() {
-  // اسکرول با کلیک روی منو (فقط برای لینک‌های بدون کلاس external-link)
-  document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute("href");
-      const targetSection = document.querySelector(targetId);
-
-      if (targetSection) {
-        this.scrollToSection(targetSection);
-      }
-    });
-  });
-
-        // تشخیص اسکرول کاربر
-        window.addEventListener(
-          "wheel",
-          (e) => {
-            if (this.isScrolling) return;
-
-            const delta = e.deltaY;
-            const currentSection = this.getCurrentSection();
-
-            if (delta > 0 && currentSection.nextElementSibling) {
-              // اسکرول به پایین - رفتن به بخش بعدی
-              this.scrollToSection(currentSection.nextElementSibling);
-            } else if (delta < 0 && currentSection.previousElementSibling) {
-              // اسکرول به بالا - رفتن به بخش قبلی
-              this.scrollToSection(currentSection.previousElementSibling);
-            }
-          },
-          { passive: false }
-        );
-
-        // به روز رسانی وضعیت منو و نشانگر
-        window.addEventListener("scroll", () => {
-          this.updateActiveNav();
-          this.updateScrollIndicator();
-        });
-
-        // مقداردهی اولیه
-        this.updateActiveNav();
-        this.updateScrollIndicator();
-      }
-
-      getCurrentSection() {
-        let closestSection = this.sections[0];
-        let minDistance = Infinity;
-        const viewportCenter = window.scrollY + window.innerHeight / 2;
-
-        this.sections.forEach((section) => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          const sectionCenter = sectionTop + sectionHeight / 2;
-          const distance = Math.abs(viewportCenter - sectionCenter);
-
-          if (distance < minDistance) {
-            minDistance = distance;
-            closestSection = section;
-          }
-        });
-
-        return closestSection;
-      }
-
-      scrollToSection(section) {
-        this.isScrolling = true;
-        window.scrollTo({
-          top: section.offsetTop,
-          behavior: "smooth",
-        });
-
-        // پس از پایان انیمیشن اسکرول
-        setTimeout(() => {
-          this.isScrolling = false;
-          this.updateActiveNav();
-          this.updateScrollIndicator();
-        }, 1000);
-      }
-
-      updateActiveNav() {
-        const currentSection = this.getCurrentSection();
-        const currentSectionId = `#${currentSection.id}`;
-
-        this.navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === currentSectionId) {
-            link.classList.add("active");
-          }
-        });
-      }
-
-      updateScrollIndicator() {
-        const currentSection = this.getCurrentSection();
-        const sectionIndex = Array.from(this.sections).indexOf(
-          currentSection
-        );
-        const progress = sectionIndex / (this.sections.length - 1);
-
-        const indicatorHeight = window.innerHeight * 0.6;
-        const indicatorTop =
-          window.innerHeight * 0.2 + window.innerHeight * 0.6 * progress;
-
-        this.scrollIndicator.style.height = `${indicatorHeight}px`;
-        this.scrollIndicator.style.top = `${indicatorTop}px`;
-
-        // بررسی اگر در آخرین بخش هستیم
-        if (currentSection === this.sections[this.sections.length - 1]) {
-          this.scrollIndicator.classList.add("inactive");
-          this.scrollIndicator.classList.remove("active");
-        } else {
-          this.scrollIndicator.classList.add("active");
-          this.scrollIndicator.classList.remove("inactive");
-        }
-      }
-    }
-
-    // راه‌اندازی سیستم‌ها هنگام لود صفحه
-    document.addEventListener("DOMContentLoaded", () => {
-      new ParticleSystem();
-      new CustomCursor();
-      new ScrollSystem();
-
-      // فعال کردن انیمیشن مهارت‌ها هنگام اسکرول
-      const skillsSection = document.getElementById("skills");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("animated");
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(skillsSection);
-    });
-
-
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const glassPanel = document.querySelector('.glass-tooltip-panel');
-      let activeWrapper = null;
-
-      // ایجاد یک پل نامرئی بین عنصر و پنل
-      const hoverBridge = document.createElement('div');
-      hoverBridge.className = 'hover-bridge';
-      document.body.appendChild(hoverBridge);
-
-      document.querySelectorAll('.experience-title-wrapper').forEach(wrapper => {
-        const tooltipId = wrapper.getAttribute('data-tooltip-id');
-        const tooltipContent = document.getElementById(tooltipId);
-
-        wrapper.addEventListener('mouseenter', () => {
-          activeWrapper = wrapper;
-          glassPanel.innerHTML = tooltipContent.innerHTML;
-          glassPanel.classList.add('active');
-
-          // موقعیت‌یابی پل
-          const wrapperRect = wrapper.getBoundingClientRect();
-          const panelRect = glassPanel.getBoundingClientRect();
-
-          hoverBridge.style.cssText = `
-        position: fixed;
-        top: ${wrapperRect.bottom}px;
-        right: ${window.innerWidth - panelRect.left}px;
-        height: ${wrapperRect.top - panelRect.bottom}px;
-        width: ${wrapperRect.right - wrapperRect.left}px;
-        z-index: 998;
-        background: transparent;
-      `;
-        });
-
-        wrapper.addEventListener('mouseleave', (e) => {
-          if (!e.relatedTarget ||
-            !(e.relatedTarget === glassPanel || e.relatedTarget === hoverBridge)) {
-            glassPanel.classList.remove('active');
-          }
-        });
-      });
-
-      glassPanel.addEventListener('mouseleave', (e) => {
-        if (!e.relatedTarget ||
-          !(e.relatedTarget === activeWrapper || e.relatedTarget === hoverBridge)) {
-          glassPanel.classList.remove('active');
-        }
-      });
-    });
-
-
-
-
-
-  </script>
+ <script src="../assets/js/pages/hossein.js"></script>
 </body>
 
 </html>

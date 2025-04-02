@@ -1,0 +1,1189 @@
+
+:root {
+  /* ======= متغیرهای پایه از فرمت بیس ======= */
+  --bg-primary: #020617;
+  --bg-secondary: #1a1a3a;
+  --bg-tertiary: #0a0a2a;
+  --pach-color: #def3eff1;
+  --border-primary: rgba(220, 221, 221, 0.3);
+  --accent-blue: #7ba9df;
+  --accent-green: #9fcfaf;
+  --text-light: #ffffff;
+  --transition-normal: all 0.3s ease-out;
+
+  /* ======= متغیرهای اختصاصی شما (حفظ شوند) ======= */
+  --galaxy-dark: var(--bg-primary); /* یکسان با --bg-primary */
+  --galaxy-mid: var(--bg-secondary); /* یکسان با --bg-secondary */
+  --galaxy-accent: var(--bg-tertiary); /* یکسان با --bg-tertiary */
+  
+  /* متغیرهای جدید شما */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --transition-duration: 0.5s;
+  --transition-timing: ease;
+
+
+  --sidebar-width: 280px;
+  --header-height: 80px;
+  --section-padding: 2rem;
+
+
+}
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--pach-color);
+  line-height: 1.6;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* سیستم چیدمان اصلی */
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+
+/* انیمیشن پارتیکل */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: var(--pach-color);
+  border-radius: 50%;
+  opacity: 0.4;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  position: fixed;
+  height: 100vh;
+  border-right: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-duration) var(--transition-timing);
+  z-index: 10;
+  overflow-y: auto;
+
+}
+
+.sidebar:hover {
+  border-right: 1px solid;
+  border-image: linear-gradient(to bottom, transparent, var(--accent-green), transparent) 1;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-green);
+  margin: 0 auto var(--space-md);
+  display: block;
+  box-shadow: 0 0 20px rgba(159, 207, 175, 0.3);
+  transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.profile-img:hover {
+  box-shadow: 0 0 30px rgba(159, 207, 175, 0.6);
+  transform: scale(1.05);
+}
+
+.name {
+  color: var(--accent-green);
+  text-align: center;
+  margin-bottom: 0.3rem; /* کاهش فاصله */
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: var(--space-md); /* تنظیم فاصله */
+  opacity: 0.8;
+  font-size: 1rem;
+}
+
+/* Profile Section */
+.profile {
+  text-align: center;
+  padding: var(--space-md) 0 var(--space-lg); /* کاهش padding بالا */
+  margin-top: -1rem; /* کشیدن محتوا به سمت بالا */
+
+}
+
+
+
+
+/* Contact Grid Styles */
+.contact-info {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 4rem;
+width: 100%;
+margin-top: 2rem;
+
+}
+
+.contact-item {
+background: rgba(26, 26, 58, 0.5);
+padding: 1.2rem;
+border-radius: 8px;
+transition: all var(--transition-duration) ease;
+border: 1px solid rgba(123, 169, 223, 0.1);
+}
+
+.contact-item:hover {
+transform: translateY(-5px);
+border-color: var(--accent-green);
+box-shadow: 0 5px 15px rgba(159, 207, 175, 0.1);
+}
+
+.contact-label {
+font-size: 0.85rem;
+opacity: 0.7;
+margin-bottom: 0.8rem;
+color: var(--accent-blue);
+font-weight: 500;
+}
+
+.contact-link {
+color: var(--pach-color);
+text-decoration: none;
+transition: all var(--transition-duration) ease;
+position: relative;
+font-size: 0.95rem;
+display: inline-block;
+width: 100%;
+}
+
+.contact-link::after {
+content: "";
+position: absolute;
+bottom: -2px;
+left: 0;
+width: 0;
+height: 1px;
+background-color: var(--accent-green);
+transition: width var(--transition-duration) ease;
+}
+
+.contact-link:hover {
+color: var(--accent-green);
+}
+
+.contact-link:hover::after {
+width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+.contact-info {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 600px) {
+.contact-info {
+grid-template-columns: 1fr;
+}
+}
+
+/* ===== Navigation ===== */
+.nav-menu {
+  margin-top: var(--space-sm);
+  flex-grow: 1;
+}
+
+.nav-link {
+  display: block;
+  color: var(--pach-color);
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  margin-bottom: var(--space-xs);
+  border-radius: 4px;
+  transition: all var(--transition-duration) var(--transition-timing);
+  position: relative;
+  font-size: 1rem;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(123, 169, 223, 0.2), transparent);
+  transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.nav-link:hover {
+  background-color: rgba(123, 169, 223, 0.1);
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-link.active {
+  background-color: var(--accent-blue);
+  color: white;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--accent-green);
+}
+
+/* ===== Main Content ===== */
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  height: 100vh;
+
+
+  padding: var(--space-xl);
+  position: relative;
+  scroll-behavior: smooth;
+
+
+}
+
+.scroll-indicator::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
+  transition: all 0.3s ease;
+}
+
+.scroll-indicator.active::after {
+  width: 12px;
+  height: 12px;
+  opacity: 1;
+}
+
+.scroll-indicator.inactive::after {
+  transform: translate(-50%, 50%) scale(1.5);
+  opacity: 0.5;
+}
+
+/* ===== Sections ===== */
+section {
+  height: auto; /* ارتفاع بر اساس محتوا */
+  min-height: 100vh; /* حداقل ارتفاع */
+  padding: var(--section-padding) 0;
+  border-bottom: 1px solid var(--border-primary);
+  scroll-snap-align: start;
+  transition: all var(--transition-duration) var(--transition-timing);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* تغییر از center به flex-start */
+  width: 100%;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+section:not(.active) {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+
+section:last-child {
+  border-bottom: none;
+}
+
+h2 {
+  color: var(--accent-green);
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  position: relative;
+  padding-bottom: var(--space-xs);
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: var(--accent-green);
+  transition: width var(--transition-duration) var(--transition-timing);
+}
+
+section:hover h2::after {
+  width: 100px;
+}
+
+
+
+/* ===== Timeline ===== */
+.timeline-item {
+  display: flex;
+  margin-bottom: var(--space-lg);
+  opacity: 0.9;
+  transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.timeline-item:hover {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.timeline-period {
+  width: 120px;
+  color: var(--accent-blue);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.timeline-content {
+  flex: 1;
+  padding-left: var(--space-sm);
+  position: relative;
+}
+
+.timeline-content::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent-green);
+}
+
+.timeline-content::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 15px;
+  bottom: -2rem;
+  width: 2px;
+  background-color: var(--accent-green);
+  opacity: 0.3;
+}
+
+.timeline-item:last-child .timeline-content::after {
+  display: none;
+}
+
+h3 {
+  color: white;
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.company,
+.university {
+  font-style: italic;
+  opacity: 0.8;
+  margin-bottom: var(--space-xs);
+  display: block;
+  color: var(--accent-blue);
+}
+
+
+
+/* ===== Experience List ===== */
+.experience-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: var(--space-sm);
+}
+
+.experience-point {
+  position: relative;
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-sm);
+}
+
+.experience-title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+
+.experience-title {
+  position: relative;
+  cursor: pointer;
+  transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.experience-title::before {
+  content: '▹';
+  position: absolute;
+  left: -1.2rem;
+  color: var(--accent-green);
+}
+
+/* اضافه کردن این استایل‌ها */
+.experience-title-wrapper,
+.experience-point {
+  position: relative;
+  z-index: 1;
+}
+
+.experience-title-wrapper::after,
+.experience-point::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  z-index: -1;
+}
+
+.tooltip-connector {
+  pointer-events: none;
+}
+
+
+
+/* ===== Tooltip ===== */
+.tooltip-content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding: var(--space-lg);
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-duration) var(--transition-timing);
+  overflow-y: auto;
+  z-index: 100;
+}
+
+
+.tooltip-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tooltip-content li::before {
+  content: '-';
+  position: absolute;
+  left: 0;
+}
+
+.tooltip-content li {
+  padding: 0.3rem 0;
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+}
+
+/* استایل لیست توضیحات تولتیپ */
+.tooltip-content .no-bullets {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tooltip-content .no-bullets li {
+  padding: 0.8rem 0;
+  /* افزایش فاصله عمودی */
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  /* افزایش فاصله بین خطوط */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* خط جداکننده ظریف */
+  transition: all 0.3s ease;
+}
+
+.tooltip-content .no-bullets li:last-child {
+  border-bottom: none;
+  /* حذف خط برای آخرین آیتم */
+}
+
+.tooltip-content .no-bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+  font-size: 1.2rem;
+}
+
+.tooltip-content .no-bullets li:hover {
+  transform: translateX(5px);
+  color: var(--accent-green);
+}
+
+
+/* ===== Tooltip Content Styles ===== */
+/* پنل شیشه‌ای */
+.glass-tooltip-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px 0 0 12px;
+  z-index: 999;
+  padding: 3rem;
+  overflow-y: auto;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.glass-tooltip-panel.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* محتوای تولتیپ */
+.tooltip-content {
+  display: none;
+  /* مخفی کردن محتوای اصلی */
+}
+
+/* استایل آیتم‌های تجربه */
+.experience-title-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.experience-title-wrapper:hover .experience-title {
+  color: var(--accent-green);
+  transform: translateX(5px);
+}
+
+/* محتوای داخل پنل */
+.glass-tooltip-panel .no-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.glass-tooltip-panel .no-bullets li {
+  padding: 0.8rem 0;
+  position: relative;
+  padding-left: 1.8rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-tooltip-panel .no-bullets li:last-child {
+  border-bottom: none;
+}
+
+.glass-tooltip-panel .no-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.1rem;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+/* ===== Hover Effects ===== */
+.experience-title-wrapper:hover .experience-title {
+  color: var(--accent-green);
+  transform: translateX(5px);
+}
+
+
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .main-content {
+    margin-left: 240px;
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    cursor: default;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+    height: auto;
+    padding: var(--space-md);
+    border-right: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .sidebar:hover {
+    border-right: none;
+    border-bottom: 1px solid;
+    border-image: linear-gradient(to right, transparent, var(--accent-green), transparent) 1;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: var(--space-md);
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .scroll-indicator,
+  .custom-cursor {
+    display: none;
+  }
+
+  section {
+    min-height: auto;
+    padding: var(--space-md) 0;
+  }
+
+  .timeline-item {
+    flex-direction: column;
+  }
+
+  .timeline-period {
+    width: 100%;
+    margin-bottom: var(--space-xs);
+  }
+
+  .timeline-content {
+    padding-left: 0;
+  }
+
+  .timeline-content::before,
+  .timeline-content::after {
+    display: none;
+  }
+
+  .tooltip-content {
+    width: 100%;
+    left: 0;
+  }
+}
+
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 4rem;
+  margin-top: 1rem;
+}
+
+.second-row {
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.skills-title {
+  color: var(--accent-blue);
+  margin-bottom: 0rem;
+}
+
+.skill {
+  margin-bottom: calc(0.5rem + 0.2vh); /* ترکیب rem و vw برای ریسپانسیو */
+}
+
+.skill-name {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+
+.skill-bar {
+  height: 4px;
+  background-color: rgba(220, 221, 221, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--accent-green);
+  border-radius: 3px;
+  width: 0;
+  transition: width 1s ease-out;
+}
+
+
+.skill[data-level="100"] .skill-bar::after {
+  width: 100%;
+}
+
+.skill[data-level="95"] .skill-bar::after {
+  width: 95%;
+}
+
+.skill[data-level="90"] .skill-bar::after {
+  width: 90%;
+}
+
+.skill[data-level="85"] .skill-bar::after {
+  width: 85%;
+}
+
+.skill[data-level="80"] .skill-bar::after {
+  width: 80%;
+}
+
+.skill[data-level="75"] .skill-bar::after {
+  width: 75%;
+}
+
+.skill[data-level="70"] .skill-bar::after {
+  width: 70%;
+}
+
+.skill[data-level="65"] .skill-bar::after {
+  width: 65%;
+}
+
+
+#skills li {
+font-size: 0.8rem;
+margin-left: 3rem;  /* تنظیم فاصله لیست از چپ */
+
+}
+
+
+
+
+/* بخش پروژه‌ها */
+.project-list {
+  margin-top: 2rem;
+}
+
+.project-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: rgba(26, 26, 58, 0.5);
+  border-radius: 8px;
+  border-left: 3px solid transparent;
+  transition: all var(--transition-duration) ease;
+}
+
+.project-item:hover {
+  border-left: 3px solid var(--accent-green);
+  transform: translateX(10px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.project-title {
+  color: var(--accent-green);
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-duration) ease;
+}
+
+.project-link:hover {
+  color: var(--accent-green);
+  transform: translateX(5px);
+}
+
+
+/* کاستوم کرسر */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(159, 207, 175, 0.3);
+  border: 1px solid var(--accent-green);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.custom-cursor.active {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(159, 207, 175, 0.1);
+}
+
+/* رسپانسیو */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+    padding: 1.5rem 1rem;
+  }
+
+  .main-content {
+    margin-left: 240px;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    cursor: default;
+  }
+
+
+
+
+
+
+
+  .custom-cursor {
+    display: none;
+  }
+
+}
+
+.hobby-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.hobby-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--galaxy-mid);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  white-space: nowrap;
+  z-index: 100;
+  border: 1px solid var(--accent-green);
+}
+
+.hobby-item:hover::after {
+  opacity: 1;
+  bottom: 120%;
+}
+
+.contact-link {
+  color: var(--pach-color);
+  text-decoration: none;
+  transition: all var(--transition-duration) ease;
+  position: relative;
+}
+
+.contact-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--accent-green);
+  transition: width var(--transition-duration) ease;
+}
+
+.contact-link:hover {
+  color: var(--accent-green);
+}
+
+.contact-link:hover::after {
+  width: 100%;
+}
+
+.contact-item {
+box-shadow: 0 0 15px rgba(159, 207, 175, 0.6);
+}
+
+.contact-item:hover {
+box-shadow: 0 0 30px rgba(159, 207, 175, 1);
+}
+
+
+/* Reduce spacing between experience points */
+.experience-point {
+  margin-bottom: 0.5rem;
+  /* Reduced from original value */
+}
+
+
+
+/* Remove the default bullet from experience titles */
+.experience-title::before {
+  content: none;
+}
+
+
+/* افکت هنگام اسکرول */
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background-color: var(--accent-green);
+  border-radius: 4px;
+}
+
+/* انیمیشن پارالاکس مینیمال */
+.particle {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+
+
+
+
+
+
+
+
+/* گرید دوره‌ها */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+/* کارت دوره‌ها */
+.course-item {
+  background: linear-gradient(145deg, rgba(26, 26, 58, 0.7), rgba(10, 10, 42, 0.5));
+  border-radius: 10px;
+  padding: var(--space-md);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(123, 169, 223, 0.15);
+}
+
+.course-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(159, 207, 175, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.course-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-color: rgba(159, 207, 175, 0.3);
+}
+
+.course-item:hover::before {
+  opacity: 1;
+}
+
+
+
+
+/* هدر کارت */
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-xs);
+}
+
+.course-year {
+  background: var(--accent-green);
+  color: var(--bg-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+.course-title {
+  color: var(--pach-color);
+  font-size: 1.1rem;
+  margin: 0;
+  flex: 1;
+  padding-left: var(--space-sm);
+}
+
+/* موسسه */
+.course-institute {
+  display: block;
+  color: var(--accent-blue);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-sm);
+  padding-left: var(--space-sm);
+  position: relative;
+}
+
+.course-institute::before {
+  content: '🏛';
+  position: absolute;
+  left: -5px;
+}
+
+/* لیست مهارت‌ها */
+.course-skills {
+  list-style: none;
+  padding-left: var(--space-sm);
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.course-skills li {
+  background: rgba(123, 169, 223, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--accent-green);
+  border: 1px solid rgba(159, 207, 175, 0.2);
+  transition: all 0.3s ease;
+}
+
+.course-skills li:hover {
+  background: rgba(159, 207, 175, 0.2);
+  transform: scale(1.05);
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .education-section {
+    padding: var(--space-md) var(--space-sm);
+  }
+}
+
+.course-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  background-color: var(--accent-green);
+  color: var(--bg-primary);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.course-item {
+  position: relative;
+}
