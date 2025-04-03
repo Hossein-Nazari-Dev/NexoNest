@@ -28,7 +28,7 @@ document.querySelectorAll(".nav-link:not(.external-link)").forEach((link) => {
       init() {
         // ایجاد ذرات
         const particleCount = Math.floor(
-          (window.innerWidth * window.innerHeight) / 10000
+          (window.innerWidth * window.innerHeight) / 5000
         );
         for (let i = 0; i < particleCount; i++) {
           this.createParticle();
