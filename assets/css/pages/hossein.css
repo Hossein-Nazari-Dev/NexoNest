@@ -792,17 +792,61 @@ h3 {
 }
 
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 4rem;
-  margin-top: 1rem;
+/* Skills Grid Layout */
+.skills-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.second-row {
-  gap: 1rem;
+/* First row - 4 columns */
+.skills-grid:not(.second-row) {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* Second row - 2 columns */
+.skills-grid.second-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
   margin-top: 3rem;
 }
+
+/* Individual skill columns */
+.skills-grid > div {
+
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(123, 169, 223, 0.1);
+  transition: all 0.3s ease;
+}
+
+.skills-grid > div:hover {
+  border-color: var(--accent-green);
+  box-shadow: 0 5px 15px rgba(159, 207, 175, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .skills-grid:not(.second-row) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-grid:not(.second-row),
+  .skills-grid.second-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .skills-grid > div {
+    padding: 1rem;
+  }
+}
+
+
 
 .skills-title {
   color: var(--accent-blue);
@@ -821,7 +865,7 @@ h3 {
 
 
 .skill-bar {
-  height: 4px;
+  height: 6px;
   background-color: rgba(220, 221, 221, 0.1);
   border-radius: 3px;
   overflow: hidden;
