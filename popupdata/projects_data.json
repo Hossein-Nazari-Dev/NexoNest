@@ -43,5 +43,14 @@
     "link": "projects/octomass.html",
     "linkText": "View Plugin Details",
     "imageUrl": "img/plugins/octomass-preview.jpg"
+  },
+
+  "masterthesis": {
+    "title": "Impact of Building Alignment on Energy Efficiency",
+    "category": "Academic",
+    "description": "Quantitative analysis of urban form's thermal performance in Tehran, demonstrating 2.4% energy reduction through optimized building configurations.",
+    "link": "../pages/Master-thesis.html",
+    "linkText": "Read Research",
+    "imageUrl": "img/academic/thesis-preview.jpg"
   }
 }
