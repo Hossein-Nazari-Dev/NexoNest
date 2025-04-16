@@ -435,6 +435,24 @@ tfoot th {
   background-color:var(--text-light);
 }
 
+
+.empty-day-cell {
+  background-color: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  border: 1px solid var(--border-color);
+}
+
+
+
+
 .caption {
   font-size: 0.7rem;
   color: #666;
