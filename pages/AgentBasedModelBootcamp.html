@@ -614,11 +614,39 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        #loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            --spinner-size: 50px;
+            --spinner-border: 6px;
+            --spinner-color: #3498db;
+            width: var(--spinner-size);
+            height: var(--spinner-size);
+            border: var(--spinner-border) solid rgba(0, 0, 0, 0.05);
+            border-top-color: var(--spinner-color);
+            border-radius: 50%;
+            animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
-
-
-
-
 
 </head>
 
@@ -995,7 +1023,10 @@
 
                     <!-- Project Container Wrapper -->
                     <div class="projects-wrapper" id="projects-wrapper">
-                        <!-- پروژه‌ها به صورت داینامیک لود می‌شن -->
+                        <div id="loading-overlay">
+                            <div class="spinner"></div>
+                            <p>Loading Projects</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1093,63 +1124,74 @@
     </div>
 
 
+
+
+
+
     <script>
-        // Main Slider Class
+        /*********************** Main Slider Class ***********************/
         class MainSlider {
             constructor() {
+                // المان‌های اصلی اسلایدر
                 this.sliderWrapper = document.querySelector('.slider-wrapper');
                 this.slides = Array.from(document.querySelectorAll('.slider-slide'));
-                this.dots = Array.from(document.querySelectorAll('.slider-dot'));
                 this.currentIndex = 0;
                 this.autoSlideInterval = null;
                 this.autoSlideDelay = 5000;
+
+                // نگه‌داشتن ارجاعات event handlerها برای امکان پاکسازی
+                this.handlePrevClick = this.handlePrevClick.bind(this);
+                this.handleNextClick = this.handleNextClick.bind(this);
+                this.handleMouseEnter = this.handleMouseEnter.bind(this);
+                this.handleMouseLeave = this.handleMouseLeave.bind(this);
 
                 this.init();
             }
 
             init() {
-                // Initialize dots based on actual slides count
                 this.initDots();
 
-                // Set up event listeners
-                document.querySelector('.prev-btn').addEventListener('click', () => this.prev());
-                document.querySelector('.next-btn').addEventListener('click', () => this.next());
+                // افزودن event listener به دکمه‌های قبلی و بعدی
+                const prevBtn = document.querySelector('.prev-btn');
+                const nextBtn = document.querySelector('.next-btn');
+                if (prevBtn) prevBtn.addEventListener('click', this.handlePrevClick);
+                if (nextBtn) nextBtn.addEventListener('click', this.handleNextClick);
 
-                // Dot navigation
-                this.dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => this.goTo(index));
-                });
-
-                // Auto slide controls
+                // تنظیم event listener برای اسلایدر جهت توقف و راه‌اندازی خودکار در زمان hover
                 const sliderContainer = document.querySelector('.slider-container');
-                sliderContainer.addEventListener('mouseenter', () => this.stopAutoSlide());
-                sliderContainer.addEventListener('mouseleave', () => this.startAutoSlide());
+                if (sliderContainer) {
+                    sliderContainer.addEventListener('mouseenter', this.handleMouseEnter);
+                    sliderContainer.addEventListener('mouseleave', this.handleMouseLeave);
+                }
 
-                // Start auto sliding
+                // شروع اسلاید خودکار
                 this.startAutoSlide();
             }
 
             initDots() {
                 const dotsContainer = document.querySelector('.slider-dots');
-                dotsContainer.innerHTML = ''; // Clear existing dots
+                if (!dotsContainer) return;
+                // پاکسازی دات‌های قدیمی
+                dotsContainer.innerHTML = '';
 
-                // Create dots based on actual slides count
-                this.slides.forEach((_, index) => {
+                // ساخت دات‌ها بر اساس تعداد اسلایدها
+                for (let i = 0; i < this.slides.length; i++) {
                     const dot = document.createElement('div');
-                    dot.classList.add('slider-dot');
-                    if (index === 0) dot.classList.add('active');
-                    dot.addEventListener('click', () => this.goTo(index));
+                    dot.className = 'slider-dot';
+                    if (i === 0) dot.classList.add('active');
+                    // دکمه‌های دات با کلیک به اسلاید مربوطه منتقل می‌شوند
+                    dot.addEventListener('click', () => this.goTo(i));
                     dotsContainer.appendChild(dot);
-                });
-
-                this.dots = Array.from(document.querySelectorAll('.slider-dot'));
+                }
+                // ذخیره ارجاع به دات‌ها
+                this.dots = Array.from(dotsContainer.querySelectorAll('.slider-dot'));
             }
 
             update() {
-                // Update slide position
+                // به‌روز‌رسانی موقعیت اسلایدها
                 this.sliderWrapper.style.transform = `translateX(-${this.currentIndex * 100}%)`;
 
-                // Update active dot
+                // تغییر وضعیت دات‌های فعال
                 this.dots.forEach((dot, index) => {
                     dot.classList.toggle('active', index === this.currentIndex);
                 });
@@ -1193,36 +1235,57 @@
                 this.startAutoSlide();
             }
 
-            destroy() {
-                this.stopAutoSlide();
-                // Remove event listeners
-                document.querySelector('.prev-btn').removeEventListener('click', () => this.prev());
-                document.querySelector('.next-btn').removeEventListener('click', () => this.next());
+            handlePrevClick() {
+                this.prev();
+            }
 
-                this.dots.forEach(dot => {
-                    dot.removeEventListener('click', () => this.goTo(this.dots.indexOf(dot)));
-                });
+            handleNextClick() {
+                this.next();
+            }
+
+            handleMouseEnter() {
+                this.stopAutoSlide();
+            }
+
+            handleMouseLeave() {
+                this.startAutoSlide();
+            }
+
+            destroy() {
+                // متوقف کردن اسلاید خودکار
+                this.stopAutoSlide();
+
+                // حذف event listenerهای دکمه‌ها و hover
+                const prevBtn = document.querySelector('.prev-btn');
+                const nextBtn = document.querySelector('.next-btn');
+                if (prevBtn) prevBtn.removeEventListener('click', this.handlePrevClick);
+                if (nextBtn) nextBtn.removeEventListener('click', this.handleNextClick);
 
                 const sliderContainer = document.querySelector('.slider-container');
-                sliderContainer.removeEventListener('mouseenter', () => this.stopAutoSlide());
-                sliderContainer.removeEventListener('mouseleave', () => this.startAutoSlide());
+                if (sliderContainer) {
+                    sliderContainer.removeEventListener('mouseenter', this.handleMouseEnter);
+                    sliderContainer.removeEventListener('mouseleave', this.handleMouseLeave);
+                }
+                // توجه: حذف event listenerهای دات‌ها نیاز به نگهداری ارجاع‌های آنها دارد.
             }
         }
 
-        // Section Highlighter Class
+        /*********************** Section Highlighter Class ***********************/
         class SectionHighlighter {
             constructor() {
                 this.sections = document.querySelectorAll('.research-section');
                 this.navLinks = document.querySelectorAll('.nav-link');
-                this.scrollThrottleTimeout = null;
                 this.scrollThrottleDelay = 100;
-
+                this.scrollThrottleTimeout = null;
+                // نگه‌داشتن ارجاع bound برای handler scroll
+                this.handleScroll = this.throttleScroll.bind(this);
                 this.init();
             }
 
             init() {
-                window.addEventListener('scroll', () => this.throttleScroll());
-                this.highlightActiveSection(); // Initial highlight
+                window.addEventListener('scroll', this.handleScroll);
+                // اولین به‌روزرسانی برای هایلایت کردن نوار منو
+                this.highlightActiveSection();
             }
 
             throttleScroll() {
@@ -1236,12 +1299,11 @@
 
             highlightActiveSection() {
                 let currentSection = '';
-                const scrollPosition = window.scrollY + (window.innerHeight / 3);
+                const scrollPosition = window.scrollY + window.innerHeight / 3;
 
                 this.sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
-
                     if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                         currentSection = section.id;
                     }
@@ -1249,19 +1311,23 @@
 
                 this.navLinks.forEach(link => {
                     const href = link.getAttribute('href').replace('#', '');
-                    link.classList.toggle('active', href === currentSection);
+                    if (href === currentSection) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
                 });
             }
 
             destroy() {
-                window.removeEventListener('scroll', () => this.throttleScroll());
+                window.removeEventListener('scroll', this.handleScroll);
                 if (this.scrollThrottleTimeout) {
                     clearTimeout(this.scrollThrottleTimeout);
                 }
             }
         }
 
-        // Project Manager Class
+        /*********************** Project Manager Class ***********************/
         class ProjectManager {
             constructor() {
                 this.projectsContainer = document.getElementById('projects-wrapper');
@@ -1276,69 +1342,61 @@
                         participants: "Sepehr, Foroozan, Saba",
                         video: "https://www.youtube.com/embed/OnbqPLik_Ns"
                     },
-
                     {
                         title: " Evaluation of Security Criteria in an Urban Fabric",
                         participants: "Haniyeh, Elham, Arezoo, Atiyeh",
                         video: "https://www.youtube.com/embed/VwSBsUIoGQI"
                     },
-
                     {
                         title: "Evaluating Commercial Visibility in Urban Environments",
                         participants: "Leila, Ava, Shabnam",
                         video: "https://www.youtube.com/embed/q6a_Ci5R8Vs"
                     },
-
                     {
                         title: "Visual Weight: A New Metric for Quantifying Spatial Visibility",
                         participants: "Ali.A-Ali.E-Samira-Sina",
                         video: "https://www.youtube.com/embed/m3jxgIYLgws"
                     },
-
                     {
                         title: "Analyzing agent's visual perception quality through the visual perception clarity index",
                         participants: "Elahe, Aynaz, Mahdi",
                         video: "https://www.youtube.com/embed/XHBzemDBndY"
                     },
-
                     {
                         title: "An Algorithmic Design Approach for Enhancing Art Exposure in Urban Passageways",
                         participants: "Negin, Samira, Reza",
                         video: "https://www.youtube.com/embed/bXv-C9zzPF8"
                     },
-
                     {
                         title: "Visual Legibility and Wayfinding in Typified Residential Complexes",
                         participants: "Anahita, Elnaz, Dorna",
                         video: "https://www.youtube.com/embed/_xf8vpT2ma8"
                     },
-
                     {
                         title: "Navigating the Unknown: Human Spatial Perception in Unfamiliar Indoor Environment",
                         participants: "Shima, Elham, Soha, Arghavan",
                         video: "https://www.youtube.com/embed/oypzuJ_b6Rw"
                     },
-
                     {
                         title: "Perception and Priority: Analyzing Viewer Attention to Urban Billboards",
                         participants: "Parham, Mobina, Mahdieh",
                         video: "https://www.youtube.com/embed/dU8JhVeQdew"
                     },
-
                     {
                         title: "Silent Signals: Inferring Emotional States Without Direct Questioning",
                         participants: "Kiana, Zahra, Amirhossein",
                         video: "https://www.youtube.com/embed/dU8JhVeQdew"
                     },
-
                     {
                         title: "Impact Of Perspective on Human Perception",
                         participants: "Rozhin, Sana, Arta, Melika",
                         video: "https://www.youtube.com/embed/dU8JhVeQdew"
-                    },
+                    }
                 ];
                 this.currentProjectIndex = 0;
 
+                // نگه‌داشتن event handler برای حذف بعداً
+                this.handleDocumentClick = this.handleDocumentClick.bind(this);
                 this.init();
             }
 
@@ -1348,8 +1406,10 @@
             }
 
             async loadProjects() {
-                this.projectsContainer.innerHTML = ''; // Clear container
+                // پاکسازی محتوا
+                this.projectsContainer.innerHTML = '';
 
+                // ایجاد و بارگذاری پروژه‌ها
                 for (let i = 0; i < this.projectsData.length; i++) {
                     const projectHTML = this.createProjectHTML(i, this.projectsData[i]);
                     this.projectsContainer.insertAdjacentHTML('beforeend', projectHTML);
@@ -1357,9 +1417,14 @@
                     const projectContainer = document.getElementById(`project${i + 1}`);
                     await this.loadProjectImages(i + 1, projectContainer);
                 }
-
-                // Show first project by default
+                // نمایش اولین پروژه به صورت پیش‌فرض
                 this.showProject('project1');
+
+                // حذف المان لودینگ پس از بارگذاری تمام پروژه‌ها
+                const loader = document.getElementById("loading-overlay");
+                if (loader) {
+                    loader.parentNode.removeChild(loader);
+                }
             }
 
             createProjectHTML(projectIndex, data) {
@@ -1368,52 +1433,50 @@
                 const projectCode = `GP${padded}`;
 
                 return `
-      <div class="project-container" id="${projectId}" data-project="${projectIndex + 1}">
-        <div class="project-navigation">
-          <button class="project-nav-btn prev-project" data-target="project${projectIndex === 0 ? this.projectsData.length : projectIndex}">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <div class="project-counter">
-            <span class="current-project">${projectIndex + 1}</span> / ${this.projectsData.length}
+        <div class="project-container" id="${projectId}" data-project="${projectIndex + 1}">
+          <div class="project-navigation">
+            <button class="project-nav-btn prev-project" data-target="project${projectIndex === 0 ? this.projectsData.length : projectIndex}">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="project-counter">
+              <span class="current-project">${projectIndex + 1}</span> / ${this.projectsData.length}
+            </div>
+            <button class="project-nav-btn next-project" data-target="project${projectIndex === this.projectsData.length - 1 ? 1 : projectIndex + 2}">
+              <i class="fas fa-chevron-right"></i>
+            </button>
           </div>
-          <button class="project-nav-btn next-project" data-target="project${projectIndex === this.projectsData.length - 1 ? 1 : projectIndex + 2}">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-
-        <div class="project-content">
-          <div class="project-header">
-            <h3>${data.title}</h3>
-            <p class="participants">By: ${data.participants}</p>
-          </div>
-
-          <div class="project-media">
-            <div class="pdf-viewer-container">
-              <div class="pdf-controls">
-                <button class="pdf-nav prev-page" data-project="${projectId}">
-                  <i class="fas fa-chevron-left"></i> Prev
-                </button>
-                <span class="page-counter">Loading...</span>
-                <button class="pdf-nav next-page" data-project="${projectId}">
-                  Next <i class="fas fa-chevron-right"></i>
-                </button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3>${data.title}</h3>
+              <p class="participants">By: ${data.participants}</p>
+            </div>
+            <div class="project-media">
+              <div class="pdf-viewer-container">
+                <div class="pdf-controls">
+                  <button class="pdf-nav prev-page" data-project="${projectId}">
+                    <i class="fas fa-chevron-left"></i> Prev
+                  </button>
+                  <span class="page-counter">Loading...</span>
+                  <button class="pdf-nav next-page" data-project="${projectId}">
+                    Next <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+                <div class="pdf-viewer"></div>
               </div>
-              <div class="pdf-viewer"></div>
-            </div>
-
-            <div class="video-container">
-              <p class="video-note">
-                <i class="fas fa-external-link-alt"></i> Video hosted on YouTube
-              </p>
-              <iframe src="${data.video}" allowfullscreen></iframe>
+              <div class="video-container">
+                <p class="video-note">
+                  <i class="fas fa-external-link-alt"></i> Video hosted on YouTube
+                </p>
+                <iframe src="${data.video}" allowfullscreen></iframe>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
             }
 
             async loadProjectImages(projectId, container) {
+                // استفاده از کد پروژه به شکل GP##
                 const padded = String(projectId).padStart(2, '0');
                 const projectCode = `GP${padded}`;
                 const pdfViewer = container.querySelector('.pdf-viewer');
@@ -1421,57 +1484,54 @@
 
                 let i = 1;
                 let loadedPages = 0;
-
                 while (true) {
                     const img = new Image();
                     img.src = `../img/Events/Bootcamp/ABMs-IUST-2024/Projects_Slides/${projectCode}/${projectCode} (${i}).png`;
                     img.classList.add('pdf-page');
                     img.dataset.page = i;
 
-                    const exists = await new Promise((resolve) => {
+                    const exists = await new Promise(resolve => {
                         img.onload = () => resolve(true);
                         img.onerror = () => resolve(false);
                     });
 
                     if (!exists) break;
-
                     if (i === 1) img.classList.add('active');
                     pdfViewer.appendChild(img);
                     loadedPages++;
                     i++;
                 }
-
                 if (pageCounter && loadedPages > 0) {
                     pageCounter.textContent = `Page 1 of ${loadedPages}`;
                 }
             }
 
             setupNavigation() {
-                // Project navigation
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest('.project-nav-btn')) {
-                        const btn = e.target.closest('.project-nav-btn');
-                        const targetProject = btn.dataset.target;
-                        this.showProject(targetProject);
-                    }
+                // استفاده از event delegation برای دکمه‌های ناوبری پروژه و PDF
+                document.addEventListener('click', this.handleDocumentClick);
+            }
 
-                    // PDF page navigation
-                    if (e.target.closest('.pdf-nav')) {
-                        const btn = e.target.closest('.pdf-nav');
-                        const projectId = btn.dataset.project;
-                        const isNext = btn.classList.contains('next-page');
-                        this.navigateSlide(projectId, isNext);
-                    }
-                });
+            handleDocumentClick(e) {
+                const navBtn = e.target.closest('.project-nav-btn');
+                if (navBtn) {
+                    const targetProject = navBtn.dataset.target;
+                    if (targetProject) this.showProject(targetProject);
+                }
+
+                const pdfNav = e.target.closest('.pdf-nav');
+                if (pdfNav) {
+                    const projectId = pdfNav.dataset.project;
+                    const isNext = pdfNav.classList.contains('next-page');
+                    this.navigateSlide(projectId, isNext);
+                }
             }
 
             showProject(projectId) {
-                // Hide all projects
+                // حذف کلاس active از همه پروژه‌ها
                 document.querySelectorAll('.project-container').forEach(project => {
                     project.classList.remove('active');
                 });
 
-                // Show selected project
                 const targetProject = document.getElementById(projectId);
                 if (targetProject) {
                     targetProject.classList.add('active');
@@ -1491,7 +1551,6 @@
                     (currentIndex + 1) % slides.length :
                     (currentIndex - 1 + slides.length) % slides.length;
 
-                // Update slides
                 slides[currentIndex].classList.remove('active');
                 slides[nextIndex].classList.add('active');
                 this.updatePageCounter(projectId);
@@ -1525,7 +1584,6 @@
                 const slides = project.querySelectorAll('.pdf-page');
                 const currentSlide = project.querySelector('.pdf-page.active');
                 const currentIndex = Array.from(slides).indexOf(currentSlide) + 1;
-
                 const counter = project.querySelector('.page-counter');
                 if (counter) {
                     counter.textContent = `Page ${currentIndex} of ${slides.length}`;
@@ -1533,25 +1591,13 @@
             }
 
             destroy() {
-                // Clean up event listeners
-                document.removeEventListener('click', (e) => {
-                    if (e.target.closest('.project-nav-btn')) {
-                        const btn = e.target.closest('.project-nav-btn');
-                        const targetProject = btn.dataset.target;
-                        this.showProject(targetProject);
-                    }
-
-                    if (e.target.closest('.pdf-nav')) {
-                        const btn = e.target.closest('.pdf-nav');
-                        const projectId = btn.dataset.project;
-                        const isNext = btn.classList.contains('next-page');
-                        this.navigateSlide(projectId, isNext);
-                    }
-                });
+                // حذف event delegation مربوط به پروژه‌ها
+                document.removeEventListener('click', this.handleDocumentClick);
             }
         }
 
-        // Main App Initialization
+
+        /*********************** Main App Initialization ***********************/
         class App {
             constructor() {
                 this.slider = null;
@@ -1562,29 +1608,27 @@
             }
 
             init() {
-                // Initialize components
                 this.slider = new MainSlider();
                 this.sectionHighlighter = new SectionHighlighter();
                 this.projectManager = new ProjectManager();
 
-                // Handle cleanup when page is unloaded
+                // پاکسازی منابع در زمان خروج از صفحه
                 window.addEventListener('beforeunload', () => this.cleanup());
             }
 
             cleanup() {
-                // Clean up all components
                 if (this.slider) this.slider.destroy();
                 if (this.sectionHighlighter) this.sectionHighlighter.destroy();
                 if (this.projectManager) this.projectManager.destroy();
             }
         }
 
-        // Initialize the app when DOM is loaded
+        // راه‌اندازی اپ پس از بارگذاری کامل DOM
         document.addEventListener('DOMContentLoaded', () => {
             new App();
         });
-
     </script>
+
 
 </body>
 
