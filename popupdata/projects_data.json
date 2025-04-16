@@ -2,8 +2,8 @@
   "octomass": {
     "title": "OctoMass Plugin",
     "category": "Plugin",
-    "description": "A revolutionary plugin for parametric massing in architectural design...",
-    "link": "projects/octomass.html",
+    "description": "A Plugin use in Climatic Form Finding and Climatic Data Analysis. with the possibility to intergration with Ladybug Tools and Other Grasshopper plugins, It could create a generative design ecosystem.",
+    "link": "../pages/octomass.html",
     "linkText": "View Plugin Details",
     "imageUrl": "img/plugins/octomass-preview.jpg"
   },
@@ -52,5 +52,16 @@
     "link": "../pages/Master-thesis.html",
     "linkText": "Read Research",
     "imageUrl": "img/academic/thesis-preview.jpg"
+  },
+
+  "abms-bootcamp": {
+    "title": "Designing Human-Centered, Environmentally Perceptive Digital Models in Architecture and Urban Planning",
+    "category": "Events",
+    "description": "Unlock the future of urban design! Join our hands-on bootcamp to master digital twins, agent-based models, and human-centered simulations. Explore how people interact with space—and design smarter, safer environments. Ready to transform your ideas into impact?",
+    "link": "../pages/AgentBasedModelBootcamp.html",
+    "linkText": "Read Research",
+    "imageUrl": "img/academic/thesis-preview.jpg"
   }
+
+
 }
