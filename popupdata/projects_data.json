@@ -3,53 +3,44 @@
     "title": "OctoMass Plugin",
     "category": "Plugin",
     "description": "A Plugin use in Climatic Form Finding and Climatic Data Analysis. with the possibility to intergration with Ladybug Tools and Other Grasshopper plugins, It could create a generative design ecosystem.",
-    "link": "../pages/octomass.html",
+    "link": "../pages/plugins/octomass/octomass.html",
     "linkText": "View Plugin Details",
     "imageUrl": "img/plugins/octomass-preview.jpg"
   },
 
 
-  "octoland": {
-    "title": "OctoLand Plugin",
-    "category": "Plugin",
-    "description": "Advanced landscape design tool that integrates terrain modeling...",
-    "link": "projects/octoland.html",
-    "linkText": "Explore Plugin",
-    "imageUrl": "img/plugins/octoland-preview.jpg"
-  },
+"octoland": {
+  "title": "OctoLand Plugin",
+  "category": "Plugin",
+  "description": "Discover OctoLand – the next‑generation Grasshopper plugin for sustainable landscape and neighborhood design. Leverage advanced topology analysis and clustering algorithms to craft resilient, data‑driven outdoor spaces. Ready to transform your site planning workflow?",
+  "link": "../pages/plugins/octoland/octoland.html",
+  "linkText": "Explore Plugin",
+  "imageUrl": "img/plugins/octoland-preview.jpg"
+},
 
-  "oasis": {
-    "title": "Oasis Competition",
-    "category": "Competition",
-    "description": "A revolutionary plugin for parametric massing in architectural design...",
-    "link": "projects/octomass.html",
-    "linkText": "View Plugin Details",
-    "imageUrl": "img/plugins/octomass-preview.jpg"
-  },
 
-  "boxmorphe": {
-    "title": "Oasis Competition",
-    "category": "Competition",
-    "description": "A revolutionary plugin for parametric massing in architectural design...",
-    "link": "projects/octomass.html",
-    "linkText": "View Plugin Details",
-    "imageUrl": "img/plugins/octomass-preview.jpg"
-  },
+"octocity": {
+  "title": "OctoCity Plugin",
+  "category": "Plugin",
+"description": "Discover OctoCity — a powerful Grasshopper plugin by NexoNest for urban morphology and sustainable city design. Analyze form-based metrics, cluster spatial patterns, and generate responsive urban layouts. Ideal for early-stage planning, OctoCity empowers designers to shape resilient cities through data-driven insights and parametric thinking.",
 
-  "rhinoflow": {
-    "title": "Oasis Competition",
-    "category": "Competition",
-    "description": "A revolutionary plugin for parametric massing in architectural design...",
-    "link": "projects/octomass.html",
-    "linkText": "View Plugin Details",
-    "imageUrl": "img/plugins/octomass-preview.jpg"
-  },
+  "link": "../pages/plugins/octocity/octocity.html",
+  "linkText": "Explore Plugin",
+  "imageUrl": "img/plugins/octoland-preview.jpg"
+},
+
+
+
+
+
+
+
 
   "masterthesis": {
     "title": "Impact of Building Alignment on Energy Efficiency",
     "category": "Academic",
     "description": "Quantitative analysis of urban form's thermal performance in Tehran, demonstrating 2.4% energy reduction through optimized building configurations.",
-    "link": "../pages/Master-thesis.html",
+    "link": "../pages/projects/academic/master-thesis.html",
     "linkText": "Read Research",
     "imageUrl": "img/academic/thesis-preview.jpg"
   },
@@ -58,10 +49,30 @@
     "title": "Designing Human-Centered, Environmentally Perceptive Digital Models in Architecture and Urban Planning",
     "category": "Events",
     "description": "Unlock the future of urban design! Join our hands-on bootcamp to master digital twins, agent-based models, and human-centered simulations. Explore how people interact with space—and design smarter, safer environments. Ready to transform your ideas into impact?",
-    "link": "../pages/AgentBasedModelBootcamp.html",
+    "link": "../pages/events/bootcamp/agent-based-modeling-2024.html",
     "linkText": "Read Research",
     "imageUrl": "img/academic/thesis-preview.jpg"
-  }
+  },
+
+"printerra": {
+  "title": "prinTerra: Robotic Construction for Sustainable Living in Extreme Climates",
+  "category": "Projects",
+  "description": "Explore prinTerra — where robotics meets climate-responsive architecture. Join a visionary journey into the future of construction with mobile 3D printing, local materials, and desert-ready design. From cactus-inspired domes to smart eco-villages, discover how computational thinking and sustainability can reshape life in extreme environments. Ready to build what tomorrow needs?",
+  "link": "../pages/projects/academic/printerra.html",
+  "linkText": "Read Research",
+  "imageUrl": "img/academic/thesis-preview.jpg"
+},
+
+"tectotrack": {
+  "title": "TectoTrack: Social Digital Twin for Human-Centered Spaces",
+  "category": "Projects",
+  "description": "Step into the world of TectoTrack — where real‑time agent-based simulations bring your architectural visions to life. We merge live data streams, cognitive wayfinding, and cutting‑edge analytics to create dynamic digital twins of urban and recreational environments. From playgrounds that map movement patterns to eco‑villages that adapt to human behavior, discover how TectoTrack’s blend of computational geometry, linear algebra, and sustainability can inspire tomorrow’s designs. Ready to see how people and places can evolve together?",
+  "link": "../pages/projects/professional/tectotrack/tectotrack.html",
+  "linkText": "Read Research",
+  "imageUrl": "img/academic/thesis-preview.jpg"
+}
+
+
 
 
 }
