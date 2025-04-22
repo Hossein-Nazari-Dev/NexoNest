@@ -12,641 +12,431 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ================ Base Styles ================ */
-        :root {
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --border-color: #020617;
-            --accent-primary: #0a0a2a;
-            --accent-secondary: #4a8bc5;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --text-light: #999999;
-            --radius-sm: 4px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* ================ Slider Styles ================ */
-        .slider-container {
-            position: relative;
-            width: 80%;
-            max-width: 800px;
-            height: 400px;
-            margin: 2rem auto;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background-color: rgba(220, 221, 221, 0.8);
-            box-shadow: var(--shadow-md);
-        }
-
-        .slider-wrapper {
-            display: flex;
-            height: 100%;
-            width: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .slider-slide {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .slider-slide img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: var(--radius-md);
-            padding: 10px;
-        }
-
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
-        .slider-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: all 0.3s ease;
-        }
-
-        .slider-btn:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-            transform: scale(1.1);
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 15px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .slider-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .slider-dot.active {
-            background-color: rgba(0, 0, 0, 0.7);
-            transform: scale(1.2);
-        }
-
-        /* ================ Keyword Bubbles ================ */
-        .keyword-bubbles {
-            margin-top: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .keyword-bubbles span {
-            background-color: #eef2f7;
-            color: var(--text-primary);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid #d0d7e1;
-            transition: all 0.2s ease;
-        }
-
-        .keyword-bubbles span:hover {
-            background-color: #d0e0f0;
-        }
-
-        /* ================ Table Styles ================ */
+        /* ================ Base Table Styles ================ */
         .table-block {
-            background-color: var(--bg-secondary);
-            border-radius: var(--radius-md);
-            padding: 1rem;
-            box-shadow: var(--shadow-sm);
-            margin: 1rem 0;
+          background-color: var(--bg-secondary);
+          border-radius: var(--radius-md);
+          padding: 1rem;
+          box-shadow: var(--shadow-sm);
+          margin: 1rem 0;
         }
-
+        
         table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.9rem;
         }
-
-        th,
-        td {
-            padding: 0.75rem;
-            text-align: left;
-            vertical-align: top;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        
+        th, td {
+          padding: 0.75rem;
+          text-align: left;
+          vertical-align: top;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
-
+        
         th {
-            background-color: var(--accent-primary);
-            color: white;
-            font-weight: 500;
-            border-bottom: 2px solid var(--accent-primary);
+          background-color: var(--accent-primary);
+          color: white;
+          font-weight: 500;
+          border-bottom: 2px solid var(--accent-primary);
         }
-
+        
         .day-cell {
-            vertical-align: middle;
-            text-align: center;
-            font-weight: bold;
-            background-color: rgba(10, 10, 42, 0.05);
+          text-align: center;
+          font-weight: bold;
+          background-color: rgba(10, 10, 42, 0.05);
         }
-
+        
         .last-row-day td {
-            border-bottom: 2px solid var(--accent-primary);
+          border-bottom: 2px solid var(--accent-primary);
         }
-
+        
         tr:hover td {
-            background-color: rgba(10, 10, 42, 0.03);
+          background-color: rgba(10, 10, 42, 0.03);
         }
-
-        /* ================ Curriculum Styles ================ */
+        
+        /* ================ Curriculum Columns ================ */
         .curriculum-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
         }
-
-        .concepts-column,
-        .tech-column {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
+        
+        .concepts-column, .tech-column {
+          background: var(--bg-secondary);
+          border-radius: var(--radius-lg);
+          padding: 1.5rem;
+          box-shadow: var(--shadow-sm);
         }
-
+        
         .column-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-primary);
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(10, 10, 42, 0.1);
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+          color: var(--accent-primary);
+          border-bottom: 2px solid rgba(10, 10, 42, 0.1);
+          padding-bottom: 0.5rem;
         }
-
+        
         .column-header i {
-            font-size: 1.5rem;
+          font-size: 1.5rem;
         }
-
+        
         .column-header h3 {
-            margin: 0;
-            font-size: 1.3rem;
+          font-size: 1.3rem;
+          margin: 0;
         }
-
-        .concept-card,
-        .tech-card {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            border-radius: var(--radius-md);
-            transition: all 0.3s ease;
+        
+        .concept-card, .tech-card {
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+          border-radius: var(--radius-md);
+          transition: all 0.3s ease;
         }
-
-        .concept-card:hover,
-        .tech-card:hover {
-            background: rgba(255, 255, 255, 0.7);
-            transform: translateY(-3px);
+        
+        .concept-card:hover, .tech-card:hover {
+          background: rgba(255, 255, 255, 0.7);
+          transform: translateY(-3px);
         }
-
-        .concept-card h4,
-        .tech-card h4 {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            color: var(--accent-primary);
-            margin: 0 0 0.8rem 0;
+        
+        .concept-card h4, .tech-card h4 {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          color: var(--accent-primary);
+          margin-bottom: 0.8rem;
         }
-
-        .concept-card ul,
-        .tech-card ul {
-            margin: 0;
-            padding-left: 1.8rem;
+        
+        .concept-card ul, .tech-card ul {
+          padding-left: 1.8rem;
+          margin: 0;
         }
-
-        .concept-card li,
-        .tech-card li {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
+        
+        .concept-card li, .tech-card li {
+          margin-bottom: 0.5rem;
+          font-size: 0.95rem;
+          line-height: 1.5;
         }
-
-        /* ================ Project Viewer Styles ================ */
-
+        
+        /* ================ Project Section ================ */
         .projects-wrapper {
-            position: relative;
-            min-height: 600px;
-            /* ارتفاع مناسب برای محتوا */
+          position: relative;
+          min-height: 600px;
         }
-
-
+        
         .project-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            box-sizing: border-box;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+          opacity: 0;
+          visibility: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-
+        
+        .project-container.active {
+          opacity: 1;
+          visibility: visible;
+          position: relative;
+        }
+        
         .project-navigation {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin: 2rem 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 2rem;
+          margin: 2rem 0;
         }
-
+        
         .project-nav-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background-color: var(--accent-primary);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: none;
+          background-color: var(--accent-primary);
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
         }
-
+        
         .project-nav-btn:hover {
-            background-color: var(--accent-secondary);
-            transform: scale(1.1);
+          background-color: var(--accent-secondary);
+          transform: scale(1.1);
         }
-
+        
         .project-counter {
-            font-size: 1.1rem;
-            color: var(--accent-primary);
-            font-weight: 600;
+          font-size: 1.1rem;
+          color: var(--accent-primary);
+          font-weight: 600;
         }
-
-        .current-project {
-            font-size: 1.3rem;
-        }
-
-        .project-content {
-            display: none;
-            width: 100%;
-        }
-
-        .project-content.active {
-            display: block;
-        }
-
+        
         .project-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
+          text-align: center;
+          margin-bottom: 1.5rem;
         }
-
+        
         .project-header h3 {
-            color: var(--accent-primary);
-            margin-bottom: 0.5rem;
+          color: var(--accent-primary);
+          margin-bottom: 0.5rem;
         }
-
+        
         .participants {
-            color: var(--text-secondary);
-            font-style: italic;
+          color: var(--text-secondary);
+          font-style: italic;
         }
-
+        
         .project-media {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            width: 100%;
-            box-sizing: border-box;
+          display: flex;
+          gap: 2rem;
+          align-items: stretch;
+          width: 100%;
+          box-sizing: border-box;
         }
-
+        
+        /* PDF & Video Containers */
         .pdf-viewer-container,
         .video-container {
-            width: 100%;
-            height: 400px;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-md);
-            padding: 1rem;
-            box-shadow: var(--shadow-sm);
-            box-sizing: border-box;
-            overflow: hidden;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          background: var(--bg-secondary);
+          border-radius: var(--radius-md);
+          box-shadow: var(--shadow-sm);
+          padding: 1rem;
+          min-height: 500px;
+          height: 100%;
         }
-
+        
+        /* PDF Viewer */
         .pdf-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
         }
-
+        
         .pdf-nav {
-            background: none;
-            border: none;
-            color: var(--accent-primary);
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+          background: none;
+          border: none;
+          color: var(--accent-primary);
+          cursor: pointer;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
         }
-
+        
         .pdf-nav:hover {
-            color: var(--accent-secondary);
+          color: var(--accent-secondary);
         }
-
+        
         .page-counter {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+          font-size: 0.9rem;
+          color: var(--text-secondary);
         }
-
+        
         .pdf-viewer {
-            height: calc(100% - 40px);
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f8f9fa;
-            border-radius: var(--radius-sm);
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          overflow: hidden;
         }
-
+        
         .pdf-page {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: none;
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+          display: none;
         }
-
+        
         .pdf-page.active {
-            display: block;
+          display: block;
         }
-
-        .video-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .video-container iframe {
-            flex: 1;
-            width: 100%;
-            border: none;
-            border-radius: var(--radius-sm);
-        }
-
+        
+        /* Video */
         .video-note {
-            text-align: center;
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          text-align: center;
+          margin: 0 0 0.5rem 0;
+          padding: 0;
         }
-
-        @media (max-width: 768px) {
-            .project-media {
-                grid-template-columns: 1fr;
-            }
-
-            .pdf-viewer-container,
-            .video-container {
-                height: 300px;
-            }
+        
+        .video-container iframe {
+          flex: 1;
+          width: 100%;
+          height: 100%;
+          border: none;
+          border-radius: var(--radius-sm);
         }
-
-        .project-container.active {
-            opacity: 1;
-            visibility: visible;
-            position: relative;
-            /* برای حفظ جریان محتوا */
-        }
-
-        .project-content {
-            display: block !important;
-            /* حذف display:none از محتوا */
-        }
-
-
-        /* ================ Footer & Caption Styles ================ */
+        
+        /* ================ Footer & Team ================ */
         .footer-note {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 1.5rem;
-            background: rgba(74, 139, 197, 0.1);
-            border-radius: var(--radius-md);
-            margin-top: 2rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.8rem;
+          padding: 1rem 1.5rem;
+          background: rgba(74, 139, 197, 0.1);
+          border-radius: var(--radius-md);
+          margin-top: 2rem;
         }
-
+        
         .footer-note i {
-            color: var(--accent-secondary);
-            font-size: 1.2rem;
+          color: var(--accent-secondary);
+          font-size: 1.2rem;
         }
-
+        
         .footer-note p {
-            margin: 0;
-            font-size: 0.9rem;
+          margin: 0;
+          font-size: 0.9rem;
         }
-
+        
         .caption {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-top: 1rem;
-            text-align: center;
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+          margin-top: 1rem;
+          text-align: center;
         }
-
-        /* ================ Animations ================ */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ================ Responsive Styles ================ */
-        @media (max-width: 768px) {
-            .curriculum-columns {
-                grid-template-columns: 1fr;
-            }
-
-            .slider-container {
-                width: 95%;
-                height: 300px;
-            }
-
-            .project-media {
-                grid-template-columns: 1fr;
-            }
-
-            .pdf-viewer {
-                height: 400px;
-            }
-        }
-
-        /* ================ Team Cards Styles ================ */
+        
         .team-cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin: 2.5rem 0;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 1.5rem;
+          margin: 2.5rem 0;
         }
-
+        
         .team-card {
-            background: var(--bg-secondary);
-            border: 1px solid #e0e0e0;
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            transition: border 0.3s ease;
+          background: var(--bg-secondary);
+          border: 1px solid #e0e0e0;
+          border-radius: var(--radius-md);
+          padding: 1.5rem;
+          transition: border 0.3s ease;
         }
-
+        
         .team-card:hover {
-            border-color: var(--accent-primary);
+          border-color: var(--accent-primary);
         }
-
+        
         .team-card h3 {
-            color: var(--accent-primary);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 0.5rem;
+          color: var(--accent-primary);
+          font-size: 1.1rem;
+          margin-bottom: 1rem;
+          border-bottom: 1px solid #ddd;
+          padding-bottom: 0.5rem;
         }
-
-        .card-icon {
-            display: none;
-            /* حذف آیکون برای مینیمالیسم */
-        }
-
+        
         .team-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+          list-style: none;
+          padding: 0;
+          margin: 0;
         }
-
+        
         .team-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed #eee;
+          padding: 0.5rem 0;
+          border-bottom: 1px dashed #eee;
         }
-
+        
         .team-list li:last-child {
-            border-bottom: none;
+          border-bottom: none;
         }
-
+        
         .team-list strong {
-            font-weight: 600;
-            color: #333;
-            display: block;
+          font-weight: 600;
+          color: #333;
+          display: block;
         }
-
+        
         .team-list span {
-            font-size: 0.85rem;
-            color: #666;
+          font-size: 0.85rem;
+          color: #666;
         }
-
-        .highlight-item {
-            background: #f9f9f9;
-            padding: 0.6rem;
-            border-radius: var(--radius-sm);
-            border: 1px solid #ececec;
-        }
-
+        
         .morpho-link {
-            color: var(--accent-secondary);
-            text-decoration: none;
-            font-weight: 500;
-
+          color: var(--accent-secondary);
+          text-decoration: none;
+          font-weight: 500;
         }
-
+        
         .morpho-link:hover {
-            opacity: 0.8;
+          opacity: 0.8;
         }
-
+        
         .collaboration-footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #f8f8f8;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            color: #444;
+          text-align: center;
+          margin-top: 2rem;
+          padding: 1rem;
+          background: #f8f8f8;
+          border-radius: var(--radius-sm);
+          font-size: 0.9rem;
+          color: #444;
         }
-
+        
+        /* ================ Responsive ================ */
         @media (max-width: 1200px) {
-            .team-cards-container {
-                grid-template-columns: 1fr 1fr;
-            }
+          .team-cards-container {
+            grid-template-columns: 1fr 1fr;
+          }
         }
-
+        
         @media (max-width: 768px) {
-            .team-cards-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        #loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
+          .curriculum-columns,
+          .team-cards-container,
+          .project-media {
+            grid-template-columns: 1fr;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            display: block;
+          }
+        
+          .pdf-viewer-container,
+          .video-container {
+            min-height: 300px;
+          }
         }
-
+        
+        /* ================ Loader ================ */
+        #loading-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(255, 255, 255, 0.8);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        
         .spinner {
-            --spinner-size: 50px;
-            --spinner-border: 6px;
-            --spinner-color: #3498db;
-            width: var(--spinner-size);
-            height: var(--spinner-size);
-            border: var(--spinner-border) solid rgba(0, 0, 0, 0.05);
-            border-top-color: var(--spinner-color);
-            border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+          --spinner-size: 50px;
+          --spinner-border: 6px;
+          --spinner-color: #3498db;
+          width: var(--spinner-size);
+          height: var(--spinner-size);
+          border: var(--spinner-border) solid rgba(0, 0, 0, 0.05);
+          border-top-color: var(--spinner-color);
+          border-radius: 50%;
+          animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
         }
-
+        
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+          to {
+            transform: rotate(360deg);
+          }
         }
-    </style>
+        </style>
+        
 
 </head>
 
@@ -707,36 +497,28 @@
                     <div class="slider-container">
                         <div class="slider-wrapper">
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (1).png"
-                                    alt="Workshop Image 1">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (1).png" alt="Workshop Image 1">
                             </div>
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (2).png"
-                                    alt="Workshop Image 2">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (2).png" alt="Workshop Image 2">
                             </div>
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (3).png"
-                                    alt="Workshop Image 3">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (3).png" alt="Workshop Image 3">
                             </div>
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (4).png"
-                                    alt="Workshop Image 4">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (4).png" alt="Workshop Image 4">
                             </div>
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (5).png"
-                                    alt="Workshop Image 5">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (5).png" alt="Workshop Image 5">
                             </div>
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (6).png"
-                                    alt="Workshop Image 6">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (6).png" alt="Workshop Image 6">
                             </div>
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (7).png"
-                                    alt="Workshop Image 7">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (7).png" alt="Workshop Image 7">
                             </div>
                             <div class="slider-slide">
-                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (8).png"
-                                    alt="Workshop Image 8">
+                                <img src="../bootcamp/ABMs-IUST-2024/Sliding/sliding (8).png" alt="Workshop Image 8">
                             </div>
                         </div>
                         <div class="slider-nav">
@@ -1010,22 +792,61 @@
 
 
 
-            <!-- Projects Section - Improved Version -->
+            <!-- Projects Section -->
             <section id="projects" class="research-section">
                 <div class="section-header">
                     <span class="section-number">04</span>
                     <h2>Participant Projects</h2>
                 </div>
-
                 <div class="section-body">
-                    <p class="lead-text">Explore 12 innovative projects applying ABM techniques to spatial design
-                        challenges.</p>
+                    <p class="lead-text">Explore innovative projects applying ABM techniques.</p>
 
-                    <!-- Project Container Wrapper -->
-                    <div class="projects-wrapper" id="projects-wrapper">
-                        <div id="loading-overlay">
-                            <div class="spinner"></div>
-                            <p>Loading Projects</p>
+                    <div id="projects-wrapper">
+                        <!-- Project 1 -->
+                        <div class="project-container active" id="project1" data-project="1">
+                            <div class="project-navigation">
+                                <button class="project-nav-btn prev-project" data-target="project12">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="project-counter">
+                                    <span class="current-project">1</span> / 12
+                                </div>
+                                <button class="project-nav-btn next-project" data-target="project2">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <h3>Impact Of Building Form On Visual Perception</h3>
+                                    <p class="participants">By: Elnaz, Fatemeh, Mohammad and Saghar</p>
+                                </div>
+                                <div class="project-media">
+                                    <div class="pdf-viewer-container">
+                                        <div class="pdf-controls">
+                                            <button class="pdf-nav prev-page" data-project="project1">
+                                                <i class="fas fa-chevron-left"></i> Prev
+                                            </button>
+                                            <span class="page-counter">Page 1 of 5</span>
+                                            <button class="pdf-nav next-page" data-project="project1">
+                                                Next <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                        <div class="pdf-viewer">
+                                            <img src="../bootcamp/ABMs-IUST-2024/Projects_Slides/GP01/GP01 (1).png"
+                                                class="pdf-page active" alt="Project slide 1">
+                                            <img src="../bootcamp/ABMs-IUST-2024/Projects_Slides/GP01/GP01 (2).png"
+                                                class="pdf-page" alt="Project slide 2">
+                                            <img src="../bootcamp/ABMs-IUST-2024/Projects_Slides/GP01/GP01 (3).png"
+                                                class="pdf-page" alt="Project slide 3">
+                                        </div>
+                                    </div>
+                                    <div class="video-container">
+                                        <iframe src="https://www.youtube.com/embed/5ysnTumivG4"
+                                            allowfullscreen></iframe>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1122,8 +943,6 @@
 
         </main>
     </div>
-
-
 
 
 
@@ -1329,126 +1148,126 @@
 
         /*********************** Project Manager Class ***********************/
         class ProjectManager {
-  constructor() {
-    this.projectsContainer = document.getElementById('projects-wrapper');
-    this.projectsData = [
-      {
-        title: "Impact Of Building Form On Visual Perception in Urban Environment",
-        participants: "Elnaz, Fatemeh, Mohammad and Saghar",
-        video: "https://www.youtube.com/embed/5ysnTumivG4"
-      },
-      {
-        title: "Evaluating Walkability through Agent-Based Simulation",
-        participants: "Sepehr, Foroozan, Saba",
-        video: "https://www.youtube.com/embed/OnbqPLik_Ns"
-      },
-      {
-        title: " Evaluation of Security Criteria in an Urban Fabric",
-        participants: "Haniyeh, Elham, Arezoo, Atiyeh",
-        video: "https://www.youtube.com/embed/VwSBsUIoGQI"
-      },
-      {
-        title: "Evaluating Commercial Visibility in Urban Environments",
-        participants: "Leila, Ava, Shabnam",
-        video: "https://www.youtube.com/embed/q6a_Ci5R8Vs"
-      },
-      {
-        title: "Visual Weight: A New Metric for Quantifying Spatial Visibility",
-        participants: "Ali.A-Ali.E-Samira-Sina",
-        video: "https://www.youtube.com/embed/m3jxgIYLgws"
-      },
-      {
-        title: "Analyzing agent's visual perception quality through the visual perception clarity index",
-        participants: "Elahe, Aynaz, Mahdi",
-        video: "https://www.youtube.com/embed/XHBzemDBndY"
-      },
-      {
-        title: "An Algorithmic Design Approach for Enhancing Art Exposure in Urban Passageways",
-        participants: "Negin, Samira, Reza",
-        video: "https://www.youtube.com/embed/bXv-C9zzPF8"
-      },
-      {
-        title: "Visual Legibility and Wayfinding in Typified Residential Complexes",
-        participants: "Anahita, Elnaz, Dorna",
-        video: "https://www.youtube.com/embed/_xf8vpT2ma8"
-      },
-      {
-        title: "Navigating the Unknown: Human Spatial Perception in Unfamiliar Indoor Environment",
-        participants: "Shima, Elham, Soha, Arghavan",
-        video: "https://www.youtube.com/embed/oypzuJ_b6Rw"
-      },
-      {
-        title: "Perception and Priority: Analyzing Viewer Attention to Urban Billboards",
-        participants: "Parham, Mobina, Mahdieh",
-        video: "https://www.youtube.com/embed/dU8JhVeQdew"
-      },
-      {
-        title: "Silent Signals: Inferring Emotional States Without Direct Questioning",
-        participants: "Kiana, Zahra, Amirhossein",
-        video: "https://www.youtube.com/embed/dU8JhVeQdew"
-      },
-      {
-        title: "Impact Of Perspective on Human Perception",
-        participants: "Rozhin, Sana, Arta, Melika",
-        video: "https://www.youtube.com/embed/dU8JhVeQdew"
-      }
-    ];
-    this.currentProjectIndex = 0;
+            constructor() {
+                this.projectsContainer = document.getElementById('projects-wrapper');
+                this.projectsData = [
+                    {
+                        title: "Impact Of Building Form On Visual Perception in Urban Environment",
+                        participants: "Elnaz, Fatemeh, Mohammad and Saghar",
+                        video: "https://www.youtube.com/embed/5ysnTumivG4"
+                    },
+                    {
+                        title: "Evaluating Walkability through Agent-Based Simulation",
+                        participants: "Sepehr, Foroozan, Saba",
+                        video: "https://www.youtube.com/embed/OnbqPLik_Ns"
+                    },
+                    {
+                        title: " Evaluation of Security Criteria in an Urban Fabric",
+                        participants: "Haniyeh, Elham, Arezoo, Atiyeh",
+                        video: "https://www.youtube.com/embed/VwSBsUIoGQI"
+                    },
+                    {
+                        title: "Evaluating Commercial Visibility in Urban Environments",
+                        participants: "Leila, Ava, Shabnam",
+                        video: "https://www.youtube.com/embed/q6a_Ci5R8Vs"
+                    },
+                    {
+                        title: "Visual Weight: A New Metric for Quantifying Spatial Visibility",
+                        participants: "Ali.A-Ali.E-Samira-Sina",
+                        video: "https://www.youtube.com/embed/m3jxgIYLgws"
+                    },
+                    {
+                        title: "Analyzing agent's visual perception quality through the visual perception clarity index",
+                        participants: "Elahe, Aynaz, Mahdi",
+                        video: "https://www.youtube.com/embed/XHBzemDBndY"
+                    },
+                    {
+                        title: "An Algorithmic Design Approach for Enhancing Art Exposure in Urban Passageways",
+                        participants: "Negin, Samira, Reza",
+                        video: "https://www.youtube.com/embed/bXv-C9zzPF8"
+                    },
+                    {
+                        title: "Visual Legibility and Wayfinding in Typified Residential Complexes",
+                        participants: "Anahita, Elnaz, Dorna",
+                        video: "https://www.youtube.com/embed/_xf8vpT2ma8"
+                    },
+                    {
+                        title: "Navigating the Unknown: Human Spatial Perception in Unfamiliar Indoor Environment",
+                        participants: "Shima, Elham, Soha, Arghavan",
+                        video: "https://www.youtube.com/embed/oypzuJ_b6Rw"
+                    },
+                    {
+                        title: "Perception and Priority: Analyzing Viewer Attention to Urban Billboards",
+                        participants: "Parham, Mobina, Mahdieh",
+                        video: "https://www.youtube.com/embed/dU8JhVeQdew"
+                    },
+                    {
+                        title: "Silent Signals: Inferring Emotional States Without Direct Questioning",
+                        participants: "Kiana, Zahra, Amirhossein",
+                        video: "https://www.youtube.com/embed/dU8JhVeQdew"
+                    },
+                    {
+                        title: "Impact Of Perspective on Human Perception",
+                        participants: "Rozhin, Sana, Arta, Melika",
+                        video: "https://www.youtube.com/embed/dU8JhVeQdew"
+                    }
+                ];
+                this.currentProjectIndex = 0;
 
-    // نگه‌داشتن event handler برای حذف بعداً
-    this.handleDocumentClick = this.handleDocumentClick.bind(this);
-    this.init();
-  }
+                // نگه‌داشتن event handler برای حذف بعداً
+                this.handleDocumentClick = this.handleDocumentClick.bind(this);
+                this.init();
+            }
 
-  async init() {
-    await this.loadProjects();
-    this.setupNavigation();
-  }
+            async init() {
+                await this.loadProjects();
+                this.setupNavigation();
+            }
 
-  // تابع delay برای ایجاد تأخیر مورد نظر (به میلی‌ثانیه)
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+            // تابع delay برای ایجاد تأخیر مورد نظر (به میلی‌ثانیه)
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
 
-  async loadProjects() {
-    // ذخیره زمان شروع بارگذاری
-    const startTime = Date.now();
+            async loadProjects() {
+                // ذخیره زمان شروع بارگذاری
+                const startTime = Date.now();
 
-    // پاکسازی محتوا
-    this.projectsContainer.innerHTML = '';
+                // پاکسازی محتوا
+                this.projectsContainer.innerHTML = '';
 
-    // ایجاد و بارگذاری پروژه‌ها
-    for (let i = 0; i < this.projectsData.length; i++) {
-      const projectHTML = this.createProjectHTML(i, this.projectsData[i]);
-      this.projectsContainer.insertAdjacentHTML('beforeend', projectHTML);
+                // ایجاد و بارگذاری پروژه‌ها
+                for (let i = 0; i < this.projectsData.length; i++) {
+                    const projectHTML = this.createProjectHTML(i, this.projectsData[i]);
+                    this.projectsContainer.insertAdjacentHTML('beforeend', projectHTML);
 
-      const projectContainer = document.getElementById(`project${i + 1}`);
-      await this.loadProjectImages(i + 1, projectContainer);
-    }
+                    const projectContainer = document.getElementById(`project${i + 1}`);
+                    await this.loadProjectImages(i + 1, projectContainer);
+                }
 
-    // نمایش اولین پروژه به صورت پیش‌فرض
-    this.showProject('project1');
+                // نمایش اولین پروژه به صورت پیش‌فرض
+                this.showProject('project1');
 
-    // بررسی زمان سپری شده؛ اگر کمتر از ۱۰ ثانیه بود، منتظر بمانید
-    const elapsedTime = Date.now() - startTime;
-    const minLoadingTime = 10000; // 10 ثانیه (10000 میلی‌ثانیه)
-    if (elapsedTime < minLoadingTime) {
-      await this.delay(minLoadingTime - elapsedTime);
-    }
+                // بررسی زمان سپری شده؛ اگر کمتر از ۱۰ ثانیه بود، منتظر بمانید
+                const elapsedTime = Date.now() - startTime;
+                const minLoadingTime = 10000; // 10 ثانیه (10000 میلی‌ثانیه)
+                if (elapsedTime < minLoadingTime) {
+                    await this.delay(minLoadingTime - elapsedTime);
+                }
 
-    // حذف المان لودینگ پس از بارگذاری تمام پروژه‌ها
-    const loader = document.getElementById("loading-overlay");
-    if (loader) {
-      loader.parentNode.removeChild(loader);
-    }
-  }
+                // حذف المان لودینگ پس از بارگذاری تمام پروژه‌ها
+                const loader = document.getElementById("loading-overlay");
+                if (loader) {
+                    loader.parentNode.removeChild(loader);
+                }
+            }
 
-  createProjectHTML(projectIndex, data) {
-    const padded = String(projectIndex + 1).padStart(2, '0');
-    const projectId = `project${projectIndex + 1}`;
-    const projectCode = `GP${padded}`;
+            createProjectHTML(projectIndex, data) {
+                const padded = String(projectIndex + 1).padStart(2, '0');
+                const projectId = `project${projectIndex + 1}`;
+                const projectCode = `GP${padded}`;
 
-    return `
+                return `
       <div class="project-container" id="${projectId}" data-project="${projectIndex + 1}">
         <div class="project-navigation">
           <button class="project-nav-btn prev-project" data-target="project${projectIndex === 0 ? this.projectsData.length : projectIndex}">
@@ -1483,130 +1302,131 @@
               <p class="video-note">
                 <i class="fas fa-external-link-alt"></i> Video hosted on YouTube
               </p>
-              <iframe src="${data.video}" allowfullscreen></iframe>
+              <iframe src="${data.video}?modestbranding=1&rel=0&showinfo=0&autohide=1" allowfullscreen></iframe>
+
             </div>
           </div>
         </div>
       </div>
     `;
-  }
+            }
 
-  async loadProjectImages(projectId, container) {
-    const padded = String(projectId).padStart(2, '0');
-    const projectCode = `GP${padded}`;
-    const pdfViewer = container.querySelector('.pdf-viewer');
-    const pageCounter = container.querySelector('.page-counter');
+            async loadProjectImages(projectId, container) {
+                const padded = String(projectId).padStart(2, '0');
+                const projectCode = `GP${padded}`;
+                const pdfViewer = container.querySelector('.pdf-viewer');
+                const pageCounter = container.querySelector('.page-counter');
 
-    let i = 1;
-    let loadedPages = 0;
-    while (true) {
-      const img = new Image();
-      img.src = `../bootcamp/ABMs-IUST-2024/Projects_Slides/${projectCode}/${projectCode} (${i}).png`;
-      img.classList.add('pdf-page');
-      img.dataset.page = i;
+                let i = 1;
+                let loadedPages = 0;
+                while (true) {
+                    const img = new Image();
+                    img.src = `../bootcamp/ABMs-IUST-2024/Projects_Slides/${projectCode}/${projectCode} (${i}).png`;
+                    img.classList.add('pdf-page');
+                    img.dataset.page = i;
 
-      const exists = await new Promise(resolve => {
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-      });
+                    const exists = await new Promise(resolve => {
+                        img.onload = () => resolve(true);
+                        img.onerror = () => resolve(false);
+                    });
 
-      if (!exists) break;
-      if (i === 1) img.classList.add('active');
-      pdfViewer.appendChild(img);
-      loadedPages++;
-      i++;
-    }
-    if (pageCounter && loadedPages > 0) {
-      pageCounter.textContent = `Page 1 of ${loadedPages}`;
-    }
-  }
+                    if (!exists) break;
+                    if (i === 1) img.classList.add('active');
+                    pdfViewer.appendChild(img);
+                    loadedPages++;
+                    i++;
+                }
+                if (pageCounter && loadedPages > 0) {
+                    pageCounter.textContent = `Page 1 of ${loadedPages}`;
+                }
+            }
 
-  setupNavigation() {
-    document.addEventListener('click', this.handleDocumentClick);
-  }
+            setupNavigation() {
+                document.addEventListener('click', this.handleDocumentClick);
+            }
 
-  handleDocumentClick(e) {
-    const navBtn = e.target.closest('.project-nav-btn');
-    if (navBtn) {
-      const targetProject = navBtn.dataset.target;
-      if (targetProject) this.showProject(targetProject);
-    }
+            handleDocumentClick(e) {
+                const navBtn = e.target.closest('.project-nav-btn');
+                if (navBtn) {
+                    const targetProject = navBtn.dataset.target;
+                    if (targetProject) this.showProject(targetProject);
+                }
 
-    const pdfNav = e.target.closest('.pdf-nav');
-    if (pdfNav) {
-      const projectId = pdfNav.dataset.project;
-      const isNext = pdfNav.classList.contains('next-page');
-      this.navigateSlide(projectId, isNext);
-    }
-  }
+                const pdfNav = e.target.closest('.pdf-nav');
+                if (pdfNav) {
+                    const projectId = pdfNav.dataset.project;
+                    const isNext = pdfNav.classList.contains('next-page');
+                    this.navigateSlide(projectId, isNext);
+                }
+            }
 
-  showProject(projectId) {
-    document.querySelectorAll('.project-container').forEach(project => {
-      project.classList.remove('active');
-    });
+            showProject(projectId) {
+                document.querySelectorAll('.project-container').forEach(project => {
+                    project.classList.remove('active');
+                });
 
-    const targetProject = document.getElementById(projectId);
-    if (targetProject) {
-      targetProject.classList.add('active');
-      this.currentProjectIndex = parseInt(targetProject.dataset.project) - 1;
-      this.updateProjectCounter(projectId);
-      this.resetSlides(projectId);
-    }
-  }
+                const targetProject = document.getElementById(projectId);
+                if (targetProject) {
+                    targetProject.classList.add('active');
+                    this.currentProjectIndex = parseInt(targetProject.dataset.project) - 1;
+                    this.updateProjectCounter(projectId);
+                    this.resetSlides(projectId);
+                }
+            }
 
-  navigateSlide(projectId, isNext) {
-    const project = document.getElementById(projectId);
-    if (!project) return;
+            navigateSlide(projectId, isNext) {
+                const project = document.getElementById(projectId);
+                if (!project) return;
 
-    const slides = Array.from(project.querySelectorAll('.pdf-page'));
-    const currentIndex = slides.findIndex(slide => slide.classList.contains('active'));
-    const nextIndex = isNext ?
-      (currentIndex + 1) % slides.length :
-      (currentIndex - 1 + slides.length) % slides.length;
+                const slides = Array.from(project.querySelectorAll('.pdf-page'));
+                const currentIndex = slides.findIndex(slide => slide.classList.contains('active'));
+                const nextIndex = isNext ?
+                    (currentIndex + 1) % slides.length :
+                    (currentIndex - 1 + slides.length) % slides.length;
 
-    slides[currentIndex].classList.remove('active');
-    slides[nextIndex].classList.add('active');
-    this.updatePageCounter(projectId);
-  }
+                slides[currentIndex].classList.remove('active');
+                slides[nextIndex].classList.add('active');
+                this.updatePageCounter(projectId);
+            }
 
-  resetSlides(projectId) {
-    const project = document.getElementById(projectId);
-    if (!project) return;
+            resetSlides(projectId) {
+                const project = document.getElementById(projectId);
+                if (!project) return;
 
-    const slides = project.querySelectorAll('.pdf-page');
-    slides.forEach((slide, index) => {
-      slide.classList.toggle('active', index === 0);
-    });
-    this.updatePageCounter(projectId);
-  }
+                const slides = project.querySelectorAll('.pdf-page');
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === 0);
+                });
+                this.updatePageCounter(projectId);
+            }
 
-  updateProjectCounter(projectId) {
-    const project = document.getElementById(projectId);
-    if (!project) return;
+            updateProjectCounter(projectId) {
+                const project = document.getElementById(projectId);
+                if (!project) return;
 
-    const counter = project.querySelector('.current-project');
-    if (counter) {
-      counter.textContent = project.dataset.project;
-    }
-  }
+                const counter = project.querySelector('.current-project');
+                if (counter) {
+                    counter.textContent = project.dataset.project;
+                }
+            }
 
-  updatePageCounter(projectId) {
-    const project = document.getElementById(projectId);
-    if (!project) return;
+            updatePageCounter(projectId) {
+                const project = document.getElementById(projectId);
+                if (!project) return;
 
-    const slides = project.querySelectorAll('.pdf-page');
-    const currentSlide = project.querySelector('.pdf-page.active');
-    const currentIndex = Array.from(slides).indexOf(currentSlide) + 1;
-    const counter = project.querySelector('.page-counter');
-    if (counter) {
-      counter.textContent = `Page ${currentIndex} of ${slides.length}`;
-    }
-  }
+                const slides = project.querySelectorAll('.pdf-page');
+                const currentSlide = project.querySelector('.pdf-page.active');
+                const currentIndex = Array.from(slides).indexOf(currentSlide) + 1;
+                const counter = project.querySelector('.page-counter');
+                if (counter) {
+                    counter.textContent = `Page ${currentIndex} of ${slides.length}`;
+                }
+            }
 
-  destroy() {
-    document.removeEventListener('click', this.handleDocumentClick);
-  }
-}
+            destroy() {
+                document.removeEventListener('click', this.handleDocumentClick);
+            }
+        }
 
 
         /*********************** Main App Initialization***********************/
