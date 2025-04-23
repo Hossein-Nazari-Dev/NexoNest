@@ -12,27 +12,33 @@ class SectionHighlighter {
     this.init();
   }
 
-  init() {
-    if (!this.sections.length || !this.navLinks.length) return;
+// در کلاس SectionHighlighter، متد init را اینگونه تغییر دهید:
+init() {
+  if (!this.sections.length || !this.navLinks.length) return;
 
-    this.navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        if (targetSection) {
-          window.scrollTo({
-            top: targetSection.offsetTop - 100,
-            behavior: 'smooth'
-          });
-          setTimeout(() => this.highlightActiveSection(), 400);
-        }
-      });
+  this.navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // اگر لینک خارجی بود، جلوگیری از پیش‌فرض را انجام نده!
+      if (link.href.startsWith('http') && !link.href.includes(window.location.host)) {
+        return; // اجازه بده لینک خارجی به صورت عادی باز شود
+      }
+
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop - 100,
+          behavior: 'smooth'
+        });
+        setTimeout(() => this.highlightActiveSection(), 400);
+      }
     });
+  });
 
-    window.addEventListener('scroll', this.handleScroll, { passive: true });
-    this.highlightActiveSection();
-  }
+  window.addEventListener('scroll', this.handleScroll, { passive: true });
+  this.highlightActiveSection();
+}
 
   handleScroll() {
     if (!this.scrollThrottleTimeout) {
