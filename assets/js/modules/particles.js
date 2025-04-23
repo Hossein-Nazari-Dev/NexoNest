@@ -43,6 +43,7 @@ export function initParticles() {
   let frameCount = 0;
   let phase = 'collapse';
   let currentWalker = null;
+  let isActive = true;
 
   const centerX = () => window.innerWidth / 2;
   const centerY = () => window.innerHeight / 2;
@@ -189,6 +190,7 @@ export function initParticles() {
     particles.length = 0;
     center.locked = true;
     particles.push(center);
+    svg.appendChild(center.element);
   }
 
   function createWalker() {
@@ -197,37 +199,39 @@ export function initParticles() {
     const x = centerX() + Math.cos(ang) * r;
     const y = centerY() + Math.sin(ang) * r;
     const w = createParticle(x, y);
-    w.locked = false;
+    if (w) w.locked = false;
     return w;
   }
 
   // حلقه انیمیشن
   function animate() {
+    if (!isActive) return;
+    
     if (phase === 'collapse') {
       moveCollapse();
       if (particles.length > config.particleCount * 2) {
-        cancelAnimationFrame(animationId);
-        clearInterval(growthTimer);
         startDLA();
       }
     } else {
       if (!currentWalker) currentWalker = createWalker();
-      currentWalker.x += (Math.random() - 0.5) * 2;
-      currentWalker.y += (Math.random() - 0.5) * 2;
-      for (let seed of particles) {
-        const dx = seed.x - currentWalker.x;
-        const dy = seed.y - currentWalker.y;
-        if (Math.hypot(dx, dy) < config.stickDistance) {
-          currentWalker.locked = true;
-          particles.push(currentWalker);
-          currentWalker = null;
-          break;
+      if (currentWalker) {
+        currentWalker.x += (Math.random() - 0.5) * 2;
+        currentWalker.y += (Math.random() - 0.5) * 2;
+        for (let seed of particles) {
+          const dx = seed.x - currentWalker.x;
+          const dy = seed.y - currentWalker.y;
+          if (Math.hypot(dx, dy) < config.stickDistance) {
+            currentWalker.locked = true;
+            particles.push(currentWalker);
+            currentWalker = null;
+            break;
+          }
+        }
+        if (currentWalker) {
+          currentWalker.element.setAttribute('cx', currentWalker.x);
+          currentWalker.element.setAttribute('cy', currentWalker.y);
         }
       }
-      particles.forEach(p => {
-        p.element.setAttribute('cx', p.x);
-        p.element.setAttribute('cy', p.y);
-      });
     }
     animationId = requestAnimationFrame(animate);
   }
@@ -241,6 +245,9 @@ export function initParticles() {
     svg.innerHTML = '';
     particles.length = 0;
     connections.length = 0;
+    frameCount = 0;
+    phase = 'collapse';
+    currentWalker = null;
     for (let i = 0; i < config.particleCount; i++) {
       const ang = config.startAngle + (i / config.particleCount) * (config.endAngle - config.startAngle);
       const x = centerX() + Math.cos(ang) * config.innerRadius;
@@ -248,6 +255,27 @@ export function initParticles() {
       createParticle(x, y, true);
     }
     updateConnections();
+    if (isActive) {
+      animationId = requestAnimationFrame(animate);
+    }
+  }
+
+  // مدیریت تغییر visibility
+  function handleVisibilityChange() {
+    isActive = !document.hidden;
+    if (isActive) {
+      handleResize();
+      growthTimer = setInterval(() => {
+        if (phase === 'collapse' && isActive) createParticle(
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight
+        );
+      }, config.growthInterval);
+      animationId = requestAnimationFrame(animate);
+    } else {
+      cancelAnimationFrame(animationId);
+      clearInterval(growthTimer);
+    }
   }
 
   // راه‌اندازی
@@ -261,6 +289,7 @@ export function initParticles() {
     }, config.growthInterval);
     animationId = requestAnimationFrame(animate);
     window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
   }
 
   start();
@@ -271,6 +300,7 @@ export function initParticles() {
       cancelAnimationFrame(animationId);
       clearInterval(growthTimer);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       svg.innerHTML = '';
     },
     getConfig() {
