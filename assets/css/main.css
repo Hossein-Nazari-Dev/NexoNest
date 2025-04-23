@@ -1,7 +1,4 @@
 
-
-
-
 /* پایه */
 @import "./base/-reset.css";
 @import "./base/-variables.css";
@@ -14,87 +11,104 @@
 @import "./layouts/-grid.css";
 
 
+
+
+/* ========== تا عرض 1024: فشرده‌سازی منو بدون همبرگری ========== */
 @media (max-width: 1024px) {
-  .grid-content {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  .navbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .nav-list {
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .nav-item {
+    font-size: 0.95rem;
+    padding: 0 6px;
+  }
+
+  .submenu {
+    font-size: 0.9rem;
   }
 }
 
+/* ========== همبرگری برای زیر 768px ========== */
 @media (max-width: 768px) {
-  /* Header adjustments */
-  .header-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .header-subtitle {
-    display: none;
-  }
-  
-  /* Navbar hamburger menu */
   .navbar {
     flex-direction: column;
+    align-items: stretch;
     padding: 10px;
     border-radius: 20px;
   }
-  
+
   .nav-list {
+    display: none;
     flex-direction: column;
     align-items: stretch;
-    display: none;
+    width: 100%;
   }
-  
+
   .nav-list.active {
     display: flex;
   }
-  
+
   .nav-item {
+    width: 100%;
     padding: 8px 0;
   }
-  
+
   .submenu {
     position: static;
     width: 100%;
-    opacity: 1;
-    visibility: visible;
     max-height: 0;
     overflow: hidden;
+    opacity: 1;
     transition: max-height 0.3s ease;
   }
-  
+
   .nav-item.active .submenu {
     max-height: 500px;
   }
-  
-  /* Hamburger button */
+
   .hamburger {
     display: block;
     cursor: pointer;
     padding: 10px;
-  }
-  
-  /* Grid adjustments */
-  .grid-content {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
-    padding: 15px;
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    color: white;
   }
 }
 
-@media (max-width: 480px) {
-  body {
-    border-width: 2px;
-    margin: 10px auto;
-    width: calc(100% - 20px);
+
+/* حالت پیش‌فرض: مخفی بودن دکمه همبرگر */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* وقتی صفحه خیلی باریک می‌شه، دکمه همبرگر نمایش داده بشه */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
   }
-  
-  .grid-content {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 8px;
-    padding: 10px;
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
   }
-  
-  .grid-item {
-    border-width: 0.5px;
+
+  .nav-list.active {
+    display: flex;
   }
 }
