@@ -17,7 +17,6 @@ async function initializeApp() {
     // بارگذاری کامپوننت‌ها با مسیرهای صحیح
     await Promise.all([
       loadComponent('../../components/header.html', 'header-container'),
-      // loadComponent('../../components/navbar.html', 'navigation-bar'),
       loadComponent('../../components/popup.html', 'popup-manager'),
       loadComponent('../../components/main-content.html', 'main-content')
     ]);

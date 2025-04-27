@@ -204,9 +204,14 @@ export function initParticles() {
   }
 
   // حلقه انیمیشن
+
+  let zoomLevel = 1;       // مقدار اولیه مقیاس
+  const zoomSpeed = 0.0001; // سرعت تغییر مقیاس بسیار نرم
+  
   function animate() {
     if (!isActive) return;
-    
+  
+    // فاز حرکت ذرات
     if (phase === 'collapse') {
       moveCollapse();
       if (particles.length > config.particleCount * 2) {
@@ -215,8 +220,11 @@ export function initParticles() {
     } else {
       if (!currentWalker) currentWalker = createWalker();
       if (currentWalker) {
+        // حرکت تصادفی واکر
         currentWalker.x += (Math.random() - 0.5) * 2;
         currentWalker.y += (Math.random() - 0.5) * 2;
+  
+        // بررسی چسبیدن واکر به ذرات موجود
         for (let seed of particles) {
           const dx = seed.x - currentWalker.x;
           const dy = seed.y - currentWalker.y;
@@ -227,14 +235,25 @@ export function initParticles() {
             break;
           }
         }
+  
+        // به‌روزرسانی موقعیت واکر
         if (currentWalker) {
           currentWalker.element.setAttribute('cx', currentWalker.x);
           currentWalker.element.setAttribute('cy', currentWalker.y);
         }
       }
     }
+  
+    // اعمال افکت کشش: کوچک شدن تدریجی نمای کل
+    zoomLevel -= zoomSpeed;
+    if (zoomLevel < 0.7) zoomLevel = 0.7; // جلوگیری از بی‌نهایت کوچک شدن
+    svg.style.transform = `scale(${zoomLevel})`;
+    svg.style.transformOrigin = 'center center'; // مرکز مقیاس‌دهی
+  
+    // ادامه‌ی انیمیشن
     animationId = requestAnimationFrame(animate);
   }
+  
 
   // تنظیم برای رویداد resize و رشد
   function handleResize() {
