@@ -11,24 +11,26 @@ export function setupNavigationFilter() {
   const menuToCategoryMap = {
     // Projects
     'Projects': { main: 'projects' },
-    'Competition': { main: 'projects', sub: 'competition' },
-    'Academic': { main: 'projects', sub: 'academic' },
-    'Professional': { main: 'projects', sub: 'professional' },
+    'Architecural Design': { main: 'projects', sub: 'architecuralDesign' },
+    'Computational Design': { main: 'projects', sub: 'computationalDesign' },
+    'Sustainable Design': { main: 'projects', sub: 'sustainableDesign' },
+    'Robotic and IoT': { main: 'projects', sub: 'robotic' },
     
+
     // Educations
     'Educations': { main: 'educations' },
-    'Computational Geometry': { main: 'educations', sub: 'computational-geometry' },
-    'Rhino': { main: 'educations', sub: 'rhino' },
-    'Grasshopper3d': { main: 'educations', sub: 'grasshopper3d' },
-    'Python for designers': { main: 'educations', sub: 'python' },
-    'C# for designers': { main: 'educations', sub: 'csharp' },
+    'Computational Design': { main: 'educations', sub: 'computationalDesign' },
+    'Coding': { main: 'educations', sub: 'coding' },
+    'Computational Geometry': { main: 'educations', sub: 'computationalGeometry' },
+    'Sustainability': { main: 'educations', sub: 'sustainability' },
     
-    // Plugins
-    'Plugins': { main: 'plugins' },
-    'Octo Mass': { main: 'plugins', sub: 'octomass' },
-    'Octo Land': { main: 'plugins', sub: 'octoland' },
-    'Octo City': { main: 'plugins', sub: 'octocity' },
-    'Octo Gen': { main: 'plugins', sub: 'octogen' },
+    // products
+    'Products': { main: 'products' },
+    'Octo Mass': { main: 'products', sub: 'octomass' },
+    'Octo Land': { main: 'products', sub: 'octoland' },
+    'Octo City': { main: 'products', sub: 'octocity' },
+    'Octo Gen': { main: 'products', sub: 'octogen' },
+    'TectoTrack': { main: 'products', sub: 'tectotrack' },
     
     // Events
     'Events': { main: 'events' },
