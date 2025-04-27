@@ -11,7 +11,7 @@ export function setupNavigationFilter() {
   const menuToCategoryMap = {
     // Projects
     'Projects': { main: 'projects' },
-    'Architecural Design': { main: 'projects', sub: 'architecuralDesign' },
+    'Architectural Design': { main: 'projects', sub: 'architecturalDesign' },
     'Computational Design': { main: 'projects', sub: 'computationalDesign' },
     'Sustainable Design': { main: 'projects', sub: 'sustainableDesign' },
     'Robotic and IoT': { main: 'projects', sub: 'robotic' },
