@@ -9,6 +9,8 @@
   <meta name="description"
     content="NexoNest works on development of sustainable design tools and educational resources" />
   <link rel="icon" type="image/x-icon" href="img/LogoArtboard 9.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
   <!-- استایل‌ها -->
   <link rel="stylesheet" href="assets/css/main.css" />
@@ -30,77 +32,105 @@
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
       <button class="hamburger" aria-label="Toggle menu" onclick="document.querySelector('.nav-list').classList.toggle('active')">
         ☰
-      </button>      
+      </button>
+  
       <ul class="nav-list main-nav">
         <li class="nav-item"><a href="https://www.NexoNest.com" class="nav-link" aria-current="page">Home</a></li>
   
-        <!-- Projects Dropdown -->
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link" aria-haspopup="true">Projects</a>
-          <ul class="submenu" role="menu">
-            <li><a href="#" role="menuitem">Architectural Design</a></li>
-            <li><a href="#" role="menuitem">Computational Design</a></li>
-            <li><a href="#" role="menuitem">Sustainable Design</a></li>
-            <li><a href="#" role="menuitem">Robotic and IoT</a></li>
+          <a href="#" class="nav-link">Projects</a>
+          <ul class="submenu">
+            <li><a href="#">Architectural Design</a></li>
+            <li><a href="#">Computational Design</a></li>
+            <li><a href="#">Sustainable Design</a></li>
+            <li><a href="#">Robotic and IoT</a></li>
           </ul>
         </li>
   
-        <!-- Education Dropdown -->
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link" aria-haspopup="true">Education</a>
-          <ul class="submenu" role="menu">
-            <li><a href="#" role="menuitem">Computational Design</a></li>
-            <li><a href="#" role="menuitem">Coding</a></li>
-            <li><a href="#" role="menuitem">Computational Geometry</a></li>
-            <li><a href="#" role="menuitem">Sustainability</a></li>
+          <a href="#" class="nav-link">Education</a>
+          <ul class="submenu">
+            <li><a href="#">Computational Design</a></li>
+            <li><a href="#">Coding</a></li>
+            <li><a href="#">Computational Geometry</a></li>
+            <li><a href="#">Sustainability</a></li>
           </ul>
         </li>
   
-        <!-- Products Dropdown -->
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link" aria-haspopup="true">Products</a>
-          <ul class="submenu" role="menu">
-            <li><a href="#" role="menuitem">Octo Mass</a></li>
-            <li><a href="#" role="menuitem">Octo Land</a></li>
-            <li><a href="#" role="menuitem">Octo City</a></li>
-            <li><a href="#" role="menuitem">Octo Gen</a></li>
-            <li><a href="#" role="menuitem">TectoTrack</a></li>
+          <a href="#" class="nav-link">Products</a>
+          <ul class="submenu">
+            <li><a href="#">Octo Mass</a></li>
+            <li><a href="#">Octo Land</a></li>
+            <li><a href="#">Octo City</a></li>
+            <li><a href="#">Octo Gen</a></li>
+            <li><a href="#">TectoTrack</a></li>
           </ul>
         </li>
   
-        <!-- Events Dropdown -->
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link" aria-haspopup="true">Events</a>
-          <ul class="submenu" role="menu">
-            <li><a href="#" role="menuitem">Course</a></li>
-            <li><a href="#" role="menuitem">Workshop</a></li>
-            <li><a href="#" role="menuitem">Bootcamp</a></li>
+          <a href="#" class="nav-link">Events</a>
+          <ul class="submenu">
+            <li><a href="#">Course</a></li>
+            <li><a href="#">Workshop</a></li>
+            <li><a href="#">Bootcamp</a></li>
           </ul>
         </li>
   
-        <!-- Publications -->
-        <li class="nav-item"><a href="#" class="nav-link">Publications</a></li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Publications</a>
+        </li>
       </ul>
   
-      <!-- Utility Navigation -->
       <ul class="nav-list utility-nav" style="flex-shrink: 0;">
-        <li class="nav-item"><a href="pages/portfolio/hossein.html" class="nav-link">Hossein</a></li>
+        <li class="nav-item">
+          <a href="pages/portfolio/hossein.html" class="nav-link">Hossein</a>
+        </li>
+  
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link profile-circle" aria-haspopup="true">
+          <a href="#" class="nav-link profile-circle">
             <span class="profile-initial">●</span>
           </a>
-          <ul class="submenu social-menu" role="menu">
-            <li><a href="https://www.linkedin.com/in/hossein-nazari-964322185/" target="_blank" role="menuitem" aria-label="LinkedIn">LinkedIn</a></li>
-            <li><a href="https://github.com/Hossein-Nazari-Dev" target="_blank" role="menuitem" aria-label="GitHub">GitHub</a></li>
-            <li><a href="https://www.kaggle.com/hosseinnazari1991" target="_blank" role="menuitem" aria-label="Kaggle">Kaggle</a></li>
-            <li><a href="https://www.instagram.com/hosseinnazari.91/" target="_blank" role="menuitem" aria-label="Instagram">Instagram</a></li>
-            <li><a href="https://t.me/hosseinnazari91" target="_blank" role="menuitem" aria-label="Telegram">Telegram</a></li>
-            <li><a href="mailto:hossein.nazari.ac@email.com" target="_blank" role="menuitem" aria-label="Email">Email</a></li>
+          <ul class="submenu social-menu">
+            <li>
+              <a href="https://www.linkedin.com/in/hossein-nazari-964322185/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/Hossein-Nazari-Dev" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.kaggle.com/hosseinnazari1991" target="_blank" aria-label="Kaggle">
+                <i class="fab fa-kaggle"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/hosseinnazari.91/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/hosseinnazari91" target="_blank" aria-label="Telegram">
+                <i class="fab fa-telegram"></i>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:hossein.nazari.ac@email.com" target="_blank" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+              </a>
+            </li>
           </ul>
         </li>
       </ul>
     </nav>
   </div>
+  
+  
+  
+  
   
 
 
