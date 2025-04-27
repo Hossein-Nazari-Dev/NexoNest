@@ -14,429 +14,437 @@
     <style>
         /* ================ Base Table Styles ================ */
         .table-block {
-          background-color: var(--bg-secondary);
-          border-radius: var(--radius-md);
-          padding: 1rem;
-          box-shadow: var(--shadow-sm);
-          margin: 1rem 0;
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+            margin: 1rem 0;
         }
-        
+
         table {
-          width: 100%;
-          border-collapse: collapse;
-          font-size: 0.9rem;
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
         }
-        
-        th, td {
-          padding: 0.75rem;
-          text-align: left;
-          vertical-align: top;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
-        
+
         th {
-          background-color: var(--accent-primary);
-          color: white;
-          font-weight: 500;
-          border-bottom: 2px solid var(--accent-primary);
+            background-color: var(--accent-primary);
+            color: white;
+            font-weight: 500;
+            border-bottom: 2px solid var(--accent-primary);
         }
-        
+
         .day-cell {
-          text-align: center;
-          font-weight: bold;
-          background-color: rgba(10, 10, 42, 0.05);
+            text-align: center;
+            font-weight: bold;
+            background-color: rgba(10, 10, 42, 0.05);
         }
-        
+
         .last-row-day td {
-          border-bottom: 2px solid var(--accent-primary);
+            border-bottom: 2px solid var(--accent-primary);
         }
-        
+
         tr:hover td {
-          background-color: rgba(10, 10, 42, 0.03);
+            background-color: rgba(10, 10, 42, 0.03);
         }
-        
+
         /* ================ Curriculum Columns ================ */
         .curriculum-columns {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-          margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
         }
-        
-        .concepts-column, .tech-column {
-          background: var(--bg-secondary);
-          border-radius: var(--radius-lg);
-          padding: 1.5rem;
-          box-shadow: var(--shadow-sm);
+
+        .concepts-column,
+        .tech-column {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
         }
-        
+
         .column-header {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          margin-bottom: 1.5rem;
-          color: var(--accent-primary);
-          border-bottom: 2px solid rgba(10, 10, 42, 0.1);
-          padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+            border-bottom: 2px solid rgba(10, 10, 42, 0.1);
+            padding-bottom: 0.5rem;
         }
-        
+
         .column-header i {
-          font-size: 1.5rem;
+            font-size: 1.5rem;
         }
-        
+
         .column-header h3 {
-          font-size: 1.3rem;
-          margin: 0;
+            font-size: 1.3rem;
+            margin: 0;
         }
-        
-        .concept-card, .tech-card {
-          margin-bottom: 1.5rem;
-          padding: 1rem;
-          border-radius: var(--radius-md);
-          transition: all 0.3s ease;
+
+        .concept-card,
+        .tech-card {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
         }
-        
-        .concept-card:hover, .tech-card:hover {
-          background: rgba(255, 255, 255, 0.7);
-          transform: translateY(-3px);
+
+        .concept-card:hover,
+        .tech-card:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateY(-3px);
         }
-        
-        .concept-card h4, .tech-card h4 {
-          display: flex;
-          align-items: center;
-          gap: 0.7rem;
-          color: var(--accent-primary);
-          margin-bottom: 0.8rem;
+
+        .concept-card h4,
+        .tech-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.8rem;
         }
-        
-        .concept-card ul, .tech-card ul {
-          padding-left: 1.8rem;
-          margin: 0;
+
+        .concept-card ul,
+        .tech-card ul {
+            padding-left: 1.8rem;
+            margin: 0;
         }
-        
-        .concept-card li, .tech-card li {
-          margin-bottom: 0.5rem;
-          font-size: 0.95rem;
-          line-height: 1.5;
+
+        .concept-card li,
+        .tech-card li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
-        
+
         /* ================ Project Section ================ */
         .projects-wrapper {
-          position: relative;
-          min-height: 600px;
+            position: relative;
+            min-height: 600px;
         }
-        
+
         .project-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-          opacity: 0;
-          visibility: hidden;
-          position: absolute;
-          top: 0;
-          left: 0;
-          transition: opacity 0.3s ease, visibility 0.3s ease;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        
+
         .project-container.active {
-          opacity: 1;
-          visibility: visible;
-          position: relative;
+            opacity: 1;
+            visibility: visible;
+            position: relative;
         }
-        
+
         .project-navigation {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 2rem;
-          margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
         }
-        
+
         .project-nav-btn {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          border: none;
-          background-color: var(--accent-primary);
-          color: white;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--accent-primary);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
-        
+
         .project-nav-btn:hover {
-          background-color: var(--accent-secondary);
-          transform: scale(1.1);
+            background-color: var(--accent-secondary);
+            transform: scale(1.1);
         }
-        
+
         .project-counter {
-          font-size: 1.1rem;
-          color: var(--accent-primary);
-          font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+            font-weight: 600;
         }
-        
+
         .project-header {
-          text-align: center;
-          margin-bottom: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
-        
+
         .project-header h3 {
-          color: var(--accent-primary);
-          margin-bottom: 0.5rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
         }
-        
+
         .participants {
-          color: var(--text-secondary);
-          font-style: italic;
+            color: var(--text-secondary);
+            font-style: italic;
         }
-        
+
         .project-media {
-          display: flex;
-          gap: 2rem;
-          align-items: stretch;
-          width: 100%;
-          box-sizing: border-box;
+            display: flex;
+            gap: 2rem;
+            align-items: stretch;
+            width: 100%;
+            box-sizing: border-box;
         }
-        
+
         /* PDF & Video Containers */
         .pdf-viewer-container,
         .video-container {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          background: var(--bg-secondary);
-          border-radius: var(--radius-md);
-          box-shadow: var(--shadow-sm);
-          padding: 1rem;
-          min-height: 500px;
-          height: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem;
+            min-height: 500px;
+            height: 100%;
         }
-        
+
         /* PDF Viewer */
         .pdf-controls {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
         }
-        
+
         .pdf-nav {
-          background: none;
-          border: none;
-          color: var(--accent-primary);
-          cursor: pointer;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--accent-primary);
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
+
         .pdf-nav:hover {
-          color: var(--accent-secondary);
+            color: var(--accent-secondary);
         }
-        
+
         .page-counter {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
-        
+
         .pdf-viewer {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: #f8f9fa;
-          border-radius: var(--radius-sm);
-          overflow: hidden;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
         }
-        
+
         .pdf-page {
-          max-width: 100%;
-          max-height: 100%;
-          object-fit: contain;
-          display: none;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none;
         }
-        
+
         .pdf-page.active {
-          display: block;
+            display: block;
         }
-        
+
         /* Video */
         .video-note {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
-          text-align: center;
-          margin: 0 0 0.5rem 0;
-          padding: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin: 0 0 0.5rem 0;
+            padding: 0;
         }
-        
+
         .video-container iframe {
-          flex: 1;
-          width: 100%;
-          height: 100%;
-          border: none;
-          border-radius: var(--radius-sm);
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--radius-sm);
         }
-        
+
         /* ================ Footer & Team ================ */
         .footer-note {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.8rem;
-          padding: 1rem 1.5rem;
-          background: rgba(74, 139, 197, 0.1);
-          border-radius: var(--radius-md);
-          margin-top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            background: rgba(74, 139, 197, 0.1);
+            border-radius: var(--radius-md);
+            margin-top: 2rem;
         }
-        
+
         .footer-note i {
-          color: var(--accent-secondary);
-          font-size: 1.2rem;
+            color: var(--accent-secondary);
+            font-size: 1.2rem;
         }
-        
+
         .footer-note p {
-          margin: 0;
-          font-size: 0.9rem;
+            margin: 0;
+            font-size: 0.9rem;
         }
-        
+
         .caption {
-          font-size: 0.8rem;
-          color: var(--text-secondary);
-          margin-top: 1rem;
-          text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            text-align: center;
         }
-        
+
         .team-cards-container {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-          gap: 1.5rem;
-          margin: 2.5rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
         }
-        
+
         .team-card {
-          background: var(--bg-secondary);
-          border: 1px solid #e0e0e0;
-          border-radius: var(--radius-md);
-          padding: 1.5rem;
-          transition: border 0.3s ease;
+            background: var(--bg-secondary);
+            border: 1px solid #e0e0e0;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: border 0.3s ease;
         }
-        
+
         .team-card:hover {
-          border-color: var(--accent-primary);
+            border-color: var(--accent-primary);
         }
-        
+
         .team-card h3 {
-          color: var(--accent-primary);
-          font-size: 1.1rem;
-          margin-bottom: 1rem;
-          border-bottom: 1px solid #ddd;
-          padding-bottom: 0.5rem;
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
         }
-        
+
         .team-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        
+
         .team-list li {
-          padding: 0.5rem 0;
-          border-bottom: 1px dashed #eee;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eee;
         }
-        
+
         .team-list li:last-child {
-          border-bottom: none;
+            border-bottom: none;
         }
-        
+
         .team-list strong {
-          font-weight: 600;
-          color: #333;
-          display: block;
+            font-weight: 600;
+            color: #333;
+            display: block;
         }
-        
+
         .team-list span {
-          font-size: 0.85rem;
-          color: #666;
+            font-size: 0.85rem;
+            color: #666;
         }
-        
+
         .morpho-link {
-          color: var(--accent-secondary);
-          text-decoration: none;
-          font-weight: 500;
+            color: var(--accent-secondary);
+            text-decoration: none;
+            font-weight: 500;
         }
-        
+
         .morpho-link:hover {
-          opacity: 0.8;
+            opacity: 0.8;
         }
-        
+
         .collaboration-footer {
-          text-align: center;
-          margin-top: 2rem;
-          padding: 1rem;
-          background: #f8f8f8;
-          border-radius: var(--radius-sm);
-          font-size: 0.9rem;
-          color: #444;
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            color: #444;
         }
-        
+
         /* ================ Responsive ================ */
         @media (max-width: 1200px) {
-          .team-cards-container {
-            grid-template-columns: 1fr 1fr;
-          }
+            .team-cards-container {
+                grid-template-columns: 1fr 1fr;
+            }
         }
-        
+
         @media (max-width: 768px) {
-          .curriculum-columns,
-          .team-cards-container,
-          .project-media {
-            grid-template-columns: 1fr;
-            flex-direction: column;
-            display: block;
-          }
-        
-          .pdf-viewer-container,
-          .video-container {
-            min-height: 300px;
-          }
+
+            .curriculum-columns,
+            .team-cards-container,
+            .project-media {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+                display: block;
+            }
+
+            .pdf-viewer-container,
+            .video-container {
+                min-height: 300px;
+            }
         }
-        
+
         /* ================ Loader ================ */
         #loading-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(255, 255, 255, 0.8);
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-        
+
         .spinner {
-          --spinner-size: 50px;
-          --spinner-border: 6px;
-          --spinner-color: #3498db;
-          width: var(--spinner-size);
-          height: var(--spinner-size);
-          border: var(--spinner-border) solid rgba(0, 0, 0, 0.05);
-          border-top-color: var(--spinner-color);
-          border-radius: 50%;
-          animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            --spinner-size: 50px;
+            --spinner-border: 6px;
+            --spinner-color: #3498db;
+            width: var(--spinner-size);
+            height: var(--spinner-size);
+            border: var(--spinner-border) solid rgba(0, 0, 0, 0.05);
+            border-top-color: var(--spinner-color);
+            border-radius: 50%;
+            animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
         }
-        
+
         @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
+            to {
+                transform: rotate(360deg);
+            }
         }
-        </style>
-        
+    </style>
+
 
 </head>
 
@@ -1212,110 +1220,71 @@
                         video: "https://www.youtube.com/embed/dU8JhVeQdew"
                     }
                 ];
-                this.currentProjectIndex = 0;
 
-                // نگه‌داشتن event handler برای حذف بعداً
+
+                this.loadedProjects = {}; // برای اینکه بدونیم کدوم پروژه قبلاً لود شده
+                this.currentProjectId = 'project1';
+
                 this.handleDocumentClick = this.handleDocumentClick.bind(this);
+
                 this.init();
             }
 
-            async init() {
-                await this.loadProjects();
-                this.setupNavigation();
+
+
+            init() {
+                this.renderInitialProject();
+                document.addEventListener('click', this.handleDocumentClick);
             }
 
-            // تابع delay برای ایجاد تأخیر مورد نظر (به میلی‌ثانیه)
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-
-            async loadProjects() {
-                // ذخیره زمان شروع بارگذاری
-                const startTime = Date.now();
-
-                // پاکسازی محتوا
+            renderInitialProject() {
                 this.projectsContainer.innerHTML = '';
-
-                // ایجاد و بارگذاری پروژه‌ها
-                for (let i = 0; i < this.projectsData.length; i++) {
-                    const projectHTML = this.createProjectHTML(i, this.projectsData[i]);
-                    this.projectsContainer.insertAdjacentHTML('beforeend', projectHTML);
-
-                    const projectContainer = document.getElementById(`project${i + 1}`);
-                    await this.loadProjectImages(i + 1, projectContainer);
-                }
-
-                // نمایش اولین پروژه به صورت پیش‌فرض
-                this.showProject('project1');
-
-                // بررسی زمان سپری شده؛ اگر کمتر از ۱۰ ثانیه بود، منتظر بمانید
-                const elapsedTime = Date.now() - startTime;
-                const minLoadingTime = 10000; // 10 ثانیه (10000 میلی‌ثانیه)
-                if (elapsedTime < minLoadingTime) {
-                    await this.delay(minLoadingTime - elapsedTime);
-                }
-
-                // حذف المان لودینگ پس از بارگذاری تمام پروژه‌ها
-                const loader = document.getElementById("loading-overlay");
-                if (loader) {
-                    loader.parentNode.removeChild(loader);
-                }
+                const projectHTML = this.createProjectHTML(0, this.projectsData[0]);
+                this.projectsContainer.insertAdjacentHTML('beforeend', projectHTML);
+                this.loadProjectImages('project1');
             }
 
-            createProjectHTML(projectIndex, data) {
-                const padded = String(projectIndex + 1).padStart(2, '0');
-                const projectId = `project${projectIndex + 1}`;
+            createProjectHTML(index, data) {
+                const padded = String(index + 1).padStart(2, '0');
+                const projectId = `project${index + 1}`;
                 const projectCode = `GP${padded}`;
 
                 return `
-      <div class="project-container" id="${projectId}" data-project="${projectIndex + 1}">
-        <div class="project-navigation">
-          <button class="project-nav-btn prev-project" data-target="project${projectIndex === 0 ? this.projectsData.length : projectIndex}">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <div class="project-counter">
-            <span class="current-project">${projectIndex + 1}</span> / ${this.projectsData.length}
-          </div>
-          <button class="project-nav-btn next-project" data-target="project${projectIndex === this.projectsData.length - 1 ? 1 : projectIndex + 2}">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-        <div class="project-content">
-          <div class="project-header">
-            <h3>${data.title}</h3>
-            <p class="participants">By: ${data.participants}</p>
-          </div>
-          <div class="project-media">
-            <div class="pdf-viewer-container">
-              <div class="pdf-controls">
-                <button class="pdf-nav prev-page" data-project="${projectId}">
-                  <i class="fas fa-chevron-left"></i> Prev
-                </button>
-                <span class="page-counter">Loading...</span>
-                <button class="pdf-nav next-page" data-project="${projectId}">
-                  Next <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
-              <div class="pdf-viewer"></div>
+            <div class="project-container active" id="${projectId}" data-project="${index + 1}" data-code="${projectCode}">
+                <div class="project-navigation">
+                    <button class="project-nav-btn prev-project" data-target="project${index === 0 ? this.projectsData.length : index}"><i class="fas fa-chevron-left"></i></button>
+                    <div class="project-counter"><span class="current-project">${index + 1}</span> / ${this.projectsData.length}</div>
+                    <button class="project-nav-btn next-project" data-target="project${index === this.projectsData.length - 1 ? 1 : index + 2}"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <h3>${data.title}</h3>
+                        <p class="participants">By: ${data.participants}</p>
+                    </div>
+                    <div class="project-media">
+                        <div class="pdf-viewer-container">
+                            <div class="pdf-controls">
+                                <button class="pdf-nav prev-page" data-project="${projectId}"><i class="fas fa-chevron-left"></i> Prev</button>
+                                <span class="page-counter">Loading...</span>
+                                <button class="pdf-nav next-page" data-project="${projectId}">Next <i class="fas fa-chevron-right"></i></button>
+                            </div>
+                            <div class="pdf-viewer"></div>
+                        </div>
+                        <div class="video-container">
+                            <iframe src="${data.video}?modestbranding=1&rel=0&showinfo=0&autohide=1" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="video-container">
-              <p class="video-note">
-                <i class="fas fa-external-link-alt"></i> Video hosted on YouTube
-              </p>
-              <iframe src="${data.video}?modestbranding=1&rel=0&showinfo=0&autohide=1" allowfullscreen></iframe>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
+        `;
             }
 
-            async loadProjectImages(projectId, container) {
-                const padded = String(projectId).padStart(2, '0');
-                const projectCode = `GP${padded}`;
+            async loadProjectImages(projectId) {
+                if (this.loadedProjects[projectId]) return; // اگر قبلاً لود شده بود، دوباره لود نکن
+                const container = document.getElementById(projectId);
                 const pdfViewer = container.querySelector('.pdf-viewer');
                 const pageCounter = container.querySelector('.page-counter');
+                const projectCode = container.dataset.code;
 
                 let i = 1;
                 let loadedPages = 0;
@@ -1331,25 +1300,42 @@
                     });
 
                     if (!exists) break;
-                    if (i === 1) img.classList.add('active');
+                    if (i === 1) img.classList.add('active'); // فقط صفحه‌ی اول فعال بشه
                     pdfViewer.appendChild(img);
                     loadedPages++;
                     i++;
                 }
-                if (pageCounter && loadedPages > 0) {
-                    pageCounter.textContent = `Page 1 of ${loadedPages}`;
-                }
+                pageCounter.textContent = `Page 1 of ${loadedPages}`;
+                this.loadedProjects[projectId] = true;
             }
 
-            setupNavigation() {
-                document.addEventListener('click', this.handleDocumentClick);
+            async showProject(targetProjectId) {
+                if (this.currentProjectId === targetProjectId) return;
+
+                // غیرفعال کردن همه‌ی پروژه‌ها
+                document.querySelectorAll('.project-container').forEach(container => container.classList.remove('active'));
+
+                // اگر پروژه هنوز ساخته نشده، اول بساز
+                if (!document.getElementById(targetProjectId)) {
+                    const index = parseInt(targetProjectId.replace('project', '')) - 1;
+                    const projectHTML = this.createProjectHTML(index, this.projectsData[index]);
+                    this.projectsContainer.insertAdjacentHTML('beforeend', projectHTML);
+                }
+
+                // حالا پروژه‌ی جدید رو فعال کن
+                const targetContainer = document.getElementById(targetProjectId);
+                targetContainer.classList.add('active');
+                this.currentProjectId = targetProjectId;
+
+                // تصاویر اسلاید رو لود کن اگر لازم باشه
+                await this.loadProjectImages(targetProjectId);
             }
 
             handleDocumentClick(e) {
                 const navBtn = e.target.closest('.project-nav-btn');
                 if (navBtn) {
-                    const targetProject = navBtn.dataset.target;
-                    if (targetProject) this.showProject(targetProject);
+                    const target = navBtn.dataset.target;
+                    if (target) this.showProject(target);
                 }
 
                 const pdfNav = e.target.closest('.pdf-nav');
@@ -1360,66 +1346,21 @@
                 }
             }
 
-            showProject(projectId) {
-                document.querySelectorAll('.project-container').forEach(project => {
-                    project.classList.remove('active');
-                });
-
-                const targetProject = document.getElementById(projectId);
-                if (targetProject) {
-                    targetProject.classList.add('active');
-                    this.currentProjectIndex = parseInt(targetProject.dataset.project) - 1;
-                    this.updateProjectCounter(projectId);
-                    this.resetSlides(projectId);
-                }
-            }
-
             navigateSlide(projectId, isNext) {
                 const project = document.getElementById(projectId);
-                if (!project) return;
-
                 const slides = Array.from(project.querySelectorAll('.pdf-page'));
-                const currentIndex = slides.findIndex(slide => slide.classList.contains('active'));
-                const nextIndex = isNext ?
-                    (currentIndex + 1) % slides.length :
-                    (currentIndex - 1 + slides.length) % slides.length;
+                if (slides.length === 0) return;
 
-                slides[currentIndex].classList.remove('active');
-                slides[nextIndex].classList.add('active');
-                this.updatePageCounter(projectId);
-            }
+                const current = slides.find(slide => slide.classList.contains('active'));
+                const currentIndex = slides.indexOf(current);
+                const nextIndex = isNext ? (currentIndex + 1) % slides.length : (currentIndex - 1 + slides.length) % slides.length;
 
-            resetSlides(projectId) {
-                const project = document.getElementById(projectId);
-                if (!project) return;
+                if (current) current.classList.remove('active');
+                if (slides[nextIndex]) slides[nextIndex].classList.add('active');
 
-                const slides = project.querySelectorAll('.pdf-page');
-                slides.forEach((slide, index) => {
-                    slide.classList.toggle('active', index === 0);
-                });
-                this.updatePageCounter(projectId);
-            }
-
-            updateProjectCounter(projectId) {
-                const project = document.getElementById(projectId);
-                if (!project) return;
-
-                const counter = project.querySelector('.current-project');
-                if (counter) {
-                    counter.textContent = project.dataset.project;
-                }
-            }
-
-            updatePageCounter(projectId) {
-                const project = document.getElementById(projectId);
-                if (!project) return;
-
-                const slides = project.querySelectorAll('.pdf-page');
-                const currentSlide = project.querySelector('.pdf-page.active');
-                const currentIndex = Array.from(slides).indexOf(currentSlide) + 1;
-                const counter = project.querySelector('.page-counter');
-                if (counter) {
-                    counter.textContent = `Page ${currentIndex} of ${slides.length}`;
+                const pageCounter = project.querySelector('.page-counter');
+                if (pageCounter) {
+                    pageCounter.textContent = `Page ${nextIndex + 1} of ${slides.length}`;
                 }
             }
 
