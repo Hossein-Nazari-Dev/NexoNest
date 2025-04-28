@@ -1,27 +1,26 @@
 export function initParticles() {
-  // تنظیمات سیستم
   const config = {
     particleCount: 40,
     maxParticles: 150,
     connectionDistance: 120,
     minParticleSize: 1,
     maxParticleSize: 5,
-    baseSpeed: 0.001,
-    rotationalSpeed: 0.003,
+    baseSpeed: 2,
+    rotationalSpeed: 0.01,
     innerRadius: 100,
     growthInterval: 3500,
     minLineWidth: 0.5,
     maxLineWidth: 3,
     lineOpacity: 0.2,
-    updateConnectionsEvery: 3,
+    updateConnectionsInterval: 100,
     repulsionDistance: 30,
     stickDistance: 4,
     collisionDamping: 0.8,
     startAngle: 0,
-    endAngle: Math.PI * 2
+    endAngle: Math.PI * 2,
+    targetFPS: 30
   };
 
-  // پالت رنگ‌ها
   const colorPalette = [
     '#E0E0E0', '#BDBDBD', '#9E9E9E', '#757575', '#616161',
     '#424242', '#212121', '#F5F5F5', '#EEEEEE', '#E0F2F7',
@@ -29,7 +28,6 @@ export function initParticles() {
     '#CFD8DC', '#B0BEC5'
   ];
 
-  // المان SVG
   const svg = document.querySelector('.particles-bg svg');
   if (!svg) {
     console.error('SVG element not found!');
@@ -40,7 +38,7 @@ export function initParticles() {
   let connections = [];
   let animationId;
   let growthTimer;
-  let frameCount = 0;
+  let lastFrameTime = 0;
   let phase = 'collapse';
   let currentWalker = null;
   let isActive = true;
@@ -48,7 +46,6 @@ export function initParticles() {
   const centerX = () => window.innerWidth / 2;
   const centerY = () => window.innerHeight / 2;
 
-  // توابع کمکی
   const helpers = {
     random: {
       color: () => colorPalette[Math.floor(Math.random() * colorPalette.length)],
@@ -59,7 +56,6 @@ export function initParticles() {
     distance: (p1, p2) => Math.hypot(p2.x - p1.x, p2.y - p1.y)
   };
 
-  // ایجاد ذره
   function createParticle(x, y, initialSpeed = false) {
     if (particles.length >= config.maxParticles) return null;
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -86,7 +82,6 @@ export function initParticles() {
     return p;
   }
 
-  // ایجاد اتصال
   function createConnection(p1, p2) {
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     const lw = config.minLineWidth + Math.random() * (config.maxLineWidth - config.minLineWidth);
@@ -102,7 +97,6 @@ export function initParticles() {
     return line;
   }
 
-  // به‌روزرسانی اتصالات
   function updateConnections() {
     connections.forEach(c => svg.removeChild(c));
     connections = [];
@@ -115,7 +109,6 @@ export function initParticles() {
     }
   }
 
-  // برخورد و اجتناب از برخورد
   function handleCollisions() {
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
@@ -143,7 +136,6 @@ export function initParticles() {
     }
   }
 
-  // حرکت فاز collapse با دورانی و اجتناب برخورد
   function moveCollapse() {
     const w = window.innerWidth;
     const h = window.innerHeight;
@@ -175,14 +167,13 @@ export function initParticles() {
       if (p.y < 0 || p.y > h) { p.speedY *= -0.8; p.y = Math.max(0, Math.min(h, p.y)); }
     });
     handleCollisions();
-    if (++frameCount % config.updateConnectionsEvery === 0) updateConnections();
+    updateConnections();
     particles.forEach(p => {
       p.element.setAttribute('cx', p.x);
       p.element.setAttribute('cy', p.y);
     });
   }
 
-  // شروع DLA
   function startDLA() {
     phase = 'dla';
     const center = particles[Math.floor(particles.length/2)];
@@ -203,59 +194,55 @@ export function initParticles() {
     return w;
   }
 
-  // حلقه انیمیشن
+  // --- افکت زوم نرم ---
+  let zoomLevel = 1;
+  const zoomSpeed = 0.00005;
+  const minZoom = 0.85;
 
-  let zoomLevel = 1;       // مقدار اولیه مقیاس
-  const zoomSpeed = 0.0001; // سرعت تغییر مقیاس بسیار نرم
-  
-  function animate() {
+  function animate(now = 0) {
     if (!isActive) return;
-  
-    // فاز حرکت ذرات
-    if (phase === 'collapse') {
-      moveCollapse();
-      if (particles.length > config.particleCount * 2) {
-        startDLA();
-      }
-    } else {
-      if (!currentWalker) currentWalker = createWalker();
-      if (currentWalker) {
-        // حرکت تصادفی واکر
-        currentWalker.x += (Math.random() - 0.5) * 2;
-        currentWalker.y += (Math.random() - 0.5) * 2;
-  
-        // بررسی چسبیدن واکر به ذرات موجود
-        for (let seed of particles) {
-          const dx = seed.x - currentWalker.x;
-          const dy = seed.y - currentWalker.y;
-          if (Math.hypot(dx, dy) < config.stickDistance) {
-            currentWalker.locked = true;
-            particles.push(currentWalker);
-            currentWalker = null;
-            break;
+
+    const elapsed = now - lastFrameTime;
+    if (elapsed > 1000 / config.targetFPS) {
+      lastFrameTime = now;
+
+      if (phase === 'collapse') {
+        moveCollapse();
+        if (particles.length > config.particleCount * 2) {
+          startDLA();
+        }
+      } else {
+        if (!currentWalker) currentWalker = createWalker();
+        if (currentWalker) {
+          currentWalker.x += (Math.random() - 0.5) * 2;
+          currentWalker.y += (Math.random() - 0.5) * 2;
+          for (let seed of particles) {
+            const dx = seed.x - currentWalker.x;
+            const dy = seed.y - currentWalker.y;
+            if (Math.hypot(dx, dy) < config.stickDistance) {
+              currentWalker.locked = true;
+              particles.push(currentWalker);
+              currentWalker = null;
+              break;
+            }
+          }
+          if (currentWalker) {
+            currentWalker.element.setAttribute('cx', currentWalker.x);
+            currentWalker.element.setAttribute('cy', currentWalker.y);
           }
         }
-  
-        // به‌روزرسانی موقعیت واکر
-        if (currentWalker) {
-          currentWalker.element.setAttribute('cx', currentWalker.x);
-          currentWalker.element.setAttribute('cy', currentWalker.y);
-        }
+      }
+
+      // مقیاس دهی نمای کلی
+      if (zoomLevel > minZoom) {
+        zoomLevel -= zoomSpeed;
+        svg.style.transform = `scale(${zoomLevel})`;
+        svg.style.transformOrigin = 'center center';
       }
     }
-  
-    // اعمال افکت کشش: کوچک شدن تدریجی نمای کل
-    zoomLevel -= zoomSpeed;
-    if (zoomLevel < 0.7) zoomLevel = 0.7; // جلوگیری از بی‌نهایت کوچک شدن
-    svg.style.transform = `scale(${zoomLevel})`;
-    svg.style.transformOrigin = 'center center'; // مرکز مقیاس‌دهی
-  
-    // ادامه‌ی انیمیشن
     animationId = requestAnimationFrame(animate);
   }
-  
 
-  // تنظیم برای رویداد resize و رشد
   function handleResize() {
     cancelAnimationFrame(animationId);
     svg.setAttribute('viewBox', `0 0 ${window.innerWidth} ${window.innerHeight}`);
@@ -264,9 +251,9 @@ export function initParticles() {
     svg.innerHTML = '';
     particles.length = 0;
     connections.length = 0;
-    frameCount = 0;
     phase = 'collapse';
     currentWalker = null;
+    zoomLevel = 1;
     for (let i = 0; i < config.particleCount; i++) {
       const ang = config.startAngle + (i / config.particleCount) * (config.endAngle - config.startAngle);
       const x = centerX() + Math.cos(ang) * config.innerRadius;
@@ -279,7 +266,6 @@ export function initParticles() {
     }
   }
 
-  // مدیریت تغییر visibility
   function handleVisibilityChange() {
     isActive = !document.hidden;
     if (isActive) {
@@ -297,7 +283,6 @@ export function initParticles() {
     }
   }
 
-  // راه‌اندازی
   function start() {
     handleResize();
     growthTimer = setInterval(() => {
@@ -313,7 +298,6 @@ export function initParticles() {
 
   start();
 
-  // خروجی
   return {
     destroy() {
       cancelAnimationFrame(animationId);
