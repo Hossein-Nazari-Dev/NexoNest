@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Project Name] | NexoNest</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Shared CSS (tokens/base/layout/components) -->
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <!-- Project-page CSS -->
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+
+<body class="project-theme">
+  <div class="project-layout">
+    <!-- Sidebar (reusable) -->
+    <aside class="project-sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/icons/placeholder.png" alt="[Project] icon" class="project-icon" />
+        <h2 class="project-title">[Project Title]</h2>
+        <p class="project-subtitle">[Short tagline]</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- Optional: inject via JS per project; static fallback below -->
+        <div id="sidebarNav" class="sidebar-primary">
+          <a class="nav-link" href="#overview">Overview</a>
+          <a class="nav-link" href="#text">Text</a>
+          <a class="nav-link" href="#text-image-left">Text+Image L</a>
+          <a class="nav-link" href="#text-image-right">Text+Image R</a>
+          <a class="nav-link" href="#gallery">Gallery</a>
+          <a class="nav-link" href="#video">Video</a>
+          <a class="nav-link" href="#features">Features</a>
+          <a class="nav-link" href="#team">Team</a>
+          <a class="nav-link" href="#metrics">Metrics</a>
+        </div>
+
+        <div class="sidebar-separator"></div>
+
+        <div class="sidebar-secondary">
+          <a href="../nexonest.html" class="nav-link back-link">← Back to NexoNest</a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="project-main">
+      <div class="project-content">
+        <!-- Overview -->
+        <section id="overview" class="content-section text-section">
+          <h2 class="section-title">Overview</h2>
+          <p>[One or two concise paragraphs explaining the project.]</p>
+        </section>
+
+        <!-- Text only -->
+        <section id="text" class="content-section text-section">
+          <h2 class="section-title">Context</h2>
+          <p>[Body text. No inline styles, all spacing handled by project.css.]</p>
+        </section>
+
+        <!-- Text + Image (Left image) -->
+        <section id="text-image-left" class="content-section text-image-section text-image-left">
+          <h2 class="section-title">Text + Image (Left)</h2>
+          <div class="section-content">
+            <div class="text-content">
+              <p>[Explain the image, method, or result.]</p>
+            </div>
+            <div class="image-content">
+              <img src="../assets/images/projects/placeholder-left.jpg" alt="[Describe the image]" />
+              <p class="image-caption">[Optional caption.]</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Text + Image (Right image) -->
+        <section id="text-image-right" class="content-section text-image-section text-image-right">
+          <h2 class="section-title">Text + Image (Right)</h2>
+          <div class="section-content">
+            <div class="image-content">
+              <img src="../assets/images/projects/placeholder-right.jpg" alt="[Describe the image]" />
+              <p class="image-caption">[Optional caption.]</p>
+            </div>
+            <div class="text-content">
+              <p>[Supporting text.]</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Gallery / Slider -->
+        <section id="gallery" class="content-section slider-section">
+          <h2 class="section-title">Image Gallery</h2>
+          <div class="section-content">
+            <div class="slider-container">
+              <div class="slider-track">
+                <figure class="slide"><img src="../assets/images/projects/slide1.jpg" alt="Slide 1" /></figure>
+                <figure class="slide"><img src="../assets/images/projects/slide2.jpg" alt="Slide 2" /></figure>
+                <figure class="slide"><img src="../assets/images/projects/slide3.jpg" alt="Slide 3" /></figure>
+              </div>
+              <!-- Optional arrows/pagers controlled via CSS/JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="content-section features-section">
+          <h2 class="section-title">Key Features</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <h3 class="feature-title">Feature One</h3>
+              <p class="feature-description">Short description.</p>
+            </div>
+            <div class="feature-card">
+              <h3 class="feature-title">Feature Two</h3>
+              <p class="feature-description">Short description.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Team -->
+        <section id="team" class="content-section contributors-section">
+          <h2 class="section-title">Team</h2>
+          <div class="contributors-grid">
+            <div class="contributor-card">
+              <img class="contributor-image" src="../assets/images/team/placeholder.jpg" alt="Name" />
+              <h3 class="contributor-name">Name</h3>
+              <p class="contributor-role">Role</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Metrics -->
+        <section id="metrics" class="content-section metrics-section">
+          <h2 class="section-title">Metrics</h2>
+          <div class="metrics-grid">
+            <div class="metric-item"><div class="metric-value">X%</div><div class="metric-label">Something</div></div>
+            <div class="metric-item"><div class="metric-value">Y%</div><div class="metric-label">Something else</div></div>
+          </div>
+        </section>
+
+        <!-- Video -->
+        <section id="video" class="content-section video-section">
+          <h2 class="section-title">Project Video</h2>
+          <div class="section-content video-container">
+            <video controls preload="metadata">
+              <source src="../assets/media/demo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </section>
+      </div>
+
+      <footer class="project-footer">
+        <div class="project-navigation">
+          <a href="#" class="nav-button">Download</a>
+          <a href="#" class="nav-button">Documentation</a>
+          <span class="nav-button is-plain">License</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Optional: same navigation injector used by CurvAdapt -->
+  <script src="../js/project-navigation.js"></script>
+</body>
+</html>

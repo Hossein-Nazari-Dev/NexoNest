@@ -1,0 +1,63 @@
+{
+    "title": "TectoTrack - Social Digital Twin",
+    "subtitle": "AI-powered agent-based modeling for urban behavior simulation",
+    "meta": "2024 • Lead Developer",
+    "tags": ["AI", "Urban Design", "Simulation", "Python", "Rhino"],
+    "date": "January 2024",
+    "blocks": [
+        {
+            "type": "brief",
+            "title": "Project Overview",
+            "subtitle": "Revolutionizing urban design through digital twin technology",
+            "content": "TectoTrack is an advanced Social Digital Twin platform that simulates human behavior patterns and analyzes social interactions in built environments. The system uses AI-powered agent-based modeling with distinct human behavior profiles to optimize public spaces, retail layouts, and wayfinding systems through predictive crowd dynamics analytics.",
+            "meta": {
+                "role": "Lead Developer & Researcher",
+                "timeline": "6 months",
+                "technologies": "Python, Grasshopper, Rhino, Machine Learning",
+                "team": "4 people"
+            }
+        },
+        {
+            "type": "slider",
+            "title": "Project Visuals",
+            "images": [
+                {
+                    "url": "../../assets/images/projects/tectotrack/1.jpg",
+                    "alt": "TectoTrack interface overview",
+                    "caption": "Main simulation interface showing urban environment"
+                },
+                {
+                    "url": "../../assets/images/projects/tectotrack/2.jpg",
+                    "alt": "Agent behavior patterns",
+                    "caption": "Different agent behavior profiles in action"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "title": "Technical Implementation",
+            "content": "The system was built using Python for the core simulation engine, integrated with Rhino and Grasshopper for spatial analysis. We implemented machine learning algorithms to train agent behaviors based on real-world observational data, creating a robust predictive model that can simulate various urban scenarios with high accuracy."
+        },
+        {
+            "type": "contributors",
+            "title": "Project Team",
+            "contributors": [
+                {
+                    "name": "Hossein Nazari",
+                    "role": "Lead Developer & Computational Designer",
+                    "links": [
+                        { "label": "LinkedIn", "url": "https://linkedin.com/in/hossein-nazari" },
+                        { "label": "GitHub", "url": "https://github.com/hossein-nazari" }
+                    ]
+                },
+                {
+                    "name": "Dr. Mohammad Reza",
+                    "role": "Academic Supervisor",
+                    "links": [
+                        { "label": "University Profile", "url": "#" }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,106 @@
+{
+    "categories": [
+      { "id": "education", "label": "Education" },
+      { "id": "projects", "label": "Projects" },
+      { "id": "products", "label": "Products" },
+      { "id": "events", "label": "Events" },
+      { "id": "publications", "label": "Publications" }
+    ],
+    "subcategories": [
+      { "id": "comp-geo", "parent": "education", "label": "Computational Geometry" },
+      { "id": "sustain", "parent": "education", "label": "Sustainability" },
+      { "id": "programming", "parent": "education", "label": "Programming" },
+      { "id": "design-proj", "parent": "projects", "label": "Design Projects" },
+      { "id": "sim-analysis", "parent": "projects", "label": "Simulation and Analysis" },
+      { "id": "robot-io", "parent": "projects", "label": "Robotic and IoT" },
+      { "id": "octomass", "parent": "products", "label": "OctoMass" },
+      { "id": "octoland", "parent": "products", "label": "OctoLand" },
+      { "id": "octocity", "parent": "products", "label": "OctoCity" },
+      { "id": "curvadapt", "parent": "products", "label": "CurvAdapt" },
+      { "id": "geofactory", "parent": "products", "label": "GeoFactory" },
+      { "id": "course", "parent": "events", "label": "Course" },
+      { "id": "workshop", "parent": "events", "label": "Workshop and Bootcamps" }
+    ],
+    "projects": [
+      {
+        "id": "p_octomass",
+        "title": "OctoMass",
+        "excerpt": "A parametric design tool for architects to create and analyze massing models with sustainability metrics.",
+        "url": "../projects/octomass.html",
+        "icon": "../assets/icons/octomass.png",
+        "categories": ["products"],
+        "subcategories": ["octomass"],
+        "image": "../assets/images/octomass-icon.om"
+      },
+      {
+        "id": "p_octoland",
+        "title": "OctoLand",
+        "excerpt": "Landscape design software that integrates environmental analysis with design workflows.",
+        "url": "../projects/octoland.html",
+        "icon": "../assets/icons/octoland.png",
+        "categories": ["products"],
+        "subcategories": ["octoland"],
+        "image": "../assets/images/octoland-card.jpg"
+      },
+      {
+        "id": "p_octocity",
+        "title": "OctoCity",
+        "excerpt": "Urban scale design and simulation platform for sustainable city planning.",
+        "url": "../projects/octocity.html",
+        "icon": "../assets/icons/octocity.png",
+        "categories": ["products"],
+        "subcategories": ["octocity"],
+        "image": "../assets/images/octocity-card.jpg"
+      },
+      {
+        "id": "p_curvadapt",
+        "title": "CurvAdapt",
+        "excerpt": "A plugin for Grasshopper3d that helps to Segmentation and Simplification Curves or Polylines. It is useful for Geometry Preparation in Building Performance Simulations(BPS).",
+        "url": "../projects-pages/curvAdapt.html",
+        "icon": "../assets/icons/curvadapt.png",
+        "categories": ["products", "publication"],
+        "subcategories": ["curvadapt"],
+        "image": "../assets/images/projects/curvadapt/card.png"
+      },
+      {
+        "id": "p_geofactory",
+        "title": "GeoFactory",
+        "excerpt": "Manufacturing preparation software for complex geometric designs and digital fabrication.",
+        "url": "../projects/geofactory.html",
+        "icon": "../assets/icons/geofactory.png",
+        "categories": ["products"],
+        "subcategories": ["geofactory"],
+        "image": "../assets/images/geofactory-card.jpg"
+      },
+      {
+        "id": "p_printerra",
+        "title": "Printerra",
+        "excerpt": "Integration of design with robotic fabrication processes for architectural components.",
+        "url": "../projects/robotic.html",
+        "icon": "../assets/icons/printerra.png",
+        "categories": ["projects"],
+        "subcategories": ["robot-io"],
+        "image": "../assets/images/robotic-card.jpg"
+      },
+      {
+        "id": "p_alignment",
+        "title": "Alignment Calculation methods",
+        "excerpt": "A Grasshopper Plugin that includes different methods for alignemnt calculation from Math and Geometry to Urban Design",
+        "url": "../projects-pages/buildingAlignment.html",
+        "icon": "../assets/icons/alignment.png",
+        "categories": ["product", "publication", "projects"],
+        "subcategories": ["sim-analysis"],
+        "image": "../assets/images/robotic-card.jpg"
+      },
+      {
+        "id": "p_tecktotrack",
+        "title": "TectoTrack",
+        "excerpt": "A Grasshopper Plugin that includes different methods for alignemnt calculation from Math and Geometry to Urban Design",
+        "url": "../projects-pages/techtoTrack.html",
+        "icon": "../assets/icons/tectotrack.png",
+        "categories": ["product", "projects"],
+        "subcategories": ["sim-analysis"],
+        "image": "../assets/images/projects/tectotracks/card.png"
+      }
+    ]
+  }

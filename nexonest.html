@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexoNest</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body class="nexonest-theme">
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="../assets/logo.svg" alt="NexoNest Logo" class="logo-img">
+            </div>
+            <div class="title">
+                <h1>NexoNest</h1>
+                <p>A Startup works on developing Sustainable Design Tools for Designers.</p>
+            </div>
+        </header>
+
+        <!-- Navigation Pill -->
+        <div class="nav-pill-container">
+            <nav class="nav-pill">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link active" data-category="all">Home</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-category="education">Education</a>
+                    <div class="submenu">
+                        <a href="#" data-subcategory="comp-geo">Computational Geometry</a>
+                        <a href="#" data-subcategory="sustain">Sustainability</a>
+                        <a href="#" data-subcategory="programming">Programming</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-category="projects">Projects</a>
+                    <div class="submenu">
+                        <a href="#" data-subcategory="design-proj">Design Projects</a>
+                        <a href="#" data-subcategory="sim-analysis">Simulation and Analysis</a>
+                        <a href="#" data-subcategory="robot-io">Robotic and IoT</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-category="products">Products</a>
+                    <div class="submenu">
+                        <a href="#" data-subcategory="octomass">OctoMass</a>
+                        <a href="#" data-subcategory="octoland">OctoLand</a>
+                        <a href="#" data-subcategory="octocity">OctoCity</a>
+                        <a href="#" data-subcategory="curvadapt">CurvAdapt</a>
+                        <a href="#" data-subcategory="geofactory">GeoFactory</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-category="events">Events</a>
+                    <div class="submenu">
+                        <a href="#" data-subcategory="course">Course</a>
+                        <a href="#" data-subcategory="workshop">Workshop and Bootcamps</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-category="publications">Publications</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Content area that pushes icons to bottom -->
+        <div class="content-area">
+            <!-- This empty div takes up space and pushes icons down -->
+            <div class="content-spacer"></div>
+
+            <!-- Project Icons Grid at the bottom -->
+            <div class="projects-container">
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Project icons will be rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Baseline and Copyright -->
+            <div class="baseline-container">
+                <div class="baseline"></div>
+            </div>
+            <div class="copyright">Copyright © NexoNest</div>
+        </div>
+    </div>
+
+    <!-- Project Popup -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-card">
+            <button class="popup-close" id="popup-close">×</button>
+            <h2 class="popup-title" id="popup-title">Project Title</h2>
+            <p class="popup-excerpt" id="popup-excerpt">Project description goes here.</p>
+            <div class="popup-image" id="popup-image">Project Image</div>
+            <div class="popup-categories" id="popup-categories">Categories: Products, Projects</div>
+            <div class="popup-actions">
+                <button class="popup-button" id="popup-button">Read More</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="../js/state.js"></script>
+    <script src="../js/nav.js"></script>
+    <script src="../js/filter.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/render.js"></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Alignment | NexoNest</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+
+<body class="project-theme">
+  <div class="project-layout">
+
+    <!-- Sidebar -->
+    <aside class="project-sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/icons/alignment.png" alt="Building Alignment Logo" class="project-icon" />
+        <h2 class="project-title">Building Alignment</h2>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- primary menu gets injected here by project-navigation.js -->
+        <div id="sidebarNav" class="sidebar-primary"></div>
+
+        <div class="sidebar-separator"></div>
+
+        <!-- persistent links -->
+        <div class="sidebar-secondary">
+          <a href="../nexonest.html" class="nav-link back-link">← Back to NexoNest</a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="project-main">
+      <div class="project-content">
+
+        <!-- Overview -->
+        <section id="overview" class="content-section text-section">
+          <h2 class="section-title">Overview</h2>
+          <p>
+            <strong>Building Alignment</strong> explores how the positional arrangement of buildings within a block 
+            affects energy performance. The study introduces a quantifiable <em>alignment metric</em> and analyzes its 
+            influence on heating, cooling, and primary energy demand across urban layouts.
+          </p>
+          <p>
+            Using parametric models of a 16-building prototype block in Tehran’s ASHRAE 3B climate, the research 
+            systematically varies alignment along X, Y, and XY axes. Results demonstrate that subtle geometric 
+            misalignments can shift block-level energy performance by up to 2–3%, underscoring the energy relevance 
+            of spatial organization itself.
+          </p>
+
+          <div class="keyword-block">
+            <span class="keyword">Urban Form</span>
+            <span class="keyword">Building Energy</span>
+            <span class="keyword">Alignment Metric</span>
+            <span class="keyword">UBEM</span>
+            <span class="keyword">Ladybug Tools</span>
+            <span class="keyword">EnergyPlus</span>
+          </div>
+        </section>
+
+        <!-- Methodology -->
+        <section id="method" class="content-section technical-section">
+          <h2 class="section-title">Methodology</h2>
+        
+          <div class="technical-content">
+            <!-- Top row: 2 boxes -->
+            <div class="technical-item" style="grid-column: span 6;">
+              <h4>Prototype Block</h4>
+              <p>
+                16-building residential prototype (15×15 m footprint, 7 floors ≈ 22.4 m) typical of Tehran’s ASHRAE 3B climate.
+                Materials, envelope, and occupancy schedules held constant to isolate geometry.
+              </p>
+              <p>
+                Inter-building distances were derived from a calibrated <strong>Shadow Impact Factor (SIF)</strong>:
+                a height multiplier indicating where neighboring mass starts meaningfully reducing solar access. The SIF curve
+                flattens beyond ~2.5–3 × height, which we adopted as the base spacing for all alignment tests.
+              </p>
+            </div>
+        
+            <div class="technical-item" style="grid-column: span 6;">
+              <h4>Alignment Definition</h4>
+              <p>
+                Previous definitions of alignment was highly related to computer graphics and works with point and line definitions. As result, we need to define alignment based on them but in a way it's applicable to the context of urban design and buildings. 
+              </p>
+              <p>
+                Alignment is the normalized overlap ratio between consecutive buildings (1.0 perfectly aligned, 0.0 fully staggered).
+                Three families were generated: <strong>X-alignment</strong>, <strong>Y-alignment</strong>, and <strong>XY-alignment</strong>,
+                each tested with uniform and non-uniform distributions.
+              </p>
+            </div>
+        
+            <!-- Bottom row: 1 full-width box -->
+            <div class="technical-item" style="grid-column: 1 / -1;">
+              <h4>Simulation Workflow</h4>
+              <ul>
+                <li>Parametric generation in <strong>Rhino / Grasshopper</strong> (Python) with batch layout creation and duplicate filtering.</li>
+                <li>Energy modeling via <strong>Ladybug Tools</strong>, <strong>OpenStudio</strong>, and <strong>EnergyPlus</strong>.</li>
+                <li>Outputs aggregated as Heating, Cooling, Thermal Load, and Primary Energy Intensity.</li>
+              </ul>
+            </div>
+          </div>
+        
+          <!-- Method diagram (after the boxes) -->
+          <div class="image-container" style="margin-top: var(--sp-4); text-align: center;">
+            <img
+              src="../assets/images/projects/buildingAlignment/mathod.png"
+              alt="Parametric workflow linking spacing calibration, alignment generation, and energy simulation"
+              style="max-width: 92%; border-radius: var(--r-card); box-shadow: var(--project-shadow);" />
+            <p class="image-caption">Workflow: SIF-based spacing → layout families → energy simulation and aggregation.</p>
+          </div>
+        </section>
+        
+        
+
+
+        <!-- Shadow Impact Factor -->
+        <section id="shadow" class="content-section split">
+          <h2 class="section-title">Shadow Impact Factor</h2>
+          <div class="section-content">
+            <div class="text-container">
+              <p>
+                To ground alignment in environmental relevance, the <strong>Shadow Impact Factor</strong> quantifies 
+                how inter-building distance modulates incident radiation. For Tehran’s mid-rise typology, 
+                distances between 2–3× building height capture the critical range where radiation loss 
+                plateaus, defining a baseline spacing for the study.
+              </p>
+              <p class="image-caption">
+                This factor ensures geometric changes remain climatically meaningful.
+              </p>
+            </div>
+            <div class="image-container">
+              <img src="../assets/images/projects/buildingAlignment/shadowimpactfactor.png" alt="Shadow factor analysis" />
+              <p class="image-caption">Radiation sensitivity vs. inter-building spacing coefficient.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Window-to-Wall Ratio -->
+        <section id="wwr" class="content-section technical-section">
+          <h2 class="section-title">Window-to-Wall Ratio Optimization</h2>
+          <div class="technical-content">
+            <div class="technical-item">
+              <h4>Objective Sweep</h4>
+              <p>
+                A multi-objective WWR optimization was conducted (5–95% step 5%) targeting 
+                minimum heating/cooling loads and ASE, with maximum sDA and View.
+              </p>
+            </div>
+            <div class="technical-item">
+              <h4>Optimal Ratios</h4>
+              <ul>
+                <li>North – 20%</li>
+                <li>South – 25%</li>
+                <li>East – 20%</li>
+                <li>West – 15%</li>
+              </ul>
+            </div>
+            <div class="technical-item">
+              <h4>Assumptions</h4>
+              <p>
+                All simulations used ASHRAE 90.1-2019 envelope definitions and neutralized HVAC efficiencies 
+                (COP=1) to isolate geometric and alignment effects on thermal performance.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Findings -->
+        <section id="findings" class="content-section features-section">
+          <h2 class="section-title">Key Findings</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <h3 class="feature-title">X-Alignment</h3>
+              <p class="feature-description">
+                Lower alignment increases all load types. Alignment magnitude influences energy more strongly 
+                than geometric distribution pattern.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3 class="feature-title">Y-Alignment</h3>
+              <p class="feature-description">
+                Cooling and primary energy outcomes depend heavily on the regularity of building distribution. 
+                Non-uniform layouts often outperform uniform grids.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3 class="feature-title">XY-Alignment</h3>
+              <p class="feature-description">
+                Misalignment in both axes amplifies energy demand. Primary energy correlates linearly 
+                with total misalignment percentage.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3 class="feature-title">Urban Implication</h3>
+              <p class="feature-description">
+                Minor geometric offsets—within typical construction tolerances—can influence block-scale 
+                energy demand by up to 2.4%. This reveals alignment as a valid urban energy parameter.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Validation -->
+        <section id="validation" class="content-section split">
+          <h2 class="section-title">Dataset & Validation</h2>
+          <div class="section-content">
+            <div class="text-container">
+              <p>
+                400 simulations were performed; 50 were re-run for cross-validation using independent 
+                model exports. Deviations stayed below 0.5 kWh/m² for all metrics, confirming reproducibility.
+              </p>
+              <ul>
+                <li>Primary energy uses a 3.7 conversion factor (national electricity coefficient).</li>
+                <li>Strong negative correlation between alignment ratio and total loads.</li>
+              </ul>
+            </div>
+            <div class="image-container">
+              <img src="../assets/images/projects/buildingAlignment/validation.png" alt="Validation correlation" />
+              <p class="image-caption">Cross-validation scatter and correlation map.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contributions -->
+        <section id="contrib" class="content-section contributors-section">
+          <h2 class="section-title">Research Team</h2>
+
+          <div class="contributors-grid">
+            <div class="contributor-card">
+              <img class="contributor-image" src="../assets/images/team/hossein.jpg" alt="Hossein Nazari" />
+              <h3 class="contributor-name">Hossein Nazari</h3>
+              <p class="contributor-role">Student</p>
+            </div>
+
+            <div class="contributor-card">
+              <img class="contributor-image" src="../assets/images/team/abbastarkashvand.jpg" alt="Dr. Abbas Tarkashvand" />
+              <h3 class="contributor-name">Dr. Abbas Tarkashvand</h3>
+              <p class="contributor-role">Supervisor</p>
+
+            </div>
+
+            <div class="contributor-card">
+              <img class="contributor-image" src="../assets/images/team/mohsenfaizi.jpg" alt="Dr. Mohsen Faizi" />
+              <h3 class="contributor-name">Dr. Mohsen Faizi</h3>
+              <p class="contributor-role">Advisor</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Resources -->
+        <section id="resources" class="content-section text-section">
+          <h2 class="section-title">Resources</h2>
+          <p>
+            <a class="nav-link" href="../papers/building-alignment-preprint.pdf" target="_blank" rel="noopener noreferrer">
+              View Preprint (SSRN)
+            </a>
+          </p>
+          <p>
+            <a class="nav-link" href="../data/building-alignment-dataset.zip" target="_blank" rel="noopener noreferrer">
+              Download Dataset (Layouts & Simulation Inputs)
+            </a>
+          </p>
+        </section>
+
+      </div>
+
+      <footer class="project-footer">
+        <div class="project-navigation">
+          <a href="../nexonest.html" class="nav-button">Back to NexoNest</a>
+          <span class="nav-button is-plain">© Hossein Nazari, A. Tarkashvand, M. Faizi</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="../js/project-navigation.js"></script>
+</body>
+</html>

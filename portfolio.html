@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio — Hossein Nazari</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/portfolio.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/images/hossein/headicon.ico"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+  </head>
+  <body class="portfolio-theme">
+    <div class="portfolio-container">
+      <!-- Left Sidebar -->
+      <aside class="portfolio-sidebar">
+        <div class="profile-image">
+          <img
+            src="../assets/profile.jpg"
+            alt="Hossein Nazari"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div class="profile-info">
+          <h1>Hossein Nazari</h1>
+          <p>Computational Designer</p>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Sections">
+          <button class="nav-button active" data-section="profile">Profile</button>
+          <button class="nav-button" data-section="myjourney">My Journey</button>
+          <button class="nav-button" data-section="education">Education</button>
+          <button class="nav-button" data-section="experience">Experience</button>
+          <button class="nav-button" data-section="skills">Skills</button>
+          <button class="nav-button" data-section="projects">Projects</button>
+          <button class="nav-button" data-section="publications">Publications</button>
+          <button class="nav-button" data-section="portfolio-pdf">Portfolio PDF</button>
+          <div style="margin-top: 1rem;"></div>
+          <a class="nav-button" href="../index.html">&larr; Return Home</a>
+        </nav>
+        
+      </aside>
+
+      <!-- Main Content -->
+      <main class="portfolio-main">
+        <div class="content-scrollable">
+
+
+
+          <!-- Profile Section -->
+          <section id="profile" class="portfolio-section active">
+            <h2>Profile</h2>
+            <div class="section-content">
+              <div class="profile-grid">
+                <div class="info-card">
+                  <h3>Personal Details</h3>
+                  <div class="details-grid">
+                    <div class="detail-item">
+                      <span class="label">Full Name:</span>
+                      <span class="value">Hossein Nazari</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="label">Date of Birth:</span>
+                      <span class="value">October 12, 1991</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="label">Nationality:</span>
+                      <span class="value">Iranian</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="label">Languages:</span>
+                      <span class="value"
+                        >
+                         <p>English: Professional Working Proficiency</p>
+                         <p>Persian: Native</p>
+                         </span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="info-card">
+                  <h3>Professional Summary</h3>
+                  <p>
+                    I define my work around what I call <strong>Computational Climatic Finding</strong> — 
+                    a design approach that integrates climate analysis, data-driven form exploration, and 
+                    computational workflows to shape architectures, landscapes, and urban systems that are 
+                    inherently adaptive and environmentally performative.
+                  </p>
+                  
+                  <p>
+                    Alongside this, I explore the potential of <strong>Social Digital Twins</strong>, 
+                    creating dynamic simulations of human behavior and comfort within built environments. 
+                    By merging climatic form-finding with behavioral modeling, my goal is to prototype 
+                    intelligent design strategies that simultaneously enhance environmental performance 
+                    and elevate user experience. To me, design is not only a technical pursuit but a 
+                    framework for sustainable, human-centered transformation.
+                  </p>
+                  
+                  
+                </div>
+              </div>
+
+              <div class="info-card full-width">
+                <h3>Interests & Hobbies</h3>
+                <div class="hobbies-grid">
+                  <div
+                    class="hobby-item"
+                    data-tooltip="Philosophy & Psychology enthusiast: especially when diagnosing my own personality disorders!"
+                  >
+                    <span class="hobby-icon"><i data-lucide="brain"></i></span>
+                    <span>Mind Explorer</span>
+                  </div>
+                  <div
+                    class="hobby-item"
+                    data-tooltip="Creating glitch art and generative designs with Processing and/or/with Arduino."
+                  >
+                    <span class="hobby-icon"><i data-lucide="palette"></i></span>
+                    <span>Digital Art</span>
+                  </div>
+                  <div
+                    class="hobby-item"
+                    data-tooltip="Certified explorer of 20,000 Leagues Under My Couch Cushions (thanks to Dear Jules Verne -> Rest In Peace)."
+                  >
+                    <span class="hobby-icon"><i data-lucide="book-open"></i></span>
+                    <span>Sci-Fi Literature</span>
+                  </div>
+                  <div
+                    class="hobby-item"
+                    data-tooltip="Growing 'Dragon's Breath chili peppers on my balcony no fire extinguisher yet!"
+                  >
+                    <span class="hobby-icon"><i data-lucide="sprout"></i></span>
+                    <span>Urban Gardening</span>
+                  </div>
+                  <div
+                    class="hobby-item"
+                    data-tooltip="Climbed 3 peaks last year -> next goal: finding an easier hobby!"
+                  >
+                    <span class="hobby-icon"><i data-lucide="mountain"></i></span>
+                    <span>Hiking</span>
+                  </div>
+                  <div
+                    class="hobby-item"
+                    data-tooltip="My cooking experiments are 50% delicious, 50% -> let's order pizza"
+                  >
+                    <span class="hobby-icon"><i data-lucide="chef-hat"></i></span>
+                    <span>Experimental Cooking</span>
+                  </div>
+                  <div
+                    class="hobby-item"
+                    data-tooltip="Professional listener of music even the artists forgot they made."
+                  >
+                    <span class="hobby-icon"><i data-lucide="headphones"></i></span>
+                    <span>Music Connoisseur</span>
+                  </div>
+                  <div
+                    class="hobby-item"
+                    data-tooltip="Getting lost in Google Earth finding weird places at 3AM"
+                  >
+                    <span class="hobby-icon"><i data-lucide="map"></i></span>
+                    <span>Digital Exploration</span>
+                  </div>
+                </div>
+              </div>
+              
+
+              <div class="links-row">
+                <a href="mailto:hossein.nazari.ac@gmail.com" class="link-box">
+                  <i data-lucide="mail"></i>
+                  <span>Email</span>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/hossein-nazari-964322185/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link-box"
+                >
+                  <i data-lucide="linkedin"></i>
+                  <span>LinkedIn</span>
+                </a>
+                <a
+                  href="https://github.com/Hossein-Nazari-Dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link-box"
+                >
+                  <i data-lucide="github"></i>
+                  <span>GitHub</span>
+                </a>
+                <a
+                  href="https://t.me/hosseinnazari91"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link-box"
+                >
+                  <i data-lucide="send"></i>
+                  <span>Telegram</span>
+                </a>
+              </div>
+              
+
+
+            </div>
+          </section>
+
+
+
+
+          <!-- ===== My Journey ===== -->
+          <section id="myjourney" class="portfolio-section">
+            <h2>My Journey</h2>
+            <p class="mj-tagline">
+              Portfolios often showcase <strong>projects</strong> more than <strong>people</strong>.
+              Success stories get told; failures get silenced. If success stories excite you,
+              wait until you hear about my failures. 🙂
+            </p>
+          
+            <div class="mj-shell" id="mj-shell">
+              <!-- Timeline -->
+              <div class="mj-stage" tabindex="0" aria-label="Journey timeline">
+                <div class="mj-rail" aria-hidden="true"></div>
+                <div id="mj-track" class="mj-track" aria-live="polite"></div>
+          
+                <!-- fades + vector hints (purely visual) -->
+                <div class="mj-fade mj-fade--left"></div>
+                <div class="mj-fade mj-fade--right"></div>
+                <svg class="mj-hint mj-hint--left" viewBox="0 0 24 24" aria-hidden="true">
+                  <path class="arrow" d="M15 4 L7 12 L15 20"/>
+                  <circle class="dot" cx="12" cy="12" r="9"/>
+                </svg>
+                <svg class="mj-hint mj-hint--right" viewBox="0 0 24 24" aria-hidden="true">
+                  <path class="arrow" d="M9 4 L17 12 L9 20"/>
+                  <circle class="dot" cx="12" cy="12" r="9"/>
+                </svg>
+              </div>
+          
+              <!-- Single panel (title + content از JS) -->
+              <div id="mj-panel" class="mj-panel" role="region" aria-label="Journey details"></div>
+            </div>
+          </section>
+          
+          
+          
+          
+
+          <!-- Education Section -->
+          <section id="education" class="portfolio-section">
+            <h2>Education & Professional Development</h2>
+            <div class="section-content">
+              <div class="info-card">
+                <h3>Academic Education</h3>
+                <div class="timeline">
+                  <div class="timeline-item">
+                    <div class="timeline-date">2019 - 2022</div>
+                    <div class="timeline-content">
+                      <h4>M.A. in Sustainable Architecture</h4>
+                      <span class="institution"
+                        >Iran University of Science and Technology (IUST)</span
+                      >
+                      <p>
+                        Thesis: Impact of Buildings Alignment on Energy
+                        Efficiency - Design A Residential Complex as case study
+                        in Tehran.
+                      </p>
+                      <p>
+                        Supervisor:
+                        <a class="timeline-date" href="https://scholar.google.com/citations?user=WcUvjrUAAAAJ&hl=en">Dr. Mohsen Faizi</a>
+                        &nbsp;–&nbsp;
+                        <a class="timeline-date" href="https://scholar.google.com/citations?user=ydZ_t4YAAAAJ&hl=en">Dr. Abbas Tarkashvand</a>
+                      </p>
+
+
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-date">2013 - 2016</div>
+                    <div class="timeline-content">
+                      <h4>B.A. in Architecture</h4>
+                      <span class="institution">Soore University</span>
+                      <p>
+                        Thesis: Designing a Respiratory Rehabilitation
+                        Hotel-Hospital. Design A Sample in Urmia, Iran
+                      </p>
+                      <p>Supervisor: Eng. Daryoush Kasraei</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <h3>Courses & Workshops</h3>
+                <div class="courses-grid">
+                  <div class="course-card">
+                    <h4>Advanced Grasshopper</h4>
+                    <span class="course-institute"
+                      >Iranian Architecture Center</span
+                    >
+
+
+                    <a href="../assets/images/certificates/AdGrasshopper.jpg" target="_blank" rel="noopener noreferrer"  class="course-badge">
+                      Certificate
+                    </a>
+
+
+
+                  </div>
+                  <div class="course-card">
+                    <h4>AI in Architecture and Urban Design</h4>
+                    <span class="course-institute"
+                      >Iranian Architecture Center</span
+                    >
+
+                    <a href="../assets/images/certificates/AI.jpg" target="_blank" rel="noopener noreferrer"  class="course-badge">
+                      Certificate
+                    </a>
+
+                  </div>
+                  <div class="course-card">
+                    <h4>Optimization and Machine Learning</h4>
+                    <span class="course-institute">Dr. Morteza Rahbar</span>
+                  </div>
+                  <div class="course-card">
+                    <h4>Python Programming</h4>
+                    <span class="course-institute">Harvard CS50</span>
+                    
+                    <a href="https://certificates.cs50.io/08bf7a30-cccf-4c44-ac35-3e66bbaddfb8.pdf?size=letter" target="_blank" rel="noopener noreferrer"  class="course-badge">
+                      Certificate
+                    </a>
+                  </div>
+
+                  <div class="course-card">
+                    <h4>Advanced Daylighting Design</h4>
+                    <span class="course-institute">Dr. Peyman Pilechiha</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Experience Section -->
+          <section id="experience" class="portfolio-section">
+            <h2>Main Experiences</h2>
+            <div class="section-content experience-layout">
+              <div class="experience-list">
+                <!-- NexoNest Experience -->
+                <div class="experience-item" data-role="nexonest">
+                  <div class="exp-header">
+                    <h4>Founder & Computational Designer</h4>
+                    <span class="exp-date">2021-Present</span>
+                  </div>
+                  <span class="company">NexoNest</span>
+                </div>
+
+                <!-- Morphotect Experience -->
+                <div class="experience-item" data-role="morphotect">
+                  <div class="exp-header">
+                    <h4>Python Developer</h4>
+                    <span class="exp-date">2023-Present</span>
+                  </div>
+                  <span class="company">Morphotect</span>
+                </div>
+
+                <!-- IUST Experience -->
+                <div class="experience-item" data-role="iust">
+                  <div class="exp-header">
+                    <h4>Research Assistant & Teaching Assistant</h4>
+                    <span class="exp-date">2022-2024</span>
+                  </div>
+                  <span class="company"
+                    >Iran University of Science and Technology</span
+                  >
+                </div>
+
+                <!-- Robotics Experience -->
+                <div class="experience-item" data-role="robotics">
+                  <div class="exp-header">
+                    <h4>Robotics and Embedded Systems Developer</h4>
+                    <span class="exp-date">2023</span>
+                  </div>
+                  <span class="company"
+                    >Iran University of Science and Technology</span
+                  >
+                </div>
+
+                <!-- Bootcamp Experience -->
+                <div class="experience-item" data-role="bootcamp">
+                  <div class="exp-header">
+                    <h4>Agent-Based Modeling Bootcamp</h4>
+                    <span class="exp-date">2024</span>
+                  </div>
+                  <span class="company"
+                    >Collaboration between IUST and Morphotect</span
+                  >
+                </div>
+
+                <!-- Architectural Experience -->
+                <div class="experience-item" data-role="architect">
+                  <div class="exp-header">
+                    <h4>Architectural Designer</h4>
+                    <span class="exp-date">2019-2022</span>
+                  </div>
+                  <span class="company">Various Projects</span>
+                </div>
+              </div>
+
+              <div class="experience-detail" id="experienceDetail">
+                <div class="detail-placeholder">
+                  <p>Select the item to view detailed responsibilities</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Skills Section (REWRITTEN) -->
+          <section id="skills" class="portfolio-section">
+            <h2>Skills</h2>
+            <div class="section-content">
+              <div class="skills-grid">
+          
+                <!-- 1) Programming & Computational Methods -->
+                <div class="skill-category">
+                  <h3>Programming & Computational Methods</h3>
+          
+                  <div class="skill" data-level="92">
+                    <span class="skill-name">Python</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:92%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="78">
+                    <span class="skill-name">C# / .NET</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:78%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="72">
+                    <span class="skill-name">HTML / CSS / JavaScript</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:72%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="86">
+                    <span class="skill-name">Git / GitHub</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:86%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="84">
+                    <span class="skill-name">Algorithms & Data Visualization</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:84%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="90">
+                    <span class="skill-name">Design Patterns</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
+                  </div>
+                </div>
+          
+                <!-- 2) Parametric & AEC Tools -->
+                <div class="skill-category">
+                  <h3>Parametric & AEC Tools</h3>
+          
+                  <div class="skill" data-level="95">
+                    <span class="skill-name">Rhino & Grasshopper</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="88">
+                    <span class="skill-name">Rhino.Inside</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:88%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="85">
+                    <span class="skill-name">Revit & BIM</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="78">
+                    <span class="skill-name">Interoperability (AEC Pipelines)</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:78%"></div></div>
+                  </div>
+                </div>
+          
+                <!-- 3) Climate & Performance Simulation -->
+                <div class="skill-category">
+                  <h3>Climate & Performance Simulation</h3>
+          
+                  <div class="skill" data-level="95">
+                    <span class="skill-name">Ladybug Tools (LB/HB/DF)</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="92">
+                    <span class="skill-name">Climate Studio</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:92%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="82">
+                    <span class="skill-name">Daylighting & Energy Modeling</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:82%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="90">
+                    <span class="skill-name">Computational Sustainability</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
+                  </div>
+                </div>
+          
+                <!-- 4) Behavioral Simulation & Interactive Systems -->
+                <div class="skill-category">
+                  <h3>Behavioral Simulation & Interactive Systems</h3>
+          
+                  <div class="skill" data-level="88">
+                    <span class="skill-name">Agent-Based Modeling</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:88%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="84">
+                    <span class="skill-name">Social Digital Twins</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:84%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="80">
+                    <span class="skill-name">Crowd Dynamics & Wayfinding</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="78">
+                    <span class="skill-name">UX for Built Environments</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:78%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="82">
+                    <span class="skill-name">IoT, Sensors & Real-Time Sensing</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:82%"></div></div>
+                  </div>
+          
+                  <div class="skill" data-level="85">
+                    <span class="skill-name">Arduino / Raspberry Pi</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
+                  </div>
+                </div>
+          
+              </div>
+          
+              <div class="skills-row">
+                <!-- Areas of Expertise -->
+                <div class="info-card full-width">
+                  <h4>Areas of Expertise</h4>
+                  <ol class="expertise-list numbered-list">
+                    <li>Computational Climatic Finding — merging climate analytics, data-driven form exploration, and optimization.</li>
+                    <li>Social Digital Twins — behavioral simulation for comfort, wayfinding, and crowd dynamics in built environments.</li>
+                    <li>Human-Centered Responsive Architecture — UX + sensing + control for adaptive spaces.</li>
+                    <li>Data-Driven Environmental Optimization — multi-objective performance across daylight, energy, and comfort.</li>
+                    <li>Sustainable & Resilient Design Systems — integrating environmental performance with social behavior at urban/architectural scales.</li>
+                  </ol>
+                </div>
+              
+                <!-- Soft Skills -->
+                <div class="info-card full-width">
+                  <h4>Soft Skills</h4>
+                  <ol class="soft-skills numbered-list">
+                    <li>Computational Thinking — structured problem-solving mindset</li>
+                    <li>Collaboration & Mentorship — team-oriented, teaching-driven</li>
+                    <li>Adaptability & Resilience — thriving in complex projects</li>
+                    <li>Creative Problem Solving — experimental and design-led approaches</li>
+                    <li>Technical Communication — clear documentation & storytelling</li>
+                    <li>Project Management — agile planning and coordination</li>
+                  </ol>
+                </div>
+              </div>
+              
+              
+              
+            </div>
+          </section>
+          
+          <!-- Projects Section -->
+          <section id="projects" class="portfolio-section">
+            <h2>Selected Projects and Experience</h2>
+            <div class="section-content">
+              <div class="project-card">
+                <h3>TectoTrack</h3>
+                <p>
+                  A social digital twin platform that models how people move, interact, and occupy space in real time. 
+                  Powered by AI-driven agent-based simulation, it represents diverse behavioral profiles to study 
+                  crowd dynamics, wayfinding, and environmental comfort—helping designers optimize public spaces, 
+                  retail layouts, and circulation systems through predictive analytics.
+                </p>
+                <a href="projects-pages/techtoTrack.html" class="project-link">View Project Details</a>
+              </div>
+
+
+              <div class="project-card">
+                <h3>CurvAdapt</h3>
+                <p>
+                  A geometry preprocessing framework that bridges free-form NURBS design and simulation accuracy. 
+                  It provides adaptive segmentation and simplification tools governed by curvature, tangent, and chord-error 
+                  metrics—ensuring geometries remain both computationally efficient and performance-faithful across 
+                  daylighting and energy analyses.
+                </p>
+                <a href="projects-pages/curvAdapt.html" class="project-link">View Project Details</a>
+              </div>
+
+              
+
+              <div class="project-card">
+                <h3>ABMs in Architecture and Urban Design</h3>
+                <p>
+                  Designing Human-Centered, Environmentally Perceptive Digital
+                  Models in Architecture and Urban Planning. This hands-on
+                  bootcamp explored digital twins and agent-based models to
+                  simulate human behavior in urban spaces. Participants used
+                  Rhino, Grasshopper, and Python to tackle real design
+                  challenges—like pedestrian flow, emergency evacuation, and
+                  spatial perception.
+                </p>
+                <a
+                  href="../events/bootcamp/agent-based-modeling-2024.html"
+                  class="project-link"
+                  >View Report Details</a
+                >
+              </div>
+
+              <div class="project-card">
+                <h3>prinTerra</h3>
+                <p>
+                  Research project in robotic 3D printing architecture using
+                  local earth materials. Features AI-driven fabrication, modular
+                  design & sustainable construction methods.
+                </p>
+                <a
+                  href="../projects/academic/printerra.html"
+                  class="project-link"
+                  >View Project Details</a
+                >
+              </div>
+
+          </section>
+
+          <!-- publications Section -->
+          <section id="publications" class="portfolio-section">
+            <h2>Academic Papers</h2>
+            <div class="section-content">
+              <div class="project-card">
+                <h3>Impact of Building's Alignment on Energy Efficiency</h3>
+                <p>
+                  The findings of master thesis.
+                </p>
+                <a href="project-template.html?id=tectotrack" class="project-link">View Page</a>
+                <a href="project-template.html?id=tectotrack" class="project-link">View Published Preprint</a>
+              </div>
+
+              <div class="project-card">
+                <h3>Reliable Geometry Preprocessing for Building Performance Simulation: Validation of Curve Segmentation through Radiation, Daylighting, and Energy Analyses</h3>
+                <p>
+                  A fundamental paper proposed a methodological approach for geometry preparation. It is published with a Rhino/Grasshopper plugin integrates with LadybugTools.
+                </p>
+                <a href="project-template.html?id=tectotrack" class="project-link">View Page</a>
+                <a href="project-template.html?id=tectotrack" class="project-link">View Paper</a>
+                <a href="project-template.html?id=tectotrack" class="project-link">View Plugin</a>
+              </div>
+
+
+            </div>
+          </section>
+
+          <!-- Portfolio PDF Section -->
+          <section id="portfolio-pdf" class="portfolio-section">
+            <h2>Portfolio PDF</h2>
+            <div class="section-content">
+              <div class="pdf-viewer">
+                <div class="pdf-controls">
+                  <button class="pdf-nav prev" aria-controls="pdf-container">‹</button>
+                  <span class="pdf-page-info" role="status" aria-live="polite">Page 1 of 12</span>
+                  <button class="pdf-nav next" aria-controls="pdf-container">›</button>
+                </div>
+                <div id="pdf-container" class="pdf-container">
+                  <div class="pdf-page left">
+                    <div class="page-content">
+                      <h3>Portfolio Preview</h3>
+                      <p>Full portfolio available in PDF format</p>
+                    </div>
+                  </div>
+                  <div class="pdf-page right">
+                    <div class="page-content">
+                      <h3>Project Showcase</h3>
+                      <p>Detailed case studies and visual documentation</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="pdf-download">
+                  <a
+                    href="../hossein/Portfolio_HosseinNazari.pdf"
+                    class="download-button"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    >Download Full PDF</a
+                  >
+                  <a
+                    href="../hossein/Presentation_HosseinNazari (1).pdf"
+                    class="download-button"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    style="margin-left: 1rem"
+                    >Download Thesis</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <div class="scroll-handle"></div>
+      </div>
+    </div>
+
+    <script src="../js/nav.js" defer></script>
+    <script src="../js/portfolio.js" defer></script>
+    <script src="../js/journey.js" defer></script>
+    <script>
+      lucide.createIcons();
+    </script>
+    
+  </body>
+</html>

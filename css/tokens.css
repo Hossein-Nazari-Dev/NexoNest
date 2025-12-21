@@ -1,0 +1,91 @@
+:root {
+    /* ===== CORE COLORS ===== */
+    --color-bg: #f9fafb;
+  
+    /* 1. NexoNest color */
+    --color-accent-nexo: #80b6a7;
+  
+    /* 2. Portfolio color */
+    --color-accent-portfolio: #88b2d3;
+  
+    /* Neutral colors */
+    --color-text: #222;
+    --color-text-light: #444;
+    --color-muted: #6b7280;
+    --color-dimmed: #9ca3af;
+    --color-connector: #9aa0a6;
+    --color-white: #ffffff;
+    --color-black: #000000;
+  
+    /* ===== DERIVED ACCENT COLORS ===== */
+    --c-accent-nexo: var(--color-accent-nexo);
+    --c-accent-nexo-weak: #dceae5;
+    --c-accent-nexo-dark: #4b7c6e;
+  
+    --c-accent-portfolio: var(--color-accent-portfolio);
+    --c-accent-portfolio-weak: #e1f5fe;
+    --c-accent-portfolio-dark: #4a8cce;
+  
+    --c-accent: var(--c-accent-nexo);
+    --c-accent-weak: var(--c-accent-nexo-weak);
+    --c-accent-dark: var(--c-accent-nexo-dark);
+
+    /* ===== GEOMETRY ===== */
+    --r: 100px;
+    --cx-left: 40vw;
+    --cy-left: 50vh;
+    --cx-right: 60vw;
+    --cy-right: 50vh;
+
+    /* ===== PATTERNS ===== */
+    --dash: 4px;
+    --gap: 2px;
+
+    /* ===== TYPOGRAPHY ===== */
+    --h1: clamp(22px, 3.2vmin, 36px);
+    --p: clamp(14px, 2vmin, 20px);
+
+    /* ===== SPACING ===== */
+    --sp-1: 4px;    /* XS - micro */
+    --sp-2: 8px;    /* S - small paddings */
+    --sp-3: 16px;   /* M - standard blocks */
+    --sp-4: 24px;   /* L - cards/gaps */
+    --sp-5: 36px;   /* XL - section headers */
+    --sp-6: 44px;   /* XXL - major section separation */
+    
+    
+    /* ===== BORDER RADIUS ===== */
+    --r-outer: 18px;
+    --r-card: 12px;
+    --r-icon: 10px;
+    
+    /* ===== DIMENSIONS ===== */
+    --icon-size: 60px;
+    --nav-pill-width: 90vw;
+    --baseline-offset: 20vh;
+
+
+        /* Project Template Colors (Average of NexoNest blue and Portfolio amber) */
+    --color-project-primary: #6b8e7f; /* Middle ground between #567e7a and #81c2f3 */
+    --color-project-primary-dark: #4a6b5f;
+    --color-project-primary-light: #8fb1a6;
+    --color-project-primary-weak: #e8f2ef;
+    
+    /* Project specific variables */
+    --project-border-radius: 12px;
+    --project-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --project-transition: all 0.3s ease;
+}
+
+/* ===== THEME CLASSES ===== */
+.nexonest-theme {
+    --c-accent: var(--c-accent-nexo);
+    --c-accent-weak: var(--c-accent-nexo-weak);
+    --c-accent-dark: var(--c-accent-nexo-dark);
+}
+
+.portfolio-theme {
+    --c-accent: var(--c-accent-portfolio);
+    --c-accent-weak: var(--c-accent-portfolio-weak);
+    --c-accent-dark: var(--c-accent-portfolio-dark);
+}

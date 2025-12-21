@@ -1,0 +1,122 @@
+{
+  "id": "curvadapt",
+  "title": "CurvAdapt",
+  "subtitle": "A Grasshopper plug-in for segmentation and simplification of NURBS and polylines in Building Performance Simulation",
+  "description": "CurvAdapt provides a transparent and controllable framework for preparing simulation-ready geometry. It bridges the gap between free-form NURBS design models and the strict planar requirements of engines like EnergyPlus and Radiance. The plug-in integrates segmentation and simplification workflows with robust error control, ensuring geometric fidelity and improving both computational efficiency and reproducibility.",
+  "meta": "2025 • Research & Development",
+  "date": "2025",
+  "tags": ["Grasshopper", "Rhino", "NURBS", "Curve Segmentation", "Geometry Simplification", "Building Performance Simulation"],
+  "categories": ["products", "projects"],
+  "status": "completed",
+
+  "header": {
+    "image": "../../assets/images/projects/curvadapt/header.jpg",
+    "thumbnail": "../../assets/icons/curvadapt.png",
+    "color": "#6b8e7f",
+    "client": "NexoNest Research",
+    "demo_url": "https://demo.nexonest.com/curvadapt",
+    "github_url": "https://github.com/nexonest/curvadapt"
+  },
+
+  "content_blocks": [
+    {
+      "type": "text",
+      "title": "Overview",
+      "subtitle": "Why Geometry Preparation Matters",
+      "content": "Accurate geometry preprocessing is essential for reliable energy and daylight simulations. Modern NURBS-based design environments produce smooth, free-form curves, but simulation engines like EnergyPlus and Radiance require planar, well-segmented surfaces. Without careful preprocessing, models may produce unstable or misleading results. CurvAdapt implements a robust framework that unifies segmentation for NURBS and simplification for polylines, governed by the maximum chord error as a geometric fidelity criterion."
+    },
+    {
+      "type": "features",
+      "title": "Key Capabilities",
+      "items": [
+        {
+          "title": "Segmentation",
+          "description": "Adaptive conversion of NURBS into polylines using curvature-, tangent-, or error-driven strategies.",
+          "icon": "scissors"
+        },
+        {
+          "title": "Simplification",
+          "description": "Efficient reduction of polyline density with error bounds, based on Douglas–Peucker, Visvalingam–Whyatt, and angle-based methods.",
+          "icon": "minus-square"
+        },
+        {
+          "title": "Error Control",
+          "description": "Guarantees geometric fidelity by reporting maximum chord error, ensuring reproducibility and comparability of results.",
+          "icon": "target"
+        },
+        {
+          "title": "Simulation Integration",
+          "description": "Produces leaner, simulation-ready geometry that reduces runtime in EnergyPlus and Radiance while maintaining accuracy.",
+          "icon": "zap"
+        }
+      ]
+    },
+    {
+      "type": "text_image",
+      "title": "The Problem of Non-Monotonic Convergence",
+      "subtitle": "Why simulation accuracy does not always improve with more segments",
+      "content": "Our research shows that relying on simulation outputs alone to judge simplification quality is flawed. Complex geometries exhibit non-monotonic convergence, where increasing detail can paradoxically worsen accuracy. To overcome this, CurvAdapt enforces a geometric guarantee via maximum chord error before simulation, ensuring stability and preventing 'false convergence.'",
+      "image": "../../assets/images/projects/curvadapt/convergence.png",
+      "image_caption": "Non-monotonic convergence in complex geometries."
+    },
+    {
+      "type": "technical",
+      "title": "Algorithms Implemented",
+      "sections": [
+        {
+          "title": "Segmentation",
+          "content": "Uniform by length/parameter, curvature-based, tangent-angle based, and recursive Douglas–Peucker with kink preservation."
+        },
+        {
+          "title": "Simplification",
+          "content": "Douglas–Peucker distance tolerance, Visvalingam–Whyatt area reduction, and angle-based filtering."
+        },
+        {
+          "title": "Metrics",
+          "content": "Geometric fidelity measured by maximum chord error; simulation performance measured by deviation in radiation/energy results."
+        }
+      ]
+    },
+    {
+      "type": "contributors",
+      "title": "Research Team",
+      "contributors": [
+        {
+          "name": "Hossein Nazari",
+          "role": "Lead Developer & Computational Designer",
+          "image": "../../assets/images/team/hossein.jpg"
+        },
+        {
+          "name": "Shadan Masoud",
+          "role": "Researcher, Building Performance Specialist",
+          "image": "../../assets/images/team/shadanmasoud.jpg"
+        },
+        {
+          "name": "Dr. Mehdi Ghiai",
+          "role": "Supervisor",
+          "image": "../../assets/images/team/mahdighiai.jpg"
+        },
+        {
+          "name": "Dr. Abbas Tarkashvand",
+          "role": "Supervisor",
+          "image": "../../assets/images/team/abbastarkashvand.jpg"
+        }
+      ]
+    }
+  ],
+
+  "footer": {
+    "download_url": "../../downloads/curvadapt.zip",
+    "documentation_url": "../../docs/curvadapt.pdf",
+    "license": "MIT License",
+    "version": "1.2.0",
+    "last_updated": "2025-01-15"
+  },
+
+  "metrics": {
+    "performance_improvement": "up to 60 simulation runtime reduction",
+    "geometry_reduction": "Vertex count reduced by up to 70%",
+    "accuracy_rate": "Geometric fidelity maintained within 1% deviation",
+    "adoption_rate": "1000+ users"
+  }
+}

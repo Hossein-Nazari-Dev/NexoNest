@@ -1,0 +1,357 @@
+/* ==========================================================================
+   PROJECT THEME (colors come ONLY from tokens.css)
+   ========================================================================== */
+.project-theme {
+  --dash-color: var(--color-connector);
+  --dash-1: 2px dashed var(--dash-color);
+  --shadow-soft: 0 2px 10px color-mix(in oklab, var(--color-black) 50%, transparent);
+
+  /* Layout tokens */
+  --sidebar-w: 260px;
+  --content-gutter: clamp(36px, 4vw, 56px);
+  --content-max-w: min(1200px, 85%);
+  --rule: 1px dashed var(--color-connector);
+}
+body, .project-theme { font-family: 'JetBrains Mono', monospace; }
+
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+.project-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+.project-sidebar {
+  position: sticky; top: 0; height: 100vh; overflow: auto;
+  width: var(--sidebar-w);
+  display: flex; flex-direction: column; align-items: center;
+  padding: var(--sp-4) clamp(16px, 2.4vw, 28px);
+  padding-left: clamp(28px, 3.2vw, 40px);
+  background: var(--color-surface);
+  border-right: var(--rule);
+}
+.project-main {
+  background: var(--color-bg);
+  padding: var(--sp-5) var(--content-gutter) var(--sp-6);
+  overflow-y: auto;
+}
+.project-content {
+  width: 100%;
+  max-width: var(--content-max-w);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   SIDEBAR
+   ========================================================================== */
+.sidebar-header { width: 100%; text-align: center; margin: var(--sp-2) 0 var(--sp-3); }
+.project-icon {
+  width: 88px; height: 88px; padding: 6px; margin: 0 auto var(--sp-2);
+  object-fit: contain; display: block; border-radius: 10px;
+  border: 1px dashed var(--color-connector); background: var(--color-white);
+}
+.project-title { margin: 0 0 6px; font-weight: 800; font-size: clamp(18px, 2.2vmin, 22px); color: var(--color-text); }
+.project-subtitle { margin: 0 auto; max-width: 260px; font-size: .9rem; line-height: 1.45; color: var(--color-muted); }
+
+.sidebar-nav { width: 100%; display: flex; flex-direction: column; gap: 1px; margin-top: var(--sp-1); }
+.sidebar-primary { display: grid; gap: 6px; }
+.sidebar-separator { border-top: 1px dashed var(--color-connector); margin: var(--sp-2) 0 var(--sp-1); opacity: .6; }
+.sidebar-secondary { display: flex; flex-direction: column; gap: 2px; }
+
+.nav-link {
+  display: block; padding: 2px 2px; border-radius: 4px;
+  color: var(--color-muted); text-decoration: none; font-weight: 600;
+  border: 1px dashed transparent; transition: background .2s, color .2s, border-color .2s;
+}
+.nav-link:hover { color: var(--color-accent); }
+.sidebar-primary .nav-link.active {
+  border-color: var(--color-connector);
+  background: color-mix(in oklab, var(--color-surface, #fff) 85%, var(--color-connector) 5%);
+  color: var(--color-accent);
+}
+.sidebar-secondary .nav-link { border-color: transparent !important; background: transparent !important; color: var(--color-text); }
+.sidebar-secondary .nav-link:hover { color: var(--color-accent); transform: translateX(-3px); }
+
+/* ==========================================================================
+   CONTENT SECTIONS
+   ========================================================================== */
+.content-section {
+  padding: clamp(28px, 5.5vw, 48px) 0;
+  margin-bottom: clamp(32px, 6vw, 64px);
+  border-bottom: 0;
+  scroll-margin-top: 110px;
+}
+.content-section::after {
+  content: ""; display: block; height: 1px;
+  background: var(--color-connector);
+  opacity: .6; margin-top: clamp(20px, 3.5vw, 32px);
+}
+.content-section:last-of-type::after { display: none; }
+
+.section-title {
+  margin: 0 0 clamp(14px, 2.2vw, 22px);
+  padding-bottom: 6px;
+  font-weight: 800; color: var(--color-text);
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  border-bottom: 1px dashed var(--color-connector);
+  text-align: left;
+}
+.section-subtitle { color: var(--color-muted); line-height: 1.6; max-width: 720px; margin: var(--sp-2) 0 0; }
+
+.section-content { margin-top: var(--sp-3); }
+
+/* متن پیش‌فرض: خوانایی خوب */
+.text-section .section-content,
+.content-section > p {
+  max-width: 72ch;
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.75;
+  font-size: 1.02rem;
+}
+/* ⬅️ Overview تمام عرض ستون محتوا */
+#overview > p { max-width: none; }
+
+/* ==========================================================================
+   TEXT + IMAGE (امن: تصویر زیرِ متن و وسط‌چین)
+   ========================================================================== */
+.content-section.split .section-content { display: block; }
+.content-section.split .text-container { max-width: 100%; margin-bottom: var(--sp-4); }
+.content-section.split .text-container p {
+  max-width: 100%; margin: 0; line-height: 1.75; color: var(--color-text); font-size: 1.02rem;
+}
+.content-section.split .image-container { text-align: center; margin-top: var(--sp-3); }
+.content-section.split .image-container img {
+  display: inline-block; max-width: 100%; height: auto;
+  border: 1px dashed var(--color-connector); border-radius: 12px;
+  background: var(--color-white); box-shadow: var(--shadow-soft);
+}
+.image-caption { margin-top: 6px; color: var(--color-muted); font-size: .92rem; text-align: center; }
+
+/* ==========================================================================
+   CARDS (Features / Contributors / Metrics / Technical)
+   ========================================================================== */
+.features-grid, .metrics-grid, .contributors-grid, .technical-content {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-4); align-items: stretch;
+}
+.feature-card, .metric-item, .contributor-card, .technical-item {
+  background: var(--color-surface);
+  border: 1px dashed var(--color-connector);
+  border-radius: 6px; padding: var(--sp-3);
+  box-shadow: 0 2px 6px color-mix(in oklab, var(--color-black) 6%, transparent);
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.feature-card:hover, .metric-item:hover, .contributor-card:hover, .technical-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 14px color-mix(in oklab, var(--color-black) 10%, transparent);
+}
+.feature-title { font-weight: 800; color: var(--color-text); margin-bottom: var(--sp-1); }
+.feature-description { color: var(--color-muted); line-height: 1.6; }
+
+/* Contributors (وسط‌چین نام/نقش) */
+.contributors-grid { justify-items: center; }
+.contributor-card { text-align: center; align-items: center; justify-content: center; }
+.contributor-image {
+  width: 96px; height: 96px; margin: 0 auto var(--sp-2);
+  border-radius: 50%; border: 1px dashed var(--color-connector); object-fit: cover; display: block;
+}
+.contributor-name { font-weight: 800; color: var(--color-text); }
+.contributor-role { color: var(--color-muted); margin-bottom: var(--sp-2); }
+.contributor-links { display: flex; justify-content: center; gap: var(--sp-2); }
+
+/* Metrics */
+.metrics-section { background: transparent; border: none; padding: var(--sp-4) 0; }
+.metric-item { text-align: center; }
+.metric-value { font-size: 1.4rem; font-weight: 600; color: var(--color-project-primary-dark); line-height: 1.25; margin-bottom: 2px; }
+.metric-label { font-size: .95rem; color: var(--color-muted); }
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.project-header { background: var(--color-bg); border-bottom: var(--dash-1); padding: var(--sp-3) 0; }
+.project-header .container { width: min(1100px, 92vw); margin-inline: auto; text-align: left; }
+#projectTop h1.project-page-title,
+h1#projectPageTitle.project-page-title {
+  font-weight: 900; font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1.2;
+  margin: 0 0 var(--sp-2); text-align: center; color: var(--color-text); border: none;
+}
+#projectTop .section-subtitle {
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem); text-align: center; color: var(--color-muted);
+  margin: var(--sp-1) auto 0; max-width: 900px;
+}
+.project-header.has-background-image { position: relative; background-size: cover; background-position: center; color: var(--color-white); }
+.project-header.has-background-image::before { content: ""; position: absolute; inset: 0; background: color-mix(in oklab, var(--color-black) 50%, transparent); }
+.project-header.has-background-image .container { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   FOOTER (هم‌عرض ستون محتوا)
+   ========================================================================== */
+.project-footer {
+  background: var(--color-bg);
+  border-top: 1px dashed var(--color-connector);
+  padding: var(--sp-6) 0 var(--sp-8);
+  margin-top: var(--sp-5);
+  text-align: center;
+}
+.project-footer .project-navigation {
+  display: flex; justify-content: center; gap: var(--sp-3); flex-wrap: wrap;
+  width: 100%; max-width: var(--content-max-w);
+  margin: var(--sp-3) auto 0; padding-top: var(--sp-3);
+  padding-inline: var(--content-gutter);
+}
+.nav-button {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 16px; border-radius: 999px;
+  background: var(--color-surface); border: 1px dashed var(--color-connector);
+  color: var(--color-text); text-decoration: none; font-weight: 600; line-height: 1;
+  transition: all .2s ease;
+}
+.nav-button:hover {
+  color: var(--color-accent); border-color: var(--color-accent);
+  background: var(--color-bg-alt); transform: translateY(-3px);
+  box-shadow: 0 6px 14px color-mix(in oklab, var(--color-black) 8%, transparent);
+}
+.nav-button.home { opacity: .9; }
+.nav-button.is-plain { cursor: default; pointer-events: none; }
+.nav-button i[data-lucide] { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.8; }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1060px) {
+  .project-layout { grid-template-columns: 1fr; }
+  .project-sidebar { position: static; height: auto; border-right: 0; border-bottom: var(--rule); width: 100%; }
+  .project-content { max-width: min(900px, 92vw); }
+  .project-footer .project-navigation { max-width: min(900px, 92vw); }
+  .features-grid, .contributors-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .features-grid, .contributors-grid, .metrics-grid { grid-template-columns: 1fr; }
+  .nav-button { width: 100%; text-align: center; }
+  .project-footer .project-navigation { flex-direction: column; align-items: stretch; }
+}
+
+
+/* Force Overview paragraph to span full column width */
+#overview > p {
+  max-width: none !important; /* break the 72ch cap */
+  width: 100%;
+}
+
+
+.text-section > p { max-width: none; width: 100%; }
+
+/* ===== Technical Section Spacing (token-based, no hover) ===== */
+.technical-section .technical-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4); /* space between boxes */
+}
+
+.technical-section .technical-item {
+  flex: 1 1 45%;
+  border: 1px dashed var(--color-connector);
+  border-radius: var(--project-border-radius);
+  padding: var(--sp-3) var(--sp-4); /* inner padding for text */
+  background: var(--color-white);
+  box-shadow: var(--project-shadow);
+}
+
+.technical-section .technical-item h4 {
+  margin-bottom: var(--sp-2);
+  font-weight: 600;
+}
+
+.technical-section .technical-item ul {
+  padding-left: var(--sp-3);
+  line-height: 1.6;
+}
+
+.technical-section .technical-item li + li {
+  margin-top: var(--sp-2);
+}
+
+
+/* ---------- Readability upgrade for "technical-section" ---------- */
+
+/* 1) Layout: go to a clean grid with real breathing room */
+.technical-section .technical-content {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--sp-4);                       /* section spacing rhythm */
+  margin-top: var(--sp-3);
+}
+
+/* Each card spans 6/12 on desktop, full width on mobile */
+.technical-section .technical-item {
+  grid-column: span 6;
+  background: var(--color-white);
+  border: 1px solid var(--color-connector);
+  border-radius: var(--project-border-radius);
+  padding: var(--sp-4);
+  box-shadow: 0 2px 10px rgba(0,0,0,.04); /* softer than your big shadow */
+}
+
+/* Stack items on narrow screens */
+@media (max-width: 900px) {
+  .technical-section .technical-item { grid-column: 1 / -1; }
+}
+
+/* 2) Type: increase line-height, kill cramped mono feel */
+.technical-section .technical-item,
+.technical-section .technical-item p,
+.technical-section .technical-item li {
+  font-size: 0.98rem;
+  line-height: 1.7;                       /* the oxygen */
+  letter-spacing: 0;                      /* monospace doesn’t need extra spacing */
+  color: var(--color-text);
+}
+
+/* Headings: tighter, not shouting */
+.technical-section .technical-item h4 {
+  margin: 0 0 var(--sp-2) 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* 3) Lists: real bullets, proper left padding, vertical rhythm */
+.technical-section .technical-item ul {
+  margin: 0 0 var(--sp-2) 0;
+  padding-left: var(--sp-4);
+  list-style: disc;
+  list-style-position: outside;
+}
+
+.technical-section .technical-item li + li {
+  margin-top: var(--sp-2);
+}
+
+/* 4) “Result:” paragraph: visually separated summary line */
+.technical-section .technical-item p:last-child {
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px dashed var(--color-connector);
+  color: var(--color-text-light);
+}
+
+
+.keyword-block {
+  display: flex; flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+.keyword {
+  background: var(--color-dimmed);
+  color: var(--color-white);
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--r-card);
+  font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.02em;
+}
