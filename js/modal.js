@@ -87,8 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Read More
+    const hasUrl = !!currentProject.url;
+    popupButton.textContent = hasUrl ? 'Read More' : 'Details coming soon';
+    popupButton.disabled = !hasUrl;
+    popupButton.setAttribute('aria-disabled', String(!hasUrl));
     popupButton.onclick = () => {
-      if (currentProject.url) {
+      if (hasUrl) {
         window.location.assign(resolveURL(currentProject.url));
       }
     };

@@ -20,22 +20,24 @@ class PortfolioApp {
 
     // Navigation Setup
     setupNavigation() {
-        const navButtons = document.querySelectorAll('.nav-button');
+        const navButtons = document.querySelectorAll('.nav-button[data-section]');
         
         navButtons.forEach(button => {
             button.addEventListener('click', (e) => {
-                const sectionId = e.target.dataset.section;
+                const sectionId = e.currentTarget.dataset.section;
                 this.switchSection(sectionId);
             });
         });
     }
 
     switchSection(sectionId) {
+        if (!sectionId || !document.getElementById(sectionId)) return;
+
         // Update active nav button
         document.querySelectorAll('.nav-button').forEach(btn => {
             btn.classList.remove('active');
         });
-        document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        document.querySelector(`[data-section="${sectionId}"]`)?.classList.add('active');
 
         // Update active section
         document.querySelectorAll('.portfolio-section').forEach(section => {

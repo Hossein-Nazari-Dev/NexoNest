@@ -391,6 +391,17 @@
     background: var(--c-accent-dark); 
 }
 
+.popup-button:disabled,
+.download-button.is-disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.download-button.is-disabled {
+    display: inline-block;
+}
+
 /* Close button base style (always visible) */
 .popup-close{
   --ring: color-mix(in oklab, var(--c-accent) 35%, transparent);

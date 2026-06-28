@@ -66,6 +66,11 @@ body, .project-theme { font-family: 'JetBrains Mono', monospace; }
   border: 1px dashed transparent; transition: background .2s, color .2s, border-color .2s;
 }
 .nav-link:hover { color: var(--color-accent); }
+.nav-link.is-plain {
+  cursor: default;
+  pointer-events: none;
+  color: var(--color-muted);
+}
 .sidebar-primary .nav-link.active {
   border-color: var(--color-connector);
   background: color-mix(in oklab, var(--color-surface, #fff) 85%, var(--color-connector) 5%);

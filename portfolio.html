@@ -8,15 +8,15 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../css/tokens.css" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
-    <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="../css/portfolio.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/portfolio.css" />
     <link
       rel="icon"
       type="image/x-icon"
-      href="../assets/images/hossein/headicon.ico"
+      href="assets/profile.jpg"
     />
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -27,7 +27,7 @@
       <aside class="portfolio-sidebar">
         <div class="profile-image">
           <img
-            src="../assets/profile.jpg"
+            src="assets/profile.jpg"
             alt="Hossein Nazari"
             onerror="this.style.display='none'"
           />
@@ -47,7 +47,7 @@
           <button class="nav-button" data-section="publications">Publications</button>
           <button class="nav-button" data-section="portfolio-pdf">Portfolio PDF</button>
           <div style="margin-top: 1rem;"></div>
-          <a class="nav-button" href="../index.html">&larr; Return Home</a>
+          <a class="nav-button" href="index.html">&larr; Return Home</a>
         </nav>
         
       </aside>
@@ -308,7 +308,7 @@
                     >
 
 
-                    <a href="../assets/images/certificates/AdGrasshopper.jpg" target="_blank" rel="noopener noreferrer"  class="course-badge">
+                    <a href="assets/images/certificates/AdGrasshopper.jpg" target="_blank" rel="noopener noreferrer"  class="course-badge">
                       Certificate
                     </a>
 
@@ -321,7 +321,7 @@
                       >Iranian Architecture Center</span
                     >
 
-                    <a href="../assets/images/certificates/AI.jpg" target="_blank" rel="noopener noreferrer"  class="course-badge">
+                    <a href="assets/images/certificates/AI.jpg" target="_blank" rel="noopener noreferrer"  class="course-badge">
                       Certificate
                     </a>
 
@@ -622,11 +622,7 @@
                   challenges—like pedestrian flow, emergency evacuation, and
                   spatial perception.
                 </p>
-                <a
-                  href="../events/bootcamp/agent-based-modeling-2024.html"
-                  class="project-link"
-                  >View Report Details</a
-                >
+                <span class="project-link is-disabled" aria-disabled="true">Report coming soon</span>
               </div>
 
               <div class="project-card">
@@ -636,11 +632,7 @@
                   local earth materials. Features AI-driven fabrication, modular
                   design & sustainable construction methods.
                 </p>
-                <a
-                  href="../projects/academic/printerra.html"
-                  class="project-link"
-                  >View Project Details</a
-                >
+                <span class="project-link is-disabled" aria-disabled="true">Details coming soon</span>
               </div>
 
           </section>
@@ -654,8 +646,7 @@
                 <p>
                   The findings of master thesis.
                 </p>
-                <a href="project-template.html?id=tectotrack" class="project-link">View Page</a>
-                <a href="project-template.html?id=tectotrack" class="project-link">View Published Preprint</a>
+                <a href="projects-pages/buildingAlignment.html" class="project-link">View Page</a>
               </div>
 
               <div class="project-card">
@@ -663,9 +654,7 @@
                 <p>
                   A fundamental paper proposed a methodological approach for geometry preparation. It is published with a Rhino/Grasshopper plugin integrates with LadybugTools.
                 </p>
-                <a href="project-template.html?id=tectotrack" class="project-link">View Page</a>
-                <a href="project-template.html?id=tectotrack" class="project-link">View Paper</a>
-                <a href="project-template.html?id=tectotrack" class="project-link">View Plugin</a>
+                <a href="projects-pages/curvAdapt.html" class="project-link">View Page</a>
               </div>
 
 
@@ -697,21 +686,7 @@
                   </div>
                 </div>
                 <div class="pdf-download">
-                  <a
-                    href="../hossein/Portfolio_HosseinNazari.pdf"
-                    class="download-button"
-                    target="_blank"
-                    rel="noopener noreferrer" 
-                    >Download Full PDF</a
-                  >
-                  <a
-                    href="../hossein/Presentation_HosseinNazari (1).pdf"
-                    class="download-button"
-                    target="_blank"
-                    rel="noopener noreferrer" 
-                    style="margin-left: 1rem"
-                    >Download Thesis</a
-                  >
+                  <span class="download-button is-disabled" aria-disabled="true">PDF version coming soon</span>
                 </div>
               </div>
             </div>
@@ -725,11 +700,11 @@
       </div>
     </div>
 
-    <script src="../js/nav.js" defer></script>
-    <script src="../js/portfolio.js" defer></script>
-    <script src="../js/journey.js" defer></script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/portfolio.js" defer></script>
+    <script src="js/journey.js" defer></script>
     <script>
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     </script>
     
   </body>

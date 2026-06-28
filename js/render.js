@@ -1,8 +1,7 @@
 // Dynamic content rendering
 document.addEventListener('DOMContentLoaded', function() {
     // Load projects data
-    fetch('../data/projects-brief.json')
-        .then(response => response.json())
+    loadProjectsData()
         .then(data => {
             window.projectsData = data;
             renderProjects();
@@ -19,8 +18,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
+async function loadProjectsData() {
+    const candidates = [
+        'data/projects-brief.json',
+        './data/projects-brief.json',
+        '../data/projects-brief.json',
+    ];
+
+    let lastError;
+    for (const rel of candidates) {
+        try {
+            const response = await fetch(new URL(rel, document.baseURI), { cache: 'no-store' });
+            if (response.ok) return await response.json();
+            lastError = new Error(`Fetch failed ${response.status} @ ${rel}`);
+        } catch (error) {
+            lastError = error;
+        }
+    }
+
+    throw lastError || new Error('Unable to load project data');
+}
+
 function renderProjects() {
     const projectsGrid = document.getElementById('projects-grid');
+    if (!projectsGrid) return;
+
     const projects = window.projectsData.projects;
     
     projectsGrid.innerHTML = '';
@@ -36,7 +58,7 @@ function renderProjects() {
         // Use placeholder if no icon available
         if (project.icon && project.icon !== "/icons/placeholder.png") {
             const img = document.createElement('img');
-            img.src = project.icon;
+            img.src = new URL(project.icon, document.baseURI).href;
             img.alt = project.title;
             
             // Add error handling for broken images
