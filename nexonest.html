@@ -3,110 +3,96 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NexoNest</title>
+    <meta name="description" content="NexoNest — computational tools, research, and experiments for climate-aware design." />
+    <title>NexoNest | Project Index</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/nexonest.css" />
+    <link rel="stylesheet" href="css/ux.css" />
 </head>
 <body class="nexonest-theme">
     <div class="container">
-        <!-- Header -->
         <header class="header">
-            <div class="logo">
-                <img src="assets/logo.svg" alt="NexoNest Logo" class="logo-img">
-            </div>
+            <a class="logo" href="index.html" aria-label="Return to main overview">
+                <img src="assets/logo.svg" alt="" class="logo-img">
+            </a>
             <div class="title">
+                <span class="title-kicker">Computational design studio</span>
                 <h1>NexoNest</h1>
-                <p>A Startup works on developing Sustainable Design Tools for Designers.</p>
+                <p>Tools, research, and experiments for climate-aware design.</p>
             </div>
+            <a class="overview-link" href="index.html">Main overview <span aria-hidden="true">↗</span></a>
         </header>
 
-        <!-- Navigation Pill -->
         <div class="nav-pill-container">
-            <nav class="nav-pill">
+            <nav class="nav-pill" aria-label="Filter project index">
+                <span class="filter-label">Filter index</span>
                 <div class="nav-item">
-                    <a href="index.html" class="nav-link active" data-category="all">Home</a>
+                    <button type="button" class="nav-link active" data-category="all" aria-pressed="true">All</button>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link" data-category="education">Education</a>
-                    <div class="submenu">
-                        <a href="#" data-subcategory="comp-geo">Computational Geometry</a>
-                        <a href="#" data-subcategory="sustain">Sustainability</a>
-                        <a href="#" data-subcategory="programming">Programming</a>
-                    </div>
+                    <button type="button" class="nav-link" data-category="education" aria-pressed="false">Education</button>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link" data-category="projects">Projects</a>
-                    <div class="submenu">
-                        <a href="#" data-subcategory="design-proj">Design Projects</a>
-                        <a href="#" data-subcategory="sim-analysis">Simulation and Analysis</a>
-                        <a href="#" data-subcategory="robot-io">Robotic and IoT</a>
-                    </div>
+                    <button type="button" class="nav-link" data-category="projects" aria-pressed="false">Projects</button>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link" data-category="products">Products</a>
-                    <div class="submenu">
-                        <a href="#" data-subcategory="octomass">OctoMass</a>
-                        <a href="#" data-subcategory="octoland">OctoLand</a>
-                        <a href="#" data-subcategory="octocity">OctoCity</a>
-                        <a href="#" data-subcategory="curvadapt">CurvAdapt</a>
-                        <a href="#" data-subcategory="geofactory">GeoFactory</a>
-                    </div>
+                    <button type="button" class="nav-link" data-category="products" aria-pressed="false">Products</button>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link" data-category="events">Events</a>
-                    <div class="submenu">
-                        <a href="#" data-subcategory="course">Course</a>
-                        <a href="#" data-subcategory="workshop">Workshop and Bootcamps</a>
-                    </div>
+                    <button type="button" class="nav-link" data-category="events" aria-pressed="false">Events</button>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link" data-category="publications">Publications</a>
+                    <button type="button" class="nav-link" data-category="publications" aria-pressed="false">Writing</button>
                 </div>
             </nav>
+            <div class="subfilter-bar" id="subfilter-bar" aria-label="Refine project filter" hidden></div>
+            <div class="filter-feedback" aria-live="polite">
+                <button type="button" class="filter-reset" data-category="all" hidden>Clear filter</button>
+            </div>
         </div>
 
-        <!-- Content area that pushes icons to bottom -->
         <div class="content-area">
-            <!-- This empty div takes up space and pushes icons down -->
-            <div class="content-spacer"></div>
-
-            <!-- Project Icons Grid at the bottom -->
-            <div class="projects-container">
-                <div class="projects-grid" id="projects-grid">
-                    <!-- Project icons will be rendered by JavaScript -->
+            <section class="projects-container" aria-labelledby="project-index-title">
+                <div class="projects-heading">
+                    <div>
+                        <span class="section-index">01 / Project index</span>
+                        <h2 id="project-index-title">Choose a project</h2>
+                    </div>
                 </div>
-            </div>
+                <div class="projects-grid" id="projects-grid"></div>
+            </section>
 
-            <!-- Baseline and Copyright -->
             <div class="baseline-container">
                 <div class="baseline"></div>
             </div>
-            <div class="copyright">Copyright © NexoNest</div>
+            <div class="copyright">© NexoNest — curious by design.</div>
         </div>
     </div>
 
-    <!-- Project Popup -->
-    <div class="popup-overlay" id="popup-overlay">
-        <div class="popup-card">
-            <button class="popup-close" id="popup-close">×</button>
+    <div class="popup-overlay" id="popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-hidden="true">
+        <div class="popup-card" role="document">
+            <button class="popup-close" id="popup-close" type="button" aria-label="Close project details">×</button>
+            <span class="popup-kicker">Project brief</span>
             <h2 class="popup-title" id="popup-title">Project Title</h2>
             <p class="popup-excerpt" id="popup-excerpt">Project description goes here.</p>
             <div class="popup-image" id="popup-image">Project Image</div>
             <div class="popup-categories" id="popup-categories">Categories: Products, Projects</div>
             <div class="popup-actions">
-                <button class="popup-button" id="popup-button">Read More</button>
+                <button class="popup-button" id="popup-button">Open project</button>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Files -->
-    <script src="js/state.js"></script>
-    <script src="js/nav.js"></script>
     <script src="js/filter.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/nav.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/render.js"></script>
+    <script src="js/ux.js" defer></script>
 </body>
 </html>

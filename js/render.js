@@ -1,59 +1,48 @@
 // Dynamic content rendering
-document.addEventListener('DOMContentLoaded', function() {
-    // Load projects data
-    loadProjectsData()
-        .then(data => {
-            window.projectsData = data;
-            renderProjects();
-        })
-        .catch(error => {
-            console.error('Error loading projects data:', error);
-            // Create fallback data if the fetch fails
-            window.projectsData = {
-                categories: [],
-                subcategories: [],
-                projects: []
-            };
-            renderProjects();
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    window.loadProjectsData().then(renderProjects);
 });
-
-async function loadProjectsData() {
-    const candidates = [
-        'data/projects-brief.json',
-        './data/projects-brief.json',
-        '../data/projects-brief.json',
-    ];
-
-    let lastError;
-    for (const rel of candidates) {
-        try {
-            const response = await fetch(new URL(rel, document.baseURI), { cache: 'no-store' });
-            if (response.ok) return await response.json();
-            lastError = new Error(`Fetch failed ${response.status} @ ${rel}`);
-        } catch (error) {
-            lastError = error;
-        }
-    }
-
-    throw lastError || new Error('Unable to load project data');
-}
 
 function renderProjects() {
     const projectsGrid = document.getElementById('projects-grid');
     if (!projectsGrid) return;
 
-    const projects = window.projectsData.projects;
+    const projects = window.projectsData?.projects || [];
     
     projectsGrid.innerHTML = '';
     
-    // Sort projects for consistent layout
-    const sortedProjects = [...projects].sort((a, b) => a.title.localeCompare(b.title));
+    // A fixed visual shuffle keeps the composition playful without moving
+    // projects between visits.
+    const layoutOrder = [
+        'p_octoland',
+        'p_alignment',
+        'p_design_suite',
+        'p_curvadapt',
+        'p_tectotrack',
+        'p_octocity',
+        'p_abm_bootcamp',
+        'p_octomass',
+        'p_sustainable_development',
+        'p_printerra',
+        'p_geofactory'
+    ];
+    const orderIndex = new Map(layoutOrder.map((id, index) => [id, index]));
+    const sortedProjects = [...projects].sort((a, b) => {
+        const aIndex = orderIndex.get(a.id) ?? Number.MAX_SAFE_INTEGER;
+        const bIndex = orderIndex.get(b.id) ?? Number.MAX_SAFE_INTEGER;
+        return aIndex - bIndex || a.title.localeCompare(b.title);
+    });
     
     sortedProjects.forEach(project => {
-        const iconEl = document.createElement('div');
+        const iconEl = document.createElement('button');
+        iconEl.type = 'button';
         iconEl.className = 'project-icon';
         iconEl.setAttribute('data-id', project.id);
+        iconEl.setAttribute('aria-label', `Read the ${project.title} project brief`);
+        iconEl.title = project.title;
+
+        const symbolEl = document.createElement('span');
+        symbolEl.className = 'project-symbol';
         
         // Use placeholder if no icon available
         if (project.icon && project.icon !== "/icons/placeholder.png") {
@@ -68,25 +57,41 @@ function renderProjects() {
                 const textIcon = document.createElement('div');
                 textIcon.className = 'text-icon';
                 textIcon.textContent = project.title.substring(0, 2).toUpperCase();
-                iconEl.appendChild(textIcon);
+                symbolEl.appendChild(textIcon);
             };
             
-            iconEl.appendChild(img);
+            symbolEl.appendChild(img);
         } else {
             // Create a text-based icon as fallback
             const textIcon = document.createElement('div');
             textIcon.className = 'text-icon';
             textIcon.textContent = project.title.substring(0, 2).toUpperCase();
-            iconEl.appendChild(textIcon);
+            symbolEl.appendChild(textIcon);
         }
-        
-        iconEl.addEventListener('click', () => {
-            if (isProjectActive(project)) {
-                openPopup(project);
-            }
-        });
+
+        iconEl.append(symbolEl);
         
         projectsGrid.appendChild(iconEl);
+    });
+
+    const futureMessages = [
+        'Maybe our next collaboration?',
+        'A good idea could land here.',
+        'Reserved for something unexpected.',
+        'Plot twist: this one could be yours.',
+        'Currently accepting brilliant detours.',
+        'Your impossible brief goes here.'
+    ];
+
+    futureMessages.forEach(message => {
+        const placeholder = document.createElement('span');
+        placeholder.className = 'project-placeholder';
+        placeholder.setAttribute('role', 'note');
+        placeholder.setAttribute('aria-label', message);
+        placeholder.setAttribute('tabindex', '0');
+        placeholder.dataset.message = message;
+        placeholder.textContent = '+';
+        projectsGrid.appendChild(placeholder);
     });
     
     filterProjects(); 

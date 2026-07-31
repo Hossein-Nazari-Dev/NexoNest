@@ -1,0 +1,97 @@
+:root {
+  --ux-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ux-ease-soft: cubic-bezier(.4, 0, .2, 1);
+  --ux-duration: 360ms;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.project-main .content-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 520px;
+}
+
+img {
+  transition: opacity 280ms var(--ux-ease-soft), filter 280ms var(--ux-ease-soft);
+}
+
+img.ux-lazy-image:not(.is-loaded) {
+  opacity: .08;
+  filter: blur(2px);
+}
+
+img.ux-lazy-image.is-loaded {
+  opacity: 1;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ux-ready .ux-reveal {
+    opacity: 0;
+    transform: translate3d(0, 7px, 0);
+    transition:
+      opacity var(--ux-duration) var(--ux-ease-out) var(--ux-delay, 0ms) !important,
+      transform var(--ux-duration) var(--ux-ease-out) var(--ux-delay, 0ms) !important;
+    will-change: opacity, transform;
+  }
+
+  .ux-ready .ux-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  a,
+  button {
+    touch-action: manipulation;
+  }
+
+  a:active,
+  button:active {
+    transition-duration: 80ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .ux-reveal,
+  img.ux-lazy-image {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: ux-page-out 140ms var(--ux-ease-soft) both;
+}
+
+::view-transition-new(root) {
+  animation: ux-page-in 220ms var(--ux-ease-out) both;
+}
+
+@keyframes ux-page-out {
+  to { opacity: .96; }
+}
+
+@keyframes ux-page-in {
+  from { opacity: .86; }
+  to { opacity: 1; }
+}

@@ -1,12 +1,14 @@
 :root {
     /* ===== CORE COLORS ===== */
-    --color-bg: #f9fafb;
+    --color-bg: #e8f1f0;
+    --color-surface: #e8f1f0;
+    --color-bg-alt: #f3f7f6;
   
     /* 1. NexoNest color */
-    --color-accent-nexo: #80b6a7;
+    --color-accent-nexo: #7fb7a8;
   
     /* 2. Portfolio color */
-    --color-accent-portfolio: #88b2d3;
+    --color-accent-portfolio: #88b3d4;
   
     /* Neutral colors */
     --color-text: #222;
@@ -19,11 +21,11 @@
   
     /* ===== DERIVED ACCENT COLORS ===== */
     --c-accent-nexo: var(--color-accent-nexo);
-    --c-accent-nexo-weak: #dceae5;
+    --c-accent-nexo-weak: #d4e7e2;
     --c-accent-nexo-dark: #4b7c6e;
   
     --c-accent-portfolio: var(--color-accent-portfolio);
-    --c-accent-portfolio-weak: #e1f5fe;
+    --c-accent-portfolio-weak: #dceaf3;
     --c-accent-portfolio-dark: #4a8cce;
   
     --c-accent: var(--c-accent-nexo);

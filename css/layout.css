@@ -188,3 +188,18 @@
     font-size: 12px;
     margin-bottom: var(--sp-3);
 }
+
+@media (max-width: 640px) {
+    .stage { min-height: 100svh; }
+    .nexo .text,
+    .portfolio .text {
+        left: 50%;
+        width: min(88vw, 320px);
+        text-align: center;
+        transform: translateX(-50%);
+    }
+    .nexo .text { top: calc(var(--cy-left) - 180px); }
+    .portfolio .text { top: calc(var(--cy-right) + 120px); }
+    .connector { display: none; }
+    .headline { top: calc(var(--cy-right) + 205px); font-size: 18px; }
+}

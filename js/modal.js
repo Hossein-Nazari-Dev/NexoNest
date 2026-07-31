@@ -9,20 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupButton     = document.getElementById('popup-button');
 
   let currentProject = null;
+  let triggerElement = null;
 
   // ----- helpers -------------------------------------------------------------
   const resolveURL   = (url) => new URL(url, document.baseURI).href;
   const lockScroll   = () => document.body.classList.add('no-scroll');
   const unlockScroll = () => document.body.classList.remove('no-scroll');
-
-  // Make close "×" totally non-focusable and non-selectable
-  if (popupClose) {
-    popupClose.setAttribute('tabindex', '-1');     // remove from tab order
-    popupClose.setAttribute('aria-hidden', 'true'); // purely visual control
-    popupClose.style.userSelect = 'none';          // avoid text selection
-    popupClose.addEventListener('focus', () => popupClose.blur());
-    popupClose.addEventListener('mousedown', (e) => e.preventDefault()); // no selection ring
-  }
 
   // Map category/subcategory ids -> labels
   function idsToLabels(catIds = [], subIds = []) {
@@ -41,10 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ----- open ---------------------------------------------------------------
-  window.openPopup = function(project) {
+  window.openPopup = function(project, trigger) {
     if (!popupOverlay) return;
 
     currentProject = project || {};
+    triggerElement = trigger || document.activeElement;
 
     // Title / excerpt
     popupTitle.textContent   = currentProject.title   || 'Untitled';
@@ -68,10 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const img = document.createElement('img');
       img.src = resolveURL(currentProject.image);
       img.alt = currentProject.title || 'Project image';
-      img.style.width = '100%';
-      img.style.height = '100%';
-      img.style.objectFit = 'cover';
-      img.style.borderRadius = '8px';
+      img.className = 'popup-image-element';
       img.onerror = () => {
         popupImage.innerHTML = 'Image not available';
         popupImage.style.display = 'grid';
@@ -88,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Read More
     const hasUrl = !!currentProject.url;
-    popupButton.textContent = hasUrl ? 'Read More' : 'Details coming soon';
+    popupButton.textContent = hasUrl ? 'Open project' : 'Details coming soon';
     popupButton.disabled = !hasUrl;
     popupButton.setAttribute('aria-disabled', String(!hasUrl));
     popupButton.onclick = () => {
@@ -97,21 +87,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Show popup, lock scroll, ensure no element is focused
+    // Show the dialog and place focus on its close control.
     popupOverlay.classList.add('active');
+    popupOverlay.setAttribute('aria-hidden', 'false');
     lockScroll();
-    requestAnimationFrame(() => {
-      if (document.activeElement) document.activeElement.blur();
-      popupClose?.blur();
-    });
+    requestAnimationFrame(() => popupClose?.focus());
   };
 
   // ----- close --------------------------------------------------------------
   window.closePopup = function() {
     if (!popupOverlay) return;
     popupOverlay.classList.remove('active');
+    popupOverlay.setAttribute('aria-hidden', 'true');
     unlockScroll();
     currentProject = null;
+    triggerElement?.focus?.();
+    triggerElement = null;
   };
 
   // Click outside card closes (only if overlay itself is clicked)
@@ -119,13 +110,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === popupOverlay) window.closePopup();
   });
 
-  // Close button (mouse only; not focusable)
+  // Close button
   popupClose?.addEventListener('click', window.closePopup);
 
   // Esc to close
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && popupOverlay?.classList.contains('active')) {
       window.closePopup();
+    }
+
+    if (e.key === 'Tab' && popupOverlay?.classList.contains('active')) {
+      const focusable = [...popupOverlay.querySelectorAll('button:not(:disabled), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')];
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 });

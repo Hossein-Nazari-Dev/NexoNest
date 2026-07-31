@@ -195,20 +195,20 @@ const MJ_ITEMS = [
 
   {
     k: "X8",
-    title: "Let's see…",
-    sub: "Is my will stronger, or Mother Nature’s? 🌱",
+    title: "Back to the room",
+    sub: "Alice, an unfinished map, and whatever comes next",
     upFrame: {
-      title: "Childlike wonder, adult uncertainty",
+      title: "Reading Alice at thirty",
       content: [
-        "Once, as a child, I turned pages of <strong>The Magic Finger</strong> and <strong>Jules Verne</strong> without knowing how those stories would shape my days. Now I work in ways that feel equally mysterious — like Alice stepping through the looking-glass, moving forward without a full map. That sense of not-knowing is not a bug; it is the engine that keeps me trying.",
-        "There is comfort in admitting I cannot predict the end. The same curiosity that sent me chasing impossible voyages as a kid keeps me building methods and tools today — even if those tools lead, sometimes, to fresh failures."
+        "At thirty, I read <strong>Alice’s Adventures in Wonderland</strong> and could not see it as a children’s book. It felt written for adults tired of watching their childhood dreams sleep.",
+        "The book returned me to that first room, where old histories and Jules Verne had once opened a second life. I realised Alice was not someone I had been watching from outside. <strong>Alice was me.</strong>"
       ]
     },
     downFrame: {
-      title: "What I'm chasing",
+      title: "Whatever comes next",
       content: [
-        "I have learned that new paths usually bring new wounds. Novelty more often yields <em>new</em> failures than instant triumphs — but those failures are not simple setbacks; they are the tuition for work that matters.",
-        "So I test, iterate, and risk. I ask whether I will discover a new route to lasting impact before I run out of time — or whether I will simply collect memorable, instructive failures along the way. Either outcome is preferable to treading old tracks. My promise isn’t to arrive unscathed; it’s to keep walking a line that is not already drawn."
+        "I do not know what comes next. If the future resembles the past, it will be a mixture of achievement and failure — probably more failure. A path no one has walked rarely offers certainty to its first traveller.",
+        "But what else can I do? Wonderland began in that ordinary room, and I still enter it Alice-like: without a map, looking for experience. With tears or laughter, I would rather meet life than watch it pass."
       ]
     }
   }
@@ -219,37 +219,68 @@ const MJ_ITEMS = [
 /* ===== MY JOURNEY (centered timeline, single panel) ===== */
 
 /* 2) CONFIG/STATE */
-const MJ_CFG  = { visibleRadius: 2, dur: 450, ease: "cubic-bezier(.2,.8,.2,1)" };
+const MJ_CFG  = { visibleRadius: 1, dur: 260, ease: "cubic-bezier(.22,.61,.36,1)" };
 const MJ_STATE= { index: 0 };
+
+const MJ_SUMMARIES = {
+  X0: { title: "Ordinary, but restless", lines: ["I was rarely the standout kid in the room — ordinary grades, ordinary sports, an ordinary place in the class. But after school, books opened a second life: old histories, Jules Verne, and worlds that felt larger than the one outside my window.", "I began to suspect that reality had layers. Writing fragments and sitting with that feeling taught me that a story can live in a pause, a room, or a silence.", "The first lesson was quiet but durable: curiosity does not need permission to begin."] },
+  X1: { title: "The long detour", lines: ["I entered agriculture by circumstance, not conviction. I worked, taught, took night classes in writing, photography, and cinema, and kept looking for a voice that did not seem to arrive.", "The cinema course was the difficult part. My ideas were not technically broken; they were simply unremarkable. Failing there taught me what does not make a story — and how much harder it is to see one clearly.", "I stopped trying to manufacture a world and started learning to frame the ordinary one. Architecture became the next attempt."] },
+  X2: { title: "Finding a home in the studio", lines: ["Entering architecture was not easy; I came without the usual academic background and spent time trying to catch up. Yet the late critiques, paper models, and long studio nights felt more alive than anything before them.", "I learned that design is not a clean line from idea to result. A drawing changes the idea that created it; the project begins to answer back.", "That loop — of making, reading, and remaking — became the first real structure in my practice."] },
+  X3: { title: "When intuition hit a limit", lines: ["I wanted to make that design loop visible and faster, but ambition outran my technical fluency. Too often an idea stopped at the edge of what I could actually model or calculate.", "Pallasmaa’s idea of mastering the medium stayed with me: thought should not be blocked by the hand, or by the computer.", "Programming, geometry, and data analysis became a slow way of removing that friction — and learning to think with the machine rather than merely operate it."] },
+  X4: { title: "Leaving form for performance", lines: ["Computation could produce exciting forms, but that alone started to feel insufficient. I wanted the work to answer harder questions: daylight, energy, comfort, air, and consequence.", "Sustainability changed the order of operations. Instead of making a shape and checking it later, I began asking performance questions before the first line was drawn.", "Simulation became less of a verdict at the end and more of an uncomfortable, useful beginning."] },
+  X5: { title: "The missing human layer", lines: ["Environmental models explained buildings well, yet often treated people as an afterthought. That gap stayed with me: a comfortable metric is not necessarily a comfortable human experience.", "Thermal and visual comfort became a bridge. The same light that improves a model can still blind someone at a desk; the same airflow can leave a person cold.", "Social digital twins and agent-based modelling gave behaviour, uncertainty, and choice a place inside the model."] },
+  X6: { title: "Form carries consequences", lines: ["My research on building alignment made one fact difficult to ignore: form is already an environmental decision. Orientation and layout quietly shape performance long before systems are selected.", "The thesis became papers and plugins, including OctoMass, but it did not feel like a final answer. If anything, it made the question larger.", "How can climatic form finding become a repeatable computational method — rigorous enough to test, flexible enough to design with?"] },
+  X7: { title: "Trying to join the pieces", lines: ["Climate, behaviour, form, and construction are usually handled as separate problems. I am trying to treat them as one feedback system, even when that makes the work messier and harder to explain.", "A digital twin, for me, is not a static copy. It is a living conversation between environmental data, human patterns, and design decisions.", "NexoNest is the practical experiment: building tools that help those disconnected layers speak to one another."] },
+  X8: { title: "No map, still moving", lines: ["At thirty, I read Alice’s Adventures in Wonderland and could not see it as a children’s book. It felt written for adults tired of watching their childhood dreams sleep. It returned me to that first room, and I realised Alice was me.", "I do not know what comes next. If the future resembles the past, it will mix achievement with failure — probably more failure. A path no one has walked rarely offers certainty to its first traveller.", "But what else can I do? Wonderland began in that room, and I still enter it Alice-like: without a map, looking for experience. With tears or laughter, I would rather meet life than watch it pass."] }
+};
+
+const MJ_QUOTES = {
+  X0: "Curiosity began long before competence.",
+  X1: "My first useful failure was discovering that I did not yet have a story.",
+  X2: "Architecture did not make the path easier. It made the struggle feel like mine.",
+  X3: "My ideas kept arriving ahead of my ability to build them.",
+  X4: "A beautiful form that ignores consequence is still an unfinished idea.",
+  X5: "A model can be accurate and still miss the person.",
+  X6: "Every answer made the original question larger.",
+  X7: "Integration is where elegant diagrams become difficult work.",
+  X8: "With tears or laughter, I would rather meet life than watch it pass."
+};
 
 /* 3) HELPERS */
 const $  = (q, r=document) => r.querySelector(q);
 const $$ = (q, r=document) => Array.from(r.querySelectorAll(q));
 const clamp = (n,a,b)=> Math.max(a, Math.min(b, n));
-const paragraphs = arr => (!arr || !arr.length) ? "" : arr.map(p=>`<p>${p}</p>`).join("");
 
 function renderPanel(item){
   const host = $("#mj-panel"); if(!host || !item) return;
-  if(item.panel){
-    host.innerHTML = `${item.panel.title?`<h4>${item.panel.title}</h4>`:""}${paragraphs(item.panel.content)}`;
-  } else {
-    const up   = item.upFrame   ? `<h4>${item.upFrame.title||""}</h4>${paragraphs(item.upFrame.content)}` : "";
-    const down = item.downFrame ? `<h4>${item.downFrame.title||""}</h4>${paragraphs(item.downFrame.content)}` : "";
-    host.innerHTML = `${up}${down}`;
-  }
-}
+  const summary = MJ_SUMMARIES[item.k];
+  const title = summary?.title || item.title;
+  const lines = summary?.lines || [];
+  const beatLabels = ["What I was chasing", "Where it resisted", "What stayed with me"];
+  const beats = lines.slice(0, 3).map((line, index) => `
+    <article class="mj-beat">
+      <span>${String(index + 1).padStart(2, "0")} / ${beatLabels[index]}</span>
+      <p>${line}</p>
+    </article>
+  `).join("");
 
-/* ارتفاع پویا: shell را تا پایین ویوپورت می‌کِشد (با CSS var) */
-function setShellMinHeight(){
-  const shell = $("#mj-shell"); if(!shell) return;
-  const top   = shell.getBoundingClientRect().top;   // فاصله از بالای ویوپورت
-  shell.style.setProperty("--mj-shell-top", `${Math.max(0, Math.round(top))}px`);
+  host.classList.remove("is-updating");
+  void host.offsetWidth;
+  host.innerHTML = `
+    <p class="mj-eyebrow">Failure note ${String(MJ_STATE.index + 1).padStart(2, "0")} / ${String(MJ_ITEMS.length).padStart(2, "0")}</p>
+    <h4>${title}</h4>
+    <blockquote>${MJ_QUOTES[item.k] || "The useful part was rarely the polished part."}</blockquote>
+    <div class="mj-beats">${beats}</div>
+  `;
+  host.classList.add("is-updating");
 }
 
 /* 4) BUILD */
 function buildJourney(){
   const stage = $(".mj-stage");
   const track = $("#mj-track");
+  const prevButton = $(".mj-prev");
+  const nextButton = $(".mj-next");
   if(!stage || !track) return;
 
   stage.style.overflow = "hidden";
@@ -257,10 +288,9 @@ function buildJourney(){
 
   // کارت‌ها
   track.innerHTML = MJ_ITEMS.map((it,i)=>`
-    <button class="mj-card" data-i="${i}" aria-pressed="${i===MJ_STATE.index}">
-      <div class="mj-k">${it.k}.</div>
+    <button class="mj-card" data-i="${i}" aria-label="Chapter ${i + 1}: ${it.title}" aria-pressed="${i===MJ_STATE.index}">
+      <div class="mj-k">${String(i + 1).padStart(2, "0")}</div>
       <div class="mj-t">${it.title}</div>
-      <div class="mj-s">${it.sub||""}</div>
     </button>
   `).join("");
 
@@ -273,23 +303,32 @@ function buildJourney(){
     if(e.key==="ArrowLeft"){  e.preventDefault(); selectMJ(MJ_STATE.index-1); }
     if(e.key==="ArrowRight"){ e.preventDefault(); selectMJ(MJ_STATE.index+1); }
   });
+  prevButton?.addEventListener("click", ()=>selectMJ(MJ_STATE.index-1));
+  nextButton?.addEventListener("click", ()=>selectMJ(MJ_STATE.index+1));
+
+  let pointerStart = null;
+  stage.addEventListener("pointerdown", (e)=>{
+    if(e.pointerType === "mouse" && e.button !== 0) return;
+    pointerStart = e.clientX;
+  });
+  stage.addEventListener("pointerup", (e)=>{
+    if(pointerStart === null) return;
+    const distance = e.clientX - pointerStart;
+    pointerStart = null;
+    if(Math.abs(distance) < 42) return;
+    selectMJ(MJ_STATE.index + (distance < 0 ? 1 : -1));
+  });
+  stage.addEventListener("pointercancel", ()=>{ pointerStart = null; });
 
   // رندر اولیه
   selectMJ(MJ_STATE.index, false);
   requestAnimationFrame(()=>{
     centerTrack(false);
-    setShellMinHeight();
   });
 
-  // وقتی اندازه/اسکرول عوض شد، ارتفاع را آپدیت کن
   window.addEventListener("resize", ()=>{
     centerTrack(false);
-    setShellMinHeight();
   });
-
-  // اگر والدِ اسکرول‌پذیر داری (مثل .content-scrollable)، این لیسنر هم کمک می‌کند
-  const scrollableParent = stage.closest(".content-scrollable");
-  (scrollableParent || window).addEventListener("scroll", setShellMinHeight, { passive:true });
 }
 
 /* 5) RENDER */
@@ -302,15 +341,21 @@ function selectMJ(i, animate=true){
     c.classList.toggle("is-active", idx===MJ_STATE.index);
     c.classList.toggle("is-dim", dist > MJ_CFG.visibleRadius);
     c.setAttribute("aria-pressed", idx===MJ_STATE.index);
+    if(idx===MJ_STATE.index) c.setAttribute("aria-current", "step");
+    else c.removeAttribute("aria-current");
     c.setAttribute("tabindex", dist > MJ_CFG.visibleRadius ? -1 : 0);
   });
+
+  const progress = $(".mj-progress");
+  const prevButton = $(".mj-prev");
+  const nextButton = $(".mj-next");
+  if(progress) progress.textContent = `${String(MJ_STATE.index + 1).padStart(2, "0")} / ${String(MJ_ITEMS.length).padStart(2, "0")}`;
+  if(prevButton) prevButton.disabled = MJ_STATE.index === 0;
+  if(nextButton) nextButton.disabled = MJ_STATE.index === MJ_ITEMS.length - 1;
 
   renderPanel(MJ_ITEMS[MJ_STATE.index]);
   centerTrack(animate);
   updateFadesAndHints();
-
-  // بعد از تغییر محتوا، یک‌بار دیگر ارتفاع پویا را محاسبه کن
-  setShellMinHeight();
 }
 
 function centerTrack(animate=true){
@@ -325,13 +370,13 @@ function centerTrack(animate=true){
   const targetX        = viewportCenter - cardCenter;
 
   if(!animate){
-    track.style.transition = "none";
+    track.style.setProperty("transition", "none", "important");
     track.style.transform  = `translate3d(${targetX}px,0,0)`;
     return;
   }
-  track.style.transition = "none";
+  track.style.setProperty("transition", "none", "important");
   void track.offsetWidth; // reflow
-  track.style.transition = `transform ${MJ_CFG.dur}ms ${MJ_CFG.ease}`;
+  track.style.setProperty("transition", `transform ${MJ_CFG.dur}ms ${MJ_CFG.ease}`, "important");
   track.style.transform  = `translate3d(${targetX}px,0,0)`;
 }
 
@@ -347,5 +392,32 @@ function updateFadesAndHints(){
 
 
 
-/* 6) INIT */
-document.addEventListener("DOMContentLoaded", buildJourney);
+/* 6) INIT — build only when the section is actually visible. */
+let MJ_BUILT = false;
+
+function activateJourney(){
+  const section = document.getElementById("myjourney");
+  if(!section?.classList.contains("active")) return;
+
+  if(!MJ_BUILT){
+    buildJourney();
+    MJ_BUILT = true;
+    return;
+  }
+
+  requestAnimationFrame(()=>centerTrack(false));
+}
+
+document.addEventListener("portfolio:sectionchange", (event)=>{
+  if(event.detail?.id === "myjourney") requestAnimationFrame(activateJourney);
+});
+
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", ()=>{
+    if(document.getElementById("myjourney")?.classList.contains("active")){
+      requestAnimationFrame(activateJourney);
+    }
+  }, { once: true });
+} else if(document.getElementById("myjourney")?.classList.contains("active")){
+  requestAnimationFrame(activateJourney);
+}

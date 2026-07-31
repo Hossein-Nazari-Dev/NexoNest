@@ -15,7 +15,6 @@ class PortfolioApp {
         this.setupPDFViewer();
         this.setupSmoothScrolling();
         this.setupTooltips();
-        this.setupSkillSpacing();
     }
 
     // Navigation Setup
@@ -49,6 +48,8 @@ class PortfolioApp {
         
         // Reset active states when switching sections
         this.resetActiveStates();
+        document.querySelector('.content-scrollable')?.scrollTo({ top: 0, behavior: 'auto' });
+        requestAnimationFrame(() => this.updateScrollIndicator?.());
     }
 
     resetActiveStates() {
@@ -66,7 +67,7 @@ class PortfolioApp {
         const projectDetail = document.getElementById('projectDetail');
         
         if (experienceDetail) {
-            experienceDetail.querySelector('.detail-placeholder').style.display = 'block';
+            experienceDetail.querySelector('.detail-placeholder').style.display = 'grid';
             const detailsContent = experienceDetail.querySelector('.role-details-content');
             if (detailsContent) detailsContent.classList.remove('active');
         }
@@ -86,6 +87,8 @@ class PortfolioApp {
         if (!experienceItems.length || !experienceDetail) return;
 
         experienceItems.forEach(item => {
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
             item.addEventListener('click', (e) => {
                 e.preventDefault();
                 
@@ -98,6 +101,12 @@ class PortfolioApp {
                 
                 // Show details in right panel
                 this.showExperienceDetails(item.dataset.role);
+            });
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
             });
         });
     }
@@ -126,6 +135,7 @@ class PortfolioApp {
         `;
         
         detailsContent.classList.add('active');
+        requestAnimationFrame(() => this.updateScrollIndicator?.());
     }
 
     getRoleData(roleId) {
@@ -334,53 +344,233 @@ class PortfolioApp {
 
     // PDF Viewer
     setupPDFViewer() {
+        const viewer = document.querySelector('.pdf-viewer');
+        const container = document.querySelector('.pdf-container');
         const prevButton = document.querySelector('.pdf-nav.prev');
         const nextButton = document.querySelector('.pdf-nav.next');
         const pageInfo = document.querySelector('.pdf-page-info');
+        const leftPage = document.querySelector('.pdf-page.left');
+        const rightPage = document.querySelector('.pdf-page.right');
+        const leftImage = document.querySelector('[data-pdf-page="left"]');
+        const rightImage = document.querySelector('[data-pdf-page="right"]');
+        const lightbox = document.querySelector('.pdf-lightbox');
+        const lightboxImage = document.querySelector('.pdf-lightbox-image');
+        const lightboxCaption = document.querySelector('.pdf-lightbox-caption');
+        const lightboxClose = document.querySelector('.pdf-lightbox-close');
+        const lightboxBackdrop = document.querySelector('.pdf-lightbox-backdrop');
         
-        if (!prevButton || !nextButton || !pageInfo) return;
+        if (!viewer || !container || !prevButton || !nextButton || !pageInfo || !leftPage || !rightPage || !leftImage || !rightImage) return;
 
-        let currentPage = 1;
-        const totalPages = 12;
+        let currentSpread = 0;
+        let isTurning = false;
+        let isInitialized = false;
+        let returnFocus = null;
+        const totalPages = 16;
+        const finalSpread = Math.ceil((totalPages - 1) / 2);
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const pagePath = (page) => `assets/images/portfolio-preview/page-${String(page).padStart(2, '0')}.jpg`;
 
-        const updatePDFView = () => {
-            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+        const spreadPages = (spread) => {
+            if (spread === 0) return [null, 1];
+            const left = spread * 2;
+            return [left, left + 1 <= totalPages ? left + 1 : null];
         };
 
-        prevButton.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
+        const updatePage = (pageElement, imageElement, page) => {
+            const isEmpty = page === null;
+
+            pageElement.classList.toggle('is-empty', isEmpty);
+            pageElement.dataset.page = isEmpty ? '' : String(page);
+            pageElement.tabIndex = isEmpty ? -1 : 0;
+            pageElement.setAttribute('aria-hidden', String(isEmpty));
+
+            if (isEmpty) {
+                pageElement.removeAttribute('role');
+                pageElement.removeAttribute('aria-label');
+                imageElement.hidden = true;
+                imageElement.removeAttribute('src');
+                imageElement.alt = '';
+                return;
+            }
+
+            pageElement.setAttribute('role', 'button');
+            pageElement.setAttribute('aria-label', `Enlarge portfolio page ${page}`);
+            imageElement.hidden = false;
+            imageElement.src = pagePath(page);
+            imageElement.alt = `Portfolio page ${page}`;
+        };
+
+        const updatePDFView = () => {
+            const [left, right] = spreadPages(currentSpread);
+
+            updatePage(leftPage, leftImage, left);
+            updatePage(rightPage, rightImage, right);
+            pageInfo.textContent = currentSpread === 0
+                ? `Cover / ${totalPages}`
+                : right
+                    ? `Pages ${String(left).padStart(2, '0')}-${String(right).padStart(2, '0')} / ${totalPages}`
+                    : `Page ${String(left).padStart(2, '0')} / ${totalPages}`;
+            prevButton.disabled = currentSpread === 0;
+            nextButton.disabled = currentSpread === finalSpread;
+
+            if (currentSpread < finalSpread) {
+                spreadPages(currentSpread + 1)
+                    .filter(Boolean)
+                    .forEach(page => {
+                        const preload = new Image();
+                        preload.src = pagePath(page);
+                    });
+            }
+        };
+
+        const initializePDFViewer = () => {
+            if (isInitialized) return;
+            isInitialized = true;
+            updatePDFView();
+        };
+
+        const turnSpread = (direction) => {
+            const targetSpread = Math.max(0, Math.min(finalSpread, currentSpread + direction));
+            if (isTurning || targetSpread === currentSpread) return;
+
+            if (reducedMotion.matches) {
+                currentSpread = targetSpread;
                 updatePDFView();
+                return;
+            }
+
+            isTurning = true;
+            container.classList.add(direction > 0 ? 'is-turning-next' : 'is-turning-prev');
+
+            window.setTimeout(() => {
+                currentSpread = targetSpread;
+                updatePDFView();
+                container.classList.remove('is-turning-next', 'is-turning-prev');
+                container.classList.add(direction > 0 ? 'is-settling-next' : 'is-settling-prev');
+
+                window.setTimeout(() => {
+                    container.classList.remove('is-settling-next', 'is-settling-prev');
+                    isTurning = false;
+                }, 270);
+            }, 380);
+        };
+
+        const openLightbox = (pageElement) => {
+            const page = Number(pageElement.dataset.page);
+            if (!page || !lightbox || !lightboxImage || !lightboxCaption) return;
+
+            returnFocus = pageElement;
+            lightboxImage.src = pagePath(page);
+            lightboxImage.alt = `Enlarged portfolio page ${page}`;
+            lightboxCaption.textContent = `Page ${String(page).padStart(2, '0')} / ${totalPages}`;
+            lightbox.hidden = false;
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('pdf-lightbox-open');
+            lightboxClose?.focus();
+        };
+
+        const closeLightbox = () => {
+            if (!lightbox || lightbox.hidden) return;
+
+            lightbox.hidden = true;
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('pdf-lightbox-open');
+            lightboxImage?.removeAttribute('src');
+            returnFocus?.focus();
+        };
+
+        prevButton.addEventListener('click', () => turnSpread(-1));
+        nextButton.addEventListener('click', () => turnSpread(1));
+
+        [leftPage, rightPage].forEach(pageElement => {
+            pageElement.addEventListener('click', () => openLightbox(pageElement));
+            pageElement.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openLightbox(pageElement);
+                }
+            });
+        });
+
+        lightboxClose?.addEventListener('click', closeLightbox);
+        lightboxBackdrop?.addEventListener('click', closeLightbox);
+
+        viewer.addEventListener('keydown', (event) => {
+            if (lightbox && !lightbox.hidden) return;
+            if (event.key === 'ArrowLeft') turnSpread(-1);
+            if (event.key === 'ArrowRight') turnSpread(1);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (!lightbox || lightbox.hidden) return;
+            if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'Tab') {
+                event.preventDefault();
+                lightboxClose?.focus();
             }
         });
 
-        nextButton.addEventListener('click', () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                updatePDFView();
+        document.addEventListener('portfolio:sectionchange', (event) => {
+            const sectionId = event.detail?.id;
+            if (sectionId === 'portfolio-pdf') {
+                initializePDFViewer();
+                return;
+            }
+
+            if (sectionId === 'publications' && !isInitialized) {
+                const preloadWhenIdle = () => initializePDFViewer();
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(preloadWhenIdle, { timeout: 1200 });
+                } else {
+                    window.setTimeout(preloadWhenIdle, 300);
+                }
             }
         });
 
-        updatePDFView();
+        if (document.getElementById('portfolio-pdf')?.classList.contains('active')) {
+            initializePDFViewer();
+        }
     }
 
     // Scroll Indicator
     setupScrollIndicator() {
+        const indicator = document.querySelector('.scroll-indicator');
         const scrollHandle = document.querySelector('.scroll-handle');
         const scrollable = document.querySelector('.content-scrollable');
         
-        if (!scrollHandle || !scrollable) return;
+        if (!indicator || !scrollHandle || !scrollable) return;
 
-        const updateScrollIndicator = () => {
-            const scrollPercentage = (scrollable.scrollTop / (scrollable.scrollHeight - scrollable.clientHeight)) * 100;
-            const handlePosition = (scrollHandle.parentElement.clientHeight - scrollHandle.clientHeight) * (scrollPercentage / 100);
-            scrollHandle.style.top = `${handlePosition}px`;
+        this.updateScrollIndicator = () => {
+            const trackHeight = indicator.clientHeight;
+            const viewportHeight = scrollable.clientHeight;
+            const contentHeight = scrollable.scrollHeight;
+            const maxScroll = Math.max(0, contentHeight - viewportHeight);
+            const isScrollable = maxScroll > 8;
+            const handleHeight = isScrollable
+                ? Math.max(26, Math.round(trackHeight * (viewportHeight / contentHeight)))
+                : trackHeight;
+            const travel = Math.max(0, trackHeight - handleHeight);
+            const progress = isScrollable ? scrollable.scrollTop / maxScroll : 0;
+
+            indicator.classList.toggle('is-scrollable', isScrollable);
+            indicator.setAttribute('aria-hidden', String(!isScrollable));
+            scrollHandle.style.height = `${handleHeight}px`;
+            scrollHandle.style.top = `${Math.round(travel * progress)}px`;
         };
 
-        scrollable.addEventListener('scroll', updateScrollIndicator);
-        window.addEventListener('resize', updateScrollIndicator);
-        
-        updateScrollIndicator();
+        scrollable.addEventListener('scroll', this.updateScrollIndicator, { passive: true });
+        window.addEventListener('resize', this.updateScrollIndicator);
+        document.addEventListener('portfolio:sectionchange', () => {
+            requestAnimationFrame(() => this.updateScrollIndicator());
+        });
+
+        if ('ResizeObserver' in window) {
+            const observer = new ResizeObserver(() => this.updateScrollIndicator());
+            observer.observe(scrollable);
+            document.querySelectorAll('.portfolio-section').forEach(section => observer.observe(section));
+        }
+
+        requestAnimationFrame(() => this.updateScrollIndicator());
     }
 
     // Smooth Scrolling
@@ -391,7 +581,7 @@ class PortfolioApp {
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
-                        behavior: 'smooth',
+                    behavior: 'auto',
                         block: 'start'
                     });
                 }
@@ -465,23 +655,6 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.style.setProperty('--transition', 'none');
 }
 
-// Handle window resize events
-window.addEventListener('resize', () => {
-    // Recalculate scroll indicator position
-    const scrollHandle = document.querySelector('.scroll-handle');
-    const scrollable = document.querySelector('.content-scrollable');
-    
-    if (scrollHandle && scrollable) {
-        const scrollPercentage = (scrollable.scrollTop / (scrollable.scrollHeight - scrollable.clientHeight)) * 100;
-        const handlePosition = (scrollHandle.parentElement.clientHeight - scrollHandle.clientHeight) * (scrollPercentage / 100);
-        scrollHandle.style.top = `${handlePosition}px`;
-    }
-});
-
-
-
-
-
 // --- Hash-aware section nav for Portfolio (add at the end of portfolio.js)
 (function () {
   const scroller = document.querySelector('.content-scrollable');
@@ -505,7 +678,8 @@ window.addEventListener('resize', () => {
     setActiveButton(target.id);
 
     // اسکرول داخل .content-scrollable (scrollIntoView نزدیک‌ترین والد اسکرولی را انتخاب می‌کند)
-    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    document.dispatchEvent(new CustomEvent('portfolio:sectionchange', { detail: { id: target.id } }));
 
     // به‌روزرسانی URL hash
     if (push) {
@@ -536,4 +710,41 @@ window.addEventListener('resize', () => {
 
   // کنترل اسکرول مرورگر (چون اسکرول اصلی داخل کانتینر است)
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+})();
+
+// Compact portfolio index for tablet and mobile.
+(function () {
+  const initMenu = () => {
+    const toggle = document.querySelector('.portfolio-menu-toggle');
+    const backdrop = document.querySelector('.portfolio-menu-backdrop');
+    const sidebar = document.querySelector('.portfolio-sidebar');
+    if (!toggle || !backdrop || !sidebar) return;
+
+    const setOpen = (open) => {
+      document.body.classList.toggle('portfolio-menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close portfolio index' : 'Open portfolio index');
+      if (open) sidebar.querySelector('.nav-button.active')?.focus();
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.body.classList.contains('portfolio-menu-open'));
+    });
+    backdrop.addEventListener('click', () => setOpen(false));
+    sidebar.addEventListener('click', (event) => {
+      if (event.target.closest('.nav-button')) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) setOpen(false);
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMenu, { once: true });
+  } else {
+    initMenu();
+  }
 })();

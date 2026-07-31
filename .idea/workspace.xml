@@ -5,13 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a32b5108-86b6-4dd4-9262-4323c253e649" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/files/CV.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/Portfolio_Academic.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/layout.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/portfolio.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/portfolio.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/project.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/project.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/tokens.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/tokens.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/projects-brief.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/projects-brief.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/journey.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/journey.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/nav.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/portfolio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/portfolio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/project-navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/project-navigation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/render.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/render.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/state.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/state.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nexonest.html" beforeDir="false" afterPath="$PROJECT_DIR$/nexonest.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portfolio.html" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-template.html" beforeDir="false" afterPath="$PROJECT_DIR$/project-template.html" afterDir="false" />
@@ -29,6 +40,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/index.html" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -93,10 +107,10 @@
       <entry key="W1" value="68.98280936907331" />
     </decayedShown>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3FgUwzRko5YctYFh7S1ChyBeeaO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -111,11 +125,11 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Version02",
+    "git-widget-placeholder": "codex/tidy-version02",
     "ignore.virus.scanning.warn.message": "true",
     "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/Hossein/Documents/GitHub/NexoNest",
+    "last_opened_file_path": "D:/009_Git/NexoNest/files",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -126,10 +140,15 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\009_Git\NexoNest\files" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.25134.101" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.8665.341" />
       </set>
     </attachedChunks>
   </component>
@@ -141,6 +160,9 @@
       <option name="presentableId" value="Default" />
       <updated>1782496452394</updated>
       <workItem from="1782496454029" duration="728000" />
+      <workItem from="1784384997524" duration="5463000" />
+      <workItem from="1785323379404" duration="12641000" />
+      <workItem from="1785401002975" duration="9870000" />
     </task>
     <servers />
   </component>

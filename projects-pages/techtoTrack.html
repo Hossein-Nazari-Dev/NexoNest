@@ -1,302 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TectoTrack — a social digital twin and agent-based simulation environment for complex buildings.">
   <title>TectoTrack | NexoNest</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/tokens.css" />
-  <link rel="stylesheet" href="../css/base.css" />
-  <link rel="stylesheet" href="../css/layout.css" />
-  <link rel="stylesheet" href="../css/components.css" />
-  <link rel="stylesheet" href="../css/project.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/project.css">
+  <link rel="stylesheet" href="../css/ux.css">
 </head>
-
-<body class="project-theme">
+<body class="project-theme nexonest-theme" data-project="tectotrack">
   <div class="project-layout">
-
-    <!-- Sidebar -->
-    <!-- Sidebar -->
     <aside class="project-sidebar">
-      <div class="sidebar-header">
-        <img src="../assets/icons/tectotrack.png" alt="tectotrack Logo" class="project-icon" />
-        <h2 class="project-title">TectoTrack</h2>
-      </div>
-
-      <nav class="sidebar-nav">
-        <!-- primary menu gets injected here by project-navigation.js -->
+      <div class="sidebar-header" id="projectSidebarHeader"></div>
+      <button class="sidebar-toggle" type="button" aria-expanded="false" aria-controls="projectSidebarNav">
+        <span class="sidebar-toggle-lines" aria-hidden="true"></span><span class="sidebar-toggle-label">Menu</span>
+      </button>
+      <nav class="sidebar-nav" id="projectSidebarNav" aria-label="Project sections">
         <div id="sidebarNav" class="sidebar-primary"></div>
-
         <div class="sidebar-separator"></div>
-
-        <!-- persistent links -->
         <div class="sidebar-secondary">
-          <a href="../nexonest.html" class="nav-link back-link">← Back to NexoNest</a>
+          <a href="../nexonest.html" class="nav-link back-link">← NexoNest</a>
+          <a href="../index.html" class="nav-link back-link">← Main overview</a>
         </div>
       </nav>
     </aside>
-
-    <!-- Main -->
     <main class="project-main">
-      <div class="project-content">
-
-        <section id="overview" class="content-section text-section">
-            <h2 class="section-title">Overview</h2>
-          
-            <p class="image-caption" style="margin:0 0 var(--sp-2) 0;">
-              “Harmonizing Spaces, Humanizing Experiences”
-            </p>
-          
-            <p>
-              <strong>TectoTrack</strong> is a social digital twin that mirrors real environments in a live, 
-              data-driven model. It observes how people move, gather, and interact, then translates those behaviors 
-              into spatial insight you can design with.
-            </p>
-            <p>
-              By coupling agent-based modeling with live and historical data streams, the platform helps architects, 
-              planners, and researchers forecast pedestrian flow, evaluate comfort, and test scenarios before they’re built.
-            </p>
-          
-            <div class="keyword-block">
-              <span class="keyword">Digital Twin</span>
-              <span class="keyword">Agent-Based Modeling</span>
-              <span class="keyword">Pedestrian Dynamics</span>
-              <span class="keyword">Urban Analytics</span>
-              <span class="keyword">Real-Time Simulation</span>
-              <span class="keyword">Behavioral Modeling</span>
-            </div>
-          </section>
-
-
-          <section id="living-future" class="content-section technical-section">
-            <h2 class="section-title">Living Future</h2>
-            <div class="technical-content">
-              <div class="technical-item">
-                <h4>Enhanced Operations</h4>
-                <ul>
-                  <li>Predictive flow management for airports, malls, and transit hubs.</li>
-                  <li>Scheduling, staffing, and resource allocation informed by forecasted demand.</li>
-                </ul>
-              </div>
-              <div class="technical-item">
-                <h4>Safety & Evacuation</h4>
-                <ul>
-                  <li>Plan egress with simulated crowd behavior in critical scenarios.</li>
-                  <li>Design and test efficient routes before implementation.</li>
-                </ul>
-              </div>
-              <div class="technical-item">
-                <h4>Targeted Communication</h4>
-                <ul>
-                  <li>Pair pedestrian forecasts with vision tracking for responsive signage.</li>
-                  <li>Dynamically place advertising where attention is likely to occur.</li>
-                </ul>
-              </div>
-              <div class="technical-item">
-                <h4>Retail Optimization</h4>
-                <ul>
-                  <li>Understand behavior patterns and tune layouts and product placement.</li>
-                  <li>Evaluate concepts on the twin before touching construction.</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-          
-          
-          
-
-        <!-- Key Features -->
-        <section id="features" class="content-section features-section">
-            <h2 class="section-title">Key Features</h2>
-            <div class="features-grid">
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Real-Time Simulation</h3>
-                <p class="feature-description">
-                  Ingests live inputs and supports real-time or time-lapse playback; integrates IoT and environmental feeds.
-                </p>
-              </div>
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Agent Profiles</h3>
-                <p class="feature-description">
-                  Configurable behaviors for wayfinding, clustering, inclusivity and safety; libraries for different user types.
-                </p>
-              </div>
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Spatial Analytics</h3>
-                <p class="feature-description">
-                  Flow and density metrics, interaction hotspots, heatmaps, conflict detection, bottleneck analysis.
-                </p>
-              </div>
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Scenario Testing</h3>
-                <p class="feature-description">
-                  What-if design evaluation, evacuation drills, capacity planning, utilization forecasting.
-                </p>
-              </div>
-          
-            </div>
-          </section>
-          
-          
-          <section id="applications" class="content-section features-section">
-            <h2 class="section-title">Applications</h2>
-            <div class="features-grid">
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Signage & Wayfinding</h3>
-                <p class="feature-description">
-                  Analyze simulated flows to position signs where they resolve confusion and shorten paths.
-                </p>
-              </div>
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Advertising Placement</h3>
-                <p class="feature-description">
-                  Use persona-driven data and heatmaps to target content at high-attention nodes.
-                </p>
-              </div>
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Airport Revenue</h3>
-                <p class="feature-description">
-                  Optimize dwell time, retail exposure, and service mix; detect maintenance cycles from usage patterns.
-                </p>
-              </div>
-          
-              <div class="feature-card">
-                <h3 class="feature-title">Retail & Shopping Malls</h3>
-                <p class="feature-description">
-                  Evaluate layouts before construction and tune existing spaces to improve flow and conversions.
-                </p>
-              </div>
-          
-            </div>
-          </section>
-          
-
-
-
-
-          <section id="roles" class="content-section technical-section">
-            <h2 class="section-title">My Contributions</h2>
-            <div class="technical-content">
-          
-              <div class="technical-item">
-                <h4>Data Pipeline</h4>
-                <ul>
-                  <li>Extracted geometry and metadata from Revit/BIM and normalized for simulation.</li>
-                  <li>Automated model conversion and versioning for Unity ingestion.</li>
-                  <li>Established update triggers so design changes propagate reliably to the twin.</li>
-                </ul>
-                <p>Result: consistent, repeatable handoff from design to analysis with minimal manual prep.</p>
-              </div>
-          
-              <div class="technical-item">
-                <h4>Simulation &amp; Analytics</h4>
-                <ul>
-                  <li>Processed outputs into flow, density, and interaction metrics.</li>
-                  <li>Built comparison reports and dashboards from sensor and sim datasets.</li>
-                  <li>Validated models via trend analysis and sanity checks against observed patterns.</li>
-                </ul>
-                <p>Result: simulations translate into decision-ready evidence instead of raw data dumps.</p>
-              </div>
-          
-              <div class="technical-item">
-                <h4>Perception &amp; Wayfinding</h4>
-                <ul>
-                  <li>Implemented gaze/field-of-view logic and isovist-based visibility.</li>
-                  <li>Prototyped cognitive wayfinding for more human-like route choice.</li>
-                  <li>Tuned agent reactions to local congestion and points of interest.</li>
-                </ul>
-                <p>Result: agents respond credibly to space, improving the realism of crowd dynamics.</p>
-              </div>
-          
-              <div class="technical-item">
-                <h4>Computational Geometry</h4>
-                <ul>
-                  <li>Built visibility graphs and spatial indices for fast queries.</li>
-                  <li>Optimized vector/matrix operations for movement and rotation.</li>
-                  <li>Hardened geometric routines to keep frame times stable.</li>
-                </ul>
-                <p>Result: performant core routines that scale with scene size and agent count.</p>
-              </div>
-          
-            </div>
-          </section>
-          
-
-
-          <!-- Academia & Outreach -->
-          <section id="academia" class="content-section technical-section">
-            <h2 class="section-title">Academia & Outreach</h2>
-          
-            <div class="technical-content">
-              <div class="technical-item" style="grid-column: 1 / -1;">
-                <p>
-                  In <strong>2024</strong>, <strong>Morphotect</strong> partnered with the 
-                  <strong>Iran University of Science and Technology (IUST)</strong> to host a 
-                  hands-on bootcamp on agent-based modeling and social digital twins. 
-                  The program guided students through practical coding workflows — 
-                  translating spatial problems into simulation logic and iterating toward 
-                  evidence-based design feedback.
-                </p>
-              </div>
-          
-              <div class="technical-item" style="grid-column: 1 / -1;">
-                <h4>Bootcamp Outcomes</h4>
-                <ul>
-                  <li>Students learned to extract geometry, build agent profiles, and run crowd simulations.</li>
-                  <li>Cross-disciplinary teams tackled real urban and architectural problems, developing prototype solutions.</li>
-                  <li>Introduced a repeatable workflow: data → model → metrics → design feedback.</li>
-                </ul>
-                <p class="image-caption">
-                  Collaboration between Morphotect and IUST, 2024.
-                </p>
-              </div>
-            </div>
-          
-            <div style="display: flex; justify-content: center; margin-top: var(--sp-4);">
-              <span class="nav-button is-plain">Bootcamp report coming soon</span>
-            </div>
-          </section>
-          
-
-
-
-        <!-- Team & Credits -->
-        <section id="credits" class="content-section contributors-section">
-          <h2 class="section-title">Team &amp; Credits</h2>
-          <div class="contributors-grid">
-            <div class="contributor-card">
-              <h3 class="contributor-name">Ali Jabbari</h3>
-              <p class="contributor-role">Founder &amp; CEO, Principal Investigator</p>
-            </div>
-          </div>
-
-          <div class="note-block">
-            <p class="image-caption">
-              Developed by Morphotect Design Group.
-            </p>
-          </div>
-        </section>
-
-      </div>
-
-      <footer class="project-footer">
-        <div class="project-navigation">
-          <a href="https://www.tectotrack.com" class="nav-button">TecktoTrack Website</a>
-          <a href="https://www.morphotect.com" class="nav-button">Morphotect Website</a>
-        </div>
-      </footer>
+      <div class="project-content" id="projectPageRoot"></div>
+      <footer class="project-footer"><div class="project-footer-editorial" id="projectPageFooter"></div></footer>
     </main>
   </div>
-
-  <!-- Optional: if you already use this to highlight sidebar links -->
+  <script src="../js/project-page.js"></script>
   <script src="../js/project-navigation.js"></script>
+  <script src="../js/ux.js" defer></script>
 </body>
 </html>

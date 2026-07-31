@@ -13,20 +13,32 @@
       { "id": "design-proj", "parent": "projects", "label": "Design Projects" },
       { "id": "sim-analysis", "parent": "projects", "label": "Simulation and Analysis" },
       { "id": "robot-io", "parent": "projects", "label": "Robotic and IoT" },
+      { "id": "design-suite", "parent": "products", "label": "NexoNest Design Suite" },
       { "id": "octomass", "parent": "products", "label": "OctoMass" },
       { "id": "octoland", "parent": "products", "label": "OctoLand" },
       { "id": "octocity", "parent": "products", "label": "OctoCity" },
       { "id": "curvadapt", "parent": "products", "label": "CurvAdapt" },
       { "id": "geofactory", "parent": "products", "label": "GeoFactory" },
       { "id": "course", "parent": "events", "label": "Course" },
-      { "id": "workshop", "parent": "events", "label": "Workshop and Bootcamps" }
+      { "id": "workshop", "parent": "events", "label": "Workshops" },
+      { "id": "bootcamp", "parent": "events", "label": "Bootcamps" }
     ],
     "projects": [
       {
+        "id": "p_design_suite",
+        "title": "NexoNest Design Suite",
+        "excerpt": "Python-first and developing C# stubs that bring Rhino and Grasshopper APIs into external editors with completion, documentation, checks, and AI context.",
+        "url": "projects-pages/nexonestDesignSuite.html",
+        "icon": "assets/logo.svg",
+        "categories": ["products"],
+        "subcategories": ["design-suite"],
+        "image": "assets/logo.svg"
+      },
+      {
         "id": "p_octomass",
         "title": "OctoMass",
-        "excerpt": "A parametric design tool for architects to create and analyze massing models with sustainability metrics.",
-        "url": "",
+        "excerpt": "An evolving Grasshopper research toolkit connecting early massing, geometric descriptors, climate data, and performance feedback.",
+        "url": "projects-pages/octoMass.html",
         "icon": "assets/icons/octomass.png",
         "categories": ["products"],
         "subcategories": ["octomass"],
@@ -35,8 +47,8 @@
       {
         "id": "p_octoland",
         "title": "OctoLand",
-        "excerpt": "Landscape design software that integrates environmental analysis with design workflows.",
-        "url": "",
+        "excerpt": "A C# Grasshopper prototype for sampling terrain and extracting elevation, normals, morphology, and statistical insight.",
+        "url": "projects-pages/octoLand.html",
         "icon": "assets/icons/octoland.png",
         "categories": ["products"],
         "subcategories": ["octoland"],
@@ -45,8 +57,8 @@
       {
         "id": "p_octocity",
         "title": "OctoCity",
-        "excerpt": "Urban scale design and simulation platform for sustainable city planning.",
-        "url": "",
+        "excerpt": "A concept-stage research framework connecting urban morphology, contextual influence, and performance-aware design.",
+        "url": "projects-pages/octoCity.html",
         "icon": "assets/icons/octocity.png",
         "categories": ["products"],
         "subcategories": ["octocity"],
@@ -55,7 +67,7 @@
       {
         "id": "p_curvadapt",
         "title": "CurvAdapt",
-        "excerpt": "A plugin for Grasshopper3d that helps to Segmentation and Simplification Curves or Polylines. It is useful for Geometry Preparation in Building Performance Simulations(BPS).",
+        "excerpt": "A reliability-first geometry preprocessing workflow for curve segmentation, fidelity verification, and building performance simulation.",
         "url": "projects-pages/curvAdapt.html",
         "icon": "assets/icons/curvadapt.png",
         "categories": ["products", "publications"],
@@ -65,8 +77,8 @@
       {
         "id": "p_geofactory",
         "title": "GeoFactory",
-        "excerpt": "Manufacturing preparation software for complex geometric designs and digital fabrication.",
-        "url": "",
+        "excerpt": "An archived concept for tolerance-led geometry preparation between complex design models and digital fabrication.",
+        "url": "projects-pages/geoFactory.html",
         "icon": "assets/icons/GeoFactory.png",
         "categories": ["products"],
         "subcategories": ["geofactory"],
@@ -74,9 +86,9 @@
       },
       {
         "id": "p_printerra",
-        "title": "Printerra",
-        "excerpt": "Integration of design with robotic fabrication processes for architectural components.",
-        "url": "",
+        "title": "prinTerra",
+        "excerpt": "An academic system study combining mobile robotic 3D printing, local earth, parametric toolpaths, sensing, and climate-responsive habitats.",
+        "url": "projects-pages/prinTerra.html",
         "icon": "assets/icons/printerra.png",
         "categories": ["projects"],
         "subcategories": ["robot-io"],
@@ -84,23 +96,43 @@
       },
       {
         "id": "p_alignment",
-        "title": "Alignment Calculation methods",
-        "excerpt": "A Grasshopper Plugin that includes different methods for alignemnt calculation from Math and Geometry to Urban Design",
+        "title": "Building Alignment & Energy",
+        "excerpt": "Research on how urban building alignment affects heating, cooling, and primary energy demand in Tehran.",
         "url": "projects-pages/buildingAlignment.html",
         "icon": "assets/icons/alignment.png",
-        "categories": ["products", "publications", "projects"],
+        "categories": ["publications", "projects"],
         "subcategories": ["sim-analysis"],
         "image": "assets/images/projects/buildingAlignment/validation.png"
       },
       {
         "id": "p_tectotrack",
         "title": "TectoTrack",
-        "excerpt": "A Grasshopper Plugin that includes different methods for alignemnt calculation from Math and Geometry to Urban Design",
+        "excerpt": "A social digital twin platform for agent-based simulation of movement, wayfinding, and human-space interaction.",
         "url": "projects-pages/techtoTrack.html",
         "icon": "assets/icons/tectotrack.png",
         "categories": ["products", "projects"],
         "subcategories": ["sim-analysis"],
         "image": "assets/images/projects/tectotracks/card.png"
+      },
+      {
+        "id": "p_abm_bootcamp",
+        "title": "ABM Bootcamp",
+        "excerpt": "A hands-on programme on agent-based modelling, visual perception, wayfinding, and human-centred spatial simulation.",
+        "url": "projects-pages/abmBootcamp.html",
+        "icon": "",
+        "categories": ["events"],
+        "subcategories": ["bootcamp"],
+        "image": "assets/logo.svg"
+      },
+      {
+        "id": "p_sustainable_development",
+        "title": "Sustainable Design Workshop",
+        "excerpt": "An online workshop connecting environmental, social, and economic sustainability to built-environment decisions.",
+        "url": "projects-pages/sustainableDevelopment.html",
+        "icon": "",
+        "categories": ["events", "education"],
+        "subcategories": ["workshop", "sustain"],
+        "image": "assets/logo.svg"
       }
     ]
   }

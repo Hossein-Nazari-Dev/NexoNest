@@ -1,81 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NexoNest & Portfolio — refined</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hossein Nazari - computational design, environmental performance, and tools for the built environment." />
+  <title>Hossein Nazari | NexoNest & Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/ux.css" />
+  <link rel="prefetch" href="nexonest.html" as="document" />
+  <link rel="prefetch" href="portfolio.html" as="document" />
+</head>
+<body class="home-page">
+  <main class="home-stage">
+    <header class="home-intro">
+      <p class="home-index">One practice / two directions</p>
+      <h1>Hossein Nazari</h1>
+      <p>Computational design, environmental performance, and useful tools for the built environment.</p>
+    </header>
 
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/tokens.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/components.css" />
-
-    <!-- Small perf win: warm up likely next pages -->
-    <link rel="prefetch" href="nexonest.html" as="document" />
-    <link rel="prefetch" href="portfolio.html" as="document" />
-  </head>
-  <body>
-    <div class="stage">
-
-      <section class="block nexo">
-        <a
-          href="nexonest.html"
-          class="circle"
-          aria-label="NexoNest — startup perspective"
-        ></a>
-
-        <div class="text">
-          <h1>NexoNest</h1>
-          <p>
-            <span
-              class="arrow-link"
-              data-url="nexonest.html"
-              role="link"
-              tabindex="0"
-              aria-label="Go to NexoNest — from the startup point of view"
-              onclick="location.assign(this.getAttribute('data-url'))"
-              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
-            >
-              <span class="arrow arrow-left" aria-hidden="true"></span>
-              |From the startup POV|
-            </span>
-          </p>
-        </div>
-      </section>
-
-      <section class="block portfolio">
-        <a
-          href="portfolio.html"
-          class="circle"
-          aria-label="Portfolio — founder perspective"
-        ></a>
-
-        <div class="text">
-          <h1>Portfolio</h1>
-          <p>
-            <span
-              class="arrow-link"
-              data-url="portfolio.html"
-              role="link"
-              tabindex="0"
-              aria-label="Go to Portfolio — from the founder point of view"
-              onclick="location.assign(this.getAttribute('data-url'))"
-              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
-            >
-              |From the founder POV|
-              <span class="arrow arrow-right" aria-hidden="true"></span>
-            </span>
-          </p>
-        </div>
-      </section>
-
-      <div class="connector" aria-hidden="true"></div>
-
-      <!-- Keep your visual style, but expose heading semantics -->
-      <p class="headline" role="heading" aria-level="1">Choose Your Path</p>
+    <div class="home-path" aria-label="Choose a perspective">
+      <a class="home-route home-route-nexo" href="nexonest.html">
+        <span class="route-dot" aria-hidden="true"></span>
+        <span class="route-number">01</span>
+        <strong>NexoNest</strong>
+        <span>The product lab — tools, research, and experiments.</span>
+      </a>
+      <div class="home-connector" aria-hidden="true"></div>
+      <a class="home-route home-route-portfolio" href="portfolio.html">
+        <span class="route-dot" aria-hidden="true"></span>
+        <span class="route-number">02</span>
+        <strong>Portfolio</strong>
+        <span>The personal side — journey, methods, and selected work.</span>
+      </a>
     </div>
 
-    <script src="js/nav.js" defer></script>
-  </body>
+    <p class="home-note">Choose a direction. They meet again later.</p>
+  </main>
+  <script src="js/ux.js" defer></script>
+</body>
 </html>

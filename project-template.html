@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/components.css" />
   <!-- Project-page CSS -->
   <link rel="stylesheet" href="css/project.css" />
+  <link rel="stylesheet" href="css/ux.css" />
 </head>
 
 <body class="project-theme">
@@ -25,7 +26,11 @@
         <p class="project-subtitle">[Short tagline]</p>
       </div>
 
-      <nav class="sidebar-nav">
+      <button class="sidebar-toggle" type="button" aria-expanded="false" aria-controls="projectSidebarNav">
+        <span class="sidebar-toggle-lines" aria-hidden="true"></span>
+        <span class="sidebar-toggle-label">Menu</span>
+      </button>
+      <nav class="sidebar-nav" id="projectSidebarNav">
         <!-- Optional: inject via JS per project; static fallback below -->
         <div id="sidebarNav" class="sidebar-primary">
           <a class="nav-link" href="#overview">Overview</a>
@@ -43,6 +48,7 @@
 
         <div class="sidebar-secondary">
           <a href="nexonest.html" class="nav-link back-link">← Back to NexoNest</a>
+          <a href="index.html" class="nav-link back-link">← Main overview</a>
         </div>
       </nav>
     </aside>
@@ -162,5 +168,6 @@
 
   <!-- Optional: same navigation injector used by CurvAdapt -->
   <script src="js/project-navigation.js"></script>
+  <script src="js/ux.js" defer></script>
 </body>
 </html>

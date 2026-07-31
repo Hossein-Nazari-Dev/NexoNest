@@ -73,19 +73,44 @@
   window.filterProjects = function filterProjects() {
     const projects = window.projectsData?.projects || [];
     const icons = document.querySelectorAll('.project-icon');
+    const activeCat = toCatId(window.state?.activeCategory);
+    const activeSub = toSubId(window.state?.activeSubcategory);
+    const hasFilter = activeCat !== 'all' || !!activeSub;
+    let activeCount = 0;
 
     icons.forEach(icon => {
       const projectId = icon.getAttribute('data-id');
       const project = projects.find(p => p.id === projectId);
 
       if (isProjectActive(project)) {
-        icon.classList.add('active');
+        activeCount += 1;
+        icon.classList.toggle('active', hasFilter);
         icon.classList.remove('dimmed');
+        icon.removeAttribute('aria-disabled');
+        icon.tabIndex = 0;
       } else {
         icon.classList.remove('active');
         icon.classList.add('dimmed');
+        icon.setAttribute('aria-disabled', 'true');
+        icon.tabIndex = -1;
       }
     });
+
+    const summary = document.getElementById('filter-summary');
+    const reset = document.querySelector('.filter-reset');
+    const cats = window.projectsData?.categories || [];
+    const subs = window.projectsData?.subcategories || [];
+    const context = activeSub
+      ? subs.find(item => item.id === activeSub)?.label
+      : cats.find(item => item.id === activeCat)?.label;
+
+    if (summary) {
+      const noun = activeCount === 1 ? 'project' : 'projects';
+      summary.textContent = context
+        ? `${activeCount} ${noun} in ${context}`
+        : `${activeCount} ${noun} in the index`;
+    }
+    if (reset) reset.hidden = activeCat === 'all' && !activeSub;
   };
 
   // Expose helpers to other modules if needed

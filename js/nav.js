@@ -6,30 +6,7 @@
   async function ensureProjectsData() {
     if (window.projectsData?.projects?.length) return window.projectsData;
 
-    const candidates = [
-      'data/projects-brief.json',
-      './data/projects-brief.json',
-      '../data/projects-brief.json',
-    ];
-
-    for (const rel of candidates) {
-      try {
-        const url = new URL(rel, document.baseURI).href;
-        const resp = await fetch(url, { cache: 'no-store' });
-        if (resp.ok) {
-          window.projectsData = await resp.json();
-          return window.projectsData;
-        }
-      } catch (_) {}
-    }
-
-    console.warn('[nav] projects-brief.json not found; using empty fallback.');
-    window.projectsData = window.projectsData || {
-      categories: [],
-      subcategories: [],
-      projects: [],
-    };
-    return window.projectsData;
+    return window.loadProjectsData();
   }
 
   /* ------------------------------------------------------------------------
@@ -141,8 +118,12 @@
         return;
       }
 
-      // Click-away reset
-      if (!isPopupOpen() && !clickIsInsideUI(t)) {
+      // Empty-space click is a second, direct way to return to the full index.
+      if (
+        !isPopupOpen() &&
+        !clickIsInsideUI(t) &&
+        !t.closest('a, button, input, select, textarea, [role="button"]')
+      ) {
         window.clearFilters?.();
       }
     });

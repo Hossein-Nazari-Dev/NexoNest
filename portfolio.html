@@ -13,41 +13,52 @@
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/portfolio.css" />
+    <link rel="stylesheet" href="css/portfolio-v2.css" />
+    <link rel="stylesheet" href="css/ux.css" />
     <link
       rel="icon"
       type="image/x-icon"
       href="assets/profile.jpg"
     />
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 
   </head>
   <body class="portfolio-theme">
     <div class="portfolio-container">
+      <button class="portfolio-menu-toggle" type="button" aria-label="Open portfolio index" aria-expanded="false" aria-controls="portfolio-sidebar">
+        <span></span><span></span>
+      </button>
+      <button class="portfolio-menu-backdrop" type="button" aria-label="Close portfolio index" tabindex="-1"></button>
       <!-- Left Sidebar -->
-      <aside class="portfolio-sidebar">
+      <aside class="portfolio-sidebar" id="portfolio-sidebar">
         <div class="profile-image">
           <img
-            src="assets/profile.jpg"
+            src="assets/profile-formal-v2.webp"
             alt="Hossein Nazari"
+            width="104"
+            height="104"
+            decoding="async"
+            fetchpriority="high"
             onerror="this.style.display='none'"
           />
         </div>
         <div class="profile-info">
           <h1>Hossein Nazari</h1>
           <p>Computational Designer</p>
+          <p class="profile-note">Making geometry behave — most days.</p>
         </div>
 
         <nav class="sidebar-nav" aria-label="Sections">
           <button class="nav-button active" data-section="profile">Profile</button>
-          <button class="nav-button" data-section="myjourney">My Journey</button>
+          <button class="nav-button" data-section="myjourney">Journey</button>
           <button class="nav-button" data-section="education">Education</button>
           <button class="nav-button" data-section="experience">Experience</button>
-          <button class="nav-button" data-section="skills">Skills</button>
+          <button class="nav-button" data-section="skills">Methods</button>
           <button class="nav-button" data-section="projects">Projects</button>
           <button class="nav-button" data-section="publications">Publications</button>
-          <button class="nav-button" data-section="portfolio-pdf">Portfolio PDF</button>
+          <button class="nav-button" data-section="portfolio-pdf">Archive</button>
           <div style="margin-top: 1rem;"></div>
-          <a class="nav-button" href="index.html">&larr; Return Home</a>
+          <a class="nav-button" href="index.html">&larr; Overview</a>
         </nav>
         
       </aside>
@@ -60,11 +71,13 @@
 
           <!-- Profile Section -->
           <section id="profile" class="portfolio-section active">
-            <h2>Profile</h2>
+            <p class="section-kicker">Selected work / 2019—now</p>
+            <h2>Designing better questions<br>for the built environment.</h2>
+            <p class="section-intro">I build computational tools and simulations that help designers make climate-aware, human-centered decisions — with fewer spreadsheets and more curiosity.</p>
             <div class="section-content">
               <div class="profile-grid">
                 <div class="info-card">
-                  <h3>Personal Details</h3>
+                  <h3>Coordinates</h3>
                   <div class="details-grid">
                     <div class="detail-item">
                       <span class="label">Full Name:</span>
@@ -91,21 +104,12 @@
                 </div>
 
                 <div class="info-card">
-                  <h3>Professional Summary</h3>
+                  <h3>Working Thesis</h3>
                   <p>
-                    I define my work around what I call <strong>Computational Climatic Finding</strong> — 
-                    a design approach that integrates climate analysis, data-driven form exploration, and 
-                    computational workflows to shape architectures, landscapes, and urban systems that are 
-                    inherently adaptive and environmentally performative.
+                    My work sits between <strong>computational climate design</strong> and <strong>social digital twins</strong>. I translate environmental data, behaviour, and geometry into practical design tools for architecture, landscape, and urban systems.
                   </p>
-                  
                   <p>
-                    Alongside this, I explore the potential of <strong>Social Digital Twins</strong>, 
-                    creating dynamic simulations of human behavior and comfort within built environments. 
-                    By merging climatic form-finding with behavioral modeling, my goal is to prototype 
-                    intelligent design strategies that simultaneously enhance environmental performance 
-                    and elevate user experience. To me, design is not only a technical pursuit but a 
-                    framework for sustainable, human-centered transformation.
+                    The goal is simple: make complex evidence easier to use early in the design process — before a beautiful idea becomes an expensive mistake.
                   </p>
                   
                   
@@ -113,7 +117,7 @@
               </div>
 
               <div class="info-card full-width">
-                <h3>Interests & Hobbies</h3>
+                <h3>Outside the Loop</h3>
                 <div class="hobbies-grid">
                   <div
                     class="hobby-item"
@@ -221,32 +225,33 @@
           <section id="myjourney" class="portfolio-section">
             <h2>My Journey</h2>
             <p class="mj-tagline">
-              Portfolios often showcase <strong>projects</strong> more than <strong>people</strong>.
-              Success stories get told; failures get silenced. If success stories excite you,
-              wait until you hear about my failures. 🙂
+              Most portfolios record what worked. This one follows the wrong turns that shaped how I design. The path may look scattered — books, cinema, architecture, code, climate, and behaviour — but each detour moved toward one question: how can a digital twin connect people, environment, form, and construction?
             </p>
           
             <div class="mj-shell" id="mj-shell">
+              <div class="mj-chapter-nav" aria-label="Journey chapter controls">
+                <div class="mj-progress-group">
+                  <span>Failure notes</span>
+                  <strong class="mj-progress" role="status" aria-live="polite">01 / 09</strong>
+                </div>
+                <div class="mj-nav-actions">
+                  <button class="mj-nav-button mj-prev" type="button" aria-label="Previous journey chapter">&larr; Previous</button>
+                  <button class="mj-nav-button mj-next" type="button" aria-label="Next journey chapter">Next &rarr;</button>
+                </div>
+              </div>
+
               <!-- Timeline -->
               <div class="mj-stage" tabindex="0" aria-label="Journey timeline">
                 <div class="mj-rail" aria-hidden="true"></div>
                 <div id="mj-track" class="mj-track" aria-live="polite"></div>
           
-                <!-- fades + vector hints (purely visual) -->
+                <!-- Edge fades keep the chapter rail visually focused. -->
                 <div class="mj-fade mj-fade--left"></div>
                 <div class="mj-fade mj-fade--right"></div>
-                <svg class="mj-hint mj-hint--left" viewBox="0 0 24 24" aria-hidden="true">
-                  <path class="arrow" d="M15 4 L7 12 L15 20"/>
-                  <circle class="dot" cx="12" cy="12" r="9"/>
-                </svg>
-                <svg class="mj-hint mj-hint--right" viewBox="0 0 24 24" aria-hidden="true">
-                  <path class="arrow" d="M9 4 L17 12 L9 20"/>
-                  <circle class="dot" cx="12" cy="12" r="9"/>
-                </svg>
               </div>
           
               <!-- Single panel (title + content از JS) -->
-              <div id="mj-panel" class="mj-panel" role="region" aria-label="Journey details"></div>
+              <div id="mj-panel" class="mj-panel" role="region" aria-label="Journey details" aria-live="polite"></div>
             </div>
           </section>
           
@@ -256,10 +261,10 @@
 
           <!-- Education Section -->
           <section id="education" class="portfolio-section">
-            <h2>Education & Professional Development</h2>
+            <h2>Learning & Development</h2>
             <div class="section-content">
               <div class="info-card">
-                <h3>Academic Education</h3>
+                <h3>Academic Record</h3>
                 <div class="timeline">
                   <div class="timeline-item">
                     <div class="timeline-date">2019 - 2022</div>
@@ -299,7 +304,7 @@
               </div>
 
               <div class="info-card">
-                <h3>Courses & Workshops</h3>
+                <h3>Additional Practice</h3>
                 <div class="courses-grid">
                   <div class="course-card">
                     <h4>Advanced Grasshopper</h4>
@@ -350,7 +355,7 @@
 
           <!-- Experience Section -->
           <section id="experience" class="portfolio-section">
-            <h2>Main Experiences</h2>
+            <h2>Professional Practice</h2>
             <div class="section-content experience-layout">
               <div class="experience-list">
                 <!-- NexoNest Experience -->
@@ -416,7 +421,7 @@
 
               <div class="experience-detail" id="experienceDetail">
                 <div class="detail-placeholder">
-                  <p>Select the item to view detailed responsibilities</p>
+                  <p>Choose a role. The less glamorous details appear here.</p>
                 </div>
               </div>
             </div>
@@ -424,128 +429,60 @@
 
           <!-- Skills Section (REWRITTEN) -->
           <section id="skills" class="portfolio-section">
-            <h2>Skills</h2>
+            <h2>Methods & Competencies</h2>
             <div class="section-content">
               <div class="skills-grid">
-          
-                <!-- 1) Programming & Computational Methods -->
                 <div class="skill-category">
-                  <h3>Programming & Computational Methods</h3>
-          
-                  <div class="skill" data-level="92">
-                    <span class="skill-name">Python</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:92%"></div></div>
+                  <h3>Computational Development</h3>
+                  <div class="skill-depth" aria-label="Advanced practice depth">
+                    <span>Practice depth</span><strong>Advanced</strong>
+                    <span class="skill-depth-track level-4" aria-hidden="true"></span>
                   </div>
-          
-                  <div class="skill" data-level="78">
-                    <span class="skill-name">C# / .NET</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:78%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="72">
-                    <span class="skill-name">HTML / CSS / JavaScript</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:72%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="86">
-                    <span class="skill-name">Git / GitHub</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:86%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="84">
-                    <span class="skill-name">Algorithms & Data Visualization</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:84%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="90">
-                    <span class="skill-name">Design Patterns</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
-                  </div>
+                  <ul class="skill-list">
+                    <li>Python & data analysis</li>
+                    <li>C# / .NET development</li>
+                    <li>Web technologies</li>
+                    <li>Git, algorithms & design patterns</li>
+                  </ul>
                 </div>
-          
-                <!-- 2) Parametric & AEC Tools -->
                 <div class="skill-category">
-                  <h3>Parametric & AEC Tools</h3>
-          
-                  <div class="skill" data-level="95">
-                    <span class="skill-name">Rhino & Grasshopper</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div>
+                  <h3>Parametric Design & BIM</h3>
+                  <div class="skill-depth" aria-label="Primary practice depth">
+                    <span>Practice depth</span><strong>Primary</strong>
+                    <span class="skill-depth-track level-5" aria-hidden="true"></span>
                   </div>
-          
-                  <div class="skill" data-level="88">
-                    <span class="skill-name">Rhino.Inside</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:88%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="85">
-                    <span class="skill-name">Revit & BIM</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="78">
-                    <span class="skill-name">Interoperability (AEC Pipelines)</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:78%"></div></div>
-                  </div>
+                  <ul class="skill-list">
+                    <li>Rhino & Grasshopper</li>
+                    <li>Rhino.Inside workflows</li>
+                    <li>Revit & BIM coordination</li>
+                    <li>AEC interoperability pipelines</li>
+                  </ul>
                 </div>
-          
-                <!-- 3) Climate & Performance Simulation -->
                 <div class="skill-category">
-                  <h3>Climate & Performance Simulation</h3>
-          
-                  <div class="skill" data-level="95">
-                    <span class="skill-name">Ladybug Tools (LB/HB/DF)</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:95%"></div></div>
+                  <h3>Environmental Performance Simulation</h3>
+                  <div class="skill-depth" aria-label="Primary practice depth">
+                    <span>Practice depth</span><strong>Primary</strong>
+                    <span class="skill-depth-track level-5" aria-hidden="true"></span>
                   </div>
-          
-                  <div class="skill" data-level="92">
-                    <span class="skill-name">Climate Studio</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:92%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="82">
-                    <span class="skill-name">Daylighting & Energy Modeling</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:82%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="90">
-                    <span class="skill-name">Computational Sustainability</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
-                  </div>
+                  <ul class="skill-list">
+                    <li>Ladybug Tools (LB / HB / DF)</li>
+                    <li>Climate Studio</li>
+                    <li>Daylighting & energy modelling</li>
+                    <li>Computational sustainability</li>
+                  </ul>
                 </div>
-          
-                <!-- 4) Behavioral Simulation & Interactive Systems -->
                 <div class="skill-category">
-                  <h3>Behavioral Simulation & Interactive Systems</h3>
-          
-                  <div class="skill" data-level="88">
-                    <span class="skill-name">Agent-Based Modeling</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:88%"></div></div>
+                  <h3>Behavioural Systems & Sensing</h3>
+                  <div class="skill-depth" aria-label="Advanced practice depth">
+                    <span>Practice depth</span><strong>Advanced</strong>
+                    <span class="skill-depth-track level-4" aria-hidden="true"></span>
                   </div>
-          
-                  <div class="skill" data-level="84">
-                    <span class="skill-name">Social Digital Twins</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:84%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="80">
-                    <span class="skill-name">Crowd Dynamics & Wayfinding</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="78">
-                    <span class="skill-name">UX for Built Environments</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:78%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="82">
-                    <span class="skill-name">IoT, Sensors & Real-Time Sensing</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:82%"></div></div>
-                  </div>
-          
-                  <div class="skill" data-level="85">
-                    <span class="skill-name">Arduino / Raspberry Pi</span>
-                    <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
-                  </div>
+                  <ul class="skill-list">
+                    <li>Agent-based modelling</li>
+                    <li>Social digital twins</li>
+                    <li>Crowd dynamics & wayfinding</li>
+                    <li>IoT, sensing & physical computing</li>
+                  </ul>
                 </div>
           
               </div>
@@ -584,15 +521,14 @@
           
           <!-- Projects Section -->
           <section id="projects" class="portfolio-section">
-            <h2>Selected Projects and Experience</h2>
+            <h2>Selected Work</h2>
             <div class="section-content">
               <div class="project-card">
                 <h3>TectoTrack</h3>
                 <p>
-                  A social digital twin platform that models how people move, interact, and occupy space in real time. 
-                  Powered by AI-driven agent-based simulation, it represents diverse behavioral profiles to study 
-                  crowd dynamics, wayfinding, and environmental comfort—helping designers optimize public spaces, 
-                  retail layouts, and circulation systems through predictive analytics.
+                  A social digital twin and agent-based simulation environment for studying how people move,
+                  choose, wait, and use complex buildings. My work spans behaviour logic, routing, queues,
+                  accessibility, BIM-to-Unity workflows, and technical system architecture.
                 </p>
                 <a href="projects-pages/techtoTrack.html" class="project-link">View Project Details</a>
               </div>
@@ -601,10 +537,9 @@
               <div class="project-card">
                 <h3>CurvAdapt</h3>
                 <p>
-                  A geometry preprocessing framework that bridges free-form NURBS design and simulation accuracy. 
-                  It provides adaptive segmentation and simplification tools governed by curvature, tangent, and chord-error 
-                  metrics—ensuring geometries remain both computationally efficient and performance-faithful across 
-                  daylighting and energy analyses.
+                  A reliability-first geometry preprocessing framework for translating NURBS curves into
+                  simulation-ready polylines. It verifies fidelity with MCE/rMCE and uses incident radiation
+                  as a fast diagnostic before heavier daylight and energy simulation.
                 </p>
                 <a href="projects-pages/curvAdapt.html" class="project-link">View Project Details</a>
               </div>
@@ -614,32 +549,27 @@
               <div class="project-card">
                 <h3>ABMs in Architecture and Urban Design</h3>
                 <p>
-                  Designing Human-Centered, Environmentally Perceptive Digital
-                  Models in Architecture and Urban Planning. This hands-on
-                  bootcamp explored digital twins and agent-based models to
-                  simulate human behavior in urban spaces. Participants used
-                  Rhino, Grasshopper, and Python to tackle real design
-                  challenges—like pedestrian flow, emergency evacuation, and
-                  spatial perception.
+                  A hands-on programme for translating human-space questions into explicit agent-based
+                  models. Forty-two participants used Rhino, Grasshopper, and Python to develop and
+                  interpret twelve architecture and urban-design projects.
                 </p>
-                <span class="project-link is-disabled" aria-disabled="true">Report coming soon</span>
+                <a href="projects-pages/abmBootcamp.html" class="project-link">View Bootcamp Archive</a>
               </div>
 
               <div class="project-card">
                 <h3>prinTerra</h3>
                 <p>
-                  Research project in robotic 3D printing architecture using
-                  local earth materials. Features AI-driven fabrication, modular
-                  design & sustainable construction methods.
+                  An academic system study combining mobile robotic 3D printing, local earth,
+                  parametric toolpaths, sensing, and passive form for arid environments.
                 </p>
-                <span class="project-link is-disabled" aria-disabled="true">Details coming soon</span>
+                <a href="projects-pages/prinTerra.html" class="project-link">View Project Details</a>
               </div>
 
           </section>
 
           <!-- publications Section -->
           <section id="publications" class="portfolio-section">
-            <h2>Academic Papers</h2>
+            <h2>Research & Writing</h2>
             <div class="section-content">
               <div class="project-card">
                 <h3>Impact of Building's Alignment on Energy Efficiency</h3>
@@ -663,30 +593,52 @@
 
           <!-- Portfolio PDF Section -->
           <section id="portfolio-pdf" class="portfolio-section">
-            <h2>Portfolio PDF</h2>
+            <p class="section-kicker">Print edition / digital access</p>
+            <h2>Portfolio Archive</h2>
+            <p class="section-intro">The portfolio is presented as a facing-page A4 spread. Browse the short preview here, or take the full documents with you.</p>
             <div class="section-content">
-              <div class="pdf-viewer">
+              <div class="pdf-viewer" tabindex="0" aria-label="Portfolio PDF preview">
                 <div class="pdf-controls">
-                  <button class="pdf-nav prev" aria-controls="pdf-container">‹</button>
-                  <span class="pdf-page-info" role="status" aria-live="polite">Page 1 of 12</span>
-                  <button class="pdf-nav next" aria-controls="pdf-container">›</button>
+                  <span class="pdf-control-label">A4 spread / click to enlarge</span>
+                  <div class="pdf-pagination">
+                    <button class="pdf-nav prev" type="button" aria-label="Previous portfolio spread" aria-controls="pdf-container">&larr;</button>
+                    <span class="pdf-page-info" role="status" aria-live="polite">Cover / 16</span>
+                    <button class="pdf-nav next" type="button" aria-label="Next portfolio spread" aria-controls="pdf-container">&rarr;</button>
+                  </div>
                 </div>
                 <div id="pdf-container" class="pdf-container">
-                  <div class="pdf-page left">
-                    <div class="page-content">
-                      <h3>Portfolio Preview</h3>
-                      <p>Full portfolio available in PDF format</p>
-                    </div>
-                  </div>
-                  <div class="pdf-page right">
-                    <div class="page-content">
-                      <h3>Project Showcase</h3>
-                      <p>Detailed case studies and visual documentation</p>
-                    </div>
+                  <figure class="pdf-page left is-empty" aria-hidden="true">
+                    <img data-pdf-page="left" alt="" loading="lazy" decoding="async" hidden />
+                  </figure>
+                  <figure class="pdf-page right is-empty" aria-hidden="true">
+                    <img data-pdf-page="right" alt="" loading="lazy" decoding="async" hidden />
+                  </figure>
+                </div>
+                <div class="pdf-lightbox" hidden aria-hidden="true">
+                  <button class="pdf-lightbox-backdrop" type="button" tabindex="-1" aria-label="Close enlarged page"></button>
+                  <div class="pdf-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Enlarged portfolio page">
+                    <button class="pdf-lightbox-close" type="button" aria-label="Close enlarged page">&times;</button>
+                    <img class="pdf-lightbox-image" alt="" />
+                    <span class="pdf-lightbox-caption"></span>
                   </div>
                 </div>
-                <div class="pdf-download">
-                  <span class="download-button is-disabled" aria-disabled="true">PDF version coming soon</span>
+                <div class="document-downloads" aria-label="Download documents">
+                  <a class="document-download" href="files/Portfolio_Academic.pdf" download>
+                    <span class="document-icon" aria-hidden="true"><i data-lucide="panels-top-left"></i></span>
+                    <span class="document-copy">
+                      <strong>Portfolio PDF</strong>
+                      <small>16 pages / selected academic work</small>
+                    </span>
+                    <span class="document-action">Download &darr;</span>
+                  </a>
+                  <a class="document-download" href="files/CV.pdf" download>
+                    <span class="document-icon" aria-hidden="true"><i data-lucide="file-text"></i></span>
+                    <span class="document-copy">
+                      <strong>Curriculum Vitae</strong>
+                      <small>4 pages / experience and credentials</small>
+                    </span>
+                    <span class="document-action">Download &darr;</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -702,9 +654,42 @@
 
     <script src="js/nav.js" defer></script>
     <script src="js/portfolio.js" defer></script>
-    <script src="js/journey.js" defer></script>
+    <script src="js/ux.js" defer></script>
     <script>
-      if (window.lucide) lucide.createIcons();
+      (() => {
+        let journeyLoading = false;
+        const loadJourney = () => {
+          if (journeyLoading || window.__journeyLoaded) return;
+          journeyLoading = true;
+          const script = document.createElement("script");
+          script.src = "js/journey.js";
+          script.onload = () => {
+            window.__journeyLoaded = true;
+            journeyLoading = false;
+          };
+          document.body.appendChild(script);
+        };
+
+        document.addEventListener("portfolio:sectionchange", (event) => {
+          if (event.detail?.id === "myjourney") {
+            loadJourney();
+            return;
+          }
+
+          if (event.detail?.id === "profile") {
+            const loadWhenIdle = () => loadJourney();
+            if ("requestIdleCallback" in window) {
+              window.requestIdleCallback(loadWhenIdle, { timeout: 1600 });
+            } else {
+              window.setTimeout(loadWhenIdle, 700);
+            }
+          }
+        });
+      })();
+
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) lucide.createIcons();
+      });
     </script>
     
   </body>

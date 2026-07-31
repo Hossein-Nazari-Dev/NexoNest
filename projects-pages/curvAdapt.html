@@ -1,314 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CurvAdapt — reliability-first curve segmentation and geometry preprocessing for building performance simulation.">
   <title>CurvAdapt | NexoNest</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/tokens.css" />
-  <link rel="stylesheet" href="../css/base.css" />
-  <link rel="stylesheet" href="../css/layout.css" />
-  <link rel="stylesheet" href="../css/components.css" />
-  <link rel="stylesheet" href="../css/project.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/project.css">
+  <link rel="stylesheet" href="../css/ux.css">
 </head>
-
-<body class="project-theme">
+<body class="project-theme nexonest-theme" data-project="curvadapt">
   <div class="project-layout">
-
-    <!-- Sidebar -->
     <aside class="project-sidebar">
-      <div class="sidebar-header">
-        <img src="../assets/icons/curvadapt.png" alt="CurvAdapt Logo" class="project-icon" />
-        <h2 class="project-title">CurvAdapt</h2>
-      </div>
-
-      <nav class="sidebar-nav">
-        <!-- primary menu gets injected here by project-navigation.js -->
+      <div class="sidebar-header" id="projectSidebarHeader"></div>
+      <button class="sidebar-toggle" type="button" aria-expanded="false" aria-controls="projectSidebarNav">
+        <span class="sidebar-toggle-lines" aria-hidden="true"></span><span class="sidebar-toggle-label">Menu</span>
+      </button>
+      <nav class="sidebar-nav" id="projectSidebarNav" aria-label="Project sections">
         <div id="sidebarNav" class="sidebar-primary"></div>
-
         <div class="sidebar-separator"></div>
-
-        <!-- persistent links -->
         <div class="sidebar-secondary">
-          <a href="../nexonest.html" class="nav-link back-link">← Back to NexoNest</a>
+          <a href="../nexonest.html" class="nav-link back-link">← NexoNest</a>
+          <a href="../index.html" class="nav-link back-link">← Main overview</a>
         </div>
       </nav>
     </aside>
-
-    <!-- Main -->
     <main class="project-main">
-      <div class="project-content">
-
-        <!-- Overview -->
-        <section id="overview" class="content-section text-section">
-          <h2 class="section-title">Overview</h2>
-          <p>
-            CurvAdapt bridges the gap between free-form NURBS design models and
-            planar simulation requirements, providing robust segmentation and
-            simplification workflows.
-          </p>
-          <p>
-            The core idea: control <em>geometric fidelity</em> directly using maximum
-            chord error (MCE) and its normalized form rMCE, instead of guessing via
-            “number of segments.” This yields stable, monotonic convergence and
-            reproducible results across daylight and energy simulations.
-          </p>
-
-          <div class="keyword-block">
-            <span class="keyword">Building Performance Simulation</span>
-            <span class="keyword">Geometry Preparation</span>
-            <span class="keyword">Plugin Development</span>
-            <span class="keyword">Curve Segmentation</span>
-            <span class="keyword">Polyline Simplification</span>
-          </div>
-        </section>
-
-        <!-- NEW: Problem Statement -->
-        <section id="problem" class="content-section text-section">
-          <h2 class="section-title">Problem Statement</h2>
-          <p>
-            Most pipelines discretize curved profiles by segment count. That’s scale-dependent,
-            hides geometric deviation, and creates false confidence when results look converged
-            but geometry isn’t. CurvAdapt makes fidelity explicit and reportable so simulations
-            are physically meaningful, not just numerically cozy.
-          </p>
-        </section>
-
-        <!-- Key Capabilities (refined for clarity and parallel structure) -->
-        <section id="features" class="content-section features-section">
-          <h2 class="section-title">Key Capabilities</h2>
-          <div class="features-grid">
-        
-            <div class="feature-card">
-              <h3 class="feature-title">Segmentation</h3>
-              <p class="feature-description">
-                Adaptive NURBS-to-polyline conversion driven by chord-error, curvature, or tangent-angle criteria.
-              </p>
-            </div>
-        
-            <div class="feature-card">
-              <h3 class="feature-title">Simplification</h3>
-              <p class="feature-description">
-                Post-process polyline reduction with geometric-fidelity control to minimize deviation while retaining form.
-              </p>
-            </div>
-        
-            <div class="feature-card">
-              <h3 class="feature-title">Critical-Point Preservation</h3>
-              <p class="feature-description">
-                Safeguards kinks, corners, and sub-curve seams (G⁰/G¹ continuity) to prevent topology distortion.
-              </p>
-            </div>
-        
-            <div class="feature-card">
-              <h3 class="feature-title">Simulation-Ready Geometry</h3>
-              <p class="feature-description">
-                Generates lightweight yet accurate geometry optimized for daylight and energy simulations.
-              </p>
-            </div>
-        
-          </div>
-        </section>
-        
-
-        <!-- NEW: Method at a Glance (with figure placeholder) -->
-        <section id="method" class="content-section split">
-          <h2 class="section-title">Method at a Glance</h2>
-          <div class="section-content">
-            <div class="text-container">
-              <p>
-                CurvAdapt quantifies fidelity with MCE/rMCE, validates a geometry-sensitive
-                proxy (incident radiation), and uses guard-banded monotonicity checks to
-                confirm stable convergence before trusting results.
-              </p>
-              <ul>
-                <li><strong>Uniform</strong> by length/parameter for smooth primitives.</li>
-                <li><strong>Adaptive</strong> by curvature/tangent/chord for complex forms.</li>
-                <li><strong>Critical-points detector</strong> across all paths.</li>
-              </ul>
-            </div>
-            <div class="image-container">
-              <!-- PLACEHOLDER: methodology overview -->
-              <img src="../assets/images/projects/curvadapt/fig-methodology.jpg" alt="CurvAdapt methodology overview diagram" />
-              <p class="image-caption">Workflow overview: segmentation families, proxy validation, and convergence checks.</p>
-            </div>
-          </div>
-        </section>
-
-
-
-        <!-- Convergence -->
-        <section id="convergence" class="content-section split">
-          <h2 class="section-title">Non-Monotonic Convergence</h2>
-
-          <div class="section-content">
-            <div class="text-container">
-              <p>
-                Increasing model detail doesn’t always improve accuracy — CurvAdapt ensures
-                stability through geometric guarantees before simulation.
-              </p>
-            </div>
-
-            <div class="image-container">
-              <img src="../assets/images/projects/curvadapt/convergence.png" alt="Convergence Diagram" />
-              <p class="image-caption">
-                Non-monotonic convergence for (A) simple and (B) complex geometries.
-              </p>
-            </div>
-          </div>
-        </section>
-
-
-
-        <!-- NEW: Proxy Validation (with figure placeholder) -->
-        <section id="validation" class="content-section split">
-          <h2 class="section-title">Proxy Validation</h2>
-          <div class="section-content">
-            <div class="text-container">
-              <p>
-                Incident <em>radiation deviation</em> tracks geometric fidelity and reliably predicts
-                when daylight and energy metrics stop changing. That means you can detect
-                “good enough” geometry at ~1/20th the cost of full simulations.
-              </p>
-
-            </div>
-            <div class="image-container">
-              <!-- PLACEHOLDER: validation figure (radiation vs energy/daylight) -->
-              <img src="../assets/images/projects/curvadapt/fig-validation.jpg" alt="Radiation vs energy/daylight convergence comparison" />
-              <p class="image-caption">
-                Validated on an ellipse (uniform-by-length) and a hybrid polycurve (adaptive-by-chord).
-              </p>
-            </div>
-          </div>
-        </section>
-
-
-
-
-        
-
-        <!-- Algorithms (concise and structured like thresholds section) -->
-        <section id="algorithms" class="content-section technical-section">
-          <h2 class="section-title">Implemented Algorithms</h2>
-        
-          <div class="technical-content">
-            <div class="technical-item">
-              <h4>Segmentation</h4>
-              <ul>
-                <li>Curvature-based and tangent-angle-based adaptive splitting.</li>
-                <li>Recursive Douglas–Peucker with kink preservation.</li>
-                <li>Hybrid segmentation for mixed geometric conditions.</li>
-              </ul>
-            </div>
-        
-            <div class="technical-item">
-              <h4>Simplification</h4>
-              <ul>
-                <li>Douglas–Peucker and Visvalingam–Whyatt algorithms.</li>
-                <li>Angle-based filtering for visual coherence.</li>
-                <li>Iterative refinement until target tolerance (MCE) is met.</li>
-              </ul>
-            </div>
-        
-            <div class="technical-item">
-              <h4>Metrics</h4>
-              <ul>
-                <li>Geometric fidelity quantified via <strong>chord error</strong> and <strong>relative MCE (rMCE)</strong>.</li>
-                <li>Performance evaluated through <strong>energy deviation</strong> and <strong>runtime reduction</strong>.</li>
-                <li>Ensures stable simulation behavior across varied curve complexities.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-        
-
-
-        <!-- NEW: Why chord error beats segment count (with figure placeholder) -->
-        <section id="fidelity" class="content-section split">
-          <h2 class="section-title">Fidelity Boundaries: Use MCE/rMCE</h2>
-          <div class="section-content">
-            <div class="text-container">
-              <p>
-                Segment count is a noisy proxy. MCE correlates strongly with radiation deviation
-                (r ≥ 0.9 across shapes/strategies), giving smooth, monotonic refinement even
-                when segment-based curves oscillate.
-              </p>
-            </div>
-            <div class="image-container">
-              <!-- PLACEHOLDER: correlation / decay figure -->
-              <img src="../assets/images/projects/curvadapt/fig-chord-vs-segments.jpg" alt="Correlation of radiation deviation with max chord error vs. segment count" />
-              <p class="image-caption">Radiation deviation decays with MCE; segment count overstates improvement.</p>
-            </div>
-          </div>
-        </section>
-
-
-        <!-- NEW: Recommended Thresholds (concise, reviewer-friendly) -->
-        <section id="thresholds" class="content-section technical-section">
-          <h2 class="section-title">Recommended Fidelity Thresholds</h2>
-          <div class="technical-content">
-            <div class="technical-item">
-              <h4>Guidance</h4>
-              <ul>
-                <li><strong>5%</strong> radiation deviation — early concept studies.</li>
-                <li><strong>3–0.86%</strong> — balanced accuracy for most daylight/energy runs.</li>
-                <li><strong>0.4%</strong> — high-accuracy cases; near-zero EUI error relative to a 200-segment baseline.</li>
-              </ul>
-            </div>
-            <div class="technical-item">
-              <h4>Rules of Thumb</h4>
-              <ul>
-                <li><strong>Simple curves</strong> (circle/ellipse): Uniform-by-Length is efficient.</li>
-                <li><strong>Free-form/hybrid</strong>: Adaptive-by-Chord with critical-points detector.</li>
-                <li>Report <em>algorithm + tolerance</em> (MCE/rMCE) with results, not just “segments.”</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- Team -->
-        <section id="team" class="content-section contributors-section">
-          <h2 class="section-title">Research Team</h2>
-          <div class="contributors-grid">
-            <div class="contributor-card">
-              <img class="contributor-image" src="../assets/images/team/hossein.jpg" alt="Hossein Nazari" />
-              <h3 class="contributor-name">Hossein Nazari</h3>
-              <p class="contributor-role">Lead Developer</p>
-            </div>
-            <div class="contributor-card">
-              <img class="contributor-image" src="../assets/images/team/shadanmasoud.jpg" alt="Shadan Masoud" />
-              <h3 class="contributor-name">Shadan Masoud</h3>
-              <p class="contributor-role">Researcher</p>
-            </div>
-            <div class="contributor-card">
-              <img class="contributor-image" src="../assets/images/team/mahdighiai.jpg" alt="Dr. Mehdi Ghiai" />
-              <h3 class="contributor-name">Dr. Mehdi Ghiai</h3>
-              <p class="contributor-role">Supervisor</p>
-            </div>
-            <div class="contributor-card">
-              <img class="contributor-image" src="../assets/images/team/abbastarkashvand.jpg" alt="Dr. Abbas Tarkashvand" />
-              <h3 class="contributor-name">Dr. Abbas Tarkashvand</h3>
-              <p class="contributor-role">Supervisor</p>
-            </div>
-          </div>
-        </section>
-
-
-
-
-
-      <footer class="project-footer">
-        <div class="project-navigation">
-          <span class="nav-button is-plain">Paper coming soon</span>
-          <span class="nav-button is-plain">Plugin coming soon</span>
-          <span class="nav-button is-plain">Documentation coming soon</span>
-          <span class="nav-button is-plain">MIT License</span>
-        </div>
-      </footer>
+      <div class="project-content" id="projectPageRoot"></div>
+      <footer class="project-footer"><div class="project-footer-editorial" id="projectPageFooter"></div></footer>
     </main>
   </div>
-
+  <script src="../js/project-page.js"></script>
   <script src="../js/project-navigation.js"></script>
+  <script src="../js/ux.js" defer></script>
 </body>
 </html>
