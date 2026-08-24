@@ -13,6 +13,86 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+.ux-page-loader {
+  position: fixed;
+  z-index: 1000;
+  right: 18px;
+  bottom: 18px;
+  display: block;
+  width: 64px;
+  height: 2px;
+  background: transparent;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+  transition: opacity 220ms var(--ux-ease-soft), visibility 220ms step-end;
+}
+
+.ux-page-loader::before {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 2px;
+  background:
+    linear-gradient(90deg, transparent, var(--c-accent, var(--color-accent-nexo)), transparent)
+    0 0 / 45% 100% no-repeat;
+  animation: ux-loading-line 820ms var(--ux-ease-soft) infinite;
+}
+
+.ux-page-loader.is-complete {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ux-navigation-loader {
+  position: fixed;
+  z-index: 1100;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px dotted color-mix(in srgb, var(--c-accent-dark, var(--color-text)) 42%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color-bg-alt) 94%, transparent);
+  color: var(--color-text-light);
+  box-shadow: 0 8px 24px rgba(31, 50, 55, .08);
+  backdrop-filter: blur(8px);
+  font-size: var(--type-small, .75rem);
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(5px);
+  animation: ux-navigation-in 120ms var(--ux-ease-out) forwards;
+  pointer-events: none;
+}
+
+.ux-navigation-loader::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid color-mix(in srgb, var(--c-accent-dark, var(--color-text)) 24%, transparent);
+  border-top-color: var(--c-accent-dark, var(--color-text));
+  border-radius: 50%;
+  animation: ux-navigation-spin 650ms linear infinite;
+}
+
+@keyframes ux-navigation-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ux-navigation-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ux-loading-line {
+  from { background-position-x: -70%; }
+  to { background-position-x: 170%; }
+}
+
 .project-main .content-section {
   content-visibility: auto;
   contain-intrinsic-size: auto 520px;
@@ -24,12 +104,22 @@ img {
 
 img.ux-lazy-image:not(.is-loaded) {
   opacity: .08;
-  filter: blur(2px);
+  filter: blur(3px);
+  background:
+    linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .36) 48%, transparent 66%)
+    0 0 / 220% 100%,
+    color-mix(in srgb, var(--color-bg-alt) 78%, var(--c-accent-weak, transparent));
+  animation: ux-image-placeholder 1.2s linear infinite;
 }
 
 img.ux-lazy-image.is-loaded {
   opacity: 1;
   filter: none;
+  animation: none;
+}
+
+@keyframes ux-image-placeholder {
+  to { background-position-x: -220%; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -67,31 +157,25 @@ img.ux-lazy-image.is-loaded {
   }
 
   .ux-reveal,
-  img.ux-lazy-image {
+  img.ux-lazy-image,
+  .ux-page-loader {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
     transition: none !important;
   }
-}
 
-@view-transition {
-  navigation: auto;
-}
+  .ux-page-loader::before {
+    animation: none;
+  }
 
-::view-transition-old(root) {
-  animation: ux-page-out 140ms var(--ux-ease-soft) both;
-}
+  .ux-navigation-loader {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 
-::view-transition-new(root) {
-  animation: ux-page-in 220ms var(--ux-ease-out) both;
-}
-
-@keyframes ux-page-out {
-  to { opacity: .96; }
-}
-
-@keyframes ux-page-in {
-  from { opacity: .86; }
-  to { opacity: 1; }
+  .ux-navigation-loader::before {
+    animation: none;
+  }
 }

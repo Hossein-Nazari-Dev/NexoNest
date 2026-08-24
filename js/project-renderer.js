@@ -191,7 +191,7 @@ class ProjectRenderer {
             <div class="slider-track">
               ${images.map((img, i) => `
                 <div class="slide" data-index="${i}">
-                  <img src="${img.url}" alt="${img.alt || ''}">
+                  <img src="${img.url}" alt="${img.alt || ''}" loading="lazy" decoding="async">
                   ${img.caption ? `<div class="slide-caption">${img.caption}</div>` : ''}
                 </div>`).join('')}
             </div>
@@ -213,7 +213,7 @@ class ProjectRenderer {
           ${data.subtitle ? `<p class="section-subtitle">${data.subtitle}</p>` : ''}
         </div>
         <div class="section-content">
-          <img src="${data.url}" alt="${data.alt || ''}">
+          <img src="${data.url}" alt="${data.alt || ''}" loading="lazy" decoding="async">
           ${data.caption ? `<p class="image-caption">${data.caption}</p>` : ''}
         </div>
       </section>`;
@@ -250,7 +250,7 @@ class ProjectRenderer {
           <div class="contributors-grid">
             ${items.map(c => `
               <div class="contributor-card">
-                ${c.image ? `<img src="${c.image}" alt="${c.name}" class="contributor-image">` : ''}
+                ${c.image ? `<img src="${c.image}" alt="${c.name}" class="contributor-image" loading="lazy" decoding="async">` : ''}
                 <h3 class="contributor-name">${c.name || ''}</h3>
                 <p class="contributor-role">${c.role || ''}</p>
                 ${Array.isArray(c.links) && c.links.length ? `
@@ -287,7 +287,7 @@ class ProjectRenderer {
         <div class="section-content">
           <div class="text-content">${data.content ? `<p>${data.content}</p>` : ''}</div>
           <div class="image-content">
-            ${data.image ? `<img src="${data.image}" alt="${data.image_caption || ''}">` : ''}
+            ${data.image ? `<img src="${data.image}" alt="${data.image_caption || ''}" loading="lazy" decoding="async">` : ''}
             ${data.image_caption ? `<p class="image-caption">${data.image_caption}</p>` : ''}
           </div>
         </div>

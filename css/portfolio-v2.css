@@ -12,7 +12,7 @@
 .portfolio-theme button,
 .portfolio-theme input,
 .portfolio-theme textarea {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 
 .portfolio-theme {
@@ -1766,6 +1766,89 @@
   }
 }
 
+/* Unified typographic hierarchy. */
+.profile-info h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+}
+
+.profile-info p,
+.sidebar-nav .nav-button {
+  font-size: var(--type-small);
+  line-height: 1.5;
+}
+
+.sidebar-nav .nav-button {
+  font-weight: 500;
+}
+
+.portfolio-section > h2 {
+  font-size: var(--type-page);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+}
+
+.portfolio-section > h2::before,
+.section-kicker {
+  font-size: var(--type-micro);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: var(--tracking-label);
+}
+
+.section-intro,
+.mj-tagline {
+  max-width: 68ch;
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+}
+
+.info-card h3,
+.info-card h4,
+.project-card h3,
+.skill-category h3,
+.timeline-content h3 {
+  font-size: var(--type-card);
+  font-weight: 650;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+}
+
+.info-card p,
+.project-card p,
+.timeline-content p,
+.detail-item .value,
+#myjourney .mj-beat p {
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+}
+
+.detail-item .label,
+.skill-depth > span,
+.skill-depth > strong,
+.mj-beat > span,
+.pdf-control-label,
+.pdf-page-info,
+.document-copy small,
+.document-action {
+  font-size: var(--type-micro);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-label);
+}
+
+.hobby-item,
+.link-box,
+.document-copy strong {
+  font-size: var(--type-small);
+  font-weight: 500;
+}
+
 @media (max-width: 620px) {
   .profile-grid,
   .skills-grid,
@@ -1872,3 +1955,98 @@
     transition: none !important;
   }
 }
+
+/* Readable editorial scale and accessible targets. */
+.portfolio-theme {
+  height: auto;
+  min-height: 100svh;
+}
+
+.profile-info p,
+.sidebar-nav .nav-button,
+.portfolio-theme :is(.section-intro, .info-card p, .value, .experience-item, .project-item, .publication-item),
+#myjourney .mj-beat p {
+  font-size: .8125rem;
+}
+
+.portfolio-theme :is(.section-kicker, .label, .mj-beat > span, .pdf-control-label, .pdf-page-info, .document-copy small, .document-action) {
+  font-size: .6875rem;
+}
+
+.sidebar-nav .nav-button,
+.link-box,
+.pdf-nav,
+.pdf-lightbox-close {
+  min-height: 44px;
+}
+
+.pdf-nav,
+.pdf-lightbox-close {
+  min-width: 44px;
+}
+
+.social-monogram {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: .625rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+@media (min-width: 901px) {
+  .portfolio-theme,
+  .portfolio-container,
+  .portfolio-sidebar,
+  .portfolio-main {
+    height: 100svh;
+  }
+}
+
+@media (max-width: 900px) {
+  .portfolio-menu-toggle {
+    width: 46px;
+    height: 46px;
+  }
+
+  .sidebar-nav .nav-button,
+  .link-box {
+    min-height: 44px;
+  }
+}
+
+/* Final type hierarchy. */
+.profile-info h1 { font-size: 1.25rem; font-weight: 700; line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+.profile-info p,
+.sidebar-nav .nav-button { font-size: var(--type-small); line-height: 1.5; }
+.sidebar-nav .nav-button { font-weight: 500; }
+.portfolio-section > h2 { font-size: var(--type-page); font-weight: 700; line-height: var(--leading-tight); letter-spacing: var(--tracking-display); }
+.portfolio-section > h2::before,
+.section-kicker { font-size: var(--type-micro); font-weight: 600; line-height: 1.35; letter-spacing: var(--tracking-label); }
+.section-intro,
+.mj-tagline { max-width: 68ch; font-size: var(--type-body); font-weight: 400; line-height: var(--leading-body); }
+.info-card h3,
+.info-card h4,
+.project-card h3,
+.skill-category h3,
+.timeline-content h3 { font-size: var(--type-card); font-weight: 650; line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+.info-card p,
+.project-card p,
+.timeline-content p,
+.detail-item .value,
+#myjourney .mj-beat p { font-size: var(--type-body); font-weight: 400; line-height: var(--leading-body); }
+.detail-item .label,
+.skill-depth > span,
+.skill-depth > strong,
+.mj-beat > span,
+.pdf-control-label,
+.pdf-page-info,
+.document-copy small,
+.document-action { font-size: var(--type-micro); font-weight: 600; line-height: 1.4; letter-spacing: var(--tracking-label); }
+.hobby-item,
+.link-box,
+.document-copy strong { font-size: var(--type-small); font-weight: 500; }

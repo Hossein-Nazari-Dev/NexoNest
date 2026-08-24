@@ -90,7 +90,7 @@
   border: none;
   background: transparent;
   color: var(--color-text);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   text-align: left;
   cursor: pointer;
@@ -761,7 +761,7 @@
     border: none;
     border-radius: var(--r-outer);
     cursor: pointer;
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono);
     transition: all 0.2s ease;
     font-size: 0.9rem;
 }
@@ -1065,7 +1065,7 @@
     left: 0;
     color: var(--c-accent-dark);
     font-weight: 600;
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono);
   }
   
 
@@ -1403,7 +1403,7 @@
 .portfolio-main .nav-button,
 .portfolio-main .section-kicker,
 .portfolio-main .project-link {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 
 .portfolio-sidebar {
@@ -1559,13 +1559,13 @@
 .portfolio-container button,
 .portfolio-container input,
 .portfolio-container textarea {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 
 .portfolio-main,
 .portfolio-main .info-card,
 .portfolio-main .project-card {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 
 .content-scrollable {

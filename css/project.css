@@ -12,7 +12,11 @@
   --content-max-w: min(1200px, 85%);
   --rule: 1px dashed var(--color-connector);
 }
-body, .project-theme { font-family: 'JetBrains Mono', monospace; }
+body, .project-theme { font-family: var(--font-mono); }
+
+.project-theme {
+  --project-body: clamp(.9375rem, 1.15vw, 1.0625rem);
+}
 
 /* ==========================================================================
    LAYOUT
@@ -61,7 +65,7 @@ body, .project-theme { font-family: 'JetBrains Mono', monospace; }
 .sidebar-secondary { display: flex; flex-direction: column; gap: 2px; }
 
 .nav-link {
-  display: block; padding: 2px 2px; border-radius: 4px;
+  display: flex; align-items: center; min-height: 40px; padding: 7px 6px; border-radius: 4px;
   color: var(--color-muted); text-decoration: none; font-weight: 600;
   border: 1px dashed transparent; transition: background .2s, color .2s, border-color .2s;
 }
@@ -507,7 +511,7 @@ h1#projectPageTitle.project-page-title {
   border-radius: 5px;
   background: transparent;
   color: var(--color-text);
-  font: 500 .72rem/1 "JetBrains Mono", monospace;
+  font: 500 .72rem/1 var(--font-mono);
   cursor: pointer;
 }
 
@@ -677,6 +681,88 @@ h1#projectPageTitle.project-page-title {
   .project-sidebar.nav-ready .sidebar-nav {
     transition: none;
   }
+}
+
+/* Unified typographic hierarchy for every project page. */
+.project-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+}
+
+.project-subtitle,
+.sidebar-primary .nav-link,
+.sidebar-secondary .nav-link {
+  font-size: var(--type-small);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.project-eyebrow,
+.project-meta dt,
+.project-thesis span,
+.project-honesty > span,
+.margin-note > span,
+.section-heading-row > span {
+  font-size: var(--type-micro);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-label);
+}
+
+.project-editorial-hero h1 {
+  font-size: var(--type-display);
+  font-weight: 700;
+  line-height: .96;
+  letter-spacing: var(--tracking-display);
+}
+
+.project-lead {
+  max-width: 68ch;
+  font-size: clamp(1rem, .45vw + .9rem, 1.25rem);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.project-meta dd,
+.project-tags span,
+.proof-item span,
+.project-figure figcaption {
+  font-size: var(--type-small);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.project-thesis p,
+.prose p,
+.project-credits > p,
+.project-honesty p {
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+}
+
+.project-editorial-section .section-title {
+  font-size: var(--type-section);
+  font-weight: 650;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+}
+
+.project-info-card h3,
+.project-process h3,
+.margin-note strong {
+  font-size: var(--type-card);
+  font-weight: 650;
+  line-height: var(--leading-heading);
+}
+
+.project-info-card p,
+.project-process p,
+.margin-note p {
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
 }
 
 /* ==========================================================================
@@ -1388,3 +1474,32 @@ body.project-theme {
     display: none;
   }
 }
+
+/* Final type hierarchy. */
+.project-title { font-size: 1.125rem; font-weight: 700; line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+.project-subtitle,
+.sidebar-primary .nav-link,
+.sidebar-secondary .nav-link { font-size: var(--type-small); font-weight: 500; line-height: 1.5; }
+.project-eyebrow,
+.project-meta dt,
+.project-thesis span,
+.project-honesty > span,
+.margin-note > span,
+.section-heading-row > span { font-size: var(--type-micro); font-weight: 600; line-height: 1.4; letter-spacing: var(--tracking-label); }
+.project-editorial-hero h1 { font-size: var(--type-display); font-weight: 700; line-height: .96; letter-spacing: var(--tracking-display); }
+.project-lead { max-width: 68ch; font-size: clamp(1rem, .45vw + .9rem, 1.25rem); font-weight: 400; line-height: 1.65; }
+.project-meta dd,
+.project-tags span,
+.proof-item span,
+.project-figure figcaption { font-size: var(--type-small); font-weight: 400; line-height: 1.55; }
+.project-thesis p,
+.prose p,
+.project-credits > p,
+.project-honesty p { font-size: var(--type-body); font-weight: 400; line-height: var(--leading-body); }
+.project-editorial-section .section-title { font-size: var(--type-section); font-weight: 650; line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+.project-info-card h3,
+.project-process h3,
+.margin-note strong { font-size: var(--type-card); font-weight: 650; line-height: var(--leading-heading); }
+.project-info-card p,
+.project-process p,
+.margin-note p { font-size: var(--type-body); line-height: var(--leading-body); }

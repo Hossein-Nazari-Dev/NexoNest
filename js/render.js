@@ -69,30 +69,14 @@ function renderProjects() {
             symbolEl.appendChild(textIcon);
         }
 
-        iconEl.append(symbolEl);
+        const nameEl = document.createElement('span');
+        nameEl.className = 'project-name';
+        nameEl.textContent = project.title;
+
+        iconEl.append(symbolEl, nameEl);
         
         projectsGrid.appendChild(iconEl);
     });
 
-    const futureMessages = [
-        'Maybe our next collaboration?',
-        'A good idea could land here.',
-        'Reserved for something unexpected.',
-        'Plot twist: this one could be yours.',
-        'Currently accepting brilliant detours.',
-        'Your impossible brief goes here.'
-    ];
-
-    futureMessages.forEach(message => {
-        const placeholder = document.createElement('span');
-        placeholder.className = 'project-placeholder';
-        placeholder.setAttribute('role', 'note');
-        placeholder.setAttribute('aria-label', message);
-        placeholder.setAttribute('tabindex', '0');
-        placeholder.dataset.message = message;
-        placeholder.textContent = '+';
-        projectsGrid.appendChild(placeholder);
-    });
-    
     filterProjects(); 
 }

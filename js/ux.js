@@ -5,6 +5,82 @@
   const observed = new WeakSet();
   const prefetched = new Set();
   let revealObserver;
+  let navigationTimer;
+  let navigationFallback;
+  let navigationLoader;
+
+  function stopNavigationFeedback() {
+    window.clearTimeout(navigationTimer);
+    window.clearTimeout(navigationFallback);
+    navigationTimer = null;
+    navigationFallback = null;
+    navigationLoader?.remove();
+    navigationLoader = null;
+  }
+
+  function startNavigationFeedback() {
+    stopNavigationFeedback();
+    navigationTimer = window.setTimeout(() => {
+      navigationLoader = document.createElement('div');
+      navigationLoader.className = 'ux-navigation-loader';
+      navigationLoader.setAttribute('role', 'status');
+      navigationLoader.setAttribute('aria-live', 'polite');
+      navigationLoader.textContent = 'Loading';
+      document.body.appendChild(navigationLoader);
+    }, 80);
+    navigationFallback = window.setTimeout(stopNavigationFeedback, 10000);
+  }
+
+  window.showNavigationFeedback = startNavigationFeedback;
+
+  function setupNavigationFeedback() {
+    document.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const anchor = event.target.closest?.('a[href]');
+      if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+
+      const href = anchor.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+      const destination = new URL(anchor.href, location.href);
+      if (destination.origin !== location.origin) return;
+      startNavigationFeedback();
+    }, true);
+
+    window.addEventListener('pageshow', stopNavigationFeedback);
+    window.addEventListener('pagehide', stopNavigationFeedback);
+  }
+
+  function setupPageLoader() {
+    const loader = document.createElement('div');
+    loader.className = 'ux-page-loader';
+    loader.setAttribute('role', 'status');
+    loader.setAttribute('aria-live', 'polite');
+    loader.setAttribute('aria-label', 'Loading page');
+    document.body.appendChild(loader);
+
+    const startedAt = performance.now();
+    const criticalImages = [...document.images].filter((img) => img.loading !== 'lazy');
+    const imageReady = criticalImages.map((img) => {
+      if (img.complete) return Promise.resolve();
+      return new Promise((resolve) => {
+        img.addEventListener('load', resolve, { once: true });
+        img.addEventListener('error', resolve, { once: true });
+      });
+    });
+    const fontsReady = document.fonts?.ready || Promise.resolve();
+    const ready = Promise.all([fontsReady, ...imageReady]);
+    const timeout = new Promise((resolve) => window.setTimeout(resolve, 650));
+
+    Promise.race([ready, timeout]).then(() => {
+      const remaining = Math.max(0, 100 - (performance.now() - startedAt));
+      window.setTimeout(() => {
+        loader.classList.add('is-complete');
+        loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+        window.setTimeout(() => loader.remove(), 320);
+      }, remaining);
+    });
+  }
 
   const revealSelector = [
     '.home-intro',
@@ -100,8 +176,42 @@
     document.addEventListener('touchstart', onIntent, { passive: true });
   }
 
+  function warmInternalPages() {
+    const warm = () => {
+      document.querySelectorAll('a[href]').forEach(prefetchLink);
+    };
+
+    window.addEventListener('load', () => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(warm, { timeout: 1200 });
+      } else {
+        window.setTimeout(warm, 300);
+      }
+    }, { once: true });
+  }
+
+  function loadOptionalIcons() {
+    if (!document.querySelector('[data-lucide]') || window.lucide) return;
+    const load = () => {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/lucide@0.468.0';
+      script.async = true;
+      script.onload = () => window.lucide?.createIcons?.();
+      document.head.appendChild(script);
+    };
+
+    window.addEventListener('load', () => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(load, { timeout: 1800 });
+      } else {
+        window.setTimeout(load, 600);
+      }
+    }, { once: true });
+  }
+
   function init() {
     root.classList.add('ux-ready');
+    setupPageLoader();
 
     if ('IntersectionObserver' in window && !reducedMotion) {
       revealObserver = new IntersectionObserver((entries) => {
@@ -115,6 +225,9 @@
 
     scan();
     setupIntentPrefetch();
+    setupNavigationFeedback();
+    warmInternalPages();
+    loadOptionalIcons();
 
     const mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {

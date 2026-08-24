@@ -959,7 +959,7 @@ function renderProjectPage(projectId) {
   const previous = PROJECT_PAGE_DATA[PROJECT_PAGE_ORDER[(orderIndex - 1 + PROJECT_PAGE_ORDER.length) % PROJECT_PAGE_ORDER.length]];
   const next = PROJECT_PAGE_DATA[PROJECT_PAGE_ORDER[(orderIndex + 1) % PROJECT_PAGE_ORDER.length]];
   const pageFor = id => ({
-    tectotrack: "techtoTrack.html",
+    tectotrack: "tectoTrack.html",
     curvadapt: "curvAdapt.html",
     "building-alignment": "buildingAlignment.html",
     "design-suite": "nexonestDesignSuite.html",

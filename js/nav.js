@@ -42,16 +42,12 @@
   function animateCircleAndNavigate(circleEl, targetUrl) {
     if (!circleEl || !targetUrl) return;
 
-    // Disable scrolling during animation
-    document.body.style.overflow = 'hidden';
-
-    // Expand circle
+    // Give immediate visual feedback without delaying the navigation.
+    window.showNavigationFeedback?.();
     circleEl.classList.add('is-expanding');
-
-    // Go to page after animation
-    setTimeout(() => {
+    window.setTimeout(() => {
       window.location.href = targetUrl;
-    }, 850);
+    }, 90);
   }
 
   /* ------------------------------------------------------------------------

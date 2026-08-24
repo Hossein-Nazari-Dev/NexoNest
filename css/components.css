@@ -413,7 +413,7 @@
     min-height: 40px;
     padding: 10px 16px;
     font-size: 0.8125rem;
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono);
     font-weight: 500; 
     cursor: pointer;
     transition: background-color .2s;
@@ -534,4 +534,3 @@
     background: var(--color-bg-alt);
     box-shadow: 12px 12px 0 rgba(127, 183, 168, .13);
 }
-

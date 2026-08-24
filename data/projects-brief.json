@@ -108,7 +108,7 @@
         "id": "p_tectotrack",
         "title": "TectoTrack",
         "excerpt": "A social digital twin platform for agent-based simulation of movement, wayfinding, and human-space interaction.",
-        "url": "projects-pages/techtoTrack.html",
+        "url": "projects-pages/tectoTrack.html",
         "icon": "assets/icons/tectotrack.png",
         "categories": ["products", "projects"],
         "subcategories": ["sim-analysis"],

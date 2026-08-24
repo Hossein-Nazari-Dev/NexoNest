@@ -277,7 +277,7 @@ class PortfolioApp {
                     ${projectData.features.map(feature => `<li>${feature}</li>`).join('')}
                 </ul>
             </div>
-            <a href="${projectData.link}" class="project-link" target="_blank">Read More</a>
+            <a href="${projectData.link}" class="project-link" target="_blank" rel="noopener noreferrer">Read More</a>
         `;
         
         detailsContent.classList.add('active');

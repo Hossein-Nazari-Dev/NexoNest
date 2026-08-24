@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     popupButton.setAttribute('aria-disabled', String(!hasUrl));
     popupButton.onclick = () => {
       if (hasUrl) {
+        window.showNavigationFeedback?.();
         window.location.assign(resolveURL(currentProject.url));
       }
     };
