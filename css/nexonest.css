@@ -66,10 +66,34 @@
     padding: 6px 0;
 }
 
+.header-links {
+    align-self: start;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.newsletter-link {
+    color: var(--c-accent-dark);
+    border-bottom-style: dotted;
+}
+
 .overview-link:hover,
 .overview-link:focus-visible {
     color: var(--c-accent-dark);
     border-color: currentColor;
+}
+
+@media (max-width: 620px) {
+    .nexonest-theme .header {
+        grid-template-columns: auto 1fr;
+    }
+
+    .header-links {
+        grid-column: 1 / -1;
+        width: 100%;
+        justify-content: space-between;
+    }
 }
 
 .nexonest-theme .nav-pill-container {
