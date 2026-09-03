@@ -5,7 +5,6 @@
   const status = document.querySelector('#form-status');
   const submitButton = form.querySelector('button[type="submit"]');
   const endpoint = document.querySelector('meta[name="newsletter-endpoint"]')?.content.trim();
-  const destination = 'hossein.nazari.ac@gmail.com';
 
   function setStatus(message, state) {
     status.textContent = message;
@@ -64,28 +63,10 @@
       interests: data.getAll('interests'),
       currentExploration: data.get('currentExploration') || '—',
       consent: Boolean(data.get('consent')),
+      website: data.get('website') || '',
       source: 'nexonest.com/newsletter.html',
       submittedAt: new Date().toISOString()
     };
-  }
-
-  function openEmail(data) {
-    const subject = encodeURIComponent('NexoNest Field Notes subscription');
-    const body = encodeURIComponent([
-      'NexoNest Field Notes — subscription request', '',
-      'Name: ' + data.fullName,
-      'Email: ' + data.email,
-      'Education: ' + data.educationLevel,
-      'Field of study: ' + data.fieldOfStudy,
-      'Role: ' + data.occupation,
-      'Institution / organisation: ' + data.organization,
-      'Interests: ' + data.interests.join(', '),
-      'Currently exploring: ' + data.currentExploration, '',
-      'Consent to occasional NexoNest emails: Yes'
-    ].join('\n'));
-
-    setStatus('Your email app is opening. Send the prepared message to complete the subscription.', 'success');
-    window.location.href = 'mailto:' + destination + '?subject=' + subject + '&body=' + body;
   }
 
   async function sendToEndpoint(data) {
@@ -96,18 +77,17 @@
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: new URLSearchParams({ payload: JSON.stringify(data) })
       });
-      if (!response.ok) throw new Error('Subscription request failed.');
       form.reset();
-      setStatus('You are on the list. The next useful note will find you.', 'success');
-      submitButton.querySelector('span').textContent = 'Subscribed';
+      setStatus('Check your inbox and confirm your email to complete the subscription.', 'success');
+      submitButton.querySelector('span').textContent = 'Confirmation sent';
     } catch (error) {
-      setStatus('The direct form is temporarily unavailable. A prepared email will open instead.', 'error');
-      openEmail(data);
+      setStatus('The subscriber list could not be reached. Nothing was submitted; please try again later.', 'error');
       submitButton.disabled = false;
-      submitButton.querySelector('span').textContent = 'Prepare subscription';
+      submitButton.querySelector('span').textContent = 'Join field notes';
     }
   }
 
@@ -120,8 +100,11 @@
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     if (form.elements.website.value || !validate()) return;
+    if (!endpoint) {
+      setStatus('The subscriber list is not connected yet. Nothing was submitted.', 'error');
+      return;
+    }
     const data = getValues();
-    if (endpoint) sendToEndpoint(data);
-    else openEmail(data);
+    sendToEndpoint(data);
   });
 })();

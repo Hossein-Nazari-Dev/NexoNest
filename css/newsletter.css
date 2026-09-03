@@ -42,7 +42,7 @@
   align-items: center;
   gap: 12px;
   color: var(--color-text);
-  font-size: .75rem;
+  font-size: .8125rem;
   font-weight: 600;
   text-decoration: none;
 }
@@ -53,7 +53,7 @@
   padding-block: 6px;
   border-bottom: 1px solid rgba(75, 124, 110, .3);
   color: var(--color-text-light);
-  font-size: .625rem;
+  font-size: .6875rem;
   text-decoration: none;
 }
 
@@ -74,7 +74,7 @@
 .newsletter-index {
   margin-bottom: 17px;
   color: var(--c-accent-nexo-dark);
-  font-size: .625rem;
+  font-size: .6875rem;
   font-weight: 600;
   letter-spacing: .11em;
   text-transform: uppercase;
@@ -93,7 +93,7 @@
   max-width: 49ch;
   margin-top: 30px;
   color: var(--color-text-light);
-  font-size: .75rem;
+  font-size: .875rem;
   line-height: 1.75;
 }
 
@@ -107,8 +107,8 @@
   padding: 15px 0;
   border-bottom: 1px dotted rgba(75, 124, 110, .3);
   color: var(--color-muted);
-  font-size: .5625rem;
-  line-height: 1.55;
+  font-size: .6875rem;
+  line-height: 1.65;
   display: grid;
   grid-template-columns: 34px 1fr;
 }
@@ -143,7 +143,7 @@
   align-items: center;
   gap: 7px;
   color: var(--color-muted);
-  font-size: .5rem;
+  font-size: .625rem;
   white-space: nowrap;
 }
 
@@ -170,7 +170,7 @@
   width: 100%;
   margin-bottom: 27px;
   color: var(--color-text);
-  font-size: .6875rem;
+  font-size: .8125rem;
   font-weight: 600;
 }
 
@@ -191,8 +191,8 @@
   display: block;
   margin-bottom: 9px;
   color: var(--color-text-light);
-  font-size: .5625rem;
-  line-height: 1.45;
+  font-size: .6875rem;
+  line-height: 1.55;
 }
 
 .field b,
@@ -211,7 +211,7 @@
   outline: none;
   background: transparent;
   color: var(--color-text);
-  font: 400 .6875rem/1.5 "JetBrains Mono", monospace;
+  font: 400 .8125rem/1.55 "JetBrains Mono", monospace;
   resize: vertical;
   transition: border-color 160ms ease, background-color 160ms ease;
 }
@@ -234,7 +234,7 @@
   min-height: 14px;
   margin-top: 6px;
   color: #8b4e4e;
-  font-size: .5rem;
+  font-size: .625rem;
 }
 
 .choice-line {
@@ -254,7 +254,7 @@
   border-right: 1px solid rgba(75, 124, 110, .28);
   border-bottom: 1px solid rgba(75, 124, 110, .28);
   color: var(--color-muted);
-  font-size: .5rem;
+  font-size: .625rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -298,8 +298,8 @@
   border-left: 1px solid var(--c-accent-nexo);
   background: var(--color-bg-alt);
   color: var(--color-muted);
-  font-size: .5rem;
-  line-height: 1.35;
+  font-size: .625rem;
+  line-height: 1.45;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -337,8 +337,8 @@
   gap: 12px;
   align-items: start;
   color: var(--color-muted);
-  font-size: .5625rem;
-  line-height: 1.55;
+  font-size: .6875rem;
+  line-height: 1.65;
   cursor: pointer;
 }
 
@@ -362,7 +362,7 @@
   align-items: center;
 }
 
-.form-submit p { max-width: 57ch; color: var(--color-muted); font-size: .5rem; line-height: 1.55; }
+.form-submit p { max-width: 57ch; color: var(--color-muted); font-size: .625rem; line-height: 1.65; }
 
 .form-submit button {
   min-width: 185px;
@@ -372,7 +372,7 @@
   border-radius: 0;
   background: transparent;
   color: var(--color-text);
-  font: 600 .625rem "JetBrains Mono", monospace;
+  font: 600 .6875rem "JetBrains Mono", monospace;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -384,7 +384,7 @@
 .form-submit button:disabled { opacity: .55; cursor: wait; }
 .form-submit button i { font-style: normal; color: var(--c-accent-nexo-dark); }
 
-.form-status { min-height: 32px; padding: 0 clamp(22px, 4vw, 42px) 20px; color: var(--color-muted); font-size: .5625rem; line-height: 1.5; }
+.form-status { min-height: 32px; padding: 0 clamp(22px, 4vw, 42px) 20px; color: var(--color-muted); font-size: .6875rem; line-height: 1.55; }
 .form-status[data-state="success"] { color: var(--c-accent-nexo-dark); }
 .form-status[data-state="error"] { color: #8b4e4e; }
 
@@ -392,7 +392,7 @@
   min-height: 120px;
   border-top: 1px dotted rgba(75, 124, 110, .34);
   color: var(--color-muted);
-  font-size: .5625rem;
+  font-size: .625rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
