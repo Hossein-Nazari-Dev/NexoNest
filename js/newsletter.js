@@ -4,6 +4,9 @@
 
   const status = document.querySelector('#form-status');
   const submitButton = form.querySelector('button[type="submit"]');
+  const confirmationPanel = document.querySelector('#submission-next');
+  const submittedEmail = confirmationPanel.querySelector('[data-submitted-email]');
+  const changeEmailButton = document.querySelector('#change-email');
   const endpoint = document.querySelector('meta[name="newsletter-endpoint"]')?.content.trim();
   const conditionalSelects = [
     { select: form.elements.occupation, input: form.elements.occupationOther },
@@ -89,8 +92,11 @@
       });
       form.reset();
       conditionalSelects.forEach(({ select, input }) => updateConditionalField(select, input));
-      setStatus('Check your inbox and confirm your email to complete the subscription.', 'success');
-      submitButton.querySelector('span').textContent = 'Confirmation sent';
+      submittedEmail.textContent = data.email;
+      confirmationPanel.hidden = false;
+      form.hidden = true;
+      confirmationPanel.focus({ preventScroll: true });
+      confirmationPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (error) {
       setStatus('The subscriber list could not be reached. Nothing was submitted; please try again later.', 'error');
       submitButton.disabled = false;
@@ -131,5 +137,14 @@
   conditionalSelects.forEach(({ select, input }) => {
     select.addEventListener('change', () => updateConditionalField(select, input));
     updateConditionalField(select, input);
+  });
+
+  changeEmailButton.addEventListener('click', () => {
+    confirmationPanel.hidden = true;
+    form.hidden = false;
+    submitButton.disabled = false;
+    submitButton.querySelector('span').textContent = 'Join field notes';
+    setStatus('', '');
+    form.elements.email.focus();
   });
 })();

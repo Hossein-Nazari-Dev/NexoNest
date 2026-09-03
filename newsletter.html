@@ -35,6 +35,17 @@
         <div><p class="newsletter-index">A small introduction</p><h2 id="form-title">Tell us where you are in the field.</h2></div>
         <p><i aria-hidden="true"></i> Required fields</p>
       </div>
+      <section class="submission-next" id="submission-next" tabindex="-1" hidden aria-labelledby="confirmation-title">
+        <p class="newsletter-index">One step left / confirmation required</p>
+        <h3 id="confirmation-title">Open your inbox<br />and confirm.</h3>
+        <p class="confirmation-lede">We sent a confirmation link to <strong data-submitted-email></strong>. Your subscription remains pending until you open that email and select <b>Confirm subscription</b>.</p>
+        <ol class="confirmation-steps">
+          <li><span>01</span><p><strong>Check your inbox</strong><small>The message is from NexoNest. Delivery may take a minute.</small></p></li>
+          <li><span>02</span><p><strong>Open the confirmation email</strong><small>If it is missing, check Spam, Promotions, or Updates.</small></p></li>
+          <li><span>03</span><p><strong>Select “Confirm subscription”</strong><small>Only then will your status change from Pending to Confirmed.</small></p></li>
+        </ol>
+        <button class="change-email" id="change-email" type="button">Use a different email <span aria-hidden="true">↺</span></button>
+      </section>
       <form class="newsletter-form" id="newsletter-form" novalidate>
         <div class="form-trap" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
 
@@ -138,7 +149,7 @@
     </section>
   </main>
   <footer class="newsletter-footer"><span>© NexoNest</span><span>Curious by design.</span></footer>
-  <script src="js/newsletter.js?v=20260903-3" defer></script>
+  <script src="js/newsletter.js?v=20260903-4" defer></script>
   <script src="js/ux.js" defer></script>
 </body>
 </html>

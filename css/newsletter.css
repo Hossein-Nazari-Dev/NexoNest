@@ -155,7 +155,74 @@
 }
 
 .newsletter-form { position: relative; }
+.newsletter-form[hidden] { display: none; }
 .form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+.submission-next {
+  padding: clamp(42px, 6vw, 68px) clamp(28px, 5vw, 58px);
+  outline: none;
+}
+
+.submission-next[hidden] { display: none; }
+
+.submission-next h3 {
+  max-width: 13ch;
+  margin-top: 22px;
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.065em;
+}
+
+.confirmation-lede {
+  max-width: 62ch;
+  margin-top: 30px;
+  color: var(--color-text-light);
+  font-size: .875rem;
+  line-height: 1.75;
+}
+
+.confirmation-lede > strong {
+  color: var(--c-accent-nexo-dark);
+  overflow-wrap: anywhere;
+}
+
+.confirmation-lede b { color: var(--color-text); font-weight: 600; }
+
+.confirmation-steps {
+  margin-top: 44px;
+  border-top: 1px solid rgba(75, 124, 110, .3);
+  list-style: none;
+}
+
+.confirmation-steps li {
+  padding: 19px 0;
+  border-bottom: 1px dotted rgba(75, 124, 110, .38);
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 10px;
++}
+
+.confirmation-steps li > span {
+  color: var(--c-accent-nexo-dark);
+  font-size: .6875rem;
+}
+
+.confirmation-steps strong,
+.confirmation-steps small { display: block; }
+.confirmation-steps strong { font-size: .8125rem; font-weight: 600; }
+.confirmation-steps small { margin-top: 6px; color: var(--color-muted); font-size: .6875rem; line-height: 1.55; }
+
+.change-email {
+  margin-top: 35px;
+  padding: 11px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(75, 124, 110, .45);
+  background: transparent;
+  color: var(--c-accent-nexo-dark);
+  font: 600 .6875rem "JetBrains Mono", monospace;
+  cursor: pointer;
+}
 
 .form-section {
   min-width: 0;
