@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/newsletter.css?v=20260903-2" />
+  <link rel="stylesheet" href="css/newsletter.css?v=20260903-3" />
   <link rel="stylesheet" href="css/ux.css" />
 </head>
 <body class="newsletter-page nexonest-theme">
@@ -43,9 +43,31 @@
           <div class="field-grid">
             <label class="field"><span>Full name <b aria-hidden="true">*</b></span><input name="fullName" type="text" autocomplete="name" required placeholder="Your name and surname" /><small class="field-error"></small></label>
             <label class="field"><span>Email <b aria-hidden="true">*</b></span><input name="email" type="email" autocomplete="email" required placeholder="you@example.com" /><small class="field-error"></small></label>
-            <label class="field"><span>Current role or occupation <b aria-hidden="true">*</b></span><input name="occupation" type="text" autocomplete="organization-title" required placeholder="Architect, researcher, student…" /><small class="field-error"></small></label>
+            <label class="field">
+              <span>Current role or occupation <b aria-hidden="true">*</b></span>
+              <select name="occupation" required>
+                <option value="">Choose the closest role</option>
+                <option>Student</option>
+                <option>Academic or researcher</option>
+                <option>Architect or designer</option>
+                <option>Computational designer</option>
+                <option>Urban or landscape designer</option>
+                <option>Building performance specialist</option>
+                <option>Engineer</option>
+                <option>Software developer or data specialist</option>
+                <option>Educator</option>
+                <option>Industry professional</option>
+                <option value="Other">Other</option>
+              </select>
+              <small class="field-error"></small>
+            </label>
             <label class="field"><span>Institution or organisation</span><input name="organization" type="text" autocomplete="organization" placeholder="Optional" /><small class="field-error"></small></label>
           </div>
+          <label class="field field-conditional" data-other-for="occupation" hidden>
+            <span>Describe your role <b aria-hidden="true">*</b></span>
+            <input name="occupationOther" type="text" autocomplete="organization-title" placeholder="Your role" />
+            <small class="field-error"></small>
+          </label>
         </fieldset>
 
         <fieldset class="form-section">
@@ -59,25 +81,43 @@
             <label><input type="radio" name="educationLevel" value="Other" /><span>Other</span></label>
           </div>
           <small class="group-error" data-error-for="educationLevel"></small>
-          <label class="field field-wide"><span>Field of study</span><input name="fieldOfStudy" type="text" placeholder="Architecture, urban design, computer science…" /></label>
+          <label class="field field-wide">
+            <span>Field of study <b aria-hidden="true">*</b></span>
+            <select name="fieldOfStudy" required>
+              <option value="">Choose the closest field</option>
+              <option>Architecture</option>
+              <option>Computational design</option>
+              <option>Urban design or planning</option>
+              <option>Landscape architecture</option>
+              <option>Building science or environmental design</option>
+              <option>Civil or structural engineering</option>
+              <option>Mechanical or energy engineering</option>
+              <option>Computer science, data or AI</option>
+              <option>Design or visual arts</option>
+              <option>Not applicable</option>
+              <option value="Other">Other</option>
+            </select>
+            <small class="field-error"></small>
+          </label>
+          <label class="field field-conditional" data-other-for="fieldOfStudy" hidden>
+            <span>Describe your field of study <b aria-hidden="true">*</b></span>
+            <input name="fieldOfStudyOther" type="text" placeholder="Your field of study" />
+            <small class="field-error"></small>
+          </label>
         </fieldset>
 
         <fieldset class="form-section">
           <legend><span>03</span> Interests</legend>
           <p class="section-question">What should be more visible in your inbox? <b aria-hidden="true">*</b></p>
-          <div class="interest-map">
-            <label class="interest-node node-a"><input type="checkbox" name="interests" value="Computational design" /><span>Computational<br />design</span></label>
-            <label class="interest-node node-b"><input type="checkbox" name="interests" value="Climate and performance" /><span>Climate +<br />performance</span></label>
-            <label class="interest-node node-c"><input type="checkbox" name="interests" value="Tools and workflows" /><span>Tools +<br />workflows</span></label>
-            <label class="interest-node node-d"><input type="checkbox" name="interests" value="Research and writing" /><span>Research +<br />writing</span></label>
-            <label class="interest-node node-e"><input type="checkbox" name="interests" value="Urban and landscape systems" /><span>Urban +<br />landscape</span></label>
-            <label class="interest-node node-f"><input type="checkbox" name="interests" value="Workshops and releases" /><span>Workshops +<br />releases</span></label>
-            <svg viewBox="0 0 700 230" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M84 67 C155 35 213 44 278 80 S405 132 474 76 S584 38 646 64" />
-              <path d="M84 67 C145 120 209 183 288 170 S423 119 474 76" />
-              <path d="M288 170 C410 206 540 196 618 166" />
-              <path d="M474 76 C523 111 568 142 618 166" />
-            </svg>
+          <div class="interest-list">
+            <label class="interest-option"><input type="checkbox" name="interests" value="Computational design and form finding" /><span><strong>Computational design</strong><small>Parametric systems, generative processes, optimisation, and form finding.</small></span></label>
+            <label class="interest-option"><input type="checkbox" name="interests" value="Climate and building performance" /><span><strong>Climate + performance</strong><small>Energy, radiation, daylight, microclimate, and climate-responsive design.</small></span></label>
+            <label class="interest-option"><input type="checkbox" name="interests" value="Geometry and simulation reliability" /><span><strong>Geometry + reliability</strong><small>Preprocessing, NURBS, interoperability, validation, and simulation-ready models.</small></span></label>
+            <label class="interest-option"><input type="checkbox" name="interests" value="AI, tools and workflows" /><span><strong>AI + design tools</strong><small>Plugins, assistants, automation, coding workflows, and useful design infrastructure.</small></span></label>
+            <label class="interest-option"><input type="checkbox" name="interests" value="Human-space systems" /><span><strong>Human–space systems</strong><small>Agent-based modelling, behaviour, perception, movement, and wayfinding.</small></span></label>
+            <label class="interest-option"><input type="checkbox" name="interests" value="Urban and landscape computation" /><span><strong>Urban + landscape</strong><small>Morphology, contextual influence, terrain intelligence, and multi-scale systems.</small></span></label>
+            <label class="interest-option"><input type="checkbox" name="interests" value="Research, methods and writing" /><span><strong>Research + writing</strong><small>Papers, conceptual frameworks, methods, evidence, and work in progress.</small></span></label>
+            <label class="interest-option"><input type="checkbox" name="interests" value="Products, workshops and releases" /><span><strong>Releases + learning</strong><small>Product updates, prototypes, tutorials, workshops, and public experiments.</small></span></label>
           </div>
           <small class="group-error" data-error-for="interests"></small>
         </fieldset>
@@ -98,7 +138,7 @@
     </section>
   </main>
   <footer class="newsletter-footer"><span>© NexoNest</span><span>Curious by design.</span></footer>
-  <script src="js/newsletter.js?v=20260903-2" defer></script>
+  <script src="js/newsletter.js?v=20260903-3" defer></script>
   <script src="js/ux.js" defer></script>
 </body>
 </html>

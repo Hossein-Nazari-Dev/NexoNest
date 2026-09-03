@@ -5,6 +5,10 @@
   const status = document.querySelector('#form-status');
   const submitButton = form.querySelector('button[type="submit"]');
   const endpoint = document.querySelector('meta[name="newsletter-endpoint"]')?.content.trim();
+  const conditionalSelects = [
+    { select: form.elements.occupation, input: form.elements.occupationOther },
+    { select: form.elements.fieldOfStudy, input: form.elements.fieldOfStudyOther }
+  ];
 
   function setStatus(message, state) {
     status.textContent = message;
@@ -20,11 +24,11 @@
     clearErrors();
     let valid = true;
 
-    form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"])').forEach((input) => {
-      if (input.validity.valid) return;
-      input.setAttribute('aria-invalid', 'true');
-      const error = input.closest('.field')?.querySelector('.field-error');
-      if (error) error.textContent = input.validity.typeMismatch ? 'Enter a valid email address.' : 'This field is required.';
+    form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"]), select[required]').forEach((control) => {
+      if (control.validity.valid) return;
+      control.setAttribute('aria-invalid', 'true');
+      const error = control.closest('.field')?.querySelector('.field-error');
+      if (error) error.textContent = control.validity.typeMismatch ? 'Enter a valid email address.' : 'Choose or complete this field.';
       valid = false;
     });
 
@@ -53,13 +57,15 @@
 
   function getValues() {
     const data = new FormData(form);
+    const occupation = data.get('occupation') === 'Other' ? data.get('occupationOther') : data.get('occupation');
+    const fieldOfStudy = data.get('fieldOfStudy') === 'Other' ? data.get('fieldOfStudyOther') : data.get('fieldOfStudy');
     return {
       fullName: data.get('fullName'),
       email: data.get('email'),
-      occupation: data.get('occupation'),
+      occupation,
       organization: data.get('organization') || '—',
       educationLevel: data.get('educationLevel'),
-      fieldOfStudy: data.get('fieldOfStudy') || '—',
+      fieldOfStudy,
       interests: data.getAll('interests'),
       currentExploration: data.get('currentExploration') || '—',
       consent: Boolean(data.get('consent')),
@@ -82,6 +88,7 @@
         body: new URLSearchParams({ payload: JSON.stringify(data) })
       });
       form.reset();
+      conditionalSelects.forEach(({ select, input }) => updateConditionalField(select, input));
       setStatus('Check your inbox and confirm your email to complete the subscription.', 'success');
       submitButton.querySelector('span').textContent = 'Confirmation sent';
     } catch (error) {
@@ -106,5 +113,23 @@
     }
     const data = getValues();
     sendToEndpoint(data);
+  });
+
+  function updateConditionalField(select, input) {
+    const wrapper = input.closest('[data-other-for]');
+    const visible = select.value === 'Other';
+    wrapper.hidden = !visible;
+    input.required = visible;
+    if (!visible) {
+      input.value = '';
+      input.removeAttribute('aria-invalid');
+      const error = wrapper.querySelector('.field-error');
+      if (error) error.textContent = '';
+    }
+  }
+
+  conditionalSelects.forEach(({ select, input }) => {
+    select.addEventListener('change', () => updateConditionalField(select, input));
+    updateConditionalField(select, input);
   });
 })();

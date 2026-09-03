@@ -8,7 +8,7 @@ const HEADERS = [
 
 function setupSheet() {
   const sheet = getSheet_();
-  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+  ensureHeaders_(sheet);
   sheet.setFrozenRows(1);
   sheet.autoResizeColumns(1, HEADERS.length);
 }
@@ -79,7 +79,22 @@ function getSheet_() {
   const file = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = file.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = file.insertSheet(SHEET_NAME);
+  ensureHeaders_(sheet);
   return sheet;
+}
+
+function ensureHeaders_(sheet) {
+  if (sheet.getLastRow() === 0) {
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+    return;
+  }
+
+  const firstRow = sheet.getRange(1, 1, 1, HEADERS.length).getDisplayValues()[0];
+  const hasHeaders = firstRow[0] === HEADERS[0] && firstRow[4] === HEADERS[4];
+  if (!hasHeaders) {
+    sheet.insertRowBefore(1);
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+  }
 }
 
 function findEmailRow_(sheet, email) {

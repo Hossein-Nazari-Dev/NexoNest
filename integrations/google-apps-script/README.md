@@ -12,3 +12,7 @@
 
 Use the /exec URL, not the /dev testing URL. After changing Code.gs, create a
 new version and update the existing deployment.
+
+If a subscription was submitted before setupSheet was run, paste the latest
+Code.gs and run setupSheet. It detects subscriber data in row 1, inserts the
+header above it, and preserves the existing row.
