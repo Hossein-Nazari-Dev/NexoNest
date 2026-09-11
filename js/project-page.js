@@ -30,6 +30,7 @@ const PROJECT_PAGE_DATA = {
     tags: ["Rhino 8", "Rhino.Geometry", "IntelliSense", "Educational documentation"],
     links: [
       ["VS Code Marketplace", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
+      ["JetBrains Marketplace", "https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true"],
       ["License & attribution", "../licenses/nexorhino.html"]
     ],
     question: "How can writing Rhino Python become easier to explore and learn outside Rhino's own editor?",
@@ -65,8 +66,8 @@ const PROJECT_PAGE_DATA = {
         title: "PyCharm installation",
         kind: "steps",
         items: [
-          ["01", "Check compatibility", "The first plugin build targets PyCharm 2026.2.x. Marketplace publication is being prepared."],
-          ["02", "Install the plugin ZIP", "In Settings > Plugins, use the gear menu and Install Plugin from Disk. Select the supplied plugin ZIP without extracting it."],
+          ["01", "Check compatibility", "The first plugin build targets PyCharm 2026.2.x. See the JetBrains Marketplace listing for available versions and compatibility."],
+          ["02", "Install", "In Settings > Plugins > Marketplace, search for NexoRhino by NexoNest and install it. Alternatively, use Install Plugin from Disk to install a supplied plugin ZIP without extracting it."],
           ["03", "Enable", "Open a Python project and choose Tools > NexoRhino > Enable Rhino Code Insight."],
           ["04", "Wait for indexing", "Use Ctrl+Space for completion and Quick Documentation for geometry explanations. The plugin adds its bundled stubs as a project library."]
         ]
@@ -92,6 +93,7 @@ const PROJECT_PAGE_DATA = {
         text: "Developed by Hossein Nazari at NexoNest. NexoRhino is an independent community project, not an official McNeel or JetBrains product.",
         links: [
           ["VS Code Marketplace", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
+          ["JetBrains Marketplace", "https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true"],
           ["Python distribution on PyPI", "https://pypi.org/project/NexoRhino-py-stubs/"],
           ["NexoNest", "https://nexonest.com"]
         ]
