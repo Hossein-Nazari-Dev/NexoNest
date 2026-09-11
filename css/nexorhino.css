@@ -1,0 +1,23 @@
+.nexorhino-license .project-editorial-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  overflow-wrap: anywhere;
+}
+
+.nexorhino-license .license-credit {
+  padding: 1.25rem;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.nexorhino-license .content-section p {
+  max-width: 76ch;
+  line-height: 1.85;
+}
+
+@media print {
+  .nexorhino-license .project-sidebar { display: none; }
+  .nexorhino-license .project-main { margin: 0; width: 100%; }
+  .nexorhino-license .project-content { padding: 0; }
+}

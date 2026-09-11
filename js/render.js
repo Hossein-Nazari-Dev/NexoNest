@@ -24,7 +24,8 @@ function renderProjects() {
         'p_octomass',
         'p_sustainable_development',
         'p_printerra',
-        'p_geofactory'
+        'p_geofactory',
+        'p_nexorhino'
     ];
     const orderIndex = new Map(layoutOrder.map((id, index) => [id, index]));
     const sortedProjects = [...projects].sort((a, b) => {

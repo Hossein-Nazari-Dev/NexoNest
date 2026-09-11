@@ -25,6 +25,16 @@
     ],
     "projects": [
       {
+        "id": "p_nexorhino",
+        "title": "NexoRhino",
+        "excerpt": "Educational RhinoCommon Python stubs for VS Code and PyCharm: code completion, signatures and geometry documentation. Personal and commercial use with attribution to NexoNest.",
+        "url": "projects-pages/nexoRhino.html",
+        "icon": "assets/icons/nexorhino.svg",
+        "categories": ["products"],
+        "subcategories": ["design-suite"],
+        "image": "assets/icons/nexorhino.svg"
+      },
+      {
         "id": "p_design_suite",
         "title": "NexoNest Design Suite",
         "excerpt": "Python-first and developing C# stubs that bring Rhino and Grasshopper APIs into external editors with completion, documentation, checks, and AI context.",

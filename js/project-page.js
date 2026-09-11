@@ -9,10 +9,95 @@ const PROJECT_PAGE_ORDER = [
   "geofactory",
   "printerra",
   "abm-bootcamp",
-  "sustainable-design"
+  "sustainable-design",
+  "nexorhino"
 ];
 
 const PROJECT_PAGE_DATA = {
+  nexorhino: {
+    page: "12",
+    title: "NexoRhino",
+    shortTitle: "NexoRhino",
+    subtitle: "Rhino Python<br>editor assistance",
+    icon: "../assets/icons/nexorhino.svg",
+    iconAlt: "NexoRhino triangular R logo",
+    eyebrow: "NexoNest / Developer tools",
+    lead: "Explore RhinoCommon through Python type hints, meaningful code completion, and geometry documentation — inside the editor you already use.",
+    role: "Hossein Nazari / NexoNest",
+    period: "2026 — present",
+    status: "Alpha / active development",
+    stack: "Python stubs / VS Code / PyCharm",
+    tags: ["Rhino 8", "Rhino.Geometry", "IntelliSense", "Educational documentation"],
+    links: [
+      ["VS Code Marketplace", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
+      ["License & attribution", "../licenses/nexorhino.html"]
+    ],
+    question: "How can writing Rhino Python become easier to explore and learn outside Rhino's own editor?",
+    response: "NexoRhino describes RhinoCommon with .pyi files, giving editor analysis tools the types, signatures, and explanations they need without executing Rhino.",
+    proof: [
+      ["219", "bundled Python stub files"],
+      ["205", "public Rhino.Geometry types in the baseline"],
+      ["2 editors", "VS Code and PyCharm integrations"],
+      ["No pip", "needed for bundled editor plugins"]
+    ],
+    sections: [
+      {
+        title: "What NexoRhino provides",
+        kind: "cards",
+        items: [
+          ["Code completion", "Discover geometry types and members while writing Rhino Python scripts."],
+          ["Signatures and types", "Inspect parameter names, return types, and available declarations before running your script."],
+          ["Learning in context", "Read educational docstrings, geometry notes, and examples alongside your code."],
+          ["One shared baseline", "The editor plugins bundle the same RhinoCommon stub collection as the Python distribution."]
+        ]
+      },
+      {
+        title: "VS Code installation",
+        kind: "steps",
+        items: [
+          ["01", "Install", "Search for NexoRhino by NexoNest in Extensions, or install a supplied VSIX using Install from VSIX."],
+          ["02", "Enable editor support", "The Python and Pylance extensions provide analysis. Open your project folder."],
+          ["03", "Activate", "Run NexoRhino: Enable Rhino IntelliSense from the Command Palette."],
+          ["04", "Explore", "Write import Rhino.Geometry as rg, then type rg. to browse available types. Hover over Point3d to see its documentation."]
+        ]
+      },
+      {
+        title: "PyCharm installation",
+        kind: "steps",
+        items: [
+          ["01", "Check compatibility", "The first plugin build targets PyCharm 2026.2.x. Marketplace publication is being prepared."],
+          ["02", "Install the plugin ZIP", "In Settings > Plugins, use the gear menu and Install Plugin from Disk. Select the supplied plugin ZIP without extracting it."],
+          ["03", "Enable", "Open a Python project and choose Tools > NexoRhino > Enable Rhino Code Insight."],
+          ["04", "Wait for indexing", "Use Ctrl+Space for completion and Quick Documentation for geometry explanations. The plugin adds its bundled stubs as a project library."]
+        ]
+      },
+      {
+        title: "Stubs, not a runtime",
+        kind: "split",
+        text: [
+          "A .pyi file describes an API; it does not implement or execute it. Installing NexoRhino does not install Rhino or make Rhino scripts executable in a standalone Python environment.",
+          "The bundled plugins do not need pip to deliver their stubs. The PyCharm integration has been tested for import resolution and geometry completion without a configured interpreter. Executing scripts still requires an appropriate runtime, and Rhino scripts require a compatible Rhino environment."
+        ],
+        aside: { label: "Current scope", text: "Rhino 8's Rhino.Geometry namespace is the main focus. Supporting namespaces and .NET interop signatures remain incomplete in this alpha." }
+      },
+      {
+        title: "Use and attribution",
+        kind: "credits",
+        text: "NexoRhino is proprietary software. Personal and commercial use is permitted under its license. When publicly sharing a project developed using NexoRhino, include: Developed with NexoRhino by NexoNest — https://nexonest.com. Your own code and project outputs remain yours.",
+        links: [["Read the full license", "../licenses/nexorhino.html"]]
+      },
+      {
+        title: "Project links",
+        kind: "credits",
+        text: "Developed by Hossein Nazari at NexoNest. NexoRhino is an independent community project, not an official McNeel or JetBrains product.",
+        links: [
+          ["VS Code Marketplace", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
+          ["Python distribution on PyPI", "https://pypi.org/project/NexoRhino-py-stubs/"],
+          ["NexoNest", "https://nexonest.com"]
+        ]
+      }
+    ]
+  },
   tectotrack: {
     page: "01",
     title: "TectoTrack",
@@ -938,6 +1023,7 @@ function renderProjectPage(projectId) {
         <div><dt>Stack</dt><dd>${escapeHtml(project.stack)}</dd></div>
       </dl>
       ${renderTags(project.tags)}
+      ${project.links?.length ? `<div class="project-links">${project.links.map(([label, href]) => `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ↗</a>`).join("")}</div>` : ""}
     </header>
 
     <section class="project-thesis" aria-label="Project question and response">
@@ -969,7 +1055,8 @@ function renderProjectPage(projectId) {
     geofactory: "geoFactory.html",
     printerra: "prinTerra.html",
     "abm-bootcamp": "abmBootcamp.html",
-    "sustainable-design": "sustainableDevelopment.html"
+    "sustainable-design": "sustainableDevelopment.html",
+    nexorhino: "nexoRhino.html"
   })[id];
 
   const footer = document.getElementById("projectPageFooter");
