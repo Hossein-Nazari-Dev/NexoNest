@@ -19,13 +19,13 @@ const PROJECT_PAGE_DATA = {
     title: "NexoRhino",
     shortTitle: "NexoRhino",
     subtitle: "Rhino Python<br>editor assistance",
-    icon: "../assets/icons/nexorhino.svg",
-    iconAlt: "NexoRhino triangular R logo",
+    icon: "../assets/icons/nexorhino.svg?v=0.1.4",
+    iconAlt: "NexoRhino grid logo with green and grey squares",
     eyebrow: "NexoNest / Developer tools",
     lead: "Explore RhinoCommon through Python type hints, meaningful code completion, and geometry documentation — inside the editor you already use.",
     role: "Hossein Nazari / NexoNest",
     period: "2026 — present",
-    status: "Alpha / active development",
+    status: "0.1.4 / Stable editor packages",
     stack: "Python stubs / VS Code / PyCharm",
     tags: ["Rhino 8", "Rhino.Geometry", "IntelliSense", "Educational documentation"],
     links: [
@@ -58,7 +58,7 @@ const PROJECT_PAGE_DATA = {
         items: [
           ["01", "Install", "Search for NexoRhino by NexoNest in Extensions, or install a supplied VSIX using Install from VSIX."],
           ["02", "Enable editor support", "The Python and Pylance extensions provide analysis. Open your project folder."],
-          ["03", "Activate", "Run NexoRhino: Enable Rhino IntelliSense from the Command Palette."],
+          ["03", "Automatic setup", "Pylance is configured automatically for each workspace folder. Use NexoRhino: Repair IntelliSense Configuration only if you need to repair or re-enable setup."],
           ["04", "Explore", "Write import Rhino.Geometry as rg, then type rg. to browse available types. Hover over Point3d to see its documentation."]
         ]
       },
@@ -68,7 +68,7 @@ const PROJECT_PAGE_DATA = {
         items: [
           ["01", "Check compatibility", "The first plugin build targets PyCharm 2026.2.x. See the JetBrains Marketplace listing for available versions and compatibility."],
           ["02", "Install", "In Settings > Plugins > Marketplace, search for NexoRhino by NexoNest and install it. Alternatively, use Install Plugin from Disk to install a supplied plugin ZIP without extracting it."],
-          ["03", "Enable", "Open a Python project and choose Tools > NexoRhino > Enable Rhino Code Insight."],
+          ["03", "Automatic setup", "Restart after installation and open a Python project. Stubs are connected automatically and restored after project synchronization. Tools > NexoRhino > Repair Code Insight Configuration is available for manual repair."],
           ["04", "Wait for indexing", "Use Ctrl+Space for completion and Quick Documentation for geometry explanations. The plugin adds its bundled stubs as a project library."]
         ]
       },
@@ -79,7 +79,7 @@ const PROJECT_PAGE_DATA = {
           "A .pyi file describes an API; it does not implement or execute it. Installing NexoRhino does not install Rhino or make Rhino scripts executable in a standalone Python environment.",
           "The bundled plugins do not need pip to deliver their stubs. The PyCharm integration has been tested for import resolution and geometry completion without a configured interpreter. Executing scripts still requires an appropriate runtime, and Rhino scripts require a compatible Rhino environment."
         ],
-        aside: { label: "Current scope", text: "Rhino 8's Rhino.Geometry namespace is the main focus. Supporting namespaces and .NET interop signatures remain incomplete in this alpha." }
+        aside: { label: "Current scope", text: "Rhino 8's Rhino.Geometry namespace is the main focus. Supporting namespaces and .NET interop signatures remain incomplete; stable editor packaging does not imply complete API coverage." }
       },
       {
         title: "Use and attribution",

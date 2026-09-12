@@ -29,10 +29,10 @@
         "title": "NexoRhino",
         "excerpt": "Educational RhinoCommon Python stubs for VS Code and PyCharm: code completion, signatures and geometry documentation. Personal and commercial use with attribution to NexoNest.",
         "url": "projects-pages/nexoRhino.html",
-        "icon": "assets/icons/nexorhino.svg",
+        "icon": "assets/icons/nexorhino.svg?v=0.1.4",
         "categories": ["products"],
         "subcategories": ["design-suite"],
-        "image": "assets/icons/nexorhino.svg"
+        "image": "assets/icons/nexorhino.svg?v=0.1.4"
       },
       {
         "id": "p_design_suite",

@@ -1,6 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.46 283.46">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 285 285">
   <title>NexoRhino</title>
-  <path d="M32.81,200.32v-109.35c0-15.07,15.11-25.45,29.18-20.04l197.83,76.06L61.74,220.45c-14.03,5.21-28.93-5.18-28.93-20.13h0Z"
-        fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/>
-  <text fill="#231f20" font-family="MS-PGothic, 'MS PGothic', sans-serif" font-size="124.38" transform="translate(53.41 222.35) rotate(-19.86)"><tspan x="0" y="0">R</tspan></text>
+  <g fill="#9fceaf">
+    <rect x="6" y="6" width="79.03" height="79.03"/>
+    <rect x="198.44" y="102.96" width="79.03" height="79.03"/>
+    <rect x="6" y="199.92" width="79.03" height="79.03"/>
+  </g>
+  <g fill="#10123c">
+    <path d="M79.03,12v67.03H12V12h67.03M91.03,0H0v91.03h91.03V0h0Z"/>
+    <path d="M271.46,108.96v67.03h-67.03v-67.03h67.03M283.46,96.96h-91.03v91.03h91.03v-91.03h0Z"/>
+    <path d="M79.03,205.92v67.03H12v-67.03h67.03M91.03,193.92H0v91.03h91.03v-91.03h0Z"/>
+  </g>
+  <g fill="#d1d3d4">
+    <rect x="96.22" width="91.03" height="91.03"/>
+    <rect x="192.44" width="91.03" height="91.03"/>
+    <rect y="96.96" width="91.03" height="91.03"/>
+    <rect x="96.22" y="96.96" width="91.03" height="91.03"/>
+    <rect x="96.22" y="193.92" width="91.03" height="91.03"/>
+    <rect x="192.44" y="193.92" width="91.03" height="91.03"/>
+  </g>
 </svg>
