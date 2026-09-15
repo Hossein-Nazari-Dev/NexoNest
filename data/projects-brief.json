@@ -4,7 +4,7 @@
       { "id": "projects", "label": "Projects" },
       { "id": "products", "label": "Products" },
       { "id": "events", "label": "Events" },
-      { "id": "publications", "label": "Publications" }
+      { "id": "publications", "label": "Research and writing" }
     ],
     "subcategories": [
       { "id": "comp-geo", "parent": "education", "label": "Computational Geometry" },
@@ -27,7 +27,7 @@
       {
         "id": "p_nexorhino",
         "title": "NexoRhino",
-        "excerpt": "Educational RhinoCommon Python stubs for VS Code and PyCharm: code completion, signatures and geometry documentation. Personal and commercial use with attribution to NexoNest.",
+        "excerpt": "Educational RhinoCommon Python stubs for VS Code and PyCharm, providing code completion, signatures, and geometry documentation. Personal and commercial use is permitted with attribution to NexoNest.",
         "url": "projects-pages/nexoRhino.html",
         "icon": "assets/icons/nexorhino.svg?v=0.1.4",
         "categories": ["products"],
@@ -47,7 +47,7 @@
       {
         "id": "p_octomass",
         "title": "OctoMass",
-        "excerpt": "An evolving Grasshopper research toolkit connecting early massing, geometric descriptors, climate data, and performance feedback.",
+        "excerpt": "A developing Grasshopper research toolkit that connects early-stage massing, geometric descriptors, climate data, and performance feedback.",
         "url": "projects-pages/octoMass.html",
         "icon": "assets/icons/octomass.png",
         "categories": ["products"],
@@ -67,7 +67,7 @@
       {
         "id": "p_octocity",
         "title": "OctoCity",
-        "excerpt": "A concept-stage research framework connecting urban morphology, contextual influence, and performance-aware design.",
+        "excerpt": "A concept-stage research framework connecting urban morphology, contextual influence, and performance-aware design methods.",
         "url": "projects-pages/octoCity.html",
         "icon": "assets/icons/octocity.png",
         "categories": ["products"],
@@ -107,7 +107,7 @@
       {
         "id": "p_alignment",
         "title": "Building Alignment & Energy",
-        "excerpt": "Research on how urban building alignment affects heating, cooling, and primary energy demand in Tehran.",
+        "excerpt": "Research examining how urban building alignment affects heating, cooling, and primary energy demand in Tehran.",
         "url": "projects-pages/buildingAlignment.html",
         "icon": "assets/icons/alignment.png",
         "categories": ["publications", "projects"],
@@ -127,7 +127,7 @@
       {
         "id": "p_abm_bootcamp",
         "title": "ABM Bootcamp",
-        "excerpt": "A hands-on programme on agent-based modelling, visual perception, wayfinding, and human-centred spatial simulation.",
+        "excerpt": "A hands-on programme covering agent-based modelling, visual perception, wayfinding, and human-centred spatial simulation.",
         "url": "projects-pages/abmBootcamp.html",
         "icon": "",
         "categories": ["events"],

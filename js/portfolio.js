@@ -154,8 +154,8 @@ class PortfolioApp {
             'morphotect': {
                 title: 'Python Developer - Morphotect',
                 details: [
-                    'Created Agent-Based Models (ABMs) to simulate human-environment interactions within a Social Digital Twin framework',
-                    'Utilized Python for model development with complex behavioral algorithms to simulate realistic interactions',
+                    'Created agent-based models (ABMs) to simulate human–environment interactions within a social digital twin framework',
+                    'Used Python to develop behavioural algorithms for simulating realistic interactions',
                     'Focused on improving decision-making processes and understanding human-environment relationships',
                     'Designed automation system for BIM data extraction from Revit and importing geometry into Unity',
                     'Significantly reduced manual data entry time, enabling faster visual representation of architectural designs',
@@ -167,13 +167,13 @@ class PortfolioApp {
             'iust': {
                 title: 'Research Assistant & Teaching Assistant - Iran University of Science and Technology',
                 details: [
-                    'Conducted research on Energy Efficiency, Daylighting, and Prefabrication using computational design methodologies',
+                    'Conducted research on energy efficiency, daylighting, and prefabrication using computational design methods',
                     'Designed and executed detailed research plans leveraging Rhino, Grasshopper, and Python',
                     'Developed Python-based codes and prototypes for generative design and design optimization',
                     'Published findings in research papers advancing knowledge in computational design and sustainable architecture',
                     'Assisted in teaching Design Studio 1, mentoring students in conceptualizing architectural projects',
                     'Delivered lectures and workshops on Computational Sustainability and basic sustainability principles',
-                    'Taught Generative Form-Finding techniques emphasizing early-stage design with computational tools',
+                    'Taught generative form-finding techniques with an emphasis on early-stage computational design',
                     'Guided students in applying computational methods to real-world architectural challenges'
                 ]
             },
@@ -183,7 +183,7 @@ class PortfolioApp {
                     'Led development of prinTerra: A Mobile Cartesian 3D Printing Robot for modular habitats in arid environments',
                     'Designed toolpath generation algorithm based on sinusoidal slicing for structural strength optimization',
                     'Integrated real-time quality monitoring with smart sensors and CCTV for minimal human intervention',
-                    'Collaborated on mechanical design, motion control testing, and material behavior calibration',
+                    'Collaborated on mechanical design, motion-control testing, and material-behaviour calibration',
                     'Managed content development for interactive research documentation and performance analysis',
                     'Designed kinetic façade prototypes using servo motors and Arduino for adaptive solar shading',
                     'Implemented environmentally responsive lighting systems with light sensors and PWM-based control',

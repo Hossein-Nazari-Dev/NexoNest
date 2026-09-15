@@ -1169,6 +1169,33 @@ function renderProjectPage(projectId) {
   if (!project || !root) return;
 
   document.title = `${project.title} | NexoNest`;
+  const description = project.lead.replace(/<[^>]*>/g, "").trim();
+  const setMeta = (name, content, property = false) => {
+    const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+    let element = document.head.querySelector(selector);
+    if (!element) {
+      element = document.createElement("meta");
+      element.setAttribute(property ? "property" : "name", name);
+      document.head.appendChild(element);
+    }
+    element.setAttribute("content", content);
+  };
+  setMeta("description", description);
+  setMeta("og:title", `${project.title} | NexoNest`, true);
+  setMeta("og:description", description, true);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": description,
+    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
+    "author": {"@type":"Person", "name":"Hossein Nazari" },
+    "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
+  };
+  const jsonLd = document.createElement("script");
+  jsonLd.type = "application/ld+json";
+  jsonLd.textContent = JSON.stringify(structuredData);
+  document.head.appendChild(jsonLd);
   document.documentElement.style.setProperty("--project-page-index", `"${project.page}"`);
 
   const sidebarHeader = document.getElementById("projectSidebarHeader");
