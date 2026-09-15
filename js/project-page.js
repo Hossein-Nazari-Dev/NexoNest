@@ -799,6 +799,77 @@ const PROJECT_PAGE_DATA = {
         ]
       },
       {
+        title: "Six-day programme",
+        kind: "table",
+        headers: ["Day", "Topic", "Presenter", "Content"],
+        rows: [
+          ["01", "Bootcamp Orientation", "Hossein Nazari", "Kick-off session introducing the structure, objectives, and roadmap of the bootcamp."],
+          ["01", "Computational Thinking", "Dr. Abbas Tarkashvand", "A fresh perspective on how designers can approach problems computationally."],
+          ["01", "Rhino & Grasshopper Basics", "Zahra Solbi, Sara Omrani", "Hands-on introduction to the computational design tools used throughout the bootcamp."],
+          ["01", "Principles of Human-Centered Design", "Ali Jabbari Jahromi", "Core concepts, methodologies, and real-world applications of user-focused design."],
+          ["02", "Python & Object-Oriented Programming", "Ali Zarrin", "Introductory programming concepts and object-oriented design with Python."],
+          ["02", "Digital Twins & Agent-Based Modeling I", "Zahra Solbi", "Fundamentals of virtual replicas and modelling interactions through agents."],
+          ["02", "Computational Geometry Essentials", "Hossein Nazari", "Mathematical and algorithmic foundations relevant to geometry-driven simulations."],
+          ["03", "Pathfinding & Search Algorithms", "Ali Zarrin", "Essential pathfinding strategies and algorithmic techniques."],
+          ["03", "Digital Twins & Agent-Based Modeling II", "Zahra Solbi", "Extended applications and case scenarios in agent-based environments."],
+          ["03", "Digital Twins in Environmental Design", "Dr. Mehdi Ghiaei", "Strategies and impacts of digital twins in sustainable and adaptive design processes."],
+          ["—", "Rest day", "—", "A planned pause between the theory and application phases."],
+          ["04", "Visual Perception & Tracking Fundamentals", "Sara Omrani", "The basics of vision science in relation to user interaction."],
+          ["04", "Vision Tracking Techniques & Algorithms", "Hossein Nazari", "Technical and algorithmic approaches in visual tracking systems."],
+          ["05", "Environmental Data Integration", "Parto Rahimi", "Linking BIM data with environmental parameters and metadata strategies."],
+          ["05", "Human-Centered Research Approaches", "Dr. M. Javad Mahdavinejad", "User-centric analysis and case studies for bringing simulation outputs into research design."],
+          ["05", "AI in Agent-Based Modeling", "Mohammad Rahmati", "Using AI to enhance simulation, behaviour prediction, and model intelligence."],
+          ["06", "Final Project Presentation & Submission", "Bootcamp team", "Final presentation, review, and submission of participant projects."]
+        ]
+      },
+      {
+        title: "Curriculum structure",
+        kind: "columns",
+        columns: [
+          { title: "Theoretical foundations", items: [
+            ["Digital Twin", ["Definition and applications in architecture", "Integration with ABM systems", "BIM interoperability"]],
+            ["Agent-Based Modeling", ["Core principles and definitions", "Architectural simulation applications", "Crowd behaviour modelling"]],
+            ["Visual Perception", ["IsoVist analysis", "Cone of Vision in built environments", "Visual navigation parameters"]],
+            ["Spatial Analysis", ["Shortest Path Problems for urban routing", "Facility Location optimisation", "Space syntax methodologies"]]
+          ]},
+          { title: "Technical implementation", items: [
+            ["Computational Tools", ["Rhino/Grasshopper visual programming", "Python OOP for ABM development", "BIM data extraction techniques"]],
+            ["Pathfinding Algorithms", ["A* and Dijkstra implementations", "BFS/DFS for spatial analysis", "TSP solutions for urban routing"]],
+            ["Agent Systems", ["Persona modelling techniques", "Memory and decision systems", "Behaviour pattern algorithms"]],
+            ["Advanced Simulation", ["Vision tracking implementation", "Geometric computation methods", "Data visualisation pipelines"]]
+          ]}
+        ]
+      },
+      {
+        title: "Teaching team",
+        kind: "credits",
+        text: "The programme combined a core teaching team, invited lecturers, mentors, and event operations across the Iran University of Science and Technology and Morphotect collaboration.",
+        groups: [
+          { label: "Leadership", people: [["Hossein Nazari", "Main director"]] },
+          { label: "Mentors", people: [["Zahra Solbi", "Architect / Product Manager"], ["Sara Omrani", "Architect / Researcher"], ["Ali Zarrin", "Programmer"], ["M. Reza Kazimi", "Programmer"], ["Parto Rahimi", "BIM Specialist"], ["Mohammad Alinia", "Unity Developer"]] },
+          { label: "Invited lecturers", people: [["Dr. Abbas Tarkashvand", "Professor"], ["Dr. Mehdi Ghiaei", "Professor"], ["Dr. M. Javad Mahdavinejad", "Professor"], ["Mohammad Rahmati", "Data Scientist"], ["Ali Jabbari Jahromi", "CEO, Morphotect"]] },
+          { label: "Operations", people: [["Bahdad Khabaz", "Programme Manager"], ["Mona Rezaeian", "Event Coordinator"], ["Bahare Behzadi", "Administrative Lead"]] }
+        ]
+      },
+      {
+        title: "Participant projects",
+        kind: "projects",
+        items: [
+          { code: "GP01", title: "Impact of Building Form on Visual Perception in Urban Environment", people: "Elnaz · Fatemeh · Mohammad", pdf: "../assets/documents/bootcamp/GP01.pdf", video: "https://www.youtube.com/embed/5ysnTumivG4" },
+          { code: "GP02", title: "Evaluating Walkability through Agent-Based Simulation", people: "Sepehr · Foroozan · Saba", pdf: "../assets/documents/bootcamp/GP02.pdf", video: "https://www.youtube.com/embed/OnbqPLik_Ns" },
+          { code: "GP03", title: "Evaluation of Security Criteria in an Urban Fabric", people: "Haniyeh · Elham · Arezoo · Atiyeh", video: "https://www.youtube.com/embed/VwSBsUIoGQI" },
+          { code: "GP04", title: "Evaluating Commercial Visibility in Urban Environments", people: "Leila · Shabnam · Ava", pdf: "../assets/documents/bootcamp/GP04.pdf", video: "https://www.youtube.com/embed/q6a_Ci5R8Vs" },
+          { code: "GP05", title: "Visual Weight: A New Metric for Quantifying Spatial Visibility", people: "Ali · Ali · Samira · Sina", pdf: "../assets/documents/bootcamp/GP05.pdf", video: "https://www.youtube.com/embed/m3jxgIYLgws" },
+          { code: "GP06", title: "Analysing Agent Visual Perception Quality through the Visual Perception Clarity Index", people: "Elahe · Aynaz · Mahdi", pdf: "../assets/documents/bootcamp/GP06.pdf", video: "https://www.youtube.com/embed/XHBzemDBndY" },
+          { code: "GP07", title: "An Algorithmic Design Approach for Enhancing Art Exposure in Urban Passageways", people: "Negin · Samira · Reza", pdf: "../assets/documents/bootcamp/GP07.pdf", video: "https://www.youtube.com/embed/bXv-C9zzPF8" },
+          { code: "GP08", title: "Visual Legibility and Wayfinding in Typified Residential Complexes", people: "Anahita · Elnaz · Dorna", pdf: "../assets/documents/bootcamp/GP08.pdf", video: "https://www.youtube.com/embed/_xf8vpT2ma8" },
+          { code: "GP09", title: "Navigating the Unknown: Human Spatial Perception in Unfamiliar Indoor Environment", people: "Shima · Elham · Soha · Arghavan", pdf: "../assets/documents/bootcamp/GP09.pdf", video: "https://www.youtube.com/embed/oypzuJ_b6Rw" },
+          { code: "GP10", title: "Perception and Priority: Analysing Viewer Attention to Urban Billboards", people: "Parham · Mobina · Mahdieh", pdf: "../assets/documents/bootcamp/GP10.pdf" },
+          { code: "GP11", title: "Silent Signals: Inferring Emotional States Without Direct Questioning", people: "Kiana · Zahra · Amirhossein", pdf: "../assets/documents/bootcamp/GP11.pdf", video: "https://youtube.com/embed/ce41spcnkf8?feature=share" },
+          { code: "GP12", title: "Impact of Perspective on Human Perception", people: "Rozhin · Sana · Melika · Arta", video: "https://youtube.com/embed/osnqc3C5pmQ" }
+        ]
+      },
+      {
         title: "Collaboration",
         kind: "credits",
         text: "Planned and delivered through a collaboration between Morphotect and Iran University of Science and Technology.",
@@ -900,6 +971,73 @@ function renderProof(items) {
     </div>`;
 }
 
+function renderBootcampProject(item) {
+  const headerControls = item.pdf ? "" : `<span class="project-media-unavailable">PDF not submitted</span>`;
+  const media = item.video?.startsWith("http") ? `<iframe src="${escapeHtml(item.video)}" title="${escapeHtml(item.title)} animation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` : `<video controls playsinline preload="metadata" width="100%"><source src="${escapeHtml(item.video || "")}" type="video/mp4">Your browser could not load this animation.</video>`;
+  return `<div class="bootcamp-project-detail-head"><div><span class="bootcamp-project-code">${escapeHtml(item.code)}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.people)}</p></div><div class="bootcamp-project-actions">${headerControls}</div></div>${item.pdf ? `<div class="bootcamp-pdf-frame pdf-flip-viewer" data-pdf="${escapeHtml(item.pdf)}"><div class="pdf-spread" data-pdf-spread><canvas></canvas><canvas></canvas></div><div class="pdf-flip-controls"><button type="button" data-pdf-prev aria-label="Previous spread">←</button><span data-pdf-counter>Loading PDF…</span><button type="button" data-pdf-next aria-label="Next spread">→</button></div></div>` : `<div class="bootcamp-empty-media">This project was submitted as an animation only.</div>`}${item.video ? `<div class="bootcamp-animation"><div class="bootcamp-animation-label">Animation</div>${media}</div>` : ""}`;
+}
+
+let pdfJsPromise;
+let activeZoomRender = null;
+function loadPdfJs() {
+  if (!pdfJsPromise) pdfJsPromise = import("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs");
+  return pdfJsPromise;
+}
+
+function initPdfViewers(root) {
+  root.querySelectorAll(".pdf-flip-viewer").forEach(viewer => {
+    if (viewer.dataset.ready) return;
+    viewer.dataset.ready = "loading";
+    const counter = viewer.querySelector("[data-pdf-counter]");
+    let pdfDoc; let pageNumber = 1;
+    const canvases = [...viewer.querySelectorAll("canvas")];
+    const draw = async () => {
+      if (!pdfDoc) return;
+      const first = await pdfDoc.getPage(pageNumber);
+      const second = pageNumber === 1 ? null : pageNumber + 1 <= pdfDoc.numPages ? await pdfDoc.getPage(pageNumber + 1) : null;
+      const base = first.getViewport({ scale: 1 });
+      const scale = Math.min((viewer.clientWidth - 46) / (base.width * (second ? 2 : 1)), 1.35);
+      for (let index = 0; index < canvases.length; index += 1) {
+        const page = index === 0 ? first : second;
+        const target = canvases[index];
+        target.hidden = false;
+        target.classList.toggle("is-empty", !page);
+        if (!page) { target.dataset.pageNumber = ""; target.width = base.width * Math.max(scale, .55); target.height = base.height * Math.max(scale, .55); target.getContext("2d").clearRect(0, 0, target.width, target.height); continue; }
+        target.dataset.pageNumber = String(pageNumber + index);
+        const viewport = page.getViewport({ scale: Math.max(scale, .55) });
+        target.width = viewport.width; target.height = viewport.height;
+        await page.render({ canvasContext: target.getContext("2d"), viewport }).promise;
+      }
+      counter.textContent = pageNumber === 1 ? `Cover · Page 1 of ${pdfDoc.numPages}` : `Pages ${pageNumber}–${Math.min(pageNumber + 1, pdfDoc.numPages)} of ${pdfDoc.numPages}`;
+    };
+    loadPdfJs().then(pdfjs => { pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs"; return pdfjs.getDocument(viewer.dataset.pdf).promise; }).then(doc => { pdfDoc = doc; viewer.dataset.ready = "ready"; draw(); }).catch(() => { counter.textContent = "PDF preview unavailable — open the PDF above"; viewer.dataset.ready = "error"; });
+    viewer.querySelector("[data-pdf-prev]").addEventListener("click", () => { if (pdfDoc) { pageNumber = pageNumber === 1 ? 1 : Math.max(1, pageNumber - (pageNumber === 2 ? 1 : 2)); draw(); } });
+    viewer.querySelector("[data-pdf-next]").addEventListener("click", () => { if (pdfDoc) { pageNumber = pageNumber === 1 ? Math.min(2, pdfDoc.numPages) : Math.min(pdfDoc.numPages, pageNumber + 2); draw(); } });
+    const header = viewer.previousElementSibling?.querySelectorAll("[data-pdf-header]");
+    header?.forEach(button => button.addEventListener("click", () => {
+      if (!pdfDoc) return;
+      pageNumber = button.dataset.pdfHeader === "prev" ? (pageNumber === 1 ? 1 : Math.max(1, pageNumber - (pageNumber === 2 ? 1 : 2))) : (pageNumber === 1 ? Math.min(2, pdfDoc.numPages) : Math.min(pdfDoc.numPages, pageNumber + 2));
+      draw();
+    }));
+    viewer.addEventListener("click", async event => {
+      const clicked = event.target.closest("canvas");
+      const zoomDialog = document.getElementById("pdfZoomDialog");
+      const zoomCanvas = zoomDialog?.querySelector("canvas");
+      if (!clicked || !pdfDoc || !clicked.dataset.pageNumber || !zoomDialog || !zoomCanvas) return;
+      const renderZoomPage = async pageNumber => {
+        const page = await pdfDoc.getPage(pageNumber);
+        const viewport = page.getViewport({ scale: 2.2 });
+        zoomCanvas.width = viewport.width; zoomCanvas.height = viewport.height;
+        await page.render({ canvasContext: zoomCanvas.getContext("2d"), viewport }).promise;
+        zoomDialog.querySelector("[data-zoom-counter]").textContent = `Page ${pageNumber} of ${pdfDoc.numPages}`;
+        activeZoomRender = delta => { const next = Math.max(1, Math.min(pdfDoc.numPages, pageNumber + delta)); if (next !== pageNumber) renderZoomPage(next); };
+      };
+      await renderZoomPage(Number(clicked.dataset.pageNumber));
+      zoomDialog.showModal();
+    });
+  });
+}
+
 function renderSection(section, index) {
   const heading = `
     <div class="section-heading-row">
@@ -934,6 +1072,35 @@ function renderSection(section, index) {
         <span>${escapeHtml(number)}</span>
         <div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></div>
       </li>`).join("")}</ol>`;
+  }
+
+  if (section.kind === "table") {
+    body = `
+      <div class="project-table-wrap">
+        <table class="project-table">
+          <thead><tr>${section.headers.map(header => `<th>${escapeHtml(header)}</th>`).join("")}</tr></thead>
+          <tbody>${section.rows.map(row => `<tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+        </table>
+      </div>`;
+  }
+
+  if (section.kind === "columns") {
+    body = `<div class="project-column-grid">${section.columns.map(column => `
+      <div class="project-column-block">
+        <h3>${escapeHtml(column.title)}</h3>
+        <div class="project-column-items">${column.items.map(([title, items]) => `
+          <article><h4>${escapeHtml(title)}</h4><ul>${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></article>
+        `).join("")}</div>
+      </div>`).join("")}</div>`;
+  }
+
+  if (section.kind === "projects") {
+    const first = section.items[0];
+    body = `<div class="bootcamp-project-browser">
+      <nav class="bootcamp-project-list" aria-label="Participant projects">${section.items.map((item, index) => `
+        <button type="button" class="bootcamp-project-list-item${index === 0 ? " is-active" : ""}" data-project-index="${index}" title="${escapeHtml(item.title)}" aria-label="${escapeHtml(item.code)} — ${escapeHtml(item.title)}"><span>${escapeHtml(item.code)}</span></button>`).join("")}</nav>
+      <div class="bootcamp-project-detail" data-project-detail>${renderBootcampProject(first)}</div>
+    </div>`;
   }
 
   if (section.kind === "figure") {
@@ -1041,7 +1208,53 @@ function renderProjectPage(projectId) {
 
     ${renderProof(project.proof)}
     ${project.sections.map(renderSection).join("")}
+    <dialog class="project-video-dialog" id="projectVideoDialog" aria-labelledby="projectVideoTitle">
+      <div class="project-video-dialog-bar"><h2 id="projectVideoTitle">Project animation</h2><button type="button" class="project-video-close" aria-label="Close">×</button></div>
+      <video controls playsinline class="project-video-player"></video>
+    </dialog>
+    <dialog class="pdf-zoom-dialog" id="pdfZoomDialog" aria-label="Enlarged PDF page">
+      <div class="pdf-zoom-toolbar"><button type="button" data-zoom-prev aria-label="Previous page">←</button><span data-zoom-counter>Page</span><button type="button" data-zoom-next aria-label="Next page">→</button><button type="button" class="pdf-zoom-close" aria-label="Close enlarged page">×</button></div><canvas></canvas>
+    </dialog>
   `;
+
+  const projectShowcase = project.sections.find(section => section.kind === "projects");
+  const projectDetail = root.querySelector("[data-project-detail]");
+  root.querySelectorAll(".bootcamp-project-list-item").forEach(button => button.addEventListener("click", () => {
+    const item = projectShowcase?.items[Number(button.dataset.projectIndex)];
+    if (!item || !projectDetail) return;
+    root.querySelectorAll(".bootcamp-project-list-item").forEach(entry => entry.classList.remove("is-active"));
+    button.classList.add("is-active");
+    projectDetail.innerHTML = renderBootcampProject(item);
+    initPdfViewers(root);
+    bindVideoButtons();
+  }));
+
+  const videoDialog = document.getElementById("projectVideoDialog");
+  const videoPlayer = videoDialog?.querySelector(".project-video-player");
+  const videoTitle = videoDialog?.querySelector("#projectVideoTitle");
+  const closeVideo = () => { if (videoPlayer) { videoPlayer.pause(); videoPlayer.removeAttribute("src"); videoPlayer.load(); } videoDialog?.close(); };
+  function bindVideoButtons() {
+    root.querySelectorAll(".project-video-button").forEach(button => button.addEventListener("click", () => {
+    if (!videoDialog || !videoPlayer) return;
+    videoTitle.textContent = button.dataset.videoTitle || "Project animation";
+    videoPlayer.src = button.dataset.video;
+    videoDialog.showModal();
+    videoPlayer.play().catch(() => {});
+    }));
+  }
+  bindVideoButtons();
+  initPdfViewers(root);
+  videoDialog?.querySelector(".project-video-close")?.addEventListener("click", closeVideo);
+  videoDialog?.addEventListener("click", event => { if (event.target === videoDialog) closeVideo(); });
+  const zoomDialog = document.getElementById("pdfZoomDialog");
+  const closeZoom = () => zoomDialog?.close();
+  zoomDialog?.querySelector(".pdf-zoom-close")?.addEventListener("click", closeZoom);
+  zoomDialog?.querySelector("[data-zoom-prev]")?.addEventListener("click", () => activeZoomRender?.(-1));
+  zoomDialog?.querySelector("[data-zoom-next]")?.addEventListener("click", () => activeZoomRender?.(1));
+  zoomDialog?.addEventListener("click", event => { if (event.target === zoomDialog) closeZoom(); });
+  zoomDialog?.addEventListener("contextmenu", event => event.preventDefault());
+  zoomDialog?.addEventListener("dragstart", event => event.preventDefault());
+  zoomDialog?.addEventListener("keydown", event => { if ((event.ctrlKey || event.metaKey) && ["s", "p", "u"].includes(event.key.toLowerCase())) event.preventDefault(); });
 
   const orderIndex = PROJECT_PAGE_ORDER.indexOf(projectId);
   const previous = PROJECT_PAGE_DATA[PROJECT_PAGE_ORDER[(orderIndex - 1 + PROJECT_PAGE_ORDER.length) % PROJECT_PAGE_ORDER.length]];

@@ -1191,6 +1191,161 @@ body.project-theme {
   color: var(--c-accent-dark);
 }
 
+.project-table-wrap {
+  overflow-x: auto;
+  border-top: 1px solid rgba(75, 124, 110, .34);
+  border-bottom: 1px solid rgba(75, 124, 110, .34);
+}
+
+.project-table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+  font-size: .71rem;
+  line-height: 1.65;
+}
+
+.project-table th,
+.project-table td {
+  padding: 13px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px dotted var(--color-connector);
+}
+
+.project-table th {
+  color: var(--c-accent-dark);
+  font-size: .61rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.project-table td:first-child {
+  width: 54px;
+  color: var(--c-accent-portfolio-dark);
+  font-weight: 600;
+}
+
+.project-table td:nth-child(2) { color: var(--color-text); font-weight: 600; }
+.project-table td:nth-child(3), .project-table td:nth-child(4) { color: var(--color-muted); }
+.project-table tr:last-child td { border-bottom: 0; }
+
+.project-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.project-column-block {
+  border-top: 1px solid rgba(75, 124, 110, .34);
+}
+
+.project-column-block > h3 {
+  margin: 17px 0 10px;
+  color: var(--c-accent-dark);
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.project-column-items article {
+  padding: 16px 0;
+  border-top: 1px dotted var(--color-connector);
+}
+
+.project-column-items h4 {
+  margin: 0 0 8px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.project-column-items ul {
+  margin: 0;
+  padding-left: 17px;
+  color: var(--color-muted);
+  font-size: .7rem;
+  line-height: 1.75;
+}
+
+.bootcamp-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  border-top: 1px solid rgba(75, 124, 110, .34);
+}
+
+.bootcamp-project-browser { display: grid; grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr); gap: 28px; align-items: start; }
+.bootcamp-project-browser { display: block; }
+.bootcamp-project-list { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(75, 124, 110, .34); padding: 16px 0 18px; }
+.bootcamp-project-list { width: 100%; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px; }
+.bootcamp-project-list-item { width: 100%; height: 34px; padding: 0; border: 1px dotted var(--color-connector); border-radius: 3px; background: transparent; color: var(--c-accent-portfolio-dark); text-align: center; font: inherit; cursor: pointer; }
+.bootcamp-project-list-item span { font-size: .62rem; }
+.bootcamp-project-list-item:hover, .bootcamp-project-list-item.is-active { border-color: var(--c-accent-dark); background: var(--c-accent-weak); color: var(--c-accent-dark); }
+.bootcamp-project-detail { min-width: 0; border-top: 1px solid rgba(75, 124, 110, .34); }
+.bootcamp-project-detail-head { display: flex; justify-content: space-between; gap: 24px; padding: 18px 0 20px; border-bottom: 1px dotted var(--color-connector); }
+.bootcamp-project-detail-head h3 { margin: 12px 0 7px; font-size: 1rem; line-height: 1.45; font-weight: 600; }
+.bootcamp-project-detail-head p { margin: 0; color: var(--color-muted); font-size: .68rem; }
+.bootcamp-project-code { color: var(--c-accent-dark); font-size: .62rem; letter-spacing: .1em; }
+.pdf-header-controls { display: flex; gap: 8px; }
+.pdf-header-controls button { width: 34px; height: 30px; border: 1px dotted var(--color-connector); background: transparent; color: var(--color-text); cursor: pointer; font: inherit; }
+.pdf-header-controls button:hover { border-color: var(--c-accent-dark); color: var(--c-accent-dark); }
+.bootcamp-pdf-frame { margin-top: 18px; height: min(70vh, 720px); border: 1px dotted var(--color-connector); background: rgba(255,255,255,.2); }
+.pdf-flip-viewer { height: auto; min-height: 420px; display: grid; place-items: center; padding: 16px 16px 0; }
+.pdf-spread { width: 100%; display: flex; justify-content: center; align-items: stretch; gap: 4px; }
+.pdf-spread canvas { display: block; max-width: calc(50% - 2px); height: auto; background: #fff; box-shadow: 0 8px 24px rgba(38,61,55,.12); }
+.pdf-spread canvas.is-empty { background: rgba(255,255,255,.35); box-shadow: none; }
+.pdf-spread canvas:not(.is-empty) { cursor: zoom-in; }
+.pdf-zoom-dialog { position: fixed; inset: 0; margin: auto; width: min(1120px, calc(100vw - 28px)); height: min(92vh, 900px); max-width: none; max-height: none; padding: 46px 18px 18px; border: 1px dotted var(--c-accent-dark); background: rgba(238,246,244,.98); }
+.pdf-zoom-dialog::backdrop { background: rgba(24,36,32,.78); }
+.pdf-zoom-dialog canvas { display: block; width: auto; max-width: 100%; height: auto; max-height: calc(100% - 12px); margin: 0 auto; background: #fff; box-shadow: 0 10px 34px rgba(20,30,27,.18); user-select: none; }
+.pdf-zoom-toolbar { position: absolute; top: 10px; left: 14px; right: 14px; display: flex; justify-content: center; align-items: center; gap: 12px; }
+.pdf-zoom-toolbar span { color: var(--color-muted); font-size: .65rem; }
+.pdf-zoom-toolbar button { width: 30px; height: 30px; border: 1px dotted var(--color-connector); background: transparent; color: var(--color-text); cursor: pointer; }
+.pdf-zoom-close { position: absolute !important; right: 0; top: 0; }
+.pdf-zoom-close:hover { color: var(--c-accent-dark); border-color: var(--c-accent-dark); }
+.pdf-flip-controls { width: 100%; display: flex; justify-content: center; align-items: center; gap: 18px; padding: 13px 0; margin-top: 16px; border-top: 1px dotted var(--color-connector); color: var(--color-muted); font-size: .65rem; }
+.pdf-flip-controls button { width: 30px; height: 28px; border: 1px dotted var(--color-connector); border-radius: 3px; background: transparent; color: var(--color-text); cursor: pointer; font: inherit; }
+.pdf-flip-controls button:hover { color: var(--c-accent-dark); border-color: var(--c-accent-dark); }
+.bootcamp-animation { margin-top: 28px; padding-top: 16px; border-top: 1px solid rgba(75,124,110,.34); }
+.bootcamp-animation-label { margin-bottom: 10px; color: var(--c-accent-dark); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+.bootcamp-animation video { display: block; width: 100%; max-height: 520px; background: #111; }
+.bootcamp-animation iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #111; }
+.bootcamp-empty-media { display: grid; place-items: center; min-height: 240px; margin-top: 18px; border: 1px dotted var(--color-connector); color: var(--color-muted); font-size: .72rem; text-align: center; }
+
+.bootcamp-project-card {
+  padding: 22px 0 24px;
+  border-bottom: 1px solid rgba(75, 124, 110, .28);
+}
+
+.bootcamp-project-card:nth-child(even) { padding-left: 24px; border-left: 1px dotted var(--color-connector); }
+.bootcamp-project-card-top { display: flex; justify-content: space-between; gap: 12px; color: var(--c-accent-portfolio-dark); font-size: .6rem; text-transform: uppercase; letter-spacing: .08em; }
+.bootcamp-project-card h3 { margin: 18px 0 8px; font-size: .88rem; line-height: 1.45; font-weight: 600; }
+.bootcamp-project-people { margin: 0; color: var(--color-muted); font-size: .68rem; }
+.bootcamp-project-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; align-items: center; }
+.project-media-link { padding: 7px 9px; border: 1px dotted var(--color-connector); border-radius: 3px; background: transparent; color: var(--color-text); font: inherit; font-size: .65rem; text-decoration: none; cursor: pointer; }
+.project-media-link:hover { color: var(--c-accent-dark); border-color: var(--c-accent-dark); }
+.project-media-unavailable { color: var(--color-muted); font-size: .63rem; }
+
+.project-video-dialog { width: min(920px, calc(100vw - 32px)); max-width: none; padding: 0; border: 1px dotted var(--c-accent-dark); background: var(--color-bg); color: var(--color-text); }
+.project-video-dialog::backdrop { background: rgba(24, 36, 32, .72); }
+.project-video-dialog-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 16px; border-bottom: 1px dotted var(--color-connector); }
+.project-video-dialog-bar h2 { margin: 0; font-size: .76rem; font-weight: 600; }
+.project-video-close { border: 0; background: transparent; color: var(--color-text); font-size: 1.4rem; cursor: pointer; }
+.project-video-player { display: block; width: 100%; max-height: 78vh; background: #000; }
+
+@media (max-width: 760px) {
+  .project-column-grid { grid-template-columns: 1fr; gap: 36px; }
+  .project-table { min-width: 700px; }
+  .bootcamp-project-grid { grid-template-columns: 1fr; }
+  .bootcamp-project-card:nth-child(even) { padding-left: 0; border-left: 0; }
+  .bootcamp-project-browser { grid-template-columns: 1fr; }
+  .bootcamp-project-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .bootcamp-project-list { max-height: none; overflow: auto; }
+  .bootcamp-project-detail-head { display: block; }
+  .bootcamp-project-detail-head .bootcamp-project-actions { margin-top: 16px; }
+  .pdf-spread canvas { max-width: calc(50% - 2px); }
+}
+
 @media (max-width: 900px) {
   .project-credit-people {
     grid-template-columns: repeat(2, minmax(0, 1fr));
