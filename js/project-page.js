@@ -3,6 +3,7 @@ const PROJECT_PAGE_ORDER = [
   "curvadapt",
   "building-alignment",
   "design-suite",
+  "nexobreak",
   "octomass",
   "octoland",
   "octocity",
@@ -96,6 +97,133 @@ const PROJECT_PAGE_DATA = {
           ["JetBrains Marketplace", "https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true"],
           ["Python distribution on PyPI", "https://pypi.org/project/NexoRhino-py-stubs/"],
           ["NexoNest", "https://nexonest.com"]
+        ]
+      }
+    ]
+  },
+  nexobreak: {
+    page: "13",
+    title: "NexoBreak",
+    shortTitle: "NexoBreak",
+    subtitle: "Plan. Focus.<br>Recover.",
+    icon: "../assets/icons/nexobreak.svg",
+    iconAlt: "NexoBreak logo",
+    eyebrow: "NexoNest / Rhino productivity",
+    lead: "A focus and break companion for Rhino that brings daily planning, time tracking, guided pauses, short viewport games, local reports, and autosave-style versioned backups into the modeling workspace.",
+    role: "Product design & development / NexoNest",
+    period: "2026 — present",
+    status: "Beta / Free on food4Rhino",
+    stack: "Rhino 8 / .NET 8 / Windows",
+    tags: ["Rhino 8", "Focus tracking", "Guided breaks", "Versioned backups"],
+    links: [
+      ["Download on food4Rhino", "https://www.food4rhino.com/en/browse?searchText=nexobreak&form_build_count=1&sort_by=fs_field_rating"],
+      ["NexoNest Field Notes", "../newsletter.html"]
+    ],
+    question: "How can long Rhino sessions stay focused without separating planning, breaks, reports, and project safety from the modeling environment?",
+    response: "NexoBreak keeps the work loop inside Rhino: choose a small daily plan, track time against the selected task, pause for a short activity, and return with your focus state still clear.",
+    proof: [
+      ["5 tasks", "daily planning limit"],
+      ["Timed snapshots", "Rhino + Grasshopper backups"],
+      ["Local reports", "with estimates and actual time"],
+      ["Private by default", "tasks and model files stay local"]
+    ],
+    sections: [
+      {
+        title: "A clearer design day",
+        kind: "split",
+        text: [
+          "Design work often happens in long, nonlinear sessions. NexoBreak gives that day a practical frame without asking you to manage a separate productivity app beside Rhino.",
+          "Plan up to five daily tasks, estimate their duration, switch focus as priorities change, and keep tracking even when the dashboard is closed."
+        ],
+        aside: { label: "Product stance", text: "This is not surveillance software. It is a local companion for planning, focus, recovery, and reflection." }
+      },
+      {
+        title: "Dashboard inside Rhino",
+        kind: "figure-text",
+        image: "../assets/images/projects/nexobreak/dashboard.png",
+        alt: "NexoBreak dashboard running inside Rhino with a selected task and focus timer",
+        caption: "The dashboard keeps the current task, timer, break controls, report access, and settings inside the Rhino workspace.",
+        text: "The main dashboard is intentionally compact: select the current task, start focus, add or edit work, take a break, open the daily report, or adjust settings without leaving the modeling context."
+      },
+      {
+        title: "Work loop",
+        kind: "steps",
+        items: [
+          ["01", "Plan", "Write a manageable task list for the day and choose the task you want to focus on first."],
+          ["02", "Focus", "Start, pause, resume, and switch task tracking while the compact launcher keeps NexoBreak close to the viewport."],
+          ["03", "Recover", "Take a guided movement break, visual activity, direction game, or short viewport game when you need a reset."],
+          ["04", "Review", "Read a local daily report and compare estimates, actual time, application activity, and task completion."]
+        ]
+      },
+      {
+        title: "Autosave-style versioned backups",
+        kind: "figure-text",
+        image: "../assets/images/projects/nexobreak/settings-backups.png",
+        alt: "NexoBreak settings showing safety backups and backup interval controls",
+        caption: "Safety backups create timestamped copies without moving or renaming the working file.",
+        text: "The backup feature is the strongest project-safety layer in NexoBreak. When enabled, it writes scheduled snapshots of the saved Rhino model and active Grasshopper definition into dated folders beside the model. You keep working in the original files, while earlier copies remain close enough to recover from risky edits, crashes, or experimental branches."
+      },
+      {
+        title: "Core features",
+        kind: "cards",
+        items: [
+          ["Daily task planning", "Plan up to five tasks, edit them during the day, update their status, and keep your current focus visible."],
+          ["Time tracking and reports", "Review task start and completion times, estimated versus actual duration, and activity across Rhino, Grasshopper, other applications, and idle periods."],
+          ["Guided breaks", "Use active-work reminders and choose a stretch routine, moving-dot tracking, Vector Vision, Star Catcher, or Duck Hunt."],
+          ["Autosave + versioned backups", "Create scheduled snapshots of the active Rhino model and Grasshopper definition in timestamped folders beside the saved model."]
+        ]
+      },
+      {
+        title: "Always within reach",
+        kind: "figure-text",
+        image: "../assets/images/projects/nexobreak/viewport-launcher.png",
+        alt: "NexoBreak compact viewport launcher in the Rhino viewport",
+        caption: "A small viewport launcher shows whether focus tracking is active without covering the model.",
+        text: "NexoBreak does not need to stay open as a large dashboard. A compact launcher sits in the viewport, shows the current tracking state, and keeps the companion available without adding much visual noise."
+      },
+      {
+        title: "Breaks without losing context",
+        kind: "figure-text",
+        image: "../assets/images/projects/nexobreak/duck-hunt.png",
+        alt: "NexoBreak Duck Hunt break activity running in a Rhino viewport",
+        caption: "Viewport games and guided activities pause the focus timer and return you to the same selected task.",
+        text: "Starting a break pauses the focus session instead of counting recovery time as work. The break tools are intentionally short: movement, attention shift, or a small viewport game. They are a pause inside the design workflow, not a replacement for real rest away from the screen."
+      },
+      {
+        title: "Daily report",
+        kind: "figure-text",
+        image: "../assets/images/projects/nexobreak/daily-report.png",
+        alt: "NexoBreak daily focus report in a browser with task ledger and tool mix",
+        caption: "Reports can be opened locally in the browser and printed or saved as PDF.",
+        text: "NexoBreak turns the day into a private local report: focused time, completed tasks, estimates, actual time, foreground activity, and a task ledger. It is built for reflection, not remote monitoring."
+      },
+      {
+        title: "Local-first privacy",
+        kind: "cards",
+        items: [
+          ["Tasks stay local", "Task lists, activity data, and reports remain on the computer."],
+          ["Model files stay local", "Versioned backups are stored beside the saved model, not uploaded by the core workflow."],
+          ["Optional online features", "Game Club shares account identity and game scores only when used."],
+          ["Separate consent", "Newsletter signup is separate from the plugin and requires its own consent."]
+        ]
+      },
+      {
+        title: "Requirements",
+        kind: "table",
+        headers: ["Area", "Requirement", "Notes"],
+        rows: [
+          ["OS", "Windows", "Built for Windows Rhino workstations."],
+          ["Rhino", "Rhino 8.34 or later", "Rhino must be running .NET 8."],
+          ["License", "Proprietary / Free", "Available through food4Rhino."],
+          ["Categories", "General, Modeling, Product design", "A productivity companion for Rhino and Grasshopper users."]
+        ]
+      },
+      {
+        title: "Download",
+        kind: "credits",
+        text: "NexoBreak is available on food4Rhino. Download it from the product listing, install it in Rhino, and use the first sessions to test how planning, tracking, breaks, reports, and backups fit your own workflow.",
+        links: [
+          ["Open NexoBreak on food4Rhino", "https://www.food4rhino.com/en/browse?searchText=nexobreak&form_build_count=1&sort_by=fs_field_rating"]
         ]
       }
     ]
@@ -1188,7 +1316,7 @@ function renderProjectPage(projectId) {
     "@type": "CreativeWork",
     "name": project.title,
     "description": description,
-    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
+    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
     "author": {"@type":"Person", "name":"Hossein Nazari" },
     "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
   };
@@ -1291,6 +1419,7 @@ function renderProjectPage(projectId) {
     curvadapt: "curvAdapt.html",
     "building-alignment": "buildingAlignment.html",
     "design-suite": "nexonestDesignSuite.html",
+    nexobreak: "nexoBreak.html",
     octomass: "octoMass.html",
     octoland: "octoLand.html",
     octocity: "octoCity.html",

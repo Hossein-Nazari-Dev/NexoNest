@@ -14,6 +14,7 @@
       { "id": "sim-analysis", "parent": "projects", "label": "Simulation and Analysis" },
       { "id": "robot-io", "parent": "projects", "label": "Robotic and IoT" },
       { "id": "design-suite", "parent": "products", "label": "NexoNest Design Suite" },
+      { "id": "nexobreak", "parent": "products", "label": "NexoBreak" },
       { "id": "octomass", "parent": "products", "label": "OctoMass" },
       { "id": "octoland", "parent": "products", "label": "OctoLand" },
       { "id": "octocity", "parent": "products", "label": "OctoCity" },
@@ -43,6 +44,16 @@
         "categories": ["products"],
         "subcategories": ["design-suite"],
         "image": "assets/logo.svg"
+      },
+      {
+        "id": "p_nexobreak",
+        "title": "NexoBreak",
+        "excerpt": "A focus and break companion for Rhino with daily planning, tracking, guided breaks, reports, and autosave-style versioned backups for Rhino and Grasshopper files.",
+        "url": "projects-pages/nexoBreak.html",
+        "icon": "assets/icons/nexobreak.svg",
+        "categories": ["products"],
+        "subcategories": ["nexobreak"],
+        "image": "assets/images/projects/nexobreak/dashboard.png"
       },
       {
         "id": "p_octomass",
