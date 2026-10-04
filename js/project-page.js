@@ -11,6 +11,8 @@ const PROJECT_PAGE_ORDER = [
   "printerra",
   "abm-bootcamp",
   "sustainable-design",
+  "code-junkyard",
+  "code-junkyard-session-00",
   "nexorhino"
 ];
 
@@ -991,7 +993,7 @@ const PROJECT_PAGE_DATA = {
           { code: "GP06", title: "Analysing Agent Visual Perception Quality through the Visual Perception Clarity Index", people: "Elahe · Aynaz · Mahdi", pdf: "../assets/documents/bootcamp/GP06.pdf", video: "https://www.youtube.com/embed/XHBzemDBndY" },
           { code: "GP07", title: "An Algorithmic Design Approach for Enhancing Art Exposure in Urban Passageways", people: "Negin · Samira · Reza", pdf: "../assets/documents/bootcamp/GP07.pdf", video: "https://www.youtube.com/embed/bXv-C9zzPF8" },
           { code: "GP08", title: "Visual Legibility and Wayfinding in Typified Residential Complexes", people: "Anahita · Elnaz · Dorna", pdf: "../assets/documents/bootcamp/GP08.pdf", video: "https://www.youtube.com/embed/_xf8vpT2ma8" },
-          { code: "GP09", title: "Navigating the Unknown: Human Spatial Perception in Unfamiliar Indoor Environment", people: "Shima · Elham · Soha · Arghavan", pdf: "../assets/documents/bootcamp/GP09.pdf", video: "https://www.youtube.com/embed/oypzuJ_b6Rw" },
+          { code: "GP09", title: "Navigating the Unknown: Human Spatial Perception in Unfamiliar Indoor Environment", people: "Shima · Elham · Soha · Arghavan", pdf: "../assets/documents/bootcamp/GP09.pdf", previewPdf: "../assets/documents/bootcamp/GP09-preview.pdf", video: "https://www.youtube.com/embed/oypzuJ_b6Rw" },
           { code: "GP10", title: "Perception and Priority: Analysing Viewer Attention to Urban Billboards", people: "Parham · Mobina · Mahdieh", pdf: "../assets/documents/bootcamp/GP10.pdf" },
           { code: "GP11", title: "Silent Signals: Inferring Emotional States Without Direct Questioning", people: "Kiana · Zahra · Amirhossein", pdf: "../assets/documents/bootcamp/GP11.pdf", video: "https://youtube.com/embed/ce41spcnkf8?feature=share" },
           { code: "GP12", title: "Impact of Perspective on Human Perception", people: "Rozhin · Sana · Melika · Arta", video: "https://youtube.com/embed/osnqc3C5pmQ" }
@@ -1064,6 +1066,89 @@ const PROJECT_PAGE_DATA = {
         text: "This page documents the curriculum and its design position. It does not present the workshop as a research validation study; its value lies in making rigorous methods accessible and connected."
       }
     ]
+  },
+
+  "code-junkyard": {
+    page: "CJ",
+    title: "CodeJunkYard",
+    shortTitle: "CodeJunkYard",
+    subtitle: "Course archive<br>and lesson index",
+    icon: "../assets/icons/codejunkyard.svg",
+    iconAlt: "CodeJunkYard logo",
+    eyebrow: "Education / Course archive",
+    lead: "A bilingual archive of short algorithm lessons for architecture and urban design, built from slide-based sessions and recorded videos.",
+    role: "Course design & instruction",
+    period: "NexoNest education archive",
+    status: "Archive scaffold / sessions in progress",
+    stack: "Rhino / Grasshopper / Python / NexoRhino",
+    tags: ["CodeJunkYard", "Bilingual archive", "Computational geometry", "Rhino Python"],
+    links: [["Open Session 00", "codeJunkyardSession00.html"]],
+    question: "How can architects and urban designers learn useful algorithms without turning every topic into a large software project?",
+    response: "CodeJunkYard keeps each lesson small: one spatial problem, one core rule, one pseudocode block, one exercise, and a recorded walkthrough archived in Persian and English.",
+    proof: [
+      ["Bilingual", "Persian and English archive"],
+      ["Session based", "one page per lesson"],
+      ["Slide source", "same structure for page and video"],
+      ["NexoNest", "filterable and searchable education index"]
+    ],
+    sections: [
+      {
+        title: "Project structure",
+        kind: "steps",
+        items: [
+          ["01", "Course hub", "This page explains CodeJunkYard and links to the full lesson archive."],
+          ["02", "Session pages", "Each session has its own page so it can be filtered, searched, shared, and updated independently."],
+          ["03", "Slides and video", "The slide content gives the compact reference; the recorded video carries the full walkthrough."],
+          ["04", "Two languages", "The archive is planned for Persian and English access for every lesson."]
+        ]
+      },
+      {
+        title: "Archive",
+        kind: "archive",
+        items: [
+          { code: "CJY-Session-00", title: "Setup Rhino, Grasshopper, and NexoRhino", status: "Placeholder / video coming", href: "codeJunkyardSession00.html", description: "Prepare the base workflow and test it with a small voxel system around a curve." }
+        ]
+      },
+      {
+        title: "Why the archive matters",
+        kind: "split",
+        text: [
+          "The course is not only a video series. NexoNest becomes the long-term reference where learners can return to the lesson structure, pseudocode, assumptions, and related sessions.",
+          "The first version keeps pages intentionally compact. When a video is recorded, it can be attached without changing the lesson architecture."
+        ],
+        aside: { label: "Publishing rule", text: "A session can exist as a placeholder before the video is ready, but it should still explain what the learner will get." }
+      }
+    ]
+  },
+
+  "code-junkyard-session-00": {
+    page: "S-00",
+    title: "CJY-Session-00",
+    shortTitle: "CJY-Session-00",
+    subtitle: "Setup and first<br>voxel test",
+    icon: "../assets/icons/codejunkyard-session-00.svg",
+    iconAlt: "CJY-Session-00 logo",
+    eyebrow: "CodeJunkYard / Session 00",
+    lead: "Set up Rhino, Grasshopper, Python, and NexoRhino before the algorithm lessons begin.",
+    role: "Setup lesson",
+    period: "Course archive",
+    status: "Placeholder / video coming",
+    stack: "Rhino / Grasshopper / Python / NexoRhino stubs",
+    tags: ["Session 00", "Setup", "NexoRhino", "Voxel"],
+    links: [["Back to CodeJunkYard", "codeJunkyard.html"]],
+    question: "What has to be ready before the algorithm lessons can stay focused and repeatable?",
+    response: "Session 00 prepares the working environment, explains the course archive, and ends with a small voxel system around a curve as the first practical test.",
+    proof: [
+      ["Rhino", "model units and clean file"],
+      ["Grasshopper", "one definition, named inputs"],
+      ["Python", "editor and loops"],
+      ["NexoRhino", "stubs and autocomplete"]
+    ],
+    sections: [
+      { title: "What the video will cover", kind: "steps", items: [["00", "Introduce CodeJunkYard", "Project goal, archive structure, bilingual access, and learning path."], ["01", "Prepare Rhino and Grasshopper", "Set units, naming conventions, and a clean definition structure."], ["02", "Prepare Python and NexoRhino", "Connect the stubs and confirm editor support works."], ["03", "Build a voxel test", "Create a small voxel grid and keep boxes whose centers are close to a curve."]] },
+      { title: "Voxel teaser", kind: "split", text: ["The first exciting test is a small voxel system around a curve. Build a 3D grid, take each voxel center, find the closest point on the curve, and keep the voxel when the distance is below a chosen threshold.", "This is intentionally a center-distance test, not a full geometric intersection algorithm. It is simple enough for setup day and useful enough to feel like a real design tool."], aside: { label: "Rule", text: "Keep voxel if distance(center, curve) <= D." } },
+      { title: "Archive status", kind: "honesty", label: "Placeholder", text: "This page is ready as an archive entry. The detailed demonstration will be completed in the recorded Session 00 video." }
+    ]
   }
 };
 
@@ -1100,68 +1185,185 @@ function renderProof(items) {
 }
 
 function renderBootcampProject(item) {
-  const headerControls = item.pdf ? "" : `<span class="project-media-unavailable">PDF not submitted</span>`;
+  const headerControls = item.pdf ? `<a class="project-media-link" href="${escapeHtml(item.pdf)}" target="_blank" rel="noopener">Open PDF ↗</a>` : `<span class="project-media-unavailable">PDF not submitted</span>`;
   const media = item.video?.startsWith("http") ? `<iframe src="${escapeHtml(item.video)}" title="${escapeHtml(item.title)} animation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` : `<video controls playsinline preload="metadata" width="100%"><source src="${escapeHtml(item.video || "")}" type="video/mp4">Your browser could not load this animation.</video>`;
-  return `<div class="bootcamp-project-detail-head"><div><span class="bootcamp-project-code">${escapeHtml(item.code)}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.people)}</p></div><div class="bootcamp-project-actions">${headerControls}</div></div>${item.pdf ? `<div class="bootcamp-pdf-frame pdf-flip-viewer" data-pdf="${escapeHtml(item.pdf)}"><div class="pdf-spread" data-pdf-spread><canvas></canvas><canvas></canvas></div><div class="pdf-flip-controls"><button type="button" data-pdf-prev aria-label="Previous spread">←</button><span data-pdf-counter>Loading PDF…</span><button type="button" data-pdf-next aria-label="Next spread">→</button></div></div>` : `<div class="bootcamp-empty-media">This project was submitted as an animation only.</div>`}${item.video ? `<div class="bootcamp-animation"><div class="bootcamp-animation-label">Animation</div>${media}</div>` : ""}`;
+  return `<div class="bootcamp-project-detail-head"><div><span class="bootcamp-project-code">${escapeHtml(item.code)}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.people)}</p></div><div class="bootcamp-project-actions">${headerControls}</div></div>${item.pdf ? `<div class="bootcamp-pdf-frame pdf-flip-viewer" data-pdf="${escapeHtml(item.previewPdf || item.pdf)}" aria-busy="false"><div class="pdf-spread" data-pdf-spread><canvas hidden></canvas><canvas hidden></canvas></div><div class="pdf-flip-controls"><button type="button" data-pdf-prev aria-label="Previous spread" disabled>←</button><span data-pdf-counter role="status">PDF preview loads when visible</span><button type="button" data-pdf-next aria-label="Next spread" disabled>→</button><button type="button" data-pdf-retry hidden>Retry</button></div></div>` : `<div class="bootcamp-empty-media">This project was submitted as an animation only.</div>`}${item.video ? `<div class="bootcamp-animation"><div class="bootcamp-animation-label">Animation</div>${media}</div>` : ""}`;
 }
 
 let pdfJsPromise;
 let activeZoomRender = null;
+let activeZoomCancel = null;
 function loadPdfJs() {
-  if (!pdfJsPromise) pdfJsPromise = import("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs");
+  if (!pdfJsPromise) pdfJsPromise = import("../assets/vendor/pdfjs/pdf.min.mjs").catch(error => { pdfJsPromise = null; throw error; });
   return pdfJsPromise;
 }
 
 function initPdfViewers(root) {
   root.querySelectorAll(".pdf-flip-viewer").forEach(viewer => {
     if (viewer.dataset.ready) return;
-    viewer.dataset.ready = "loading";
+    viewer.dataset.ready = "pending";
     const counter = viewer.querySelector("[data-pdf-counter]");
-    let pdfDoc; let pageNumber = 1;
+    counter.textContent = "PDF preview loads when visible";
+    let pdfDoc; let pageNumber = 1; let loadingTask; let disposed = false; let drawing = false;
+    let observer; let timer; let resizeObserver; let resizeTimer;
+    let renderedWidth = viewer.clientWidth;
+    const renderTasks = new Set();
+    const retry = viewer.querySelector("[data-pdf-retry]");
+    const buttons = [...viewer.querySelectorAll("[data-pdf-prev], [data-pdf-next]")];
+    const setButtons = () => {
+      buttons[0].disabled = !pdfDoc || drawing || pageNumber === 1;
+      buttons[1].disabled = !pdfDoc || drawing || (pageNumber === 1 ? pdfDoc.numPages === 1 : pageNumber + 1 >= pdfDoc.numPages);
+    };
+    setButtons();
+    viewer.disposePdf = () => {
+      if (disposed) return;
+      disposed = true;
+      observer?.disconnect();
+      resizeObserver?.disconnect();
+      clearTimeout(timer);
+      clearTimeout(resizeTimer);
+      renderTasks.forEach(task => task.cancel());
+      activeZoomCancel?.();
+      activeZoomRender = null;
+      loadingTask?.destroy().catch(() => {});
+    };
+    const fail = error => {
+      if (disposed) return;
+      console.warn("PDF preview failed", error);
+      counter.textContent = "PDF preview unavailable — use Open PDF above";
+      viewer.dataset.ready = "error";
+      viewer.setAttribute("aria-busy", "false");
+      retry.hidden = false;
+      pdfDoc = null;
+      setButtons();
+      viewer.disposePdf();
+    };
     const canvases = [...viewer.querySelectorAll("canvas")];
     const draw = async () => {
-      if (!pdfDoc) return;
-      const first = await pdfDoc.getPage(pageNumber);
-      const second = pageNumber === 1 ? null : pageNumber + 1 <= pdfDoc.numPages ? await pdfDoc.getPage(pageNumber + 1) : null;
-      const base = first.getViewport({ scale: 1 });
-      const scale = Math.min((viewer.clientWidth - 46) / (base.width * (second ? 2 : 1)), 1.35);
-      for (let index = 0; index < canvases.length; index += 1) {
-        const page = index === 0 ? first : second;
-        const target = canvases[index];
-        target.hidden = false;
-        target.classList.toggle("is-empty", !page);
-        if (!page) { target.dataset.pageNumber = ""; target.width = base.width * Math.max(scale, .55); target.height = base.height * Math.max(scale, .55); target.getContext("2d").clearRect(0, 0, target.width, target.height); continue; }
-        target.dataset.pageNumber = String(pageNumber + index);
-        const viewport = page.getViewport({ scale: Math.max(scale, .55) });
-        target.width = viewport.width; target.height = viewport.height;
-        await page.render({ canvasContext: target.getContext("2d"), viewport }).promise;
+      if (!pdfDoc || disposed || drawing) return;
+      drawing = true;
+      renderedWidth = viewer.clientWidth;
+      setButtons();
+      try {
+        const first = await pdfDoc.getPage(pageNumber);
+        if (disposed) return;
+        const second = pageNumber > 1 && pageNumber + 1 <= pdfDoc.numPages ? await pdfDoc.getPage(pageNumber + 1) : null;
+        if (disposed) return;
+        const pages = [first, second];
+        const spread = viewer.querySelector("[data-pdf-spread]");
+        spread.dataset.cover = String(!second);
+        const widths = pages.filter(Boolean).map(page => page.getViewport({ scale: 1 }).width);
+        const scale = Math.max(.1, Math.min((viewer.clientWidth - 36) / widths.reduce((sum, width) => sum + width, 0), 1.35));
+        for (let index = 0; index < canvases.length; index += 1) {
+          if (disposed) return;
+          const page = pages[index];
+          const target = canvases[index];
+          target.hidden = !page;
+          target.dataset.pageNumber = "";
+          if (!page) continue;
+          const viewport = page.getViewport({ scale });
+          target.width = viewport.width; target.height = viewport.height;
+          const task = page.render({ canvasContext: target.getContext("2d"), viewport });
+          renderTasks.add(task);
+          try { await task.promise; } finally { renderTasks.delete(task); }
+          if (disposed) return;
+          target.dataset.pageNumber = String(pageNumber + index);
+        }
+        counter.textContent = pageNumber === 1 ? `Cover · Page 1 of ${pdfDoc.numPages}` : `Pages ${pageNumber}–${Math.min(pageNumber + 1, pdfDoc.numPages)} of ${pdfDoc.numPages}`;
+      } catch (error) { fail(error); }
+      finally {
+        drawing = false;
+        setButtons();
+        if (!disposed && pdfDoc && Math.abs(viewer.clientWidth - renderedWidth) > 1) resizeTimer = setTimeout(draw, 100);
       }
-      counter.textContent = pageNumber === 1 ? `Cover · Page 1 of ${pdfDoc.numPages}` : `Pages ${pageNumber}–${Math.min(pageNumber + 1, pdfDoc.numPages)} of ${pdfDoc.numPages}`;
     };
-    loadPdfJs().then(pdfjs => { pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs"; return pdfjs.getDocument(viewer.dataset.pdf).promise; }).then(doc => { pdfDoc = doc; viewer.dataset.ready = "ready"; draw(); }).catch(() => { counter.textContent = "PDF preview unavailable — open the PDF above"; viewer.dataset.ready = "error"; });
-    viewer.querySelector("[data-pdf-prev]").addEventListener("click", () => { if (pdfDoc) { pageNumber = pageNumber === 1 ? 1 : Math.max(1, pageNumber - (pageNumber === 2 ? 1 : 2)); draw(); } });
-    viewer.querySelector("[data-pdf-next]").addEventListener("click", () => { if (pdfDoc) { pageNumber = pageNumber === 1 ? Math.min(2, pdfDoc.numPages) : Math.min(pdfDoc.numPages, pageNumber + 2); draw(); } });
-    const header = viewer.previousElementSibling?.querySelectorAll("[data-pdf-header]");
-    header?.forEach(button => button.addEventListener("click", () => {
-      if (!pdfDoc) return;
-      pageNumber = button.dataset.pdfHeader === "prev" ? (pageNumber === 1 ? 1 : Math.max(1, pageNumber - (pageNumber === 2 ? 1 : 2))) : (pageNumber === 1 ? Math.min(2, pdfDoc.numPages) : Math.min(pdfDoc.numPages, pageNumber + 2));
-      draw();
-    }));
+    if ("ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(() => {
+        if (disposed || !pdfDoc || drawing || Math.abs(viewer.clientWidth - renderedWidth) <= 1) return;
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(draw, 100);
+      });
+      resizeObserver.observe(viewer);
+    }
+    const start = async () => {
+      if (disposed || viewer.dataset.ready !== "pending") return;
+      observer?.disconnect();
+      viewer.dataset.ready = "loading";
+      viewer.setAttribute("aria-busy", "true");
+      counter.textContent = "Loading PDF…";
+      timer = setTimeout(() => {
+        fail(new Error("PDF preview timed out"));
+        viewer.disposePdf();
+      }, 60000);
+      try {
+        const pdfjs = await loadPdfJs();
+        if (disposed) return;
+        pdfjs.GlobalWorkerOptions.workerSrc = new URL("../assets/vendor/pdfjs/pdf.worker.min.mjs", document.baseURI).href;
+        loadingTask = pdfjs.getDocument({ url: viewer.dataset.pdf, disableAutoFetch: true, disableStream: true });
+        loadingTask.onProgress = ({ loaded, total }) => {
+          if (!disposed && viewer.dataset.ready === "loading") counter.textContent = total > 0 ? `Loading PDF… ${Math.min(100, Math.round(loaded / total * 100))}%` : "Loading PDF…";
+        };
+        const doc = await loadingTask.promise;
+        if (disposed) return;
+        pdfDoc = doc;
+        await draw();
+        if (!disposed && viewer.dataset.ready !== "error") viewer.dataset.ready = "ready";
+      } catch (error) { fail(error); }
+      finally { clearTimeout(timer); viewer.setAttribute("aria-busy", "false"); }
+    };
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) start();
+      }, { rootMargin: "200px" });
+      observer.observe(viewer);
+    } else start();
+    viewer.querySelector("[data-pdf-prev]").addEventListener("click", () => { if (pdfDoc && !drawing && !disposed) { pageNumber = pageNumber === 1 ? 1 : Math.max(1, pageNumber - (pageNumber === 2 ? 1 : 2)); draw(); } });
+    viewer.querySelector("[data-pdf-next]").addEventListener("click", () => { if (pdfDoc && !drawing && !disposed && !buttons[1].disabled) { pageNumber = pageNumber === 1 ? 2 : pageNumber + 2; draw(); } });
+    retry.onclick = () => {
+      viewer.disposePdf();
+      const replacement = viewer.cloneNode(true);
+      delete replacement.dataset.ready;
+      replacement.querySelectorAll("canvas").forEach(canvas => { canvas.hidden = true; });
+      replacement.querySelector("[data-pdf-retry]").hidden = true;
+      viewer.replaceWith(replacement);
+      initPdfViewers(root);
+    };
+    let zoomBusy = false;
     viewer.addEventListener("click", async event => {
       const clicked = event.target.closest("canvas");
       const zoomDialog = document.getElementById("pdfZoomDialog");
       const zoomCanvas = zoomDialog?.querySelector("canvas");
-      if (!clicked || !pdfDoc || !clicked.dataset.pageNumber || !zoomDialog || !zoomCanvas) return;
-      const renderZoomPage = async pageNumber => {
-        const page = await pdfDoc.getPage(pageNumber);
-        const viewport = page.getViewport({ scale: 2.2 });
-        zoomCanvas.width = viewport.width; zoomCanvas.height = viewport.height;
-        await page.render({ canvasContext: zoomCanvas.getContext("2d"), viewport }).promise;
-        zoomDialog.querySelector("[data-zoom-counter]").textContent = `Page ${pageNumber} of ${pdfDoc.numPages}`;
-        activeZoomRender = delta => { const next = Math.max(1, Math.min(pdfDoc.numPages, pageNumber + delta)); if (next !== pageNumber) renderZoomPage(next); };
+      if (!clicked || !pdfDoc || disposed || zoomBusy || !clicked.dataset.pageNumber || !zoomDialog || !zoomCanvas) return;
+      let zoomCancelled = false;
+      let zoomTask;
+      activeZoomCancel = () => { zoomCancelled = true; zoomTask?.cancel(); activeZoomRender = null; };
+      const zoomButtons = [...zoomDialog.querySelectorAll("[data-zoom-prev], [data-zoom-next]")];
+      const renderZoomPage = async number => {
+        if (zoomBusy || zoomCancelled || disposed) return;
+        zoomBusy = true;
+        zoomButtons.forEach(button => { button.disabled = true; });
+        try {
+          const page = await pdfDoc.getPage(number);
+          if (zoomCancelled || disposed) return;
+          const viewport = page.getViewport({ scale: 2 });
+          zoomCanvas.width = viewport.width; zoomCanvas.height = viewport.height;
+          zoomTask = page.render({ canvasContext: zoomCanvas.getContext("2d"), viewport });
+          renderTasks.add(zoomTask);
+          await zoomTask.promise;
+          if (zoomCancelled || disposed) return;
+          zoomDialog.querySelector("[data-zoom-counter]").textContent = `Page ${number} of ${pdfDoc.numPages}`;
+          activeZoomRender = delta => { const next = Math.max(1, Math.min(pdfDoc.numPages, number + delta)); if (next !== number) renderZoomPage(next); };
+          zoomButtons[0].disabled = number === 1;
+          zoomButtons[1].disabled = number === pdfDoc.numPages;
+        } catch (error) {
+          if (!zoomCancelled && !disposed) {
+            console.warn("PDF zoom failed", error);
+            zoomDialog.querySelector("[data-zoom-counter]").textContent = "Page preview unavailable — use Open PDF";
+          }
+        } finally { renderTasks.delete(zoomTask); zoomTask = null; zoomBusy = false; }
       };
+      if (!zoomDialog.open) zoomDialog.showModal();
       await renderZoomPage(Number(clicked.dataset.pageNumber));
-      zoomDialog.showModal();
     });
   });
 }
@@ -1231,6 +1433,16 @@ function renderSection(section, index) {
     </div>`;
   }
 
+  if (section.kind === "archive") {
+    body = `<div class="project-archive-list">${section.items.map(item => `
+      <a class="project-archive-item" href="${escapeHtml(item.href)}">
+        <span>${escapeHtml(item.code)}</span>
+        <strong>${escapeHtml(item.title)}</strong>
+        <em>${escapeHtml(item.status)}</em>
+        <p>${escapeHtml(item.description)}</p>
+      </a>`).join("")}</div>`;
+  }
+
   if (section.kind === "figure") {
     body = `
       <figure class="project-figure">
@@ -1297,6 +1509,7 @@ function renderProjectPage(projectId) {
   if (!project || !root) return;
 
   document.title = `${project.title} | NexoNest`;
+  document.documentElement.lang = "en";
   const description = project.lead.replace(/<[^>]*>/g, "").trim();
   const setMeta = (name, content, property = false) => {
     const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
@@ -1316,7 +1529,7 @@ function renderProjectPage(projectId) {
     "@type": "CreativeWork",
     "name": project.title,
     "description": description,
-    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
+    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
     "author": {"@type":"Person", "name":"Hossein Nazari" },
     "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
   };
@@ -1377,6 +1590,8 @@ function renderProjectPage(projectId) {
   root.querySelectorAll(".bootcamp-project-list-item").forEach(button => button.addEventListener("click", () => {
     const item = projectShowcase?.items[Number(button.dataset.projectIndex)];
     if (!item || !projectDetail) return;
+    if (button.classList.contains("is-active")) return;
+    projectDetail.querySelectorAll(".pdf-flip-viewer").forEach(viewer => viewer.disposePdf?.());
     root.querySelectorAll(".bootcamp-project-list-item").forEach(entry => entry.classList.remove("is-active"));
     button.classList.add("is-active");
     projectDetail.innerHTML = renderBootcampProject(item);
@@ -1404,6 +1619,7 @@ function renderProjectPage(projectId) {
   const zoomDialog = document.getElementById("pdfZoomDialog");
   const closeZoom = () => zoomDialog?.close();
   zoomDialog?.querySelector(".pdf-zoom-close")?.addEventListener("click", closeZoom);
+  zoomDialog?.addEventListener("close", () => { activeZoomCancel?.(); activeZoomCancel = null; activeZoomRender = null; });
   zoomDialog?.querySelector("[data-zoom-prev]")?.addEventListener("click", () => activeZoomRender?.(-1));
   zoomDialog?.querySelector("[data-zoom-next]")?.addEventListener("click", () => activeZoomRender?.(1));
   zoomDialog?.addEventListener("click", event => { if (event.target === zoomDialog) closeZoom(); });
@@ -1427,6 +1643,8 @@ function renderProjectPage(projectId) {
     printerra: "prinTerra.html",
     "abm-bootcamp": "abmBootcamp.html",
     "sustainable-design": "sustainableDevelopment.html",
+    "code-junkyard": "codeJunkyard.html",
+    "code-junkyard-session-00": "codeJunkyardSession00.html",
     nexorhino: "nexoRhino.html"
   })[id];
 
@@ -1442,6 +1660,7 @@ function renderProjectPage(projectId) {
       </a>`;
   }
 
+  document.dispatchEvent(new CustomEvent("project:rendered"));
 }
 
 document.addEventListener("DOMContentLoaded", () => {

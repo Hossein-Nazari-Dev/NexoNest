@@ -10,6 +10,7 @@
       { "id": "comp-geo", "parent": "education", "label": "Computational Geometry" },
       { "id": "sustain", "parent": "education", "label": "Sustainability" },
       { "id": "programming", "parent": "education", "label": "Programming" },
+      { "id": "code-junkyard", "parent": "education", "label": "CodeJunkYard" },
       { "id": "design-proj", "parent": "projects", "label": "Design Projects" },
       { "id": "sim-analysis", "parent": "projects", "label": "Simulation and Analysis" },
       { "id": "robot-io", "parent": "projects", "label": "Robotic and IoT" },
@@ -154,6 +155,26 @@
         "categories": ["events", "education"],
         "subcategories": ["workshop", "sustain"],
         "image": "assets/logo.svg"
+      },
+      {
+        "id": "p_code_junkyard",
+        "title": "CodeJunkYard",
+        "excerpt": "The course hub and bilingual archive for small algorithm lessons in architecture and urban design.",
+        "url": "projects-pages/codeJunkyard.html",
+        "icon": "assets/icons/codejunkyard.svg",
+        "categories": ["education"],
+        "subcategories": ["code-junkyard", "programming", "comp-geo"],
+        "image": "assets/icons/codejunkyard.svg"
+      },
+      {
+        "id": "p_code_junkyard_session_00",
+        "title": "CJY-Session-00",
+        "excerpt": "Setup Rhino, Grasshopper, Python, and NexoRhino, then test the workflow with a small voxel system around a curve.",
+        "url": "projects-pages/codeJunkyardSession00.html",
+        "icon": "assets/icons/codejunkyard-session-00.svg",
+        "categories": ["education"],
+        "subcategories": ["code-junkyard", "programming", "comp-geo"],
+        "image": "assets/icons/codejunkyard-session-00.svg"
       }
     ]
   }

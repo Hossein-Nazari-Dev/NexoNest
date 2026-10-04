@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
       img.src = resolveURL(currentProject.image);
       img.alt = currentProject.title || 'Project image';
       img.className = 'popup-image-element';
+      if (/\.svg(?:[?#].*)?$/i.test(currentProject.image)) {
+        img.classList.add('popup-image-element--logo');
+      }
       img.onerror = () => {
         popupImage.innerHTML = 'Image not available';
         popupImage.style.display = 'grid';

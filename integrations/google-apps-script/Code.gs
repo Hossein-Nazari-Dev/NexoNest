@@ -1,6 +1,9 @@
 const SHEET_NAME = 'Subscribers';
 const TOKEN_VALID_DAYS = 7;
 const NEXOBREAK_URL = 'https://www.food4rhino.com/en/browse?searchText=nexobreak&form_build_count=1&sort_by=fs_field_rating';
+const NEXOBREAK_PAGE_URL = 'https://nexonest.com/projects-pages/nexoBreak.html';
+const NEXOBREAK_DASHBOARD_IMAGE = 'https://nexonest.com/assets/images/projects/nexobreak/dashboard.png';
+const NEXOBREAK_BACKUPS_IMAGE = 'https://nexonest.com/assets/images/projects/nexobreak/settings-backups.png';
 const HEADERS = [
   'Submitted At', 'Status', 'Confirmed At', 'Full Name', 'Email',
   'Education Level', 'Field of Study', 'Occupation', 'Organization',
@@ -179,6 +182,9 @@ function sendNexoBreakAnnouncement() {
 function sendNexoBreakEmail_(name, email) {
   const safeName = escape_(clean_(name, 120) || 'there');
   const safeUrl = escape_(NEXOBREAK_URL);
+  const safePageUrl = escape_(NEXOBREAK_PAGE_URL);
+  const safeDashboardImage = escape_(NEXOBREAK_DASHBOARD_IMAGE);
+  const safeBackupsImage = escape_(NEXOBREAK_BACKUPS_IMAGE);
   const subject = 'NexoBreak: plan, focus, and recover inside Rhino';
   const html = '<div style="margin:0;padding:0;background:#e8f1f0;color:#1f2a27;font-family:monospace">' +
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:#e8f1f0"><tr><td align="center" style="padding:36px 18px">' +
@@ -191,14 +197,18 @@ function sendNexoBreakEmail_(name, email) {
     '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d">Hello ' + safeName + ',</p>' +
     '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d"><strong>NexoBreak</strong>, our new focus and break companion for Rhino, is now available on food4Rhino.</p>' +
     '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d">It brings daily task planning, time tracking, guided breaks, local reports, and versioned backups into the modeling workspace, so you can structure the day without leaving Rhino.</p>' +
+    '<p style="margin:24px 0 8px"><img src="' + safeDashboardImage + '" alt="NexoBreak dashboard inside Rhino" style="display:block;width:100%;max-width:572px;border:1px solid #bdd2cc"></p>' +
+    '<p style="margin:0 0 24px;font-size:11px;line-height:1.6;color:#67736f">Daily planning, focus tracking, break controls, reports, and settings stay close to the Rhino workspace.</p>' +
     '<ul style="margin:0 0 24px;padding:0;list-style:none;border-top:1px dotted #8fb1a8">' +
     '<li style="padding:12px 0;border-bottom:1px dotted #8fb1a8;font-size:13px;line-height:1.65;color:#33413d"><strong>Plan up to five daily tasks</strong><br><span style="color:#67736f">Set estimates, switch focus, and track progress while you work.</span></li>' +
     '<li style="padding:12px 0;border-bottom:1px dotted #8fb1a8;font-size:13px;line-height:1.65;color:#33413d"><strong>Understand your working time</strong><br><span style="color:#67736f">Review local reports with task timing, actual duration, application activity, and idle periods.</span></li>' +
     '<li style="padding:12px 0;border-bottom:1px dotted #8fb1a8;font-size:13px;line-height:1.65;color:#33413d"><strong>Take short guided breaks</strong><br><span style="color:#67736f">Use stretch routines, visual tracking, Vector Vision, Star Catcher, or Duck Hunt inside Rhino.</span></li>' +
     '<li style="padding:12px 0;border-bottom:1px dotted #8fb1a8;font-size:13px;line-height:1.65;color:#33413d"><strong>Keep versioned backups</strong><br><span style="color:#67736f">Create timestamped snapshots of your Rhino model and active Grasshopper definition beside your saved model.</span></li>' +
     '</ul>' +
+    '<p style="margin:24px 0 8px"><img src="' + safeBackupsImage + '" alt="NexoBreak safety backup settings" style="display:block;width:100%;max-width:572px;border:1px solid #bdd2cc"></p>' +
+    '<p style="margin:0 0 24px;font-size:11px;line-height:1.6;color:#67736f">Autosave-style versioned backups create timestamped copies without moving or renaming your working file.</p>' +
     '<p style="margin:0 0 24px;font-size:14px;line-height:1.75;color:#33413d">Core task, activity, report, and model data stay on your computer. Optional Game Club features share account identity and game scores only.</p>' +
-    '<p style="margin:30px 0"><a href="' + safeUrl + '" style="display:inline-block;padding:15px 19px;border:1px solid #4b7c6e;color:#1f2a27;text-decoration:none;font-size:13px;font-weight:600">Download NexoBreak on food4Rhino</a></p>' +
+    '<p style="margin:30px 0"><a href="' + safeUrl + '" style="display:inline-block;padding:15px 19px;border:1px solid #4b7c6e;color:#1f2a27;text-decoration:none;font-size:13px;font-weight:600">Download NexoBreak on food4Rhino</a> <a href="' + safePageUrl + '" style="display:inline-block;margin-left:8px;padding:15px 19px;border:1px dotted #4b7c6e;color:#1f2a27;text-decoration:none;font-size:13px;font-weight:600">View product page</a></p>' +
     '<p style="margin:0 0 24px;font-size:12px;line-height:1.7;color:#67736f">Requirements: Windows, Rhino 8.34 or later, and Rhino running .NET 8. NexoBreak is proprietary software and currently free on food4Rhino.</p>' +
     '<p style="margin:0 0 24px;font-size:12px;line-height:1.7;color:#67736f">You are receiving this because you subscribed to NexoNest Field Notes.</p>' +
     '</td></tr>' +
@@ -218,13 +228,11 @@ function sendNexoBreakEmail_(name, email) {
     '- Keep timestamped snapshots of your Rhino model and active Grasshopper definition beside your saved model.\n\n' +
     'Core task, activity, report, and model data stay on your computer. Optional Game Club features share account identity and game scores only.\n\n' +
     'Download NexoBreak on food4Rhino:\n' + NEXOBREAK_URL + '\n\n' +
+    'Product page:\n' + NEXOBREAK_PAGE_URL + '\n\n' +
     'Requirements: Windows, Rhino 8.34 or later, and Rhino running .NET 8. NexoBreak is proprietary software and currently free on food4Rhino.\n\n' +
     'You are receiving this because you subscribed to NexoNest Field Notes.\n\n' +
     'NexoNest\nCurious by design.';
-  MailApp.sendEmail({
-    to: email,
-    subject,
-    body,
+  GmailApp.sendEmail(email, subject, body, {
     htmlBody: html,
     name: 'NexoNest'
   });

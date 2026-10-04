@@ -105,7 +105,7 @@
       : cats.find(item => item.id === activeCat)?.label;
 
     if (summary) {
-      const noun = activeCount === 1 ? 'project' : 'projects';
+      const noun = activeCount === 1 ? 'item' : 'items';
       summary.textContent = context
         ? `${activeCount} ${noun} in ${context}`
         : `${activeCount} ${noun} in the index`;

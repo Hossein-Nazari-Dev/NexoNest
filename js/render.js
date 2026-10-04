@@ -22,6 +22,8 @@ function renderProjects() {
         'p_octocity',
         'p_abm_bootcamp',
         'p_octomass',
+        'p_code_junkyard',
+        'p_code_junkyard_session_00',
         'p_sustainable_development',
         'p_printerra',
         'p_geofactory',
