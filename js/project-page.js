@@ -4,6 +4,7 @@ const PROJECT_PAGE_ORDER = [
   "building-alignment",
   "design-suite",
   "nexobreak",
+  "nexosolve",
   "octomass",
   "octoland",
   "octocity",
@@ -17,6 +18,323 @@ const PROJECT_PAGE_ORDER = [
 ];
 
 const PROJECT_PAGE_DATA = {
+  nexosolve: {
+  "page": "16",
+  "title": "NexoSolve",
+  "shortTitle": "NexoSolve",
+  "subtitle": "Parametric studies for<br>Rhino and Grasshopper",
+  "icon": "../assets/images/projects/nexosolve/nexosolve-icon.png",
+  "iconAlt": "NexoSolve product icon",
+  "eyebrow": "NexoNest / Parametric studies",
+  "lead": "Explore every combination. Keep every result. Run finite parametric studies from your Grasshopper definition with a dedicated desktop workspace. Define your inputs, record the outputs that matter, and follow each case from calculation to saved results.",
+  "role": "Product design & development / NexoNest",
+  "period": "2026 — present",
+  "status": "0.0.1 Beta / Early access",
+  "stack": "Windows x64 / Rhino 8.34+ / .NET 8",
+  "tags": [
+    "Grasshopper",
+    "Finite studies",
+    "Pause & resume",
+    "Local results"
+  ],
+  "links": [
+    [
+      "Download Windows trial",
+      "https://github.com/Hossein-Nazari-Dev/NexoNest---Products/releases/tag/v0.0.1"
+    ]
+  ],
+  "navGroups": {
+    "What you gain": "Features",
+    "Your study workspace": "Features",
+    "From definition to saved results": "Features",
+    "Choose the values you actually need": "Features",
+    "Review before you run": "Features",
+    "Pause safely. Continue later.": "Features",
+    "Reuse compatible results": "Features",
+    "Keep results on your computer": "Features",
+    "Light and dark workspaces": "Features",
+    "Requirements": "Getting started",
+    "Trial and licensing": "Getting started",
+    "Pricing": "Getting started",
+    "Account and offline access": "Getting started",
+    "Install the complete package": "Getting started",
+    "Questions": "About",
+    "Early-access status": "About",
+    "Get NexoSolve": "About"
+  },
+  "question": "How can you explore a finite design space without losing progress, results, or the calculation context?",
+  "response": "Keep geometry, simulation and evaluation in Grasshopper. NexoSolve manages the sequence, records each case locally, and helps you resume or review the study.",
+  "proof": [
+    [
+      "Brute Force",
+      "exhaustive finite enumeration"
+    ],
+    [
+      "Case by case",
+      "saved progress and recovery"
+    ],
+    [
+      "CSV + geometry",
+      "local results and optional images"
+    ],
+    [
+      "Two themes",
+      "light and dark workspaces"
+    ]
+  ],
+  "sections": [
+    {
+      "title": "What you gain",
+      "kind": "cards",
+      "items": [
+        ["Know what ran", "Review the full case count, completed, failed and remaining cases, active time and estimated time before and during a study."],
+        ["Recover your progress", "Pause or stop at a saved case boundary, then resume with recorded progress and execution settings."],
+        ["Keep an audit trail", "Save case results locally and export numeric data as CSV with per-scenario geometry and optional images."],
+        ["Avoid compatible reruns", "Reuse matching successful cases when you expand a domain and the underlying calculation is still compatible."]
+      ]
+    },
+    {
+      "title": "Your study workspace",
+      "kind": "figure-text",
+      "image": "../assets/images/projects/nexosolve/study-running-dark.png",
+      "alt": "NexoSolve study progress, saved cases and pause controls in dark mode",
+      "caption": "Actual NexoSolve interface with demonstration study data.",
+      "text": "See completed, failed and remaining cases, active time and estimated time remaining in one workspace. NexoSolve runs cases serially; geometry, simulation and evaluation stay in your Grasshopper definition."
+    },
+    {
+      "title": "From definition to saved results",
+      "kind": "steps",
+      "items": [
+        [
+          "01",
+          "Model",
+          "Register connected number sliders or explicit numeric lists, numeric outputs, optional meshes and viewport captures."
+        ],
+        [
+          "02",
+          "Project",
+          "Choose a local project destination. NexoSolve keeps the study with its recorded model context."
+        ],
+        [
+          "03",
+          "Execution",
+          "Set case timing, active run budget and completion behavior."
+        ],
+        [
+          "04",
+          "Review and run",
+          "Confirm the variables, case count and destination before starting exhaustive enumeration."
+        ],
+        [
+          "05",
+          "Completion",
+          "Inspect locally saved results, export numeric data and reopen the study when needed."
+        ]
+      ]
+    },
+    {
+      "title": "Choose the values you actually need",
+      "kind": "figure-text",
+      "image": "../assets/images/projects/nexosolve/custom-variable-light.png",
+      "alt": "Custom variable editor with name, units and allowed numeric values",
+      "caption": "Actual NexoSolve interface with demonstration study data.",
+      "text": "Name your variables, add units and descriptions, and preserve the order of custom values. Use connected sliders or explicit numeric lists to define the finite domain."
+    },
+    {
+      "title": "Review before you run",
+      "kind": "figure-text",
+      "image": "../assets/images/projects/nexosolve/study-review-light.png",
+      "alt": "Study summary and confirmation before Run",
+      "caption": "Actual NexoSolve interface with demonstration study data.",
+      "text": "Check the full case count, project destination, timing and completion settings before starting. Exhaustive enumeration grows with the product of the variable value counts; choose a manageable domain."
+    },
+    {
+      "title": "Pause safely. Continue later.",
+      "kind": "figure-text",
+      "image": "../assets/images/projects/nexosolve/study-paused-dark.png",
+      "alt": "Paused study with saved progress and resume controls",
+      "caption": "Actual NexoSolve interface with demonstration study data.",
+      "text": "Pause or stop after the current case is saved. Resume a saved study with its recorded progress and execution settings. Synchronous Grasshopper components may need to return before a pause or timeout can take effect."
+    },
+    {
+      "title": "Reuse compatible results",
+      "kind": "split",
+      "text": [
+        "Expand or change a study domain without recalculating matching successful cases when the underlying calculation remains compatible.",
+        "Saved model copies and calculation signatures help keep the study context available for comparison and recovery.",
+        "Changes to the calculation can block reuse. External data and solver changes require an explicit revision so earlier results are not silently treated as equivalent."
+      ],
+      "aside": {
+        "label": "Calculation ownership",
+        "text": "NexoSolve manages the sequence and persistence. Validate the analysis and registered outputs on your own Grasshopper definition."
+      }
+    },
+    {
+      "title": "Keep results on your computer",
+      "kind": "figure-text",
+      "image": "../assets/images/projects/nexosolve/study-resume-light.png",
+      "alt": "Saved study summary with recorded progress ready to resume",
+      "caption": "Actual NexoSolve interface with demonstration study data.",
+      "text": "Each committed case is saved locally. Reopen the study to review progress and continue when needed. Export numeric results as CSV, with per-scenario result and geometry files and optional viewport images. Model backups support recovery and comparison. The licensing service handles account and activation information; it does not receive your models or study results."
+    },
+    {
+      "title": "Light and dark workspaces",
+      "kind": "cards",
+      "items": [
+        ["Light theme", "Use a bright workspace in well-lit modeling environments."],
+        ["Dark theme", "Switch to a darker workspace while keeping the same study controls and workflow."]
+      ]
+    },
+    {
+      "title": "Requirements",
+      "kind": "table",
+      "headers": [
+        "Area",
+        "Requirement"
+      ],
+      "rows": [
+        [
+          "Operating system",
+          "Windows x64"
+        ],
+        [
+          "Host",
+          "Rhino 8.34 or later with Grasshopper, running .NET 8"
+        ],
+        [
+          "Package",
+          "Complete installation folder: NexoSolve.gha plus the adjacent Desktop folder; the desktop includes its Windows runtime"
+        ],
+        [
+          "Connection",
+          "Internet required for first activation and email sign-in"
+        ]
+      ]
+    },
+    {
+      "title": "Trial and licensing",
+      "kind": "table",
+      "headers": [
+        "Access",
+        "Duration and conditions"
+      ],
+      "rows": [
+        [
+          "Guest trial",
+          "14 days from first online device activation; no login required"
+        ],
+        [
+          "Verified account trial",
+          "Until day 90 from the same first activation; guest time is included"
+        ],
+        [
+          "License",
+          "Paid license available as a 1, 3, 6 or 12-month voucher requested by email"
+        ],
+        [
+          "Course voucher",
+          "Redeem an eligible participant code inside Account & License"
+        ]
+      ]
+    },
+    {
+      "title": "Pricing",
+      "kind": "table",
+      "headers": [
+        "Term",
+        "USD",
+        "IRR (Rial)"
+      ],
+      "rows": [
+        ["1 month", "$6", "1,900,000 IRR"],
+        ["3 months", "$15", "4,900,000 IRR"],
+        ["6 months", "$27", "8,900,000 IRR"],
+        ["12 months", "$45", "15,900,000 IRR"]
+      ],
+      "note": "Each option is a prepaid voucher for one user and one active device. No recurring billing. To purchase and receive your selected voucher, email nexonest.contact@gmail.com. Voucher issuance is handled manually after payment confirmation."    },
+    {
+      "title": "Account and offline access",
+      "kind": "split",
+      "text": [
+        "One active device is allowed per account. Sign in with an email verification code. Normal license checks send no email. Reinstalling does not restart the trial.",
+        "Signed offline access lasts up to seven days, bounded by trial or license expiry. If access expires during a study, the current case finishes and saves before the study pauses. Device transfers can require waiting up to seven days for an existing offline activation to expire."
+      ],
+      "aside": {
+        "label": "Licensing enquiries",
+        "text": "Choose a 1, 3, 6 or 12-month voucher from the Pricing section. Email nexonest.contact@gmail.com to purchase and receive it; issuance is manual after payment confirmation. Newsletter subscription is optional."
+      }
+    },
+    {
+      "title": "Install the complete package",
+      "kind": "steps",
+      "items": [
+        [
+          "01",
+          "Extract",
+          "Download the Windows trial package from the official 0.0.1 Beta release. Follow its installation notes for the matching Grasshopper and Desktop files."
+        ],
+        [
+          "02",
+          "Close Rhino",
+          "Close Rhino before replacing an older installation. Remove duplicate older plugin copies."
+        ],
+        [
+          "03",
+          "Copy the folder",
+          "Copy the complete folder into Grasshopper Libraries as NexoSolve. Keep NexoSolve.gha and the adjacent Desktop folder together."
+        ],
+        [
+          "04",
+          "Open NexoSolve",
+          "Open Rhino and Grasshopper. Use Open NexoSolve on Nexo Connector; leave App Path blank for normal portable discovery."
+        ]
+      ]
+    },
+    {
+      "title": "Questions",
+      "kind": "cards",
+      "items": [
+        [
+          "Is it an optimization solver?",
+          "The current desktop runs exhaustive finite studies. It does not automatically search for an optimum or offer optimizer selection."
+        ],
+        [
+          "Can I use my own simulation components?",
+          "Your Grasshopper definition owns the analysis. Register its inputs and numeric outputs, then validate the study on your own definition."
+        ],
+        [
+          "Does it update automatically?",
+          "Use NexoSolve Club to check Grasshopper plugin updates. Desktop updates are user-started; they are not installed in the background."
+        ],
+        [
+          "Can I move to another computer?",
+          "Contact support for a device transfer. Trial history and license expiry remain unchanged."
+        ]
+      ]
+    },
+    {
+      "title": "Early-access status",
+      "kind": "honesty",
+      "label": "Release checks remain",
+      "text": "Version 0.0.1 Beta is publicly available. Automated engine, recovery, packaging and UI checks are recorded, as are live guest activation and license signature checks. Broader Rhino acceptance remains ongoing. Screenshots show the actual application with demonstration data, not a completed customer simulation."
+    },
+    {
+      "title": "Get NexoSolve",
+      "kind": "credits",
+      "text": "Download the Windows trial from the official 0.0.1 Beta release, or email nexonest.contact@gmail.com to purchase and receive a 1, 3, 6 or 12-month voucher. Voucher issuance is manual after payment confirmation.",
+      "links": [
+        [
+          "Download Windows trial",
+          "https://github.com/Hossein-Nazari-Dev/NexoNest---Products/releases/tag/v0.0.1"
+        ],
+        [
+          "Email to request a voucher",
+          "mailto:nexonest.contact@gmail.com?subject=NexoSolve%20voucher%20request"
+        ]
+      ]
+    }
+  ]
+},
   nexorhino: {
     page: "12",
     title: "NexoRhino",
@@ -1368,7 +1686,8 @@ function initPdfViewers(root) {
   });
 }
 
-function renderSection(section, index) {
+function renderSection(section, index, navGroups = {}) {
+  const navGroup = navGroups[section.title];
   const heading = `
     <div class="section-heading-row">
       <span>${String(index + 1).padStart(2, "0")}</span>
@@ -1411,7 +1730,7 @@ function renderSection(section, index) {
           <thead><tr>${section.headers.map(header => `<th>${escapeHtml(header)}</th>`).join("")}</tr></thead>
           <tbody>${section.rows.map(row => `<tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
         </table>
-      </div>`;
+      </div>${section.note ? `<p class="project-table-note">${escapeHtml(section.note)}</p>` : ""}`;
   }
 
   if (section.kind === "columns") {
@@ -1500,7 +1819,7 @@ function renderSection(section, index) {
       </div>`;
   }
 
-  return `<section class="content-section project-editorial-section" data-nav-title="${escapeHtml(section.title)}">${heading}${body}</section>`;
+  return `<section class="content-section project-editorial-section" data-nav-title="${escapeHtml(section.title)}"${navGroup ? ` data-nav-group="${escapeHtml(navGroup)}"` : ""}>${heading}${body}</section>`;
 }
 
 function renderProjectPage(projectId) {
@@ -1529,7 +1848,7 @@ function renderProjectPage(projectId) {
     "@type": "CreativeWork",
     "name": project.title,
     "description": description,
-    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
+    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", nexosolve:"nexoSolve.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
     "author": {"@type":"Person", "name":"Hossein Nazari" },
     "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
   };
@@ -1575,7 +1894,7 @@ function renderProjectPage(projectId) {
     </section>
 
     ${renderProof(project.proof)}
-    ${project.sections.map(renderSection).join("")}
+    ${project.sections.map((section, index) => renderSection(section, index, project.navGroups)).join("")}
     <dialog class="project-video-dialog" id="projectVideoDialog" aria-labelledby="projectVideoTitle">
       <div class="project-video-dialog-bar"><h2 id="projectVideoTitle">Project animation</h2><button type="button" class="project-video-close" aria-label="Close">×</button></div>
       <video controls playsinline class="project-video-player"></video>
@@ -1636,6 +1955,7 @@ function renderProjectPage(projectId) {
     "building-alignment": "buildingAlignment.html",
     "design-suite": "nexonestDesignSuite.html",
     nexobreak: "nexoBreak.html",
+    nexosolve: "nexoSolve.html",
     octomass: "octoMass.html",
     octoland: "octoLand.html",
     octocity: "octoCity.html",

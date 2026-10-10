@@ -42,20 +42,41 @@ function buildSidebarNav() {
   const sections = document.querySelectorAll('.content-section');
   if (!sidebar || !sections.length) return;
 
-  const navItems = Array.from(sections).map((sec, idx) => {
+  const sectionItems = Array.from(sections).map((sec, idx) => {
     const titleEl = sec.querySelector('.section-title');
-    if (!titleEl) return '';
+    if (!titleEl) return null;
     const id = `section-${idx + 1}`;
     sec.id = id;
     const label = sec.dataset.navTitle || titleEl.textContent;
-    return `
+    return {
+      group: sec.dataset.navGroup || '',
+      html: `
       <div class="nav-item">
         <a href="#${id}" class="nav-link" data-section="${id}">
           <span class="nav-index">${String(idx + 1).padStart(2, '0')}</span>
           <span>${label}</span>
         </a>
-      </div>`;
-  }).join('');
+      </div>`
+    };
+  }).filter(Boolean);
+
+  const hasGroups = sectionItems.some(item => item.group);
+  let navItems;
+  if (!hasGroups) {
+    navItems = sectionItems.map(item => item.html).join('');
+  } else {
+    const groups = new Map();
+    sectionItems.forEach(item => {
+      const group = item.group || 'More';
+      if (!groups.has(group)) groups.set(group, []);
+      groups.get(group).push(item.html);
+    });
+    navItems = Array.from(groups, ([group, items]) => `
+      <details class="nav-group">
+        <summary>${group}</summary>
+        <div class="nav-group-items">${items.join('')}</div>
+      </details>`).join('');
+  }
 
   sidebar.innerHTML = navItems;
   setupSmoothScroll();
@@ -110,6 +131,10 @@ function observeSections() {
         const id = ent.target.id;
         document.querySelectorAll('.nav-link').forEach(link => {
           link.classList.toggle('active', link.getAttribute('data-section') === id);
+        });
+        document.querySelectorAll('.nav-group').forEach(group => {
+          const activeLink = group.querySelector(`.nav-link[data-section="${id}"]`);
+          group.querySelector('summary')?.classList.toggle('active', Boolean(activeLink));
         });
       }
     });

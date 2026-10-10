@@ -57,6 +57,31 @@ body, .project-theme { font-family: 'JetBrains Mono', monospace; }
 
 .sidebar-nav { width: 100%; display: flex; flex-direction: column; gap: 1px; margin-top: var(--sp-1); }
 .sidebar-primary { display: grid; gap: 6px; }
+.sidebar-primary .nav-group {
+  border-bottom: 1px dashed color-mix(in oklab, var(--color-connector) 55%, transparent);
+}
+.sidebar-primary .nav-group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 2px;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: 700;
+  list-style: none;
+}
+.sidebar-primary .nav-group summary::-webkit-details-marker { display: none; }
+.sidebar-primary .nav-group summary::after {
+  content: "+";
+  color: var(--color-muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+.sidebar-primary .nav-group[open] summary::after { content: "−"; }
+.sidebar-primary .nav-group summary:hover,
+.sidebar-primary .nav-group summary.active { color: var(--color-accent); }
+.sidebar-primary .nav-group-items { display: grid; gap: 2px; padding: 0 0 8px 8px; }
 .sidebar-separator { border-top: 1px dashed var(--color-connector); margin: var(--sp-2) 0 var(--sp-1); opacity: .6; }
 .sidebar-secondary { display: flex; flex-direction: column; gap: 2px; }
 
@@ -1091,6 +1116,28 @@ body.project-theme {
   grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr);
 }
 
+.nexosolve-theme .figure-text-layout {
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 5vw, 56px);
+}
+
+.nexosolve-theme .figure-text-layout .project-figure img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(420px, 52vh);
+  margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+  .nexosolve-theme .figure-text-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nexosolve-theme .figure-text-layout .project-figure img {
+    max-height: min(320px, 48vh);
+  }
+}
+
 .project-honesty {
   display: grid;
   grid-template-columns: 170px minmax(0, 1fr);
@@ -1191,6 +1238,49 @@ body.project-theme {
   color: var(--c-accent-dark);
 }
 
+.nexosolve-theme .project-editorial-hero .project-links {
+  justify-content: flex-start;
+  margin-top: 22px;
+}
+
+.nexosolve-theme .project-editorial-hero .project-links a:first-child {
+  padding: 11px 16px;
+  border: 1px solid var(--c-accent-dark);
+  border-radius: 4px;
+  background: var(--c-accent-dark);
+  color: var(--color-white);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.nexosolve-theme .project-editorial-hero .project-links a:first-child:hover {
+  background: var(--c-accent-nexo);
+  border-color: var(--c-accent-nexo);
+  color: var(--color-white);
+}
+
+.nexosolve-theme .project-editorial-section[data-nav-title="What you gain"] .project-card-grid {
+  gap: 12px;
+}
+
+.nexosolve-theme .project-editorial-section[data-nav-title="What you gain"] .project-info-card {
+  min-height: 164px;
+  padding: 22px;
+  border: 1px solid color-mix(in oklab, var(--c-accent-dark) 24%, transparent);
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--color-surface) 93%, var(--c-accent-nexo));
+}
+
+.nexosolve-theme .project-editorial-section[data-nav-title="What you gain"] .project-info-card h3 {
+  color: var(--c-accent-dark);
+  font-size: .96rem;
+}
+
+.nexosolve-theme .project-editorial-section[data-nav-title="What you gain"] .project-info-card p {
+  max-width: 34ch;
+  line-height: 1.7;
+}
+
 .project-table-wrap {
   overflow-x: auto;
   border-top: 1px solid rgba(75, 124, 110, .34);
@@ -1230,6 +1320,35 @@ body.project-theme {
 .project-table td:nth-child(2) { color: var(--color-text); font-weight: 600; }
 .project-table td:nth-child(3), .project-table td:nth-child(4) { color: var(--color-muted); }
 .project-table tr:last-child td { border-bottom: 0; }
+
+.project-table-note {
+  max-width: 88ch;
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: .68rem;
+  line-height: 1.7;
+}
+
+.nexosolve-theme .project-editorial-section[data-nav-title="Pricing"] .project-table {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.nexosolve-theme .project-editorial-section[data-nav-title="Pricing"] .project-table th,
+.nexosolve-theme .project-editorial-section[data-nav-title="Pricing"] .project-table td {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .nexosolve-theme .project-editorial-section[data-nav-title="Pricing"] .project-table {
+    font-size: .62rem;
+  }
+
+  .nexosolve-theme .project-editorial-section[data-nav-title="Pricing"] .project-table th,
+  .nexosolve-theme .project-editorial-section[data-nav-title="Pricing"] .project-table td {
+    padding: 9px 6px;
+  }
+}
 
 .project-archive-list {
   display: grid;

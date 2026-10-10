@@ -15,6 +15,7 @@
       { "id": "sim-analysis", "parent": "projects", "label": "Simulation and Analysis" },
       { "id": "robot-io", "parent": "projects", "label": "Robotic and IoT" },
       { "id": "design-suite", "parent": "products", "label": "NexoNest Design Suite" },
+      { "id": "nexosolve", "parent": "products", "label": "NexoSolve" },
       { "id": "nexobreak", "parent": "products", "label": "NexoBreak" },
       { "id": "octomass", "parent": "products", "label": "OctoMass" },
       { "id": "octoland", "parent": "products", "label": "OctoLand" },
@@ -26,6 +27,20 @@
       { "id": "bootcamp", "parent": "events", "label": "Bootcamps" }
     ],
     "projects": [
+      {
+        "id": "p_nexosolve",
+        "title": "NexoSolve",
+        "excerpt": "NexoNest Beta for finite Rhino and Grasshopper studies: track every case, recover saved progress, reuse compatible results and export locally.",
+        "url": "projects-pages/nexoSolve.html",
+        "icon": "assets/images/projects/nexosolve/nexosolve-icon.png",
+        "categories": [
+          "products"
+        ],
+        "subcategories": [
+          "nexosolve"
+        ],
+        "image": "assets/images/projects/nexosolve/study-running-dark.png"
+      },
       {
         "id": "p_nexorhino",
         "title": "NexoRhino",
