@@ -2,6 +2,7 @@
 const LICENSE_ADMIN_SHEET = 'AS_nexosolve';
 
 function onOpen() {
+  if (typeof workshopMenu_ === 'function') workshopMenu_();
   const ui = SpreadsheetApp.getUi();
   ui.createMenu('NexoSolve Admin')
     .addItem('Refresh accounts', 'refreshLicenseAdminSheet')

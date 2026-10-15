@@ -9,7 +9,7 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-10
+reviewed: 2026-10-15
 status: maintained
 ---
 
@@ -94,6 +94,51 @@ flowchart TD
 
 No part of the diagram implies a currently deployed or functioning remote
 service. Read the relevant implementation and deployment status separately.
+
+## Workshop registration
+
+`workshop.html`, `css/workshop.css`, and `js/workshop.js` provide the Persian RTL
+registration page. Local Vazirmatn fonts avoid an external font dependency. The
+page covers conditional student/newsletter fields, server-recomputed fees,
+certificate selection, versioned consent, optional attributed website publication,
+and a private receipt upload (JPEG/PNG/PDF, 5 MiB maximum). Dates remain unset.
+
+`integrations/google-apps-script/Workshop.gs` is a dedicated module routed through
+the existing `doPost` dispatcher with `service=workshop`; existing routes are
+preserved. It targets the confirmed business-account spreadsheet and separate
+`Workshop_Registrations` tab, never newsletter membership or licensing records.
+The existing spreadsheet `onOpen` also adds a Persian workshop menu. Only the
+active `nexonest.contact@gmail.com` user can run administrative actions.
+
+The receipt folder belongs to the business account and has owner-only permissions
+(connector readback). Deploy the Apps Script as that account, executing as owner.
+`WORKSHOP_ENABLED` must equal `true` to accept new requests. The public page's
+`workshop-endpoint` is deliberately empty until live acceptance: it shows a
+Persian preparation notice, disables submit, and tells users not to pay yet.
+No deployment or actual email delivery is established by local tests.
+On 2026-10-15 the business-account `Workshop_Registrations` tab (31006) was
+created with 24 Persian headers, RTL layout, frozen header, filter, and owner-only
+edit protection. Header values/formats were verified by connector readback.
+`node scripts/test-workshop.cjs` passed 20 mocked backend checks. JavaScript syntax
+and guide checks passed. Browser visual QA remains blocked by the browser tool's
+local-URL policy; no responsive-rendering or real submission claim is made.
+
+Request UUIDs make retries idempotent. Upload MIME and magic bytes, form enums,
+consents and lengths are validated on the server. The module limits total
+registrations to 150 and daily new submissions to 30 as basic storage/mail abuse
+containment; distributed abuse can still exhaust this cap. Add a verified
+anti-bot challenge before broad public promotion. Formula-like sheet values are
+escaped. Personal information is not stored in browser storage. Receipts remain
+private. Mail records `unknown` before sending and `accepted` after MailApp
+returns; neither proves inbox delivery. Unknown sends need manual inspection,
+not blind retry. Owner approval is explicit, locked, and sends confirmation once.
+Optional `WORKSHOP_VIDEO_URL` adds the preparatory video; missing video content
+is stated honestly in the confirmation. Rejected requests receive no automatic
+email. Refund/change policy has not been supplied.
+
+See [workshop deployment notes](integrations/google-apps-script/Workshop-README.md)
+for setup and acceptance. The page is intentionally unlinked and noindexed until
+launch. Publishing the site and deploying Apps Script are separate operations.
 
 ## Repository layout
 
@@ -294,18 +339,19 @@ at 420 px on desktop and 320 px on narrow screens. The source PNGs are already
 small; this is a presentation-size and image-selection change, not file-size
 optimization. Six PNGs remain: the icon and five selected screenshots.
 
-**Fact (checked against NexoSolve Current State and Website Kit on 2026-10-10):**
-version 0.0.1 Beta is publicly available at the product release URL in the
-Website Kit. The page labels the product 0.0.1 Beta / Early access and keeps the
-Windows trial download separate from the paid offer. The Pricing section shows
-one price per term for 1, 3, 6 and 12-month vouchers, with USD and IRR amounts.
-Customers request their selected voucher through nexonest.contact@gmail.com;
-issuance is manual after payment confirmation. This page copy does not configure
-a checkout or the external licensing service. Installation keeps the matching
-Grasshopper and Desktop files together. Screenshots show real UI with
-demonstration data. The page describes automated checks, live guest
-activation/signature checks and the remaining broader Rhino acceptance boundary
-separately.
+**Fact (checked against NexoSolve Current State and Website Kit on 2026-10-10;
+website acquisition path updated on 2026-10-14):** version 0.0.1 Beta is
+publicly available. The page labels the product 0.0.1 Beta / Early access. Its
+Grasshopper plugin CTA points to Food4Rhino; installation copy also names the
+Rhino Package Manager. The page directs users to the plugin's Help for getting
+or updating the companion Desktop app and does not offer GitHub binaries as a
+download path. The Pricing section shows one price per term for 1, 3, 6 and
+12-month vouchers, with USD and IRR amounts. Customers request their selected
+voucher through nexonest.contact@gmail.com; issuance is manual after payment
+confirmation. This page copy does not configure a checkout or the external
+licensing service. Screenshots show real UI with demonstration data. The page
+describes automated checks, live guest activation/signature checks and the
+remaining broader Rhino acceptance boundary separately.
 The sidebar groups NexoSolve sections under collapsed Features, Getting started
 and About disclosures. This reduces the initial menu height while preserving
 the existing section anchor links.
@@ -471,11 +517,12 @@ All mail uses send-only MailApp; no inbox access is needed.
 ### Campaign and shared quota
 
 `sendNexoBreakAnnouncement()` is a manually run editor entry point using campaign
-ID `nexobreak-v1`. The current local implementation needs `Licensing.gs` for owner
+ID `nexobreak-1.0.0-food4rhino`. The NexoBreak 1.0.0 announcement links directly to its Food4Rhino product page and records batch counts. The current local implementation needs `Licensing.gs` for owner
 checks and delivery records. It scans only subscribed newsletter rows, keeps the
 `NEWSLETTER_EMAIL_RESERVE` (default 20), checks remaining quota before each send,
-and stops after approximately five seconds excluding the final in-flight send.
-There is no installed automatic schedule in this source.
+and stops after approximately five seconds excluding the final in-flight send. The
+log distinguishes complete scans from time/quota stops and includes remaining
+daily quota. There is no installed automatic schedule in this source.
 
 `License_NewsletterDeliveries` records campaign/email hashes and `sending`, `sent`
 or `review` states. Reservation happens before sending. Ambiguous records are
@@ -884,9 +931,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 158 application/configuration/integration/tool/asset files:
+SHA-256 of 167 application/configuration/integration/tool/asset files:
 
-`09b76a44920ac7ce11f785f61401dc46c9b1d89f74fa478854cb3775a0a5ec4b`
+`57288d3e9dd176b6e604e43a57bf161774fd55845c746ebd6f60297b7d3c2c5c`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1277,6 +1324,9 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/documents/bootcamp/GP09.pdf](assets/documents/bootcamp/GP09.pdf) | 74197147 |
 | [assets/documents/bootcamp/GP10.pdf](assets/documents/bootcamp/GP10.pdf) | 8613005 |
 | [assets/documents/bootcamp/GP11.pdf](assets/documents/bootcamp/GP11.pdf) | 3331541 |
+| [assets/fonts/OFL-Vazirmatn.txt](assets/fonts/OFL-Vazirmatn.txt) | 4391 |
+| [assets/fonts/Vazirmatn-Bold.ttf](assets/fonts/Vazirmatn-Bold.ttf) | 123036 |
+| [assets/fonts/Vazirmatn-Regular.ttf](assets/fonts/Vazirmatn-Regular.ttf) | 122752 |
 | [assets/icons/GeoFactory.png](assets/icons/GeoFactory.png) | 129035 |
 | [assets/icons/alignment.png](assets/icons/alignment.png) | 83483 |
 | [assets/icons/codejunkyard-session-00.svg](assets/icons/codejunkyard-session-00.svg) | 1398 |
@@ -1366,6 +1416,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/project.css](css/project.css) | 48921 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
+| [css/workshop.css](css/workshop.css) | 7873 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 3923 |
 | [data/projects-brief.json](data/projects-brief.json) | 9419 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
@@ -1373,16 +1424,18 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [files/CV.pdf](files/CV.pdf) | 319151 |
 | [files/Portfolio_Academic.pdf](files/Portfolio_Academic.pdf) | 131441 |
 | [index.html](index.html) | 3058 |
-| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 19817 |
+| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 19958 |
 | [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 4184 |
-| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 20800 |
+| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 20939 |
 | [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 52628 |
 | [integrations/google-apps-script/LicensingAdmin.gs](integrations/google-apps-script/LicensingAdmin.gs) | 9992 |
 | [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2125 |
-| [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9519 |
+| [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9579 |
 | [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 4337 |
-| [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2056 |
+| [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
 | [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 6932 |
+| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 3594 |
+| [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 12601 |
 | [js/data.js](js/data.js) | 880 |
 | [js/filter.js](js/filter.js) | 4001 |
 | [js/journey.js](js/journey.js) | 30140 |
@@ -1391,11 +1444,12 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/newsletter.js](js/newsletter.js) | 5976 |
 | [js/portfolio.js](js/portfolio.js) | 34511 |
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 109823 |
+| [js/project-page.js](js/project-page.js) | 109715 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 3776 |
 | [js/state.js](js/state.js) | 3441 |
 | [js/ux.js](js/ux.js) | 4538 |
+| [js/workshop.js](js/workshop.js) | 5777 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 4449 |
 | [newsletter.html](newsletter.html) | 12349 |
 | [nexonest.html](nexonest.html) | 7503 |
@@ -1409,7 +1463,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 2510 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 2938 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 3241 |
-| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 2959 |
+| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 2999 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 2528 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 2514 |
 | [projects-pages/octoLand.html](projects-pages/octoLand.html) | 2505 |
@@ -1418,8 +1472,10 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 2581 |
 | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 2560 |
 | [robots.txt](robots.txt) | 66 |
+| [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6640 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 7242 |
 | [sitemap.xml](sitemap.xml) | 1484 |
+| [workshop.html](workshop.html) | 12724 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

@@ -14,13 +14,14 @@ function sendNewsletterBatch_(campaign) {
     if (emailIndex < 0 || statusIndex < 0) throw new Error('Newsletter email/status column missing.');
     const reserve = Number(PropertiesService.getScriptProperties().getProperty('NEWSLETTER_EMAIL_RESERVE') || '20');
     if (!Number.isInteger(reserve) || reserve < 0) throw new Error('Invalid newsletter email reserve.');
-    const started = Date.now(); let sent = 0;
+    const started = Date.now(); let sent = 0; let stopReason = 'complete';
     for (let i = 1; i < values.length; i++) {
       const row = values[i], email = nbClean_(row[emailIndex], 254).toLowerCase();
       if (nbClean_(row[statusIndex], 80).toLowerCase() !== 'subscribed' || !nbValidEmail_(email)) continue;
       const key = licenseHash_(campaign + ':' + email);
       if (licenseGet_('NewsletterDeliveries', key)) continue;
-      if (MailApp.getRemainingDailyQuota() <= reserve || Date.now() - started > 5000) break;
+      if (MailApp.getRemainingDailyQuota() <= reserve) { stopReason = 'quota'; break; }
+      if (Date.now() - started > 5000) { stopReason = 'time'; break; }
       licensePut_('NewsletterDeliveries', key, { status: 'sending', at: Date.now() });
       try {
         sendNexoBreakCampaignEmail_(nameIndex >= 0 ? row[nameIndex] : 'there', email);
@@ -29,6 +30,7 @@ function sendNewsletterBatch_(campaign) {
         licensePut_('NewsletterDeliveries', key, { status: 'review', at: Date.now() }); throw error;
       }
     }
+    console.log('Newsletter batch sent=' + sent + ', stop=' + stopReason + ', remainingQuota=' + MailApp.getRemainingDailyQuota());
     return sent;
   } finally { lock.releaseLock(); }
 }

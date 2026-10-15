@@ -39,8 +39,8 @@ const PROJECT_PAGE_DATA = {
   ],
   "links": [
     [
-      "Download Windows trial",
-      "https://github.com/Hossein-Nazari-Dev/NexoNest---Products/releases/tag/v0.0.1"
+      "Get NexoSolve on food4Rhino",
+      "https://www.food4rhino.com/en/app/nexosolve"
     ]
   ],
   "navGroups": {
@@ -270,23 +270,23 @@ const PROJECT_PAGE_DATA = {
       "items": [
         [
           "01",
-          "Extract",
-          "Download the Windows trial package from the official 0.0.1 Beta release. Follow its installation notes for the matching Grasshopper and Desktop files."
+          "Install the Grasshopper plugin",
+          "Get the NexoSolve GHA through food4Rhino or the Rhino Package Manager. Do not download plugin files from GitHub."
         ],
         [
           "02",
-          "Close Rhino",
-          "Close Rhino before replacing an older installation. Remove duplicate older plugin copies."
+          "Open the plugin Help",
+          "Use Help inside NexoSolve to get or update the companion Desktop app."
         ],
         [
           "03",
-          "Copy the folder",
-          "Copy the complete folder into Grasshopper Libraries as NexoSolve. Keep NexoSolve.gha and the adjacent Desktop folder together."
+          "Finish setup",
+          "Follow the instructions shown by the plugin and restart Rhino if it asks you to do so."
         ],
         [
           "04",
           "Open NexoSolve",
-          "Open Rhino and Grasshopper. Use Open NexoSolve on Nexo Connector; leave App Path blank for normal portable discovery."
+          "Open Rhino and Grasshopper, then launch NexoSolve from Nexo Connector."
         ]
       ]
     },
@@ -321,11 +321,11 @@ const PROJECT_PAGE_DATA = {
     {
       "title": "Get NexoSolve",
       "kind": "credits",
-      "text": "Download the Windows trial from the official 0.0.1 Beta release, or email nexonest.contact@gmail.com to purchase and receive a 1, 3, 6 or 12-month voucher. Voucher issuance is manual after payment confirmation.",
+      "text": "Get the NexoSolve Grasshopper plugin from food4Rhino or the Rhino Package Manager. Get or update the companion Desktop app through Help inside the plugin. For a 1, 3, 6 or 12-month voucher, email nexonest.contact@gmail.com; issuance is manual after payment confirmation.",
       "links": [
         [
-          "Download Windows trial",
-          "https://github.com/Hossein-Nazari-Dev/NexoNest---Products/releases/tag/v0.0.1"
+          "Get NexoSolve on food4Rhino",
+          "https://www.food4rhino.com/en/app/nexosolve"
         ],
         [
           "Email to request a voucher",

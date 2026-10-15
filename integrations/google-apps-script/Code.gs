@@ -5,6 +5,7 @@ const NEXOBREAK = 'NexoBreak';
 const TOKEN_VALID_DAYS = 7;
 
 function doPost(event) {
+  if (event && event.parameter && event.parameter.service === 'workshop') return workshopPost_(event);
   if (event && event.parameter && event.parameter.service === 'licensing') return licensingPost_(event);
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -243,7 +244,7 @@ function escape_(value) { return String(value).replace(/[&<>"']/g, function(char
 function json_(value) { return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON); }
 
 // --- NexoBreak campaign sender ---
-const NB_NEXOBREAK_URL = 'https://www.food4rhino.com/en/browse?searchText=nexobreak&form_build_count=1&sort_by=fs_field_rating';
+const NB_NEXOBREAK_URL = 'https://www.food4rhino.com/en/app/nexobreak';
 const NB_NEXOBREAK_PAGE_URL = 'https://nexonest.com/projects-pages/nexoBreak.html';
 const NB_NEXOBREAK_DASHBOARD_IMAGE = 'https://nexonest.com/assets/images/projects/nexobreak/dashboard.png';
 const NB_NEXOBREAK_BACKUPS_IMAGE = 'https://nexonest.com/assets/images/projects/nexobreak/settings-backups.png';
@@ -256,25 +257,25 @@ function sendNexoBreakTestToOwner() {
   return 'Sent NexoBreak test to ' + email;
 }
 
-function sendNexoBreakAnnouncement() { return sendNewsletterBatch_('nexobreak-v1'); }
+function sendNexoBreakAnnouncement() { const sent = sendNewsletterBatch_('nexobreak-1.0.0-food4rhino'); console.log('NexoBreak announcement batch sent: ' + sent); return sent; }
 function sendNexoBreakCampaignEmail_(name, email) {
   const safeName = nbEscape_(nbClean_(name, 120) || 'there');
   const safeFood4RhinoUrl = nbEscape_(NB_NEXOBREAK_URL);
   const safePageUrl = nbEscape_(NB_NEXOBREAK_PAGE_URL);
   const safeDashboardImage = nbEscape_(NB_NEXOBREAK_DASHBOARD_IMAGE);
   const safeBackupsImage = nbEscape_(NB_NEXOBREAK_BACKUPS_IMAGE);
-  const subject = 'NexoBreak: plan, focus, and recover inside Rhino';
+  const subject = 'NexoBreak 1.0.0 is now available on Food4Rhino';
   const html = '<div style="margin:0;padding:0;background:#e8f1f0;color:#1f2a27;font-family:monospace">' +
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:#e8f1f0"><tr><td align="center" style="padding:36px 18px">' +
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;border-collapse:collapse;background:#f7faf9;border:1px solid #bdd2cc">' +
     '<tr><td style="padding:34px 34px 18px;border-bottom:1px dotted #8fb1a8">' +
     '<p style="margin:0 0 18px;font-size:11px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:#4b7c6e">NexoNest / Field Notes</p>' +
-    '<h1 style="margin:0;max-width:500px;font-size:34px;line-height:1.05;font-weight:600;color:#1f2a27">Plan. Focus. Recover. Meet NexoBreak.</h1>' +
+    '<h1 style="margin:0;max-width:500px;font-size:34px;line-height:1.05;font-weight:600;color:#1f2a27">NexoBreak 1.0.0 is here.</h1>' +
     '</td></tr>' +
     '<tr><td style="padding:30px 34px 8px">' +
     '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d">Hello ' + safeName + ',</p>' +
-    '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d"><strong>NexoBreak</strong>, our new focus and break companion for Rhino, is now available on food4Rhino.</p>' +
-    '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d">It brings daily task planning, time tracking, guided breaks, local reports, and versioned backups into the modeling workspace, so you can structure the day without leaving Rhino.</p>' +
+    '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d"><strong>NexoBreak 1.0.0</strong> is now available on Food4Rhino.</p>' +
+    '<p style="margin:0 0 18px;font-size:14px;line-height:1.75;color:#33413d">Version 1.0.0 brings improved task and subtask planning, a more responsive dashboard, smoother work and break transitions, six-stage game progression, versioned model backups, and clearer, verified updates.</p>' +
     '<p style="margin:24px 0 8px"><img src="' + safeDashboardImage + '" alt="NexoBreak dashboard inside Rhino" style="display:block;width:100%;max-width:572px;border:1px solid #bdd2cc"></p>' +
     '<p style="margin:0 0 24px;font-size:11px;line-height:1.6;color:#67736f">Daily planning, focus tracking, break controls, reports, and settings stay close to the Rhino workspace.</p>' +
     '<ul style="margin:0 0 24px;padding:0;list-style:none;border-top:1px dotted #8fb1a8">' +
@@ -294,8 +295,8 @@ function sendNexoBreakCampaignEmail_(name, email) {
     '<p style="margin:0;font-size:11px;line-height:1.7;color:#67736f">NexoNest<br>Curious by design.</p>' +
     '</td></tr></table></td></tr></table></div>';
   const body = 'Hello ' + (nbClean_(name, 120) || 'there') + ',\n\n' +
-    'NexoBreak, our new focus and break companion for Rhino, is now available on food4Rhino.\n\n' +
-    'It brings daily task planning, time tracking, guided breaks, local reports, and versioned backups into the modeling workspace, so you can structure the day without leaving Rhino.\n\n' +
+    'NexoBreak 1.0.0, our focus and break companion for Rhino, is now available on Food4Rhino.\n\n' +
+    'Version 1.0.0 brings improved task and subtask planning, a more responsive dashboard, smoother work and break transitions, six-stage game progression, versioned model backups, and clearer, verified updates.\n\n' +
     'Download NexoBreak on food4Rhino:\n' + NB_NEXOBREAK_URL + '\n\n' +
     'Product page:\n' + NB_NEXOBREAK_PAGE_URL + '\n\n' +
     'Requirements: Windows, Rhino 8.34 or later, and Rhino running .NET 8.\n\n' +

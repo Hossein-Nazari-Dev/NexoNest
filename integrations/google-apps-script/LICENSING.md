@@ -76,7 +76,7 @@ Device release revokes sessions and returns the earliest reactivation date. A ne
 
 ## Newsletter capacity
 
-The existing `sendNexoBreakAnnouncement` editor entry point now processes a resumable batch. It checks `MailApp.getRemainingDailyQuota()` before each send and leaves `NEWSLETTER_EMAIL_RESERVE` (default 20) for sign-in/confirmation emails. Each batch runs for approximately five seconds, excluding the final in-flight send. Run the entry point again on a suitable day to continue; no automatic schedule is installed.
+The existing `sendNexoBreakAnnouncement` editor entry point now processes a resumable batch. It checks `MailApp.getRemainingDailyQuota()` before each send and leaves `NEWSLETTER_EMAIL_RESERVE` (default 20) for sign-in/confirmation emails. Each batch scans for approximately five seconds, excluding the final in-flight send. Its log reports sent count, whether the scan completed or stopped at the time/quota guard, and remaining daily quota. Run the entry point again to continue a time-limited or quota-limited batch; no automatic schedule is installed.
 
 `License_NewsletterDeliveries` stores campaign/email hashes with `sending`, `sent` or `review`. A reserved or ambiguous delivery is never automatically retried. Inspect it manually before deciding to retry. Exactly-once delivery cannot be guaranteed across Google email and Sheets operations, so ambiguous sends favor avoiding duplicates. A future campaign needs a new campaign identifier.
 
