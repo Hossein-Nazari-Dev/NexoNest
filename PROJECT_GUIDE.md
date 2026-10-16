@@ -9,7 +9,7 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-15
+reviewed: 2026-10-16
 status: maintained
 ---
 
@@ -101,7 +101,42 @@ service. Read the relevant implementation and deployment status separately.
 registration page. Local Vazirmatn fonts avoid an external font dependency. The
 page covers conditional student/newsletter fields, server-recomputed fees,
 certificate selection, versioned consent, optional attributed website publication,
-and a private receipt upload (JPEG/PNG/PDF, 5 MiB maximum). Dates remain unset.
+and a private receipt upload (JPEG/PNG/PDF, 5 MiB maximum).
+
+The 2026-10-16 content revision sets workshop dates to 7–8 Aban 1405
+(2026-10-29/30), 17:00–21:00 Tehran; critique to 12 Aban (2026-11-03),
+17:00–21:00; and final submission to 15 Aban (2026-11-06), with the exact
+submission hour/channel still pending. Dates are visible on mobile as well.
+The hero badges show 8 hours of training (the scheduled window includes breaks)
+and 4 hours of critique. The inline SVG hero illustrates understanding, identifying relationships,
+generation of valid alternatives, validated measurement, and interpretation/selection,
+with a feedback loop. A five-card framework maps the same semantic labels to
+technical models. The published rubric awards 20 points to each stage; stage 5
+allocates 5 to reproducible execution, 8 to interpretation, and 7 to selection.
+Correctness and boundary tests belong to both generation and measurement.
+Observed relationships alone do not establish causation.
+It uses the page palette without new runtime or image dependencies. The hidden
+anti-spam field is clipped in place to avoid horizontal overflow in RTL layout.
+
+The workshop support link opens https://t.me/Nexonest_admin for direct Telegram support.
+
+Attendance certificates are electronic only and have no online verification.
+Completion certificates require project submission and a score strictly above
+70/100 plus at least 10/20 in every stage, and are eligible for online verification. Participants who do not submit
+or score 70 or below, or below 10 in any stage, receive only attendance certification if they attended.
+Attendance tracking and certificate issuance/verification are operational work,
+not implemented by this form. No attendance percentage is defined here.
+The rubric is published on the registration page before project work.
+On 2026-10-16 local browser checks covered desktop and mobile rendering;
+these do not establish deployment, real submission or email delivery. Private album inclusion
+is separate from optional attributed website publication; declining publication
+does not affect grading or certification. AI use itself is not penalized;
+unexplained or unverified decisions reduce the relevant assessment score.
+Consent version `2026-10-v3` is synchronized in browser and server validation;
+deploy both together. Old-version requests fail validation and must reload.
+The selected certificate enum and other registration contracts are preserved.
+The local approval-email template now includes these dates. This revision does
+not deploy the service, send mail, or implement certificate issuance.
 
 `integrations/google-apps-script/Workshop.gs` is a dedicated module routed through
 the existing `doPost` dispatcher with `service=workshop`; existing routes are
@@ -933,7 +968,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 167 application/configuration/integration/tool/asset files:
 
-`57288d3e9dd176b6e604e43a57bf161774fd55845c746ebd6f60297b7d3c2c5c`
+`44dde2720d0b66551879254c3819f2cb522b7bc4a889ef6db7ed20e9573360d1`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1416,7 +1451,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/project.css](css/project.css) | 48921 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
-| [css/workshop.css](css/workshop.css) | 7873 |
+| [css/workshop.css](css/workshop.css) | 11553 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 3923 |
 | [data/projects-brief.json](data/projects-brief.json) | 9419 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
@@ -1434,8 +1469,8 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 4337 |
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
 | [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 6932 |
-| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 3594 |
-| [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 12601 |
+| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 4377 |
+| [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 12935 |
 | [js/data.js](js/data.js) | 880 |
 | [js/filter.js](js/filter.js) | 4001 |
 | [js/journey.js](js/journey.js) | 30140 |
@@ -1449,7 +1484,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/render.js](js/render.js) | 3776 |
 | [js/state.js](js/state.js) | 3441 |
 | [js/ux.js](js/ux.js) | 4538 |
-| [js/workshop.js](js/workshop.js) | 5777 |
+| [js/workshop.js](js/workshop.js) | 5848 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 4449 |
 | [newsletter.html](newsletter.html) | 12349 |
 | [nexonest.html](nexonest.html) | 7503 |
@@ -1472,10 +1507,10 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 2581 |
 | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 2560 |
 | [robots.txt](robots.txt) | 66 |
-| [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6640 |
+| [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6686 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 7242 |
 | [sitemap.xml](sitemap.xml) | 1484 |
-| [workshop.html](workshop.html) | 12724 |
+| [workshop.html](workshop.html) | 21824 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

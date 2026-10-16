@@ -53,7 +53,7 @@
     try {
       const file = validate(); busy = true; button.disabled = true; button.textContent = 'در حال ارسال؛ لطفاً صبر کنید…';
       const values = Object.fromEntries(new FormData(form));
-      const payload = {...values,requestId,rulesVersion:'2026-10-v1',rulesAccepted:form.elements.rulesAccepted.checked,certificateAccepted:form.elements.certificateAccepted.checked,websiteConsent:form.elements.websiteConsent.checked,receipt:{type:file.type,base64:await readBase64(file)}};
+      const payload = {...values,requestId,rulesVersion:'2026-10-v3',rulesAccepted:form.elements.rulesAccepted.checked,certificateAccepted:form.elements.certificateAccepted.checked,websiteConsent:form.elements.websiteConsent.checked,receipt:{type:file.type,base64:await readBase64(file)}};
       const response = await fetch(endpoint, {method:'POST',body:new URLSearchParams({service:'workshop',payload:JSON.stringify(payload)}),signal:AbortSignal.timeout(90000)});
       if (!response.ok) throw new Error('پاسخ سرور دریافت نشد.');
       const result = await response.json();

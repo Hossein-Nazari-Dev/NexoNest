@@ -46,7 +46,7 @@ function workshopValidate_(data) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('ایمیل معتبر وارد کنید.');
   const phone = workshopText_(data.phone,20).replace(/[۰-۹٠-٩]/g,c => String('۰۱۲۳۴۵۶۷۸۹'.includes(c) ? '۰۱۲۳۴۵۶۷۸۹'.indexOf(c) : '٠١٢٣٤٥٦٧٨٩'.indexOf(c))).replace(/[\s()-]/g,'');
   if (!/^\+?[0-9]{10,15}$/.test(phone)) throw new Error('شماره تماس معتبر وارد کنید.');
-  if (!/^[a-f0-9-]{36}$/i.test(data.requestId || '') || data.website || data.rulesVersion !== '2026-10-v1' || data.rulesAccepted !== true || data.certificateAccepted !== true || typeof data.websiteConsent !== 'boolean') throw new Error('پذیرش قوانین و اطلاعات فرم را بررسی کنید.');
+  if (!/^[a-f0-9-]{36}$/i.test(data.requestId || '') || data.website || data.rulesVersion !== '2026-10-v3' || data.rulesAccepted !== true || data.certificateAccepted !== true || typeof data.websiteConsent !== 'boolean') throw new Error('پذیرش قوانین و اطلاعات فرم را بررسی کنید.');
   const type = workshopChoice_(data.registrationType,{standard:'عمومی',student:'دانشجویی',newsletter:'عضو خبرنامه'});
   const fee = {standard:2900000,student:2610000,newsletter:2320000}[data.registrationType];
   const education = workshopChoice_(data.educationLevel,{school:'دیپلم و پیش‌دانشگاهی',associate:'کاردانی',bachelor:'کارشناسی',master:'کارشناسی ارشد',doctorate:'دکتری',other:'سایر'});
@@ -128,6 +128,6 @@ function workshopReview_(approve) {
     const video=PropertiesService.getScriptProperties().getProperty('WORKSHOP_VIDEO_URL') || '';
     if(video && !/^https:\/\/[^\s]+$/.test(video)) throw new Error('نشانی ویدئوی آمادگی معتبر نیست.');
     sheet.getRange(row,18,1,4).setValues([[approve?'تأیید شده':'رد شده',WORKSHOP_OWNER,new Date().toISOString(),workshopSafe_(note)]]); SpreadsheetApp.flush();
-    if(approve) workshopMail_(sheet,row,23,values[3],'تأیید ثبت‌نام کارگاه نکسونست',values[2]+' عزیز،\nثبت‌نام شما تأیید شد.\nکد پیگیری: '+tracking+'\nگواهینامهٔ انتخاب‌شده: '+values[12]+'\n'+(video?'ویدئوی آمادگی و راهنمای نصب:\n'+video:'راهنمای نصب و آمادگی دوره در ادامه برای شما ارسال خواهد شد.')+'\nتاریخ دقیق دوره جداگانه اعلام می‌شود.\nآکادمی نکسونست');
+    if(approve) workshopMail_(sheet,row,23,values[3],'تأیید ثبت‌نام کارگاه نکسونست',values[2]+' عزیز،\nثبت‌نام شما تأیید شد.\nکد پیگیری: '+tracking+'\nگواهینامهٔ انتخاب‌شده: '+values[12]+'\n'+(video?'ویدئوی آمادگی و راهنمای نصب:\n'+video:'راهنمای نصب و آمادگی دوره در ادامه برای شما ارسال خواهد شد.')+'\nکارگاه: پنجشنبه و جمعه ۷ و ۸ آبان ۱۴۰۵، ساعت ۱۷ تا ۲۱. کرکسیون: سه‌شنبه ۱۲ آبان، ساعت ۱۷ تا ۲۱. تحویل نهایی: جمعه ۱۵ آبان. همهٔ ساعت‌ها به وقت تهران است.\nآکادمی نکسونست');
   } finally {lock.releaseLock();}
 }

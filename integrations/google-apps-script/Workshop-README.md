@@ -33,6 +33,17 @@ owner authorization, approval/rejection and uncertain email outcomes.
 7. Publish the page and add its navigation/sitemap entry only after acceptance.
    The checkout currently leaves endpoint empty and the page noindexed/unlinked.
 
+## Current cohort content (2026-10-16)
+
+Deploy browser and backend consent version `2026-10-v3` together; older requests
+are rejected and must reload. Workshop: 7–8 Aban 1405, 17:00–21:00 Tehran;
+critique: 12 Aban, 17:00–21:00; final project: 15 Aban, exact hour/channel pending.
+Approval email includes these dates. Attendance certificates are electronic
+without online verification. Completion requires a submitted project scoring
+strictly above 70/100 plus at least 10/20 in each of five stages and supports online verification; otherwise attendees
+receive attendance certification only. Certificate issuance and verification
+are not implemented by this registration module. No live deployment is implied.
+
 ## Administration
 
 Select exactly one populated row in `Workshop_Registrations`. The Persian menu
