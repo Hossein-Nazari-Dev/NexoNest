@@ -97,7 +97,18 @@ service. Read the relevant implementation and deployment status separately.
 
 ## Workshop registration
 
-`workshop.html`, `css/workshop.css`, and `js/workshop.js` provide the Persian RTL
+The registration file is `CTworkshop01.html` for edition-specific management.
+Its original Persian page title and hero heading are preserved. The catalogue
+label is Computational Thinking Workshop 1. Catalogue ID `p_computational_thinking_workshop_1` links
+to the renamed `CTworkshop01.html` URL under Events / Workshops and Education.
+The custom SVG uses connected components and a highlighted edition number.
+The index uses its normal brief popup and navigation, fixed visual ordering,
+and a noscript link. This is a standalone registration page, so the guide
+generator validates its explicit catalogue ID/route without an editorial record.
+Adding catalogue visibility does not enable payments, submission or deployment.
+
+
+`CTworkshop01.html`, `css/workshop.css`, and `js/workshop.js` provide the Persian RTL
 registration page. Local Vazirmatn fonts avoid an external font dependency. The
 page covers conditional student/newsletter fields, server-recomputed fees,
 certificate selection, versioned consent, optional attributed website publication,
@@ -172,7 +183,7 @@ is stated honestly in the confirmation. Rejected requests receive no automatic
 email. Refund/change policy has not been supplied.
 
 See [workshop deployment notes](integrations/google-apps-script/Workshop-README.md)
-for setup and acceptance. The page is intentionally unlinked and noindexed until
+for setup and acceptance. The page is linked from the NexoNest catalogue and remains noindexed until
 launch. Publishing the site and deploying Apps Script are separate operations.
 
 ## Repository layout
@@ -966,9 +977,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 167 application/configuration/integration/tool/asset files:
+SHA-256 of 168 application/configuration/integration/tool/asset files:
 
-`44dde2720d0b66551879254c3819f2cb522b7bc4a889ef6db7ed20e9573360d1`
+`f567f40b655273df2b2a58ea9a402fba02f4fb96344faf9737d1f522cdc7dc8a`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -978,6 +989,7 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 
 | Catalogue ID | Editorial ID | Page | Categories / subcategories |
 | --- | --- | --- | --- |
+| p_computational_thinking_workshop_1 | Standalone registration | [CTworkshop01.html](CTworkshop01.html) | events, education / workshop |
 | p_nexosolve | nexosolve | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | products / nexosolve |
 | p_nexorhino | nexorhino | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | products / design-suite |
 | p_design_suite | design-suite | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | products / design-suite |
@@ -1345,6 +1357,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | File | Bytes |
 | --- | --- |
 | [CNAME](CNAME) | 12 |
+| [CTworkshop01.html](CTworkshop01.html) | 21824 |
 | [README.txt](README.txt) | 29 |
 | [assets/documents/Hossein-Nazari-CV.pdf](assets/documents/Hossein-Nazari-CV.pdf) | 319151 |
 | [assets/documents/Hossein-Nazari-Portfolio.pdf](assets/documents/Hossein-Nazari-Portfolio.pdf) | 131441 |
@@ -1366,6 +1379,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/icons/alignment.png](assets/icons/alignment.png) | 83483 |
 | [assets/icons/codejunkyard-session-00.svg](assets/icons/codejunkyard-session-00.svg) | 1398 |
 | [assets/icons/codejunkyard.svg](assets/icons/codejunkyard.svg) | 1057 |
+| [assets/icons/computational-thinking-workshop-1.svg](assets/icons/computational-thinking-workshop-1.svg) | 635 |
 | [assets/icons/curvadapt.png](assets/icons/curvadapt.png) | 125490 |
 | [assets/icons/nexobreak.svg](assets/icons/nexobreak.svg) | 902 |
 | [assets/icons/nexorhino.svg](assets/icons/nexorhino.svg) | 977 |
@@ -1451,9 +1465,9 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/project.css](css/project.css) | 48921 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
-| [css/workshop.css](css/workshop.css) | 11553 |
+| [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 3923 |
-| [data/projects-brief.json](data/projects-brief.json) | 9419 |
+| [data/projects-brief.json](data/projects-brief.json) | 10064 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
@@ -1469,7 +1483,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 4337 |
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
 | [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 6932 |
-| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 4377 |
+| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 4446 |
 | [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 12935 |
 | [js/data.js](js/data.js) | 880 |
 | [js/filter.js](js/filter.js) | 4001 |
@@ -1481,13 +1495,13 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
 | [js/project-page.js](js/project-page.js) | 109715 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
-| [js/render.js](js/render.js) | 3776 |
+| [js/render.js](js/render.js) | 3832 |
 | [js/state.js](js/state.js) | 3441 |
 | [js/ux.js](js/ux.js) | 4538 |
 | [js/workshop.js](js/workshop.js) | 5848 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 4449 |
 | [newsletter.html](newsletter.html) | 12349 |
-| [nexonest.html](nexonest.html) | 7503 |
+| [nexonest.html](nexonest.html) | 7608 |
 | [portfolio.html](portfolio.html) | 33051 |
 | [project-template.html](project-template.html) | 7509 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 2490 |
@@ -1508,9 +1522,8 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 2560 |
 | [robots.txt](robots.txt) | 66 |
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6686 |
-| [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 7242 |
+| [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 7762 |
 | [sitemap.xml](sitemap.xml) | 1484 |
-| [workshop.html](workshop.html) | 21824 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

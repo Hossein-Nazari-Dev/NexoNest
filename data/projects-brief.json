@@ -27,6 +27,21 @@
       { "id": "bootcamp", "parent": "events", "label": "Bootcamps" }
     ],
     "projects": [
+{
+  "id": "p_computational_thinking_workshop_1",
+  "title": "Computational Thinking Workshop 1",
+  "excerpt": "From computational thinking to design decisions: frame a problem, reveal relationships, generate valid alternatives, measure performance, and interpret evidence. 8 hours of training and 4 hours of critique. Registration is being prepared.",
+  "url": "CTworkshop01.html",
+  "icon": "assets/icons/computational-thinking-workshop-1.svg",
+  "categories": [
+    "events",
+    "education"
+  ],
+  "subcategories": [
+    "workshop"
+  ],
+  "image": "assets/icons/computational-thinking-workshop-1.svg"
+},
       {
         "id": "p_nexosolve",
         "title": "NexoSolve",

@@ -68,6 +68,11 @@ function generate() {
   ];
   for (const project of brief.projects) {
     if (!fs.existsSync(path.join(root, project.url))) throw new Error(`Missing project route: ${project.url}`);
+    // Registration owns its own page; it does not use the editorial renderer.
+    if (project.id === 'p_computational_thinking_workshop_1' && project.url === 'CTworkshop01.html') {
+      lines.push(`| ${cell(project.id)} | Standalone registration | ${link(project.url)} | ${cell(project.categories.join(', '))} / ${cell(project.subcategories.join(', '))} |`);
+      continue;
+    }
     const id = read(project.url).match(/data-project="([^"]+)"/)?.[1];
     if (!context.pages[id]) throw new Error(`No editorial record for ${project.url}`);
     lines.push(`| ${cell(project.id)} | ${cell(id)} | ${link(project.url)} | ${cell(project.categories.join(', '))} / ${cell(project.subcategories.join(', '))} |`);

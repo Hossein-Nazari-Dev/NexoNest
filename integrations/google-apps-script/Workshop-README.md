@@ -30,8 +30,8 @@ owner authorization, approval/rejection and uncertain email outcomes.
    same request id, receipt privacy, and approval. Verify email sender/delivery
    with a consenting test address. Local mocked tests do not verify Google OAuth,
    scopes, browser CORS, redirects, execution quotas, or delivery.
-7. Publish the page and add its navigation/sitemap entry only after acceptance.
-   The checkout currently leaves endpoint empty and the page noindexed/unlinked.
+7. Enable registration and add the sitemap entry only after acceptance.
+   The checkout leaves the endpoint empty and the page noindexed. The NexoNest catalogue links to the workshop information page; submission remains disabled.
 
 ## Current cohort content (2026-10-16)
 

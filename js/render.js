@@ -21,6 +21,7 @@ function renderProjects() {
         'p_tectotrack',
         'p_octocity',
         'p_abm_bootcamp',
+        'p_computational_thinking_workshop_1',
         'p_octomass',
         'p_code_junkyard',
         'p_code_junkyard_session_00',
