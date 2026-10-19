@@ -22,14 +22,14 @@ const PROJECT_PAGE_DATA = {
   "page": "16",
   "title": "NexoSolve",
   "shortTitle": "NexoSolve",
-  "subtitle": "Parametric studies for<br>Rhino and Grasshopper",
+  "subtitle": "Windows study workspace<br> connected to Grasshopper",
   "icon": "../assets/images/projects/nexosolve/nexosolve-icon.png",
   "iconAlt": "NexoSolve product icon",
   "eyebrow": "NexoNest / Parametric studies",
-  "lead": "Explore every combination. Keep every result. Run finite parametric studies from your Grasshopper definition with a dedicated desktop workspace. Define your inputs, record the outputs that matter, and follow each case from calculation to saved results.",
+  "lead": "Explore every combination. Keep every result. NexoSolve is a standalone Windows application for finite parametric studies. Manage your study outside Grasshopper while your Grasshopper definition performs the calculations, connected through a lightweight plugin.",
   "role": "Product design & development / NexoNest",
   "period": "2026 — present",
-  "status": "0.0.1 Beta / Early access",
+  "status": "0.0.4 Beta / Early access",
   "stack": "Windows x64 / Rhino 8.34+ / .NET 8",
   "tags": [
     "Grasshopper",
@@ -38,6 +38,11 @@ const PROJECT_PAGE_DATA = {
     "Local results"
   ],
   "links": [
+    [
+      "Download NexoSolve for Windows",
+      "https://raw.githubusercontent.com/Hossein-Nazari-Dev/NexoNest---Products/main/nexosolve/NexoSolve-Windows-x64.zip",
+      "NexoSolve-Windows-x64.zip"
+    ],
     [
       "Get NexoSolve on food4Rhino",
       "https://www.food4rhino.com/en/app/nexosolve"
@@ -60,10 +65,11 @@ const PROJECT_PAGE_DATA = {
     "Install the complete package": "Getting started",
     "Questions": "About",
     "Early-access status": "About",
-    "Get NexoSolve": "About"
+    "Get NexoSolve": "About",
+    "How NexoSolve connects to Grasshopper": "Features"
   },
   "question": "How can you explore a finite design space without losing progress, results, or the calculation context?",
-  "response": "Keep geometry, simulation and evaluation in Grasshopper. NexoSolve manages the sequence, records each case locally, and helps you resume or review the study.",
+  "response": "Work in the NexoSolve Windows app. Its Grasshopper plugin connects the app to your definition: inputs go in, calculated results come back, and the app saves each case locally.",
   "proof": [
     [
       "Brute Force",
@@ -87,11 +93,30 @@ const PROJECT_PAGE_DATA = {
       "title": "What you gain",
       "kind": "cards",
       "items": [
-        ["Know what ran", "Review the full case count, completed, failed and remaining cases, active time and estimated time before and during a study."],
-        ["Recover your progress", "Pause or stop at a saved case boundary, then resume with recorded progress and execution settings."],
-        ["Keep an audit trail", "Save case results locally and export numeric data as CSV with per-scenario geometry and optional images."],
-        ["Avoid compatible reruns", "Reuse matching successful cases when you expand a domain and the underlying calculation is still compatible."]
+        [
+          "Know what ran",
+          "Review the full case count, completed, failed and remaining cases, active time and estimated time before and during a study."
+        ],
+        [
+          "Recover your progress",
+          "Pause or stop at a saved case boundary, then resume with recorded progress and execution settings."
+        ],
+        [
+          "Keep an audit trail",
+          "Save case results locally and export numeric data as CSV with per-scenario geometry and optional images."
+        ],
+        [
+          "Avoid compatible reruns",
+          "Reuse matching successful cases when you expand a domain and the underlying calculation is still compatible."
+        ]
       ]
+    },
+    {
+      "title": "How NexoSolve connects to Grasshopper",
+      "kind": "figure",
+      "image": "../assets/images/projects/nexosolve/desktop-grasshopper-connection.svg",
+      "alt": "Standalone NexoSolve Windows app sends case inputs to the connector inside Rhino and Grasshopper. The Grasshopper definition calculates geometry, simulation and numeric outputs. Results return through the connector to the app for local storage.",
+      "caption": "Work in the separate Windows app. The Grasshopper plugin is the connection layer; your definition owns the analysis. Both run on your computer, and Rhino with Grasshopper must remain open during a study."
     },
     {
       "title": "Your study workspace",
@@ -181,8 +206,14 @@ const PROJECT_PAGE_DATA = {
       "title": "Light and dark workspaces",
       "kind": "cards",
       "items": [
-        ["Light theme", "Use a bright workspace in well-lit modeling environments."],
-        ["Dark theme", "Switch to a darker workspace while keeping the same study controls and workflow."]
+        [
+          "Light theme",
+          "Use a bright workspace in well-lit modeling environments."
+        ],
+        [
+          "Dark theme",
+          "Switch to a darker workspace while keeping the same study controls and workflow."
+        ]
       ]
     },
     {
@@ -203,7 +234,7 @@ const PROJECT_PAGE_DATA = {
         ],
         [
           "Package",
-          "Complete installation folder: NexoSolve.gha plus the adjacent Desktop folder; the desktop includes its Windows runtime"
+          "Standalone Windows app (runtime included), Grasshopper connector plugin and official Samples; keep GHA, EXE and Samples together in the NexoSolve installation folder"
         ],
         [
           "Connection",
@@ -246,12 +277,29 @@ const PROJECT_PAGE_DATA = {
         "IRR (Rial)"
       ],
       "rows": [
-        ["1 month", "$6", "1,900,000 IRR"],
-        ["3 months", "$15", "4,900,000 IRR"],
-        ["6 months", "$27", "8,900,000 IRR"],
-        ["12 months", "$45", "15,900,000 IRR"]
+        [
+          "1 month",
+          "$6",
+          "1,900,000 IRR"
+        ],
+        [
+          "3 months",
+          "$15",
+          "4,900,000 IRR"
+        ],
+        [
+          "6 months",
+          "$27",
+          "8,900,000 IRR"
+        ],
+        [
+          "12 months",
+          "$45",
+          "15,900,000 IRR"
+        ]
       ],
-      "note": "Each option is a prepaid voucher for one user and one active device. No recurring billing. To purchase and receive your selected voucher, email nexonest.contact@gmail.com. Voucher issuance is handled manually after payment confirmation."    },
+      "note": "Each option is a prepaid voucher for one user and one active device. No recurring billing. To purchase and receive your selected voucher, email nexonest.contact@gmail.com. Voucher issuance is handled manually after payment confirmation."
+    },
     {
       "title": "Account and offline access",
       "kind": "split",
@@ -270,23 +318,23 @@ const PROJECT_PAGE_DATA = {
       "items": [
         [
           "01",
-          "Install the Grasshopper plugin",
-          "Get the NexoSolve GHA through food4Rhino or the Rhino Package Manager. Do not download plugin files from GitHub."
+          "Install the Grasshopper connector",
+          "Get the NexoSolve plugin through food4Rhino or Rhino Package Manager. Restart Rhino after installing or updating the plugin."
         ],
         [
           "02",
-          "Open the plugin Help",
-          "Use Help inside NexoSolve to get or update the companion Desktop app."
+          "Download the Windows app",
+          "Use Download NexoSolve for Windows on this page to download the app ZIP directly. Or add NexoSolve > Help > NexoSolve Club and click Download / Update NexoSolve for a verified app installation."
         ],
         [
           "03",
-          "Finish setup",
-          "Follow the instructions shown by the plugin and restart Rhino if it asks you to do so."
+          "Keep the installation together",
+          "For manual setup, extract the app ZIP into %APPDATA%/Grasshopper/Libraries/NexoSolve-Portable-Windows-x64 alongside NexoSolve.gha. Keep the EXE and official Samples together. Close NexoSolve before replacing app files."
         ],
         [
           "04",
-          "Open NexoSolve",
-          "Open Rhino and Grasshopper, then launch NexoSolve from Nexo Connector."
+          "Connect and work in NexoSolve",
+          "Keep Rhino and your Grasshopper definition open. On Nexo Connector, click Open NexoSolve. The Windows app is a separate workspace; the connector transfers case inputs and calculated results. If needed, set App Path to the extracted executable."
         ]
       ]
     },
@@ -294,6 +342,10 @@ const PROJECT_PAGE_DATA = {
       "title": "Questions",
       "kind": "cards",
       "items": [
+        [
+          "Where do I work?",
+          "Configure, run and review studies in the standalone NexoSolve Windows app. The plugin inside Grasshopper connects that workspace to your definition. Rhino and Grasshopper perform the model calculations and must remain open."
+        ],
         [
           "Is it an optimization solver?",
           "The current desktop runs exhaustive finite studies. It does not automatically search for an optimum or offer optimizer selection."
@@ -304,7 +356,7 @@ const PROJECT_PAGE_DATA = {
         ],
         [
           "Does it update automatically?",
-          "Use NexoSolve Club to check Grasshopper plugin updates. Desktop updates are user-started; they are not installed in the background."
+          "App updates are user-started: use Download / Update NexoSolve in NexoSolve Club. Grasshopper plugin installation and updates are managed separately through Rhino Package Manager."
         ],
         [
           "Can I move to another computer?",
@@ -316,13 +368,18 @@ const PROJECT_PAGE_DATA = {
       "title": "Early-access status",
       "kind": "honesty",
       "label": "Release checks remain",
-      "text": "Version 0.0.1 Beta is publicly available. Automated engine, recovery, packaging and UI checks are recorded, as are live guest activation and license signature checks. Broader Rhino acceptance remains ongoing. Screenshots show the actual application with demonstration data, not a completed customer simulation."
+      "text": "Version 0.0.4 Beta is available for Windows x64. Screenshots show the actual application with demonstration study data. Broader native Rhino acceptance remains ongoing; automated checks do not establish the validity of your simulation."
     },
     {
       "title": "Get NexoSolve",
       "kind": "credits",
-      "text": "Get the NexoSolve Grasshopper plugin from food4Rhino or the Rhino Package Manager. Get or update the companion Desktop app through Help inside the plugin. For a 1, 3, 6 or 12-month voucher, email nexonest.contact@gmail.com; issuance is manual after payment confirmation.",
+      "text": "Download the standalone Windows app directly below. Install the Grasshopper connector through food4Rhino or Rhino Package Manager, then work in NexoSolve while your definition calculates in Grasshopper. You can also install or update the Windows app from NexoSolve Club. For a voucher, email nexonest.contact@gmail.com; issuance is manual after payment confirmation.",
       "links": [
+        [
+          "Download NexoSolve for Windows",
+          "https://raw.githubusercontent.com/Hossein-Nazari-Dev/NexoNest---Products/main/nexosolve/NexoSolve-Windows-x64.zip",
+          "NexoSolve-Windows-x64.zip"
+        ],
         [
           "Get NexoSolve on food4Rhino",
           "https://www.food4rhino.com/en/app/nexosolve"
@@ -432,11 +489,11 @@ const PROJECT_PAGE_DATA = {
     lead: "A focus and break companion for Rhino that brings daily planning, time tracking, guided pauses, short viewport games, local reports, and autosave-style versioned backups into the modeling workspace.",
     role: "Product design & development / NexoNest",
     period: "2026 — present",
-    status: "Beta / Free on food4Rhino",
+    status: "Stable / Free on Food4Rhino",
     stack: "Rhino 8 / .NET 8 / Windows",
     tags: ["Rhino 8", "Focus tracking", "Guided breaks", "Versioned backups"],
     links: [
-      ["Download on food4Rhino", "https://www.food4rhino.com/en/browse?searchText=nexobreak&form_build_count=1&sort_by=fs_field_rating"],
+      ["Download on food4Rhino", "https://www.food4rhino.com/en/app/nexobreak"],
       ["NexoNest Newsletter", "../newsletter.html"]
     ],
     question: "How can long Rhino sessions stay focused without separating planning, breaks, reports, and project safety from the modeling environment?",
@@ -453,7 +510,7 @@ const PROJECT_PAGE_DATA = {
         kind: "split",
         text: [
           "Design work often happens in long, nonlinear sessions. NexoBreak gives that day a practical frame without asking you to manage a separate productivity app beside Rhino.",
-          "Plan up to five daily tasks, estimate their duration, switch focus as priorities change, and keep tracking even when the dashboard is closed."
+          "Plan up to five daily tasks, divide them into focusable subtasks, estimate their duration, and leave a next-step note before a break. Subtask time is included in its parent task, and tracking continues when the dashboard is closed."
         ],
         aside: { label: "Product stance", text: "This is not surveillance software. It is a local companion for planning, focus, recovery, and reflection." }
       },
@@ -481,13 +538,13 @@ const PROJECT_PAGE_DATA = {
         image: "../assets/images/projects/nexobreak/settings-backups.png",
         alt: "NexoBreak settings showing safety backups and backup interval controls",
         caption: "Safety backups create timestamped copies without moving or renaming the working file.",
-        text: "The backup feature is the strongest project-safety layer in NexoBreak. When enabled, it writes scheduled snapshots of the saved Rhino model and active Grasshopper definition into dated folders beside the model. You keep working in the original files, while earlier copies remain close enough to recover from risky edits, crashes, or experimental branches."
+        text: "Backups are optional. Enable scheduled snapshots of the saved Rhino model and active Grasshopper definition, stored together in timestamped folders beside the model. Choose Latest backups, Recent days, or Keep all for retention. You continue working in the original files; snapshots are additional copies, not a replacement for saving your work or keeping an independent backup."
       },
       {
         title: "Core features",
         kind: "cards",
         items: [
-          ["Daily task planning", "Plan up to five tasks, edit them during the day, update their status, and keep your current focus visible."],
+          ["Daily task planning", "Plan up to five tasks, add focusable subtasks and next-step notes, and keep the current task visible."],
           ["Time tracking and reports", "Review task start and completion times, estimated versus actual duration, and activity across Rhino, Grasshopper, other applications, and idle periods."],
           ["Guided breaks", "Use active-work reminders and choose a stretch routine, moving-dot tracking, Vector Vision, Star Catcher, or Duck Hunt."],
           ["Autosave + versioned backups", "Create scheduled snapshots of the active Rhino model and Grasshopper definition in timestamped folders beside the saved model."]
@@ -507,7 +564,7 @@ const PROJECT_PAGE_DATA = {
         image: "../assets/images/projects/nexobreak/duck-hunt.png",
         alt: "NexoBreak Duck Hunt break activity running in a Rhino viewport",
         caption: "Viewport games and guided activities pause the focus timer and return you to the same selected task.",
-        text: "Starting a break pauses the focus session instead of counting recovery time as work. The break tools are intentionally short: movement, attention shift, or a small viewport game. They are a pause inside the design workflow, not a replacement for real rest away from the screen."
+        text: "Starting a break pauses focus tracking. Quiet breaks, the stretch routine, moving-dot tracking, Vector Vision, Star Catcher, and Duck Hunt run inside the active Rhino viewport; visual activities are selected there too. Return with the same task, subtask, and next-step note, then explicitly resume focus when ready. Screen activities complement breaks; they do not replace rest away from the screen."
       },
       {
         title: "Daily report",
@@ -523,7 +580,7 @@ const PROJECT_PAGE_DATA = {
         items: [
           ["Tasks stay local", "Task lists, activity data, and reports remain on the computer."],
           ["Model files stay local", "Versioned backups are stored beside the saved model, not uploaded by the core workflow."],
-          ["Optional online features", "Game Club shares account identity and game scores only when used."],
+          ["Optional Game Club", "Core features work without an account. To sync Star Catcher and Duck Hunt scores, request a six-digit email code in Account, then paste it into any code box. Only account identity and game scores are shared."],
           ["Separate consent", "Newsletter signup is separate from the plugin and requires its own consent."]
         ]
       },
@@ -539,11 +596,20 @@ const PROJECT_PAGE_DATA = {
         ]
       },
       {
+        title: "Install and start",
+        kind: "steps",
+        items: [
+          ["01", "Download", "Get NexoBreak from its Food4Rhino product page. Windows and Rhino 8.34 or later running .NET 8 are required."],
+          ["02", "Install", "For a Yak download, drag the package into Rhino and follow the installation prompt. For an RHP download, use Options > Plug-ins > Install. Use one installation method, then restart Rhino."],
+          ["03", "Begin", "Run NexoBreak, add a task and choose Start focus. Configure reminders and optional backups in Settings. An account is needed only for optional score synchronization."]
+        ]
+      },
+      {
         title: "Download",
         kind: "credits",
-        text: "NexoBreak is available on food4Rhino. Download it from the product listing, install it in Rhino, and use the first sessions to test how planning, tracking, breaks, reports, and backups fit your own workflow.",
+        text: "Download NexoBreak from its official Food4Rhino product listing. Check the version and installation details there; downloads are provided by Food4Rhino rather than hosted on this site.",
         links: [
-          ["Open NexoBreak on food4Rhino", "https://www.food4rhino.com/en/browse?searchText=nexobreak&form_build_count=1&sort_by=fs_field_rating"]
+          ["Open NexoBreak on food4Rhino", "https://www.food4rhino.com/en/app/nexobreak"]
         ]
       }
     ]
@@ -1688,6 +1754,11 @@ function initPdfViewers(root) {
   });
 }
 
+function renderProjectLink([label, href, download]) {
+  const attributes = download ? ' download="' + escapeHtml(download) + '"' : ' target="_blank" rel="noopener noreferrer"';
+  return '<a href="' + escapeHtml(href) + '"' + attributes + '>' + escapeHtml(label) + (download ? ' ↓' : ' ↗') + '</a>';
+}
+
 function renderSection(section, index, navGroups = {}) {
   const navGroup = navGroups[section.title];
   const heading = `
@@ -1813,9 +1884,7 @@ function renderSection(section, index, navGroups = {}) {
       <div class="project-credits${groups ? " has-groups" : ""}">
         <div class="project-credits-intro">
           <p>${escapeHtml(section.text)}</p>
-          ${section.links?.length ? `<div class="project-links">${section.links.map(([label, href]) =>
-            `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ↗</a>`
-          ).join("")}</div>` : ""}
+          ${section.links?.length ? `<div class="project-links">${section.links.map(renderProjectLink).join("")}</div>` : ""}
         </div>
         ${groups}
       </div>`;
@@ -1884,7 +1953,7 @@ function renderProjectPage(projectId) {
         <div><dt>Stack</dt><dd>${escapeHtml(project.stack)}</dd></div>
       </dl>
       ${renderTags(project.tags)}
-      ${project.links?.length ? `<div class="project-links">${project.links.map(([label, href]) => `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ↗</a>`).join("")}</div>` : ""}
+      ${project.links?.length ? `<div class="project-links">${project.links.map(renderProjectLink).join("")}</div>` : ""}
     </header>
 
     <section class="project-thesis" aria-label="Project question and response">

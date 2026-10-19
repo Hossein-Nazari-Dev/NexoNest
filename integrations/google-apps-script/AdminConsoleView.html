@@ -1,0 +1,1801 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>NexoNest Management</title>
+        <style>
+            :root {
+                color-scheme: light;
+                --bg: #edf5fb;
+                --surface: #fff;
+                --soft: #f5f8fc;
+                --text: #17344f;
+                --muted: #526f88;
+                --line: #c6d9e8;
+                --accent: #345f85;
+                --weak: #dfedf8;
+                --danger: #a12e3c;
+                --danger-bg: #fff1f2;
+                --success: #276448;
+                --shadow: 0 12px 40px #17344f18;
+                font-family: "Segoe UI", Arial, sans-serif;
+                color: var(--text);
+                background: var(--bg);
+                font-size: 14px;
+            }
+            html.dark {
+                color-scheme: dark;
+                --bg: #171f2a;
+                --surface: #253346;
+                --soft: #202c3b;
+                --text: #f5f8fc;
+                --muted: #bacddd;
+                --line: #43596d;
+                --accent: #99bfdc;
+                --weak: #2c445c;
+                --danger: #ffafb8;
+                --danger-bg: #452933;
+                --success: #a7dfc2;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+            }
+            button,
+            input,
+            select,
+            textarea {
+                font: inherit;
+            }
+            button,
+            input,
+            select {
+                min-height: 44px;
+            }
+            button {
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                padding: 10px 16px;
+                color: var(--text);
+                background: var(--surface);
+                cursor: pointer;
+                font-weight: 600;
+            }
+            button:hover {
+                background: var(--weak);
+            }
+            button:disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+            .primary {
+                background: var(--accent);
+                color: #fff;
+                border-color: transparent;
+            }
+            html.dark .primary {
+                color: #17344f;
+            }
+            .danger {
+                color: var(--danger);
+                background: var(--danger-bg);
+                border-color: var(--danger);
+            }
+            button:focus-visible,
+            a:focus-visible,
+            input:focus-visible,
+            select:focus-visible,
+            textarea:focus-visible {
+                outline: 3px solid var(--accent);
+                outline-offset: 3px;
+            }
+            input,
+            select,
+            textarea {
+                width: 100%;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                padding: 10px 12px;
+                background: var(--soft);
+                color: var(--text);
+            }
+            textarea {
+                min-height: 110px;
+                resize: vertical;
+            }
+            input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+                min-height: 18px;
+                accent-color: var(--accent);
+                cursor: pointer;
+            }
+            a {
+                color: var(--accent);
+            }
+            [hidden] {
+                display: none !important;
+            }
+            .shell {
+                display: grid;
+                grid-template-columns: 216px minmax(0, 1fr);
+                min-height: 100vh;
+            }
+            aside {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                background: var(--surface);
+                border-right: 1px solid var(--line);
+                padding: 28px 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+            }
+            .brand {
+                padding: 0 12px;
+                font-size: 22px;
+                font-weight: 650;
+                letter-spacing: -0.7px;
+            }
+            .brand small {
+                font-size: 12px;
+                letter-spacing: 0;
+                display: block;
+                font-weight: 400;
+                color: var(--muted);
+                margin-top: 4px;
+            }
+            .nav-label {
+                font-size: 11px;
+                color: var(--muted);
+                letter-spacing: 1.2px;
+                text-transform: uppercase;
+                margin: 0 12px 8px;
+            }
+            .nav {
+                display: grid;
+                gap: 4px;
+            }
+            .nav button {
+                background: transparent;
+                border-color: transparent;
+                text-align: left;
+                font-weight: 500;
+            }
+            .nav button[aria-current="page"] {
+                background: var(--weak);
+                color: var(--accent);
+                font-weight: 650;
+            }
+            .aside-foot {
+                margin-top: auto;
+                padding: 12px;
+                color: var(--muted);
+                font-size: 12px;
+                line-height: 1.6;
+                overflow-wrap: anywhere;
+            }
+            main {
+                min-width: 0;
+                padding: 24px 32px 40px;
+            }
+            .topbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 28px;
+            }
+            .context {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+            }
+            .context label {
+                font-size: 12px;
+                color: var(--muted);
+            }
+            .context select {
+                min-width: 180px;
+                width: auto;
+                background: var(--surface);
+            }
+            .utilities {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                align-items: center;
+            }
+            .mode {
+                font-size: 12px;
+                color: var(--muted);
+            }
+            .page-heading {
+                display: flex;
+                justify-content: space-between;
+                gap: 24px;
+                align-items: center;
+                margin-bottom: 24px;
+            }
+            .page-heading h1 {
+                font-size: 28px;
+                letter-spacing: -0.6px;
+                line-height: 1.2;
+                margin: 0 0 8px;
+            }
+            .page-heading p {
+                margin: 0;
+                color: var(--muted);
+                max-width: 650px;
+                line-height: 1.6;
+            }
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+            .stat {
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                background: var(--surface);
+                padding: 20px;
+            }
+            .stat span {
+                font-size: 12px;
+                color: var(--muted);
+            }
+            .stat strong {
+                display: block;
+                font-size: 28px;
+                margin-top: 12px;
+                font-weight: 650;
+            }
+            .panel {
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+            .panel-head {
+                padding: 20px 24px;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+            }
+            .panel-head h2 {
+                font-size: 16px;
+                margin: 0;
+            }
+            .toolbar {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                flex-wrap: wrap;
+                padding: 16px 24px;
+                border-bottom: 1px solid var(--line);
+            }
+            .toolbar input {
+                max-width: 320px;
+            }
+            .toolbar select {
+                max-width: 180px;
+            }
+            .toolbar .count {
+                margin-left: auto;
+                color: var(--muted);
+                font-size: 12px;
+            }
+            .table-wrap {
+                overflow: auto;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: left;
+                white-space: nowrap;
+            }
+            th {
+                font-size: 11px;
+                letter-spacing: 0.4px;
+                text-transform: uppercase;
+                color: var(--muted);
+                font-weight: 600;
+                background: var(--soft);
+            }
+            td,
+            th {
+                padding: 14px 20px;
+                border-bottom: 1px solid var(--line);
+                vertical-align: middle;
+            }
+            th:first-child,
+            td:first-child {
+                padding-left: 24px;
+            }
+            tr:last-child td {
+                border-bottom: 0;
+            }
+            tbody tr:hover {
+                background: var(--soft);
+            }
+            td .sub {
+                font-size: 12px;
+                color: var(--muted);
+                display: block;
+                margin-top: 5px;
+            }
+            .pill {
+                display: inline-block;
+                border-radius: 6px;
+                padding: 5px 8px;
+                background: var(--weak);
+                font-size: 12px;
+            }
+            .pill.good {
+                color: var(--success);
+            }
+            .pill.bad {
+                color: var(--danger);
+                background: var(--danger-bg);
+            }
+            .row-action {
+                padding: 7px 12px;
+                min-height: 36px;
+                font-size: 12px;
+            }
+            .empty {
+                padding: 48px 24px;
+                text-align: center;
+                color: var(--muted);
+                line-height: 1.8;
+            }
+            .pager {
+                border-top: 1px solid var(--line);
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                align-items: center;
+                padding: 16px 24px;
+            }
+            .pager span {
+                font-size: 12px;
+                color: var(--muted);
+            }
+            .pager div {
+                display: flex;
+                gap: 8px;
+            }
+            .bulk {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 24px;
+                background: var(--danger-bg);
+                border-bottom: 1px solid var(--line);
+            }
+            .notice {
+                padding: 14px 16px;
+                border: 1px solid var(--line);
+                background: var(--weak);
+                border-radius: 8px;
+                line-height: 1.6;
+                color: var(--muted);
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+            .notice.error {
+                border-color: var(--danger);
+                color: var(--danger);
+                background: var(--danger-bg);
+            }
+            .cards {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+            }
+            .overview-card {
+                padding: 24px;
+            }
+            .overview-card h2 {
+                margin: 0 0 10px;
+                font-size: 18px;
+            }
+            .overview-card p {
+                color: var(--muted);
+                line-height: 1.7;
+                margin: 0 0 20px;
+            }
+            .overview-card button {
+                margin-right: 8px;
+            }
+            .footnote {
+                font-size: 12px;
+                color: var(--muted);
+                line-height: 1.7;
+                margin-top: 20px;
+            }
+            dialog {
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                padding: 0;
+                background: var(--surface);
+                color: var(--text);
+                box-shadow: var(--shadow);
+                width: min(680px, calc(100vw - 40px));
+                max-height: calc(100vh - 40px);
+            }
+            dialog::backdrop {
+                background: #10233788;
+            }
+            .dialog-head {
+                padding: 24px 24px 16px;
+                border-bottom: 1px solid var(--line);
+            }
+            .dialog-head h2 {
+                font-size: 22px;
+                margin: 0 0 8px;
+            }
+            .dialog-head p {
+                margin: 0;
+                color: var(--muted);
+                line-height: 1.6;
+            }
+            .dialog-body {
+                padding: 24px;
+                max-height: calc(100vh - 240px);
+                overflow: auto;
+            }
+            .dialog-foot {
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+                padding: 16px 24px;
+                border-top: 1px solid var(--line);
+                background: var(--soft);
+            }
+            .fields {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 16px;
+            }
+            .fields label {
+                display: grid;
+                gap: 8px;
+                font-size: 13px;
+            }
+            .fields small {
+                color: var(--muted);
+                line-height: 1.5;
+            }
+            .full {
+                grid-column: 1/-1;
+            }
+            .detail-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin-bottom: 24px;
+            }
+            .detail-grid dt {
+                font-size: 12px;
+                color: var(--muted);
+                margin-bottom: 6px;
+            }
+            .detail-grid dd {
+                margin: 0;
+                overflow-wrap: anywhere;
+            }
+            .action-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .dialog-body > * + * {
+                margin-top: 20px;
+            }
+            .dialog-body h3 {
+                font-size: 15px;
+                margin: 24px 0 14px;
+            }
+            .dialog-error {
+                margin: 16px 24px 0;
+            }
+            .delete-list {
+                max-height: 150px;
+                overflow: auto;
+                padding-left: 20px;
+                line-height: 1.8;
+            }
+            .mono {
+                font-family: Consolas, monospace;
+                font-size: 13px;
+            }
+            .loading {
+                opacity: 0.55;
+                pointer-events: none;
+            }
+            .sr {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
+            @media (max-width: 960px) {
+                .shell {
+                    grid-template-columns: 180px minmax(0, 1fr);
+                }
+                main {
+                    padding: 24px;
+                }
+                .context {
+                    gap: 8px;
+                }
+                .mode {
+                    font-size: 11px;
+                }
+                .stats {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .page-heading {
+                    align-items: flex-start;
+                }
+                .context select {
+                    min-width: 140px;
+                }
+            }
+            @media (max-width: 680px) {
+                .shell {
+                    display: block;
+                }
+                aside {
+                    position: static;
+                    height: auto;
+                    padding: 16px;
+                    border-right: 0;
+                    border-bottom: 1px solid var(--line);
+                    gap: 16px;
+                }
+                .brand small,
+                .nav-label,
+                .aside-foot {
+                    display: none;
+                }
+                .nav {
+                    display: flex;
+                    overflow: auto;
+                }
+                .nav button {
+                    white-space: nowrap;
+                }
+                .topbar {
+                    flex-wrap: wrap;
+                }
+                main {
+                    padding: 20px 16px;
+                }
+                .cards,
+                .fields {
+                    grid-template-columns: 1fr;
+                }
+                .full {
+                    grid-column: auto;
+                }
+                .page-heading {
+                    flex-direction: column;
+                    gap: 16px;
+                }
+                .panel-head,
+                .toolbar,
+                td,
+                th,
+                .pager {
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+                .stats {
+                    gap: 12px;
+                }
+                .stat {
+                    padding: 16px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="shell">
+            <aside>
+                <div class="brand">
+                    NexoNest<small>Management console</small>
+                </div>
+                <div>
+                    <p class="nav-label">Workspace</p>
+                    <nav class="nav" aria-label="Management sections">
+                        <button data-page="overview" aria-current="page">
+                            Overview</button
+                        ><button data-page="accounts">Accounts</button
+                        ><button data-page="licenses">Licenses</button
+                        ><button data-page="vouchers">Vouchers</button
+                        ><button data-page="courses">Courses</button
+                        ><button data-page="registrations">Registrations</button
+                        ><button data-page="products">Products</button>
+                    </nav>
+                </div>
+                <div class="aside-foot">
+                    Owner access only<br />Changes are scoped to the selected
+                    product or course.<br /><br />No automatic emails.
+                </div>
+            </aside>
+            <main>
+                <header class="topbar">
+                    <div class="context">
+                        <label for="product">Product</label
+                        ><select id="product" aria-label="Selected product">
+                            <option value="nexosolve">NexoSolve</option>
+                        </select>
+                    </div>
+                    <div class="utilities">
+                        <span class="mode" id="mode">Owner console</span
+                        ><button id="theme" aria-label="Switch color theme">
+                            Dark theme</button
+                        ><button id="refresh">Refresh</button>
+                    </div>
+                </header>
+                <div class="notice error" id="error" role="alert" hidden></div>
+                <div
+                    class="notice"
+                    id="status"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                ></div>
+                <div class="page-heading">
+                    <div>
+                        <h1 id="title">Workspace overview</h1>
+                        <p id="subtitle">
+                            Manage access and learning programs from one place.
+                        </p>
+                    </div>
+                    <button class="primary" id="create" hidden></button>
+                </div>
+                <section class="stats" aria-label="Selected workspace summary">
+                    <div class="stat">
+                        <span>Product accounts</span
+                        ><strong id="stat-accounts">—</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Accounts with access</span
+                        ><strong id="stat-active">—</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Available vouchers</span
+                        ><strong id="stat-vouchers">—</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Pending in selected course</span
+                        ><strong id="stat-pending">—</strong>
+                    </div>
+                </section>
+                <section id="overview" class="cards">
+                    <article class="panel overview-card">
+                        <h2>Software access</h2>
+                        <p>
+                            Manage verified accounts, grant a license, create
+                            vouchers and resolve device transfers. Shared
+                            devices keep the history needed by other accounts.
+                        </p>
+                        <button data-go="accounts">Manage accounts</button
+                        ><button data-go="products">Manage products</button>
+                    </article>
+                    <article class="panel overview-card">
+                        <h2>Courses and cohorts</h2>
+                        <p>
+                            Keep each cohort’s registrations, prices and consent
+                            rules separate. Review payment receipts and save a
+                            decision without sending an email.
+                        </p>
+                        <button data-go="registrations">
+                            Review registrations</button
+                        ><button data-go="courses">Manage courses</button>
+                    </article>
+                </section>
+                <section class="panel" id="listing" hidden>
+                    <div class="panel-head">
+                        <h2 id="list-title">Accounts</h2>
+                        <label id="course-label" hidden
+                            >Course
+                            <select
+                                id="course"
+                                aria-label="Selected course"
+                            ></select
+                        ></label>
+                    </div>
+                    <div class="toolbar">
+                        <label class="sr" for="search"
+                            >Search this section</label
+                        ><input
+                            id="search"
+                            type="search"
+                            placeholder="Search name, email or reference…"
+                        /><label class="sr" for="filter">Filter status</label
+                        ><select id="filter">
+                            <option value="">All statuses</option></select
+                        ><span class="count" id="count"></span>
+                    </div>
+                    <div class="bulk" id="bulk" hidden>
+                        <span id="selection"></span>
+                        <div>
+                            <button id="clear-selection">Clear</button>
+                            <button class="danger" id="delete-selection">
+                                Delete selected accounts
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead id="thead"></thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="empty" id="empty" hidden></div>
+                    <footer class="pager">
+                        <span id="page-label"></span>
+                        <div>
+                            <button id="previous">Previous</button
+                            ><button id="next">Next</button>
+                        </div>
+                    </footer>
+                </section>
+                <p class="footnote" id="footnote">Loading the workspace…</p>
+            </main>
+        </div>
+        <dialog id="dialog" aria-labelledby="dialog-title">
+            <form id="dialog-form">
+                <header class="dialog-head">
+                    <h2 id="dialog-title"></h2>
+                    <p id="dialog-description"></p>
+                </header>
+                <div
+                    class="notice error dialog-error"
+                    id="dialog-error"
+                    role="alert"
+                    hidden
+                ></div>
+                <div class="dialog-body" id="dialog-body"></div>
+                <footer class="dialog-foot">
+                    <button type="button" id="cancel">Cancel</button
+                    ><button class="primary" type="submit" id="submit">
+                        Save
+                    </button>
+                </footer>
+            </form>
+        </dialog>
+        <script>
+            "use strict";
+            const $ = (id) => document.getElementById(id),
+                state = {
+                    page: "overview",
+                    data: null,
+                    pageIndex: 0,
+                    selected: new Set(),
+                    busy: false,
+                    sequence: 0,
+                    submit: null,
+                };
+            const pages = {
+                overview: [
+                    "Workspace overview",
+                    "Manage software access and learning programs from one place.",
+                ],
+                accounts: [
+                    "Accounts",
+                    "Manage access for the selected product. Changes never delete another product’s account.",
+                ],
+                licenses: [
+                    "Licenses",
+                    "Review direct grants. Voucher-based access is shown in Vouchers.",
+                ],
+                vouchers: [
+                    "Vouchers",
+                    "Issue 3, 6 or 12 months of access for an account or a course.",
+                ],
+                courses: [
+                    "Courses and cohorts",
+                    "Each cohort has its own registrations, pricing and consent version.",
+                ],
+                registrations: [
+                    "Registrations",
+                    "Review receipts and save decisions. These actions do not send email.",
+                ],
+                products: [
+                    "Products",
+                    "Separate license storage and signing configuration for each software product.",
+                ],
+            };
+            function el(tag, text, cls) {
+                const node = document.createElement(tag);
+                if (text !== undefined) node.textContent = text;
+                if (cls) node.className = cls;
+                return node;
+            }
+            function status(text, error = false) {
+                const node = $(error ? "error" : "status");
+                node.textContent = text;
+                node.hidden = !text;
+            }
+            function date(value) {
+                return value
+                    ? new Intl.DateTimeFormat("en-GB", {
+                          dateStyle: "medium",
+                          timeStyle: "short",
+                          timeZone: "UTC",
+                      }).format(new Date(value)) + " UTC"
+                    : "—";
+            }
+            function api(name, ...args) {
+                if (window.ADMIN_PREVIEW)
+                    return window.ADMIN_PREVIEW(name, args);
+                return new Promise((resolve, reject) => {
+                    if (!window.google?.script?.run)
+                        return reject(
+                            Error(
+                                "Open this console from the NexoNest Admin menu in its spreadsheet.",
+                            ),
+                        );
+                    google.script.run
+                        .withSuccessHandler(resolve)
+                        .withFailureHandler(reject)
+                        [name](...args);
+                });
+            }
+            function options(select, items, value) {
+                select.replaceChildren(
+                    ...items.map((item) => {
+                        const node = el("option", item.name);
+                        node.value = item.id;
+                        return node;
+                    }),
+                );
+                if (items.some((item) => item.id === value))
+                    select.value = value;
+            }
+            async function load() {
+                const sequence = ++state.sequence;
+                state.loading = true;
+                $("create").disabled = true;
+                $("refresh").disabled = true;
+                $("listing").classList.add("loading");
+                try {
+                    const data = await api(
+                        "adminSnapshot",
+                        $("product").value,
+                        $("course").value,
+                    );
+                    if (sequence !== state.sequence) return;
+                    state.data = data;
+                    options($("product"), data.products, data.productId);
+                    options($("course"), data.courses, data.courseId);
+                    for (const key of [
+                        "accounts",
+                        "active",
+                        "vouchers",
+                        "pending",
+                    ])
+                        $("stat-" + key).textContent = data.stats[key];
+                    state.selected = new Set(
+                        [...state.selected].filter((email) =>
+                            data.accounts.some((a) => a.email === email),
+                        ),
+                    );
+                    $("footnote").textContent =
+                        "Updated " +
+                        date(data.generatedAt) +
+                        ". Offline access can remain valid for up to seven days after revocation or deletion.";
+                    render();
+                    status("", true);
+                } catch (error) {
+                    if (sequence !== state.sequence) return;
+                    if (state.data) {
+                        $("product").value = state.data.productId;
+                        $("course").value = state.data.courseId;
+                    }
+                    status(
+                        (error.message || "Could not load the workspace.") +
+                            " The last successfully loaded workspace remains selected; refresh to retry.",
+                        true,
+                    );
+                } finally {
+                    if (sequence === state.sequence) {
+                        state.loading = false;
+                        $("create").disabled = !state.data;
+                        $("refresh").disabled = false;
+                        $("listing").classList.remove("loading");
+                    }
+                }
+            }
+            function navigate(page) {
+                status("");
+                state.page = page;
+                state.pageIndex = 0;
+                $("search").value = "";
+                $("filter").value = "";
+                render(true);
+            }
+            function setFilter(items) {
+                options(
+                    $("filter"),
+                    [
+                        { id: "", name: "All statuses" },
+                        ...items.map((id) => ({ id, name: id })),
+                    ],
+                    "",
+                );
+            }
+            function rows() {
+                if (!state.data) return [];
+                return state.data[state.page] || [];
+            }
+            function render(resetFilter = false) {
+                const page = state.page,
+                    data = state.data;
+                document
+                    .querySelectorAll("[data-page]")
+                    .forEach((node) =>
+                        node.setAttribute(
+                            "aria-current",
+                            node.dataset.page === page ? "page" : "false",
+                        ),
+                    );
+                $("title").textContent = pages[page][0];
+                $("subtitle").textContent = pages[page][1];
+                $("overview").hidden = page !== "overview";
+                $("listing").hidden = page === "overview";
+                $("course-label").hidden = page !== "registrations";
+                $("list-title").textContent = pages[page][0];
+                const create = {
+                    products: "Add product",
+                    courses: "New cohort",
+                    vouchers: "Create vouchers",
+                }[page];
+                $("create").hidden = !create;
+                $("create").disabled = state.loading || !state.data;
+                $("create").textContent = create || "";
+                if (!data || page === "overview") return;
+                if (resetFilter)
+                    setFilter([
+                        ...new Set(
+                            rows()
+                                .map((row) => row.status || row.state)
+                                .filter(Boolean),
+                        ),
+                    ]);
+                const query = $("search").value.trim().toLowerCase(),
+                    filter = $("filter").value;
+                let list = rows().filter(
+                    (row) =>
+                        (!filter || (row.status || row.state) === filter) &&
+                        Object.values(row).some((value) =>
+                            String(value ?? "")
+                                .toLowerCase()
+                                .includes(query),
+                        ),
+                );
+                const size = 20;
+                state.pageIndex = Math.max(
+                    0,
+                    Math.min(
+                        state.pageIndex,
+                        Math.ceil(list.length / size) - 1,
+                    ),
+                );
+                const visible = list.slice(
+                    state.pageIndex * size,
+                    (state.pageIndex + 1) * size,
+                );
+                $("count").textContent = list.length + " record(s)";
+                $("page-label").textContent = list.length
+                    ? `${state.pageIndex * size + 1}–${state.pageIndex * size + visible.length} of ${list.length}`
+                    : "No records";
+                $("previous").disabled = state.pageIndex === 0;
+                $("next").disabled =
+                    (state.pageIndex + 1) * size >= list.length;
+                const columns = {
+                    accounts: [
+                        "Select",
+                        "Account",
+                        "Status",
+                        "Access",
+                        "Expires",
+                        "Device",
+                        "",
+                    ],
+                    licenses: ["Account", "Duration", "Status", "Expires", ""],
+                    vouchers: [
+                        "Assignment / campaign",
+                        "Duration",
+                        "Status",
+                        "Deadline / access",
+                        "",
+                    ],
+                    courses: [
+                        "Course",
+                        "Status",
+                        "Registrations",
+                        "Linked benefit",
+                        "",
+                    ],
+                    registrations: [
+                        "Participant",
+                        "Fee (toman)",
+                        "Status",
+                        "Confirmation email",
+                        "",
+                    ],
+                    products: ["Product", "Status", "Storage", ""],
+                }[page];
+                const header = el("tr");
+                columns.forEach((label) => {
+                    const th = el("th", label);
+                    th.scope = "col";
+                    header.append(th);
+                });
+                $("thead").replaceChildren(header);
+                $("tbody").replaceChildren();
+                visible.forEach((row) => {
+                    const tr = el("tr"),
+                        cell = (text, sub) => {
+                            const td = el("td", text);
+                            if (sub) td.append(el("span", sub, "sub"));
+                            tr.append(td);
+                            return td;
+                        },
+                        badge = (text) => {
+                            const td = cell("");
+                            td.append(
+                                el(
+                                    "span",
+                                    text,
+                                    "pill " +
+                                        ([
+                                            "Active",
+                                            "Enabled",
+                                            "active",
+                                            "open",
+                                            "تأیید شده",
+                                        ].includes(text)
+                                            ? "good"
+                                            : [
+                                                    "Disabled",
+                                                    "Revoked",
+                                                    "Expired",
+                                                    "رد شده",
+                                                ].includes(text)
+                                              ? "bad"
+                                              : ""),
+                                ),
+                            );
+                        },
+                        action = (label, fn) => {
+                            const td = cell(""),
+                                button = el("button", label, "row-action");
+                            button.onclick = fn;
+                            td.append(button);
+                        };
+                    if (page === "accounts") {
+                        const td = cell(""),
+                            check = el("input");
+                        check.type = "checkbox";
+                        check.checked = state.selected.has(row.email);
+                        check.setAttribute("aria-label", "Select " + row.email);
+                        check.onchange = () => {
+                            check.checked
+                                ? state.selected.add(row.email)
+                                : state.selected.delete(row.email);
+                            updateBulk();
+                        };
+                        td.append(check);
+                        cell(row.name || "Name not set", row.email);
+                        badge(row.status);
+                        cell(row.access);
+                        cell(date(row.endsAt));
+                        cell(row.device);
+                        action("Manage", () => accountDialog(row));
+                    }
+                    if (page === "licenses" || page === "vouchers") {
+                        cell(
+                            row.email || row.campaign || "Unassigned",
+                            (row.courseId ? row.courseId + " · " : "") +
+                                "Ref " +
+                                row.id.slice(0, 10),
+                        );
+                        cell(row.months + " months");
+                        badge(row.state);
+                        cell(date(row.endsAt || row.redeemBy));
+                        action("Revoke", () =>
+                            confirmAction(
+                                "Revoke this grant?",
+                                "Reference " +
+                                    row.id.slice(0, 10) +
+                                    ". This affects only the selected product. Existing offline access may continue until expiry.",
+                                () =>
+                                    api("adminRevokeGrant", {
+                                        product: data.productId,
+                                        table: row.table,
+                                        id: row.id,
+                                    }),
+                                "Revoke grant",
+                                true,
+                            ),
+                        );
+                    }
+                    if (page === "products") {
+                        cell(row.name, row.id);
+                        badge(row.state);
+                        cell(
+                            row.id === "nexosolve"
+                                ? "Existing NexoSolve ledger"
+                                : "Separate product ledger",
+                        );
+                        action("Edit", () => productDialog(row));
+                    }
+                    if (page === "courses") {
+                        cell(row.name, row.id);
+                        badge(
+                            row.state === "open" &&
+                                row.registrationEnabled === false
+                                ? "Blocked by legacy switch"
+                                : row.state,
+                        );
+                        cell(
+                            row.registrationCount || 0,
+                            row.capacity + " request limit",
+                        );
+                        cell(
+                            row.product
+                                ? row.product +
+                                      " · " +
+                                      row.voucherMonths +
+                                      " months"
+                                : "No linked product",
+                        );
+                        action("Edit", () => courseDialog(row));
+                    }
+                    if (page === "registrations") {
+                        cell(row.name, row.email);
+                        cell(Number(row.fee).toLocaleString("en-GB"));
+                        badge(row.status);
+                        cell(
+                            row.confirmation === "accepted"
+                                ? "Provider accepted"
+                                : row.confirmation === "unknown"
+                                  ? "Needs delivery review"
+                                  : "Not sent",
+                        );
+                        action("Review", () => registrationDialog(row));
+                    }
+                    $("tbody").append(tr);
+                });
+                $("empty").hidden = visible.length > 0;
+                $("empty").textContent =
+                    query || filter
+                        ? "No matching records. Clear the search or status filter."
+                        : "No records yet. This section will show records for the selected product or course.";
+                updateBulk();
+            }
+            function updateBulk() {
+                $("bulk").hidden =
+                    state.page !== "accounts" || !state.selected.size;
+                $("selection").textContent =
+                    state.selected.size + " account(s) selected";
+                $("delete-selection").disabled = state.selected.size > 100;
+            }
+            function showDialog(
+                title,
+                description,
+                submit,
+                action = "Save",
+                danger = false,
+            ) {
+                $("dialog-title").textContent = title;
+                $("dialog-description").textContent = description;
+                $("dialog-body").replaceChildren();
+                $("dialog-error").hidden = true;
+                $("submit").disabled = false;
+                $("submit").textContent = action;
+                $("submit").className = danger ? "danger" : "primary";
+                $("submit").hidden = !submit;
+                state.submit = submit;
+                $("cancel").textContent = submit ? "Cancel" : "Close";
+                if (!$("dialog").open) $("dialog").showModal();
+            }
+            function fields() {
+                const grid = el("div", undefined, "fields");
+                $("dialog-body").append(grid);
+                return grid;
+            }
+            function field(
+                grid,
+                label,
+                value,
+                type = "text",
+                items = null,
+                full = false,
+            ) {
+                const wrap = el("label", label, full ? "full" : "");
+                const input = el(
+                    items
+                        ? "select"
+                        : type === "textarea"
+                          ? "textarea"
+                          : "input",
+                );
+                if (items) options(input, items, String(value));
+                else {
+                    if (type !== "textarea") input.type = type;
+                    input.value = value ?? "";
+                }
+                wrap.append(input);
+                grid.append(wrap);
+                return input;
+            }
+            function note(text, danger = false) {
+                $("dialog-body").append(
+                    el("div", text, "notice" + (danger ? " error" : "")),
+                );
+            }
+            function confirmAction(
+                title,
+                description,
+                operation,
+                label = "Confirm",
+                danger = false,
+            ) {
+                showDialog(title, description, operation, label, danger);
+                note(
+                    "No email is sent. Refresh the workspace after an uncertain outcome before taking another action.",
+                );
+            }
+            function accountDialog(row) {
+                showDialog(row.name || "Account details", row.email, null);
+                const dl = el("dl", undefined, "detail-grid");
+                for (const [label, value] of Object.entries({
+                    Product: $("product").selectedOptions[0].textContent,
+                    Status: row.status,
+                    Access: row.access,
+                    Expires: date(row.endsAt),
+                })) {
+                    const div = el("div");
+                    div.append(el("dt", label), el("dd", value));
+                    dl.append(div);
+                }
+                $("dialog-body").append(dl);
+                note(
+                    "Existing offline access may remain valid for up to seven days. These actions affect this product only.",
+                );
+                const grid = el("div", undefined, "action-grid");
+                for (const [label, action] of [
+                    ["Grant license", "grant"],
+                    [
+                        row.status === "Disabled"
+                            ? "Enable account"
+                            : "Disable account",
+                        row.status === "Disabled" ? "enable" : "disable",
+                    ],
+                    ["Repair sign-in", "signout"],
+                    ["Transfer device", "release"],
+                ]) {
+                    const button = el("button", label);
+                    button.type = "button";
+                    button.onclick = () => {
+                        if (action === "grant") return grantDialog(row);
+                        confirmAction(
+                            label + "?",
+                            row.email,
+                            () =>
+                                api("adminLicenseAction", {
+                                    product: state.data.productId,
+                                    email: row.email,
+                                    action,
+                                }),
+                            label,
+                            action === "disable",
+                        );
+                    };
+                    grid.append(button);
+                }
+                $("dialog-body").append(grid);
+            }
+            function grantDialog(row) {
+                let months;
+                const operationId = crypto.randomUUID();
+                showDialog(
+                    "Grant a license",
+                    row.email +
+                        " · " +
+                        $("product").selectedOptions[0].textContent,
+                    () =>
+                        api("adminLicenseAction", {
+                            product: state.data.productId,
+                            email: row.email,
+                            action: "grant",
+                            months: Number(months.value),
+                            operationId,
+                        }),
+                    "Activate license",
+                );
+                months = field(
+                    fields(),
+                    "Duration",
+                    3,
+                    "text",
+                    [3, 6, 12].map((id) => ({
+                        id: String(id),
+                        name: id + " months",
+                    })),
+                );
+                note(
+                    "Starts immediately and extends existing paid access. Retrying this unchanged form uses the same operation ID and will not add time twice.",
+                );
+            }
+            function productDialog(
+                item = { id: "", name: "", state: "draft" },
+            ) {
+                let id, name, statusInput;
+                showDialog(
+                    item.id ? "Edit product" : "Add product",
+                    "A stable product ID isolates accounts, devices, grants and private signing configuration.",
+                    () =>
+                        api("adminSaveProduct", {
+                            id: id.value,
+                            name: name.value,
+                            state: statusInput.value,
+                        }),
+                );
+                const grid = fields();
+                id = field(grid, "Product ID", item.id);
+                id.required = true;
+                id.pattern = "[a-z][a-z0-9-]{2,39}";
+                id.readOnly = !!item.id;
+                name = field(grid, "Display name", item.name);
+                name.required = true;
+                statusInput = field(
+                    grid,
+                    "Status",
+                    item.state,
+                    "text",
+                    ["draft", "active", "paused"].map((id) => ({
+                        id,
+                        name: id,
+                    })),
+                );
+                note(
+                    "New products start in Draft. Before activating, configure a separate private signing key and token secret in Script properties and integrate the matching client. This panel never displays private keys.",
+                );
+            }
+            function courseDialog(
+                item = {
+                    id: "",
+                    name: "",
+                    rulesVersion: "v1",
+                    state: "draft",
+                    capacity: 100,
+                    dailyLimit: 30,
+                    fees: { standard: 0, student: 0, newsletter: 0 },
+                    schedule: "",
+                    product: "",
+                    voucherMonths: 3,
+                },
+            ) {
+                const inputs = {};
+                showDialog(
+                    item.id ? "Edit cohort" : "New cohort",
+                    "A cohort gets a separate registration table. Existing consent and recorded fees remain unchanged.",
+                    () =>
+                        api("adminSaveCourse", {
+                            id: inputs.id.value,
+                            name: inputs.name.value,
+                            rulesVersion: inputs.rulesVersion.value,
+                            state: inputs.state.value,
+                            capacity: Number(inputs.capacity.value),
+                            dailyLimit: Number(inputs.dailyLimit.value),
+                            fees: {
+                                standard: Number(inputs.standard.value),
+                                student: Number(inputs.student.value),
+                                newsletter: Number(inputs.newsletter.value),
+                            },
+                            schedule: inputs.schedule.value,
+                            product: inputs.product.value,
+                            voucherMonths: Number(inputs.voucherMonths.value),
+                        }),
+                );
+                const grid = fields();
+                inputs.id = field(grid, "Course ID", item.id);
+                inputs.id.readOnly = !!item.id;
+                inputs.id.required = true;
+                inputs.name = field(grid, "Course name", item.name);
+                inputs.name.required = true;
+                inputs.rulesVersion = field(
+                    grid,
+                    "Consent / rules version",
+                    item.rulesVersion,
+                );
+                inputs.state = field(
+                    grid,
+                    "Registration status",
+                    item.state,
+                    "text",
+                    ["draft", "open", "closed"].map((id) => ({ id, name: id })),
+                );
+                inputs.capacity = field(
+                    grid,
+                    "Total request limit (max. 150)",
+                    item.capacity,
+                    "number",
+                );
+                inputs.dailyLimit = field(
+                    grid,
+                    "Daily request limit (max. 30)",
+                    item.dailyLimit,
+                    "number",
+                );
+                for (const key of ["standard", "student", "newsletter"])
+                    inputs[key] = field(
+                        grid,
+                        key[0].toUpperCase() + key.slice(1) + " price · toman",
+                        item.fees[key],
+                        "number",
+                    );
+                inputs.product = field(
+                    grid,
+                    "Optional product benefit",
+                    item.product,
+                    "text",
+                    [
+                        { id: "", name: "No linked product" },
+                        ...state.data.products,
+                    ],
+                );
+                inputs.voucherMonths = field(
+                    grid,
+                    "Benefit duration",
+                    item.voucherMonths,
+                    "text",
+                    [3, 6, 12].map((id) => ({
+                        id: String(id),
+                        name: id + " months",
+                    })),
+                );
+                inputs.schedule = field(
+                    grid,
+                    "Schedule and time zone",
+                    item.schedule,
+                    "textarea",
+                    null,
+                    true,
+                );
+                if (item.registrationCount > 0) {
+                    inputs.rulesVersion.readOnly = true;
+                    for (const key of ["standard", "student", "newsletter"])
+                        inputs[key].readOnly = true;
+                    note(
+                        "This cohort already has registrations. Prices and the consent version are locked; create a new cohort to change them.",
+                    );
+                }
+                if (
+                    item.id === "workshop-2026-10" &&
+                    item.registrationEnabled === false
+                )
+                    note(
+                        "The legacy public form is also blocked by its existing WORKSHOP_ENABLED setting. Saving this course does not change that global switch.",
+                    );
+                note(
+                    "A linked benefit is metadata. Issue vouchers explicitly after reviewing the participants. Saving does not publish a course page, send an email, grant a license or issue certificates.",
+                );
+            }
+            function voucherDialog() {
+                const inputs = {},
+                    operationId = crypto.randomUUID();
+                showDialog(
+                    "Create vouchers",
+                    "Issue access for the selected product. Codes are not sent automatically.",
+                    () =>
+                        api("adminIssueVouchers", {
+                            product: state.data.productId,
+                            operationId,
+                            months: Number(inputs.months.value),
+                            count: Number(inputs.count.value),
+                            email: inputs.email.value,
+                            redeemBy: inputs.deadline.value + "T23:59:59Z",
+                            courseId: inputs.course.value,
+                            campaign: inputs.campaign.value,
+                        }),
+                    "Create codes",
+                );
+                const grid = fields();
+                inputs.months = field(
+                    grid,
+                    "Access duration",
+                    3,
+                    "text",
+                    [3, 6, 12].map((id) => ({
+                        id: String(id),
+                        name: id + " months",
+                    })),
+                );
+                inputs.count = field(
+                    grid,
+                    "Number of codes (1–100)",
+                    1,
+                    "number",
+                );
+                inputs.count.min = 1;
+                inputs.count.max = 100;
+                inputs.email = field(
+                    grid,
+                    "Assign to an account · optional",
+                    "",
+                    "email",
+                );
+                inputs.course = field(
+                    grid,
+                    "Course / cohort · optional",
+                    "",
+                    "text",
+                    [{ id: "", name: "No course" }, ...state.data.courses],
+                );
+                const deadline = new Date();
+                deadline.setUTCFullYear(deadline.getUTCFullYear() + 1);
+                inputs.deadline = field(
+                    grid,
+                    "Redeem by (UTC)",
+                    deadline.toISOString().slice(0, 10),
+                    "date",
+                );
+                inputs.campaign = field(grid, "Campaign label · optional", "");
+                note(
+                    "Account assignment requires a verified enabled account and exactly one code. Course batches are one-use codes. Access begins on redemption; paid access is extended. Retrying this unchanged form recovers the same batch.",
+                );
+            }
+            async function deletionDialog() {
+                try {
+                    const product = state.data.productId,
+                        plan = await api("adminPreviewDeletion", product, [
+                            ...state.selected,
+                        ]);
+                    let typed;
+                    showDialog(
+                        "Permanently delete " +
+                            plan.accounts +
+                            (plan.accounts === 1 ? " account?" : " accounts?"),
+                        "Only " +
+                            $("product").selectedOptions[0].textContent +
+                            " account records will be removed.",
+                        () =>
+                            api("adminDeleteAccounts", {
+                                product,
+                                emails: plan.emails,
+                                revision: plan.revision,
+                                phrase: typed.value,
+                            }),
+                        "Delete permanently",
+                        true,
+                    );
+                    note(
+                        `${plan.sharedDevices} shared device(s) will retain their limits and remaining accounts. ${plan.exclusiveDevices} exclusive device history record(s) will be removed. Other products, newsletter data and course registrations remain.`,
+                        true,
+                    );
+                    const list = el("ul", undefined, "delete-list");
+                    plan.emails.forEach((email) =>
+                        list.append(el("li", email)),
+                    );
+                    $("dialog-body").append(list);
+                    typed = field(
+                        fields(),
+                        "Type " + plan.phrase,
+                        "",
+                        "text",
+                        null,
+                        true,
+                    );
+                    typed.required = true;
+                    $("submit").disabled = true;
+                    typed.oninput = () => {
+                        $("submit").disabled = typed.value !== plan.phrase;
+                    };
+                    note(
+                        "This cannot be undone. Existing offline leases can remain valid until expiry. A fresh trial may become available on an exclusive device. If records change after this preview, deletion is blocked.",
+                    );
+                } catch (error) {
+                    status(error.message, true);
+                }
+            }
+            function registrationDialog(row) {
+                const pending = row.status === "در انتظار بررسی";
+                let decision, noteInput;
+                showDialog(
+                    "Review registration",
+                    row.name + " · " + row.email,
+                    pending
+                        ? () =>
+                              api("adminReviewRegistration", {
+                                  courseId: state.data.courseId,
+                                  id: row.id,
+                                  revision: row.revision,
+                                  decision: decision.value,
+                                  note: noteInput.value,
+                              })
+                        : null,
+                    "Save decision",
+                );
+                note(
+                    "Verify the receipt, amount, eligibility and discount evidence before approving. Saving only records the decision; it sends no email and issues no certificate or license.",
+                );
+                if (row.receipt) {
+                    const link = el("a", "Open private payment receipt");
+                    link.href = row.receipt;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    $("dialog-body").append(link);
+                }
+                if (Number(row.fee) > 0 && !row.receipt)
+                    note(
+                        "This paid registration has no valid receipt link. Verify payment separately before approving.",
+                        true,
+                    );
+                const grid = fields();
+                decision = field(
+                    grid,
+                    "Decision",
+                    row.status === "رد شده" ? "reject" : "approve",
+                    "text",
+                    [
+                        { id: "approve", name: "Approve registration" },
+                        { id: "reject", name: "Reject registration" },
+                    ],
+                );
+                decision.disabled = !pending;
+                noteInput = field(
+                    grid,
+                    "Review note",
+                    row.note,
+                    "textarea",
+                    null,
+                    true,
+                );
+                noteInput.required = pending;
+                noteInput.readOnly = !pending;
+            }
+            $("dialog-form").onsubmit = async (event) => {
+                event.preventDefault();
+                if (state.busy || !state.submit) return;
+                state.busy = true;
+                const action = state.submit;
+                const controls = [
+                        ...$("dialog-form").querySelectorAll(
+                            "button,input,select,textarea",
+                        ),
+                    ],
+                    disabled = controls.map((node) => node.disabled);
+                controls.forEach((node) => (node.disabled = true));
+                $("dialog-error").hidden = true;
+                try {
+                    const result = await action();
+                    $("dialog").close();
+                    status(result.message || "Saved.");
+                    if (result.codes) {
+                        showDialog("Voucher codes", result.message, null);
+                        const codes = el("textarea");
+                        codes.readOnly = true;
+                        codes.className = "mono";
+                        codes.value = result.codes.join("\n");
+                        codes.style.minHeight = "220px";
+                        codes.setAttribute("aria-label", "New voucher codes");
+                        $("dialog-body").append(codes);
+                        const copy = el("button", "Copy codes");
+                        copy.type = "button";
+                        copy.onclick = async () => {
+                            try {
+                                await navigator.clipboard.writeText(
+                                    codes.value,
+                                );
+                                copy.textContent = "Copied";
+                            } catch (_) {
+                                codes.focus();
+                                codes.select();
+                                copy.textContent = "Select and copy the codes";
+                            }
+                        };
+                        $("dialog-body").append(copy);
+                    } else state.selected.clear();
+                    await load();
+                } catch (error) {
+                    $("dialog-error").textContent =
+                        (error.message || "The outcome is uncertain.") +
+                        " Refresh and review records before retrying. For grants or vouchers, retry the unchanged form to recover the same operation.";
+                    $("dialog-error").hidden = false;
+                } finally {
+                    controls.forEach(
+                        (node, i) => (node.disabled = disabled[i]),
+                    );
+                    state.busy = false;
+                }
+            };
+            $("dialog").addEventListener("cancel", (event) => {
+                if (state.busy) event.preventDefault();
+            });
+            $("cancel").onclick = () => {
+                if (!state.busy) $("dialog").close();
+            };
+            $("refresh").onclick = load;
+            $("product").onchange = () => {
+                state.selected.clear();
+                state.pageIndex = 0;
+                load();
+            };
+            $("course").onchange = () => {
+                state.pageIndex = 0;
+                load();
+            };
+            $("search").oninput = () => {
+                state.pageIndex = 0;
+                render();
+            };
+            $("filter").onchange = () => {
+                state.pageIndex = 0;
+                render();
+            };
+            $("previous").onclick = () => {
+                state.pageIndex--;
+                render();
+            };
+            $("next").onclick = () => {
+                state.pageIndex++;
+                render();
+            };
+            $("clear-selection").onclick = () => {
+                state.selected.clear();
+                render();
+            };
+            $("delete-selection").onclick = deletionDialog;
+            $("create").onclick = () =>
+                ({
+                    products: productDialog,
+                    courses: courseDialog,
+                    vouchers: voucherDialog,
+                })[state.page]();
+            document
+                .querySelectorAll("[data-page]")
+                .forEach(
+                    (button) =>
+                        (button.onclick = () => navigate(button.dataset.page)),
+                );
+            document
+                .querySelectorAll("[data-go]")
+                .forEach(
+                    (button) =>
+                        (button.onclick = () => navigate(button.dataset.go)),
+                );
+            $("theme").onclick = () => {
+                const dark = document.documentElement.classList.toggle("dark");
+                $("theme").textContent = dark ? "Light theme" : "Dark theme";
+            };
+            window.addEventListener("DOMContentLoaded", () => {
+                if (window.ADMIN_PREVIEW)
+                    $("mode").textContent = "Preview · synthetic data";
+                load();
+            });
+        </script>
+    </body>
+</html>

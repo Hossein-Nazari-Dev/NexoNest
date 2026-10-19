@@ -22,16 +22,16 @@ function licenseNewsletterConsent_(email, name, now) {
   const row = findRow_(newsletter, 3, email);
   if (row && String(newsletter.getRange(row, 6).getValue()) === 'subscribed') return;
   const time = new Date(now);
-  const consent = ['consent_' + Utilities.getUuid(), user.userId, email, 'nexosolve-profile-v1', time,
-    'subscribed', '', 'nexosolve-desktop', '', '', '', '', 'NexoSolve', '', '', time, time];
+  const consent = ['consent_' + Utilities.getUuid(), user.userId, email, licenseProduct_() + '-profile-v1', time,
+    'subscribed', '', licenseProduct_() === 'nexosolve' ? 'nexosolve-desktop' : licenseProduct_() + '-app', '', '', '', '', licenseProductName_(), '', '', time, time];
   if (row) {
     const previous = newsletter.getRange(row, 1, 1, consent.length).getValues()[0];
     // A prior profile consent can outlive an interrupted account write or a later opt-out.
-    if (previous[3] === 'nexosolve-profile-v1' || previous[5] === 'unsubscribed') return;
+    if (previous[3] === licenseProduct_() + '-profile-v1' || previous[5] === 'unsubscribed') return;
     // Preserve the reader's existing education, occupation and interests.
     for (let column = 8; column <= 13; column++) consent[column] = previous[column];
     consent[16] = previous[16] || time;
   }
   // Email was just verified by the account flow; no second confirmation email is required.
-  newsletter.getRange(row || newsletter.getLastRow() + 1, 1, 1, consent.length).setValues([consent.map(sheetText_)]);
+  newsletter.getRange(row || newsletter.getLastRow() + 1, 1, 1, consent.length).setValues([consent.map(value => typeof value === 'string' && /^[=+@\-\t\r]/.test(value) ? "'" + value : value)]);
 }

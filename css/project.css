@@ -1721,3 +1721,10 @@ body.project-theme {
     display: none;
   }
 }
+
+/* Keep the connection diagram readable at desktop and mobile widths. */
+.project-figure img[src$="desktop-grasshopper-connection.svg"] {
+  width: min(100%, 640px);
+  max-height: none;
+  margin-inline: auto;
+}

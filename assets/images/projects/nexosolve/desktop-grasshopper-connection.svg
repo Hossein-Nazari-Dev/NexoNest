@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 800" role="img" aria-labelledby="title desc">
+<title id="title">NexoSolve and Grasshopper: connected workspaces</title>
+<desc id="desc">The standalone Windows app manages studies and saves results. A connector inside Rhino and Grasshopper transfers inputs and results. The Grasshopper definition performs geometry, simulation and evaluation.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="#77d7b4"/></marker></defs>
+<rect width="640" height="800" rx="20" fill="#131d25"/>
+<g font-family="Arial, sans-serif" fill="#f1f5f7">
+<text x="32" y="44" font-size="20" fill="#a8bbc8">ON YOUR WINDOWS COMPUTER</text>
+<rect x="32" y="66" width="576" height="176" rx="14" fill="#233a46" stroke="#77d7b4" stroke-width="2"/>
+<text x="56" y="106" font-size="29" font-weight="700">NexoSolve Windows app</text>
+<text x="56" y="143" font-size="23" fill="#77d7b4">Separate desktop workspace</text>
+<text x="56" y="181" font-size="22">Configure, run, pause and review studies</text>
+<text x="56" y="215" font-size="22">Sequence cases and save results locally</text>
+<path d="M182 255 V342" stroke="#77d7b4" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M458 342 V255" stroke="#77d7b4" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="49" y="291" font-size="21">Case inputs</text>
+<text x="482" y="310" font-size="21" text-anchor="middle">Results</text>
+<rect x="32" y="353" width="576" height="413" rx="14" fill="#1b2933" stroke="#637f91" stroke-width="2"/>
+<text x="56" y="395" font-size="27" font-weight="700">Rhino + Grasshopper</text>
+<rect x="56" y="419" width="528" height="109" rx="10" fill="#294536" stroke="#77d7b4"/>
+<text x="80" y="457" font-size="25" font-weight="700">NexoSolve connector plugin</text>
+<text x="80" y="495" font-size="22">Transfers inputs and calculated results</text>
+<path d="M195 540 V586 M445 586 V540" stroke="#77d7b4" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="56" y="600" width="528" height="137" rx="10" fill="#233a46" stroke="#637f91"/>
+<text x="80" y="640" font-size="25" font-weight="700">Your Grasshopper definition</text>
+<text x="80" y="679" font-size="22">Geometry, simulation and evaluation</text>
+<text x="80" y="713" font-size="22" fill="#b8cbd7">Performs each case calculation</text>
+</g></svg>

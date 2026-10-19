@@ -10,7 +10,7 @@ function setupLicensing() {
   licenseAdmin_();
   LICENSE_TABLES.forEach(name => licenseTable_(name));
   const props = PropertiesService.getScriptProperties();
-  if (!props.getProperty('LICENSE_TOKEN_SECRET')) props.setProperty('LICENSE_TOKEN_SECRET', Utilities.getUuid() + Utilities.getUuid());
+  if (!props.getProperty(licenseProperty_('TOKEN_SECRET'))) props.setProperty(licenseProperty_('TOKEN_SECRET'), Utilities.getUuid() + Utilities.getUuid());
   if (!props.getProperty('NEWSLETTER_EMAIL_RESERVE')) props.setProperty('NEWSLETTER_EMAIL_RESERVE', '20');
 }
 
@@ -21,7 +21,7 @@ function licenseAdmin_() {
 
 function licenseTable_(name) {
   const file = SpreadsheetApp.getActiveSpreadsheet();
-  const sheetName = LICENSE_STORAGE_PREFIX + name;
+  const sheetName = licensePrefix_() + name;
   let sheet = file.getSheetByName(sheetName);
   if (!sheet) {
     sheet = file.insertSheet(sheetName);
@@ -53,7 +53,7 @@ function licenseHash_(text) {
 }
 
 function licenseRandom_() {
-  const key = PropertiesService.getScriptProperties().getProperty('LICENSE_TOKEN_SECRET');
+  const key = PropertiesService.getScriptProperties().getProperty(licenseProperty_('TOKEN_SECRET'));
   if (!key) throw new Error('Licensing has not been configured.');
   return Utilities.base64EncodeWebSafe(Utilities.computeHmacSha256Signature(Utilities.getUuid() + Utilities.getUuid(), key)).replace(/=+$/, '');
 }
@@ -87,19 +87,48 @@ function licenseRate_(key, now, maximum, cooldown) {
   rate.count++; rate.lastAt = now; licensePut_('Rates', key, rate);
 }
 
+// Fixed-size admission counters: anonymous callers cannot grow the rate ledger.
+function licenseAdmission_(key, now, window, maximum) {
+  const props = PropertiesService.getScriptProperties();
+  const raw = props.getProperty(key);
+  let rate = raw ? JSON.parse(raw) : null;
+  if (!rate || now - rate.startedAt >= window) rate = { startedAt: now, count: 0 };
+  if (rate.count >= maximum) licenseFail_('busy', 'The service is busy. Try again shortly.', true);
+  rate.count++;
+  props.setProperty(key, JSON.stringify(rate));
+}
+
+function licenseAdmitRequest_(request, now) {
+  if (!request || request.product !== licenseProduct_()) licenseFail_('invalid_product', 'Unknown product.');
+  if (!['guest', 'send_code', 'verify_code', 'check', 'profile', 'redeem', 'logout'].includes(request.action))
+    licenseFail_('invalid_action', 'Unknown request.');
+  if (typeof request.device !== 'string' || !/^[a-f0-9]{64}$/.test(request.device)) licenseFail_('invalid_device', 'Invalid device identity.');
+  licenseAdmission_('LICENSE_REQUEST_MINUTE', now, 60000, 300);
+  if (!licenseGet_('Devices', request.device)) {
+    // Only discovery/sign-in may register a device. Authenticated calls never create one.
+    if (!['guest', 'send_code', 'verify_code'].includes(request.action)) licenseFail_('invalid_device', 'Register this device before signing in.');
+    licenseAdmission_('LICENSE_NEW_DEVICE_HOUR', now, 3600000, 60);
+    licenseAdmission_('LICENSE_NEW_DEVICE_DAY', now, LICENSE_DAY, 200);
+  }
+}
+
 function licensingPost_(event) {
   const lock = LockService.getScriptLock();
   let locked = false;
+  let action = 'invalid';
   try {
     locked = lock.tryLock(10000);
     if (!locked) licenseFail_('busy', 'The service is busy. Try again shortly.', true);
     const raw = event.parameter.payload || (event.postData && event.postData.contents) || '{}';
     if (raw.length > 8192) licenseFail_('invalid_request', 'Request is too large.');
     const request = JSON.parse(raw);
-    if (request.product !== LICENSE_PRODUCT) licenseFail_('invalid_product', 'Unknown product.');
+    try { licenseContext_ = licenseResolveProduct_(request.product, true); }
+    catch (_) { licenseFail_('invalid_product', 'Unknown or unavailable product.'); }
     const props = PropertiesService.getScriptProperties();
-    if (!props.getProperty('LICENSE_PRIVATE_KEY') || !props.getProperty('LICENSE_TOKEN_SECRET')) licenseFail_('unconfigured', 'License service is not configured.', true);
+    if (!props.getProperty(licenseProperty_('PRIVATE_KEY')) || !props.getProperty(licenseProperty_('TOKEN_SECRET'))) licenseFail_('unconfigured', 'License service is not configured.', true);
     const now = Date.now();
+    licenseAdmitRequest_(request, now);
+    action = request.action;
     const device = licenseDevice_(request.device, now);
     let result;
     switch (request.action) {
@@ -127,11 +156,13 @@ function licensingPost_(event) {
       default: licenseFail_('invalid_action', 'Unknown request.');
     }
     if (['verify_code', 'profile', 'redeem'].includes(request.action)) licenseRefreshAdminSafely_();
+    console.info('License ' + licenseProduct_() + ' ' + action + ': ok');
     return json_(Object.assign({ ok: true }, result));
   } catch (error) {
+    console.warn('License ' + licenseProduct_() + ' ' + action + ': ' + (error.code || 'service_error'));
     if (!error.code) console.error('License service failure. Inspect execution diagnostics without logging request credentials.');
     return json_({ ok: false, code: error.code || 'service_error', error: error.code ? error.message : 'Service unavailable. Please try again later.', retryable: error.code ? error.retryable : true });
-  } finally { if (locked) lock.releaseLock(); }
+  } finally { licenseContext_ = null; if (locked) lock.releaseLock(); }
 }
 
 function licenseSendCode_(request, now) {
@@ -171,6 +202,8 @@ function licenseSendCode_(request, now) {
 }
 
 function licenseCodeEmail_(email, code) {
+  if (licenseProduct_() !== 'nexosolve') return { to: email, subject: 'Your ' + licenseProductName_() + ' sign-in code', name: 'NexoNest', replyTo: LICENSE_OWNER,
+    body: 'Your ' + licenseProductName_() + ' sign-in code is ' + code + '.\nIt expires in 10 minutes. Do not share it. If you did not request it, ignore this email.' };
   const html = '<!doctype html><html><body style="margin:0;background:#EDF5FB;font-family:Arial,sans-serif;color:#17344F">' +
     '<table role="presentation" width="100%"><tr><td align="center" style="padding:32px 16px"><table role="presentation" width="480" style="width:100%;max-width:480px;background:#ffffff;border-radius:16px">' +
     '<tr><td style="padding:32px"><img src="cid:productLogo" width="48" height="48" alt="NexoSolve" style="display:block;margin-bottom:18px"><div style="font-size:14px;color:#456B8C">NEXONEST / NEXOSOLVE</div>' +
@@ -187,9 +220,20 @@ function licenseCodeEmail_(email, code) {
 function licenseVerifyCode_(request, device, now) {
   const key = licenseHash_(String(request.challenge || ''));
   const code = licenseGet_('LoginCodes', key);
-  if (!code || code.used || now >= code.expiresAt || code.device !== device.hash || code.attempts >= 5) licenseFail_('invalid_code', 'The code has expired or is invalid. Request another code.');
-  code.attempts++; licensePut_('LoginCodes', key, code);
-  if (code.digest !== licenseHash_(request.challenge + ':' + request.code)) licenseFail_('invalid_code', 'Incorrect code.');
+  if (!code || now >= code.expiresAt || code.device !== device.hash || code.attempts >= 5) licenseFail_('invalid_code', 'The code has expired or is invalid. Request another code.');
+  if (code.digest !== licenseHash_(request.challenge + ':' + request.code)) {
+    code.attempts++; licensePut_('LoginCodes', key, code);
+    licenseFail_('invalid_code', 'Incorrect code.');
+  }
+  // Reconstruct the same opaque token without storing a recoverable bearer credential.
+  const secret = PropertiesService.getScriptProperties().getProperty(licenseProperty_('TOKEN_SECRET'));
+  const token = Utilities.base64EncodeWebSafe(Utilities.computeHmacSha256Signature('login-session:' + request.challenge, secret)).replace(/=+$/, '');
+  if (code.used) {
+    if (code.sessionHash !== licenseHash_(token)) licenseFail_('invalid_code', 'Request another code.');
+    const account = licenseSession_({ session: token, device: device.hash }, now);
+    if (account.device !== device.hash) licenseFail_('device_limit', 'This account is activated on another device.');
+    return { session: token, lease: licenseLease_(device, account, now) };
+  }
   let account = licenseGet_('Accounts', licenseHash_(code.email));
   if (account && account.disabled) licenseFail_('account_disabled', 'This account is disabled. Contact support.');
   if (account && account.device && account.device !== device.hash) licenseFail_('device_limit', 'One device is allowed. Contact support to transfer your activation.');
@@ -201,9 +245,12 @@ function licenseVerifyCode_(request, device, now) {
   account.device = device.hash;
   delete account.deletedAt;
   licensePut_('Accounts', licenseHash_(account.email), account);
-  code.used = true; licensePut_('LoginCodes', key, code);
-  const token = licenseRandom_();
-  licensePut_('Sessions', licenseHash_(token), { account: licenseHash_(account.email), device: device.hash, expiresAt: now + 180 * LICENSE_DAY, revoked: false });
+  const sessionKey = licenseHash_(token);
+  const existing = licenseGet_('Sessions', sessionKey);
+  if (existing) licenseSession_({ session: token, device: device.hash }, now);
+  else licensePut_('Sessions', sessionKey, { account: licenseHash_(account.email), device: device.hash, expiresAt: now + 180 * LICENSE_DAY, revoked: false });
+  // Session commits first; retries after a partial write reuse it without extending expiry.
+  code.used = true; code.sessionHash = sessionKey; licensePut_('LoginCodes', key, code);
   return { session: token, lease: licenseLease_(device, account, now) };
 }
 
@@ -218,7 +265,7 @@ function licenseSession_(request, now) {
 function licenseEntitlement_(account, now) {
   let result = { kind: 'account_trial', endsAt: account.trialEnd };
   licenseRows_('Licenses').map(row => row.value).concat(licenseRows_('Vouchers').map(row => row.value))
-    .filter(grant => grant.account === account.id && grant.product === LICENSE_PRODUCT && !grant.revoked && grant.startsAt <= now)
+    .filter(grant => grant.account === account.id && grant.product === licenseProduct_() && !grant.revoked && grant.startsAt <= now)
     .forEach(grant => { if (grant.endsAt > result.endsAt) result = { kind: 'license', endsAt: grant.endsAt }; });
   return result;
 }
@@ -227,7 +274,7 @@ function licenseEntitlement_(account, now) {
 function licensePaidEnd_(account, now) {
   return licenseRows_('Licenses').concat(licenseRows_('Vouchers'))
     .map(row => row.value)
-    .filter(grant => grant.account === account.id && grant.product === LICENSE_PRODUCT && !grant.revoked && grant.startsAt <= now)
+    .filter(grant => grant.account === account.id && grant.product === licenseProduct_() && !grant.revoked && grant.startsAt <= now)
     .reduce((end, grant) => Math.max(end, grant.endsAt), now);
 }
 
@@ -238,8 +285,8 @@ function licenseLease_(device, account, now) {
     account && entitlement.kind === 'account_trial' && device.trialAccount && device.trialAccount !== account.id
       ? 'device_trial_used' : 'entitlement_expired';
   const until = allowed ? Math.min(entitlement.endsAt, now + 7 * LICENSE_DAY) : now;
-  const payload = JSON.stringify({ schema: 1, product: LICENSE_PRODUCT, device: device.hash, account: account ? account.id : '', email: account ? account.email : '', displayName: account ? account.displayName || '' : '', profileComplete: !!(account && account.profileCompletedAt && account.displayName), newsletterOptIn: !!(account && account.newsletterOptIn), kind: entitlement.kind, allowed: allowed, reason: reason, issuedAt: now, expiresAt: until, entitlementEndsAt: entitlement.endsAt });
-  const key = PropertiesService.getScriptProperties().getProperty('LICENSE_PRIVATE_KEY').replace(/\\n/g, '\n');
+  const payload = JSON.stringify({ schema: 1, product: licenseProduct_(), device: device.hash, account: account ? account.id : '', email: account ? account.email : '', displayName: account ? account.displayName || '' : '', profileComplete: !!(account && account.profileCompletedAt && account.displayName), newsletterOptIn: !!(account && account.newsletterOptIn), kind: entitlement.kind, allowed: allowed, reason: reason, issuedAt: now, expiresAt: until, entitlementEndsAt: entitlement.endsAt });
+  const key = PropertiesService.getScriptProperties().getProperty(licenseProperty_('PRIVATE_KEY')).replace(/\\n/g, '\n');
   const signature = Utilities.base64Encode(Utilities.computeRsaSha256Signature(payload, key, Utilities.Charset.UTF_8));
   device.lastLeaseUntil = Math.max(device.lastLeaseUntil || 0, until); licensePut_('Devices', device.hash, device);
   return { payload: payload, signature: signature };
@@ -256,7 +303,7 @@ function licenseRedeem_(request, account, now) {
   licenseRate_('voucher:' + account.id, now, 10, 1000);
   const key = licenseHash_(String(request.voucher || '').trim().toUpperCase());
   const voucher = licenseGet_('Vouchers', key);
-  if (!voucher || voucher.revoked || voucher.product !== LICENSE_PRODUCT) licenseFail_('invalid_voucher', 'Invalid voucher.');
+  if (!voucher || voucher.revoked || voucher.product !== licenseProduct_()) licenseFail_('invalid_voucher', 'Invalid voucher.');
   if (voucher.assignedAccount && voucher.assignedAccount !== account.id) licenseFail_('voucher_account', 'This voucher belongs to another account.');
   // Idempotent retry after a lost response: the existing grant is returned, never extended again.
   if (voucher.account === account.id) return;

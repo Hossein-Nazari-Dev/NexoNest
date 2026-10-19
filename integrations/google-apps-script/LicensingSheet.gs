@@ -2,30 +2,15 @@
 const LICENSE_ADMIN_SHEET = 'AS_nexosolve';
 
 function onOpen() {
-  if (typeof workshopMenu_ === 'function') workshopMenu_();
   const ui = SpreadsheetApp.getUi();
-  ui.createMenu('NexoSolve Admin')
-    .addItem('Refresh accounts', 'refreshLicenseAdminSheet')
-    .addSubMenu(ui.createMenu('Activate license now')
-      .addItem('1 month', 'adminGrantOneMonth').addItem('3 months', 'adminGrantThreeMonths')
-      .addItem('6 months', 'adminGrantSixMonths').addItem('12 months', 'adminGrantTwelveMonths'))
-    .addSubMenu(ui.createMenu('Vouchers')
-      .addItem('Selected account: 1 month', 'adminVoucherOneMonth')
-      .addItem('Selected account: 3 months', 'adminVoucherThreeMonths')
-      .addItem('Selected account: 6 months', 'adminVoucherSixMonths')
-      .addItem('Selected account: 12 months', 'adminVoucherTwelveMonths')
-      .addItem('Course codes: 1 month', 'adminCourseOneMonth')
-      .addItem('Course codes: 3 months', 'adminCourseThreeMonths')
-      .addItem('Course codes: 6 months', 'adminCourseSixMonths')
-      .addItem('Course codes: 12 months', 'adminCourseTwelveMonths'))
+  ui.createMenu('NexoNest Admin')
+    .addItem('Open management console', 'openAdminConsole')
     .addSeparator()
-    .addItem('Repair sign-in', 'adminSignOutAccount')
-    .addItem('Disable account', 'adminDisableAccount').addItem('Enable account', 'adminEnableAccount')
-    .addItem('Transfer to another device', 'adminReleaseDevice')
-    .addItem('Delete all NexoSolve account records', 'adminDeleteAccount')
-    .addSeparator()
-    .addItem('Show technical license tables', 'adminShowTechnicalTables')
-    .addItem('Hide technical license tables', 'adminHideTechnicalTables').addToUi();
+    .addItem('Refresh NexoSolve support view', 'refreshLicenseAdminSheet')
+    .addSubMenu(ui.createMenu('Advanced: NexoSolve tables')
+      .addItem('Show technical tables', 'adminShowTechnicalTables')
+      .addItem('Hide technical tables', 'adminHideTechnicalTables'))
+    .addToUi();
 }
 
 function setupLicenseAdminSheet() {
@@ -34,11 +19,12 @@ function setupLicenseAdminSheet() {
 
 function licenseAdminView_() {
   const book = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = book.getSheetByName(LICENSE_ADMIN_SHEET);
+  const viewName = licenseProduct_() === 'nexosolve' ? LICENSE_ADMIN_SHEET : 'AS_' + licenseProduct_();
+  let sheet = book.getSheetByName(viewName);
   if (!sheet) {
-    sheet = book.getSheetByName('License_Admin');
-    if (sheet) sheet.setName(LICENSE_ADMIN_SHEET);
-    else sheet = book.insertSheet(LICENSE_ADMIN_SHEET);
+    sheet = licenseProduct_() === 'nexosolve' ? book.getSheetByName('License_Admin') : null;
+    if (sheet) sheet.setName(viewName);
+    else sheet = book.insertSheet(viewName);
   }
   return sheet;
 }
@@ -98,15 +84,37 @@ function licenseAdminAction_(label, operation) {
   try {
     const email = licenseSelectedEmail_();
     if (!licenseAdminConfirm_(email, label)) return;
-    const result = operation(email); refreshLicenseAdminSheet();
+    const result = operation(email);
     SpreadsheetApp.getUi().alert(result || 'Updated. Use Check license in NexoSolve to see changes.');
   } catch (error) { SpreadsheetApp.getUi().alert(String(error.message || 'Administration failed.')); }
 }
 
-function adminGrantOneMonth() { licenseAdminAction_('Activate one month immediately (no voucher)', email => { grantLicense(email, 1); }); }
-function adminGrantThreeMonths() { licenseAdminAction_('Activate three months immediately (no voucher)', email => { grantLicense(email, 3); }); }
-function adminGrantSixMonths() { licenseAdminAction_('Activate six months immediately (no voucher)', email => { grantLicense(email, 6); }); }
-function adminGrantTwelveMonths() { licenseAdminAction_('Activate twelve months immediately (no voucher)', email => { grantLicense(email, 12); }); }
+function adminGrantThreeMonths() { licenseGrantUi_(3); }
+function adminGrantSixMonths() { licenseGrantUi_(6); }
+function adminGrantTwelveMonths() { licenseGrantUi_(12); }
+// Retain one pending operation until success is acknowledged. A timeout can be retried safely.
+function licenseGrantUi_(months) {
+  licenseAdmin_();
+  const email = licenseSelectedEmail_(), props = PropertiesService.getScriptProperties();
+  const pendingKey = licensePendingGrantKey_(licenseEmail_(email), months);
+  let operationId = props.getProperty(pendingKey);
+  if (!licenseAdminConfirm_(email, (operationId ? 'Retry pending activation: ' : 'Activate now: ') + months + ' months')) return;
+  try {
+    const lock = LockService.getScriptLock(); lock.waitLock(10000);
+    try {
+      operationId = props.getProperty(pendingKey);
+      if (!operationId) { operationId = Utilities.getUuid(); props.setProperty(pendingKey, operationId); }
+    } finally { lock.releaseLock(); }
+    grantLicense(email, months, operationId);
+    SpreadsheetApp.getUi().alert('Activation saved. Use Check license in NexoSolve to see changes.');
+    lock.waitLock(10000);
+    try { if (props.getProperty(pendingKey) === operationId) props.deleteProperty(pendingKey); }
+    finally { lock.releaseLock(); }
+  } catch (error) {
+    SpreadsheetApp.getUi().alert('Activation outcome may be uncertain. Retry the same duration to recover the pending operation without adding time twice.');
+  }
+}
+
 function adminDisableAccount() { licenseAdminAction_('Disable account', email => disableLicenseAccount(email, true)); }
 function adminEnableAccount() { licenseAdminAction_('Enable account', email => disableLicenseAccount(email, false)); }
 function adminSignOutAccount() { licenseAdminAction_('Repair sign-in; request a new email code afterward', email => resetLicenseAccount(email, false)); }
@@ -121,16 +129,14 @@ function adminDeleteAccount() {
   licenseAdmin_();
   const email = licenseSelectedEmail_();
   const typed = licenseAdminPrompt_('Permanent NexoSolve deletion',
-    'This permanently deletes this account\'s NexoSolve licenses, vouchers, sessions, trial and device history. It permits a fresh trial. Newsletter and other products remain.\n\nType the exact email to confirm: ' + email);
+    'This permanently deletes this account\'s NexoSolve licenses, vouchers and sessions. Shared device limits and other accounts are preserved. An exclusive device may receive a fresh trial. Newsletter and other products remain.\n\nType the exact email to confirm: ' + email);
   if (typed !== email) return;
   if (!licenseAdminConfirm_(email, 'PERMANENT deletion: all NexoSolve records; cannot undo')) return;
   deleteLicenseAccount(email); refreshLicenseAdminSheet();
   SpreadsheetApp.getUi().alert('NexoSolve records deleted. The user can create the account again. Previously issued offline access may last until its expiry.');
 }
 
-function adminVoucherOneMonth() { licenseCreateVoucherUi_(1, true); }
 function adminVoucherThreeMonths() { licenseCreateVoucherUi_(3, true); }
-function adminCourseOneMonth() { licenseCreateVoucherUi_(1, false); }
 function adminCourseThreeMonths() { licenseCreateVoucherUi_(3, false); }
 function adminVoucherSixMonths() { licenseCreateVoucherUi_(6, true); }
 function adminVoucherTwelveMonths() { licenseCreateVoucherUi_(12, true); }

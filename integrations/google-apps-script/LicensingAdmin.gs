@@ -17,13 +17,13 @@ function disableLicenseAccount(email, disabled) {
 function createLicenseVouchers(months, count, redeemByIso, campaign) {
   licenseAdmin_();
   const redeemBy = Date.parse(redeemByIso);
-  if (![1, 3, 6, 12].includes(months) || !Number.isInteger(count) || count < 1 || count > 100 || !(redeemBy > Date.now())) throw new Error('Use 1/3/6/12 months, 1-100 vouchers and a future redemption deadline.');
+  if (![3, 6, 12].includes(months) || !Number.isInteger(count) || count < 1 || count > 100 || !(redeemBy > Date.now())) throw new Error('Use 3/6/12 months, 1-100 vouchers and a future redemption deadline.');
   const lock = LockService.getScriptLock(); lock.waitLock(10000);
   try {
     const codes = [];
     for (let i = 0; i < count; i++) {
       const code = 'NX-' + licenseHash_(licenseRandom_()).slice(0, 32).toUpperCase();
-      licensePut_('Vouchers', licenseHash_(code), { product: LICENSE_PRODUCT, months: months, redeemBy: redeemBy, campaign: String(campaign || '').slice(0, 120), account: '', revoked: false });
+      licensePut_('Vouchers', licenseHash_(code), { product: licenseProduct_(), months: months, redeemBy: redeemBy, campaign: String(campaign || '').slice(0, 120), account: '', revoked: false });
       codes.push(code);
     }
     return codes; // Save securely: only hashes are stored in the license tables.
@@ -32,16 +32,23 @@ function createLicenseVouchers(months, count, redeemByIso, campaign) {
   }
 }
 
-function grantLicense(email, months) {
+function grantLicense(email, months, operationId) {
   licenseAdmin_();
-  if (![1, 3, 6, 12].includes(months)) throw new Error('Use 1, 3, 6 or 12 months.');
+  if (![3, 6, 12].includes(months)) throw new Error('Use 3, 6 or 12 months.');
   const lock = LockService.getScriptLock(); lock.waitLock(10000);
   try {
     const account = licenseGet_('Accounts', licenseHash_(licenseEmail_(email)));
     if (!account || account.disabled || account.deletedAt) throw new Error('An enabled, verified account is required.');
     const now = Date.now();
-    const id = Utilities.getUuid();
-    licensePut_('Licenses', id, { product: LICENSE_PRODUCT, account: account.id, startsAt: now, endsAt: licenseAddMonths_(licensePaidEnd_(account, now), months), revoked: false });
+    const requestId = operationId || Utilities.getUuid();
+    if (!/^[a-zA-Z0-9_-]{20,100}$/.test(requestId)) throw new Error('Invalid activation operation.');
+    const id = licenseHash_('grant:' + requestId);
+    const previous = licenseGet_('Licenses', id);
+    if (previous) {
+      if (previous.account !== account.id || previous.months !== months) throw new Error('Activation operation does not match.');
+      return id;
+    }
+    licensePut_('Licenses', id, { product: licenseProduct_(), account: account.id, months: months, startsAt: now, endsAt: licenseAddMonths_(licensePaidEnd_(account, now), months), revoked: false });
     licenseEvent_('manual_grant', account.id, id, now); return id;
   } finally {
     try { licenseRefreshAdminSafely_(); } finally { lock.releaseLock(); }
@@ -89,6 +96,14 @@ function deleteLicenseAccount(email) {
   licenseAdmin_();
   const lock = LockService.getScriptLock(); lock.waitLock(10000);
   try {
+    licenseEraseAccount_(email);
+  } finally {
+    try { licenseRefreshAdminSafely_(); } finally { lock.releaseLock(); }
+  }
+}
+
+// The caller holds the script lock and has checked owner identity.
+function licenseEraseAccount_(email) {
     const normalized = licenseEmail_(email), key = licenseHash_(normalized);
     const account = licenseGet_('Accounts', key);
     if (!account) throw new Error('Account not found.');
@@ -98,27 +113,36 @@ function deleteLicenseAccount(email) {
       codes.filter(row => row.value.email === normalized).map(row => row.value.device),
       licenseRows_('Devices').filter(row => row.value.trialAccount === account.id).map(row => row.key)
     ).filter(Boolean));
-    // A shared device must be resolved before erasure; do not erase another customer's history.
+    // Shared device history belongs to the remaining accounts as well.
     const otherAccounts = licenseRows_('Accounts').filter(row => row.key !== key);
-    if (otherAccounts.some(row => devices.has(row.value.device)) ||
-        sessions.some(row => row.value.account !== key && devices.has(row.value.device)) ||
-        codes.some(row => row.value.email !== normalized && devices.has(row.value.device)))
-      throw new Error('This device also has another account history. Contact the maintainer before deleting; no records were removed.');
+    const sharedDevices = new Set([...devices].filter(device =>
+      otherAccounts.some(row => row.value.device === device || (row.value.erasureDevices || []).includes(device)) ||
+      sessions.some(row => row.value.account !== key && row.value.device === device) ||
+      codes.some(row => row.value.email !== normalized && row.value.device === device)));
     // Retain the erasure plan until completion, so an interrupted deletion can be retried.
     account.erasureDevices = [...devices]; account.disabled = true; licensePut_('Accounts', key, account);
     // Delete credentials first. A partial failure remains fail-closed and can be retried.
     licenseDeleteRows_('Sessions', row => row.value.account === key);
     licenseDeleteRows_('LoginCodes', row => row.value.email === normalized);
-    licenseDeleteRows_('Licenses', row => row.value.account === account.id && row.value.product === LICENSE_PRODUCT);
-    licenseDeleteRows_('Vouchers', row => row.value.product === LICENSE_PRODUCT && (row.value.account === account.id || row.value.assignedAccount === account.id));
+    licenseDeleteRows_('Licenses', row => row.value.account === account.id && row.value.product === licenseProduct_());
+    licenseDeleteRows_('Vouchers', row => row.value.product === licenseProduct_() && (row.value.account === account.id || row.value.assignedAccount === account.id));
     licenseDeleteRows_('Events', row => row.value.account === account.id);
-    licenseDeleteRows_('Rates', row => row.key === 'email:' + key || row.key === 'voucher:' + account.id || [...devices].some(device => row.key === 'device:' + device));
-    licenseDeleteRows_('Devices', row => devices.has(row.key));
+    licenseDeleteRows_('Rates', row => row.key === 'email:' + key || row.key === 'voucher:' + account.id || [...devices].some(device => !sharedDevices.has(device) && row.key === 'device:' + device));
+    sharedDevices.forEach(device => {
+      const record = licenseGet_('Devices', device);
+      if (record && record.trialAccount === account.id) {
+        // Keep anti-abuse and offline-lease history, without retaining the erased account link.
+        record.trialAccount = 'erased'; licensePut_('Devices', device, record);
+      }
+    });
+    licenseDeleteRows_('Devices', row => devices.has(row.key) && !sharedDevices.has(row.key));
+    const props = PropertiesService.getScriptProperties();
+    [1, 3, 6, 12].forEach(months => props.deleteProperty(licensePendingGrantKey_(normalized, months)));
+    const batches = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Admin_Batches');
+    if (batches) adminDataRows_('Batches').filter(row => row.value.product === licenseProduct_() && row.value.account === account.id)
+      .sort((a, b) => b.row - a.row).forEach(row => batches.deleteRow(row.row));
     licenseDeleteRows_('Accounts', row => row.key === key);
     // Do not recreate an identifying audit record after explicit erasure.
-  } finally {
-    try { licenseRefreshAdminSafely_(); } finally { lock.releaseLock(); }
-  }
 }
 
 function licenseDeleteRows_(table, predicate) {
@@ -134,11 +158,11 @@ function createAssignedLicenseVouchers(months, count, email) {
   try {
     const account = normalized ? licenseGet_('Accounts', licenseHash_(normalized)) : null;
     if (normalized && (!account || account.disabled || account.deletedAt)) throw new Error('An enabled registered account is required.');
-    if (![1, 3, 6, 12].includes(months) || !Number.isInteger(count) || count < 1 || count > 100 || (normalized && count !== 1)) throw new Error('Use 1/3/6/12 months and 1-100 codes; one code for a selected account.');
+    if (![3, 6, 12].includes(months) || !Number.isInteger(count) || count < 1 || count > 100 || (normalized && count !== 1)) throw new Error('Use 3/6/12 months and 1-100 codes; one code for a selected account.');
     const codes = [], now = Date.now();
     for (let i = 0; i < count; i++) {
       const code = 'NX-' + licenseHash_(licenseRandom_()).slice(0, 32).toUpperCase();
-      licensePut_('Vouchers', licenseHash_(code), { product: LICENSE_PRODUCT, months: months,
+      licensePut_('Vouchers', licenseHash_(code), { product: licenseProduct_(), months: months,
         redeemBy: licenseAddMonths_(now, 12), assignedAccount: account ? account.id : '',
         assignedEmail: normalized, account: '', revoked: false });
       codes.push(code);

@@ -15,6 +15,13 @@ status: maintained
 
 # NexoNest - Architecture and Developer Handoff
 
+## Owner management console - 2026-10-19 (deployed version 17)
+
+The bound spreadsheet source adds **NexoNest Admin > Open management console**, with products, accounts, grants, vouchers, cohorts and registration review. Every server entry checks active/effective owner identity; no public admin route or broader permissions are added. NexoSolve keeps its existing storage/keys/contracts. Additional stable product IDs use separate ledgers/signing properties and cannot activate until configured. New cohorts use independent registration tables and rules; requests omitting courseId retain the original cohort and WORKSHOP_ENABLED gate. Record prices and consent are immutable once registrations exist. Shared-device account erasure preserves other accounts and device limits; batch erasure needs a fresh impact preview and typed confirmation. Panel review sends no email or certificate/license. Legacy editor mail actions remain separate. See [management runbook](integrations/google-apps-script/ADMIN.md).
+
+The user explicitly approved saving and publishing this version. Google confirmed deployment version 17 on 2026-10-19, 7:08 PM, at the same endpoint with unchanged owner/access. The bound console loaded real owner aggregates and the legacy course. The initial automatic approval rejection was resolved before Google writes. Code.gs/PublicEmail/GameClubEmail/NewsletterDelivery and private properties were preserved. No real account deletion, grant/voucher issue, registration change or email was performed; mutation tests use mocked Google services. Version 16 remains the pre-console rollback, and saved-head sources must be restored separately for menu rollback.
+
+
 This is the canonical guide to **this website repository**, not an implementation
 guide to all the products it presents. Rhino plugins, simulation engines and
 desktop clients described on the site generally live in other repositories.
@@ -535,19 +542,32 @@ at 420 px on desktop and 320 px on narrow screens. The source PNGs are already
 small; this is a presentation-size and image-selection change, not file-size
 optimization. Six PNGs remain: the icon and five selected screenshots.
 
-**Fact (checked against NexoSolve Current State and Website Kit on 2026-10-10;
-website acquisition path updated on 2026-10-14):** version 0.0.1 Beta is
-publicly available. The page labels the product 0.0.1 Beta / Early access. Its
-Grasshopper plugin CTA points to Food4Rhino; installation copy also names the
-Rhino Package Manager. The page directs users to the plugin's Help for getting
-or updating the companion Desktop app and does not offer GitHub binaries as a
-download path. The Pricing section shows one price per term for 1, 3, 6 and
-12-month vouchers, with USD and IRR amounts. Customers request their selected
-voucher through nexonest.contact@gmail.com; issuance is manual after payment
-confirmation. This page copy does not configure a checkout or the external
-licensing service. Screenshots show real UI with demonstration data. The page
-describes automated checks, live guest activation/signature checks and the
-remaining broader Rhino acceptance boundary separately.
+**Fact (2026-10-19):** the product page presents **0.0.4 Beta** as a standalone
+Windows study workspace. The Grasshopper plugin is its connection layer; model
+geometry, simulation and evaluation stay in the user's Grasshopper definition.
+A local SVG connection diagram, using the existing figure renderer, shows both
+process boundaries and the two-way input/result flow. Its full-height responsive
+presentation preserves readable labels; the adjacent caption explains the flow.
+
+The hero and closing CTA download the Windows app ZIP directly from
+`https://raw.githubusercontent.com/Hossein-Nazari-Dev/NexoNest---Products/main/nexosolve/NexoSolve-Windows-x64.zip`.
+This URL was read from the public product latest.json (0.0.4 Beta) and returned
+HTTP 200 with Content-Type application/zip on 2026-10-19. It opens no GitHub page.
+Project-link tuples may include an optional third value, the download filename;
+the shared renderer gives those links a download attribute and no new-tab target.
+Cross-origin download handling ultimately belongs to the browser and response
+headers; this ZIP response is a binary download. Other links retain their existing
+new-tab behavior. Static crawler-visible HTML is generated from the same renderer.
+
+Installation copy names NexoSolve Club's **Download / Update NexoSolve** action,
+keeps GHA, EXE and Samples together under
+`%APPDATA%/Grasshopper/Libraries/NexoSolve-Portable-Windows-x64`, and distinguishes
+app updates from Rhino Package Manager's plugin updates. The ZIP is the app;
+the Grasshopper plugin is obtained separately. Version and diagram changes do
+not establish native Rhino or scientific acceptance. Voucher pricing and manual
+purchase terms are unchanged. Local browser checks at 1440 px and 390 px passed: both direct CTAs, loaded diagram, no horizontal overflow or runtime errors, and matching static content without JavaScript. Local page verification is separate from website
+publication; this change does not publish the site or product binaries.
+
 The sidebar groups NexoSolve sections under collapsed Features, Getting started
 and About disclosures. This reduces the initial menu height while preserving
 the existing section anchor links.
@@ -774,31 +794,55 @@ Local code includes test-send entry points, but documentation or UI work does no
 authorize using them. Subscriber exports and recipient-data transmission also
 require explicit scope authorization. Never put subscriber rows in this guide.
 
-### NexoBreak email presentation and copy helper (2026-10-19)
+### NexoBreak email presentation (2026-10-19)
 
-**Fact, current source:** GameClubEmail.gs builds NexoBreak verification mail with
-NexoNest and NexoBreak CID PNG logos, website colors, six readable digits, expiry
-and security copy, and plain-text fallback. PublicEmail.gs delegates its MailApp
-message to that renderer; add the new companion before deploying the dispatcher.
-The existing Code.gs doGet serves ?view=nexobreak-code without account/sheet/mail
-mutations. The code is carried only in a URL fragment and read with the Apps Script
-location API; it is not stored by this helper or sent as a server query parameter.
-Copy requires a click on that page, because normal email clients do not run
-arbitrary JavaScript. Clipboard denial falls back to selecting the code and manual
-copy. No new inbox-read permission, external tracking asset, code replay, code
-renewal or sign-in side effect is introduced. Other product mail templates and
-newsletter consent remain separate. Browser rendering is not Gmail acceptance.
+**Fact, current source:** GameClubEmail.gs builds verification mail with NexoNest
+and NexoBreak CID PNG logos, website colors, six selectable digits, expiry/security
+copy and plain-text fallback. PublicEmail.gs delegates its MailApp message to this
+required companion. New mail contains no scripts, tracking assets or Copy code
+link. Users select the digits and paste into any plug-in code box. The owner
+requested removal of the redirect after receiving the HTML test. The existing
+Code.gs doGet stateless ?view=nexobreak-code helper remains only for links in
+already-delivered mail. Its code stays in a URL fragment; the helper cannot read
+accounts/sheets, send mail, renew codes or authenticate. Other product templates
+and newsletter consent remain separate.
 
-**Live evidence, separately authorized:** the owner authorized upgrading the
-existing shared service and one code email to nexonest.contact@gmail.com. Version
-13 replaced version 12 with the same URL/execute-as identity/public access. Cloud
-Code.gs and PublicEmail.gs were read back and matched the reviewed source at that
-point; all original licensing/newsletter/workshop companion files were retained.
-The owner confirmed receiving the original plain-text code. HTML/template/copy
-helper changes follow that deployment and remain pending a subsequent authorized
-rollout. No newsletter campaign or source website publication occurred.
+**Live evidence, separately authorized:** the existing shared service advanced
+from version 12 to 13, then 14 under nexonest.contact@gmail.com, preserving URL,
+execute-as identity and public access. Original companion modules were retained;
+reviewed source was read back before deployment. The owner confirmed both test
+emails, including branded HTML rendering; the second request returned HTTP 200
+with verification-required. Version 15 removes the copy redirect at the owner's
+request; source readback matched and deployment success was verified. No third
+email, newsletter campaign or website publication occurred. NexoBreak product
+version/channel remain 1.0.0 stable; native Rhino acceptance remains separate.
+
+### NexoBreak product-page review (2026-10-19)
+
+**Current source:** js/project-page.js remains the product-page owner. NexoBreak
+keeps its existing shell URL, IDs, navigation and shared layout. Both download
+CTAs now target https://www.food4rhino.com/en/app/nexobreak directly, replacing
+the browse/search URL. Status is Stable / Free; no fixed latest-version claim is
+made because Food4Rhino owns downloadable release details. Added concise install/
+start steps and clarified subtasks, next-step notes, backup retention, viewport
+activities, explicit focus resume and optional six-digit Game Club verification.
+Core use needs no account; newsletter consent remains separate. Backup copy avoids
+promising recovery or replacing normal saves. Existing product screenshots remain
+historical illustrations and should be refreshed from current native UI later.
+
+**Evidence boundary:** live NexoNest page and direct Food4Rhino listing were
+opened on 2026-10-19; the live page still showed Beta and search links before this
+edit. Local source/preview verification is separate from website deployment. No
+website publication, subscriber operation or plugin release is performed here.
 
 ## Licensing service
+
+### NexoSolve version 16 deployed - 2026-10-19
+
+The prepared recovery/admission changes and 3/6/12-month issuance were published at 18:02 Tehran as Google version 16 on the same exec URL, owner and Anyone access. Only Licensing.gs, LicensingAdmin.gs and LicensingSheet.gs changed. Each normalized source hash matched the tested local copy after reloading; Code.gs remained unchanged and the workshop menu hook remains. Existing signing properties, shared modules and real user grants/vouchers were preserved. Version 15 is rollback. This supersedes earlier local-only recovery/short-term rollout notes.
+
+The user-authorized smoke reused the existing synthetic guest device and passed RSA signature, unchanged trial end, bounded lease, signed profile defaults and anonymous profile rejection. No real email was sent; inbox delivery and authenticated redemption remain user acceptance. Source guide checks and local licensing/public-email/workshop mocks passed. No website/public binary upload, commit or push occurred.
+
 
 Sources: [Licensing.gs](integrations/google-apps-script/Licensing.gs),
 [LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs),
@@ -857,7 +901,7 @@ signature verification changes its bytes and breaks the contract.
   Gmail plus/dot aliases normalize to the same mailbox.
 - Sessions: 180 days, revocable. Session/code/voucher secrets are hashed in
   storage rather than retained as raw bearer values.
-- Local grants support one/three/six/twelve calendar months (short durations pending deployment) with month-end clamping. During a
+- Deployed grants and vouchers support three/six/twelve calendar months (version 16) with month-end clamping. During a
   trial a voucher starts paid access immediately; it extends existing paid access.
   The consumed voucher row is the authoritative grant. Same-voucher retries do
   not add time again.
@@ -1262,9 +1306,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 185 application/configuration/integration/tool/asset files:
+SHA-256 of 192 application/configuration/integration/tool/asset files:
 
-`45c07b68d57943f7de254597d68faef0d85cd462e86e185fb9f11c2f888fea32`
+`266da09ae7a5b8fba050dab2bd65c6fde089df9e8f45f7b6be451517d031f9cf`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1303,9 +1347,9 @@ Statuses below quote the current website content; they are not independent produ
 
 Source key: `nexosolve`; shell: [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html); printed page label: `16`.
 
-**Published content status:** 0.0.1 Beta / Early access.
+**Published content status:** 0.0.4 Beta / Early access.
 
-**Purpose:** Parametric studies for<br>Rhino and Grasshopper
+**Purpose:** Windows study workspace<br> connected to Grasshopper
 
 **Role / period:** Product design & development / NexoNest / 2026 — present.
 
@@ -1314,6 +1358,7 @@ Source key: `nexosolve`; shell: [projects-pages/nexoSolve.html](projects-pages/n
 | Section | Renderer kind |
 | --- | --- |
 | What you gain | `cards` |
+| How NexoSolve connects to Grasshopper | `figure` |
 | Your study workspace | `figure-text` |
 | From definition to saved results | `steps` |
 | Choose the values you actually need | `figure-text` |
@@ -1356,7 +1401,7 @@ Source key: `nexorhino`; shell: [projects-pages/nexoRhino.html](projects-pages/n
 
 Source key: `nexobreak`; shell: [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html); printed page label: `13`.
 
-**Published content status:** Beta / Free on food4Rhino.
+**Published content status:** Stable / Free on Food4Rhino.
 
 **Purpose:** Plan. Focus.<br>Recover.
 
@@ -1376,6 +1421,7 @@ Source key: `nexobreak`; shell: [projects-pages/nexoBreak.html](projects-pages/n
 | Daily report | `figure-text` |
 | Local-first privacy | `cards` |
 | Requirements | `table` |
+| Install and start | `steps` |
 | Download | `credits` |
 
 #### TectoTrack
@@ -1713,6 +1759,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/nexobreak/settings-backups.png](assets/images/projects/nexobreak/settings-backups.png) | 698579 |
 | [assets/images/projects/nexobreak/viewport-launcher.png](assets/images/projects/nexobreak/viewport-launcher.png) | 708127 |
 | [assets/images/projects/nexosolve/custom-variable-light.png](assets/images/projects/nexosolve/custom-variable-light.png) | 16117 |
+| [assets/images/projects/nexosolve/desktop-grasshopper-connection.svg](assets/images/projects/nexosolve/desktop-grasshopper-connection.svg) | 2414 |
 | [assets/images/projects/nexosolve/nexosolve-icon.png](assets/images/projects/nexosolve/nexosolve-icon.png) | 25803 |
 | [assets/images/projects/nexosolve/study-paused-dark.png](assets/images/projects/nexosolve/study-paused-dark.png) | 65838 |
 | [assets/images/projects/nexosolve/study-resume-light.png](assets/images/projects/nexosolve/study-resume-light.png) | 65541 |
@@ -1756,7 +1803,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/podcast.css](css/podcast.css) | 5558 |
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 36315 |
 | [css/portfolio.css](css/portfolio.css) | 50287 |
-| [css/project.css](css/project.css) | 48921 |
+| [css/project.css](css/project.css) | 49132 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
@@ -1767,19 +1814,25 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [files/CV.pdf](files/CV.pdf) | 319151 |
 | [files/Portfolio_Academic.pdf](files/Portfolio_Academic.pdf) | 131441 |
 | [index.html](index.html) | 3666 |
-| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 22195 |
+| [integrations/google-apps-script/ADMIN.md](integrations/google-apps-script/ADMIN.md) | 8751 |
+| [integrations/google-apps-script/AdminConsole.gs](integrations/google-apps-script/AdminConsole.gs) | 19794 |
+| [integrations/google-apps-script/AdminConsoleView.html](integrations/google-apps-script/AdminConsoleView.html) | 70549 |
+| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 22301 |
+| [integrations/google-apps-script/GameClubEmail.gs](integrations/google-apps-script/GameClubEmail.gs) | 29481 |
 | [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 4184 |
-| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 21193 |
-| [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 52628 |
-| [integrations/google-apps-script/LicensingAdmin.gs](integrations/google-apps-script/LicensingAdmin.gs) | 9992 |
-| [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2174 |
-| [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9579 |
-| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 6381 |
+| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 25448 |
+| [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 55934 |
+| [integrations/google-apps-script/LicensingAdmin.gs](integrations/google-apps-script/LicensingAdmin.gs) | 11397 |
+| [integrations/google-apps-script/LicensingProducts.gs](integrations/google-apps-script/LicensingProducts.gs) | 5373 |
+| [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2384 |
+| [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9364 |
+| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 7303 |
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
-| [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6511 |
-| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 8976 |
-| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 4446 |
-| [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 12935 |
+| [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6336 |
+| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 10000 |
+| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 5339 |
+| [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 13326 |
+| [integrations/google-apps-script/WorkshopCatalog.gs](integrations/google-apps-script/WorkshopCatalog.gs) | 5036 |
 | [js/data.js](js/data.js) | 880 |
 | [js/filter.js](js/filter.js) | 4001 |
 | [js/journey.js](js/journey.js) | 30140 |
@@ -1789,7 +1842,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 34511 |
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 110112 |
+| [js/project-page.js](js/project-page.js) | 113525 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -1806,9 +1859,9 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 8972 |
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
-| [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 17983 |
+| [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 13908 |
-| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 24070 |
+| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26357 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
 | [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9348 |
@@ -1821,9 +1874,9 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-podcast-browser.cjs](scripts/test-podcast-browser.cjs) | 4846 |
 | [scripts/test-popup-browser.cjs](scripts/test-popup-browser.cjs) | 2865 |
 | [scripts/test-project-grid-browser.cjs](scripts/test-project-grid-browser.cjs) | 5077 |
-| [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 10635 |
+| [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 10992 |
 | [scripts/test-seo-browser.cjs](scripts/test-seo-browser.cjs) | 4006 |
-| [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6686 |
+| [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6761 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8000 |
 | [scripts/update-seo.cjs](scripts/update-seo.cjs) | 7324 |
 | [sitemap.xml](sitemap.xml) | 1788 |
@@ -1859,6 +1912,14 @@ Google version 12 published at 00:26 Tehran on the existing deployment identity,
 ## Short-duration licenses and proposed Iran prices (2026-10-10)
 
 
-Local Apps Script source and owner menu now support 1/3/6/12-month grants, assigned vouchers and course codes. Paid renewal accumulates the latest unrevoked paid end independently of a longer trial; access still uses the later trial/paid end. Calendar clamping, idempotent redemption, one-year menu redemption deadline and trial dates are unchanged. Local server regressions pass. No live grants/codes, service deployment, mail, app rebuild or version change. Iran list/Beta price proposals and manual course/academic rules are in the NexoSolve licensing runbook and the existing Sheet's NexoSolve_Pricing catalog; they do not configure checkout or server pricing. Live menu/service acceptance is pending. See NexoSolve ADR-049.
+Historical ADR-049 choice (one-month issuance superseded): local source and owner menu supported 1/3/6/12-month grants, assigned vouchers and course codes. Paid renewal accumulates the latest unrevoked paid end independently of a longer trial; access still uses the later trial/paid end. Calendar clamping, idempotent redemption, one-year menu redemption deadline and trial dates are unchanged. Local server regressions pass. No live grants/codes, service deployment, mail, app rebuild or version change. Iran list/Beta price proposals and manual course/academic rules are in the NexoSolve licensing runbook and the existing Sheet's NexoSolve_Pricing catalog; they do not configure checkout or server pricing. Live menu/service acceptance is pending. See NexoSolve ADR-049.
 
 
+
+### NexoSolve recovery update - local only, 2026-10-19
+
+The synchronized Licensing.gs, LicensingAdmin.gs and LicensingSheet.gs now issue 3/6/12-month grants and vouchers (superseding one-month issuance, without changing old records). Verification recovers the same unrevoked session with the original correct proof/device before code expiry, commits the session before consuming the code, and never extends session expiry on retry. The Desktop retries one ambiguous verification response. Owner grants accept operationId; the Sheet menu retains a pending identity until success acknowledgement, so interrupted activations can be retried without adding time twice. Direct editor retries must reuse the operationId. Derived-view failures do not undo grants.
+
+Three fixed Script-property counters bound licensing requests to 300/minute and anonymous device registrations to 60/hour and 200/day. Validate action and identity before device registration; authenticated calls never register missing devices. These bound mutations and storage, not upstream denial-of-service traffic. Logs contain only action/result codes. Preserve existing signing properties, schemas, trial/device history and other products. Pricing proposals are separate from permitted voucher issuance.
+
+Read-only inspection confirmed active Google deployment 15 on the owner account, same exec URL and Anyone access; its licensing modules still have the previous 6/12-month behavior. This source update is not deployed. A future authorized rollout must update only these three files in the shared project, retaining the latest Code.gs dispatcher, Workshop.gs, PublicEmail.gs, GameClubEmail.gs and the conditional workshop menu hook. Never replace the complete shared project from an older NexoSolve copy. Keep version 15 as rollback and update the server before distributing the new Desktop. No live emails, account/voucher mutations, publication, commit or push were performed for this update. Native/authenticated acceptance remains outstanding; local mocks are not live acceptance.

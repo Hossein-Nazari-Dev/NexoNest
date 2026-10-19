@@ -79,20 +79,16 @@ No deployment, real email or live acceptance is claimed by this update.
 
 ## NexoBreak HTML verification email (2026-10-19)
 
-GameClubEmail.gs is a required companion for the Game Club code request. It builds
-a table-based transactional HTML email with embedded CID PNG logos derived from
-NexoNest assets/logo.svg and NexoBreak's existing light artwork, selectable code
-digits, expiration/security copy and a plain-text fallback. No remote tracking
-images, scripts or automatic clipboard actions are placed in email.
+GameClubEmail.gs is a required companion for Game Club code requests. It builds
+transactional HTML with embedded CID logos derived from NexoNest assets/logo.svg
+and NexoBreak artwork, six selectable digits, expiry/security copy and plain text.
+New mail contains no scripts, tracking assets or copy link. Select the digits and
+paste into any plug-in code box. The old stateless ?view=nexobreak-code helper
+remains for already-delivered links only; it reads a URL fragment and cannot send
+mail, access records, extend codes or sign in.
 
-The email's Copy code link opens the existing service's read-only
-?view=nexobreak-code page. The code is in #code=123456, never a query parameter;
-the helper uses google.script.url.getLocation to read the fragment in Apps Script.
-A user click copies through the browser Clipboard API with select/copy fallback.
-The helper cannot send mail, access account records, extend a challenge or sign in.
-
-Authorized rollout in this task updated the existing deployment from version 12
-to version 13 using nexonest.contact@gmail.com, preserving its URL and public access.
-One plain-text code was requested only for that mailbox; the owner confirmed
-receipt. The new HTML template/copy helper are a subsequent local change pending
-separate rollout and received-email acceptance. No newsletter campaign was run.
+Authorized rollout advanced the existing service from version 12 to 13, then 14
+using nexonest.contact@gmail.com with URL/account/access preserved. The owner
+confirmed both test emails and HTML rendering. At the owner's request, version 15
+removes the redirecting copy link. Source readback matched and deployment success
+was verified. No third email or newsletter campaign was sent.

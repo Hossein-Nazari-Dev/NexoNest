@@ -14,8 +14,8 @@ function workshopMenu_() {
     .addItem('تأیید ثبت‌نام انتخاب‌شده', 'approveWorkshopRegistration')
     .addItem('رد درخواست انتخاب‌شده', 'rejectWorkshopRegistration').addToUi();
 }
-function workshopSheet_() {
-  const sheet = SpreadsheetApp.openById(WORKSHOP_BOOK).getSheetByName(WORKSHOP_TAB);
+function workshopSheet_(course) {
+  const sheet = SpreadsheetApp.openById(WORKSHOP_BOOK).getSheetByName(course ? course.sheet : WORKSHOP_TAB);
   if (!sheet || JSON.stringify(sheet.getRange(1,1,1,WORKSHOP_HEADERS.length).getValues()[0]) !== JSON.stringify(WORKSHOP_HEADERS)) throw new Error('جدول ثبت‌نام آماده نیست.');
   return sheet;
 }
@@ -41,14 +41,14 @@ function workshopChoice_(value, allowed) {
   if (!Object.prototype.hasOwnProperty.call(allowed,value)) throw new Error('گزینهٔ انتخاب‌شده معتبر نیست.');
   return allowed[value];
 }
-function workshopValidate_(data) {
+function workshopValidate_(data, course) {
   const name = workshopText_(data.fullName,120), email = workshopText_(data.email,160).toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('ایمیل معتبر وارد کنید.');
   const phone = workshopText_(data.phone,20).replace(/[۰-۹٠-٩]/g,c => String('۰۱۲۳۴۵۶۷۸۹'.includes(c) ? '۰۱۲۳۴۵۶۷۸۹'.indexOf(c) : '٠١٢٣٤٥٦٧٨٩'.indexOf(c))).replace(/[\s()-]/g,'');
   if (!/^\+?[0-9]{10,15}$/.test(phone)) throw new Error('شماره تماس معتبر وارد کنید.');
-  if (!/^[a-f0-9-]{36}$/i.test(data.requestId || '') || data.website || data.rulesVersion !== '2026-10-v3' || data.rulesAccepted !== true || data.certificateAccepted !== true || typeof data.websiteConsent !== 'boolean') throw new Error('پذیرش قوانین و اطلاعات فرم را بررسی کنید.');
+  if (!/^[a-f0-9-]{36}$/i.test(data.requestId || '') || data.website || data.rulesVersion !== (course ? course.rulesVersion : '2026-10-v3') || data.rulesAccepted !== true || data.certificateAccepted !== true || typeof data.websiteConsent !== 'boolean') throw new Error('پذیرش قوانین و اطلاعات فرم را بررسی کنید.');
   const type = workshopChoice_(data.registrationType,{standard:'عمومی',student:'دانشجویی',newsletter:'عضو خبرنامه'});
-  const fee = {standard:2900000,student:2610000,newsletter:2320000}[data.registrationType];
+  const fee = (course ? course.fees : {standard:2900000,student:2610000,newsletter:2320000})[data.registrationType];
   const education = workshopChoice_(data.educationLevel,{school:'دیپلم و پیش‌دانشگاهی',associate:'کاردانی',bachelor:'کارشناسی',master:'کارشناسی ارشد',doctorate:'دکتری',other:'سایر'});
   const levels = {none:'بدون تجربه',beginner:'مقدماتی',intermediate:'متوسط',advanced:'پیشرفته'};
   const rhino = workshopChoice_(data.rhinoExperience,levels), gh = workshopChoice_(data.grasshopperExperience,levels);
@@ -73,24 +73,28 @@ function workshopPost_(event) {
     if (Session.getEffectiveUser().getEmail().toLowerCase() !== WORKSHOP_OWNER) throw new Error('حساب اجرایی ثبت‌نام نیاز به تنظیم دارد.');
     const raw = event && event.parameter && event.parameter.payload;
     if (!raw || raw.length > 7100000) throw new Error('حجم درخواست معتبر نیست.');
-    const data = JSON.parse(raw), valid = workshopValidate_(data), sheet = workshopSheet_();
+    const data = JSON.parse(raw), course = workshopResolveCourse_(data.courseId), valid = workshopValidate_(data, course), sheet = workshopSheet_(course);
     const rows = sheet.getLastRow()>1 ? sheet.getRange(2,1,sheet.getLastRow()-1,24).getValues() : [];
     const previous = rows.find(row => String(row[23]) === data.requestId);
     if (previous) return json_({ok:true,trackingCode:previous[0],emailStatus:previous[21]});
-    if (PropertiesService.getScriptProperties().getProperty('WORKSHOP_ENABLED') !== 'true') throw new Error('ثبت‌نام هنوز فعال نیست. فعلاً وجهی واریز نکنید.');
+    if (course.state !== 'open' || (course.id === 'workshop-2026-10' && PropertiesService.getScriptProperties().getProperty('WORKSHOP_ENABLED') !== 'true')) throw new Error('ثبت‌نام هنوز فعال نیست. فعلاً وجهی واریز نکنید.');
     if (rows.some(row=>String(row[3]).toLowerCase()===valid.email)) throw new Error('برای این ایمیل قبلاً درخواست ثبت شده است. برای پیگیری با پشتیبانی تماس بگیرید.');
     // Hard quotas bound public-upload abuse; this is not a replacement for CAPTCHA at larger scale.
-    if (rows.length >= 150 || rows.filter(row=>String(row[1]).slice(0,10)===new Date().toISOString().slice(0,10)).length>=30) throw new Error('ظرفیت دریافت درخواست فعلاً تکمیل است؛ با پشتیبانی تماس بگیرید.');
-    const receipt = workshopReceipt_(data.receipt);
+    if (rows.length >= course.capacity || rows.filter(row=>String(row[1]).slice(0,10)===new Date().toISOString().slice(0,10)).length>=course.dailyLimit) throw new Error('ظرفیت دریافت درخواست فعلاً تکمیل است؛ با پشتیبانی تماس بگیرید.');
+    const receipt = valid.fee > 0 ? workshopReceipt_(data.receipt) : null;
     const tracking = 'NN-'+Utilities.getUuid().replace(/-/g,'').slice(0,16).toUpperCase();
-    const folder = DriveApp.getFolderById(WORKSHOP_FOLDER);
-    if (folder.getSharingAccess() !== DriveApp.Access.PRIVATE) throw new Error('ذخیره‌سازی امن فیش در حال بررسی است.');
-    const file = folder.createFile(Utilities.newBlob(receipt.bytes,receipt.type,tracking+'.'+receipt.ext));
-    file.setSharing(DriveApp.Access.PRIVATE,DriveApp.Permission.NONE);
+    let receiptUrl = '';
+    if (receipt) {
+      const folder = DriveApp.getFolderById(WORKSHOP_FOLDER);
+      if (folder.getSharingAccess() !== DriveApp.Access.PRIVATE) throw new Error('ذخیره‌سازی امن فیش در حال بررسی است.');
+      const file = folder.createFile(Utilities.newBlob(receipt.bytes,receipt.type,tracking+'.'+receipt.ext));
+      file.setSharing(DriveApp.Access.PRIVATE,DriveApp.Permission.NONE);
+      receiptUrl = file.getUrl();
+    }
     // Preserve receipt on uncertain sheet-write outcome; the owner can reconcile an orphan.
-    sheet.appendRow([tracking,new Date().toISOString(),valid.name,valid.email,valid.phone,valid.education,valid.rhino,valid.gh,valid.type,valid.fee,valid.university,valid.code,valid.certificate,data.websiteConsent?'بله':'خیر',data.rulesVersion,'بله',file.getUrl(),'در انتظار بررسی','','','','pending','pending',data.requestId].map(workshopSafe_));
+    sheet.appendRow([tracking,new Date().toISOString(),valid.name,valid.email,valid.phone,valid.education,valid.rhino,valid.gh,valid.type,valid.fee,valid.university,valid.code,valid.certificate,data.websiteConsent?'بله':'خیر',data.rulesVersion,'بله',receiptUrl,'در انتظار بررسی','','','','pending','pending',data.requestId].map(workshopSafe_));
     const row=sheet.getLastRow(); SpreadsheetApp.flush();
-    workshopMail_(sheet,row,22,valid.email,'دریافت درخواست ثبت‌نام کارگاه',valid.name+' عزیز،\nدرخواست شما دریافت شد.\nکد پیگیری: '+tracking+'\nثبت‌نام در انتظار بررسی فیش و اطلاعات است و هنوز قطعی نیست. نتیجه از طریق ایمیل اعلام می‌شود.\nآکادمی نکسونست');
+    workshopMail_(sheet,row,22,valid.email,'دریافت درخواست ثبت‌نام کارگاه',valid.name+' عزیز،\nدرخواست شما برای '+course.name+' دریافت شد.\nکد پیگیری: '+tracking+'\nثبت‌نام در انتظار بررسی فیش و اطلاعات است و هنوز قطعی نیست. نتیجه از طریق ایمیل اعلام می‌شود.\nآکادمی نکسونست');
     return json_({ok:true,trackingCode:tracking,emailStatus:sheet.getRange(row,22).getValue()});
   } catch(error) {
     console.error('Workshop request failed: '+error.message);

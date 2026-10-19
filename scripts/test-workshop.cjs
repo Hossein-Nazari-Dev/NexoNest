@@ -1,7 +1,7 @@
 const fs=require('node:fs'), vm=require('node:vm'), assert=require('node:assert/strict');
 const path=require('node:path');
-const modulePath=fs.existsSync(path.join(__dirname,'Workshop.gs')) ? path.join(__dirname,'Workshop.gs') : path.join(__dirname,'../integrations/google-apps-script/Workshop.gs');
-const code=fs.readFileSync(modulePath,'utf8');
+const directory=path.resolve(__dirname,'../integrations/google-apps-script');
+const code=['LicensingProducts.gs','WorkshopCatalog.gs','Workshop.gs'].map(name=>fs.readFileSync(path.join(directory,name),'utf8')).join('\n');
 let rows=[],mails=0,files=0,enabled=true,failMail=false,owner='nexonest.contact@gmail.com';
 let privateFolder=true;
 const sheet={
@@ -11,7 +11,7 @@ const sheet={
  getActiveRange:()=>({getRow:()=>2,getNumRows:()=>1}),
  getRange:(r,c,n=1,width=1)=>({getValues:()=>r===1?[vm.runInContext('WORKSHOP_HEADERS',ctx)]:rows.slice(r-2,r-2+n).map(row=>row.slice(c-1,c-1+width)),getValue:()=>rows[r-2][c-1],setValue:v=>{rows[r-2][c-1]=v;},setValues:values=>{values.forEach((cells,i)=>cells.forEach((v,j)=>rows[r-2+i][c-1+j]=v));}})
 };
-const ctx=vm.createContext({console,Date,JSON,Object,String,Error,Session:{getActiveUser:()=>({getEmail:()=>owner})},LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})},PropertiesService:{getScriptProperties:()=>({getProperty:()=>enabled?'true':'false'})},SpreadsheetApp:{openById:()=>({getSheetByName:()=>sheet}),flush:()=>{}},Utilities:{getUuid:()=>require('node:crypto').randomUUID(),base64Decode:s=>[...Buffer.from(s,'base64')],newBlob:(...a)=>a},DriveApp:{Access:{PRIVATE:'private'},Permission:{NONE:'none'},getFolderById:()=>({getSharingAccess:()=>privateFolder?'private':'anyone',createFile:()=>{files++;return {setSharing:()=>{},getUrl:()=>`https://drive.google.com/file/d/test-${files}`};}})},MailApp:{sendEmail:()=>{mails++;if(failMail)throw new Error('delivery outcome unknown');}},json_:v=>v});
+const ctx=vm.createContext({console,Date,JSON,Object,String,Error,Session:{getActiveUser:()=>({getEmail:()=>owner})},LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})},PropertiesService:{getScriptProperties:()=>({getProperty:()=>enabled?'true':'false'})},SpreadsheetApp:{getActiveSpreadsheet:()=>({getSheetByName:()=>null}),openById:()=>({getSheetByName:()=>sheet}),flush:()=>{}},Utilities:{getUuid:()=>require('node:crypto').randomUUID(),base64Decode:s=>[...Buffer.from(s,'base64')],newBlob:(...a)=>a},DriveApp:{Access:{PRIVATE:'private'},Permission:{NONE:'none'},getFolderById:()=>({getSharingAccess:()=>privateFolder?'private':'anyone',createFile:()=>{files++;return {setSharing:()=>{},getUrl:()=>`https://drive.google.com/file/d/test-${files}`};}})},MailApp:{sendEmail:()=>{mails++;if(failMail)throw new Error('delivery outcome unknown');}},json_:v=>v});
 vm.runInContext(code,ctx);
 ctx.Session.getEffectiveUser=()=>({getEmail:()=>owner});
 const base={fullName:'آزمون',email:'test@example.com',phone:'۰۹۱۲۱۲۳۴۵۶۷',requestId:'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa',educationLevel:'master',rhinoExperience:'beginner',grasshopperExperience:'none',registrationType:'standard',certificateType:'attendance',rulesAccepted:true,certificateAccepted:true,websiteConsent:false,rulesVersion:'2026-10-v3',receipt:{type:'application/pdf',base64:Buffer.from('%PDF-1.7 test').toString('base64')}};
@@ -37,7 +37,7 @@ test('non-private folder rejected',()=>{reset();privateFolder=false;assert.equal
 test('uncertain email does not duplicate on retry',()=>{reset();failMail=true;const a=post(base);assert.equal(a.ok,true);assert.equal(a.emailStatus,'unknown');post(base);assert.equal(mails,1);});
 test('admin identity checked',()=>{owner='other@example.com';assert.throws(()=>ctx.workshopOwner_());owner='nexonest.contact@gmail.com';ctx.workshopOwner_();});
 test('daily quota enforced',()=>{reset();rows=Array.from({length:30},(_,i)=>['OLD'+i,new Date().toISOString(),'','other'+i+'@example.com']);assert.equal(post(base).ok,false);assert.equal(files,0);});
-ctx.SpreadsheetApp.getActiveSpreadsheet=()=>({getId:()=> '1V3-9pdWyaSNJXYUTJqsqESKI-G9JrCiggMaW3M16Bls',getActiveSheet:()=>sheet});
+ctx.SpreadsheetApp.getActiveSpreadsheet=()=>({getSheetByName:()=>null,getId:()=> '1V3-9pdWyaSNJXYUTJqsqESKI-G9JrCiggMaW3M16Bls',getActiveSheet:()=>sheet});
 ctx.SpreadsheetApp.getUi=()=>({ButtonSet:{OK_CANCEL:1},Button:{OK:1},prompt:()=>({getSelectedButton:()=>1,getResponseText:()=> 'فیش و کد بررسی شد'})});
 ctx.LockService.getScriptLock=()=>({tryLock:()=>true,waitLock:()=>{},releaseLock:()=>{}});
 ctx.PropertiesService.getScriptProperties=()=>({getProperty:key=>key==='WORKSHOP_ENABLED'?(enabled?'true':'false'):''});

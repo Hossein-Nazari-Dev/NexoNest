@@ -41,7 +41,7 @@ const ctx = vm.createContext({ console: {log() {}, error() {}}, Date: TestDate,
   ContentService: {MimeType: {JSON: 'json'}, createTextOutput: value => ({setMimeType: () => JSON.parse(value)})},
   HtmlService: {createHtmlOutput: html => html}
 });
-for (const file of ['Code.gs', 'PublicEmail.gs', 'GameClubEmail.gs', 'LicensingProfile.gs', 'Licensing.gs', 'NewsletterDelivery.gs'])
+for (const file of ['Code.gs', 'PublicEmail.gs', 'GameClubEmail.gs', 'LicensingProfile.gs', 'Licensing.gs', 'LicensingProducts.gs', 'NewsletterDelivery.gs'])
   vm.runInContext(fs.readFileSync(path.join(__dirname, '../integrations/google-apps-script', file), 'utf8'), ctx, {filename: file});
 function reset() {
   clock = Date.UTC(2026, 9, 18); quota = 100; mailFailure = false; locked = false;

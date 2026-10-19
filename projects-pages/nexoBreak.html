@@ -40,7 +40,7 @@
         <div id="sidebarNav" class="sidebar-primary"></div>
         <div class="sidebar-separator"></div>
         <div class="sidebar-secondary">
-          <a href="https://www.food4rhino.com/en/browse?searchText=nexobreak&amp;form_build_count=1&amp;sort_by=fs_field_rating" class="nav-link" target="_blank" rel="noopener noreferrer">Download on food4Rhino ↗</a>
+          <a href="https://www.food4rhino.com/en/app/nexobreak" class="nav-link" target="_blank" rel="noopener noreferrer">Download on food4Rhino ↗</a>
           <a href="../nexonest.html" class="nav-link back-link">← NexoNest</a>
           <a href="../index.html" class="nav-link back-link">← Main overview</a>
         </div>
@@ -56,11 +56,11 @@
       <dl class="project-meta">
         <div><dt>Role</dt><dd>Product design &amp; development / NexoNest</dd></div>
         <div><dt>Period</dt><dd>2026 — present</dd></div>
-        <div><dt>Status</dt><dd>Beta / Free on food4Rhino</dd></div>
+        <div><dt>Status</dt><dd>Stable / Free on Food4Rhino</dd></div>
         <div><dt>Stack</dt><dd>Rhino 8 / .NET 8 / Windows</dd></div>
       </dl>
       <div class="project-tags" aria-label="Project topics"><span>Rhino 8</span><span>Focus tracking</span><span>Guided breaks</span><span>Versioned backups</span></div>
-      <div class="project-links"><a href="https://www.food4rhino.com/en/browse?searchText=nexobreak&amp;form_build_count=1&amp;sort_by=fs_field_rating" target="_blank" rel="noopener noreferrer">Download on food4Rhino ↗</a><a href="../newsletter.html" target="_blank" rel="noopener noreferrer">NexoNest Newsletter ↗</a></div>
+      <div class="project-links"><a href="https://www.food4rhino.com/en/app/nexobreak" target="_blank" rel="noopener noreferrer">Download on food4Rhino ↗</a><a href="../newsletter.html" target="_blank" rel="noopener noreferrer">NexoNest Newsletter ↗</a></div>
     </header>
 
     <section class="project-thesis" aria-label="Project question and response">
@@ -100,7 +100,7 @@
       <h2 class="section-title">A clearer design day</h2>
     </div>
       <div class="editorial-split">
-        <div class="prose"><p>Design work often happens in long, nonlinear sessions. NexoBreak gives that day a practical frame without asking you to manage a separate productivity app beside Rhino.</p><p>Plan up to five daily tasks, estimate their duration, switch focus as priorities change, and keep tracking even when the dashboard is closed.</p></div>
+        <div class="prose"><p>Design work often happens in long, nonlinear sessions. NexoBreak gives that day a practical frame without asking you to manage a separate productivity app beside Rhino.</p><p>Plan up to five daily tasks, divide them into focusable subtasks, estimate their duration, and leave a next-step note before a break. Subtask time is included in its parent task, and tracking continues when the dashboard is closed.</p></div>
         <aside class="margin-note">
           <span>Product stance</span>
           <p>This is not surveillance software. It is a local companion for planning, focus, recovery, and reflection.</p>
@@ -142,7 +142,7 @@
       <h2 class="section-title">Autosave-style versioned backups</h2>
     </div>
       <div class="figure-text-layout">
-        <div class="prose"><p>The backup feature is the strongest project-safety layer in NexoBreak. When enabled, it writes scheduled snapshots of the saved Rhino model and active Grasshopper definition into dated folders beside the model. You keep working in the original files, while earlier copies remain close enough to recover from risky edits, crashes, or experimental branches.</p></div>
+        <div class="prose"><p>Backups are optional. Enable scheduled snapshots of the saved Rhino model and active Grasshopper definition, stored together in timestamped folders beside the model. Choose Latest backups, Recent days, or Keep all for retention. You continue working in the original files; snapshots are additional copies, not a replacement for saving your work or keeping an independent backup.</p></div>
         <figure class="project-figure">
           <img src="../assets/images/projects/nexobreak/settings-backups.png" alt="NexoBreak settings showing safety backups and backup interval controls" loading="lazy" decoding="async">
           <figcaption>Safety backups create timestamped copies without moving or renaming the working file.</figcaption>
@@ -154,7 +154,7 @@
     </div><div class="project-card-grid">
       <article class="project-info-card">
         <h3>Daily task planning</h3>
-        <p>Plan up to five tasks, edit them during the day, update their status, and keep your current focus visible.</p>
+        <p>Plan up to five tasks, add focusable subtasks and next-step notes, and keep the current task visible.</p>
       </article>
       <article class="project-info-card">
         <h3>Time tracking and reports</h3>
@@ -184,7 +184,7 @@
       <h2 class="section-title">Breaks without losing context</h2>
     </div>
       <div class="figure-text-layout">
-        <div class="prose"><p>Starting a break pauses the focus session instead of counting recovery time as work. The break tools are intentionally short: movement, attention shift, or a small viewport game. They are a pause inside the design workflow, not a replacement for real rest away from the screen.</p></div>
+        <div class="prose"><p>Starting a break pauses focus tracking. Quiet breaks, the stretch routine, moving-dot tracking, Vector Vision, Star Catcher, and Duck Hunt run inside the active Rhino viewport; visual activities are selected there too. Return with the same task, subtask, and next-step note, then explicitly resume focus when ready. Screen activities complement breaks; they do not replace rest away from the screen.</p></div>
         <figure class="project-figure">
           <img src="../assets/images/projects/nexobreak/duck-hunt.png" alt="NexoBreak Duck Hunt break activity running in a Rhino viewport" loading="lazy" decoding="async">
           <figcaption>Viewport games and guided activities pause the focus timer and return you to the same selected task.</figcaption>
@@ -214,8 +214,8 @@
         <p>Versioned backups are stored beside the saved model, not uploaded by the core workflow.</p>
       </article>
       <article class="project-info-card">
-        <h3>Optional online features</h3>
-        <p>Game Club shares account identity and game scores only when used.</p>
+        <h3>Optional Game Club</h3>
+        <p>Core features work without an account. To sync Star Catcher and Duck Hunt scores, request a six-digit email code in Account, then paste it into any code box. Only account identity and game scores are shared.</p>
       </article>
       <article class="project-info-card">
         <h3>Separate consent</h3>
@@ -230,15 +230,31 @@
           <thead><tr><th>Area</th><th>Requirement</th><th>Notes</th></tr></thead>
           <tbody><tr><td>OS</td><td>Windows</td><td>Built for Windows Rhino workstations.</td></tr><tr><td>Rhino</td><td>Rhino 8.34 or later</td><td>Rhino must be running .NET 8.</td></tr><tr><td>License</td><td>Proprietary / Free</td><td>Available through food4Rhino.</td></tr><tr><td>Categories</td><td>General, Modeling, Product design</td><td>A productivity companion for Rhino and Grasshopper users.</td></tr></tbody>
         </table>
-      </div></section><section class="content-section project-editorial-section" data-nav-title="Download">
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Install and start">
     <div class="section-heading-row">
       <span>11</span>
+      <h2 class="section-title">Install and start</h2>
+    </div><ol class="project-process">
+      <li>
+        <span>01</span>
+        <div><h3>Download</h3><p>Get NexoBreak from its Food4Rhino product page. Windows and Rhino 8.34 or later running .NET 8 are required.</p></div>
+      </li>
+      <li>
+        <span>02</span>
+        <div><h3>Install</h3><p>For a Yak download, drag the package into Rhino and follow the installation prompt. For an RHP download, use Options &gt; Plug-ins &gt; Install. Use one installation method, then restart Rhino.</p></div>
+      </li>
+      <li>
+        <span>03</span>
+        <div><h3>Begin</h3><p>Run NexoBreak, add a task and choose Start focus. Configure reminders and optional backups in Settings. An account is needed only for optional score synchronization.</p></div>
+      </li></ol></section><section class="content-section project-editorial-section" data-nav-title="Download">
+    <div class="section-heading-row">
+      <span>12</span>
       <h2 class="section-title">Download</h2>
     </div>
       <div class="project-credits">
         <div class="project-credits-intro">
-          <p>NexoBreak is available on food4Rhino. Download it from the product listing, install it in Rhino, and use the first sessions to test how planning, tracking, breaks, reports, and backups fit your own workflow.</p>
-          <div class="project-links"><a href="https://www.food4rhino.com/en/browse?searchText=nexobreak&amp;form_build_count=1&amp;sort_by=fs_field_rating" target="_blank" rel="noopener noreferrer">Open NexoBreak on food4Rhino ↗</a></div>
+          <p>Download NexoBreak from its official Food4Rhino product listing. Check the version and installation details there; downloads are provided by Food4Rhino rather than hosted on this site.</p>
+          <div class="project-links"><a href="https://www.food4rhino.com/en/app/nexobreak" target="_blank" rel="noopener noreferrer">Open NexoBreak on food4Rhino ↗</a></div>
         </div>
 
       </div></section>

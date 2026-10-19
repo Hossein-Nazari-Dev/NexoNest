@@ -2,14 +2,13 @@
 // Embedded CID images require no tracking requests or remotely hosted email assets.
 function gameClubCodeMessage_(email, code) {
   if (!/^\d{6}$/.test(code)) throw new Error('Invalid verification code.');
-  const copyUrl = ScriptApp.getService().getUrl() + '?view=nexobreak-code#code=' + code;
   const logos = gameClubEmailLogos_();
   return {
     to: email, name: 'NexoNest · NexoBreak', subject: 'Your NexoBreak Game Club code',
     body: 'Your Game Club verification code is ' + code + '. It expires in ten minutes.\n\n' +
-      'Paste all six digits into NexoBreak in Rhino.\nCopy help: ' + copyUrl + '\n\n' +
+      'Select or copy the six digits and paste them into any NexoBreak code box in Rhino.\n\n' +
       'Never share this code. Ignore this email if you did not request it.\nNexoBreak by NexoNest · https://nexonest.com',
-    htmlBody: gameClubCodeHtml_(code, copyUrl),
+    htmlBody: gameClubCodeHtml_(code),
     inlineImages: {
       nexonest: Utilities.newBlob(Utilities.base64Decode(logos.nexonest), 'image/png', 'nexonest.png'),
       nexobreak: Utilities.newBlob(Utilities.base64Decode(logos.nexobreak), 'image/png', 'nexobreak.png')
@@ -17,7 +16,7 @@ function gameClubCodeMessage_(email, code) {
   };
 }
 
-function gameClubCodeHtml_(code, copyUrl) {
+function gameClubCodeHtml_(code) {
   if (!/^\d{6}$/.test(code)) throw new Error('Invalid verification code.');
   const digits = code.split('').map(function(digit, index) {
     return (index ? '<td width="6"></td>' : '') + '<td align="center" style="border:1px solid #b9d3cb;border-radius:8px;background:#f3f7f6;padding:14px 0;font:600 30px/1.2 Segoe UI,Arial,sans-serif;color:#222">' + digit + '</td>';
@@ -37,13 +36,13 @@ function gameClubCodeHtml_(code, copyUrl) {
 <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:#444">Enter this code in the NexoBreak plug-in to create or restore your Game Club account.</p>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:360px;margin:0 auto"><tr>${digits}</tr></table>
 <p style="margin:14px 0 24px;text-align:center;font-size:12px;color:#6b7280">Valid for <strong>10 minutes</strong> · One use only</p>
-<table role="presentation" cellspacing="0" cellpadding="0" align="center"><tr><td align="center" bgcolor="#4b7c6e" style="border-radius:8px"><a href="${escape_(copyUrl)}" target="_blank" style="display:inline-block;padding:13px 38px;font-size:14px;font-weight:600;text-decoration:none;color:#fff">Copy code</a></td></tr></table>
-<p style="margin:12px 0 26px;text-align:center;font-size:11px;line-height:1.6;color:#6b7280">Opens a page where you can copy the code.<br>You can also select the six digits above and paste them into any code box.</p>
+<p style="margin:12px 0 26px;text-align:center;font-size:12px;line-height:1.7;color:#6b7280">Select the six digits above and copy them.<br>Then paste into any code box in NexoBreak.</p>
 <div style="border-top:1px dashed #b8ccc5;padding-top:20px;font-size:12px;line-height:1.8;color:#6b7280">Never share this code. NexoNest will never ask you to send it back.<br>If you did not request it, you can ignore this email.</div>
 </td></tr><tr><td style="padding:20px 28px;background:#f3f7f6;border-radius:0 0 16px 16px;font-size:11px;line-height:1.8;color:#6b7280">NexoBreak by <a href="https://nexonest.com" style="color:#4b7c6e;text-decoration:none;font-weight:600">NexoNest</a><br>This is an account verification email, separate from your newsletter preferences.</td></tr>
 </table></td></tr></table></body></html>`;
 }
 
+// Legacy helper for links in already-delivered emails; new mail contains no copy link.
 // This GET is a stateless copy helper. The code stays in the URL fragment,
 // never in server query parameters; no account, sheet, mail or authentication mutation occurs.
 function gameClubCopyPage_() {

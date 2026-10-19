@@ -1,8 +1,21 @@
 # Licensing deployment
 
+## Management console integration - 2026-10-19
+
+Deployed as version 17 on 2026-10-19 with explicit user approval. The source set contains LicensingProducts.gs, WorkshopCatalog.gs, AdminConsole.gs and AdminConsoleView.html, and update Licensing.gs, LicensingAdmin.gs, LicensingProfile.gs, LicensingSheet.gs and Workshop.gs together. Preserve Code.gs and all other service modules, properties and existing data. The unified NexoNest Admin menu opens the owner-only console. Shared-device deletion is scoped to selected accounts, with other users' limits retained. Separate product/cohort registries preserve the existing NexoSolve and workshop defaults. Course review in the console does not email or grant benefits. See [ADMIN.md](ADMIN.md) for configuration, exact contracts, tests and rollback. The older menu instructions below are historical; use the console for new administration.
+
+
+### NexoSolve version 16 deployed - 2026-10-19
+
+The prepared recovery/admission changes and 3/6/12-month issuance were published at 18:02 Tehran as Google version 16 on the same exec URL, owner and Anyone access. Only Licensing.gs, LicensingAdmin.gs and LicensingSheet.gs changed. Each normalized source hash matched the tested local copy after reloading; Code.gs remained unchanged and the workshop menu hook remains. Existing signing properties, shared modules and real user grants/vouchers were preserved. Version 15 is rollback. This supersedes earlier local-only recovery/short-term rollout notes.
+
+The user-authorized smoke reused the existing synthetic guest device and passed RSA signature, unchanged trial end, bounded lease, signed profile defaults and anonymous profile rejection. No real email was sent; inbox delivery and authenticated redemption remain user acceptance. Source guide checks and local licensing/public-email/workshop mocks passed. No website/public binary upload, commit or push occurred.
+
+For version 16 rollout/rollback, change only the three licensing files. Preserve the latest Code.gs dispatcher and Workshop/PublicEmail/GameClub modules. Do not repeat the older six-file installation procedure below on the shared project.
+
 Owner and sender: **nexonest.contact@gmail.com**. This is the account that must own/run the Apps Script deployment; `replyTo` does not change the actual sender.
 
-## Current status
+## Historical status (superseded by version 16)
 
 Google deployment version 6 is published on the existing URL; setup and owner key entry are complete. Live guest activation, RSA signature, unchanged trial end on retry and seven-day lease bounds passed. A configured portable package is built under `output/`; a complete installation ZIP is under `artifacts/Deployment/`. The user supplied screenshots of successful email sign-in and a running study in Rhino. New profile onboarding, live voucher/offline/expiry acceptance and public package release remain pending. Ordinary builds without service configuration disable Run/Resume. UI preview uses only a fake connector and remains available.
 
@@ -142,3 +155,11 @@ Trial-denial clarity and progress presentation (2026-10-10): server schema 1 add
 
 Local Apps Script source and owner menu now support 1/3/6/12-month grants, assigned vouchers and course codes. Paid renewal accumulates the latest unrevoked paid end independently of a longer trial; access still uses the later trial/paid end. Calendar clamping, idempotent redemption, one-year menu redemption deadline and trial dates are unchanged. Local server regressions pass. No live grants/codes, service deployment, mail, app rebuild or version change. Iran list/Beta price proposals and manual course/academic rules are in the NexoSolve licensing runbook and the existing Sheet's NexoSolve_Pricing catalog; they do not configure checkout or server pricing. Live menu/service acceptance is pending. See NexoSolve ADR-049.
 
+
+### NexoSolve recovery update - local only, 2026-10-19
+
+The synchronized Licensing.gs, LicensingAdmin.gs and LicensingSheet.gs now issue 3/6/12-month grants and vouchers (superseding one-month issuance, without changing old records). Verification recovers the same unrevoked session with the original correct proof/device before code expiry, commits the session before consuming the code, and never extends session expiry on retry. The Desktop retries one ambiguous verification response. Owner grants accept operationId; the Sheet menu retains a pending identity until success acknowledgement, so interrupted activations can be retried without adding time twice. Direct editor retries must reuse the operationId. Derived-view failures do not undo grants.
+
+Three fixed Script-property counters bound licensing requests to 300/minute and anonymous device registrations to 60/hour and 200/day. Validate action and identity before device registration; authenticated calls never register missing devices. These bound mutations and storage, not upstream denial-of-service traffic. Logs contain only action/result codes. Preserve existing signing properties, schemas, trial/device history and other products. Pricing proposals are separate from permitted voucher issuance.
+
+Read-only inspection confirmed active Google deployment 15 on the owner account, same exec URL and Anyone access; its licensing modules still have the previous 6/12-month behavior. This source update is not deployed. A future authorized rollout must update only these three files in the shared project, retaining the latest Code.gs dispatcher, Workshop.gs, PublicEmail.gs, GameClubEmail.gs and the conditional workshop menu hook. Never replace the complete shared project from an older NexoSolve copy. Keep version 15 as rollback and update the server before distributing the new Desktop. No live emails, account/voucher mutations, publication, commit or push were performed for this update. Native/authenticated acceptance remains outstanding; local mocks are not live acceptance.
