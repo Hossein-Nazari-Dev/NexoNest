@@ -132,6 +132,7 @@ function syncNexoBreak_(data) {
 }
 
 function doGet(event) {
+  if (event && event.parameter && event.parameter.view === 'nexobreak-code') return gameClubCopyPage_();
   if (event && event.parameter && event.parameter.unsubscribe) return newsletterUnsubscribe_(event.parameter, false);
   const token = clean_(event && event.parameter && event.parameter.confirm, 100);
   if (!token) return page_('NexoNest data service', 'The NexoNest data service is online.', true);

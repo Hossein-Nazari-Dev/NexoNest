@@ -34,13 +34,14 @@ const ctx = vm.createContext({ console: {log() {}, error() {}}, Date: TestDate,
   Utilities: {getUuid: crypto.randomUUID, DigestAlgorithm: {SHA_256: 'sha256'}, Charset: {UTF_8: 'utf8'},
     computeDigest: (_, value) => [...crypto.createHash('sha256').update(value).digest()],
     computeHmacSha256Signature: (value, key) => [...crypto.createHmac('sha256', key).update(value).digest()],
-    base64EncodeWebSafe: bytes => Buffer.from(bytes).toString('base64url')},
+    base64EncodeWebSafe: bytes => Buffer.from(bytes).toString('base64url'),
+    base64Decode: value => [...Buffer.from(value, 'base64')], newBlob: (bytes, mimeType, name) => ({bytes, mimeType, name})},
   MailApp: {getRemainingDailyQuota: () => quota, sendEmail: mail => {sent.push(mail); if (mailFailure) throw Error('unknown provider result');}},
   ScriptApp: {getService: () => ({getUrl: () => 'https://script.example/exec'})},
   ContentService: {MimeType: {JSON: 'json'}, createTextOutput: value => ({setMimeType: () => JSON.parse(value)})},
   HtmlService: {createHtmlOutput: html => html}
 });
-for (const file of ['Code.gs', 'PublicEmail.gs', 'LicensingProfile.gs', 'Licensing.gs', 'NewsletterDelivery.gs'])
+for (const file of ['Code.gs', 'PublicEmail.gs', 'GameClubEmail.gs', 'LicensingProfile.gs', 'Licensing.gs', 'NewsletterDelivery.gs'])
   vm.runInContext(fs.readFileSync(path.join(__dirname, '../integrations/google-apps-script', file), 'utf8'), ctx, {filename: file});
 function reset() {
   clock = Date.UTC(2026, 9, 18); quota = 100; mailFailure = false; locked = false;

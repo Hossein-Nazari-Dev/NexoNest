@@ -75,3 +75,24 @@ confirmation token. Preserve/back up NEWSLETTER_TOKEN_SECRET (created lazily).
 Never rotate it casually. Campaign filtering and desktop consent respect opt-out.
 Previously sent mail cannot be amended. Product/registration emails are separate.
 No deployment, real email or live acceptance is claimed by this update.
+
+
+## NexoBreak HTML verification email (2026-10-19)
+
+GameClubEmail.gs is a required companion for the Game Club code request. It builds
+a table-based transactional HTML email with embedded CID PNG logos derived from
+NexoNest assets/logo.svg and NexoBreak's existing light artwork, selectable code
+digits, expiration/security copy and a plain-text fallback. No remote tracking
+images, scripts or automatic clipboard actions are placed in email.
+
+The email's Copy code link opens the existing service's read-only
+?view=nexobreak-code page. The code is in #code=123456, never a query parameter;
+the helper uses google.script.url.getLocation to read the fragment in Apps Script.
+A user click copies through the browser Clipboard API with select/copy fallback.
+The helper cannot send mail, access account records, extend a challenge or sign in.
+
+Authorized rollout in this task updated the existing deployment from version 12
+to version 13 using nexonest.contact@gmail.com, preserving its URL and public access.
+One plain-text code was requested only for that mailbox; the owner confirmed
+receipt. The new HTML template/copy helper are a subsequent local change pending
+separate rollout and received-email acceptance. No newsletter campaign was run.

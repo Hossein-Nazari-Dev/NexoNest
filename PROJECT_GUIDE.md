@@ -774,6 +774,30 @@ Local code includes test-send entry points, but documentation or UI work does no
 authorize using them. Subscriber exports and recipient-data transmission also
 require explicit scope authorization. Never put subscriber rows in this guide.
 
+### NexoBreak email presentation and copy helper (2026-10-19)
+
+**Fact, current source:** GameClubEmail.gs builds NexoBreak verification mail with
+NexoNest and NexoBreak CID PNG logos, website colors, six readable digits, expiry
+and security copy, and plain-text fallback. PublicEmail.gs delegates its MailApp
+message to that renderer; add the new companion before deploying the dispatcher.
+The existing Code.gs doGet serves ?view=nexobreak-code without account/sheet/mail
+mutations. The code is carried only in a URL fragment and read with the Apps Script
+location API; it is not stored by this helper or sent as a server query parameter.
+Copy requires a click on that page, because normal email clients do not run
+arbitrary JavaScript. Clipboard denial falls back to selecting the code and manual
+copy. No new inbox-read permission, external tracking asset, code replay, code
+renewal or sign-in side effect is introduced. Other product mail templates and
+newsletter consent remain separate. Browser rendering is not Gmail acceptance.
+
+**Live evidence, separately authorized:** the owner authorized upgrading the
+existing shared service and one code email to nexonest.contact@gmail.com. Version
+13 replaced version 12 with the same URL/execute-as identity/public access. Cloud
+Code.gs and PublicEmail.gs were read back and matched the reviewed source at that
+point; all original licensing/newsletter/workshop companion files were retained.
+The owner confirmed receiving the original plain-text code. HTML/template/copy
+helper changes follow that deployment and remain pending a subsequent authorized
+rollout. No newsletter campaign or source website publication occurred.
+
 ## Licensing service
 
 Sources: [Licensing.gs](integrations/google-apps-script/Licensing.gs),

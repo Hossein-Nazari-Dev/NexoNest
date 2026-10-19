@@ -58,8 +58,7 @@ function requestGameClubCode_(data) {
   challenge = { digest: hash_(email + ':' + code), expiresAt: now + 600000, attempts: 0 };
   publicEmailState_(key, challenge);
   SpreadsheetApp.flush();
-  MailApp.sendEmail({ to: email, subject: 'Your NexoBreak Game Club code',
-    body: 'Your Game Club verification code is ' + code + '. It expires in ten minutes. Ignore this email if you did not request it.', name: 'NexoNest' });
+  MailApp.sendEmail(gameClubCodeMessage_(email, code));
   return json_({ ok: true, status: 'verification-required' });
 }
 
