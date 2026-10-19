@@ -27,6 +27,39 @@ await page.setViewportSize({width,height});await page.goto(`http://127.0.0.1:${s
 const result=await page.evaluate(()=>{const tiles=[...document.querySelectorAll('.projects-grid > *')].map(x=>{const r=x.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height}});return {count:tiles.length,placeholders:document.querySelectorAll('.project-placeholder').length,overlap:tiles.some((a,i)=>tiles.slice(i+1).some(b=>a.x<b.x+b.w&&b.x<a.x+a.w&&a.y<b.y+b.h&&b.y<a.y+a.h)),outside:tiles.some(a=>a.x<0||a.x+a.w>innerWidth||a.y<0||a.y+a.h>document.documentElement.scrollHeight)}});
 assert.equal(result.overlap,false,JSON.stringify({width,result}));assert.equal(result.outside,false,JSON.stringify({width,result}));assert.equal(result.placeholders,6);await page.screenshot({path:path.join(out,`grid-${width}.png`)});
 const position=()=>page.locator('.project-icon').first().evaluate(el=>[el.offsetLeft,el.offsetTop]);const before=await position();await page.locator('[data-category="products"]').click();assert.deepEqual(await position(),before);
+const productGroups = {
+ 'grasshopper-plugins': ['p_nexosolve','p_octomass','p_octoland','p_octocity'],
+ 'rhino-plugins': ['p_nexobreak','p_curvadapt'],
+ 'data-analytics': ['p_octoland','p_octocity','p_tectotrack'],
+ 'windows-apps': ['p_nexosolve'],
+ 'developer-tools': ['p_nexorhino','p_design_suite']
+};
+assert.deepEqual(await page.locator('#subfilter-bar button').allTextContents(), ['Grasshopper Plugins','Rhino Plugins','Data Analytics','Windows Apps','Developer Tools']);
+assert.equal(await page.locator('.project-icon.active').count(),10);
+for (const [group, ids] of Object.entries(productGroups)) {
+ const chip=page.locator(`[data-subcategory="${group}"]`);
+ await chip.scrollIntoViewIfNeeded();
+ await chip.click();
+ assert.deepEqual((await page.locator('.project-icon.active').evaluateAll(els=>els.map(el=>el.dataset.id))).sort(), [...ids].sort(), `${width}: ${group}`);
+ assert.equal(await page.locator('#subfilter-bar [aria-pressed="true"]').count(),1);
+ assert.equal(await chip.getAttribute('aria-pressed'),'true');
+ assert.deepEqual(await position(),before);
+}
+await page.locator('.filter-reset').click();
+assert.equal(await page.locator('.project-icon.dimmed').count(),0);
+assert.equal(await page.locator('#subfilter-bar').isVisible(),false);
+await page.locator('[data-category="projects"]').click();
+await page.locator('[data-subcategory="sim-analysis"]').click();
+assert.deepEqual((await page.locator('.project-icon.active').evaluateAll(els=>els.map(el=>el.dataset.id))).sort(),['p_alignment','p_tectotrack']);
+await page.locator('[data-category="products"]').click();
+assert.equal(await page.locator('#subfilter-bar [aria-pressed="true"]').count(),0);
+await page.locator('[data-subcategory="developer-tools"]').click();
+await page.locator('[data-id="p_nexorhino"]').click();
+assert.match(await page.locator('#popup-categories').innerText(),/Developer Tools/);
+assert.equal(await page.locator('#popup-title').innerText(),'NexoRhino');
+await page.locator('#popup-close').click();
+await page.waitForFunction(()=>getComputedStyle(document.querySelector('#popup-overlay')).opacity==='0');
+await page.screenshot({path:path.join(out,`product-groups-${width}.png`),fullPage:true});
 console.log(width,result);
 }
 }finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});

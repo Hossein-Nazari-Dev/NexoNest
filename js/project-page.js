@@ -1842,9 +1842,11 @@ function renderProjectPage(projectId) {
     }
     element.setAttribute("content", content);
   };
-  setMeta("description", description);
+  // Preserve the concise, crawlable shell description after enhancement.
+  const searchDescription = document.head.querySelector('meta[name="description"]')?.content || description;
+  setMeta("description", searchDescription);
   setMeta("og:title", `${project.title} | NexoNest`, true);
-  setMeta("og:description", description, true);
+  setMeta("og:description", searchDescription, true);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -1854,7 +1856,8 @@ function renderProjectPage(projectId) {
     "author": {"@type":"Person", "name":"Hossein Nazari" },
     "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
   };
-  const jsonLd = document.createElement("script");
+  const jsonLd = document.getElementById("projectStructuredData") || document.createElement("script");
+  jsonLd.id = "projectStructuredData";
   jsonLd.type = "application/ld+json";
   jsonLd.textContent = JSON.stringify(structuredData);
   document.head.appendChild(jsonLd);

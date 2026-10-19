@@ -6,8 +6,8 @@
   <meta name="description" content="Building Alignment — parametric research on urban layout and building energy demand in Tehran.">
   <link rel="canonical" href="https://nexonest.com/projects-pages/buildingAlignment.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Building Alignment and Energy | NexoNest">
-  <meta property="og:description" content="Research examining urban building alignment, heating, cooling, and primary energy demand in Tehran.">
+  <meta property="og:title" content="Building Alignment | NexoNest">
+  <meta property="og:description" content="Building Alignment — parametric research on urban layout and building energy demand in Tehran.">
   <meta property="og:url" content="https://nexonest.com/projects-pages/buildingAlignment.html">
   <title>Building Alignment | NexoNest</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +17,16 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/project.css">
   <link rel="stylesheet" href="../css/ux.css">
+<script type="application/ld+json" id="projectStructuredData">{"@context":"https://schema.org","@type":"CreativeWork","name":"Building Alignment","description":"A parametric study of how the alignment and distribution of buildings quietly reshape block-level energy demand.","url":"https://nexonest.com/projects-pages/buildingAlignment.html","author":{"@type":"Person","name":"Hossein Nazari"},"isPartOf":{"@type":"WebSite","name":"NexoNest","url":"https://nexonest.com/"}}</script>
+<meta property="og:site_name" content="NexoNest">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://nexonest.com/assets/profile-formal-v2.png">
+<meta property="og:image:alt" content="Hossein Nazari — computational design and research">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Building Alignment | NexoNest">
+<meta name="twitter:description" content="Building Alignment — parametric research on urban layout and building energy demand in Tehran.">
+<meta name="twitter:image" content="https://nexonest.com/assets/profile-formal-v2.png">
+<meta name="twitter:image:alt" content="Hossein Nazari — computational design and research">
 </head>
 <body class="project-theme nexonest-theme" data-project="building-alignment">
   <div class="project-layout">
@@ -35,7 +45,151 @@
       </nav>
     </aside>
     <main class="project-main">
-      <div class="project-content" id="projectPageRoot"></div>
+      <div class="project-content" id="projectPageRoot"><!-- seo-content:start -->
+    <header class="project-editorial-hero">
+      <div class="project-hero-dots" aria-hidden="true"></div>
+      <p class="project-eyebrow">Master’s research / Urban building energy</p>
+      <h1>Building Alignment</h1>
+      <p class="project-lead">A parametric study of how the alignment and distribution of buildings quietly reshape block-level energy demand.</p>
+      <dl class="project-meta">
+        <div><dt>Role</dt><dd>Lead researcher &amp; computational workflow</dd></div>
+        <div><dt>Period</dt><dd>2021 — 2024</dd></div>
+        <div><dt>Status</dt><dd>Research complete / manuscript development</dd></div>
+        <div><dt>Stack</dt><dd>Grasshopper / Python / EnergyPlus</dd></div>
+      </dl>
+      <div class="project-tags" aria-label="Project topics"><span>Urban morphology</span><span>Alignment metric</span><span>UBEM</span><span>Tehran</span></div>
+
+    </header>
+
+    <section class="project-thesis" aria-label="Project question and response">
+      <div>
+        <span>Question</span>
+        <p>If building size and specifications stay fixed, can the arrangement of the block still change its energy demand?</p>
+      </div>
+      <div>
+        <span>Response</span>
+        <p>The study generated controlled alignment families along X, Y, and XY axes, simulated them under identical conditions, and compared heating, cooling, and primary energy.</p>
+      </div>
+    </section>
+
+
+    <div class="project-proof" aria-label="Project evidence">
+
+        <div class="proof-item">
+          <strong>16</strong>
+          <span>buildings per prototype block</span>
+        </div>
+        <div class="proof-item">
+          <strong>400</strong>
+          <span>parametric simulations</span>
+        </div>
+        <div class="proof-item">
+          <strong>50</strong>
+          <span>cross-validation cases</span>
+        </div>
+        <div class="proof-item">
+          <strong>2.42%</strong>
+          <span>possible primary-energy reduction</span>
+        </div>
+    </div>
+    <section class="content-section project-editorial-section" data-nav-title="From visual order to measurable parameter">
+    <div class="section-heading-row">
+      <span>01</span>
+      <h2 class="section-title">From visual order to measurable parameter</h2>
+    </div>
+      <div class="editorial-split">
+        <div class="prose"><p>Alignment is usually discussed as a visual property of urban form. This research reframed it as a normalized geometric variable that can be generated, compared, and related to performance.</p><p>Three model families tested misalignment along one or both axes while keeping footprints, height, envelope, schedules, and total floor area constant.</p></div>
+        <aside class="margin-note">
+          <span>Research move</span>
+          <p>Treat the city block as an energy system, not a collection of isolated buildings.</p>
+        </aside>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Experimental loop">
+    <div class="section-heading-row">
+      <span>02</span>
+      <h2 class="section-title">Experimental loop</h2>
+    </div><ol class="project-process">
+      <li>
+        <span>01</span>
+        <div><h3>Define</h3><p>Translate point-and-line alignment concepts into a block-scale geometric measure.</p></div>
+      </li>
+      <li>
+        <span>02</span>
+        <div><h3>Generate</h3><p>Create X, Y, and XY families with uniform and non-uniform distributions.</p></div>
+      </li>
+      <li>
+        <span>03</span>
+        <div><h3>Simulate</h3><p>Run controlled heating, cooling, thermal-load, and primary-energy evaluations.</p></div>
+      </li>
+      <li>
+        <span>04</span>
+        <div><h3>Compare</h3><p>Read trendlines per axis instead of forcing one universal alignment rule.</p></div>
+      </li></ol></section><section class="content-section project-editorial-section" data-nav-title="Method">
+    <div class="section-heading-row">
+      <span>03</span>
+      <h2 class="section-title">Method</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/buildingAlignment/mathod.png" alt="Parametric generation, energy simulation and analysis workflow" loading="lazy" decoding="async">
+        <figcaption>A controlled geometry-to-performance workflow for a representative Tehran block.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Findings">
+    <div class="section-heading-row">
+      <span>04</span>
+      <h2 class="section-title">Findings</h2>
+    </div><div class="project-card-grid">
+      <article class="project-info-card">
+        <h3>Direction matters</h3>
+        <p>X, Y, and combined misalignment do not produce the same heating and cooling trends.</p>
+      </article>
+      <article class="project-info-card">
+        <h3>Distribution matters</h3>
+        <p>Layouts with the same alignment value can perform differently when their offsets are distributed differently.</p>
+      </article>
+      <article class="project-info-card">
+        <h3>Small percentages scale</h3>
+        <p>Potential reductions reached about 1.25% for heating, 3.1% for cooling, and 2.42% for primary energy.</p>
+      </article>
+      <article class="project-info-card">
+        <h3>Symmetry is not performance</h3>
+        <p>Regular and visually ordered arrangements were not automatically the most energy-efficient alternatives.</p>
+      </article></div></section><section class="content-section project-editorial-section" data-nav-title="Validation">
+    <div class="section-heading-row">
+      <span>05</span>
+      <h2 class="section-title">Validation</h2>
+    </div>
+      <div class="figure-text-layout">
+        <div class="prose"><p>The study isolates alignment deliberately. Its results should be read as evidence that layout is consequential, not as a universal prescription for every climate, density, programme, or urban context.</p></div>
+        <figure class="project-figure">
+          <img src="../assets/images/projects/buildingAlignment/validation.png" alt="Building Alignment validation results" loading="lazy" decoding="async">
+          <figcaption>Fifty cases were cross-checked; the reported maximum variance was approximately 0.4 kWh/m².</figcaption>
+        </figure>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="What followed">
+    <div class="section-heading-row">
+      <span>06</span>
+      <h2 class="section-title">What followed</h2>
+    </div>
+      <div class="project-honesty">
+        <span>A research seed</span>
+        <p>The project opened several later questions — contextual influence, shadow distance, WWR, geometry metrics, and climatic form-finding. Those are related research lines, but they are not presented here as if they were one experiment.</p>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Research team">
+    <div class="section-heading-row">
+      <span>07</span>
+      <h2 class="section-title">Research team</h2>
+    </div>
+      <div class="project-credits">
+        <div class="project-credits-intro">
+          <p>Hossein Nazari with Abbas Tarkashvand and Mohsen Faizi, Iran University of Science and Technology.</p>
+
+        </div>
+
+      </div></section>
+    <dialog class="project-video-dialog" id="projectVideoDialog" aria-labelledby="projectVideoTitle">
+      <div class="project-video-dialog-bar"><h2 id="projectVideoTitle">Project animation</h2><button type="button" class="project-video-close" aria-label="Close">×</button></div>
+      <video controls playsinline class="project-video-player"></video>
+    </dialog>
+    <dialog class="pdf-zoom-dialog" id="pdfZoomDialog" aria-label="Enlarged PDF page">
+      <div class="pdf-zoom-toolbar"><button type="button" data-zoom-prev aria-label="Previous page">←</button><span data-zoom-counter>Page</span><button type="button" data-zoom-next aria-label="Next page">→</button><button type="button" class="pdf-zoom-close" aria-label="Close enlarged page">×</button></div><canvas></canvas>
+    </dialog>
+<!-- seo-content:end --></div>
       <footer class="project-footer"><div class="project-footer-editorial" id="projectPageFooter"></div></footer>
     </main>
   </div>

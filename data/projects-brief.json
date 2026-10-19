@@ -16,14 +16,11 @@
       { "id": "design-proj", "parent": "projects", "label": "Design Projects" },
       { "id": "sim-analysis", "parent": "projects", "label": "Simulation and Analysis" },
       { "id": "robot-io", "parent": "projects", "label": "Robotic and IoT" },
-      { "id": "design-suite", "parent": "products", "label": "NexoNest Design Suite" },
-      { "id": "nexosolve", "parent": "products", "label": "NexoSolve" },
-      { "id": "nexobreak", "parent": "products", "label": "NexoBreak" },
-      { "id": "octomass", "parent": "products", "label": "OctoMass" },
-      { "id": "octoland", "parent": "products", "label": "OctoLand" },
-      { "id": "octocity", "parent": "products", "label": "OctoCity" },
-      { "id": "curvadapt", "parent": "products", "label": "CurvAdapt" },
-      { "id": "geofactory", "parent": "products", "label": "GeoFactory" },
+      { "id": "grasshopper-plugins", "parent": "products", "label": "Grasshopper Plugins" },
+      { "id": "rhino-plugins", "parent": "products", "label": "Rhino Plugins" },
+      { "id": "data-analytics", "parent": "products", "label": "Data Analytics" },
+      { "id": "windows-apps", "parent": "products", "label": "Windows Apps" },
+      { "id": "developer-tools", "parent": "products", "label": "Developer Tools" },
       { "id": "course", "parent": "events", "label": "Course" },
       { "id": "workshop", "parent": "events", "label": "Workshops" },
       { "id": "bootcamp", "parent": "events", "label": "Bootcamps" }
@@ -67,9 +64,7 @@
         "categories": [
           "products"
         ],
-        "subcategories": [
-          "nexosolve"
-        ],
+        "subcategories": ["grasshopper-plugins", "windows-apps"],
         "image": "assets/images/projects/nexosolve/study-running-dark.png"
       },
       {
@@ -79,7 +74,7 @@
         "url": "projects-pages/nexoRhino.html",
         "icon": "assets/icons/nexorhino.svg?v=0.1.4",
         "categories": ["products"],
-        "subcategories": ["design-suite"],
+        "subcategories": ["developer-tools"],
         "image": "assets/icons/nexorhino.svg?v=0.1.4"
       },
       {
@@ -89,7 +84,7 @@
         "url": "projects-pages/nexonestDesignSuite.html",
         "icon": "assets/logo.svg",
         "categories": ["products"],
-        "subcategories": ["design-suite"],
+        "subcategories": ["developer-tools"],
         "image": "assets/logo.svg"
       },
       {
@@ -99,7 +94,7 @@
         "url": "projects-pages/nexoBreak.html",
         "icon": "assets/icons/nexobreak.svg",
         "categories": ["products"],
-        "subcategories": ["nexobreak"],
+        "subcategories": ["rhino-plugins"],
         "image": "assets/images/projects/nexobreak/dashboard.png"
       },
       {
@@ -109,7 +104,7 @@
         "url": "projects-pages/octoMass.html",
         "icon": "assets/icons/octomass.png",
         "categories": ["products"],
-        "subcategories": ["octomass"],
+        "subcategories": ["grasshopper-plugins"],
         "image": "assets/icons/octomass.png"
       },
       {
@@ -119,7 +114,7 @@
         "url": "projects-pages/octoLand.html",
         "icon": "assets/icons/octoland.png",
         "categories": ["products"],
-        "subcategories": ["octoland"],
+        "subcategories": ["grasshopper-plugins", "data-analytics"],
         "image": "assets/icons/octoland.png"
       },
       {
@@ -129,7 +124,7 @@
         "url": "projects-pages/octoCity.html",
         "icon": "assets/icons/octocity.png",
         "categories": ["products"],
-        "subcategories": ["octocity"],
+        "subcategories": ["grasshopper-plugins", "data-analytics"],
         "image": "assets/icons/octocity.png"
       },
       {
@@ -139,7 +134,7 @@
         "url": "projects-pages/curvAdapt.html",
         "icon": "assets/icons/curvadapt.png",
         "categories": ["products", "publications"],
-        "subcategories": ["curvadapt"],
+        "subcategories": ["rhino-plugins"],
         "image": "assets/images/projects/curvadapt/card.png"
       },
       {
@@ -149,7 +144,7 @@
         "url": "projects-pages/geoFactory.html",
         "icon": "assets/icons/GeoFactory.png",
         "categories": ["products"],
-        "subcategories": ["geofactory"],
+        "subcategories": [],
         "image": "assets/icons/GeoFactory.png"
       },
       {
@@ -179,7 +174,7 @@
         "url": "projects-pages/techtoTrack.html",
         "icon": "assets/icons/tectotrack.png",
         "categories": ["products", "projects"],
-        "subcategories": ["sim-analysis"],
+        "subcategories": ["sim-analysis", "data-analytics"],
         "image": "assets/images/projects/tectotracks/card.png"
       },
       {

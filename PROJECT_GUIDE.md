@@ -249,7 +249,7 @@ launch. Publishing the site and deploying Apps Script are separate operations.
 | Location | Responsibility |
 | --- | --- |
 | Root HTML | Home, project index, portfolio, newsletter, CurvAdapt wiki, old template |
-| `projects-pages/` | Sixteen small project page shells; titles, metadata, body project ID |
+| `projects-pages/` | Sixteen project pages; generated initial content, metadata, body project ID |
 | `licenses/` | Public NexoRhino software terms; separate from NexoSolve activation |
 | `js/` | Shared UI, project index, editorial renderer, portfolio and old renderer |
 | `css/` | Design tokens, reset/base, shared layout/components and page styles |
@@ -356,13 +356,46 @@ category ID. Project fields are `id`, `title`, `excerpt`, `url`, `icon`, `image`
 `categories[]`, and `subcategories[]`. IDs in this index normally start with
 `p_`; they are distinct from editorial IDs such as `abm-bootcamp`.
 
-Category IDs are `education`, `projects`, `products`, `events`, `publications`.
+Category IDs are `podcast`, `education`, `projects`, `products`, `events`, `publications`.
 The `publications` category is labelled **Publications** in both the index filter
 and catalogue metadata, making the published-work category explicit. The category
 ID and project membership remain unchanged. Label consistency reviewed locally
 on 2026-10-19; this does not establish deployment.
 One project can belong to several categories/subcategories. A subcategory's
 `parent` controls which filter group displays it.
+
+Reviewed 2026-10-19: selecting Products now presents five product-type filters,
+replacing the previous per-project chips. The author explicitly approved the
+additional Developer Tools group because editor stubs are not runtime plugins.
+This reuses the existing category/subcategory UI; no third navigation level or
+new CSS is introduced. Product IDs, URLs and top-level memberships are unchanged.
+
+| Product subcategory | Catalogue membership |
+| --- | --- |
+| Grasshopper Plugins (`grasshopper-plugins`) | NexoSolve, OctoMass, OctoLand, OctoCity |
+| Rhino Plugins (`rhino-plugins`) | NexoBreak, CurvAdapt |
+| Data Analytics (`data-analytics`) | OctoLand, OctoCity, TectoTrack |
+| Windows Apps (`windows-apps`) | NexoSolve companion desktop |
+| Developer Tools (`developer-tools`) | NexoRhino, NexoNest Design Suite |
+
+Classification follows published platform/workflow descriptions, including
+in-development products. Data Analytics describes analytical purpose, while
+the other groups describe host or packaging, so membership intentionally overlaps.
+OctoCity remains explicitly concept-stage and CurvAdapt remains in development;
+filter membership is not a release claim. GeoFactory remains in the Products
+overview only: its archived concept has no confirmed runtime platform. TectoTrack
+retains `sim-analysis` under Projects as well as its new analytics membership.
+All ten products remain reachable from Products; choosing a group narrows them
+with the existing dimming behavior. Selecting a different category or Clear
+filter clears the subcategory normally. Old per-project product subcategory IDs
+are removed from this local catalogue and are not public URL parameters.
+Future products must use an evidence-supported group or remain overview-only.
+Local `scripts/test-project-grid-browser.cjs` checks passed at widths 1440, 820,
+390 and 320: five group labels, exact matching product sets, overlapping
+memberships, ten-product overview, active-chip state, Clear filter, category
+switch reset, retained Projects / Simulation and Analysis membership, and
+Developer Tools popup labels. All 24 grid tiles retained stable positions with
+no overlap or out-of-bounds tiles. These are local browser results, not deployment.
 
 `loadProjectsData()` fetches JSON using `cache: 'no-store'`, caches its promise and
 stores the result as `window.projectsData`. Failure is logged and resolves to an
@@ -912,20 +945,71 @@ The PDF viewer intentionally does not rely on an external CDN.
 
 `CNAME` contains `nexonest.com`. `robots.txt` permits crawling and points to the
 sitemap. HTML has titles, descriptions, canonical links and Open Graph fields;
-project JavaScript adds current rich metadata/CreativeWork structured data.
+editorial HTML includes CreativeWork structured data before JavaScript runs.
+The browser updates that same identified record instead of appending a duplicate.
 
 **Inference:** these files fit a static hosting setup such as GitHub Pages. The
 repository does not prove the hosting provider, branch, deployment workflow,
 HTTP headers or current published version. Do not switch hosting services based
 only on `CNAME`.
 
-Search crawlers may initially see shell metadata before client content renders.
-Update shell metadata and dynamic content together. Hard-coded renderer URL maps
-and actual mixed-case filenames must match exactly on case-sensitive hosting.
+Reviewed 2026-10-19: `node scripts/update-seo.cjs --write` generates initial
+editorial content for all 16 project routes from the existing browser renderer's
+data, pure rendering functions and content template. `js/project-page.js` remains
+the content owner; generated HTML is not a second authoring source. The script
+evaluates trusted repository JavaScript locally, never remote or user input.
+It fails if the expected renderer boundary/root contract changes. Regenerate
+after changing project data or its content template; no framework or hosting
+migration is involved. Initial HTML contains the hero, project text, section
+headings and links; JavaScript still enhances navigation, media and dialogs.
+Interactive PDF/video controls need JavaScript; this is not a complete static
+replacement for those features. Existing CSS and visual layouts are unchanged.
 
-**Observed gap:** the sitemap omits `codeJunkyard.html`,
-`codeJunkyardSession00.html` and the NexoRhino terms page. This guide documents the
-gap; it does not silently change publication configuration during a doc task.
+The same command synchronizes Open Graph/Twitter metadata from each page's
+existing title and search description across 23 indexable pages, using existing
+raster imagery (the author portrait replaces unsupported SVG social images).
+It emits matching CreativeWork records and a deterministic sitemap containing
+all those canonical routes, including both Code Junkyard pages and license terms.
+Project runtime preserves the concise initial description and its OG equivalent.
+Mixed-case filenames and public URLs remain unchanged. Social previews are
+metadata only; no new artwork, rating, release date or product claim is invented.
+
+`project-template.html` is explicitly `noindex, follow` and omitted from the
+sitemap because it contains authoring placeholders. The workshop registration
+page's pre-existing `noindex` remains intentional and it is also omitted; this
+SEO change does not open registration or decide its publication readiness.
+Run `node scripts/update-seo.cjs --check` before the guide refresh/check to detect
+stale output, missing/duplicate search titles and descriptions, canonical
+mismatches and missing social assets. The generator also synchronizes the existing
+catalogue noscript directory with all 18 brief records, checks local destinations,
+and escapes titles/URLs. This fixes the omitted NexoBreak and NexoSolve fallback
+links without changing the JavaScript-enabled index or its popup interaction.
+
+Local verification on 2026-10-19: `scripts/test-seo-browser.cjs` passed in headless
+Edge for all 16 project routes with and without JavaScript: single matching H1,
+matching lead/section counts, stable search descriptions and one matching
+CreativeWork record after enhancement. Four representative pages at 1440px and
+390px had no horizontal overflow; screenshots were inspected for the home,
+mobile index and mobile portfolio. Tests block external network requests and
+submit no forms. An existing Portfolio error, `window.loadProjectsData is not a
+function`, remains: `portfolio.html` loads `nav.js` without `data.js`. The test
+reports that known error separately and fails on unexpected errors. This finding
+is recorded for the requested design review; it is not fixed by this SEO pass.
+Browser execution may need permission outside restricted Windows sandboxes.
+Local checks do not establish production publication, indexing, rankings, Core
+Web Vitals, rich-result eligibility or search traffic; Search Console and field
+metrics were not connected. In the follow-up, Product Design was connected and
+used for a screenshot-based audit of the published home → catalogue → project
+brief → NexoBreak flow, plus mobile catalogue/filter states, using the in-app
+browser. This was review only; no visual changes were made. Screenshots support
+observations about discoverability, hierarchy and text legibility, not full
+accessibility compliance or measured conversion effects.
+Ahrefs authentication subsequently succeeded, but Site Audit projects, Site
+Explorer metrics/domain rating and the public domain-rating endpoint all returned
+`Insufficient plan`. No ranking, traffic, backlink or audit-health numbers were
+retrieved; absence of data must not be reported as zero performance. Account
+API entitlement is separate from connector authentication.
+
 Robots allowing `/` is not protection for assets, source files, documents or
 future admin material. Never publish secrets into the website tree.
 
@@ -951,7 +1035,7 @@ authorization to delete them.
 
 | Decision | Evidence and reason | Cost / condition for reconsideration |
 | --- | --- | --- |
-| Static HTML/CSS/JS, no build | Fact; inferred fit for a small publishing site and low deployment effort | Globals, manual synchronization and runtime rendering; reconsider for substantially larger content/editor needs |
+| Static HTML/CSS/JS, no framework build | Fact; inferred fit for a small publishing site and low deployment effort; SEO generator materializes editorial HTML before publishing | Globals and generated-content refresh; reconsider for substantially larger content/editor needs |
 | Short catalogue separate from editorial content | Fact; inferred separation of index taxonomy from rich narratives | Same project titles/URLs can drift; synchronize on edits |
 | Content kinds shared by project shells | Fact; inferred consistent layout with data-shaped authoring | Large `project-page.js` couples content and rendering; splitting is reasonable when edits become hard to review |
 | Fixed catalogue shuffle | Source comment: playful composition without movement between visits | Order list must be maintained; omitted items use fallback sorting |
@@ -1028,7 +1112,9 @@ website editing; Node is used for syntax/docs checks, not a frontend build.
 4. Update `PROJECT_PAGE_ORDER`, renderer URL maps and desired index visual order.
    Do not confuse catalogue ID, editorial ID, page label and filename.
 5. Add assets with captions/alt text and outgoing product/research links as needed.
-6. Update sitemap and any portfolio references affected by the change.
+6. Run `node scripts/update-seo.cjs --write` to regenerate initial HTML, metadata
+   and sitemap, then `node scripts/update-seo.cjs --check`. Update any affected
+   portfolio references. Run the SEO browser check when changing the renderer.
 7. Update this guide and generated reference; verify popup, page, navigation,
    responsive layout, metadata and local links.
 
@@ -1152,9 +1238,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 183 application/configuration/integration/tool/asset files:
+SHA-256 of 185 application/configuration/integration/tool/asset files:
 
-`51f812f3f310685bb9a80f371d4b69bc1657179c2b86a0b8eb9c330d49599e77`
+`45c07b68d57943f7de254597d68faef0d85cd462e86e185fb9f11c2f888fea32`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1166,18 +1252,18 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 | --- | --- | --- | --- |
 | p_archicast_season_01 | Standalone podcast season | [archicast/season-01.html](archicast/season-01.html) | podcast / archicast-season-01 |
 | p_computational_thinking_workshop_1 | Standalone registration | [CTworkshop01.html](CTworkshop01.html) | events, education / workshop |
-| p_nexosolve | nexosolve | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | products / nexosolve |
-| p_nexorhino | nexorhino | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | products / design-suite |
-| p_design_suite | design-suite | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | products / design-suite |
-| p_nexobreak | nexobreak | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | products / nexobreak |
-| p_octomass | octomass | [projects-pages/octoMass.html](projects-pages/octoMass.html) | products / octomass |
-| p_octoland | octoland | [projects-pages/octoLand.html](projects-pages/octoLand.html) | products / octoland |
-| p_octocity | octocity | [projects-pages/octoCity.html](projects-pages/octoCity.html) | products / octocity |
-| p_curvadapt | curvadapt | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | products, publications / curvadapt |
-| p_geofactory | geofactory | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | products / geofactory |
+| p_nexosolve | nexosolve | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | products / grasshopper-plugins, windows-apps |
+| p_nexorhino | nexorhino | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | products / developer-tools |
+| p_design_suite | design-suite | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | products / developer-tools |
+| p_nexobreak | nexobreak | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | products / rhino-plugins |
+| p_octomass | octomass | [projects-pages/octoMass.html](projects-pages/octoMass.html) | products / grasshopper-plugins |
+| p_octoland | octoland | [projects-pages/octoLand.html](projects-pages/octoLand.html) | products / grasshopper-plugins, data-analytics |
+| p_octocity | octocity | [projects-pages/octoCity.html](projects-pages/octoCity.html) | products / grasshopper-plugins, data-analytics |
+| p_curvadapt | curvadapt | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | products, publications / rhino-plugins |
+| p_geofactory | geofactory | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | products /  |
 | p_printerra | printerra | [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | projects / robot-io |
 | p_alignment | building-alignment | [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | publications, projects / sim-analysis |
-| p_tectotrack | tectotrack | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | products, projects / sim-analysis |
+| p_tectotrack | tectotrack | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | products, projects / sim-analysis, data-analytics |
 | p_abm_bootcamp | abm-bootcamp | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | events / bootcamp |
 | p_sustainable_development | sustainable-design | [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | events, education / workshop, sustain |
 | p_code_junkyard | code-junkyard | [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | education / code-junkyard, programming, comp-geo |
@@ -1535,7 +1621,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [CNAME](CNAME) | 12 |
 | [CTworkshop01.html](CTworkshop01.html) | 21824 |
 | [README.txt](README.txt) | 29 |
-| [archicast/season-01.html](archicast/season-01.html) | 11087 |
+| [archicast/season-01.html](archicast/season-01.html) | 12038 |
 | [assets/audio/archicast/season-01/episode-01.mp3](assets/audio/archicast/season-01/episode-01.mp3) | 30682636 |
 | [assets/audio/archicast/season-01/episode-02.mp3](assets/audio/archicast/season-01/episode-02.mp3) | 28168060 |
 | [assets/audio/archicast/season-01/episode-03.mp3](assets/audio/archicast/season-01/episode-03.mp3) | 11255166 |
@@ -1650,13 +1736,13 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
-| [curvadapt-wiki.html](curvadapt-wiki.html) | 3923 |
-| [data/projects-brief.json](data/projects-brief.json) | 10542 |
+| [curvadapt-wiki.html](curvadapt-wiki.html) | 4706 |
+| [data/projects-brief.json](data/projects-brief.json) | 10684 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
 | [files/Portfolio_Academic.pdf](files/Portfolio_Academic.pdf) | 131441 |
-| [index.html](index.html) | 3019 |
+| [index.html](index.html) | 3666 |
 | [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 22195 |
 | [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 4184 |
 | [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 21193 |
@@ -1679,42 +1765,44 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 34511 |
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 109823 |
+| [js/project-page.js](js/project-page.js) | 110112 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
 | [js/ux.js](js/ux.js) | 4538 |
 | [js/workshop.js](js/workshop.js) | 5848 |
-| [licenses/nexorhino.html](licenses/nexorhino.html) | 4449 |
-| [newsletter.html](newsletter.html) | 12179 |
-| [nexonest.html](nexonest.html) | 7730 |
-| [portfolio.html](portfolio.html) | 33051 |
-| [project-template.html](project-template.html) | 7509 |
-| [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 2490 |
-| [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 2563 |
-| [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | 2578 |
-| [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 2678 |
-| [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 2639 |
-| [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 2510 |
-| [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 2938 |
-| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 3241 |
-| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 2999 |
-| [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 2528 |
-| [projects-pages/octoCity.html](projects-pages/octoCity.html) | 2514 |
-| [projects-pages/octoLand.html](projects-pages/octoLand.html) | 2505 |
-| [projects-pages/octoMass.html](projects-pages/octoMass.html) | 2510 |
-| [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | 2515 |
-| [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 2581 |
-| [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 2560 |
+| [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
+| [newsletter.html](newsletter.html) | 12970 |
+| [nexonest.html](nexonest.html) | 8508 |
+| [portfolio.html](portfolio.html) | 33753 |
+| [project-template.html](project-template.html) | 7556 |
+| [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
+| [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 11950 |
+| [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | 9293 |
+| [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 8972 |
+| [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
+| [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
+| [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 17983 |
+| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 13908 |
+| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 24070 |
+| [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
+| [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
+| [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9348 |
+| [projects-pages/octoMass.html](projects-pages/octoMass.html) | 13995 |
+| [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | 10646 |
+| [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 9967 |
+| [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 12258 |
 | [robots.txt](robots.txt) | 66 |
 | [scripts/test-newsletter-browser.cjs](scripts/test-newsletter-browser.cjs) | 4802 |
 | [scripts/test-podcast-browser.cjs](scripts/test-podcast-browser.cjs) | 4846 |
 | [scripts/test-popup-browser.cjs](scripts/test-popup-browser.cjs) | 2865 |
-| [scripts/test-project-grid-browser.cjs](scripts/test-project-grid-browser.cjs) | 2885 |
+| [scripts/test-project-grid-browser.cjs](scripts/test-project-grid-browser.cjs) | 5077 |
 | [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 10635 |
+| [scripts/test-seo-browser.cjs](scripts/test-seo-browser.cjs) | 4006 |
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6686 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8000 |
-| [sitemap.xml](sitemap.xml) | 1554 |
+| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 7324 |
+| [sitemap.xml](sitemap.xml) | 1788 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

@@ -6,8 +6,8 @@
   <meta name="description" content="CurvAdapt — reliability-first curve segmentation and geometry preprocessing for building performance simulation.">
   <link rel="canonical" href="https://nexonest.com/projects-pages/curvAdapt.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="CurvAdapt | Reliable Geometry for Simulation">
-  <meta property="og:description" content="A reliability-first workflow for curve segmentation and simulation-ready geometry preprocessing.">
+  <meta property="og:title" content="CurvAdapt | NexoNest">
+  <meta property="og:description" content="CurvAdapt — reliability-first curve segmentation and geometry preprocessing for building performance simulation.">
   <meta property="og:url" content="https://nexonest.com/projects-pages/curvAdapt.html">
   <title>CurvAdapt | NexoNest</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +17,16 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/project.css">
   <link rel="stylesheet" href="../css/ux.css">
+<script type="application/ld+json" id="projectStructuredData">{"@context":"https://schema.org","@type":"CreativeWork","name":"CurvAdapt","description":"A reliability-first workflow for translating curved design geometry into simulation-ready polylines.","url":"https://nexonest.com/projects-pages/curvAdapt.html","author":{"@type":"Person","name":"Hossein Nazari"},"isPartOf":{"@type":"WebSite","name":"NexoNest","url":"https://nexonest.com/"}}</script>
+<meta property="og:site_name" content="NexoNest">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://nexonest.com/assets/profile-formal-v2.png">
+<meta property="og:image:alt" content="Hossein Nazari — computational design and research">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CurvAdapt | NexoNest">
+<meta name="twitter:description" content="CurvAdapt — reliability-first curve segmentation and geometry preprocessing for building performance simulation.">
+<meta name="twitter:image" content="https://nexonest.com/assets/profile-formal-v2.png">
+<meta name="twitter:image:alt" content="Hossein Nazari — computational design and research">
 </head>
 <body class="project-theme nexonest-theme" data-project="curvadapt">
   <div class="project-layout">
@@ -36,7 +46,151 @@
       </nav>
     </aside>
     <main class="project-main">
-      <div class="project-content" id="projectPageRoot"></div>
+      <div class="project-content" id="projectPageRoot"><!-- seo-content:start -->
+    <header class="project-editorial-hero">
+      <div class="project-hero-dots" aria-hidden="true"></div>
+      <p class="project-eyebrow">Research software / Geometry preprocessing</p>
+      <h1>CurvAdapt</h1>
+      <p class="project-lead">A reliability-first workflow for translating curved design geometry into simulation-ready polylines.</p>
+      <dl class="project-meta">
+        <div><dt>Role</dt><dd>Concept, algorithms, analysis &amp; development</dd></div>
+        <div><dt>Period</dt><dd>2024 — present</dd></div>
+        <div><dt>Status</dt><dd>Paper in major revision / plugin in development</dd></div>
+        <div><dt>Stack</dt><dd>RhinoCommon / C# / BPS</dd></div>
+      </dl>
+      <div class="project-tags" aria-label="Project topics"><span>Curve segmentation</span><span>MCE / rMCE</span><span>Verification</span><span>Radiation proxy</span></div>
+
+    </header>
+
+    <section class="project-thesis" aria-label="Project question and response">
+      <div>
+        <span>Question</span>
+        <p>When a smooth curve becomes a polyline, how much geometric error is still safe for building-performance simulation?</p>
+      </div>
+      <div>
+        <span>Response</span>
+        <p>CurvAdapt controls the deviation itself — using maximum chord error and relative MCE — instead of treating segment count as evidence of accuracy.</p>
+      </div>
+    </section>
+
+
+    <div class="project-proof" aria-label="Project evidence">
+
+        <div class="proof-item">
+          <strong>6</strong>
+          <span>representative curve profiles</span>
+        </div>
+        <div class="proof-item">
+          <strong>5</strong>
+          <span>segmentation strategies</span>
+        </div>
+        <div class="proof-item">
+          <strong>|r| ≈ .99</strong>
+          <span>radiation and annual EUI</span>
+        </div>
+        <div class="proof-item">
+          <strong>G¹ aware</strong>
+          <span>critical breaks preserved</span>
+        </div>
+    </div>
+    <section class="content-section project-editorial-section" data-nav-title="The weak link before simulation">
+    <div class="section-heading-row">
+      <span>01</span>
+      <h2 class="section-title">The weak link before simulation</h2>
+    </div>
+      <div class="editorial-split">
+        <div class="prose"><p>NURBS geometry cannot enter many performance engines directly. It is discretized first, often with an arbitrary segment count. The model may look smooth while its deviation, topology, and simulation reliability remain unknown.</p><p>CurvAdapt separates segmentation from simplification, preserves real discontinuities, and reports geometric fidelity in a scale-aware form.</p></div>
+        <aside class="margin-note">
+          <span>Small but consequential</span>
+          <p>A simulation can be numerically precise and still begin with unreliable geometry.</p>
+        </aside>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Reliability workflow">
+    <div class="section-heading-row">
+      <span>02</span>
+      <h2 class="section-title">Reliability workflow</h2>
+    </div><ol class="project-process">
+      <li>
+        <span>01</span>
+        <div><h3>Prepare</h3><p>Detect domains, duplicate parameters, seams, kinks, and G¹ breakpoints.</p></div>
+      </li>
+      <li>
+        <span>02</span>
+        <div><h3>Segment</h3><p>Compare uniform and adaptive routines across different curvature behaviours.</p></div>
+      </li>
+      <li>
+        <span>03</span>
+        <div><h3>Verify geometry</h3><p>Measure MCE and normalize it as rMCE so fidelity can be compared across scale.</p></div>
+      </li>
+      <li>
+        <span>04</span>
+        <div><h3>Check performance</h3><p>Use fast incident-radiation convergence before committing to heavier daylight and energy runs.</p></div>
+      </li></ol></section><section class="content-section project-editorial-section" data-nav-title="What the study found">
+    <div class="section-heading-row">
+      <span>03</span>
+      <h2 class="section-title">What the study found</h2>
+    </div><div class="project-card-grid">
+      <article class="project-info-card">
+        <h3>No universal best algorithm</h3>
+        <p>Uniform-by-length is efficient for smooth convex curves; adaptive-by-chord is more robust for hybrid and free-form profiles.</p>
+      </article>
+      <article class="project-info-card">
+        <h3>Segment count can mislead</h3>
+        <p>More segments do not guarantee a proportionally better approximation and may conceal false convergence.</p>
+      </article>
+      <article class="project-info-card">
+        <h3>Radiation is a useful diagnostic</h3>
+        <p>It retains sensitivity to geometry and strongly tracks annual energy convergence at a fraction of the computation.</p>
+      </article>
+      <article class="project-info-card">
+        <h3>Daylight needs extra care</h3>
+        <p>Sensor-grid allocation can introduce oscillations that are not caused by the curve itself.</p>
+      </article></div></section><section class="content-section project-editorial-section" data-nav-title="Method trace">
+    <div class="section-heading-row">
+      <span>04</span>
+      <h2 class="section-title">Method trace</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/curvadapt/fig-methodology.jpg" alt="CurvAdapt geometry verification and building performance simulation workflow" loading="lazy" decoding="async">
+        <figcaption>Geometry is verified before performance accuracy is interpreted.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Evidence, not a magic threshold">
+    <div class="section-heading-row">
+      <span>05</span>
+      <h2 class="section-title">Evidence, not a magic threshold</h2>
+    </div>
+      <div class="figure-text-layout">
+        <div class="prose"><p>The tested thresholds are evidence from specific curve families, not universal constants. The transferable contribution is the procedure for deriving an appropriate threshold for a new geometry and simulation objective.</p></div>
+        <figure class="project-figure">
+          <img src="../assets/images/projects/curvadapt/fig-validation.jpg" alt="Comparison of radiation, daylight and energy convergence" loading="lazy" decoding="async">
+          <figcaption>Radiation convergence anticipates energy stability; daylight also reflects its sensor discretization.</figcaption>
+        </figure>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Current boundary">
+    <div class="section-heading-row">
+      <span>06</span>
+      <h2 class="section-title">Current boundary</h2>
+    </div>
+      <div class="project-honesty">
+        <span>Under revision</span>
+        <p>The journal review recognized the workflow’s merit while asking for tighter terminology, broader climate testing, stronger sensitivity analysis, and a more modest novelty claim. The paper and plugin are being revised around that reliability-first contribution.</p>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Research team">
+    <div class="section-heading-row">
+      <span>07</span>
+      <h2 class="section-title">Research team</h2>
+    </div>
+      <div class="project-credits">
+        <div class="project-credits-intro">
+          <p>Hossein Nazari — conceptualization, methodology, algorithms, data analysis and original draft. With Shadan Masoud, Abbas Tarkashvand and Mehdi Ghiai.</p>
+
+        </div>
+
+      </div></section>
+    <dialog class="project-video-dialog" id="projectVideoDialog" aria-labelledby="projectVideoTitle">
+      <div class="project-video-dialog-bar"><h2 id="projectVideoTitle">Project animation</h2><button type="button" class="project-video-close" aria-label="Close">×</button></div>
+      <video controls playsinline class="project-video-player"></video>
+    </dialog>
+    <dialog class="pdf-zoom-dialog" id="pdfZoomDialog" aria-label="Enlarged PDF page">
+      <div class="pdf-zoom-toolbar"><button type="button" data-zoom-prev aria-label="Previous page">←</button><span data-zoom-counter>Page</span><button type="button" data-zoom-next aria-label="Next page">→</button><button type="button" class="pdf-zoom-close" aria-label="Close enlarged page">×</button></div><canvas></canvas>
+    </dialog>
+<!-- seo-content:end --></div>
       <footer class="project-footer"><div class="project-footer-editorial" id="projectPageFooter"></div></footer>
     </main>
   </div>
