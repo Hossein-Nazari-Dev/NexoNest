@@ -6,6 +6,9 @@
   const submitButton = form.querySelector('button[type="submit"]');
   const confirmationPanel = document.querySelector('#submission-next');
   const submittedEmail = confirmationPanel.querySelector('[data-submitted-email]');
+  const confirmationTitle = document.querySelector('#confirmation-title');
+  const confirmationMessage = document.querySelector('#confirmation-message');
+  const confirmationSteps = confirmationPanel.querySelector('.confirmation-steps');
   const changeEmailButton = document.querySelector('#change-email');
   const endpoint = document.querySelector('meta[name="newsletter-endpoint"]')?.content.trim();
   const conditionalSelects = [
@@ -79,28 +82,45 @@
   }
 
   async function sendToEndpoint(data) {
+    if (submitButton.disabled) return;
     submitButton.disabled = true;
     submitButton.querySelector('span').textContent = 'Submitting…';
     setStatus('Submitting your introduction…', 'pending');
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
+        credentials: 'omit',
+        signal: controller.signal,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
         body: new URLSearchParams({ payload: JSON.stringify(data) })
       });
-      form.reset();
-      conditionalSelects.forEach(({ select, input }) => updateConditionalField(select, input));
+      if (!response.ok) throw new Error('unconfirmed');
+      const result = await response.json();
+      if (result.ok !== true) {
+        setStatus(result.error || 'The server could not accept your request. Please try later.', 'error');
+        return;
+      }
+      if (!['already-subscribed', 'pending-confirmation'].includes(result.status)) throw new Error('unconfirmed');
+      const subscribed = result.status === 'already-subscribed';
+      confirmationTitle.textContent = subscribed ? 'You are already subscribed.' : 'Check your inbox and confirm.';
+      confirmationMessage.textContent = subscribed ? 'This email is already subscribed to NexoNest Newsletter.' :
+        'The email service accepted a confirmation request. Check the address below for your link. Your subscription starts only after confirmation.';
+      confirmationSteps.hidden = subscribed;
       submittedEmail.textContent = data.email;
       confirmationPanel.hidden = false;
       form.hidden = true;
       confirmationPanel.focus({ preventScroll: true });
       confirmationPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (error) {
-      setStatus('The subscriber list could not be reached. Nothing was submitted; please try again later.', 'error');
+      setStatus('We could not confirm the result. Your request may have reached the server. Check your inbox before retrying; your form details have been kept.', 'error');
+    } finally {
+      clearTimeout(timeout);
       submitButton.disabled = false;
-      submitButton.querySelector('span').textContent = 'Join field notes';
+      submitButton.querySelector('span').textContent = 'Subscribe';
     }
   }
 
@@ -143,7 +163,7 @@
     confirmationPanel.hidden = true;
     form.hidden = false;
     submitButton.disabled = false;
-    submitButton.querySelector('span').textContent = 'Join field notes';
+    submitButton.querySelector('span').textContent = 'Subscribe';
     setStatus('', '');
     form.elements.email.focus();
   });

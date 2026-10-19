@@ -1,12 +1,14 @@
 {
     "categories": [
+      { "id": "podcast", "label": "Archicast" },
       { "id": "education", "label": "Education" },
       { "id": "projects", "label": "Projects" },
       { "id": "products", "label": "Products" },
       { "id": "events", "label": "Events" },
-      { "id": "publications", "label": "Research and writing" }
+      { "id": "publications", "label": "Publications" }
     ],
     "subcategories": [
+      { "id": "archicast-season-01", "parent": "podcast", "label": "Season 01 - Form" },
       { "id": "comp-geo", "parent": "education", "label": "Computational Geometry" },
       { "id": "sustain", "parent": "education", "label": "Sustainability" },
       { "id": "programming", "parent": "education", "label": "Programming" },
@@ -27,6 +29,20 @@
       { "id": "bootcamp", "parent": "events", "label": "Bootcamps" }
     ],
     "projects": [
+{
+  "id": "p_archicast_season_01",
+  "title": "Archicast",
+  "excerpt": "A Persian architecture podcast by Hossein Nazari. How does form take shape? Listen to the first three published episodes, with Persian and English summaries.",
+  "url": "archicast/season-01.html",
+  "icon": "assets/icons/archicast.svg",
+  "categories": [
+    "podcast"
+  ],
+  "subcategories": [
+    "archicast-season-01"
+  ],
+  "image": "assets/icons/archicast.svg"
+},
 {
   "id": "p_computational_thinking_workshop_1",
   "title": "Computational Thinking Workshop 1",
@@ -171,20 +187,20 @@
         "title": "ABM Bootcamp",
         "excerpt": "A hands-on programme covering agent-based modelling, visual perception, wayfinding, and human-centred spatial simulation.",
         "url": "projects-pages/abmBootcamp.html",
-        "icon": "",
+        "icon": "assets/icons/abm-bootcamp.svg",
         "categories": ["events"],
         "subcategories": ["bootcamp"],
-        "image": "assets/logo.svg"
+        "image": "assets/icons/abm-bootcamp.svg"
       },
       {
         "id": "p_sustainable_development",
         "title": "Sustainable Design Workshop",
         "excerpt": "An online workshop connecting environmental, social, and economic sustainability to built-environment decisions.",
         "url": "projects-pages/sustainableDevelopment.html",
-        "icon": "",
+        "icon": "assets/icons/sustainable-design-workshop.svg",
         "categories": ["events", "education"],
         "subcategories": ["workshop", "sustain"],
-        "image": "assets/logo.svg"
+        "image": "assets/icons/sustainable-design-workshop.svg"
       },
       {
         "id": "p_code_junkyard",

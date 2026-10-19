@@ -9,7 +9,7 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-16
+reviewed: 2026-10-19
 status: maintained
 ---
 
@@ -94,6 +94,64 @@ flowchart TD
 
 No part of the diagram implies a currently deployed or functioning remote
 service. Read the relevant implementation and deployment status separately.
+
+## Archicast podcast
+
+The Persian season introduction and narrator byline use the author's approved
+first-person copy (updated and reviewed on 2026-10-19). The English introduction
+remains in third person; this copy edit does not change episode summaries or audio.
+
+Added locally on 2026-10-19 at the author's request. The Persian name is حسین نظری;
+the existing English spelling Hossein Nazari is retained. The author confirmed
+season 1 episodes 1–3 are published; exact release dates were not supplied.
+
+The main NexoNest filter includes **Archicast**, with the **Season 01 - Form**
+subfilter and catalogue record `p_archicast_season_01`, titled **Archicast**.
+The separate homepage podcast shortcut was removed at the author's request on
+2026-10-19, preserving the two main entry routes, NexoNest and Portfolio.
+Archicast remains accessible through the project index. The season is a standalone Persian RTL
+page, with one Persian and one English paragraph for the season and each of the
+three episodes. English blocks declare `lang="en"` and `dir="ltr"`. Local Vazirmatn
+fonts and shared site color tokens keep it consistent without a new dependency.
+
+The Archicast vault owns editorial content. Summaries were copied from its public
+episode indexes; the season paragraph was adapted from its introduction. Only
+approved public summaries and audio enter this site; no internal scripts, research
+extracts or production notes are imported. There is no automatic vault exporter.
+
+`css/podcast.css` owns layout; `js/podcast.js` pauses other tracks when one starts
+and reveals an error message on media failure. Native audio controls and direct
+file links work without JavaScript. Audio uses `preload="none"`, no autoplay,
+and is copied unchanged into `assets/audio/archicast/season-01/episode-01..03.mp3`.
+Source files were episode 1 `product/S1-E1.mp3`, episode 2 `S1-E2.mp3`, and episode 3
+`Episode03_Season_01.mp3`. These copies require deliberate replacement if masters
+change. Browser metadata yields durations of 767, 880 and 703 seconds, displayed as 12:47, 14:40 and 11:43. No date, transcript or unpublished episode is fabricated.
+
+Decision: use static accessible season HTML instead of extending the product
+renderer. The page remains readable and playable without a data fetch or JS;
+the trade-off is manually maintained season content. The catalogue and guide
+generator explicitly recognize its standalone route, preserving existing product
+IDs and renderer contracts. Sitemap includes the season URL. Local implementation
+does not establish deployment, public audio availability or hosting range support.
+
+Local verification on 2026-10-19: `scripts/test-podcast-browser.cjs` passed in
+headless Edge for desktop/mobile layout, no initial audio requests, three actual
+MP3 metadata decodes, playback and mutual pause, episode anchors, Podcast/season
+filters, popup navigation, absence of a homepage podcast shortcut, no-JavaScript content/native controls
+and no page errors. Screenshots were visually inspected. Run with Playwright
+available; `PLAYWRIGHT_CHANNEL=msedge` selects installed Edge. The test serves only
+loopback content and blocks external requests. Its local range-serving fixture
+does not prove production hosting range behavior. Exact audio-copy hashes were
+checked against Archicast sources. Guide inventory checks and JS syntax checks
+also passed; these claims concern local files, not a deployment.
+
+Navigation labels now use **Archicast** in the main filter and season menu, replacing the generic Podcast label as requested by the author. The internal category ID remains `podcast` to preserve filtering contracts.
+
+Navigation refinement on 2026-10-19: the catalogue title is **Archicast** and
+the season subfilter is **Season 01 - Form**, at the author's request. The desktop
+filter grid uses implicit columns instead of a fixed six-button count, keeping
+all seven filters on one row. At 820px and below, the existing multirow grid is
+retained for readable touch targets. IDs, routes and audio are unchanged.
 
 ## Workshop registration
 
@@ -270,6 +328,28 @@ Sources: [brief data](data/projects-brief.json), [data loader](js/data.js),
 
 ### Data contract
 
+Custom education icons use exactly black `#000000` plus one site accent from
+`css/tokens.css`: NexoNest green `#7fb7a8` or Portfolio blue `#88b3d4`.
+The author's direction excludes red. External SVG image files embed the hex
+values because page CSS variables do not cascade into them. Keep these values
+aligned with the tokens when changing the palette. The CodeJunkYard hub uses
+code brackets and a green module; session 00 pairs those brackets with a blue
+four-cell voxel seed. Computational Thinking Workshop 1 uses connected problem,
+decision and result shapes, with a black edition numeral on green. All three
+retain their existing asset paths and use transparent 128-by-128 viewBoxes,
+rounded strokes and no font dependencies. The previously added ABM and
+sustainability icons also use the exact same black/accent palette. Reviewed
+locally on 2026-10-19.
+
+ABM Bootcamp and Sustainable Design Workshop use dedicated two-colour SVG icons
+for index tiles, popup artwork and editorial page marks:
+`assets/icons/abm-bootcamp.svg` depicts
+connected agents in black/blue; `assets/icons/sustainable-design-workshop.svg`
+combines a building outline and leaf in black/green. Both use a transparent
+128-by-128 viewBox and rounded strokes to remain legible at tile size. These
+replace text initials and the generic popup studio logo; catalogue IDs and
+destinations are unchanged. Reviewed locally on 2026-10-19.
+
 Top-level arrays are `categories`, `subcategories`, and `projects`.
 Category fields are `id`, `label`; subcategories add `parent`, which references a
 category ID. Project fields are `id`, `title`, `excerpt`, `url`, `icon`, `image`,
@@ -277,6 +357,10 @@ category ID. Project fields are `id`, `title`, `excerpt`, `url`, `icon`, `image`
 `p_`; they are distinct from editorial IDs such as `abm-bootcamp`.
 
 Category IDs are `education`, `projects`, `products`, `events`, `publications`.
+The `publications` category is labelled **Publications** in both the index filter
+and catalogue metadata, making the published-work category explicit. The category
+ID and project membership remain unchanged. Label consistency reviewed locally
+on 2026-10-19; this does not establish deployment.
 One project can belong to several categories/subcategories. A subcategory's
 `parent` controls which filter group displays it.
 
@@ -288,7 +372,15 @@ empty data object. It does not retry automatically during that page lifetime.
 
 1. `render.js` builds button icons using a fixed visual ordering, with alphabetical
    fallback for projects absent from that order. Text initials replace missing
-   icons. Six decorative future-project placeholders follow the real projects.
+   icons. Six decorative future-project placeholders follow the real projects
+   in DOM order and are visually interspersed using sparse layout coordinates.
+   `render.js` assigns stable wide/medium/small cell coordinates; `nexonest.css`
+   uses 12, 6 or 4 columns with deliberate empty cells. Extra catalogue entries
+   fall back to automatic grid placement. Filtering preserves each tile's cell.
+   Local Edge checks on 2026-10-19 covered 1440x900, 820x900, 390x844 and 320x568:
+   24 tiles including six future slots, no overlap or horizontal overflow,
+   and stable positions within the grid after filtering. The narrow mobile
+   index retains normal document scrolling to keep tiles readable.
 2. `state.js` owns `activeCategory`, `activeSubcategory`, `activeProject` and
    exports state setters. UI updates rebuild subfilter chips, apply filters and
    update pressed/active states. `activeProject` is a state field; the popup also
@@ -302,6 +394,31 @@ empty data object. It does not retry automatically during that page lifetime.
 5. `modal.js` owns popup visibility, scroll locking, fallback imagery, SVG logo
    fitting, focus placement/return, Escape handling and Tab focus wrapping.
    Opening the selected project's URL uses a full page navigation.
+
+Popup artwork uses a centred frame capped at 320 CSS pixels on each axis.
+`nexonest.css` fits the entire brief into the viewport with a grid: text and
+actions retain their height while the artwork row takes the remaining space.
+The card uses content height instead of reserving a fixed 760-pixel height,
+removing excess blank space around artwork. Artwork height adapts between 48
+and 280 pixels based on viewport height. The 108 local popup checks were rerun
+successfully after this refinement on 2026-10-19.
+The frame can become rectangular on short screens; preserving full copy and
+avoiding scroll takes priority over a square. Short landscape viewports use
+artwork beside the text. The card has no internal scrolling; opening the modal
+also locks background scrolling. `components.css` positions the image inside
+an explicit 80% by 80% inner box with `object-fit: contain`, preserving the full
+artwork and equal 10% margins without intrinsic SVG sizing enlarging the grid
+track and clipping the image. SVG and raster artwork share this sizing contract.
+For new artwork, use a square canvas (recommended 1024 by 1024 pixels for raster
+assets) with the subject centred and balanced internal whitespace; existing
+non-square assets remain supported without cropping. Missing-image text remains
+centred in the same frame. On 2026-10-19, `scripts/test-popup-browser.cjs`
+passed local Edge checks for all 18 projects at 1440x900, 1366x768, 390x844,
+360x640, 320x568 and 844x390 (108 combinations): image decoding, centred
+contain sizing, positive frame dimensions, visible card/actions, no internal
+overflow and background scroll locking. Workshop screenshots at 320x568 and
+844x390 were also visually inspected. These checks do not establish deployment
+or guarantee fit for arbitrary zoom, larger future copy or smaller viewports.
 
 **Inferred rationale:** a shared JSON catalogue avoids duplicating filter
 taxonomy in every index module, while keeping editing possible without a build.
@@ -507,6 +624,12 @@ synchronization of document images and duplicated personal content.
 
 ## Newsletter frontend
 
+The project-index header labels its subscription link **Newsletter**, matching
+the destination page title **NexoNest Newsletter** and making its purpose explicit.
+The public route remains `newsletter.html`; this label change does not alter
+subscription behavior or backend contracts. Reviewed locally on 2026-10-19;
+deployment has not been verified.
+
 Sources: [page](newsletter.html), [client](js/newsletter.js),
 [styles](css/newsletter.css). The page's `newsletter-endpoint` meta tag contains
 the public Apps Script `/exec` URL. This endpoint is public configuration, not a
@@ -521,15 +644,19 @@ Client validation checks required fields, email validity, education selection,
 at least one interest and consent. It displays field/group errors and manages
 submission/confirmation UI. A missing endpoint prevents submission.
 
-POST uses `mode: 'no-cors'` and an URL-encoded `payload` containing JSON. The
-response is opaque: a resolved fetch **does not prove server acceptance or email
-delivery**. The UI resets the form and asks the user to check email; the actual
-confirmation email/link is the proof of opt-in. A network exception also cannot
-prove the server received nothing, despite the current UI wording.
+POST uses a CORS-readable, URL-encoded payload containing JSON with a 30-second
+browser timeout. Only a readable {ok:true,status} response with pending-confirmation
+or already-subscribed opens the next-step panel. HTTP failures, unreadable responses,
+invalid JSON, unknown statuses, and network/timeout failures keep all form values.
+An uncertain result asks the reader to check their inbox before retrying; it does
+not claim that nothing was submitted. The pending panel distinguishes MailApp
+acceptance from recipient delivery. The page and email identity are NexoNest
+Newsletter; the newsletter.html URL is retained to preserve links.
 
-**Inferred rationale:** a form-compatible request avoids requiring a custom CORS
-API on a static site. The cost is lack of machine-readable result/error handling.
-Do not claim that the browser reads the backend's `{ok,status}` response.
+Decision: fail closed on unreadable responses instead of displaying success after
+an opaque fetch. Live browser acceptance against the deployed Google endpoint is
+still required: redirects/CORS depend on that deployment. Never restore no-cors
+as a success fallback. A readable response is not proof of inbox delivery.
 
 ## Newsletter backend
 
@@ -548,16 +675,51 @@ Organization | Interests | CurrentExploration | Token | ConfirmedAt | SubmittedA
 ```
 
 `doPost()` routes `service=licensing` before the existing newsletter/Game Club
-lock and dispatcher. Newsletter subscription validates consent and fields,
-upserts Users, returns already-subscribed for a subscribed row, or writes a
-pending row and sends a confirmation link. A honeypot request is ignored.
-`doGet()` consumes the seven-day confirmation token, writes subscribed/expired
-and clears the consumed token. There is no dedicated unsubscribe API in this
-source; support handles preference changes.
+lock and dispatcher. Public payloads are limited to 12,000 characters; unknown
+actions fail closed. Newsletter subscription validates consent/fields and returns
+already-subscribed without sending to an existing subscriber. Pending retries retain
+the original consent, demographics, token and seven-day expiry. Expired or cancelled
+requests renew the existing row with a new consent ID/token rather than deleting it.
+Formula-like user text is escaped before writing newsletter/user/profile cells.
 
-Game Club join/sync remains in Code.gs: verified access tokens are hashed,
-user/product records persist, and independent game scores merge monotonically.
-Do not replace the dispatcher or change score/session contracts in a license update.
+PublicEmail.gs owns public email controls in the separate PublicEmailState sheet
+(Key/JSON). Under the common script lock it reserves capacity before sending:
+three requests per mailbox/purpose per rolling day (Gmail dot/plus aliases share limits), one-minute minimum spacing,
+a shared public cap of 30 per rolling day (PUBLIC_EMAIL_DAILY_LIMIT), and a MailApp
+quota reserve of 20 (NEWSLETTER_EMAIL_RESERVE). Failed or uncertain sends consume
+an attempt; they are never automatically resent. The cap covers newsletter
+confirmation and Game Club verification, not licensing OTP or workshop mail.
+It bounds mail/storage abuse but does not replace edge rate limiting or CAPTCHA.
+PublicEmailState contains mailbox hashes, rolling counters and hashed code state;
+restrict spreadsheet access and include it in operational backups.
+
+Game Club now requires mailbox verification for every join/restore. The client
+first calls action=nexobreak_request_code with email, then nexobreak_join with
+email, displayName, consent=true and the six-digit code. Codes expire after ten
+minutes, allow five guesses, are single-use and stored only as hashes. Re-requesting
+an unused valid code sends nothing and preserves it. Verification precedes all
+user/product/score writes and token rotation. Existing bearer-token sync continues
+unchanged; the response fields and score merging remain stable. A response lost
+after consuming a code may require a fresh code. Client-controlled scores are not
+authoritative competition results.
+
+Security migration: old NexoBreak clients cannot join/restore without the code
+flow. Update that external client before rolling out this server; do not provide
+an email-only compatibility bypass. Existing sync tokens are neither invalidated
+nor considered proof that an old session was originally issued securely. Recovery
+rotates the token; compromised existing sessions require owner/user recovery.
+
+Newsletter links use a consent-ID-bound HMAC with NEWSLETTER_TOKEN_SECRET, created
+on first link issuance. Preserve/back up the secret: replacing it invalidates all
+issued unsubscribe links. Confirmation and campaign emails include links in HTML
+and plain text. GET only renders a confirmation form; POST with
+action=newsletter_unsubscribe validates the signature under the lock, clears the
+pending confirmation token, writes unsubscribed and UnsubscribedAt, and is
+idempotent. No email address is put in the URL. Changing consent IDs on a fresh
+signup invalidates older preference links. Existing confirmation links still work;
+previously delivered campaign emails cannot gain unsubscribe links retroactively.
+Campaigns only select subscribed rows, and desktop profile opt-in never overrides
+an unsubscribed record. Product sign-in and workshop mail remain independent.
 All mail uses send-only MailApp; no inbox access is needed.
 
 ### Campaign and shared quota
@@ -589,7 +751,7 @@ Sources: [Licensing.gs](integrations/google-apps-script/Licensing.gs),
 
 The product identifier is `nexosolve`; owner identity is
 `nexonest.contact@gmail.com`. This is separate from NexoRhino's public terms.
-All six service files share one bound Apps Script project and the Code.gs dispatcher. Licensing.gs owns authority/storage, LicensingProfile.gs owns name/consent, LicensingAdmin.gs owns owner-only operations, LicensingSheet.gs owns the generated AS_nexosolve view and NexoSolve Admin menu, and NewsletterDelivery.gs owns campaigns.
+Seven core service files, plus Workshop.gs for workshop registration, share one bound Apps Script project and the Code.gs dispatcher. PublicEmail.gs owns public mail limits, Game Club codes and newsletter unsubscribe. Licensing.gs owns authority/storage, LicensingProfile.gs owns name/consent, LicensingAdmin.gs owns owner-only operations, LicensingSheet.gs owns the generated AS_nexosolve view and NexoSolve Admin menu, and NewsletterDelivery.gs owns campaigns.
 
 ### Storage and request contract
 
@@ -660,7 +822,7 @@ without resetting trial history. Name edits do not change initial consent.
 The authenticated profile action records the first consent choice once. Opt-in
 uses the verified mailbox without a second email and preserves existing reader
 demographics. Retries cannot resubscribe an opted-out reader, including an
-interrupted account write. False does not remove an existing website subscription.
+interrupted account write. False does not remove an existing website subscription; an unsubscribed record is never reactivated by profile onboarding.
 The signed choice is not the current newsletter delivery status.
 
 The desktop shows signed names in its header and vouchers only after profile
@@ -687,7 +849,7 @@ study. Authenticated new profile, voucher, offline/expiry acceptance and public
 package release remain separate checks. Version 5 is the immediate rollback;
 version 4 predates licensing. Never delete tables during source rollback.
 
-Keep all six `.gs` files and runbooks synchronized with NexoSolve. Preserve
+Keep all seven core .gs files and runbooks synchronized with NexoSolve. The external test loader must also include PublicEmail.gs; this repository does not update that external checkout. Preserve
 endpoint, signing identity and original account/trial history. Setup alone sends
 no mail; exercising `send_code` does. Local checks do not prove a static website
 deployment or general product acceptance.
@@ -799,7 +961,7 @@ authorization to delete them.
 | Separate GP09 preview | Recorded response to 74 MB source | Lossy copy and regeneration work; preserve original |
 | Portfolio JPEG preview | Fact; inferred simpler fixed-document preview | Images/count/download can drift |
 | Apps Script + Sheets | Integration runbook: early-stage service | Linear scans, quota and concurrency limits; unsuitable as an unlimited scaling assumption |
-| Email confirmation | Fact; inferred proof of opt-in/email control | Delivery failure and opaque client responses need operational support |
+| Email confirmation and readable results | Fact; confirmation proves email control; unreadable browser responses fail closed | Live CORS/redirect and real delivery require separate acceptance |
 | Shared newsletter/license endpoint | Current code/runbook | Fewer deployments but coupled scripts, account quota and service reliability |
 | Signed offline license lease | Code/runbook | Offline usability trades off immediate revocation; key rotation needs client coordination |
 | Reserve campaign delivery before sending | Source comments/runbook: avoid duplicates on ambiguous sends | May skip an unsent recipient pending review; exactly-once delivery is not guaranteed |
@@ -821,9 +983,9 @@ Historical intent not supported by evidence is deliberately labelled inference.
    `escapeHtml` is not URL validation or a complete user-content sanitizer.
 5. Portfolio has overlapping navigation layers and old renderer/style residue.
    Avoid broad cleanup during a narrow feature change.
-6. Newsletter no-cors hides backend results; a displayed confirmation prompt is
-   not proof of an accepted subscription. The page promises unsubscribe, but this
-   repository has no automated unsubscribe handler; operators need a process.
+6. Newsletter requires a readable deployed endpoint response. CORS/redirect and
+   real delivery acceptance remain unverified by local mocks. Public email caps
+   contain abuse but a malicious caller can still exhaust the public allowance.
 7. Honeypots/basic email-device limits are not robust public edge protection.
    Apps Script capacity and MailApp quota belong to the executing account.
 8. Sheets writes across rows/tables are not transactions; locking reduces races
@@ -898,6 +1060,19 @@ endpoint and signing key remain compatible. Use mocks by default; deployment,
 live mail and license administration are separate explicitly authorized actions.
 
 ## Verification and release
+
+2026-10-18 public-email changes are local source changes, not a deployment claim.
+Run node scripts/test-public-email.cjs and node scripts/test-workshop.cjs for mocked
+backend regressions. Run node scripts/test-newsletter-browser.cjs with Playwright
+available in the development environment; PLAYWRIGHT_CHANNEL=msedge selects an
+installed Edge when bundled Chromium is unavailable. The browser test substitutes
+the endpoint and blocks external traffic. Neither test sends real mail.
+Deploy PublicEmail.gs together with Code.gs, LicensingProfile.gs and the existing
+core files, then publish the frontend with its updated script version. Keep the
+same deployment URL, executing owner, signing identity and tables. Coordinate the
+external NexoBreak code-entry UI first. Real email acceptance is a separate,
+explicitly authorized operation; local tests do not authorize it.
+
 
 ### Local source checks
 
@@ -977,9 +1152,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 168 application/configuration/integration/tool/asset files:
+SHA-256 of 183 application/configuration/integration/tool/asset files:
 
-`f567f40b655273df2b2a58ea9a402fba02f4fb96344faf9737d1f522cdc7dc8a`
+`51f812f3f310685bb9a80f371d4b69bc1657179c2b86a0b8eb9c330d49599e77`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -989,6 +1164,7 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 
 | Catalogue ID | Editorial ID | Page | Categories / subcategories |
 | --- | --- | --- | --- |
+| p_archicast_season_01 | Standalone podcast season | [archicast/season-01.html](archicast/season-01.html) | podcast / archicast-season-01 |
 | p_computational_thinking_workshop_1 | Standalone registration | [CTworkshop01.html](CTworkshop01.html) | events, education / workshop |
 | p_nexosolve | nexosolve | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | products / nexosolve |
 | p_nexorhino | nexorhino | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | products / design-suite |
@@ -1359,6 +1535,10 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [CNAME](CNAME) | 12 |
 | [CTworkshop01.html](CTworkshop01.html) | 21824 |
 | [README.txt](README.txt) | 29 |
+| [archicast/season-01.html](archicast/season-01.html) | 11087 |
+| [assets/audio/archicast/season-01/episode-01.mp3](assets/audio/archicast/season-01/episode-01.mp3) | 30682636 |
+| [assets/audio/archicast/season-01/episode-02.mp3](assets/audio/archicast/season-01/episode-02.mp3) | 28168060 |
+| [assets/audio/archicast/season-01/episode-03.mp3](assets/audio/archicast/season-01/episode-03.mp3) | 11255166 |
 | [assets/documents/Hossein-Nazari-CV.pdf](assets/documents/Hossein-Nazari-CV.pdf) | 319151 |
 | [assets/documents/Hossein-Nazari-Portfolio.pdf](assets/documents/Hossein-Nazari-Portfolio.pdf) | 131441 |
 | [assets/documents/bootcamp/GP01.pdf](assets/documents/bootcamp/GP01.pdf) | 2211669 |
@@ -1376,10 +1556,12 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/fonts/Vazirmatn-Bold.ttf](assets/fonts/Vazirmatn-Bold.ttf) | 123036 |
 | [assets/fonts/Vazirmatn-Regular.ttf](assets/fonts/Vazirmatn-Regular.ttf) | 122752 |
 | [assets/icons/GeoFactory.png](assets/icons/GeoFactory.png) | 129035 |
+| [assets/icons/abm-bootcamp.svg](assets/icons/abm-bootcamp.svg) | 499 |
 | [assets/icons/alignment.png](assets/icons/alignment.png) | 83483 |
-| [assets/icons/codejunkyard-session-00.svg](assets/icons/codejunkyard-session-00.svg) | 1398 |
-| [assets/icons/codejunkyard.svg](assets/icons/codejunkyard.svg) | 1057 |
-| [assets/icons/computational-thinking-workshop-1.svg](assets/icons/computational-thinking-workshop-1.svg) | 635 |
+| [assets/icons/archicast.svg](assets/icons/archicast.svg) | 330 |
+| [assets/icons/codejunkyard-session-00.svg](assets/icons/codejunkyard-session-00.svg) | 377 |
+| [assets/icons/codejunkyard.svg](assets/icons/codejunkyard.svg) | 360 |
+| [assets/icons/computational-thinking-workshop-1.svg](assets/icons/computational-thinking-workshop-1.svg) | 647 |
 | [assets/icons/curvadapt.png](assets/icons/curvadapt.png) | 125490 |
 | [assets/icons/nexobreak.svg](assets/icons/nexobreak.svg) | 902 |
 | [assets/icons/nexorhino.svg](assets/icons/nexorhino.svg) | 977 |
@@ -1387,6 +1569,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/icons/octoland.png](assets/icons/octoland.png) | 83944 |
 | [assets/icons/octomass.png](assets/icons/octomass.png) | 90370 |
 | [assets/icons/printerra.png](assets/icons/printerra.png) | 101062 |
+| [assets/icons/sustainable-design-workshop.svg](assets/icons/sustainable-design-workshop.svg) | 340 |
 | [assets/icons/tectotrack.png](assets/icons/tectotrack.png) | 53409 |
 | [assets/images/certificates/AI.jpg](assets/images/certificates/AI.jpg) | 709052 |
 | [assets/images/certificates/AdGrasshopper.jpg](assets/images/certificates/AdGrasshopper.jpg) | 700091 |
@@ -1452,14 +1635,15 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/bootcamp/GP11.mp4](assets/videos/bootcamp/GP11.mp4) | 8377993 |
 | [assets/videos/bootcamp/GP12.mp4](assets/videos/bootcamp/GP12.mp4) | 6551259 |
 | [css/base.css](css/base.css) | 650 |
-| [css/components.css](css/components.css) | 12361 |
+| [css/components.css](css/components.css) | 12235 |
 | [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 4741 |
 | [css/design-suite.css](css/design-suite.css) | 8673 |
-| [css/home.css](css/home.css) | 5342 |
+| [css/home.css](css/home.css) | 5344 |
 | [css/layout.css](css/layout.css) | 4531 |
 | [css/newsletter.css](css/newsletter.css) | 12397 |
-| [css/nexonest.css](css/nexonest.css) | 25927 |
+| [css/nexonest.css](css/nexonest.css) | 25171 |
 | [css/nexorhino.css](css/nexorhino.css) | 554 |
+| [css/podcast.css](css/podcast.css) | 5558 |
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 36315 |
 | [css/portfolio.css](css/portfolio.css) | 50287 |
 | [css/project.css](css/project.css) | 48921 |
@@ -1467,22 +1651,23 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 3923 |
-| [data/projects-brief.json](data/projects-brief.json) | 10064 |
+| [data/projects-brief.json](data/projects-brief.json) | 10542 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
 | [files/Portfolio_Academic.pdf](files/Portfolio_Academic.pdf) | 131441 |
-| [index.html](index.html) | 3058 |
-| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 19958 |
+| [index.html](index.html) | 3019 |
+| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 22195 |
 | [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 4184 |
-| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 20939 |
+| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 21193 |
 | [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 52628 |
 | [integrations/google-apps-script/LicensingAdmin.gs](integrations/google-apps-script/LicensingAdmin.gs) | 9992 |
-| [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2125 |
+| [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2174 |
 | [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9579 |
-| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 4337 |
+| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 6381 |
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
-| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 6932 |
+| [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6511 |
+| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 8976 |
 | [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 4446 |
 | [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 12935 |
 | [js/data.js](js/data.js) | 880 |
@@ -1490,18 +1675,19 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/journey.js](js/journey.js) | 30140 |
 | [js/modal.js](js/modal.js) | 5432 |
 | [js/nav.js](js/nav.js) | 4901 |
-| [js/newsletter.js](js/newsletter.js) | 5976 |
+| [js/newsletter.js](js/newsletter.js) | 7289 |
+| [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 34511 |
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 109715 |
+| [js/project-page.js](js/project-page.js) | 109823 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
-| [js/render.js](js/render.js) | 3832 |
+| [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
 | [js/ux.js](js/ux.js) | 4538 |
 | [js/workshop.js](js/workshop.js) | 5848 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 4449 |
-| [newsletter.html](newsletter.html) | 12349 |
-| [nexonest.html](nexonest.html) | 7608 |
+| [newsletter.html](newsletter.html) | 12179 |
+| [nexonest.html](nexonest.html) | 7730 |
 | [portfolio.html](portfolio.html) | 33051 |
 | [project-template.html](project-template.html) | 7509 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 2490 |
@@ -1521,9 +1707,14 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 2581 |
 | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 2560 |
 | [robots.txt](robots.txt) | 66 |
+| [scripts/test-newsletter-browser.cjs](scripts/test-newsletter-browser.cjs) | 4802 |
+| [scripts/test-podcast-browser.cjs](scripts/test-podcast-browser.cjs) | 4846 |
+| [scripts/test-popup-browser.cjs](scripts/test-popup-browser.cjs) | 2865 |
+| [scripts/test-project-grid-browser.cjs](scripts/test-project-grid-browser.cjs) | 2885 |
+| [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 10635 |
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6686 |
-| [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 7762 |
-| [sitemap.xml](sitemap.xml) | 1484 |
+| [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8000 |
+| [sitemap.xml](sitemap.xml) | 1554 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->
@@ -1557,4 +1748,5 @@ Google version 12 published at 00:26 Tehran on the existing deployment identity,
 
 
 Local Apps Script source and owner menu now support 1/3/6/12-month grants, assigned vouchers and course codes. Paid renewal accumulates the latest unrevoked paid end independently of a longer trial; access still uses the later trial/paid end. Calendar clamping, idempotent redemption, one-year menu redemption deadline and trial dates are unchanged. Local server regressions pass. No live grants/codes, service deployment, mail, app rebuild or version change. Iran list/Beta price proposals and manual course/academic rules are in the NexoSolve licensing runbook and the existing Sheet's NexoSolve_Pricing catalog; they do not configure checkout or server pricing. Live menu/service acceptance is pending. See NexoSolve ADR-049.
+
 

@@ -98,5 +98,21 @@ function renderProjects() {
         projectsGrid.appendChild(placeholder);
     });
     
+    // Sparse, stable compositions include both real projects and future slots.
+    // Extra projects continue in ordinary grid flow beyond the planned cells.
+    const compositions = [
+        ['wide', 12, [2, 5, 9, 13, 14, 17, 19, 22, 25, 28, 29, 31, 34, 36, 38, 39, 42, 44, 4, 16, 24, 33, 40, 47]],
+        ['medium', 6, [1, 4, 6, 8, 9, 12, 13, 16, 18, 20, 21, 24, 25, 28, 29, 32, 34, 36, 3, 10, 17, 23, 27, 35]],
+        ['small', 4, [1, 3, 6, 8, 9, 10, 12, 15, 17, 19, 20, 22, 24, 25, 27, 29, 30, 32, 4, 7, 14, 18, 23, 28]]
+    ];
+    [...projectsGrid.children].forEach((tile, index) => {
+        compositions.forEach(([name, columns, slots]) => {
+            const slot = slots[index];
+            if (!slot) return;
+            tile.style.setProperty(`--${name}-column`, ((slot - 1) % columns) + 1);
+            tile.style.setProperty(`--${name}-row`, Math.floor((slot - 1) / columns) + 1);
+        });
+    });
+
     filterProjects(); 
 }

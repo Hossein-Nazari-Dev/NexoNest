@@ -73,6 +73,11 @@ function generate() {
       lines.push(`| ${cell(project.id)} | Standalone registration | ${link(project.url)} | ${cell(project.categories.join(', '))} / ${cell(project.subcategories.join(', '))} |`);
       continue;
     }
+    // Podcast season pages own static, bilingual content and native audio.
+    if (project.id === 'p_archicast_season_01' && project.url === 'archicast/season-01.html') {
+      lines.push(`| ${cell(project.id)} | Standalone podcast season | ${link(project.url)} | ${cell(project.categories.join(', '))} / ${cell(project.subcategories.join(', '))} |`);
+      continue;
+    }
     const id = read(project.url).match(/data-project="([^"]+)"/)?.[1];
     if (!context.pages[id]) throw new Error(`No editorial record for ${project.url}`);
     lines.push(`| ${cell(project.id)} | ${cell(id)} | ${link(project.url)} | ${cell(project.categories.join(', '))} / ${cell(project.subcategories.join(', '))} |`);

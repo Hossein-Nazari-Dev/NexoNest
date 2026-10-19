@@ -8,17 +8,24 @@ function doPost(event) {
   if (event && event.parameter && event.parameter.service === 'workshop') return workshopPost_(event);
   if (event && event.parameter && event.parameter.service === 'licensing') return licensingPost_(event);
   const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
+  if (!lock.tryLock(10000)) return json_({ ok: false, error: 'The service is busy. Please try again shortly.' });
   try {
-    const data = JSON.parse((event && event.parameter && event.parameter.payload) || '{}');
+    const parameters = (event && event.parameter) || {};
+    if (parameters.action === 'newsletter_unsubscribe') return newsletterUnsubscribe_(parameters, true);
+    const raw = parameters.payload || '{}';
+    if (raw.length > 12000) throw new Error('Request is too large.');
+    const data = JSON.parse(raw);
+    if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid request.');
     if (data.website) return json_({ ok: true });
     const action = clean_(data.action, 40) || 'newsletter_subscribe';
     if (action === 'nexobreak_join') return joinNexoBreak_(data);
+    if (action === 'nexobreak_request_code') return requestGameClubCode_(data);
     if (action === 'nexobreak_sync') return syncNexoBreak_(data);
+    if (action !== 'newsletter_subscribe') throw new Error('Unknown action.');
     return subscribeNewsletter_(data);
   } catch (error) {
-    console.error(error);
-    return json_({ ok: false, error: error.message });
+    console.error('Public request failed.');
+    return json_({ ok: false, error: error.publicMessage || 'The request could not be completed. Please try later or contact support.' });
   } finally {
     lock.releaseLock();
   }
@@ -29,23 +36,31 @@ function subscribeNewsletter_(data) {
   const users = sheet_(USERS);
   const newsletter = sheet_(NEWSLETTER);
   const email = email_(data.email);
-  const user = upsertUser_(users, email, data.fullName);
   const consentRow = findRow_(newsletter, 3, email);
+  let existing;
   if (consentRow) {
-    const status = String(newsletter.getRange(consentRow, 6).getValue());
+    existing = newsletter.getRange(consentRow, 1, 1, 17).getValues()[0];
+    const status = String(existing[5]);
     if (status === 'subscribed') return json_({ ok: true, status: 'already-subscribed' });
-    newsletter.deleteRow(consentRow);
   }
+  reservePublicMail_('newsletter', email);
   const now = new Date();
-  const token = Utilities.getUuid() + Utilities.getUuid();
-  newsletter.appendRow([
+  // Preserve a valid pending token and its original consent/demographics on retries.
+  const pending = existing && existing[5] === 'pending' && existing[14] &&
+    Number.isFinite(new Date(existing[16]).getTime()) && now - new Date(existing[16]) <= TOKEN_VALID_DAYS * 86400000;
+  const user = pending ? null : upsertUser_(users, email, data.fullName);
+  const token = pending ? existing[14] : Utilities.getUuid() + Utilities.getUuid();
+  const record = pending ? existing : [
     'consent_' + Utilities.getUuid(), user.userId, email, 'v1', now, 'pending', '',
     clean_(data.source, 160), clean_(data.educationLevel, 80), clean_(data.fieldOfStudy, 120),
     clean_(data.occupation, 120), clean_(data.organization, 160),
     data.interests.map(function(value) { return clean_(value, 80); }).join(', '),
     clean_(data.currentExploration, 500), token, '', now
-  ]);
-  sendConfirmation_(data.fullName, email, token);
+  ];
+  const row = consentRow || newsletter.getLastRow() + 1;
+  newsletter.getRange(row, 1, 1, 17).setValues([record.map(sheetText_)]);
+  SpreadsheetApp.flush();
+  sendConfirmation_(pending ? 'there' : data.fullName, email, token, newsletterUnsubscribeUrl_(record));
   return json_({ ok: true, status: 'pending-confirmation' });
 }
 
@@ -53,6 +68,7 @@ function joinNexoBreak_(data) {
   const displayName = clean_(data.displayName, 80);
   const email = email_(data.email);
   if (!displayName || data.consent !== true) throw new Error('Display name, email, and Game Club consent are required.');
+  verifyGameClubCode_(email, data.code);
   const users = sheet_(USERS);
   const subscriptions = sheet_(PRODUCT_SUBSCRIPTIONS);
   const scores = sheet_(NEXOBREAK);
@@ -116,6 +132,7 @@ function syncNexoBreak_(data) {
 }
 
 function doGet(event) {
+  if (event && event.parameter && event.parameter.unsubscribe) return newsletterUnsubscribe_(event.parameter, false);
   const token = clean_(event && event.parameter && event.parameter.confirm, 100);
   if (!token) return page_('NexoNest data service', 'The NexoNest data service is online.', true);
   const lock = LockService.getScriptLock();
@@ -123,16 +140,16 @@ function doGet(event) {
   try {
     const newsletter = sheet_(NEWSLETTER);
     const row = findRow_(newsletter, 15, token);
-    if (!row) return page_('Link not found', 'This link may already have been used.', false);
+    if (!row || newsletter.getRange(row, 6).getValue() !== 'pending') return page_('Link not found', 'This link may already have been used.', false);
     const submittedAt = newsletter.getRange(row, 17).getValue();
-    if (Date.now() - new Date(submittedAt).getTime() > TOKEN_VALID_DAYS * 86400000) {
+    if (!Number.isFinite(new Date(submittedAt).getTime()) || Date.now() - new Date(submittedAt).getTime() > TOKEN_VALID_DAYS * 86400000) {
       newsletter.getRange(row, 6).setValue( 'expired');
       return page_('Link expired', 'Return to NexoNest and subscribe again.', false);
     }
     newsletter.getRange(row, 6).setValue('subscribed');
     newsletter.getRange(row, 15).clearContent();
     newsletter.getRange(row, 16).setValue(new Date());
-    return page_('Subscription confirmed', 'You are now part of NexoNest Field Notes.', true);
+    return page_('Subscription confirmed', 'You are now part of NexoNest Newsletter.', true);
   } finally {
     lock.releaseLock();
   }
@@ -142,13 +159,13 @@ function upsertUser_(users, email, displayName) {
   const row = findRow_(users, 3, email);
   const now = new Date();
   if (row) {
-    users.getRange(row, 4).setValue(clean_(displayName, 120));
+    users.getRange(row, 4).setValue(sheetText_(clean_(displayName, 120)));
     users.getRange(row, 6).setValue(now);
     users.getRange(row, 7).setValue('active');
     return { userId: String(users.getRange(row, 1).getValue()), row: row };
   }
   const userId = 'usr_' + Utilities.getUuid();
-  users.appendRow([userId, '', email, clean_(displayName, 120), now, now, 'active']);
+  users.appendRow([userId, '', email, clean_(displayName, 120), now, now, 'active'].map(sheetText_));
   return { userId: userId, row: users.getLastRow() };
 }
 
@@ -224,14 +241,15 @@ function hash_(value) {
   return Utilities.base64EncodeWebSafe(bytes);
 }
 
-function sendConfirmation_(name, email, token) {
+function sendConfirmation_(name, email, token, unsubscribeUrl) {
   const url = ScriptApp.getService().getUrl() + '?confirm=' + encodeURIComponent(token);
   const html = '<div style="max-width:560px;margin:auto;padding:36px;font-family:monospace;color:#222;background:#f3f7f6">' +
-    '<p style="font-size:11px;letter-spacing:.12em;color:#4b7c6e">NEXONEST / FIELD NOTES</p>' +
+    '<p style="font-size:11px;letter-spacing:.12em;color:#4b7c6e">NEXONEST / NEWSLETTER</p>' +
     '<h1>Confirm your subscription.</h1><p>Hello ' + escape_(clean_(name, 120)) + ', confirm that you would like to receive occasional NexoNest notes.</p>' +
     '<p style="margin:30px 0"><a href="' + url + '" style="padding:14px 18px;border:1px solid #4b7c6e;color:#222;text-decoration:none">Confirm subscription →</a></p>' +
-    '<p style="font-size:10px;color:#6b7280">This link expires in 7 days. Ignore this email if you did not request it.</p></div>';
-  MailApp.sendEmail({to: email, subject: 'Confirm your NexoNest Field Notes subscription', body: 'Confirm your subscription: ' + url, htmlBody: html, name: 'NexoNest'});
+    '<p style="font-size:10px;color:#6b7280">This link expires in 7 days. Ignore this email if you did not request it.</p>' +
+    '<p><a href="' + escape_(unsubscribeUrl) + '">Cancel request / unsubscribe</a></p></div>';
+  MailApp.sendEmail({to: email, subject: 'Confirm your NexoNest Newsletter subscription', body: 'Confirm your subscription: ' + url + '\nCancel request / unsubscribe: ' + unsubscribeUrl, htmlBody: html, name: 'NexoNest'});
 }
 
 function page_(title, message, success) {
@@ -240,6 +258,7 @@ function page_(title, message, success) {
 }
 
 function clean_(value, limit) { return String(value || '').trim().slice(0, limit); }
+function sheetText_(value) { return typeof value === 'string' && /^[=+@\-\t\r]/.test(value) ? "'" + value : value; }
 function escape_(value) { return String(value).replace(/[&<>"']/g, function(char) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]; }); }
 function json_(value) { return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON); }
 
@@ -259,6 +278,8 @@ function sendNexoBreakTestToOwner() {
 
 function sendNexoBreakAnnouncement() { const sent = sendNewsletterBatch_('nexobreak-1.0.0-food4rhino'); console.log('NexoBreak announcement batch sent: ' + sent); return sent; }
 function sendNexoBreakCampaignEmail_(name, email) {
+  const newsletter = sheet_(NEWSLETTER), row = findRow_(newsletter, 3, email);
+  const unsubscribeUrl = row ? newsletterUnsubscribeUrl_(newsletter.getRange(row, 1, 1, 17).getValues()[0]) : '';
   const safeName = nbEscape_(nbClean_(name, 120) || 'there');
   const safeFood4RhinoUrl = nbEscape_(NB_NEXOBREAK_URL);
   const safePageUrl = nbEscape_(NB_NEXOBREAK_PAGE_URL);
@@ -269,7 +290,7 @@ function sendNexoBreakCampaignEmail_(name, email) {
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:#e8f1f0"><tr><td align="center" style="padding:36px 18px">' +
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;border-collapse:collapse;background:#f7faf9;border:1px solid #bdd2cc">' +
     '<tr><td style="padding:34px 34px 18px;border-bottom:1px dotted #8fb1a8">' +
-    '<p style="margin:0 0 18px;font-size:11px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:#4b7c6e">NexoNest / Field Notes</p>' +
+    '<p style="margin:0 0 18px;font-size:11px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:#4b7c6e">NexoNest / Newsletter</p>' +
     '<h1 style="margin:0;max-width:500px;font-size:34px;line-height:1.05;font-weight:600;color:#1f2a27">NexoBreak 1.0.0 is here.</h1>' +
     '</td></tr>' +
     '<tr><td style="padding:30px 34px 8px">' +
@@ -289,7 +310,8 @@ function sendNexoBreakCampaignEmail_(name, email) {
     '<p style="margin:0 0 24px;font-size:14px;line-height:1.75;color:#33413d">Core task, activity, report, and model data stay on your computer. Optional Game Club features share account identity and game scores only.</p>' +
     '<p style="margin:30px 0"><a href="' + safeFood4RhinoUrl + '" style="display:inline-block;padding:15px 19px;border:1px solid #4b7c6e;color:#1f2a27;text-decoration:none;font-size:13px;font-weight:600">Download NexoBreak on food4Rhino</a> <a href="' + safePageUrl + '" style="display:inline-block;margin-left:8px;padding:15px 19px;border:1px dotted #4b7c6e;color:#1f2a27;text-decoration:none;font-size:13px;font-weight:600">View product page</a></p>' +
     '<p style="margin:0 0 24px;font-size:12px;line-height:1.7;color:#67736f">Requirements: Windows, Rhino 8.34 or later, and Rhino running .NET 8. NexoBreak is proprietary software and currently free on food4Rhino.</p>' +
-    '<p style="margin:0 0 24px;font-size:12px;line-height:1.7;color:#67736f">You are receiving this because you subscribed to NexoNest Field Notes.</p>' +
+    '<p style="margin:0 0 24px;font-size:12px;line-height:1.7;color:#67736f">You are receiving this because you subscribed to NexoNest Newsletter.</p>' +
+    (unsubscribeUrl ? '<p><a href="' + nbEscape_(unsubscribeUrl) + '">Unsubscribe</a></p>' : '') +
     '</td></tr>' +
     '<tr><td style="padding:22px 34px 32px;border-top:1px dotted #8fb1a8">' +
     '<p style="margin:0;font-size:11px;line-height:1.7;color:#67736f">NexoNest<br>Curious by design.</p>' +
@@ -300,7 +322,8 @@ function sendNexoBreakCampaignEmail_(name, email) {
     'Download NexoBreak on food4Rhino:\n' + NB_NEXOBREAK_URL + '\n\n' +
     'Product page:\n' + NB_NEXOBREAK_PAGE_URL + '\n\n' +
     'Requirements: Windows, Rhino 8.34 or later, and Rhino running .NET 8.\n\n' +
-    'You are receiving this because you subscribed to NexoNest Field Notes.\n\nNexoNest\nCurious by design.';
+    'You are receiving this because you subscribed to NexoNest Newsletter.\n' +
+    (unsubscribeUrl ? 'Unsubscribe: ' + unsubscribeUrl + '\n' : '') + '\nNexoNest\nCurious by design.';
   MailApp.sendEmail({ to: email, subject: subject, body: body, htmlBody: html, name: 'NexoNest' });
 }
 

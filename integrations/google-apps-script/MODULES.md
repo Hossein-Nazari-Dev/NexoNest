@@ -1,6 +1,6 @@
 # NexoNest license service
 
-Deploy these six files together in the existing bound **NexoNest Subscriber Backend** project:
+Deploy these seven core files together in the existing bound **NexoNest Subscriber Backend** project:
 
 | File | Responsibility |
 |---|---|
@@ -9,6 +9,7 @@ Deploy these six files together in the existing bound **NexoNest Subscriber Back
 | `LicensingProfile.gs` | Verified display-name onboarding and explicit optional newsletter consent |
 | `LicensingAdmin.gs` | Owner-only editor operations for vouchers, grants, revocation and transfer |
 | `LicensingSheet.gs` | Readable owner-only account view and spreadsheet administration menu |
+| `PublicEmail.gs` | Public mail limits, verified Game Club join/restore and signed newsletter unsubscribe |
 | `NewsletterDelivery.gs` | Quota reserve, campaign ledger and resumable delivery |
 
 There is one `doPost` and one `doGet`, both in `Code.gs`. Apps Script files share project scope; this is a responsibility split, not ES module loading. Private helpers end in `_`; administrative entry points are not API actions and check active/effective owner identity.
@@ -19,7 +20,7 @@ Add companion files before replacing `Code.gs`, then update the existing deploym
 
 Set `LICENSE_PRIVATE_KEY` from ignored `.secrets/licensing/private-property.txt` (single-line PEM with escaped newlines) using the owner's private settings. Raw multiline PEM is also accepted. Do not rotate existing keys during updates. Run `setupLicensing` to initialize separate tables/token secret without sending email. See `Documents/05 Operations/Licensing.md` and `Live Activation.md` in NexoSolve for deployment state and controlled acceptance.
 
-Run `node tests/licensing/service.test.cjs` from NexoSolve. The test loads all six files together with mocked Google services, including existing join/sync/signup and signed-profile/consent regressions; it sends no real email. Keep the NexoNest repository's deployment copies synchronized.
+Run `node tests/licensing/service.test.cjs` from NexoSolve. The external test loader must include PublicEmail.gs and exercise the new verified Game Club contract; this local change does not update that external checkout. From NexoNest run node scripts/test-public-email.cjs and node scripts/test-workshop.cjs. These use mocked services and send no real email. Keep the NexoNest repository's deployment copies synchronized.
 
 Run `setupLicenseAdminSheet` once from the bound editor, then reopen the spreadsheet. Use the **NexoSolve Admin** menu; select one account row in `AS_nexosolve`. This view is regenerated, so direct edits do not change the ledger. See the licensing runbook for recovery semantics.
 
@@ -36,3 +37,31 @@ The desktop sends a random challenge before waiting for a response and retries t
 Fresh requests require capacity and both mailbox/device rate checks before either counter advances. Unknown sends conservatively consume an attempt to avoid duplicate mail/abuse. Same-request retries bypass the send limits. No Sent-folder polling: it requires broader mailbox access and does not establish recipient delivery.
 
 Local tests use fake mail and simulate accepted/lost/ambiguous outcomes. Live rendering, real inbox delivery and a user-observed slow-response retry remain acceptance tasks.
+
+## Public email security update (2026-10-18, local source only)
+
+PublicEmail.gs must be added before deploying Code.gs. Workshop.gs remains an
+additional companion for the workshop route. Preserve the existing URL/owner and
+all tables. PublicEmailState is created lazily; it stores hashed mailbox counters
+and hashed Game Club codes. Defaults: three mail requests per mailbox/purpose per
+rolling day, at least 60 seconds apart, 30 total public sends per rolling day via
+PUBLIC_EMAIL_DAILY_LIMIT, and NEWSLETTER_EMAIL_RESERVE=20. These limits do not
+replace edge protection. Unknown sends consume an attempt. No auto resend.
+
+NexoBreak clients must implement nexobreak_request_code (email), then
+nexobreak_join (email, displayName, consent=true, code). Codes last ten minutes,
+allow five guesses and are single-use. Existing sync tokens/score fields remain
+compatible. Old join/restore fails closed; coordinate the external client before
+server rollout. Lost join responses may require a new code.
+
+NexoNest Newsletter keeps newsletter.html. Pending retries preserve the original
+confirmation link; expired requests renew in place. The frontend requires readable
+JSON success and retains inputs on rejection/uncertainty. Verify deployed CORS and
+redirect behavior separately; never interpret an opaque response as success.
+
+Future confirmation/campaign emails include signed unsubscribe links. GET shows
+a confirmation form; POST cancels pending/subscribed records and clears the
+confirmation token. Preserve/back up NEWSLETTER_TOKEN_SECRET (created lazily).
+Never rotate it casually. Campaign filtering and desktop consent respect opt-out.
+Previously sent mail cannot be amended. Product/registration emails are separate.
+No deployment, real email or live acceptance is claimed by this update.

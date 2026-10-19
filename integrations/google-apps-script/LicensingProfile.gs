@@ -4,7 +4,7 @@ function licenseSaveProfile_(request, account, now) {
   if (name.length < 2 || name.length > 80 || /[\x00-\x1f\x7f<>]/.test(name))
     licenseFail_('invalid_name', 'Enter a display name with 2 to 80 characters.');
   if (typeof request.newsletterOptIn !== 'boolean')
-    licenseFail_('invalid_consent', 'Choose whether to receive NexoNest Field Notes.');
+    licenseFail_('invalid_consent', 'Choose whether to receive NexoNest Newsletter.');
   // The first explicit choice is recorded once. Retrying a lost response cannot resubscribe someone.
   if (!account.profileCompletedAt && request.newsletterOptIn)
     licenseNewsletterConsent_(account.email, name, now);
@@ -27,11 +27,11 @@ function licenseNewsletterConsent_(email, name, now) {
   if (row) {
     const previous = newsletter.getRange(row, 1, 1, consent.length).getValues()[0];
     // A prior profile consent can outlive an interrupted account write or a later opt-out.
-    if (previous[3] === 'nexosolve-profile-v1') return;
+    if (previous[3] === 'nexosolve-profile-v1' || previous[5] === 'unsubscribed') return;
     // Preserve the reader's existing education, occupation and interests.
     for (let column = 8; column <= 13; column++) consent[column] = previous[column];
     consent[16] = previous[16] || time;
   }
   // Email was just verified by the account flow; no second confirmation email is required.
-  newsletter.getRange(row || newsletter.getLastRow() + 1, 1, 1, consent.length).setValues([consent]);
+  newsletter.getRange(row || newsletter.getLastRow() + 1, 1, 1, consent.length).setValues([consent.map(sheetText_)]);
 }

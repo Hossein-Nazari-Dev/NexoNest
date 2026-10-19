@@ -437,7 +437,7 @@ const PROJECT_PAGE_DATA = {
     tags: ["Rhino 8", "Focus tracking", "Guided breaks", "Versioned backups"],
     links: [
       ["Download on food4Rhino", "https://www.food4rhino.com/en/browse?searchText=nexobreak&form_build_count=1&sort_by=fs_field_rating"],
-      ["NexoNest Field Notes", "../newsletter.html"]
+      ["NexoNest Newsletter", "../newsletter.html"]
     ],
     question: "How can long Rhino sessions stay focused without separating planning, breaks, reports, and project safety from the modeling environment?",
     response: "NexoBreak keeps the work loop inside Rhino: choose a small daily plan, track time against the selected task, pause for a short activity, and return with your focus state still clear.",
@@ -1201,6 +1201,7 @@ const PROJECT_PAGE_DATA = {
     shortTitle: "ABM Bootcamp",
     subtitle: "Teaching behaviour<br>through simulation",
     iconText: "AB",
+    icon: "../assets/icons/abm-bootcamp.svg",
     eyebrow: "Education / Intensive programme",
     lead: "A hands-on programme that asked architecture and urban-design participants to turn human-space questions into working agent-based models.",
     role: "Lead planner, instructor & mentor",
@@ -1332,6 +1333,7 @@ const PROJECT_PAGE_DATA = {
     shortTitle: "Sustainable Design",
     subtitle: "A wider view<br>of performance",
     iconText: "SD",
+    icon: "../assets/icons/sustainable-design-workshop.svg",
     eyebrow: "Education / Online workshop",
     lead: "A teaching programme that moves sustainability beyond a checklist and back into the earliest design decisions.",
     role: "Programme development & instruction",

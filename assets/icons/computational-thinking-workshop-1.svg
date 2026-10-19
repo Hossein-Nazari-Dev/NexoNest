@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none"><title>Computational Thinking Workshop 1</title><g stroke="#171717" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 48H35M48 22V35M48 61V74M61 48H80"/><rect x="35" y="35" width="26" height="26" rx="5"/><rect x="5" y="37" width="18" height="22" rx="4"/><rect x="37" y="5" width="22" height="18" rx="4"/><rect x="37" y="73" width="22" height="18" rx="4"/></g><rect x="73" y="35" width="18" height="26" rx="4" fill="#F4511E"/><path d="M80 43L83 40V55" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <title>Computational Thinking Workshop 1</title>
+  <g stroke="#000000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M35 34h33M24 45v38M35 94h33"/>
+    <rect x="13" y="23" width="22" height="22" rx="4"/>
+    <rect x="13" y="83" width="22" height="22" rx="4"/>
+    <path d="m81 14 32 20-32 20-13-20Z" fill="#7fb7a8"/>
+    <rect x="68" y="72" width="45" height="41" rx="7" fill="#7fb7a8"/>
+    <path d="M91 54v18"/>
+  </g>
+  <path d="m85 88 7-5v19" stroke="#000000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
