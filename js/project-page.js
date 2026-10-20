@@ -1,6 +1,7 @@
 const PROJECT_PAGE_ORDER = [
   "tectotrack",
   "curvadapt",
+  "reframing-genericity",
   "building-alignment",
   "design-suite",
   "nexobreak",
@@ -18,6 +19,99 @@ const PROJECT_PAGE_ORDER = [
 ];
 
 const PROJECT_PAGE_DATA = {
+  "reframing-genericity": {
+  "page": "17",
+  "title": "Reframing Genericity in Design",
+  "shortTitle": "Genericity",
+  "subtitle": "Context, identity<br>and procedural universality",
+  "icon": "../assets/icons/reframing-genericity.svg",
+  "iconAlt": "A shared decision structure branching into different forms",
+  "eyebrow": "Research / Architectural theory",
+  "lead": "A shared way of making design decisions can produce different forms in different contexts.",
+  "role": "Author / Hossein Nazari",
+  "period": "Ongoing research",
+  "status": "Manuscript under review",
+  "stack": "Design theory / Computational reasoning",
+  "tags": [
+    "Context",
+    "Design agency",
+    "Procedural universality"
+  ],
+  "question": "What should transfer from one design project to another?",
+  "response": "The manuscript argues for transferring a structure of reasoning: how conditions are represented, priorities are stated and alternatives are compared. Each project supplies its own context and priorities, so a shared procedure can lead to distinct spatial outcomes.",
+  "proof": [
+    [
+      "Shared",
+      "decision structure"
+    ],
+    [
+      "Specific",
+      "context and priorities"
+    ],
+    [
+      "Different",
+      "spatial outcomes"
+    ],
+    [
+      "Under review",
+      "conceptual research"
+    ]
+  ],
+  "sections": [
+    {
+      "title": "The argument at a glance",
+      "kind": "figure",
+      "image": "../assets/images/projects/reframing-genericity/decision-structure.svg",
+      "alt": "Context and designer judgement feed a transferable decision structure. It produces a context-specific response. Evaluation feeds back into priorities and the procedure.",
+      "caption": "A conceptual reading of the argument: context and judgement shape the use of a shared procedure, while evaluation enables revision. This overview diagram is not a figure from the manuscript."
+    },
+    {
+      "title": "What transfers, and what changes?",
+      "kind": "table",
+      "headers": [
+        "Layer",
+        "Across projects"
+      ],
+      "rows": [
+        [
+          "Decision structure",
+          "Transfer how relationships are defined, alternatives are generated and consequences are compared."
+        ],
+        [
+          "Context",
+          "Reconsider spatial, environmental and social conditions for each project."
+        ],
+        [
+          "Design judgement",
+          "Set and revise goals, priorities and criteria for a sufficient result."
+        ],
+        [
+          "Spatial outcome",
+          "Allow form and organisation to emerge from those choices."
+        ]
+      ],
+      "note": "Context is an input to reasoning, not simply an appearance to reproduce. Making priorities explicit does not make them neutral."
+    },
+    {
+      "title": "Why this matters to my practice",
+      "kind": "split",
+      "text": [
+        "This perspective connects my work in geometry, environmental simulation and agent-based modelling: a computational workflow should make its assumptions, choices and consequences easier to examine.",
+        "The manuscript considers digital twins as possible infrastructure for comparing scenarios and revisiting decisions. Their role here is to support judgement through relationships and feedback."
+      ],
+      "aside": {
+        "label": "From idea to usable tool",
+        "text": "Turning an idea into a usable tool requires explicit inputs, dependable interfaces and workflows that can be tested and revised. That implementation experience informs the questions I bring to research."
+      }
+    },
+    {
+      "title": "About the manuscript",
+      "kind": "honesty",
+      "label": "Conceptual research · Under review",
+      "text": "Reframing Genericity in Design: Context, Identity, and Procedural Universality — Hossein Nazari. This short overview presents the research position; the full manuscript is not shared here. The work is conceptual and remains subject to peer review and revision."
+    }
+  ]
+},
   nexosolve: {
   "page": "16",
   "title": "NexoSolve",
@@ -708,7 +802,7 @@ const PROJECT_PAGE_DATA = {
     lead: "A reliability-first workflow for translating curved design geometry into simulation-ready polylines.",
     role: "Concept, algorithms, analysis & development",
     period: "2024 — present",
-    status: "Paper in major revision / plugin in development",
+    status: "Manuscript under review / plugin in development",
     stack: "RhinoCommon / C# / BPS",
     tags: ["Curve segmentation", "MCE / rMCE", "Verification", "Radiation proxy"],
     question: "When a smooth curve becomes a polyline, how much geometric error is still safe for building-performance simulation?",
@@ -1921,7 +2015,7 @@ function renderProjectPage(projectId) {
     "@type": "CreativeWork",
     "name": project.title,
     "description": description,
-    "url": `https://nexonest.com/projects-pages/${({"building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", nexosolve:"nexoSolve.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
+    "url": `https://nexonest.com/projects-pages/${({"reframing-genericity":"reframingGenericity.html", "building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", nexosolve:"nexoSolve.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
     "author": {"@type":"Person", "name":"Hossein Nazari" },
     "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
   };
@@ -2026,6 +2120,7 @@ function renderProjectPage(projectId) {
   const pageFor = id => ({
     tectotrack: "techtoTrack.html",
     curvadapt: "curvAdapt.html",
+    "reframing-genericity": "reframingGenericity.html",
     "building-alignment": "buildingAlignment.html",
     "design-suite": "nexonestDesignSuite.html",
     nexobreak: "nexoBreak.html",

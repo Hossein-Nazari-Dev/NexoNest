@@ -9,11 +9,21 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-19
+reviewed: 2026-10-20
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## Local research overview — 2026-10-20
+
+Revision for local review: the overview now leads with one central claim, followed by an original SVG decision-flow diagram, a comparison table, a practical connection and a short under-review note. The diagram is an explanatory website asset, not a manuscript figure. A dedicated black/green line icon replaces the NexoNest mark in the editorial page and catalogue. Existing figure/table renderer contracts are reused; no new renderer or dependency. No publication authorized.
+
+Added the `reframing-genericity` editorial entry and `projects-pages/reframingGenericity.html` using the existing renderer and catalogue. It is a short paraphrased conceptual overview, labelled **Manuscript under review**, with no full manuscript, manuscript figures, reviewer correspondence or publication/acceptance claim. The catalogue and portfolio link to the overview; renderer navigation and structured-data routes include it. The user requested local review only: these source changes are not published. Journal-specific sharing/anonymity conditions remain to check before deployment.
+
+CurvAdapt's portfolio summary no longer implies publication; its editorial status also says the manuscript is under review and the plugin is in development. No product/research implementation or manuscript file changed.
+
+Local verification passed: SEO and guide consistency checks, whitespace checks, desktop/mobile browser checks at 1440/390/320px, no horizontal overflow, static/no-JavaScript content, catalogue popup navigation, portfolio link and CurvAdapt sequential navigation. Existing portfolio loadProjectsData error remains outside this content change. Full-page review screenshots include offscreen content by overriding content-visibility during capture only.
 
 ## Owner management console - 2026-10-19 (deployed version 17)
 
@@ -1306,9 +1316,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 192 application/configuration/integration/tool/asset files:
+SHA-256 of 195 application/configuration/integration/tool/asset files:
 
-`266da09ae7a5b8fba050dab2bd65c6fde089df9e8f45f7b6be451517d031f9cf`
+`8972a467c1f1ba5e02db8be64d848f6b4c594926aa0cf16a726fdf82e1446b5e`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1328,6 +1338,7 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 | p_octoland | octoland | [projects-pages/octoLand.html](projects-pages/octoLand.html) | products / grasshopper-plugins, data-analytics |
 | p_octocity | octocity | [projects-pages/octoCity.html](projects-pages/octoCity.html) | products / grasshopper-plugins, data-analytics |
 | p_curvadapt | curvadapt | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | products, publications / rhino-plugins |
+| p_reframing_genericity | reframing-genericity | [projects-pages/reframingGenericity.html](projects-pages/reframingGenericity.html) | publications /  |
 | p_geofactory | geofactory | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | products /  |
 | p_printerra | printerra | [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | projects / robot-io |
 | p_alignment | building-alignment | [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | publications, projects / sim-analysis |
@@ -1337,11 +1348,30 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 | p_code_junkyard | code-junkyard | [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | education / code-junkyard, programming, comp-geo |
 | p_code_junkyard_session_00 | code-junkyard-session-00 | [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | education / code-junkyard, programming, comp-geo |
 
-Editorial navigation order: `tectotrack` → `curvadapt` → `building-alignment` → `design-suite` → `nexobreak` → `nexosolve` → `octomass` → `octoland` → `octocity` → `geofactory` → `printerra` → `abm-bootcamp` → `sustainable-design` → `code-junkyard` → `code-junkyard-session-00` → `nexorhino`.
+Editorial navigation order: `tectotrack` → `curvadapt` → `reframing-genericity` → `building-alignment` → `design-suite` → `nexobreak` → `nexosolve` → `octomass` → `octoland` → `octocity` → `geofactory` → `printerra` → `abm-bootcamp` → `sustainable-design` → `code-junkyard` → `code-junkyard-session-00` → `nexorhino`.
 
 ### Every editorial project and section
 
 Statuses below quote the current website content; they are not independent product release checks.
+
+#### Reframing Genericity in Design
+
+Source key: `reframing-genericity`; shell: [projects-pages/reframingGenericity.html](projects-pages/reframingGenericity.html); printed page label: `17`.
+
+**Published content status:** Manuscript under review.
+
+**Purpose:** Context, identity<br>and procedural universality
+
+**Role / period:** Author / Hossein Nazari / Ongoing research.
+
+**Stack:** Design theory / Computational reasoning.
+
+| Section | Renderer kind |
+| --- | --- |
+| The argument at a glance | `figure` |
+| What transfers, and what changes? | `table` |
+| Why this matters to my practice | `split` |
+| About the manuscript | `honesty` |
 
 #### NexoSolve
 
@@ -1449,7 +1479,7 @@ Source key: `tectotrack`; shell: [projects-pages/techtoTrack.html](projects-page
 
 Source key: `curvadapt`; shell: [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html); printed page label: `02`.
 
-**Published content status:** Paper in major revision / plugin in development.
+**Published content status:** Manuscript under review / plugin in development.
 
 **Purpose:** Reliable geometry<br>for simulation
 
@@ -1725,6 +1755,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/icons/octoland.png](assets/icons/octoland.png) | 83944 |
 | [assets/icons/octomass.png](assets/icons/octomass.png) | 90370 |
 | [assets/icons/printerra.png](assets/icons/printerra.png) | 101062 |
+| [assets/icons/reframing-genericity.svg](assets/icons/reframing-genericity.svg) | 449 |
 | [assets/icons/sustainable-design-workshop.svg](assets/icons/sustainable-design-workshop.svg) | 340 |
 | [assets/icons/tectotrack.png](assets/icons/tectotrack.png) | 53409 |
 | [assets/images/certificates/AI.jpg](assets/images/certificates/AI.jpg) | 709052 |
@@ -1765,6 +1796,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/nexosolve/study-resume-light.png](assets/images/projects/nexosolve/study-resume-light.png) | 65541 |
 | [assets/images/projects/nexosolve/study-review-light.png](assets/images/projects/nexosolve/study-review-light.png) | 65021 |
 | [assets/images/projects/nexosolve/study-running-dark.png](assets/images/projects/nexosolve/study-running-dark.png) | 66782 |
+| [assets/images/projects/reframing-genericity/decision-structure.svg](assets/images/projects/reframing-genericity/decision-structure.svg) | 2268 |
 | [assets/images/projects/tectotracks/card.png](assets/images/projects/tectotracks/card.png) | 26060 |
 | [assets/images/team/abbastarkashvand.jpg](assets/images/team/abbastarkashvand.jpg) | 4116 |
 | [assets/images/team/hossein.jpg](assets/images/team/hossein.jpg) | 148688 |
@@ -1803,12 +1835,12 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/podcast.css](css/podcast.css) | 5558 |
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 36315 |
 | [css/portfolio.css](css/portfolio.css) | 50287 |
-| [css/project.css](css/project.css) | 49132 |
+| [css/project.css](css/project.css) | 49836 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 4706 |
-| [data/projects-brief.json](data/projects-brief.json) | 10684 |
+| [data/projects-brief.json](data/projects-brief.json) | 11215 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
@@ -1842,7 +1874,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 34511 |
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 113525 |
+| [js/project-page.js](js/project-page.js) | 118040 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -1850,8 +1882,8 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/workshop.js](js/workshop.js) | 5848 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 12970 |
-| [nexonest.html](nexonest.html) | 8508 |
-| [portfolio.html](portfolio.html) | 33753 |
+| [nexonest.html](nexonest.html) | 8626 |
+| [portfolio.html](portfolio.html) | 34210 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
 | [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 11950 |
@@ -1867,6 +1899,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9348 |
 | [projects-pages/octoMass.html](projects-pages/octoMass.html) | 13995 |
 | [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | 10646 |
+| [projects-pages/reframingGenericity.html](projects-pages/reframingGenericity.html) | 10235 |
 | [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 9967 |
 | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 12258 |
 | [robots.txt](robots.txt) | 66 |
@@ -1879,7 +1912,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6761 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8000 |
 | [scripts/update-seo.cjs](scripts/update-seo.cjs) | 7324 |
-| [sitemap.xml](sitemap.xml) | 1788 |
+| [sitemap.xml](sitemap.xml) | 1873 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

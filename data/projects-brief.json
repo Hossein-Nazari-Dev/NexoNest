@@ -138,6 +138,18 @@
         "image": "assets/images/projects/curvadapt/card.png"
       },
       {
+        "id": "p_reframing_genericity",
+        "title": "Reframing Genericity in Design",
+        "excerpt": "A conceptual manuscript under review, exploring context, identity and transferable decision procedures in computational design.",
+        "url": "projects-pages/reframingGenericity.html",
+        "icon": "assets/icons/reframing-genericity.svg",
+        "categories": [
+          "publications"
+        ],
+        "subcategories": [],
+        "image": "assets/icons/reframing-genericity.svg"
+      },
+      {
         "id": "p_geofactory",
         "title": "GeoFactory",
         "excerpt": "An archived concept for tolerance-led geometry preparation between complex design models and digital fabrication.",

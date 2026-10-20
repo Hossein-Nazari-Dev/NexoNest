@@ -1728,3 +1728,14 @@ body.project-theme {
   max-height: none;
   margin-inline: auto;
 }
+
+/* The research overview uses a prose comparison rather than a wide data table. */
+body[data-project="reframing-genericity"] .project-table { min-width: 0; table-layout: fixed; }
+body[data-project="reframing-genericity"] .project-table th:first-child,
+body[data-project="reframing-genericity"] .project-table td:first-child { width: 28%; }
+body[data-project="reframing-genericity"] .project-table td { overflow-wrap: anywhere; }
+body[data-project="reframing-genericity"] .project-table td:nth-child(2) { font-weight: 400; }
+@media (max-width: 600px) {
+  body[data-project="reframing-genericity"] .project-table th,
+  body[data-project="reframing-genericity"] .project-table td { padding: 12px 8px; }
+}
