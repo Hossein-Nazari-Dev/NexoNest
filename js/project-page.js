@@ -133,11 +133,6 @@ const PROJECT_PAGE_DATA = {
   ],
   "links": [
     [
-      "Download NexoSolve for Windows",
-      "https://raw.githubusercontent.com/Hossein-Nazari-Dev/NexoNest---Products/main/nexosolve/NexoSolve-Windows-x64.zip",
-      "NexoSolve-Windows-x64.zip"
-    ],
-    [
       "Get NexoSolve on food4Rhino",
       "https://www.food4rhino.com/en/app/nexosolve"
     ]
@@ -417,18 +412,18 @@ const PROJECT_PAGE_DATA = {
         ],
         [
           "02",
-          "Download the Windows app",
-          "Use Download NexoSolve for Windows on this page to download the app ZIP directly. Or add NexoSolve > Help > NexoSolve Club and click Download / Update NexoSolve for a verified app installation."
+          "Add NexoSolve Club",
+          "In Grasshopper, open NexoSolve > Help and place the NexoSolve Club component on the canvas. Use this component to install the separate Windows app; installing the Grasshopper plugin alone does not complete the setup."
         ],
         [
           "03",
-          "Keep the installation together",
-          "For manual setup, extract the app ZIP into %APPDATA%/Grasshopper/Libraries/NexoSolve-Portable-Windows-x64 alongside NexoSolve.gha. Keep the EXE and official Samples together. Close NexoSolve before replacing app files."
+          "Install the Windows app from Club",
+          "In NexoSolve Club, click Download / Update NexoSolve and wait for installation to finish. An internet connection is needed for the download. If installation fails, record the message shown in Club before retrying. Use the same action for future app updates; close the Windows app before updating it."
         ],
         [
           "04",
           "Connect and work in NexoSolve",
-          "Keep Rhino and your Grasshopper definition open. On Nexo Connector, click Open NexoSolve. The Windows app is a separate workspace; the connector transfers case inputs and calculated results. If needed, set App Path to the extracted executable."
+          "Keep Rhino and your Grasshopper definition open. On Nexo Connector, click Open NexoSolve to launch the installed Windows app. Configure and run your study there while Grasshopper calculates the results. Start with a small study to check the connection and outputs."
         ]
       ]
     },
@@ -449,6 +444,10 @@ const PROJECT_PAGE_DATA = {
           "Your Grasshopper definition owns the analysis. Register its inputs and numeric outputs, then validate the study on your own definition."
         ],
         [
+          "I installed the plugin. Where is the Windows app?",
+          "The Grasshopper plugin and Windows app are separate parts. Add NexoSolve > Help > NexoSolve Club to the Grasshopper canvas, then click Download / Update NexoSolve. After installation, launch the app with Open NexoSolve on Nexo Connector."
+        ],
+        [
           "Does it update automatically?",
           "App updates are user-started: use Download / Update NexoSolve in NexoSolve Club. Grasshopper plugin installation and updates are managed separately through Rhino Package Manager."
         ],
@@ -467,13 +466,8 @@ const PROJECT_PAGE_DATA = {
     {
       "title": "Get NexoSolve",
       "kind": "credits",
-      "text": "Download the standalone Windows app directly below. Install the Grasshopper connector through food4Rhino or Rhino Package Manager, then work in NexoSolve while your definition calculates in Grasshopper. You can also install or update the Windows app from NexoSolve Club. For a voucher, email nexonest.contact@gmail.com; issuance is manual after payment confirmation.",
+      "text": "Get the Grasshopper plugin through food4Rhino or Rhino Package Manager. Then add NexoSolve > Help > NexoSolve Club in Grasshopper and click Download / Update NexoSolve to install the Windows app. NexoSolve Club is the installation and update route for the Windows app. For a voucher, email nexonest.contact@gmail.com; issuance is manual after payment confirmation.",
       "links": [
-        [
-          "Download NexoSolve for Windows",
-          "https://raw.githubusercontent.com/Hossein-Nazari-Dev/NexoNest---Products/main/nexosolve/NexoSolve-Windows-x64.zip",
-          "NexoSolve-Windows-x64.zip"
-        ],
         [
           "Get NexoSolve on food4Rhino",
           "https://www.food4rhino.com/en/app/nexosolve"

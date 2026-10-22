@@ -9,11 +9,16 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-20
+reviewed: 2026-10-22
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## NexoSolve Club installation route 2026-10-22
+
+The NexoSolve product page now directs users to install the Grasshopper plugin through food4Rhino or Rhino Package Manager, place NexoSolve > Help > NexoSolve Club on the canvas, and click Download / Update NexoSolve to install the Windows app. The hero and closing links no longer expose the app ZIP, and the setup steps no longer describe manual extraction or an extracted App Path. The FAQ explains that installing the Grasshopper plugin alone does not install the Windows workspace. This supersedes earlier website guidance offering a direct ZIP download; the underlying distribution payload is unchanged. The owner requested Club as the sole user-facing Windows app installation route. Source authority remains js/project-page.js; generated HTML must stay synchronized. No product binary, server, pricing, license contract or route URL changes. This is a local content change, not a deployment or live Rhino installation check. A screenshot tutorial is not included in this change.
+
 
 ## Local research overview — 2026-10-20
 
@@ -1318,7 +1323,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 195 application/configuration/integration/tool/asset files:
 
-`8972a467c1f1ba5e02db8be64d848f6b4c594926aa0cf16a726fdf82e1446b5e`
+`11d83befea645808701edc28b0acc114119e3d976a986f9072e9e5ec2af7ba1a`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1874,7 +1879,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 34511 |
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 118040 |
+| [js/project-page.js](js/project-page.js) | 118141 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -1893,7 +1898,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 13908 |
-| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26357 |
+| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26431 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
 | [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9348 |
