@@ -9,11 +9,48 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-22
+reviewed: 2026-10-24
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## prinTerra archive - 2026-10-24
+
+Reviewed the prinTerra content and shared ABM media renderer. The owner confirmed
+his contribution as sustainability simulations and nozzle control, and confirmed
+a physical laboratory prototype followed by a financial halt. Prototype scope is
+unspecified; do not infer a complete machine, successful print test or built camp.
+The editorial page now distinguishes personal work, team outputs, simulations,
+proposed capabilities and unverified historical estimates. The catalogue excerpt
+follows this scope. Source authority remains `js/project-page.js`.
+
+The supplied numbered PNGs 01-34 are packaged into
+`assets/documents/printerra/printerra-project-book.pdf`: the cover stays single;
+each subsequent spread is split left/right, preserving 67 original pages in order.
+PNG 35 is blank and excluded. The image-based PDF preserves original text and
+figures, including historical claims; it is not a revised technical report or a
+searchable transcript. Two original MP4s are copied unchanged into
+`assets/videos/printerra/`. Source masters stay outside this repository.
+
+The prinTerra PDF preview is capped at 880px and uses a fixed 2:1 spread stage.
+The square cover fits centrally within half the stage width, so turning from
+the cover to a spread does not change frame height. Clicking any rendered page
+retains the shared enlarged-page viewer. These CSS rules are scoped to prinTerra.
+
+The existing ABM `projects` section provides lazy PDF loading, previous/next
+spreads, enlarged pages, retry on failure and native local video controls. Its
+optional `label` names the archive navigation; existing ABM defaults remain.
+Direct PDF/video links in credits remain available without JavaScript and when
+preview loading fails. No new dependency or route/ID migration. Rationale: reuse
+the established document viewer instead of introducing a second slideshow system.
+This is a local website update; no deployment or physical testing is implied.
+
+Local verification: SEO and guide checks and JavaScript syntax passed. Headless
+Edge verified PDF loading (67 pages), page turning, enlarged-page opening, both
+MP4 metadata decodes, static archive links and no horizontal overflow at
+1440/390/320px, with no page runtime errors. The rendered PDF spread was visually
+inspected. Video metadata decoding does not prove uninterrupted full playback.
 
 ## NexoSolve Club installation route 2026-10-22
 
@@ -656,22 +693,101 @@ Sources: [portfolio page](portfolio.html), [application](js/portfolio.js),
 [journey](js/journey.js), [portfolio styles](css/portfolio.css),
 [style overrides](css/portfolio-v2.css).
 
-Sections: `profile`, `myjourney`, `education`, `experience`, `skills`, `projects`,
-`publications`, `portfolio-pdf` (labelled Archive). Personal copy is mostly in the
-HTML; role/project detail content also lives in `PortfolioApp` methods. It is
+Sections in navigation and document order: `profile`, `projects`, `publications`,
+`experience`, `education`, `skills`, `myjourney`, `portfolio-pdf`. The last section
+is labelled **Portfolio & CV**; `publications` is labelled **Research & Writing**.
+All existing section IDs and project destinations are preserved. Personal copy is mostly in the
+HTML; legacy project detail content also lives in `PortfolioApp` methods. It is
 independent of the index catalogue and editorial project descriptions.
 
-`PortfolioApp` initializes navigation, selection details, PDF-image preview,
+`PortfolioApp` initializes navigation, legacy project selection details, experience
+role selection, PDF-image preview,
 scroll indicator, smooth scrolling and tooltips. A second
 hash-aware navigation IIFE controls active sections and emits
 `portfolio:sectionchange`. Preserve this event when changing section navigation.
 These two navigation layers overlap; consolidation would need regression checks.
 
+### Local portfolio review — 2026-10-22
+
+The portfolio tab favicon now uses `assets/portfolio-favicon.svg`, a dark H on
+the existing pale background, instead of the profile photograph. This is scoped
+to the portfolio tab; the profile portrait and social preview images are retained.
+
+
+Reviewed the affected portfolio source and style sections on 2026-10-22. This is a
+local review change; publication is not authorized. The owner requested the same
+overall visual identity, no new factual content or claims, and links to existing
+project pages instead of project thumbnails. The existing colors, monospace
+family, sidebar, editorial rules and image-based document viewer are retained.
+
+After owner review, Profile retains its original two-column Coordinates / Working
+Thesis layout, followed by the visible interests and contact links. Selected-work
+and CV-download shortcuts sit at the bottom, after those original blocks. The
+profile paragraph size is restored; no disclosure elements hide its content. Projects and research
+precede the longer background sections. Project headings and named action links
+go directly to existing editorial pages; no new project images, metadata,
+performance figures, authorship claims or publication claims are added. Research
+status remains in the existing descriptions; missing metadata is not inferred.
+Skill self-rating bars are removed and replaced with links to existing related
+work. Body copy and project actions are modestly enlarged within the same theme.
+
+The profile work shortcut uses the existing section-navigation event and hash
+contract. `js/nav.js` is no longer loaded by the portfolio: its catalogue-data
+initialization is unrelated to this standalone page and caused the missing
+`loadProjectsData` runtime error. Native editorial, download, email and Overview
+links need no catalogue initialization. Other pages still load their own shared
+navigation as before. Existing document/image links retain their normal failure
+behavior; this change does not add a new fetching or fallback layer.
+
+Current local verification: desktop in-app browser screenshots of Profile, Projects
+and Methods were inspected. The selected-work shortcut updates the active section
+and hash; the TectoTrack action reaches the existing editorial page. Direct
+`#skills` navigation worked in that check. Personal-details disclosure testing
+was superseded when the original visible Profile structure was restored. The document viewer
+initializes on selection. No browser errors were recorded in these checks. HTML
+nesting, unique IDs, local link destinations, section anchors, JavaScript syntax,
+whitespace and generated-guide consistency passed. Mobile viewport and full
+accessibility acceptance were not performed in this change.
+
+### Experience copy and layout — 2026-10-22
+
+Reviewed the affected portfolio experience sources on 2026-10-22. Six existing
+roles, organisations and date ranges are retained. Each role now has three
+concise responsibility statements, paraphrased from the previous `getRoleData`
+copy. General impact, publication and leadership claims are omitted rather than
+expanded or inferred. The short section introduction summarises the same existing
+areas of work. Links point to the existing NexoNest catalogue, TectoTrack,
+prinTerra and bootcamp pages; no new project route or claim is introduced.
+
+After owner review, Experience again uses the original two-panel interaction:
+a role list on the left and a detail panel on the right at desktop widths. The
+first role is selected immediately, with no empty placeholder. The panel includes
+its existing date, role, organisation, three rewritten responsibilities and any
+existing related-work link. Selected state persists across section switches.
+Narrow layouts stack the selector above the panel. Native buttons support Enter
+and Space; Up/Down, Home and End also select and focus a role.
+
+Descriptions remain in `portfolio.html`, with no duplicated JavaScript role-data
+map. The static page contains six readable articles and a hidden selector;
+`setupExperienceSelection` progressively reveals the selector and hides inactive
+articles. Without JavaScript, all descriptions remain readable. `aria-controls`
+and `aria-pressed` expose the panel association and selected state. A selection
+refreshes the existing scroll indicator. This supersedes the native-disclosure
+layout reviewed earlier on the same day. Profile and other sections retain their
+previously reviewed layouts. No publication is authorized.
+
+Verification for this revision: JavaScript syntax, HTML nesting, unique IDs,
+matching selector/panel associations, local links and guide consistency are
+checked locally. Browser checks cover initial selection, switching roles,
+keyboard selection and retained selection across section switches. Viewport
+coverage is limited to the in-app browser's current size; full accessibility
+acceptance is not claimed.
+
 ### Archive viewer is not the Bootcamp viewer
 
 The portfolio uses **16 pre-rendered JPEGs**, not PDF.js. Its page path is
-`assets/images/portfolio-preview/page-NN.jpg`. It initializes when Archive is
-selected and can preload during idle time from Publications. It has cover/spread
+`assets/images/portfolio-preview/page-NN.jpg`. It initializes when Portfolio & CV is
+selected and can preload during idle time from Research & Writing. It has cover/spread
 navigation, an animated turn, keyboard arrows and an image lightbox with Escape
 and focus return. `files/Portfolio_Academic.pdf` and `files/CV.pdf` are independent
 download links. Regenerate the images and update `totalPages` when replacing the
@@ -1077,7 +1193,9 @@ mobile index and mobile portfolio. Tests block external network requests and
 submit no forms. An existing Portfolio error, `window.loadProjectsData is not a
 function`, remains: `portfolio.html` loads `nav.js` without `data.js`. The test
 reports that known error separately and fails on unexpected errors. This finding
-is recorded for the requested design review; it is not fixed by this SEO pass.
+was recorded for the requested design review; it was not fixed by that SEO pass.
+The local portfolio review on 2026-10-22 removes the unrelated script from this
+page; deployment of that correction is not claimed.
 Browser execution may need permission outside restricted Windows sandboxes.
 Local checks do not establish production publication, indexing, rankings, Core
 Web Vitals, rich-result eligibility or search traffic; Search Console and field
@@ -1321,9 +1439,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 195 application/configuration/integration/tool/asset files:
+SHA-256 of 199 application/configuration/integration/tool/asset files:
 
-`11d83befea645808701edc28b0acc114119e3d976a986f9072e9e5ec2af7ba1a`
+`69a54c34ad18dcba43066373b2a5bab8d24399b2c0711734fe4611821715a02e`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1623,21 +1741,22 @@ Source key: `geofactory`; shell: [projects-pages/geoFactory.html](projects-pages
 
 Source key: `printerra`; shell: [projects-pages/prinTerra.html](projects-pages/prinTerra.html); printed page label: `09`.
 
-**Published content status:** Academic research prototype.
+**Published content status:** Laboratory prototype built / development halted.
 
 **Purpose:** Earth construction<br>with a mobile robot
 
-**Role / period:** Robotics, computational workflow & research / 2023.
+**Role / period:** Sustainability simulations & nozzle control / Spring 2023.
 
-**Stack:** Grasshopper / robotics / sensing.
+**Stack:** Rhino / Grasshopper / Kangaroo / Ladybug Tools / ClimateStudio.
 
 | Section | Renderer kind |
 | --- | --- |
-| One construction ecosystem | `split` |
-| Workflow | `steps` |
-| Design intelligence | `cards` |
-| Research boundary | `honesty` |
-| Archive | `credits` |
+| Project and contribution | `split` |
+| Robot, form and toolpath | `steps` |
+| Sustainability studies | `cards` |
+| Project book and animations | `projects` |
+| Evidence and development status | `honesty` |
+| Team and archive | `credits` |
 
 #### ABM Bootcamp
 
@@ -1743,6 +1862,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/documents/bootcamp/GP09.pdf](assets/documents/bootcamp/GP09.pdf) | 74197147 |
 | [assets/documents/bootcamp/GP10.pdf](assets/documents/bootcamp/GP10.pdf) | 8613005 |
 | [assets/documents/bootcamp/GP11.pdf](assets/documents/bootcamp/GP11.pdf) | 3331541 |
+| [assets/documents/printerra/printerra-project-book.pdf](assets/documents/printerra/printerra-project-book.pdf) | 21903363 |
 | [assets/fonts/OFL-Vazirmatn.txt](assets/fonts/OFL-Vazirmatn.txt) | 4391 |
 | [assets/fonts/Vazirmatn-Bold.ttf](assets/fonts/Vazirmatn-Bold.ttf) | 123036 |
 | [assets/fonts/Vazirmatn-Regular.ttf](assets/fonts/Vazirmatn-Regular.ttf) | 122752 |
@@ -1809,6 +1929,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/team/mohsenfaizi.jpg](assets/images/team/mohsenfaizi.jpg) | 39108 |
 | [assets/images/team/shadanmasoud.jpg](assets/images/team/shadanmasoud.jpg) | 3729 |
 | [assets/logo.svg](assets/logo.svg) | 900 |
+| [assets/portfolio-favicon.svg](assets/portfolio-favicon.svg) | 185 |
 | [assets/profile-formal-v2.png](assets/profile-formal-v2.png) | 2010634 |
 | [assets/profile-formal-v2.webp](assets/profile-formal-v2.webp) | 19664 |
 | [assets/profile-formal.png](assets/profile-formal.png) | 1942853 |
@@ -1828,6 +1949,8 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/bootcamp/GP09.mp4](assets/videos/bootcamp/GP09.mp4) | 5760032 |
 | [assets/videos/bootcamp/GP11.mp4](assets/videos/bootcamp/GP11.mp4) | 8377993 |
 | [assets/videos/bootcamp/GP12.mp4](assets/videos/bootcamp/GP12.mp4) | 6551259 |
+| [assets/videos/printerra/fifthtry1.mp4](assets/videos/printerra/fifthtry1.mp4) | 2984991 |
+| [assets/videos/printerra/seventhtry1.mp4](assets/videos/printerra/seventhtry1.mp4) | 15987813 |
 | [css/base.css](css/base.css) | 650 |
 | [css/components.css](css/components.css) | 12235 |
 | [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 4741 |
@@ -1838,14 +1961,14 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/nexonest.css](css/nexonest.css) | 25171 |
 | [css/nexorhino.css](css/nexorhino.css) | 554 |
 | [css/podcast.css](css/podcast.css) | 5558 |
-| [css/portfolio-v2.css](css/portfolio-v2.css) | 36315 |
+| [css/portfolio-v2.css](css/portfolio-v2.css) | 38038 |
 | [css/portfolio.css](css/portfolio.css) | 50287 |
-| [css/project.css](css/project.css) | 49836 |
+| [css/project.css](css/project.css) | 50664 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 4706 |
-| [data/projects-brief.json](data/projects-brief.json) | 11215 |
+| [data/projects-brief.json](data/projects-brief.json) | 11249 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
@@ -1877,9 +2000,9 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/nav.js](js/nav.js) | 4901 |
 | [js/newsletter.js](js/newsletter.js) | 7289 |
 | [js/podcast.js](js/podcast.js) | 605 |
-| [js/portfolio.js](js/portfolio.js) | 34511 |
+| [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 118141 |
+| [js/project-page.js](js/project-page.js) | 121051 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -1888,7 +2011,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 12970 |
 | [nexonest.html](nexonest.html) | 8626 |
-| [portfolio.html](portfolio.html) | 34210 |
+| [portfolio.html](portfolio.html) | 39218 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
 | [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 11950 |
@@ -1903,7 +2026,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
 | [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9348 |
 | [projects-pages/octoMass.html](projects-pages/octoMass.html) | 13995 |
-| [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | 10646 |
+| [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | 16934 |
 | [projects-pages/reframingGenericity.html](projects-pages/reframingGenericity.html) | 10235 |
 | [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 9967 |
 | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 12258 |

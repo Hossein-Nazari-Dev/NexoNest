@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="css/ux.css" />
     <link
       rel="icon"
-      type="image/x-icon"
-      href="assets/profile.jpg"
+      type="image/svg+xml"
+      href="assets/portfolio-favicon.svg"
     />
     <script src="https://unpkg.com/lucide@latest" defer></script>
 
@@ -66,17 +66,17 @@
 
         <nav class="sidebar-nav" aria-label="Sections">
           <button class="nav-button active" data-section="profile">Profile</button>
-          <button class="nav-button" data-section="myjourney">Journey</button>
-          <button class="nav-button" data-section="education">Education</button>
-          <button class="nav-button" data-section="experience">Experience</button>
-          <button class="nav-button" data-section="skills">Methods</button>
           <button class="nav-button" data-section="projects">Projects</button>
-          <button class="nav-button" data-section="publications">Publications</button>
-          <button class="nav-button" data-section="portfolio-pdf">Archive</button>
+          <button class="nav-button" data-section="publications">Research & Writing</button>
+          <button class="nav-button" data-section="experience">Experience</button>
+          <button class="nav-button" data-section="education">Education</button>
+          <button class="nav-button" data-section="skills">Methods</button>
+          <button class="nav-button" data-section="myjourney">Journey</button>
+          <button class="nav-button" data-section="portfolio-pdf">Portfolio & CV</button>
           <div style="margin-top: 1rem;"></div>
           <a class="nav-button" href="index.html">&larr; Overview</a>
         </nav>
-        
+
       </aside>
 
       <!-- Main Content -->
@@ -127,8 +127,8 @@
                   <p>
                     The goal is simple: make complex evidence easier to use early in the design process — before a beautiful idea becomes an expensive mistake.
                   </p>
-                  
-                  
+
+
                 </div>
               </div>
 
@@ -193,7 +193,7 @@
                   </div>
                 </div>
               </div>
-              
+
 
               <div class="links-row">
                 <a href="mailto:hossein.nazari.ac@gmail.com" class="link-box">
@@ -228,54 +228,212 @@
                   <span>Telegram</span>
                 </a>
               </div>
-              
+
+
+
+              <div class="profile-actions" aria-label="Portfolio shortcuts">
+                <a class="project-link" href="#projects" data-section-link>View selected work</a>
+                <a class="project-link" href="files/CV.pdf" download>Download CV</a>
+              </div>
+            </div>
+          </section>
+
+          <section id="projects" class="portfolio-section">
+            <h2>Selected Work</h2>
+            <div class="section-content">
+              <div class="project-card">
+                <h3><a href="projects-pages/techtoTrack.html">TectoTrack</a></h3>
+                <p>
+                  A social digital twin and agent-based simulation environment for studying how people move,
+                  choose, wait, and use complex buildings. My work spans behaviour logic, routing, queues,
+                  accessibility, BIM-to-Unity workflows, and technical system architecture.
+                </p>
+                <a href="projects-pages/techtoTrack.html" class="project-link">Explore TectoTrack</a>
+              </div>
+
+
+              <div class="project-card">
+                <h3><a href="projects-pages/curvAdapt.html">CurvAdapt</a></h3>
+                <p>
+                  A reliability-first geometry preprocessing framework for translating NURBS curves into
+                  simulation-ready polylines. It verifies fidelity with MCE/rMCE and uses incident radiation
+                  as a fast diagnostic before heavier daylight and energy simulation.
+                </p>
+                <a href="projects-pages/curvAdapt.html" class="project-link">Explore CurvAdapt</a>
+              </div>
+
+
+
+              <div class="project-card">
+                <h3><a href="projects-pages/abmBootcamp.html">ABMs in Architecture and Urban Design</a></h3>
+                <p>
+                  A hands-on programme for translating human-space questions into explicit agent-based
+                  models. Forty-two participants used Rhino, Grasshopper, and Python to develop and
+                  interpret twelve architecture and urban-design projects.
+                </p>
+                <a href="projects-pages/abmBootcamp.html" class="project-link">Explore the ABM Bootcamp</a>
+              </div>
+
+              <div class="project-card">
+                <h3><a href="projects-pages/prinTerra.html">prinTerra</a></h3>
+                <p>
+                  An academic system study combining mobile robotic 3D printing, local earth,
+                  parametric toolpaths, sensing, and passive form for arid environments.
+                </p>
+                <a href="projects-pages/prinTerra.html" class="project-link">Explore prinTerra</a>
+              </div>
+
+            </div>
+          </section>
+
+          <section id="publications" class="portfolio-section">
+            <h2>Research & Writing</h2>
+            <div class="section-content">
+              <div class="project-card">
+                <h3>Reframing Genericity in Design</h3>
+                <p>A conceptual manuscript under review on context, identity and transferable decision procedures in computational design.</p>
+                <a href="projects-pages/reframingGenericity.html" class="project-link">Read research overview</a>
+              </div>
+
+              <div class="project-card">
+                <h3>Impact of Building's Alignment on Energy Efficiency</h3>
+                <p>
+                  Findings from my master's thesis.
+                </p>
+                <a href="projects-pages/buildingAlignment.html" class="project-link">Read research overview</a>
+              </div>
+
+              <div class="project-card">
+                <h3>Reliable Geometry Preprocessing for Building Performance Simulation: Validation of Curve Segmentation through Radiation, Daylighting, and Energy Analyses</h3>
+                <p>
+                  A geometry-preprocessing manuscript currently under review, with a related Rhino/Grasshopper plugin in development. The research examines geometric fidelity before radiation, daylight and energy simulation.
+                </p>
+                <a href="projects-pages/curvAdapt.html" class="project-link">Read research overview</a>
+              </div>
 
 
             </div>
           </section>
 
-
-
-
-          <!-- ===== My Journey ===== -->
-          <section id="myjourney" class="portfolio-section">
-            <h2>My Journey</h2>
-            <p class="mj-tagline">
-              Most portfolios record what worked. This one follows the wrong turns that shaped how I design. The path may look scattered — books, cinema, architecture, code, climate, and behaviour — but each detour moved toward one question: how can a digital twin connect people, environment, form, and construction?
-            </p>
-          
-            <div class="mj-shell" id="mj-shell">
-              <div class="mj-chapter-nav" aria-label="Journey chapter controls">
-                <div class="mj-progress-group">
-                  <span>Failure notes</span>
-                  <strong class="mj-progress" role="status" aria-live="polite">01 / 09</strong>
-                </div>
-                <div class="mj-nav-actions">
-                  <button class="mj-nav-button mj-prev" type="button" aria-label="Previous journey chapter">&larr; Previous</button>
-                  <button class="mj-nav-button mj-next" type="button" aria-label="Next journey chapter">Next &rarr;</button>
-                </div>
+          <section id="experience" class="portfolio-section">
+            <h2>Professional Practice</h2>
+            <p class="section-intro">Tool development, simulation research, teaching and architectural design.</p>
+            <div class="section-content experience-layout">
+              <div class="experience-list" aria-label="Professional roles" hidden>
+                <button type="button" class="experience-item" data-role="nexonest" aria-controls="experience-nexonest" aria-pressed="false">
+                  <span class="exp-header"><span class="experience-role">Founder &amp; Computational Designer</span><span class="exp-date">2021–Present</span></span>
+                  <span class="company">NexoNest</span>
+                </button>
+                <button type="button" class="experience-item" data-role="morphotect" aria-controls="experience-morphotect" aria-pressed="false">
+                  <span class="exp-header"><span class="experience-role">Python Developer</span><span class="exp-date">2023–Present</span></span>
+                  <span class="company">Morphotect</span>
+                </button>
+                <button type="button" class="experience-item" data-role="iust" aria-controls="experience-iust" aria-pressed="false">
+                  <span class="exp-header"><span class="experience-role">Research Assistant &amp; Teaching Assistant</span><span class="exp-date">2022–2024</span></span>
+                  <span class="company">Iran University of Science and Technology</span>
+                </button>
+                <button type="button" class="experience-item" data-role="robotics" aria-controls="experience-robotics" aria-pressed="false">
+                  <span class="exp-header"><span class="experience-role">Robotics &amp; Embedded Systems Developer</span><span class="exp-date">2023</span></span>
+                  <span class="company">Iran University of Science and Technology</span>
+                </button>
+                <button type="button" class="experience-item" data-role="bootcamp" aria-controls="experience-bootcamp" aria-pressed="false">
+                  <span class="exp-header"><span class="experience-role">Agent-Based Modelling Bootcamp</span><span class="exp-date">2024</span></span>
+                  <span class="company">IUST &amp; Morphotect</span>
+                </button>
+                <button type="button" class="experience-item" data-role="architect" aria-controls="experience-architect" aria-pressed="false">
+                  <span class="exp-header"><span class="experience-role">Architectural Designer</span><span class="exp-date">2019–2022</span></span>
+                  <span class="company">Various Projects</span>
+                </button>
               </div>
-
-              <!-- Timeline -->
-              <div class="mj-stage" tabindex="0" aria-label="Journey timeline">
-                <div class="mj-rail" aria-hidden="true"></div>
-                <div id="mj-track" class="mj-track" aria-live="polite"></div>
-          
-                <!-- Edge fades keep the chapter rail visually focused. -->
-                <div class="mj-fade mj-fade--left"></div>
-                <div class="mj-fade mj-fade--right"></div>
+              <div class="experience-panels">
+                <article class="experience-detail" id="experience-nexonest" aria-labelledby="experience-title-nexonest">
+                  <p class="experience-detail-meta">2021–Present</p>
+                  <h3 id="experience-title-nexonest">Founder &amp; Computational Designer</h3>
+                  <p class="experience-detail-organization">NexoNest</p>
+                  <div class="experience-body">
+<ul>
+                    <li>Develop Grasshopper tools for Rhino, with a focus on sustainable design and environmental performance.</li>
+                    <li>Translate computational design research into practical tools and workflows.</li>
+                    <li>Design and deliver courses, workshops and webinars on computational sustainability.</li>
+                  </ul>
+                  <div class="experience-links">
+                    <a class="project-link" href="nexonest.html">Explore NexoNest</a>
+                  </div>
+                  </div>
+                </article>
+                <article class="experience-detail" id="experience-morphotect" aria-labelledby="experience-title-morphotect">
+                  <p class="experience-detail-meta">2023–Present</p>
+                  <h3 id="experience-title-morphotect">Python Developer</h3>
+                  <p class="experience-detail-organization">Morphotect</p>
+                  <div class="experience-body">
+<ul>
+                    <li>Develop agent-based models and behavioural algorithms for human–environment simulation.</li>
+                    <li>Build workflows for extracting BIM data from Revit and transferring geometry into Unity.</li>
+                    <li>Develop Python tools for processing simulation data and supporting design decisions.</li>
+                  </ul>
+                  <div class="experience-links">
+                    <a class="project-link" href="projects-pages/techtoTrack.html">Explore TectoTrack</a>
+                  </div>
+                  </div>
+                </article>
+                <article class="experience-detail" id="experience-iust" aria-labelledby="experience-title-iust">
+                  <p class="experience-detail-meta">2022–2024</p>
+                  <h3 id="experience-title-iust">Research Assistant &amp; Teaching Assistant</h3>
+                  <p class="experience-detail-organization">Iran University of Science and Technology</p>
+                  <div class="experience-body">
+<ul>
+                    <li>Research energy efficiency, daylighting and prefabrication through computational design.</li>
+                    <li>Develop generative design and simulation workflows using Rhino, Grasshopper and Python.</li>
+                    <li>Support Design Studio 1 and teach computational sustainability and early-stage form-finding.</li>
+                  </ul>
+                  </div>
+                </article>
+                <article class="experience-detail" id="experience-robotics" aria-labelledby="experience-title-robotics">
+                  <p class="experience-detail-meta">2023</p>
+                  <h3 id="experience-title-robotics">Robotics &amp; Embedded Systems Developer</h3>
+                  <p class="experience-detail-organization">Iran University of Science and Technology</p>
+                  <div class="experience-body">
+<ul>
+                    <li>Develop prinTerra toolpath algorithms and contribute to mechanical design, motion-control testing and material calibration.</li>
+                    <li>Integrate sensors and camera-based monitoring into robotic printing workflows.</li>
+                    <li>Prototype Arduino-based kinetic shading and sensor-controlled lighting systems.</li>
+                  </ul>
+                  <div class="experience-links">
+                    <a class="project-link" href="projects-pages/prinTerra.html">Explore prinTerra</a>
+                  </div>
+                  </div>
+                </article>
+                <article class="experience-detail" id="experience-bootcamp" aria-labelledby="experience-title-bootcamp">
+                  <p class="experience-detail-meta">2024</p>
+                  <h3 id="experience-title-bootcamp">Agent-Based Modelling Bootcamp</h3>
+                  <p class="experience-detail-organization">IUST &amp; Morphotect</p>
+                  <div class="experience-body">
+<ul>
+                    <li>Plan and deliver the programme, including curriculum, logistics and participant support.</li>
+                    <li>Teach model development, Python implementation and result interpretation to 42 participants.</li>
+                    <li>Coordinate six mentors and guide participants in developing architectural and urban-design models and visualisations.</li>
+                  </ul>
+                  <div class="experience-links">
+                    <a class="project-link" href="projects-pages/abmBootcamp.html">Explore the bootcamp archive</a>
+                  </div>
+                  </div>
+                </article>
+                <article class="experience-detail" id="experience-architect" aria-labelledby="experience-title-architect">
+                  <p class="experience-detail-meta">2019–2022</p>
+                  <h3 id="experience-title-architect">Architectural Designer</h3>
+                  <p class="experience-detail-organization">Various Projects</p>
+                  <div class="experience-body">
+<ul>
+                    <li>Develop feasibility studies, design alternatives, space programmes, massing studies and circulation diagrams.</li>
+                    <li>Coordinate design teams and consultants from concept through construction documentation.</li>
+                    <li>Use BIM workflows, design reviews and quality checks to support documentation and project coordination.</li>
+                  </ul>
+                  </div>
+                </article>
               </div>
-          
-              <!-- Single panel (title + content از JS) -->
-              <div id="mj-panel" class="mj-panel" role="region" aria-label="Journey details" aria-live="polite"></div>
             </div>
           </section>
-          
-          
-          
-          
 
-          <!-- Education Section -->
           <section id="education" class="portfolio-section">
             <h2>Learning & Development</h2>
             <div class="section-content">
@@ -354,7 +512,7 @@
                   <div class="course-card">
                     <h4>Python Programming</h4>
                     <span class="course-institute">Harvard CS50</span>
-                    
+
                     <a href="https://certificates.cs50.io/08bf7a30-cccf-4c44-ac35-3e66bbaddfb8.pdf?size=letter" target="_blank" rel="noopener noreferrer"  class="course-badge">
                       Certificate
                     </a>
@@ -369,140 +527,53 @@
             </div>
           </section>
 
-          <!-- Experience Section -->
-          <section id="experience" class="portfolio-section">
-            <h2>Professional Practice</h2>
-            <div class="section-content experience-layout">
-              <div class="experience-list">
-                <!-- NexoNest Experience -->
-                <div class="experience-item" data-role="nexonest">
-                  <div class="exp-header">
-                    <h4>Founder & Computational Designer</h4>
-                    <span class="exp-date">2021-Present</span>
-                  </div>
-                  <span class="company">NexoNest</span>
-                </div>
-
-                <!-- Morphotect Experience -->
-                <div class="experience-item" data-role="morphotect">
-                  <div class="exp-header">
-                    <h4>Python Developer</h4>
-                    <span class="exp-date">2023-Present</span>
-                  </div>
-                  <span class="company">Morphotect</span>
-                </div>
-
-                <!-- IUST Experience -->
-                <div class="experience-item" data-role="iust">
-                  <div class="exp-header">
-                    <h4>Research Assistant & Teaching Assistant</h4>
-                    <span class="exp-date">2022-2024</span>
-                  </div>
-                  <span class="company"
-                    >Iran University of Science and Technology</span
-                  >
-                </div>
-
-                <!-- Robotics Experience -->
-                <div class="experience-item" data-role="robotics">
-                  <div class="exp-header">
-                    <h4>Robotics and Embedded Systems Developer</h4>
-                    <span class="exp-date">2023</span>
-                  </div>
-                  <span class="company"
-                    >Iran University of Science and Technology</span
-                  >
-                </div>
-
-                <!-- Bootcamp Experience -->
-                <div class="experience-item" data-role="bootcamp">
-                  <div class="exp-header">
-                    <h4>Agent-Based Modeling Bootcamp</h4>
-                    <span class="exp-date">2024</span>
-                  </div>
-                  <span class="company"
-                    >Collaboration between IUST and Morphotect</span
-                  >
-                </div>
-
-                <!-- Architectural Experience -->
-                <div class="experience-item" data-role="architect">
-                  <div class="exp-header">
-                    <h4>Architectural Designer</h4>
-                    <span class="exp-date">2019-2022</span>
-                  </div>
-                  <span class="company">Various Projects</span>
-                </div>
-              </div>
-
-              <div class="experience-detail" id="experienceDetail">
-                <div class="detail-placeholder">
-                  <p>Choose a role. The less glamorous details appear here.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Skills Section (REWRITTEN) -->
           <section id="skills" class="portfolio-section">
             <h2>Methods & Competencies</h2>
             <div class="section-content">
               <div class="skills-grid">
                 <div class="skill-category">
                   <h3>Computational Development</h3>
-                  <div class="skill-depth" aria-label="Advanced practice depth">
-                    <span>Practice depth</span><strong>Advanced</strong>
-                    <span class="skill-depth-track level-4" aria-hidden="true"></span>
-                  </div>
                   <ul class="skill-list">
                     <li>Python & data analysis</li>
                     <li>C# / .NET development</li>
                     <li>Web technologies</li>
                     <li>Git, algorithms & design patterns</li>
                   </ul>
+                  <a class="project-link" href="projects-pages/techtoTrack.html">TectoTrack</a>
                 </div>
                 <div class="skill-category">
                   <h3>Parametric Design & BIM</h3>
-                  <div class="skill-depth" aria-label="Primary practice depth">
-                    <span>Practice depth</span><strong>Primary</strong>
-                    <span class="skill-depth-track level-5" aria-hidden="true"></span>
-                  </div>
                   <ul class="skill-list">
                     <li>Rhino & Grasshopper</li>
                     <li>Rhino.Inside workflows</li>
                     <li>Revit & BIM coordination</li>
                     <li>AEC interoperability pipelines</li>
                   </ul>
+                  <a class="project-link" href="projects-pages/techtoTrack.html">TectoTrack</a>
                 </div>
                 <div class="skill-category">
                   <h3>Environmental Performance Simulation</h3>
-                  <div class="skill-depth" aria-label="Primary practice depth">
-                    <span>Practice depth</span><strong>Primary</strong>
-                    <span class="skill-depth-track level-5" aria-hidden="true"></span>
-                  </div>
                   <ul class="skill-list">
                     <li>Ladybug Tools (LB / HB / DF)</li>
                     <li>Climate Studio</li>
                     <li>Daylighting & energy modelling</li>
                     <li>Computational sustainability</li>
                   </ul>
+                  <a class="project-link" href="projects-pages/curvAdapt.html">CurvAdapt</a>
                 </div>
                 <div class="skill-category">
                   <h3>Behavioural Systems & Sensing</h3>
-                  <div class="skill-depth" aria-label="Advanced practice depth">
-                    <span>Practice depth</span><strong>Advanced</strong>
-                    <span class="skill-depth-track level-4" aria-hidden="true"></span>
-                  </div>
                   <ul class="skill-list">
                     <li>Agent-based modelling</li>
                     <li>Social digital twins</li>
                     <li>Crowd dynamics & wayfinding</li>
                     <li>IoT, sensing & physical computing</li>
                   </ul>
+                  <a class="project-link" href="projects-pages/abmBootcamp.html">ABM Bootcamp</a>
                 </div>
-          
+
               </div>
-          
+
               <div class="skills-row">
                 <!-- Areas of Expertise -->
                 <div class="info-card full-width">
@@ -515,7 +586,7 @@
                     <li>Sustainable and resilient design systems — integrating environmental performance with social behaviour at architectural and urban scales.</li>
                   </ol>
                 </div>
-              
+
                 <!-- Soft Skills -->
                 <div class="info-card full-width">
                   <h4>Soft Skills</h4>
@@ -529,94 +600,48 @@
                   </ol>
                 </div>
               </div>
-              
-              
-              
-            </div>
-          </section>
-          
-          <!-- Projects Section -->
-          <section id="projects" class="portfolio-section">
-            <h2>Selected Work</h2>
-            <div class="section-content">
-              <div class="project-card">
-                <h3>TectoTrack</h3>
-                <p>
-                  A social digital twin and agent-based simulation environment for studying how people move,
-                  choose, wait, and use complex buildings. My work spans behaviour logic, routing, queues,
-                  accessibility, BIM-to-Unity workflows, and technical system architecture.
-                </p>
-                <a href="projects-pages/techtoTrack.html" class="project-link">View Project Details</a>
-              </div>
 
-
-              <div class="project-card">
-                <h3>CurvAdapt</h3>
-                <p>
-                  A reliability-first geometry preprocessing framework for translating NURBS curves into
-                  simulation-ready polylines. It verifies fidelity with MCE/rMCE and uses incident radiation
-                  as a fast diagnostic before heavier daylight and energy simulation.
-                </p>
-                <a href="projects-pages/curvAdapt.html" class="project-link">View Project Details</a>
-              </div>
-
-              
-
-              <div class="project-card">
-                <h3>ABMs in Architecture and Urban Design</h3>
-                <p>
-                  A hands-on programme for translating human-space questions into explicit agent-based
-                  models. Forty-two participants used Rhino, Grasshopper, and Python to develop and
-                  interpret twelve architecture and urban-design projects.
-                </p>
-                <a href="projects-pages/abmBootcamp.html" class="project-link">View Bootcamp Archive</a>
-              </div>
-
-              <div class="project-card">
-                <h3>prinTerra</h3>
-                <p>
-                  An academic system study combining mobile robotic 3D printing, local earth,
-                  parametric toolpaths, sensing, and passive form for arid environments.
-                </p>
-                <a href="projects-pages/prinTerra.html" class="project-link">View Project Details</a>
-              </div>
-
-          </section>
-
-          <!-- publications Section -->
-          <section id="publications" class="portfolio-section">
-            <h2>Research & Writing</h2>
-            <div class="section-content">
-              <div class="project-card">
-                <h3>Reframing Genericity in Design</h3>
-                <p>A conceptual manuscript under review on context, identity and transferable decision procedures in computational design.</p>
-                <a href="projects-pages/reframingGenericity.html" class="project-link">Read research overview</a>
-              </div>
-
-              <div class="project-card">
-                <h3>Impact of Building's Alignment on Energy Efficiency</h3>
-                <p>
-                  The findings of master thesis.
-                </p>
-                <a href="projects-pages/buildingAlignment.html" class="project-link">View Page</a>
-              </div>
-
-              <div class="project-card">
-                <h3>Reliable Geometry Preprocessing for Building Performance Simulation: Validation of Curve Segmentation through Radiation, Daylighting, and Energy Analyses</h3>
-                <p>
-                  A geometry-preprocessing manuscript currently under review, with a related Rhino/Grasshopper plugin in development. The research examines geometric fidelity before radiation, daylight and energy simulation.
-                </p>
-                <a href="projects-pages/curvAdapt.html" class="project-link">View Page</a>
-              </div>
 
 
             </div>
           </section>
 
-          <!-- Portfolio PDF Section -->
+          <section id="myjourney" class="portfolio-section">
+            <h2>My Journey</h2>
+            <p class="mj-tagline">
+              Most portfolios record what worked. This one follows the wrong turns that shaped how I design. The path may look scattered — books, cinema, architecture, code, climate, and behaviour — but each detour moved toward one question: how can a digital twin connect people, environment, form, and construction?
+            </p>
+
+            <div class="mj-shell" id="mj-shell">
+              <div class="mj-chapter-nav" aria-label="Journey chapter controls">
+                <div class="mj-progress-group">
+                  <span>Failure notes</span>
+                  <strong class="mj-progress" role="status" aria-live="polite">01 / 09</strong>
+                </div>
+                <div class="mj-nav-actions">
+                  <button class="mj-nav-button mj-prev" type="button" aria-label="Previous journey chapter">&larr; Previous</button>
+                  <button class="mj-nav-button mj-next" type="button" aria-label="Next journey chapter">Next &rarr;</button>
+                </div>
+              </div>
+
+              <!-- Timeline -->
+              <div class="mj-stage" tabindex="0" aria-label="Journey timeline">
+                <div class="mj-rail" aria-hidden="true"></div>
+                <div id="mj-track" class="mj-track" aria-live="polite"></div>
+
+                <!-- Edge fades keep the chapter rail visually focused. -->
+                <div class="mj-fade mj-fade--left"></div>
+                <div class="mj-fade mj-fade--right"></div>
+              </div>
+
+              <!-- Single panel (title + content از JS) -->
+              <div id="mj-panel" class="mj-panel" role="region" aria-label="Journey details" aria-live="polite"></div>
+            </div>
+          </section>
+
           <section id="portfolio-pdf" class="portfolio-section">
             <p class="section-kicker">Print edition / digital access</p>
-            <h2>Portfolio Archive</h2>
+            <h2>Portfolio & CV</h2>
             <p class="section-intro">The portfolio is presented as a facing-page A4 spread. Browse the short preview here, or take the full documents with you.</p>
             <div class="section-content">
               <div class="pdf-viewer" tabindex="0" aria-label="Portfolio PDF preview">
@@ -674,7 +699,6 @@
       </div>
     </div>
 
-    <script src="js/nav.js" defer></script>
     <script src="js/portfolio.js" defer></script>
     <script src="js/ux.js" defer></script>
     <script>
@@ -713,6 +737,6 @@
         if (window.lucide) lucide.createIcons();
       });
     </script>
-    
+
   </body>
 </html>

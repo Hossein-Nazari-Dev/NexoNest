@@ -2,16 +2,15 @@
 class PortfolioApp {
     constructor() {
         this.currentSection = 'profile';
-        this.activeExperience = null;
         this.activeProject = null;
         this.init();
     }
 
     init() {
         this.setupNavigation();
-        this.setupExperienceSelection();
         this.setupProjectSelection();
         this.setupScrollIndicator();
+        this.setupExperienceSelection();
         this.setupPDFViewer();
         this.setupSmoothScrolling();
         this.setupTooltips();
@@ -53,25 +52,14 @@ class PortfolioApp {
     }
 
     resetActiveStates() {
-        if (this.activeExperience) {
-            this.activeExperience.classList.remove('active');
-            this.activeExperience = null;
-        }
         if (this.activeProject) {
             this.activeProject.classList.remove('active');
             this.activeProject = null;
         }
         
         // Reset detail panels
-        const experienceDetail = document.getElementById('experienceDetail');
         const projectDetail = document.getElementById('projectDetail');
-        
-        if (experienceDetail) {
-            experienceDetail.querySelector('.detail-placeholder').style.display = 'grid';
-            const detailsContent = experienceDetail.querySelector('.role-details-content');
-            if (detailsContent) detailsContent.classList.remove('active');
-        }
-        
+
         if (projectDetail) {
             projectDetail.querySelector('.detail-placeholder').style.display = 'block';
             const detailsContent = projectDetail.querySelector('.project-details-content');
@@ -79,148 +67,45 @@ class PortfolioApp {
         }
     }
 
-    // Experience Section
+    // Enhance the static role descriptions into a two-panel selector.
     setupExperienceSelection() {
-        const experienceItems = document.querySelectorAll('.experience-item');
-        const experienceDetail = document.getElementById('experienceDetail');
-        
-        if (!experienceItems.length || !experienceDetail) return;
+        const layout = document.querySelector('.experience-layout');
+        if (!layout) return;
+        const list = layout.querySelector('.experience-list');
+        const buttons = Array.from(list.querySelectorAll('button[data-role]'));
+        const panels = Array.from(layout.querySelectorAll('.experience-detail'));
+        if (!buttons.length || buttons.length !== panels.length) return;
 
-        experienceItems.forEach(item => {
-            item.setAttribute('role', 'button');
-            item.setAttribute('tabindex', '0');
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Remove active class from all items
-                experienceItems.forEach(i => i.classList.remove('active'));
-                
-                // Add active class to clicked item
-                item.classList.add('active');
-                this.activeExperience = item;
-                
-                // Show details in right panel
-                this.showExperienceDetails(item.dataset.role);
+        const selectRole = (button) => {
+            const target = button.getAttribute('aria-controls');
+            buttons.forEach(item => {
+                const active = item === button;
+                item.classList.toggle('active', active);
+                item.setAttribute('aria-pressed', String(active));
             });
-            item.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    item.click();
-                }
-            });
-        });
-    }
-
-    showExperienceDetails(roleId) {
-        const experienceDetail = document.getElementById('experienceDetail');
-        const detailPlaceholder = experienceDetail.querySelector('.detail-placeholder');
-        const roleData = this.getRoleData(roleId);
-        
-        if (!roleData) return;
-
-        detailPlaceholder.style.display = 'none';
-        
-        let detailsContent = experienceDetail.querySelector('.role-details-content');
-        if (!detailsContent) {
-            detailsContent = document.createElement('div');
-            detailsContent.className = 'role-details-content';
-            experienceDetail.appendChild(detailsContent);
-        }
-        
-        detailsContent.innerHTML = `
-            <h3 class="role-detail-title">${roleData.title}</h3>
-            <ul class="role-detail-list">
-                ${roleData.details.map(detail => `<li>${detail}</li>`).join('')}
-            </ul>
-        `;
-        
-        detailsContent.classList.add('active');
-        requestAnimationFrame(() => this.updateScrollIndicator?.());
-    }
-
-    getRoleData(roleId) {
-        const roleData = {
-            'nexonest': {
-                title: 'Founder & Computational Designer - NexoNest',
-                details: [
-                    'Developed a suite of Grasshopper Plugins for Rhino to assist designers in sustainable design',
-                    'Created tools that enable designers to optimize their designs for energy efficiency and environmental performance',
-                    'Bridged the gap between academic research and practical application in architectural design',
-                    'Conducted comprehensive training programs and workshops on computational design methodologies',
-                    'Developed and delivered specialized courses focusing on sustainability in computational design',
-                    'Established an annual Sustainable Development webinar series to share knowledge and best practices'
-                ]
-            },
-            'morphotect': {
-                title: 'Python Developer - Morphotect',
-                details: [
-                    'Created agent-based models (ABMs) to simulate human–environment interactions within a social digital twin framework',
-                    'Used Python to develop behavioural algorithms for simulating realistic interactions',
-                    'Focused on improving decision-making processes and understanding human-environment relationships',
-                    'Designed automation system for BIM data extraction from Revit and importing geometry into Unity',
-                    'Significantly reduced manual data entry time, enabling faster visual representation of architectural designs',
-                    'Facilitated real-time data synchronization between BIM models and Unity environments',
-                    'Developed comprehensive Data Analysis Framework using Python to process simulation data',
-                    'Provided stakeholders with actionable insights for design optimization and decision-making'
-                ]
-            },
-            'iust': {
-                title: 'Research Assistant & Teaching Assistant - Iran University of Science and Technology',
-                details: [
-                    'Conducted research on energy efficiency, daylighting, and prefabrication using computational design methods',
-                    'Designed and executed detailed research plans leveraging Rhino, Grasshopper, and Python',
-                    'Developed Python-based codes and prototypes for generative design and design optimization',
-                    'Published findings in research papers advancing knowledge in computational design and sustainable architecture',
-                    'Assisted in teaching Design Studio 1, mentoring students in conceptualizing architectural projects',
-                    'Delivered lectures and workshops on Computational Sustainability and basic sustainability principles',
-                    'Taught generative form-finding techniques with an emphasis on early-stage computational design',
-                    'Guided students in applying computational methods to real-world architectural challenges'
-                ]
-            },
-            'robotics': {
-                title: 'Robotics and Embedded Systems Developer - Iran University of Science and Technology',
-                details: [
-                    'Led development of prinTerra: A Mobile Cartesian 3D Printing Robot for modular habitats in arid environments',
-                    'Designed toolpath generation algorithm based on sinusoidal slicing for structural strength optimization',
-                    'Integrated real-time quality monitoring with smart sensors and CCTV for minimal human intervention',
-                    'Collaborated on mechanical design, motion-control testing, and material-behaviour calibration',
-                    'Managed content development for interactive research documentation and performance analysis',
-                    'Designed kinetic façade prototypes using servo motors and Arduino for adaptive solar shading',
-                    'Implemented environmentally responsive lighting systems with light sensors and PWM-based control',
-                    'Tested integration between digital parametric models and physical computing workflows'
-                ]
-            },
-            'bootcamp': {
-                title: 'Agent-Based Modeling Bootcamp - IUST & Morphotect Collaboration',
-                details: [
-                    'Spearheaded planning and execution of the Agent-Based Modeling Bootcamp for architecture and urban design',
-                    'Designed curriculum introducing agent-based modeling concepts and Python programming applications',
-                    'Taught participants to develop and implement agent-based models for architectural and urban projects',
-                    'Managed all aspects including logistics, participant engagement, and stakeholder collaboration',
-                    'Trained 42 participants in problem definition, code implementation, and result interpretation',
-                    'Supervised 6 mentors to support participants throughout the bootcamp experience',
-                    'Focused on practical applications in architecture and urban design workflows',
-                    'Enabled participants to create animations and visualizations for their projects'
-                ]
-            },
-            'architect': {
-                title: 'Architectural Designer',
-                details: [
-                    'Conducted detailed feasibility studies analyzing zoning regulations, site conditions, and economic factors',
-                    'Developed multiple conceptual alternatives with comprehensive cost estimates and phasing strategies',
-                    'Created schematic design packages including space programs, massing studies, and circulation diagrams',
-                    'Facilitated client workshops and brainstorming sessions to define project goals and design parameters',
-                    'Presented design concepts to municipal authorities for preliminary approvals and regulatory compliance',
-                    'Managed design teams of 3-5 architects through all project phases from concept to construction documents',
-                    'Conducted weekly design reviews and coordination meetings to ensure project milestones were met',
-                    'Implemented BIM workflows and quality control procedures for design documentation and coordination',
-                    'Mentored junior staff in design development, detailing techniques, and presentation skills',
-                    'Coordinated with external consultants including landscape architects, engineers, and lighting designers'
-                ]
-            }
+            panels.forEach(panel => { panel.hidden = panel.id !== target; });
+            requestAnimationFrame(() => this.updateScrollIndicator?.());
         };
 
-        return roleData[roleId];
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => selectRole(button));
+            button.addEventListener('keydown', event => {
+                const targets = {
+                    ArrowDown: (index + 1) % buttons.length,
+                    ArrowUp: (index + buttons.length - 1) % buttons.length,
+                    Home: 0,
+                    End: buttons.length - 1
+                };
+                if (!(event.key in targets)) return;
+                event.preventDefault();
+                const next = buttons[targets[event.key]];
+                next.focus();
+                selectRole(next);
+            });
+        });
+        selectRole(buttons[0]);
+        layout.classList.add('is-enhanced');
+        list.hidden = false;
     }
 
     // Projects Section
@@ -575,7 +460,7 @@ class PortfolioApp {
 
     // Smooth Scrolling
     setupSmoothScrolling() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]:not([data-section-link])').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
@@ -690,10 +575,10 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 
   // کلیک روی دکمه‌های سایدبار
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.nav-button[data-section]');
+    const btn = e.target.closest('.nav-button[data-section], a[data-section-link]');
     if (!btn) return;
     e.preventDefault();
-    showSection(btn.dataset.section, { push: true, smooth: true });
+    showSection(btn.dataset.section || btn.hash.slice(1), { push: true, smooth: true });
   });
 
   // پشتیبانی از Back/Forward

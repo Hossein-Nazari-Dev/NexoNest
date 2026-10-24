@@ -1739,3 +1739,33 @@ body[data-project="reframing-genericity"] .project-table td:nth-child(2) { font-
   body[data-project="reframing-genericity"] .project-table th,
   body[data-project="reframing-genericity"] .project-table td { padding: 12px 8px; }
 }
+
+/* Keep the prinTerra cover and spreads in the same compact preview stage. */
+body[data-project="printerra"] .pdf-flip-viewer {
+  width: 100%;
+  max-width: 880px;
+  min-height: 0;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+body[data-project="printerra"] .pdf-spread {
+  position: relative;
+  aspect-ratio: 2 / 1;
+}
+body[data-project="printerra"] .pdf-spread canvas {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(50% - 2px);
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+  box-shadow: none;
+}
+body[data-project="printerra"] .pdf-spread canvas:nth-child(2) {
+  left: auto;
+  right: 0;
+}
+body[data-project="printerra"] .pdf-spread[data-cover="true"] canvas:first-child {
+  left: 25%;
+}

@@ -162,7 +162,7 @@
       {
         "id": "p_printerra",
         "title": "prinTerra",
-        "excerpt": "An academic system study combining mobile robotic 3D printing, local earth, parametric toolpaths, sensing, and climate-responsive habitats.",
+        "excerpt": "An academic earth-construction proposal combining a mobile printer, environmental simulations and nozzle control; a laboratory prototype was built before development halted.",
         "url": "projects-pages/prinTerra.html",
         "icon": "assets/icons/printerra.png",
         "categories": ["projects"],

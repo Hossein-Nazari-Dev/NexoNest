@@ -1289,62 +1289,78 @@ const PROJECT_PAGE_DATA = {
     subtitle: "Earth construction<br>with a mobile robot",
     icon: "../assets/icons/printerra.png",
     iconAlt: "prinTerra mark",
-    eyebrow: "Academic research / Robotic fabrication",
-    lead: "A speculative construction ecosystem combining mobile 3D printing, local earth, parametric toolpaths, and passive design for arid environments.",
-    role: "Robotics, computational workflow & research",
-    period: "2023",
-    status: "Academic research prototype",
-    stack: "Grasshopper / robotics / sensing",
-    tags: ["Additive manufacturing", "Earth", "Toolpath", "Arid climate"],
-    question: "What if non-standard climate-responsive forms could be built with material collected close to the site?",
-    response: "prinTerra studies a mobile Cartesian printing system and a cell-based construction workflow in which form, toolpath, material behaviour, monitoring, and settlement logic are designed together.",
+    eyebrow: "Academic project / Robotic fabrication",
+    lead: "An academic proposal for an earth-based eco-camp in Yazd, connecting a mobile Cartesian 3D printer, parametric toolpaths, and environmental simulation.",
+    role: "Sustainability simulations & nozzle control",
+    period: "Spring 2023",
+    status: "Laboratory prototype built / development halted",
+    stack: "Rhino / Grasshopper / Kangaroo / Ladybug Tools / ClimateStudio",
+    tags: ["Additive manufacturing", "Earth", "Nozzle control", "Environmental simulation"],
+    question: "How can robotic earth construction and environmental simulation inform the design of a settlement in an arid climate?",
+    response: "The team developed a mobile Cartesian printer concept alongside dome-based accommodation, printable path studies, and climate-responsive site design. My work focused on sustainability simulations and nozzle control.",
     proof: [
-      ["Local earth", "lower transport dependence"],
-      ["Mobile frame", "construction across uneven sites"],
-      ["Parametric path", "geometry becomes fabrication logic"],
-      ["Academic", "system study, not market-ready machine"]
+      ["Yazd", "arid-climate design context"],
+      ["Simulation", "daylight, radiation and thermal comfort studies"],
+      ["Nozzle control", "personal contribution alongside sustainability simulations"],
+      ["Laboratory", "physical prototype built; development later halted"]
     ],
     sections: [
       {
-        title: "One construction ecosystem",
+        title: "Project and contribution",
         kind: "split",
         text: [
-          "The research does not treat the robot as an isolated machine. Site preparation, material sourcing, toolpath geometry, print monitoring, passive form, and modular growth belong to one loop.",
-          "My contribution focused on computational and robotic aspects, including toolpath logic, sensing concepts, system integration, and research documentation."
+          "prinTerra was developed as a team project in Computational Design & Digital Fabrication at the School of Architecture, Iran University of Science and Technology, in Spring 2023.",
+          "My contribution was sustainability simulations and nozzle control. The robot design, form-finding, toolpath studies and landscape proposal presented in the project book are team outputs.",
+          "A physical laboratory prototype was built. Further development stopped because of financial constraints. The available record does not establish the prototype's exact scope, full-scale construction, or validated autonomous operation."
         ],
-        aside: { label: "Form meets consequence", text: "Digital fabrication matters when performance-driven geometry can no longer rely on conventional repetition." }
+        aside: { label: "From proposal to laboratory", text: "The laboratory prototype and the proposed eco-camp represent different stages of development; the settlement is presented as a design proposal." }
       },
       {
-        title: "Workflow",
+        title: "Robot, form and toolpath",
         kind: "steps",
         items: [
-          ["01", "Read the site", "Prepare terrain information and define a stable local construction field."],
-          ["02", "Prepare material", "Use earth-based mixtures with calibration for deposition and structural behaviour."],
-          ["03", "Generate toolpaths", "Translate modular, climate-responsive geometry into printable paths."],
-          ["04", "Print & observe", "Coordinate motion, deposition, and sensor-supported quality checks."]
+          ["01", "Mobile printer concept", "A Cartesian gantry with tracked supports, a material-feed nozzle, and detailed mechanical assembly studies."],
+          ["02", "Climate-responsive form", "Cactus-inspired ribs and dome geometry explored through parametric alternatives and environmental simulation."],
+          ["03", "Generate paths", "Grasshopper and Kangaroo studies develop surface grids, opening-aware curves, and connected sinusoidal printing paths."],
+          ["04", "Control deposition", "Nozzle control connects the digital path with the proposed printing process. The archive does not establish production accuracy or reliability."]
         ]
       },
       {
-        title: "Design intelligence",
+        title: "Sustainability studies",
         kind: "cards",
         items: [
-          ["Toolpath as structure", "Sinusoidal and layered paths were explored as part of material and stability thinking."],
-          ["Passive form", "Arid-climate strategies informed geometry rather than being added after fabrication."],
-          ["Modular growth", "Cell-based construction allows the settlement to expand in manageable increments."],
-          ["Feedback potential", "Monitoring suggests a future loop between printing data, calibration, and the next layer."]
+          ["Climate context", "Yazd weather studies cover temperature, humidity, wind, solar radiation, ground temperature and psychrometric conditions."],
+          ["Daylight and glare", "The project book compares unshaded and shaded geometries using daylight autonomy, sunlight exposure, mean illuminance and glare simulations."],
+          ["Site and outdoor comfort", "Radiation and UTCI studies explore excavation, dome placement and semi-domes for shaded gathering spaces."],
+          ["Landscape strategy", "The proposal combines windbreaks, planting, grouped units and shaded spaces. Environmental benefits remain design aims and simulation findings."]
         ]
       },
       {
-        title: "Research boundary",
-        kind: "honesty",
-        label: "Speculative, technically grounded",
-        text: "prinTerra is an academic system proposal and prototype study. Claims about autonomous construction, material performance, and full-scale deployment require physical validation beyond the documented concept."
+        title: "Project book and animations",
+        kind: "projects",
+        label: "Project archive",
+        items: [
+          { code: "BOOK", title: "Original project book", people: "67 pages · Spring 2023 · Team design, technical studies and simulation outputs. Original estimates and claims are retained as archival content.", pdf: "../assets/documents/printerra/printerra-project-book.pdf" },
+          { code: "V01", title: "Project animation 01", people: "Original archive file: fifthtry1.mp4. Animation is not evidence of physical operation.", video: "../assets/videos/printerra/fifthtry1.mp4" },
+          { code: "V02", title: "Project animation 02", people: "Original archive file: seventhtry1.mp4. Animation is not evidence of physical operation.", video: "../assets/videos/printerra/seventhtry1.mp4" }
+        ]
       },
       {
-        title: "Archive",
+        title: "Evidence and development status",
+        kind: "honesty",
+        label: "Laboratory prototype / halted development",
+        text: "A physical laboratory prototype was built, as confirmed by the contributor; development later halted because of financial constraints. The original book contains proposed capabilities, simulation outputs, and preliminary cost, material and construction-time estimates. These are not measured full-scale outcomes, independently verified performance, or certification. No claim of a completed settlement or production-ready machine is made."
+      },
+      {
+        title: "Team and archive",
         kind: "credits",
-        text: "Developed at Iran University of Science and Technology under the guidance of Morteza Rahbar.",
-        links: [["View project repository", "https://github.com/Hossein-Nazari-Dev/prinTerra"]]
+        text: "Iran University of Science and Technology, School of Architecture · Computational Design & Digital Fabrication · Spring 2023. Names follow the supplied project book.",
+        groups: [
+          { label: "Instructor", people: [["Dr. Morteza Rahbar", "Instructor"]] },
+          { label: "Teaching assistant", people: [["Sajjad Eftekharzadeh", "Teaching assistant"]] },
+          { label: "Design team", people: [["Hossein Mortazavi", "Team member"], ["Mohammad Sajad Amrolahi", "Team member"], ["Mohammad Moazeni", "Team member"], ["Behzad Maleki Asl", "Team member"], ["Mehrzad Samadi", "Team member"], ["Amir Farbod Shahverdi", "Team member"], ["Hossein Nazari", "Sustainability simulations & nozzle control"], ["Farnoush Bratlou", "Team member"]] }
+        ],
+        links: [["Open project book", "../assets/documents/printerra/printerra-project-book.pdf"], ["Animation 01", "../assets/videos/printerra/fifthtry1.mp4"], ["Animation 02", "../assets/videos/printerra/seventhtry1.mp4"], ["View project repository", "https://github.com/Hossein-Nazari-Dev/prinTerra"]]
       }
     ]
   },
@@ -1661,7 +1677,7 @@ function renderProof(items) {
 function renderBootcampProject(item) {
   const headerControls = item.pdf ? `<a class="project-media-link" href="${escapeHtml(item.pdf)}" target="_blank" rel="noopener">Open PDF ↗</a>` : `<span class="project-media-unavailable">PDF not submitted</span>`;
   const media = item.video?.startsWith("http") ? `<iframe src="${escapeHtml(item.video)}" title="${escapeHtml(item.title)} animation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>` : `<video controls playsinline preload="metadata" width="100%"><source src="${escapeHtml(item.video || "")}" type="video/mp4">Your browser could not load this animation.</video>`;
-  return `<div class="bootcamp-project-detail-head"><div><span class="bootcamp-project-code">${escapeHtml(item.code)}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.people)}</p></div><div class="bootcamp-project-actions">${headerControls}</div></div>${item.pdf ? `<div class="bootcamp-pdf-frame pdf-flip-viewer" data-pdf="${escapeHtml(item.previewPdf || item.pdf)}" aria-busy="false"><div class="pdf-spread" data-pdf-spread><canvas hidden></canvas><canvas hidden></canvas></div><div class="pdf-flip-controls"><button type="button" data-pdf-prev aria-label="Previous spread" disabled>←</button><span data-pdf-counter role="status">PDF preview loads when visible</span><button type="button" data-pdf-next aria-label="Next spread" disabled>→</button><button type="button" data-pdf-retry hidden>Retry</button></div></div>` : `<div class="bootcamp-empty-media">This project was submitted as an animation only.</div>`}${item.video ? `<div class="bootcamp-animation"><div class="bootcamp-animation-label">Animation</div>${media}</div>` : ""}`;
+  return `<div class="bootcamp-project-detail-head"><div><span class="bootcamp-project-code">${escapeHtml(item.code)}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.people)}</p></div><div class="bootcamp-project-actions">${headerControls}</div></div>${item.pdf ? `<div class="bootcamp-pdf-frame pdf-flip-viewer" data-pdf="${escapeHtml(item.previewPdf || item.pdf)}" aria-busy="false"><div class="pdf-spread" data-pdf-spread><canvas hidden></canvas><canvas hidden></canvas></div><div class="pdf-flip-controls"><button type="button" data-pdf-prev aria-label="Previous spread" disabled>←</button><span data-pdf-counter role="status">PDF preview loads when visible</span><button type="button" data-pdf-next aria-label="Next spread" disabled>→</button><button type="button" data-pdf-retry hidden>Retry</button></div></div>` : `<div class="bootcamp-empty-media">This archive item contains an animation only.</div>`}${item.video ? `<div class="bootcamp-animation"><div class="bootcamp-animation-label">Animation</div>${media}</div>` : ""}`;
 }
 
 let pdfJsPromise;
@@ -1907,7 +1923,7 @@ function renderSection(section, index, navGroups = {}) {
   if (section.kind === "projects") {
     const first = section.items[0];
     body = `<div class="bootcamp-project-browser">
-      <nav class="bootcamp-project-list" aria-label="Participant projects">${section.items.map((item, index) => `
+      <nav class="bootcamp-project-list" aria-label="${escapeHtml(section.label || "Participant projects")}">${section.items.map((item, index) => `
         <button type="button" class="bootcamp-project-list-item${index === 0 ? " is-active" : ""}" data-project-index="${index}" title="${escapeHtml(item.title)}" aria-label="${escapeHtml(item.code)} — ${escapeHtml(item.title)}"><span>${escapeHtml(item.code)}</span></button>`).join("")}</nav>
       <div class="bootcamp-project-detail" data-project-detail>${renderBootcampProject(first)}</div>
     </div>`;
