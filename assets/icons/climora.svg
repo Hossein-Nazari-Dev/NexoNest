@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <title>Climora</title>
+  <desc>An open C frames three hourly climate bands and a rising green sun.</desc>
+  <path d="M72 23a35 35 0 1 0 0 50" stroke="#203d36" stroke-width="9" stroke-linecap="round"/>
+  <path d="M36 40h22m-22 12h36M36 64h22" stroke="#203d36" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="72" cy="23" r="8" fill="#7fb7a8"/>
+</svg>

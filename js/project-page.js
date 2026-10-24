@@ -1,4 +1,5 @@
 const PROJECT_PAGE_ORDER = [
+  "climora",
   "tectotrack",
   "curvadapt",
   "reframing-genericity",
@@ -19,6 +20,213 @@ const PROJECT_PAGE_ORDER = [
 ];
 
 const PROJECT_PAGE_DATA = {
+  climora: {
+  "page": "18",
+  "title": "Climora",
+  "shortTitle": "Climora",
+  "subtitle": "Climate evidence.<br>Design decisions.",
+  "icon": "../assets/icons/climora.svg",
+  "iconAlt": "Climora: an open C, hourly climate bands and a rising sun",
+  "eyebrow": "NexoNest / Climate-responsive design",
+  "lead": "Read the rhythm of a climate before shaping a space. Climora brings hourly weather, clear annual heatmaps and early architectural design opportunities into a local Windows workspace.",
+  "role": "Product design & development / Hossein Nazari",
+  "period": "2026 — present",
+  "status": "Development preview",
+  "stack": "Windows / Tauri / EPW weather data",
+  "tags": [
+    "Climate analysis",
+    "Annual heatmaps",
+    "Early-stage design",
+    "Local projects"
+  ],
+  "question": "How can hourly climate evidence become useful, legible input to architectural decisions?",
+  "response": "Start with a weather file, examine annual patterns, state how the space is used, and review design opportunities with their assumptions and trade-offs. Keep the evidence visible and the display controls close at hand.",
+  "proof": [
+    [
+      "4 variables",
+      "temperature, humidity, solar and wind"
+    ],
+    [
+      "P10–P90",
+      "editable default scale bounds"
+    ],
+    [
+      "SVG + PNG",
+      "figures with source and legend"
+    ],
+    [
+      ".cli",
+      "self-contained local project files"
+    ]
+  ],
+  "sections": [
+    {
+      "title": "A workspace around the evidence",
+      "kind": "split",
+      "text": [
+        "The annual heatmap is the main working surface. Display settings open in a drawer, while project setup stays in a compact rail. Focus mode gives the chart more room without changing the data.",
+        "Viridis, Cividis, Inferno and Batlow are available across all four variables. The palette controls appearance; the legend records the variable, units and numerical range."
+      ],
+      "aside": {
+        "label": "Current availability",
+        "text": "Climora is a development preview. This page is its product overview and user guide. A public installer is not available here yet."
+      }
+    },
+    {
+      "id": "getting-started",
+      "title": "Getting started",
+      "kind": "steps",
+      "items": [
+        [
+          "01",
+          "Create or open",
+          "Choose File → New project, or File → Open to continue a .cli file. Recent files are available from File → Open recent."
+        ],
+        [
+          "02",
+          "Load climate data",
+          "Import an EPW file, optionally with STAT, DDY and RAIN companions, or choose a station from the regional weather catalogue. Downloads need internet; saved project weather can be used offline."
+        ],
+        [
+          "03",
+          "Set the context",
+          "Choose the space use, construction status and either 24-hour or daytime use. Review optional design feasibility questions and the resulting strategy shortlist."
+        ],
+        [
+          "04",
+          "Explore and save",
+          "Open Annual heatmaps, select a variable and adjust Display settings. Save the project as a .cli file; export or copy a figure separately when preparing a design album."
+        ]
+      ]
+    },
+    {
+      "id": "palette-legend",
+      "title": "Palette and legend",
+      "kind": "table",
+      "headers": [
+        "Control",
+        "Behavior"
+      ],
+      "rows": [
+        [
+          "Palette",
+          "Choose Viridis, Cividis, Inferno or Batlow for any variable. Apply one palette to all heatmaps, or keep separate choices. Colors alone do not establish physical meaning."
+        ],
+        [
+          "Automatic bounds",
+          "The 10th and 90th percentiles of valid hourly values set the default lower and upper bounds. Values beyond them use the end colors; they are not removed from the data."
+        ],
+        [
+          "Manual bounds",
+          "Enter a lower and upper value in the variable’s units, then Apply bounds. The lower value must be smaller than the upper value."
+        ],
+        [
+          "Lock scale",
+          "Preserve this variable’s bounds when replacing the weather file in the project. Other variables retain their own scales."
+        ],
+        [
+          "Comparable figures",
+          "For comparisons of the same variable, deliberately use the same palette and numerical bounds across projects. Percentile bounds calculated independently are not a shared numerical scale."
+        ],
+        [
+          "Missing values",
+          "Missing or invalid hours are marked separately. If P10 and P90 coincide for nonconstant data, the full valid range is used; a constant dataset has a single-value legend."
+        ]
+      ]
+    },
+    {
+      "id": "project-files",
+      "title": "Project files and figure output",
+      "kind": "cards",
+      "items": [
+        [
+          "Save your work",
+          "New, Open, Save, Save As and Close follow a document workflow. A .cli file retains weather contents, project inputs, palette and legend settings. Saving is explicit. Unsaved changes are marked and checked before leaving."
+        ],
+        [
+          "Export a figure",
+          "SVG preserves vector graphics at a 1200 × 850 layout. PNG can be 1200 × 850, 2400 × 1700 or 3600 × 2550. Figures include source, units, scale bounds and the legend."
+        ],
+        [
+          "Copy into a design album",
+          "Edit → Copy figure puts a rendered image on the clipboard at the chosen PNG size. Paste it into a document or presentation that accepts images."
+        ],
+        [
+          "Undo and preferences",
+          "Undo/Redo covers committed project inputs, palette and legend changes. History resets when opening a project or replacing weather. Preferences stores defaults on this device; the default palette applies only to new projects."
+        ]
+      ]
+    },
+    {
+      "id": "methods",
+      "title": "Methods and limitations",
+      "kind": "split",
+      "text": [
+        "Heatmaps use the imported EPW hourly records for dry-bulb temperature, relative humidity, global horizontal radiation and wind speed. Time follows EPW local standard time. Invalid and missing records are screened and displayed separately. Partial files remain inspectable but do not establish a complete annual climate.",
+        "The weather catalogue is sourced from Climate.OneBuilding.org. A nearby station is not necessarily representative: consider elevation, exposure, weather dataset period and local conditions. STAT, DDY and RAIN files are optional companions; their presence does not turn the workbench into a building simulation.",
+        "Design strategies are deterministic early-stage screening results with stated assumptions and trade-offs. Climora does not predict energy demand, quantified savings or guaranteed comfort. Check weather warnings and evaluate proposals with suitable building analysis before making performance claims."
+      ],
+      "aside": {
+        "label": "Read every legend",
+        "text": "Percentile clipping changes the color scale, not the underlying measurements. Matching colors between different variables or different bounds do not mean matching physical values."
+      }
+    },
+    {
+      "id": "shortcuts",
+      "title": "Keyboard shortcuts",
+      "kind": "table",
+      "headers": [
+        "Action",
+        "Shortcut"
+      ],
+      "rows": [
+        [
+          "New / Open",
+          "Ctrl+N / Ctrl+O"
+        ],
+        [
+          "Save / Save As",
+          "Ctrl+S / Ctrl+Shift+S"
+        ],
+        [
+          "Undo / Redo",
+          "Ctrl+Z / Ctrl+Shift+Z or Ctrl+Y"
+        ],
+        [
+          "Copy figure",
+          "Ctrl+Shift+C"
+        ],
+        [
+          "Focus chart / Exit focus",
+          "F11 / Escape"
+        ],
+        [
+          "Online guide",
+          "F1"
+        ],
+        [
+          "Menu bar",
+          "F10 or Alt+F / E / V / H"
+        ],
+        [
+          "Inspect heatmap",
+          "Focus the chart, then use the arrow keys"
+        ],
+        [
+          "Close a menu or dialog",
+          "Escape"
+        ]
+      ],
+      "note": "Text inputs retain their usual text editing shortcuts. Undo history is kept for this editing session; it is not a persistent version history."
+    },
+    {
+      "title": "About Climora",
+      "kind": "honesty",
+      "label": "Version 0.1.0 · Development preview",
+      "text": "Designed and developed by Hossein Nazari / NexoNest. This page describes the current implementation, not a validated building-performance engine. Windows interaction and figure pasting depend on the host application. No public release or installer availability is implied."
+    }
+  ]
+},
   "reframing-genericity": {
   "page": "17",
   "title": "Reframing Genericity in Design",
@@ -1994,7 +2202,7 @@ function renderSection(section, index, navGroups = {}) {
       </div>`;
   }
 
-  return `<section class="content-section project-editorial-section" data-nav-title="${escapeHtml(section.title)}"${navGroup ? ` data-nav-group="${escapeHtml(navGroup)}"` : ""}>${heading}${body}</section>`;
+  return `<section class="content-section project-editorial-section" data-nav-title="${escapeHtml(section.title)}"${section.id && /^[a-z][a-z0-9-]*$/.test(section.id) ? ` id="${section.id}"` : ""}${navGroup ? ` data-nav-group="${escapeHtml(navGroup)}"` : ""}>${heading}${body}</section>`;
 }
 
 function renderProjectPage(projectId) {
@@ -2025,7 +2233,7 @@ function renderProjectPage(projectId) {
     "@type": "CreativeWork",
     "name": project.title,
     "description": description,
-    "url": `https://nexonest.com/projects-pages/${({"reframing-genericity":"reframingGenericity.html", "building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", nexosolve:"nexoSolve.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
+    "url": `https://nexonest.com/projects-pages/${({"reframing-genericity":"reframingGenericity.html", "building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", climora:"climora.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", nexosolve:"nexoSolve.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
     "author": {"@type":"Person", "name":"Hossein Nazari" },
     "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
   };
@@ -2128,6 +2336,7 @@ function renderProjectPage(projectId) {
   const previous = PROJECT_PAGE_DATA[PROJECT_PAGE_ORDER[(orderIndex - 1 + PROJECT_PAGE_ORDER.length) % PROJECT_PAGE_ORDER.length]];
   const next = PROJECT_PAGE_DATA[PROJECT_PAGE_ORDER[(orderIndex + 1) % PROJECT_PAGE_ORDER.length]];
   const pageFor = id => ({
+    climora: "climora.html",
     tectotrack: "techtoTrack.html",
     curvadapt: "curvAdapt.html",
     "reframing-genericity": "reframingGenericity.html",

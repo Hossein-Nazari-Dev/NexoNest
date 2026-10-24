@@ -45,7 +45,7 @@ function buildSidebarNav() {
   const sectionItems = Array.from(sections).map((sec, idx) => {
     const titleEl = sec.querySelector('.section-title');
     if (!titleEl) return null;
-    const id = `section-${idx + 1}`;
+    const id = sec.id || `section-${idx + 1}`;
     sec.id = id;
     const label = sec.dataset.navTitle || titleEl.textContent;
     return {
@@ -81,6 +81,10 @@ function buildSidebarNav() {
   sidebar.innerHTML = navItems;
   setupSmoothScroll();
   observeSections();
+  // Restore a stable Help anchor after the renderer replaces the initial HTML.
+  if (location.hash) {
+    try { document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ behavior: "instant", block: "start" }); } catch (_) {}
+  }
 }
 
 

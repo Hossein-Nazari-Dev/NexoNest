@@ -27,6 +27,21 @@
     ],
     "projects": [
 {
+  "id": "p_climora",
+  "title": "Climora",
+  "excerpt": "A Windows climate-to-design workbench: explore EPW heatmaps, control palettes and legends, save local projects and prepare figures for design albums. Development preview.",
+  "url": "projects-pages/climora.html",
+  "icon": "assets/icons/climora.svg",
+  "categories": [
+    "products"
+  ],
+  "subcategories": [
+    "data-analytics",
+    "windows-apps"
+  ],
+  "image": "assets/icons/climora.svg"
+},
+{
   "id": "p_archicast_season_01",
   "title": "Archicast",
   "excerpt": "A Persian architecture podcast by Hossein Nazari. How does form take shape? Listen to the first three published episodes, with Persian and English summaries.",

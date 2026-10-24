@@ -9,11 +9,30 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-24
+reviewed: 2026-10-25
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## Climora product and guide — 2026-10-25
+
+Added the development-preview product and user guide at [Climora](projects-pages/climora.html),
+with catalogue ID p_climora, editorial ID climora and Products / Data Analytics / Windows Apps membership.
+Content belongs to js/project-page.js; generated HTML, canonical URL and sitemap follow the existing SEO workflow.
+The shared SVG logo uses an open C, hourly bands and a rising green sun; the same source is used by the desktop app.
+No installer or public release is advertised. The page documents actual EPW inputs, percentile/manual scales,
+project files, output, shortcuts and screening limitations. It makes no predicted energy or comfort claims.
+
+Sections may now provide an optional lowercase hyphenated id. The renderer validates its syntax and emits it
+in static and runtime HTML. Navigation preserves explicit IDs, retains section-N for existing sections and
+restores an initial hash after rendering. This supports the app's fixed getting-started and methods Help links
+without tying them to section order. Other product URLs, IDs and category memberships are preserved.
+
+Verification: generated SEO (25 indexable pages, no stale output), guide, syntax and static help-anchor/catalogue checks passed locally.
+No browser automation or desktop interaction is performed at the owner's request. The owner authorized
+publication on 2026-10-25. Deployment and live Help acceptance must be verified separately from source generation.
+
 
 ## prinTerra archive - 2026-10-24
 
@@ -1439,9 +1458,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 199 application/configuration/integration/tool/asset files:
+SHA-256 of 201 application/configuration/integration/tool/asset files:
 
-`69a54c34ad18dcba43066373b2a5bab8d24399b2c0711734fe4611821715a02e`
+`a0ceca719e5245f37b6759b407d7e35e1bba145af399a0419ffde25ad7703a6d`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1451,6 +1470,7 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 
 | Catalogue ID | Editorial ID | Page | Categories / subcategories |
 | --- | --- | --- | --- |
+| p_climora | climora | [projects-pages/climora.html](projects-pages/climora.html) | products / data-analytics, windows-apps |
 | p_archicast_season_01 | Standalone podcast season | [archicast/season-01.html](archicast/season-01.html) | podcast / archicast-season-01 |
 | p_computational_thinking_workshop_1 | Standalone registration | [CTworkshop01.html](CTworkshop01.html) | events, education / workshop |
 | p_nexosolve | nexosolve | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | products / grasshopper-plugins, windows-apps |
@@ -1471,11 +1491,33 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 | p_code_junkyard | code-junkyard | [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | education / code-junkyard, programming, comp-geo |
 | p_code_junkyard_session_00 | code-junkyard-session-00 | [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | education / code-junkyard, programming, comp-geo |
 
-Editorial navigation order: `tectotrack` → `curvadapt` → `reframing-genericity` → `building-alignment` → `design-suite` → `nexobreak` → `nexosolve` → `octomass` → `octoland` → `octocity` → `geofactory` → `printerra` → `abm-bootcamp` → `sustainable-design` → `code-junkyard` → `code-junkyard-session-00` → `nexorhino`.
+Editorial navigation order: `climora` → `tectotrack` → `curvadapt` → `reframing-genericity` → `building-alignment` → `design-suite` → `nexobreak` → `nexosolve` → `octomass` → `octoland` → `octocity` → `geofactory` → `printerra` → `abm-bootcamp` → `sustainable-design` → `code-junkyard` → `code-junkyard-session-00` → `nexorhino`.
 
 ### Every editorial project and section
 
 Statuses below quote the current website content; they are not independent product release checks.
+
+#### Climora
+
+Source key: `climora`; shell: [projects-pages/climora.html](projects-pages/climora.html); printed page label: `18`.
+
+**Published content status:** Development preview.
+
+**Purpose:** Climate evidence.<br>Design decisions.
+
+**Role / period:** Product design & development / Hossein Nazari / 2026 — present.
+
+**Stack:** Windows / Tauri / EPW weather data.
+
+| Section | Renderer kind |
+| --- | --- |
+| A workspace around the evidence | `split` |
+| Getting started | `steps` |
+| Palette and legend | `table` |
+| Project files and figure output | `cards` |
+| Methods and limitations | `split` |
+| Keyboard shortcuts | `table` |
+| About Climora | `honesty` |
 
 #### Reframing Genericity in Design
 
@@ -1870,6 +1912,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/icons/abm-bootcamp.svg](assets/icons/abm-bootcamp.svg) | 499 |
 | [assets/icons/alignment.png](assets/icons/alignment.png) | 83483 |
 | [assets/icons/archicast.svg](assets/icons/archicast.svg) | 330 |
+| [assets/icons/climora.svg](assets/icons/climora.svg) | 432 |
 | [assets/icons/codejunkyard-session-00.svg](assets/icons/codejunkyard-session-00.svg) | 377 |
 | [assets/icons/codejunkyard.svg](assets/icons/codejunkyard.svg) | 360 |
 | [assets/icons/computational-thinking-workshop-1.svg](assets/icons/computational-thinking-workshop-1.svg) | 647 |
@@ -1968,7 +2011,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 4706 |
-| [data/projects-brief.json](data/projects-brief.json) | 11249 |
+| [data/projects-brief.json](data/projects-brief.json) | 11472 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
@@ -2001,8 +2044,8 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/newsletter.js](js/newsletter.js) | 7289 |
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
-| [js/project-navigation.js](js/project-navigation.js) | 5598 |
-| [js/project-page.js](js/project-page.js) | 121051 |
+| [js/project-navigation.js](js/project-navigation.js) | 5870 |
+| [js/project-page.js](js/project-page.js) | 129939 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2010,11 +2053,12 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/workshop.js](js/workshop.js) | 5848 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 12970 |
-| [nexonest.html](nexonest.html) | 8626 |
+| [nexonest.html](nexonest.html) | 8709 |
 | [portfolio.html](portfolio.html) | 39218 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
 | [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 11950 |
+| [projects-pages/climora.html](projects-pages/climora.html) | 15777 |
 | [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | 9293 |
 | [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 8972 |
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
@@ -2040,7 +2084,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6761 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8000 |
 | [scripts/update-seo.cjs](scripts/update-seo.cjs) | 7324 |
-| [sitemap.xml](sitemap.xml) | 1873 |
+| [sitemap.xml](sitemap.xml) | 1946 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->
