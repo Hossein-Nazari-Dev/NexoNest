@@ -60,11 +60,11 @@
       <dl class="project-meta">
         <div><dt>Role</dt><dd>Hossein Nazari / NexoNest</dd></div>
         <div><dt>Period</dt><dd>2026 — present</dd></div>
-        <div><dt>Status</dt><dd>0.1.4 / Stable editor packages</dd></div>
+        <div><dt>Status</dt><dd>Rhino 8 / Python editor tools</dd></div>
         <div><dt>Stack</dt><dd>Python stubs / VS Code / PyCharm</dd></div>
       </dl>
       <div class="project-tags" aria-label="Project topics"><span>Rhino 8</span><span>Rhino.Geometry</span><span>IntelliSense</span><span>Educational documentation</span></div>
-      <div class="project-links"><a href="https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino" target="_blank" rel="noopener noreferrer">VS Code Marketplace ↗</a><a href="https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true" target="_blank" rel="noopener noreferrer">JetBrains Marketplace ↗</a><a href="../licenses/nexorhino.html" target="_blank" rel="noopener noreferrer">License &amp; attribution ↗</a></div>
+      <div class="project-links"><a href="https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino" target="_blank" rel="noopener noreferrer">VS Code Marketplace ↗</a><a href="https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true" target="_blank" rel="noopener noreferrer">JetBrains Marketplace ↗</a><a href="../nexorhino/geometry.html" target="_blank" rel="noopener noreferrer">Geometry learning reference ↗</a><a href="../licenses/nexorhino.html" target="_blank" rel="noopener noreferrer">License &amp; attribution ↗</a></div>
     </header>
 
     <section class="project-thesis" aria-label="Project question and response">
@@ -118,9 +118,20 @@
       <article class="project-info-card">
         <h3>One shared baseline</h3>
         <p>The editor plugins bundle the same RhinoCommon stub collection as the Python distribution.</p>
-      </article></div></section><section class="content-section project-editorial-section" data-nav-title="VS Code installation">
+      </article></div></section><section class="content-section project-editorial-section" data-nav-title="Geometry learning reference" id="geometry-reference">
     <div class="section-heading-row">
       <span>02</span>
+      <h2 class="section-title">Geometry learning reference</h2>
+    </div>
+      <div class="project-credits">
+        <div class="project-credits-intro">
+          <p>Read 182 authored geometry lessons alongside the API signatures: parameters and arc length, local frames, tolerance, NURBS, surface trimming, mesh topology, spatial indexing, and transformations. Every one of the 205 Geometry classes has a class tag and permanent link; represented members have their own exact targets. Topic filters and search help locate a concept. Short notes in PyCharm link directly to the corresponding lesson, with 16 in-memory Rhino Python examples in the extended reference.</p>
+          <div class="project-links"><a href="../nexorhino/geometry.html" target="_blank" rel="noopener noreferrer">Browse all geometry classes ↗</a><a href="../nexorhino/geometry.html#Rhino.Geometry.Curve.ClosestPoint" target="_blank" rel="noopener noreferrer">Curve · closest-point parameters ↗</a><a href="../nexorhino/geometry.html#Rhino.Geometry.Circle.ClosestParameter" target="_blank" rel="noopener noreferrer">Circle · angular projection ↗</a><a href="../nexorhino/geometry.html#Rhino.Geometry.Transform.Multiply" target="_blank" rel="noopener noreferrer">Transform · composition order ↗</a></div>
+        </div>
+
+      </div></section><section class="content-section project-editorial-section" data-nav-title="VS Code installation">
+    <div class="section-heading-row">
+      <span>03</span>
       <h2 class="section-title">VS Code installation</h2>
     </div><ol class="project-process">
       <li>
@@ -140,7 +151,7 @@
         <div><h3>Explore</h3><p>Write import Rhino.Geometry as rg, then type rg. to browse available types. Hover over Point3d to see its documentation.</p></div>
       </li></ol></section><section class="content-section project-editorial-section" data-nav-title="PyCharm installation">
     <div class="section-heading-row">
-      <span>03</span>
+      <span>04</span>
       <h2 class="section-title">PyCharm installation</h2>
     </div><ol class="project-process">
       <li>
@@ -157,21 +168,21 @@
       </li>
       <li>
         <span>04</span>
-        <div><h3>Wait for indexing</h3><p>Use Ctrl+Space for completion and Quick Documentation for geometry explanations. The plugin adds its bundled stubs as a project library.</p></div>
+        <div><h3>Wait for indexing</h3><p>Select an existing Python interpreter so standard types resolve, then use Ctrl+Space for completion, Ctrl+Q for short geometry explanations and exact lesson links, and Ctrl+P for parameter information. The plugin adds its bundled stubs as a project library.</p></div>
       </li></ol></section><section class="content-section project-editorial-section" data-nav-title="Stubs, not a runtime">
     <div class="section-heading-row">
-      <span>04</span>
+      <span>05</span>
       <h2 class="section-title">Stubs, not a runtime</h2>
     </div>
       <div class="editorial-split">
-        <div class="prose"><p>A .pyi file describes an API; it does not implement or execute it. Installing NexoRhino does not install Rhino or make Rhino scripts executable in a standalone Python environment.</p><p>The bundled plugins do not need pip to deliver their stubs. The PyCharm integration has been tested for import resolution and geometry completion without a configured interpreter. Executing scripts still requires an appropriate runtime, and Rhino scripts require a compatible Rhino environment.</p></div>
+        <div class="prose"><p>A .pyi file describes an API; it does not implement or execute it. Installing NexoRhino does not install Rhino or make Rhino scripts executable in a standalone Python environment.</p><p>The bundled plugins do not need pip to deliver their stubs. Basic import resolution and geometry completion can work without an interpreter. Select an existing Python interpreter to resolve standard types and return annotations in Quick Documentation. Executing scripts still requires an appropriate runtime, and Rhino scripts require a compatible Rhino environment.</p></div>
         <aside class="margin-note">
           <span>Current scope</span>
           <p>Rhino 8&#039;s Rhino.Geometry namespace is the main focus. Supporting namespaces and .NET interop signatures remain incomplete; stable editor packaging does not imply complete API coverage.</p>
         </aside>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Use and attribution">
     <div class="section-heading-row">
-      <span>05</span>
+      <span>06</span>
       <h2 class="section-title">Use and attribution</h2>
     </div>
       <div class="project-credits">
@@ -182,7 +193,7 @@
 
       </div></section><section class="content-section project-editorial-section" data-nav-title="Project links">
     <div class="section-heading-row">
-      <span>06</span>
+      <span>07</span>
       <h2 class="section-title">Project links</h2>
     </div>
       <div class="project-credits">

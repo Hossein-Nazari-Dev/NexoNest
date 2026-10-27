@@ -9,11 +9,53 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-25
+reviewed: 2026-10-27
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## NexoRhino geometry learning reference — 2026-10-27
+
+Added the standalone [Geometry learning reference](nexorhino/geometry.html).
+All 205 represented public Geometry types have stable class fragments and tags;
+2,583 declared member groups have exact targets. Overloads share one member
+section. There are 182 authored short/extended lessons and 16 Rhino examples;
+other entries retain their API-derived summaries, identified separately.
+The product page links to the reference and three representative method lessons.
+PyCharm setup now explains why an existing interpreter is needed for standard
+types and resolved return annotations.
+
+Source ownership: NexoDesignSuite/RhinoPy/tools/geometry-learning-notes.json owns
+education, and generated Rhino stubs own the displayed signatures and API summaries.
+NexoDesignSuite/RhinoPy/tools/learning_reference.py builds this site's three files:
+nexorhino/geometry.html, css/nexorhino-learning.css, js/nexorhino-learning.js.
+Do not edit those copies directly. Regenerate with:
+`python <NexoDesignSuite>/RhinoPy/tools/learning_reference.py --site-root <NexoNest>`.
+Use the same command with `--check` for freshness. Then run this repository's SEO
+and guide generators/checks. The learning-page templates live beside that builder.
+
+Fragment contract: `#Rhino.Geometry.Class` and `#Rhino.Geometry.Class.Member`,
+case-sensitive and independent of display order. A fragment opens its owning
+class, clears incompatible filters, scrolls to the exact target, and focuses it.
+Search matches names and content; topic filters combine with search. All content
+is static HTML, with native disclosure controls and direct links. JavaScript adds
+filtering and precise fragment reveal; there is no fetch, router, analytics, or
+new runtime dependency. CSS uses the existing site tokens and a mobile breakpoint.
+Unknown or malformed fragments do not run code or change other sections.
+
+The reference documents a partial Rhino 8.35 / Python view. It does not install
+or run Rhino, and does not add educational hover to Rhino's native editor.
+Publish this page before releasing packages that include its URLs. This entry
+records a local implementation; it does not establish deployment or availability
+on the public domain. Verification: the local reference passed exact member reveal/focus, search,
+combined topic filtering and reset, unique-ID and console checks. No page-level
+horizontal overflow at 320, 390 and 1440 pixels after a long-name wrapping fix.
+All 2,788 class/member targets exist in the generated static HTML. Reference
+freshness, SEO (26 pages), and guide inventory checks passed. The real PyCharm
+1.1.0 sandbox showed the corrected Circle.ClosestParameter tuple and note; clicking
+its link opened the exact public fragment. The public path returned 404 because
+this new page has not been deployed. These checks do not establish publication.
 
 ## Climora product and guide — 2026-10-25
 
@@ -1458,9 +1500,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 201 application/configuration/integration/tool/asset files:
+SHA-256 of 204 application/configuration/integration/tool/asset files:
 
-`a0ceca719e5245f37b6759b407d7e35e1bba145af399a0419ffde25ad7703a6d`
+`c9ab2e4cdd77e36dbbb74a2935d0fff1bd7601a6300cbcdb95cc4e648cf79e0c`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1575,7 +1617,7 @@ Source key: `nexosolve`; shell: [projects-pages/nexoSolve.html](projects-pages/n
 
 Source key: `nexorhino`; shell: [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html); printed page label: `12`.
 
-**Published content status:** 0.1.4 / Stable editor packages.
+**Published content status:** Rhino 8 / Python editor tools.
 
 **Purpose:** Rhino Python<br>editor assistance
 
@@ -1586,6 +1628,7 @@ Source key: `nexorhino`; shell: [projects-pages/nexoRhino.html](projects-pages/n
 | Section | Renderer kind |
 | --- | --- |
 | What NexoRhino provides | `cards` |
+| Geometry learning reference | `credits` |
 | VS Code installation | `steps` |
 | PyCharm installation | `steps` |
 | Stubs, not a runtime | `split` |
@@ -2002,6 +2045,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/layout.css](css/layout.css) | 4531 |
 | [css/newsletter.css](css/newsletter.css) | 12397 |
 | [css/nexonest.css](css/nexonest.css) | 25171 |
+| [css/nexorhino-learning.css](css/nexorhino-learning.css) | 4281 |
 | [css/nexorhino.css](css/nexorhino.css) | 554 |
 | [css/podcast.css](css/podcast.css) | 5558 |
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 38038 |
@@ -2042,10 +2086,11 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/modal.js](js/modal.js) | 5432 |
 | [js/nav.js](js/nav.js) | 4901 |
 | [js/newsletter.js](js/newsletter.js) | 7289 |
+| [js/nexorhino-learning.js](js/nexorhino-learning.js) | 2363 |
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 129939 |
+| [js/project-page.js](js/project-page.js) | 131497 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2054,6 +2099,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 12970 |
 | [nexonest.html](nexonest.html) | 8709 |
+| [nexorhino/geometry.html](nexorhino/geometry.html) | 1633725 |
 | [portfolio.html](portfolio.html) | 39218 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
@@ -2064,7 +2110,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
-| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 13908 |
+| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 15732 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26431 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
@@ -2083,8 +2129,8 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-seo-browser.cjs](scripts/test-seo-browser.cjs) | 4006 |
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6761 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8000 |
-| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 7324 |
-| [sitemap.xml](sitemap.xml) | 1946 |
+| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 7463 |
+| [sitemap.xml](sitemap.xml) | 2015 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

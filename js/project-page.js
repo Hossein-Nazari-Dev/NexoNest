@@ -699,12 +699,13 @@ const PROJECT_PAGE_DATA = {
     lead: "Explore RhinoCommon through Python type hints, meaningful code completion, and geometry documentation — inside the editor you already use.",
     role: "Hossein Nazari / NexoNest",
     period: "2026 — present",
-    status: "0.1.4 / Stable editor packages",
+    status: "Rhino 8 / Python editor tools",
     stack: "Python stubs / VS Code / PyCharm",
     tags: ["Rhino 8", "Rhino.Geometry", "IntelliSense", "Educational documentation"],
     links: [
       ["VS Code Marketplace", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
       ["JetBrains Marketplace", "https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true"],
+      ["Geometry learning reference", "../nexorhino/geometry.html"],
       ["License & attribution", "../licenses/nexorhino.html"]
     ],
     question: "How can writing Rhino Python become easier to explore and learn outside Rhino's own editor?",
@@ -727,6 +728,18 @@ const PROJECT_PAGE_DATA = {
         ]
       },
       {
+        id: "geometry-reference",
+        title: "Geometry learning reference",
+        kind: "credits",
+        text: "Read 182 authored geometry lessons alongside the API signatures: parameters and arc length, local frames, tolerance, NURBS, surface trimming, mesh topology, spatial indexing, and transformations. Every one of the 205 Geometry classes has a class tag and permanent link; represented members have their own exact targets. Topic filters and search help locate a concept. Short notes in PyCharm link directly to the corresponding lesson, with 16 in-memory Rhino Python examples in the extended reference.",
+        links: [
+          ["Browse all geometry classes", "../nexorhino/geometry.html"],
+          ["Curve · closest-point parameters", "../nexorhino/geometry.html#Rhino.Geometry.Curve.ClosestPoint"],
+          ["Circle · angular projection", "../nexorhino/geometry.html#Rhino.Geometry.Circle.ClosestParameter"],
+          ["Transform · composition order", "../nexorhino/geometry.html#Rhino.Geometry.Transform.Multiply"]
+        ]
+      },
+      {
         title: "VS Code installation",
         kind: "steps",
         items: [
@@ -743,7 +756,7 @@ const PROJECT_PAGE_DATA = {
           ["01", "Check compatibility", "The first plugin build targets PyCharm 2026.2.x. See the JetBrains Marketplace listing for available versions and compatibility."],
           ["02", "Install", "In Settings > Plugins > Marketplace, search for NexoRhino by NexoNest and install it. Alternatively, use Install Plugin from Disk to install a supplied plugin ZIP without extracting it."],
           ["03", "Automatic setup", "Restart after installation and open a Python project. Stubs are connected automatically and restored after project synchronization. Tools > NexoRhino > Repair Code Insight Configuration is available for manual repair."],
-          ["04", "Wait for indexing", "Use Ctrl+Space for completion and Quick Documentation for geometry explanations. The plugin adds its bundled stubs as a project library."]
+          ["04", "Wait for indexing", "Select an existing Python interpreter so standard types resolve, then use Ctrl+Space for completion, Ctrl+Q for short geometry explanations and exact lesson links, and Ctrl+P for parameter information. The plugin adds its bundled stubs as a project library."]
         ]
       },
       {
@@ -751,7 +764,7 @@ const PROJECT_PAGE_DATA = {
         kind: "split",
         text: [
           "A .pyi file describes an API; it does not implement or execute it. Installing NexoRhino does not install Rhino or make Rhino scripts executable in a standalone Python environment.",
-          "The bundled plugins do not need pip to deliver their stubs. The PyCharm integration has been tested for import resolution and geometry completion without a configured interpreter. Executing scripts still requires an appropriate runtime, and Rhino scripts require a compatible Rhino environment."
+          "The bundled plugins do not need pip to deliver their stubs. Basic import resolution and geometry completion can work without an interpreter. Select an existing Python interpreter to resolve standard types and return annotations in Quick Documentation. Executing scripts still requires an appropriate runtime, and Rhino scripts require a compatible Rhino environment."
         ],
         aside: { label: "Current scope", text: "Rhino 8's Rhino.Geometry namespace is the main focus. Supporting namespaces and .NET interop signatures remain incomplete; stable editor packaging does not imply complete API coverage." }
       },
