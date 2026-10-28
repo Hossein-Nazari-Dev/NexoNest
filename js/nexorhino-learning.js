@@ -32,13 +32,15 @@
     try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
     if (!id) return;
     const target = document.getElementById(id);
-    if (!target || !target.closest('#class-entries')) return;
+    if (!target || (!target.closest('#class-entries') && !target.closest('#learning-topics'))) return;
     // An incoming link must win over any previous filtering state.
     search.value = '';
     topic.value = '';
     filter();
     const owner = target.closest('.class-entry');
     if (owner) owner.open = true;
+    const concept = target.closest('.topic-guide');
+    if (concept) concept.open = true;
     target.scrollIntoView({ block: 'start' });
     target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });

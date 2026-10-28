@@ -2,3 +2,12 @@
 
 /* API names can be long; prose wraps while signature blocks scroll locally. */
 p{overflow-wrap:anywhere}.class-entry>summary h2{min-width:0;flex:1}.class-body{min-width:0}
+
+/* Educational content stays distinct from the API summary. */
+.lesson-label{font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:#426b5b}
+.learning-context{margin:24px 0;padding:16px 20px;border-left:3px solid #6a9f85;background:#dcebe3;border-radius:0 5px 5px 0}
+.learning-context h4{margin-top:0}.learning-context a,.related-lessons{font-size:13px}.member h4{margin:24px 0 8px;font-size:14px}
+.member li{padding-left:4px;margin:9px 0}.tag{text-decoration:none}.topic-guide{border-top:1px solid #b2cbbd;scroll-margin-top:24px}
+.topic-guide summary{cursor:pointer;padding:18px 0}.topic-guide summary h2{font:600 17px/1.5 system-ui,sans-serif}
+.topic-body{padding:0 8px 24px}.topic-body h3{font:600 15px system-ui,sans-serif}#learning-topics{margin:48px 0}
+#concepts-title{display:block;font:650 25px/1.4 system-ui,sans-serif}.topic-guide:target{outline:2px solid #4d8b6f;outline-offset:6px}

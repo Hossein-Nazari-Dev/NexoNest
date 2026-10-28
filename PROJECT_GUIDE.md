@@ -9,11 +9,49 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-27
+reviewed: 2026-10-28
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## NexoRhino clickable learning tags and expanded lessons — 2026-10-28
+
+PyCharm Ctrl+Q now displays a dedicated NexoNest learning block directly below the
+signature with an exact #Class.Member link, including static properties and
+implicit constructors that have no docstring. The page retains its stable class
+and member fragments; method headings now identify their owning class explicitly.
+
+The expanded reference adds 25 shared concept tutorials and 14 worked numerical
+explanations with use cases, ordered calculations, common mistakes, and related
+lesson links. The existing 182 authored short notes and 16 executable examples
+remain. Members without individual worked lessons show an API summary followed
+by labelled class/concept learning context, including the represented base-class
+topic where appropriate. These are distinct content levels, not a claim that
+all 2,583 member groups have individual authored worked examples.
+
+Source ownership additionally includes NexoDesignSuite/RhinoPy/tools/
+geometry-learning-topics.json. The builder renders all three website files;
+never edit their generated copies directly. Concept links use stable #topic-name
+fragments. Navigation opens the concept disclosure, scrolls to it, and focuses it;
+related member links retain the existing exact-fragment behavior.
+
+The page contains a deterministic nexorhino-learning-revision metadata value
+computed from the authored notes/topics. The package release guard checks this
+revision as well as anchor coverage; an old page with matching IDs cannot pass
+as the new learning content. This is a freshness contract, not a deployment ID.
+
+Current verification: 23 PyCharm platform tests and the native Ctrl+Q tag display
+passed; six education/reference tests passed. The browser verified exact member
+focus, a related-member jump, and opening/focusing a concept lesson. No browser
+console warnings/errors or page-level overflow at 320/390/1440 pixels. The public
+page responded HTTP 200 but still contained the older learning content. This
+follow-up was prepared locally. The owner explicitly authorized publication of
+only these educational website changes on 2026-10-28. The approved scope is the
+reference HTML/CSS/navigation, NexoRhino product copy and this guide. Package
+publication is not authorized by that approval. Pre-publication reference, SEO,
+source-inventory and whitespace checks passed; live deployment evidence is
+verified separately after the publishing push.
 
 ## NexoRhino geometry learning reference — 2026-10-27
 
@@ -1502,7 +1540,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 204 application/configuration/integration/tool/asset files:
 
-`c9ab2e4cdd77e36dbbb74a2935d0fff1bd7601a6300cbcdb95cc4e648cf79e0c`
+`3765e1420b69c4ccfe00e893b7745d9e008f78b4206fceff96adf40a4c57e254`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2045,7 +2083,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/layout.css](css/layout.css) | 4531 |
 | [css/newsletter.css](css/newsletter.css) | 12397 |
 | [css/nexonest.css](css/nexonest.css) | 25171 |
-| [css/nexorhino-learning.css](css/nexorhino-learning.css) | 4281 |
+| [css/nexorhino-learning.css](css/nexorhino-learning.css) | 5204 |
 | [css/nexorhino.css](css/nexorhino.css) | 554 |
 | [css/podcast.css](css/podcast.css) | 5558 |
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 38038 |
@@ -2086,11 +2124,11 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/modal.js](js/modal.js) | 5432 |
 | [js/nav.js](js/nav.js) | 4901 |
 | [js/newsletter.js](js/newsletter.js) | 7289 |
-| [js/nexorhino-learning.js](js/nexorhino-learning.js) | 2363 |
+| [js/nexorhino-learning.js](js/nexorhino-learning.js) | 2494 |
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 131497 |
+| [js/project-page.js](js/project-page.js) | 131604 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2099,7 +2137,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 12970 |
 | [nexonest.html](nexonest.html) | 8709 |
-| [nexorhino/geometry.html](nexorhino/geometry.html) | 1633725 |
+| [nexorhino/geometry.html](nexorhino/geometry.html) | 3384725 |
 | [portfolio.html](portfolio.html) | 39218 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
@@ -2110,7 +2148,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
-| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 15732 |
+| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 15839 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26431 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |

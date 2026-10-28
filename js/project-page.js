@@ -731,7 +731,7 @@ const PROJECT_PAGE_DATA = {
         id: "geometry-reference",
         title: "Geometry learning reference",
         kind: "credits",
-        text: "Read 182 authored geometry lessons alongside the API signatures: parameters and arc length, local frames, tolerance, NURBS, surface trimming, mesh topology, spatial indexing, and transformations. Every one of the 205 Geometry classes has a class tag and permanent link; represented members have their own exact targets. Topic filters and search help locate a concept. Short notes in PyCharm link directly to the corresponding lesson, with 16 in-memory Rhino Python examples in the extended reference.",
+        text: "Read 182 authored geometry lessons alongside the API signatures: parameters and arc length, local frames, tolerance, NURBS, surface trimming, mesh topology, spatial indexing, and transformations. Every one of the 205 Geometry classes has a class tag and permanent link; represented members have their own exact targets. Topic filters and search help locate a concept. Ctrl+Q in PyCharm shows an exact clickable #Class.Member learning tag. The extended reference includes 25 concept tutorials, 14 worked numerical explanations with common mistakes and related lessons, and 16 in-memory Rhino Python examples.",
         links: [
           ["Browse all geometry classes", "../nexorhino/geometry.html"],
           ["Curve · closest-point parameters", "../nexorhino/geometry.html#Rhino.Geometry.Curve.ClosestPoint"],
