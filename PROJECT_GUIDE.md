@@ -40,8 +40,12 @@ passed. Seven stub files differ only in checkout newlines; the authoring reposit
 release guard now accepts only CRLF/LF differences while still rejecting content
 changes. The appended release-1-1
 section reports the availability boundary without claiming that every store
-already serves 1.1.0. Existing numbered section fragments are preserved. Website
-publication will be recorded separately after the authorized deployment.
+already serves 1.1.0. Existing numbered section fragments are preserved. Website update commit d97cd33fe517c4f2123cbfc256f46a7d80feeb76 was deployed by
+GitHub Pages run 40755108206 (success). Live browser verification confirmed the
+1.1 release-status section and updated VS Code shortcuts, with no horizontal
+overflow. Store status remains independent: PyPI 1.1.0 is public, PyCharm update
+1205557 is Under review, and the VS Code upload is waiting on its CAPTCHA. The
+release-status section intentionally does not advertise universal 1.1 availability.
 
 ## NexoRhino clickable learning tags and expanded lessons — 2026-10-28
 
