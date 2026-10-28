@@ -15,6 +15,34 @@ status: maintained
 
 # NexoNest - Architecture and Developer Handoff
 
+## NexoRhino editor acceptance and release preparation — 2026-10-28
+
+The product guide now documents the native editor controls separately: PyCharm
+Ctrl+Space / Ctrl+P / Ctrl+Q and VS Code Ctrl+Space / Ctrl+Shift+Space / Show or
+Focus Hover (Ctrl+K, Ctrl+I). VS Code exposes the exact live lesson through the
+Pylance Learn more URL; its external-site Open prompt does not require changing
+Trusted Domains. A trusted workspace is required for the extension to activate.
+PyCharm 1.1 compatibility is explicitly limited to build 262 / 2026.2.x.
+
+These instructions describe the 1.1 candidate tested from local packages. Store
+submission and approval are separate from local acceptance and website publication;
+do not advertise public 1.1 availability until each store confirms it. Existing
+product IDs, page URLs, learning fragments, license terms and non-NexoRhino pages
+are unchanged. Source ownership remains js/project-page.js, with generated HTML
+owned by the SEO script. The owner authorized both Marketplace updates and separately confirmed PyPI
+publication. JetBrains accepted the 1.1.0 ZIP in Stable (update 1205557) on
+2026-10-28 and reports Under review. Initial upload checks found no problems;
+manual approval is pending. VS Code upload is waiting on the human CAPTCHA,
+and Python 1.1.0 is published on PyPI (GitHub release workflow 40752947154
+completed successfully). The downloaded public wheel and source archive matched
+their PyPI SHA-256 hashes; installing the public wheel and consumer type checks
+passed. Seven stub files differ only in checkout newlines; the authoring repository
+release guard now accepts only CRLF/LF differences while still rejecting content
+changes. The appended release-1-1
+section reports the availability boundary without claiming that every store
+already serves 1.1.0. Existing numbered section fragments are preserved. Website
+publication will be recorded separately after the authorized deployment.
+
 ## NexoRhino clickable learning tags and expanded lessons — 2026-10-28
 
 PyCharm Ctrl+Q now displays a dedicated NexoNest learning block directly below the
@@ -1550,7 +1578,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 204 application/configuration/integration/tool/asset files:
 
-`59a42499f7ee079e351b1f8369c8faf440398b424b22b2b982874a2014beaad4`
+`16b97bb614b4a648c5989ed4f17a908c8edacf29b34c2c5ca6cf1c4c54de9ad5`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1682,6 +1710,7 @@ Source key: `nexorhino`; shell: [projects-pages/nexoRhino.html](projects-pages/n
 | Stubs, not a runtime | `split` |
 | Use and attribution | `credits` |
 | Project links | `credits` |
+| Version 1.1 release status | `credits` |
 
 #### NexoBreak
 
@@ -2138,7 +2167,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 131604 |
+| [js/project-page.js](js/project-page.js) | 132933 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2158,7 +2187,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
-| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 15839 |
+| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 17558 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26431 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |

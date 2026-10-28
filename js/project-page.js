@@ -744,19 +744,19 @@ const PROJECT_PAGE_DATA = {
         kind: "steps",
         items: [
           ["01", "Install", "Search for NexoRhino by NexoNest in Extensions, or install a supplied VSIX using Install from VSIX."],
-          ["02", "Enable editor support", "The Python and Pylance extensions provide analysis. Open your project folder."],
+          ["02", "Enable editor support", "The Python and Pylance extensions provide analysis. Open a project folder you trust and wait for Pylance to finish loading."],
           ["03", "Automatic setup", "Pylance is configured automatically for each workspace folder. Use NexoRhino: Repair IntelliSense Configuration only if you need to repair or re-enable setup."],
-          ["04", "Explore", "Write import Rhino.Geometry as rg, then type rg. to browse available types. Hover over Point3d to see its documentation."]
+          ["04", "Explore", "Write import Rhino.Geometry as rg, then use Ctrl+Space for completion and Ctrl+Shift+Space inside a call for parameters. Hover over a class or method, or run Show or Focus Hover (Ctrl+K, then Ctrl+I). Click its Learn more URL to open the exact live lesson. Choose Open if VS Code asks to open that website; no Trusted Domains change is needed."]
         ]
       },
       {
         title: "PyCharm installation",
         kind: "steps",
         items: [
-          ["01", "Check compatibility", "The first plugin build targets PyCharm 2026.2.x. See the JetBrains Marketplace listing for available versions and compatibility."],
+          ["01", "Check compatibility", "Version 1.1 targets PyCharm 2026.2.x (build 262). See the JetBrains Marketplace listing for the version currently available and its compatibility."],
           ["02", "Install", "In Settings > Plugins > Marketplace, search for NexoRhino by NexoNest and install it. Alternatively, use Install Plugin from Disk to install a supplied plugin ZIP without extracting it."],
           ["03", "Automatic setup", "Restart after installation and open a Python project. Stubs are connected automatically and restored after project synchronization. Tools > NexoRhino > Repair Code Insight Configuration is available for manual repair."],
-          ["04", "Wait for indexing", "Select an existing Python interpreter so standard types resolve, then use Ctrl+Space for completion, Ctrl+Q for short geometry explanations and exact lesson links, and Ctrl+P for parameter information. The plugin adds its bundled stubs as a project library."]
+          ["04", "Wait for indexing", "Select an existing Python interpreter so standard types resolve, then use Ctrl+Space for completion, Ctrl+Q for short geometry explanations and exact lesson links, and Ctrl+P for parameter information. The blue #Class.Member tag opens the expanded lesson for that exact symbol. The plugin adds its bundled stubs as a project library."]
         ]
       },
       {
@@ -783,6 +783,17 @@ const PROJECT_PAGE_DATA = {
           ["JetBrains Marketplace", "https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true"],
           ["Python distribution on PyPI", "https://pypi.org/project/NexoRhino-py-stubs/"],
           ["NexoNest", "https://nexonest.com"]
+        ]
+      },
+      {
+        id: "release-1-1",
+        title: "Version 1.1 release status",
+        kind: "credits",
+        text: "The 1.1.0 packages have passed local typing, packaging, PyCharm and Pylance checks. The PyCharm update has been submitted to the Stable channel and is under JetBrains review; it becomes publicly available after approval. The Python distribution 1.1.0 is published on PyPI. VS Code publication is being completed separately. Check the version displayed by each store before downloading; local validation does not mean every store already serves 1.1.0. All releases retain the documented partial Rhino 8 API scope.",
+        links: [
+          ["PyCharm versions", "https://plugins.jetbrains.com/plugin/34207-nexorhino/versions"],
+          ["VS Code listing", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
+          ["Python distribution", "https://pypi.org/project/NexoRhino-py-stubs/"]
         ]
       }
     ]
