@@ -699,12 +699,13 @@ const PROJECT_PAGE_DATA = {
     lead: "Explore RhinoCommon through Python type hints, meaningful code completion, and geometry documentation — inside the editor you already use.",
     role: "Hossein Nazari / NexoNest",
     period: "2026 — present",
-    status: "Rhino 8 / Python editor tools",
+    status: "Version 1.1.0 / Rhino 8",
     stack: "Python stubs / VS Code / PyCharm",
     tags: ["Rhino 8", "Rhino.Geometry", "IntelliSense", "Educational documentation"],
     links: [
       ["VS Code Marketplace", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
       ["JetBrains Marketplace", "https://plugins.jetbrains.com/plugin/34207-nexorhino?noRedirect=true"],
+      ["Python package 1.1.0", "https://pypi.org/project/NexoRhino-py-stubs/1.1.0/"],
       ["Geometry learning reference", "../nexorhino/geometry.html"],
       ["License & attribution", "../licenses/nexorhino.html"]
     ],
@@ -789,7 +790,7 @@ const PROJECT_PAGE_DATA = {
         id: "release-1-1",
         title: "Version 1.1 release status",
         kind: "credits",
-        text: "The 1.1.0 packages have passed local typing, packaging, PyCharm and Pylance checks. The PyCharm update has been submitted to the Stable channel and is under JetBrains review; it becomes publicly available after approval. The Python distribution 1.1.0 is published on PyPI. VS Code publication is being completed separately. Check the version displayed by each store before downloading; local validation does not mean every store already serves 1.1.0. All releases retain the documented partial Rhino 8 API scope.",
+        text: "Version 1.1.0 is publicly available on PyPI, JetBrains Marketplace and the VS Code Marketplace. Both editor plugins bundle the same Rhino 8 stubs, so no pip installation is needed for their editor support. PyCharm 1.1 targets 2026.2.x (build 262); VS Code uses the Python and Pylance extensions. The downloaded public packages were checked against the tested artifacts. Coverage of RhinoCommon remains partial; executing geometry still requires a compatible Rhino environment.",
         links: [
           ["PyCharm versions", "https://plugins.jetbrains.com/plugin/34207-nexorhino/versions"],
           ["VS Code listing", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],

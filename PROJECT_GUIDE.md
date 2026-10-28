@@ -9,11 +9,33 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-28
+reviewed: 2026-10-29
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## NexoRhino public editor update — 2026-10-29
+
+JetBrains update 1205557 / NexoRhino 1.1.0 is now approved and present in the
+public update API. The downloaded public ZIP passes all 220 canonical stub,
+version and license checks; every archive entry is byte-identical to the tested
+local ZIP (ZIP container/compression metadata differs). This verifies the actual
+public plugin payload, rather than inferring publication from its earlier upload.
+
+Microsoft verification also finished: the official public Gallery API now lists
+1.1.0 as the latest version. The public VSIX was downloaded from its returned asset
+URL and passes all 220 canonical stub, version and license checks. All 228 files
+under extension/ are byte-identical to the tested VSIX, including its runtime JS
+and manifest. No CAPTCHA or publishing approval remains pending. PyPI 1.1.0
+remains published and its downloaded wheel was independently installed and tested.
+
+The product status now identifies version 1.1.0, the main links include its pinned
+PyPI page, and release-1-1 records public availability on all three services.
+Compatibility and the partial API scope remain explicit. Existing section
+fragments, other product pages and runtime behavior are unchanged. Source ownership
+remains js/project-page.js; SEO output is generated. The previous 2026-10-28
+sections below record their historical checkpoints.
 
 ## NexoRhino editor acceptance and release preparation — 2026-10-28
 
@@ -1582,7 +1604,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 204 application/configuration/integration/tool/asset files:
 
-`16b97bb614b4a648c5989ed4f17a908c8edacf29b34c2c5ca6cf1c4c54de9ad5`
+`0172cc82bd5fb2d775cbc8e58a695ea517d69041fccff4b87e367b9c626160b1`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1697,7 +1719,7 @@ Source key: `nexosolve`; shell: [projects-pages/nexoSolve.html](projects-pages/n
 
 Source key: `nexorhino`; shell: [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html); printed page label: `12`.
 
-**Published content status:** Rhino 8 / Python editor tools.
+**Published content status:** Version 1.1.0 / Rhino 8.
 
 **Purpose:** Rhino Python<br>editor assistance
 
@@ -2171,7 +2193,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 132933 |
+| [js/project-page.js](js/project-page.js) | 132978 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2191,7 +2213,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
-| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 17558 |
+| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 17647 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26431 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
