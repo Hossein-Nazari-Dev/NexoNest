@@ -39,9 +39,11 @@ related member links retain the existing exact-fragment behavior.
 The page contains a deterministic nexorhino-learning-revision metadata value
 computed from the authored notes/topics. The package release guard checks this
 revision as well as anchor coverage; an old page with matching IDs cannot pass
-as the new learning content. This is a freshness contract, not a deployment ID.
+as the new learning content. This is a freshness contract, not a deployment ID. The
+reference CSS/JS URLs also carry a deterministic asset fingerprint so returning
+visitors load the matching navigation and layout immediately after publication.
 
-Current verification: 23 PyCharm platform tests and the native Ctrl+Q tag display
+Pre-publication verification: 23 PyCharm platform tests and the native Ctrl+Q tag display
 passed; six education/reference tests passed. The browser verified exact member
 focus, a related-member jump, and opening/focusing a concept lesson. No browser
 console warnings/errors or page-level overflow at 320/390/1440 pixels. The public
@@ -52,6 +54,14 @@ reference HTML/CSS/navigation, NexoRhino product copy and this guide. Package
 publication is not authorized by that approval. Pre-publication reference, SEO,
 source-inventory and whitespace checks passed; live deployment evidence is
 verified separately after the publishing push.
+
+Publication evidence: educational content commit dc8644143952e9fc674fdf1696f6ae562653dc37
+was pushed to main and GitHub Pages run 40744799259 completed successfully on
+2026-10-28. The public HTTPS reference passed the authored education-revision
+check and all 2,788 class/member targets. This records website publication only;
+no Python or editor package was published. The asset-fingerprint follow-up keeps
+the same educational revision and prevents older cached navigation/layout from
+being reused after an update.
 
 ## NexoRhino geometry learning reference — 2026-10-27
 
@@ -1540,7 +1550,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 204 application/configuration/integration/tool/asset files:
 
-`3765e1420b69c4ccfe00e893b7745d9e008f78b4206fceff96adf40a4c57e254`
+`59a42499f7ee079e351b1f8369c8faf440398b424b22b2b982874a2014beaad4`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2137,7 +2147,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 12970 |
 | [nexonest.html](nexonest.html) | 8709 |
-| [nexorhino/geometry.html](nexorhino/geometry.html) | 3384725 |
+| [nexorhino/geometry.html](nexorhino/geometry.html) | 3384755 |
 | [portfolio.html](portfolio.html) | 39218 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
