@@ -754,7 +754,7 @@ const PROJECT_PAGE_DATA = {
         title: "PyCharm installation",
         kind: "steps",
         items: [
-          ["01", "Check compatibility", "PyCharm plugin 1.1.1 supports PyCharm 2023.3 through 2026.2.x (builds 233–262), including Community and Professional/unified editions. It is submitted to JetBrains Stable and awaiting approval. The currently approved 1.1.0 supports 2026.2.x only; check Marketplace for the available update."],
+          ["01", "Check compatibility", "PyCharm plugin 1.1.1 supports PyCharm 2023.3 through 2026.2.x (builds 233–262), including Community and Professional/unified editions. Version 1.1.1 is approved and publicly available on JetBrains Stable. Upgrade from 1.1.0 to enable this wider IDE range."],
           ["02", "Install", "In Settings > Plugins > Marketplace, search for NexoRhino by NexoNest and install it. Alternatively, use Install Plugin from Disk to install a supplied plugin ZIP without extracting it."],
           ["03", "Automatic setup", "Restart after installation and open a Python project. Stubs are connected automatically and restored after project synchronization. Tools > NexoRhino > Repair Code Insight Configuration is available for manual repair."],
           ["04", "Wait for indexing", "Select an existing Python interpreter so standard types resolve, then use Ctrl+Space for completion, Ctrl+Q for short geometry explanations and exact lesson links, and Ctrl+P for parameter information. The blue #Class.Member tag opens the expanded lesson for that exact symbol. The plugin adds its bundled stubs as a project library."]
@@ -790,7 +790,7 @@ const PROJECT_PAGE_DATA = {
         id: "release-1-1",
         title: "Version 1.1 release status",
         kind: "credits",
-        text: "PyCharm 1.1.1 adds support for PyCharm 2023.3–2026.2.x and has been submitted to JetBrains Stable for approval. Its identical ZIP passed 23 automated IDE tests in each of 10 environments and binary compatibility verification; the approved 1.1.0 still targets 2026.2.x. VS Code 1.1.1 is publicly available as a Stable update. Its downloaded Marketplace package matches all 228 tested extension payloads byte for byte. VS Code requires version 1.85 or newer, Python and Pylance. Both editor patches bundle the same tested Rhino 8 stubs and learning catalogue as the published Python package 1.1.0. No pip installation is needed for bundled editor support. API coverage remains partial, and executing geometry requires a compatible Rhino environment.",
+        text: "PyCharm 1.1.1 is approved and publicly available on JetBrains Stable, adding support for PyCharm 2023.3–2026.2.x. Its ZIP passed 23 automated IDE tests in each of 10 environments and binary compatibility verification. All 230 entries in the downloaded Marketplace ZIP match the tested package byte for byte. VS Code 1.1.1 is publicly available as a Stable update. Its downloaded Marketplace package matches all 228 tested extension payloads byte for byte. VS Code requires version 1.85 or newer, Python and Pylance. Both editor patches bundle the same tested Rhino 8 stubs and learning catalogue as the published Python package 1.1.0. No pip installation is needed for bundled editor support. API coverage remains partial, and executing geometry requires a compatible Rhino environment.",
         links: [
           ["PyCharm versions", "https://plugins.jetbrains.com/plugin/34207-nexorhino/versions"],
           ["VS Code listing", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
