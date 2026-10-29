@@ -699,7 +699,7 @@ const PROJECT_PAGE_DATA = {
     lead: "Explore RhinoCommon through Python type hints, meaningful code completion, and geometry documentation — inside the editor you already use.",
     role: "Hossein Nazari / NexoNest",
     period: "2026 — present",
-    status: "Version 1.1.0 / Rhino 8",
+    status: "Version 1.1 / Rhino 8",
     stack: "Python stubs / VS Code / PyCharm",
     tags: ["Rhino 8", "Rhino.Geometry", "IntelliSense", "Educational documentation"],
     links: [
@@ -745,7 +745,7 @@ const PROJECT_PAGE_DATA = {
         kind: "steps",
         items: [
           ["01", "Install", "Search for NexoRhino by NexoNest in Extensions, or install a supplied VSIX using Install from VSIX."],
-          ["02", "Enable editor support", "The Python and Pylance extensions provide analysis. Open a project folder you trust and wait for Pylance to finish loading."],
+          ["02", "Enable editor support", "Use VS Code 1.85 or newer with the Python and Pylance extensions. Open a project folder you trust and wait for Pylance to finish loading."],
           ["03", "Automatic setup", "Pylance is configured automatically for each workspace folder. Use NexoRhino: Repair IntelliSense Configuration only if you need to repair or re-enable setup."],
           ["04", "Explore", "Write import Rhino.Geometry as rg, then use Ctrl+Space for completion and Ctrl+Shift+Space inside a call for parameters. Hover over a class or method, or run Show or Focus Hover (Ctrl+K, then Ctrl+I). Click its Learn more URL to open the exact live lesson. Choose Open if VS Code asks to open that website; no Trusted Domains change is needed."]
         ]
@@ -754,7 +754,7 @@ const PROJECT_PAGE_DATA = {
         title: "PyCharm installation",
         kind: "steps",
         items: [
-          ["01", "Check compatibility", "Version 1.1 targets PyCharm 2026.2.x (build 262). See the JetBrains Marketplace listing for the version currently available and its compatibility."],
+          ["01", "Check compatibility", "PyCharm plugin 1.1.1 supports PyCharm 2023.3 through 2026.2.x (builds 233–262), including Community and Professional/unified editions. It is submitted to JetBrains Stable and awaiting approval. The currently approved 1.1.0 supports 2026.2.x only; check Marketplace for the available update."],
           ["02", "Install", "In Settings > Plugins > Marketplace, search for NexoRhino by NexoNest and install it. Alternatively, use Install Plugin from Disk to install a supplied plugin ZIP without extracting it."],
           ["03", "Automatic setup", "Restart after installation and open a Python project. Stubs are connected automatically and restored after project synchronization. Tools > NexoRhino > Repair Code Insight Configuration is available for manual repair."],
           ["04", "Wait for indexing", "Select an existing Python interpreter so standard types resolve, then use Ctrl+Space for completion, Ctrl+Q for short geometry explanations and exact lesson links, and Ctrl+P for parameter information. The blue #Class.Member tag opens the expanded lesson for that exact symbol. The plugin adds its bundled stubs as a project library."]
@@ -790,7 +790,7 @@ const PROJECT_PAGE_DATA = {
         id: "release-1-1",
         title: "Version 1.1 release status",
         kind: "credits",
-        text: "Version 1.1.0 is publicly available on PyPI, JetBrains Marketplace and the VS Code Marketplace. Both editor plugins bundle the same Rhino 8 stubs, so no pip installation is needed for their editor support. PyCharm 1.1 targets 2026.2.x (build 262); VS Code uses the Python and Pylance extensions. The downloaded public packages were checked against the tested artifacts. Coverage of RhinoCommon remains partial; executing geometry still requires a compatible Rhino environment.",
+        text: "PyCharm 1.1.1 adds support for PyCharm 2023.3–2026.2.x and has been submitted to JetBrains Stable for approval. Its identical ZIP passed 23 automated IDE tests in each of 10 environments and binary compatibility verification; the approved 1.1.0 still targets 2026.2.x. VS Code 1.1.1 has been uploaded and is being verified by Microsoft; 1.1.0 remains publicly available until that completes. VS Code requires version 1.85 or newer, Python and Pylance. Both editor patches bundle the same tested Rhino 8 stubs and learning catalogue as the published Python package 1.1.0. No pip installation is needed for bundled editor support. API coverage remains partial, and executing geometry requires a compatible Rhino environment.",
         links: [
           ["PyCharm versions", "https://plugins.jetbrains.com/plugin/34207-nexorhino/versions"],
           ["VS Code listing", "https://marketplace.visualstudio.com/items?itemName=nexonest.nexorhino"],
