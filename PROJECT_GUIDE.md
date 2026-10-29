@@ -26,16 +26,19 @@ Windows environments additionally cover Java 17/21/25. These are automated IDE
 fixture results, not a new manual GUI or Rhino-host test claim. The uploaded ZIP
 SHA-256 is 27ea3cdedee110cf58e724d29ce67f636fc54f0fba875d6010baebd1f84943f2.
 
-VS Code 1.1.1 was also uploaded to the existing nexonest.nexorhino listing and
-Microsoft is verifying it. Its 23 ownership/activation tests pass. Runtime JS,
-icon and all bundled stubs match the tested public 1.1.0 payload; this is an
-editor metadata/documentation patch, not a new VS Code compatibility range.
+VS Code 1.1.1 is now public and Stable on the existing nexonest.nexorhino
+listing. The official Gallery API lists it with PreRelease=false. The VSIX
+downloaded from that API's asset URL passes all 220 canonical stub/marker,
+version and license checks. All 228 extension payloads match the tested VSIX byte
+for byte. Its 23 ownership/activation tests pass. Runtime JS, icon and all bundled
+stubs also match the tested public 1.1.0 payload; this is an editor metadata and
+documentation patch, not a new VS Code compatibility range.
 The unchanged minimum is VS Code 1.85 with Python and Pylance. Python remains
 1.1.0 on PyPI; the editor versions are independent and no Python release is made.
 
 The product page shows the new PyCharm compatibility together with its approval
-boundary, and reports Microsoft verification separately from public availability.
-Until approvals complete, the public 1.1.0 packages remain the available versions.
+boundary, and distinguishes the public VS Code 1.1.1 update from PyCharm's
+pending approval. Until JetBrains approves 1.1.1, its public 1.1.0 remains available.
 The hero uses the 1.1 family label rather than implying one shared patch version.
 Existing product URLs, section IDs, geometry learning anchors, licenses and other
 product pages remain unchanged. Source ownership is js/project-page.js; SEO HTML
@@ -1631,7 +1634,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 204 application/configuration/integration/tool/asset files:
 
-`cbb272cf70ede1a6ef2868324f39e8fe205586182f0151a787313517d22f4a77`
+`10572c471d22e7bc2758cee89b33f44dfb7721bc635636d8263a93848a3a4e85`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2220,7 +2223,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 133384 |
+| [js/project-page.js](js/project-page.js) | 133409 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2240,7 +2243,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
-| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 18053 |
+| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 18078 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26431 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
