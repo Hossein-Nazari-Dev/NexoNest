@@ -24,39 +24,39 @@ const PROJECT_PAGE_DATA = {
   "page": "18",
   "title": "Climora",
   "shortTitle": "Climora",
-  "subtitle": "Climate evidence.<br>Design decisions.",
+  "subtitle": "Read the climate.<br>Design with insight.",
   "icon": "../assets/icons/climora.svg",
-  "iconAlt": "Climora: an open C, hourly climate bands and a rising sun",
+  "iconAlt": "Climora Readout: an open C and a vertical measurement datum",
   "eyebrow": "NexoNest / Climate-responsive design",
-  "lead": "Read the rhythm of a climate before shaping a space. Climora brings hourly weather, clear annual heatmaps and early architectural design opportunities into a local Windows workspace.",
+  "lead": "Read the climate. Design with insight. Climora is being developed to connect climate analysis and comparison with design strategies for architecture, landscape and urban design.",
   "role": "Product design & development / Hossein Nazari",
   "period": "2026 — present",
   "status": "Development preview",
   "stack": "Windows / Tauri / EPW weather data",
   "tags": [
     "Climate analysis",
-    "Annual heatmaps",
-    "Early-stage design",
+    "Variable comparison",
+    "Architecture / Landscape / Urban design",
     "Local projects"
   ],
-  "question": "How can hourly climate evidence become useful, legible input to architectural decisions?",
-  "response": "Start with a weather file, examine annual patterns, state how the space is used, and review design opportunities with their assumptions and trade-offs. Keep the evidence visible and the display controls close at hand.",
+  "question": "How can reading a climate inform decisions across buildings, landscapes and urban spaces?",
+  "response": "Make weather patterns legible, compare relevant variables and examine solar exposure with explicit assumptions. The current workbench provides the analytical foundation; broader climate-responsive design strategies define the development direction.",
   "proof": [
     [
-      "4 variables",
-      "temperature, humidity, solar and wind"
+      "EPW",
+      "local hourly climate data"
     ],
     [
-      "P10–P90",
-      "editable default scale bounds"
+      "Up to 4",
+      "variables in one comparison"
+    ],
+    [
+      "Solar geometry",
+      "window and shading studies"
     ],
     [
       "SVG + PNG",
-      "figures with source and legend"
-    ],
-    [
-      ".cli",
-      "self-contained local project files"
+      "figures with source and period"
     ]
   ],
   "sections": [
@@ -64,12 +64,12 @@ const PROJECT_PAGE_DATA = {
       "title": "A workspace around the evidence",
       "kind": "split",
       "text": [
-        "The annual heatmap is the main working surface. Display settings open in a drawer, while project setup stays in a compact rail. Focus mode gives the chart more room without changing the data.",
-        "Viridis, Cividis, Inferno and Batlow are available across all four variables. The palette controls appearance; the legend records the variable, units and numerical range."
+        "Explore annual heatmaps, hourly and daily series, monthly means, day/night comparisons and a 16-sector wind rose. The variable library groups temperature, humidity, radiation, daylight, wind and other available EPW fields.",
+        "Compare up to four numeric variables with at most two different units. Shared time filters and labelled scales keep comparisons explicit. Missing observations remain missing rather than becoming zero."
       ],
       "aside": {
         "label": "Current availability",
-        "text": "Climora is a development preview. This page is its product overview and user guide. A public installer is not available here yet."
+        "text": "Climora is a development preview. This is its product overview and user guide; no public installer is provided here."
       }
     },
     {
@@ -79,29 +79,29 @@ const PROJECT_PAGE_DATA = {
       "items": [
         [
           "01",
-          "Create or open",
-          "Choose File → New project, or File → Open to continue a .cli file. Recent files are available from File → Open recent."
+          "Load the weather",
+          "Choose New project and import a local EPW file, or select a weather station from the map. Station downloads require an internet connection."
         ],
         [
           "02",
-          "Load climate data",
-          "Import an EPW file, optionally with STAT, DDY and RAIN companions, or choose a station from the regional weather catalogue. Downloads need internet; saved project weather can be used offline."
+          "Keep a local study",
+          "In the Windows app, choose a location for the .cli project. Cancel leaves the previous session intact. Use Open project to reopen a saved study."
         ],
         [
           "03",
-          "Set the context",
-          "Choose the space use, construction status and either 24-hour or daytime use. Review optional design feasibility questions and the resulting strategy shortlist."
+          "Choose an analysis",
+          "Select a climate variable, Compare variables, Psychrometric or Sun shading. Use the contextual left panel to adjust relevant inputs."
         ],
         [
           "04",
-          "Explore and save",
-          "Open Annual heatmaps, select a variable and adjust Display settings. Save the project as a .cli file; export or copy a figure separately when preparing a design album."
+          "Refine and share",
+          "Select a time period, review coverage and display settings, then export SVG or PNG. Valid study changes save in order; a failed save is shown with a retry action."
         ]
       ]
     },
     {
       "id": "palette-legend",
-      "title": "Palette and legend",
+      "title": "Palette, period and legend",
       "kind": "table",
       "headers": [
         "Control",
@@ -110,27 +110,23 @@ const PROJECT_PAGE_DATA = {
       "rows": [
         [
           "Palette",
-          "Choose Viridis, Cividis, Inferno or Batlow for any variable. Apply one palette to all heatmaps, or keep separate choices. Colors alone do not establish physical meaning."
+          "Choose a supported color palette in Display settings. Color maps values; it does not establish comfort, safety or design performance."
         ],
         [
           "Automatic bounds",
-          "The 10th and 90th percentiles of valid hourly values set the default lower and upper bounds. Values beyond them use the end colors; they are not removed from the data."
+          "Heatmap defaults use the 10th and 90th percentiles of valid selected observations. End colors can clip the visual range without removing the original values."
         ],
         [
           "Manual bounds",
-          "Enter a lower and upper value in the variable’s units, then Apply bounds. The lower value must be smaller than the upper value."
+          "Set an explicit lower and upper value in the variable's units. Use the same numerical bounds and palette when comparing the same variable across exported figures."
         ],
         [
-          "Lock scale",
-          "Preserve this variable’s bounds when replacing the weather file in the project. Other variables retain their own scales."
+          "Time period",
+          "Select calendar dates and hours, with day/night and warm/cold-period options. The active period applies to the supported analyses and exports."
         ],
         [
-          "Comparable figures",
-          "For comparisons of the same variable, deliberately use the same palette and numerical bounds across projects. Percentile bounds calculated independently are not a shared numerical scale."
-        ],
-        [
-          "Missing values",
-          "Missing or invalid hours are marked separately. If P10 and P90 coincide for nonconstant data, the full valid range is used; a constant dataset has a single-value legend."
+          "Missing observations",
+          "Missing or invalid observations are excluded and counted. Coverage, units and source information remain part of the interpretation."
         ]
       ]
     },
@@ -140,20 +136,20 @@ const PROJECT_PAGE_DATA = {
       "kind": "cards",
       "items": [
         [
-          "Save your work",
-          "New, Open, Save, Save As and Close follow a document workflow. A .cli file retains weather contents, project inputs, palette and legend settings. Saving is explicit. Unsaved changes are marked and checked before leaving."
+          "Local Windows projects",
+          "A .cli study retains imported weather and supported analysis settings. Valid changes save automatically; Save As selects another location. Reopen from the home screen or recent-project list."
         ],
         [
-          "Export a figure",
-          "SVG preserves vector graphics at a 1200 × 850 layout. PNG can be 1200 × 850, 2400 × 1700 or 3600 × 2550. Figures include source, units, scale bounds and the legend."
+          "SVG and PNG figures",
+          "Export editable vector figures or raster images, with source, units, period and method metadata. Use Ctrl+Shift+C to copy the current chart."
         ],
         [
-          "Copy into a design album",
-          "Edit → Copy figure puts a rendered image on the clipboard at the chosen PNG size. Paste it into a document or presentation that accepts images."
+          "Project library",
+          "Recent projects can be pinned. In Windows, Delete asks for confirmation and moves owned project files to the Recycle Bin; original source EPW files are preserved."
         ],
         [
-          "Undo and preferences",
-          "Undo/Redo covers committed project inputs, palette and legend changes. History resets when opening a project or replacing weather. Preferences stores defaults on this device; the default palette applies only to new projects."
+          "Browser preview boundary",
+          "The browser preview stores its studies separately. It does not provide native Windows Save As, folder reveal or Recycle Bin behavior."
         ]
       ]
     },
@@ -162,71 +158,115 @@ const PROJECT_PAGE_DATA = {
       "title": "Methods and limitations",
       "kind": "split",
       "text": [
-        "Heatmaps use the imported EPW hourly records for dry-bulb temperature, relative humidity, global horizontal radiation and wind speed. Time follows EPW local standard time. Invalid and missing records are screened and displayed separately. Partial files remain inspectable but do not establish a complete annual climate.",
-        "The weather catalogue is sourced from Climate.OneBuilding.org. A nearby station is not necessarily representative: consider elevation, exposure, weather dataset period and local conditions. STAT, DDY and RAIN files are optional companions; their presence does not turn the workbench into a building simulation.",
-        "Design strategies are deterministic early-stage screening results with stated assumptions and trade-offs. Climora does not predict energy demand, quantified savings or guaranteed comfort. Check weather warnings and evaluate proposals with suitable building analysis before making performance claims."
+        "EPW fields are used as supplied. Climate charts screen invalid values and preserve gaps. Station proximity does not establish representativeness: consider elevation, exposure, the source period and local conditions.",
+        "The psychrometric diagram uses temperature, humidity and EPW pressure. Its optional PMV reference region has explicit activity, clothing, relative-air-speed and radiant-temperature assumptions. An indoor reference over outdoor weather is not an outdoor comfort assessment or a compliance certificate.",
+        "Sun shading uses solar directions, facade orientation and window/overhang/fin dimensions. Its section and isometric drawings are fixed schematics, not dimensionally scaled geometry. Neighboring obstructions, diffuse shading, room clipping and energy loads are not calculated."
       ],
       "aside": {
-        "label": "Read every legend",
-        "text": "Percentile clipping changes the color scale, not the underlying measurements. Matching colors between different variables or different bounds do not mean matching physical values."
+        "label": "Evidence before claims",
+        "text": "Climora does not establish predicted energy savings, building performance or guaranteed comfort. Evaluate design proposals with the additional models and project data appropriate to the question."
       }
     },
     {
       "id": "shortcuts",
-      "title": "Keyboard shortcuts",
+      "title": "Keyboard and interaction",
       "kind": "table",
       "headers": [
         "Action",
-        "Shortcut"
+        "Control"
       ],
       "rows": [
         [
-          "New / Open",
-          "Ctrl+N / Ctrl+O"
-        ],
-        [
-          "Save / Save As",
-          "Ctrl+S / Ctrl+Shift+S"
-        ],
-        [
-          "Undo / Redo",
-          "Ctrl+Z / Ctrl+Shift+Z or Ctrl+Y"
-        ],
-        [
-          "Copy figure",
-          "Ctrl+Shift+C"
-        ],
-        [
-          "Focus chart / Exit focus",
-          "F11 / Escape"
-        ],
-        [
-          "Online guide",
-          "F1"
-        ],
-        [
-          "Menu bar",
-          "F10 or Alt+F / E / V / H"
+          "Copy current chart",
+          "Ctrl+Shift+C in the chart workspace."
         ],
         [
           "Inspect heatmap",
-          "Focus the chart, then use the arrow keys"
+          "Focus the heatmap, then use the arrow keys to inspect cells."
         ],
         [
-          "Close a menu or dialog",
-          "Escape"
+          "Leave station map",
+          "Escape returns from the map to the start screen."
+        ],
+        [
+          "Edit analysis inputs",
+          "Use the contextual left panel. Valid edits update the chart; incomplete numeric input keeps the last valid chart with an inline message."
         ]
       ],
-      "note": "Text inputs retain their usual text editing shortcuts. Undo history is kept for this editing session; it is not a persistent version history."
+      "note": "Use the visible controls for project actions and exports. Text fields retain their standard editing controls."
     },
     {
       "title": "About Climora",
       "kind": "honesty",
       "label": "Version 0.1.0 · Development preview",
-      "text": "Designed and developed by Hossein Nazari / NexoNest. This page describes the current implementation, not a validated building-performance engine. Windows interaction and figure pasting depend on the host application. No public release or installer availability is implied."
+      "text": "Designed and developed by Hossein Nazari / NexoNest. The current analytical tools and the broader design-strategy direction are described separately. This page does not imply public installer availability or validated performance results."
+    },
+    {
+      "id": "analysis-comparison",
+      "title": "Analysis and comparison",
+      "kind": "cards",
+      "items": [
+        [
+          "Climate charts",
+          "Read hourly records through heatmaps, time series, daily summaries and monthly views. Soil-temperature headers remain monthly values rather than invented hourly data."
+        ],
+        [
+          "Compare variables",
+          "Put up to four compatible numeric variables in one hourly, daily or monthly view. At most two units use explicitly labelled axes."
+        ],
+        [
+          "Psychrometrics",
+          "Read humidity-ratio distributions and an optional indoor PMV reference region with editable assumptions."
+        ],
+        [
+          "Sun shading",
+          "Inspect the relationship between solar direction, a facade opening, an overhang and side fins through section, isometric and shading-mask views."
+        ]
+      ]
+    },
+    {
+      "id": "design-direction",
+      "title": "Architecture, landscape and urban design",
+      "kind": "cards",
+      "items": [
+        [
+          "Architecture",
+          "Climate patterns and solar geometry provide a starting point for questions about orientation, openings and shading."
+        ],
+        [
+          "Landscape",
+          "Seasonal and daily patterns frame questions about exposure, outdoor-space use and the timing of activities."
+        ],
+        [
+          "Urban design",
+          "Climate evidence can inform questions about spatial structure and networks of open spaces. Site-specific microclimate analysis requires additional models and data."
+        ]
+      ]
+    },
+    {
+      "id": "development",
+      "title": "From climate understanding to design strategies",
+      "kind": "split",
+      "text": [
+        "Climora's scope extends beyond displaying weather charts. Its development direction is to connect analysis and comparison with climate-responsive strategies across architecture, landscape and urban design.",
+        "The implemented foundation includes climate charts, variable comparison, psychrometrics, solar shading and local study output. Broader climate-responsive strategy recommendations remain a development direction."
+      ],
+      "aside": {
+        "label": "Read the climate. Design with insight.",
+        "text": "A design question determines which evidence is useful. A climate chart supports reasoning; it does not replace a project-specific performance assessment."
+      }
+    },
+    {
+      "id": "visual-identity",
+      "title": "Read the climate. Design with insight.",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-introduction-en.png",
+      "alt": "Climora's open-C logo and climate-data ribbon above a building, landscape trees and urban blocks",
+      "caption": "Climora brand illustration across architecture, landscape and urban design. The ribbon is conceptual artwork, not a numerical simulation result."
     }
   ]
 },
+
   "reframing-genericity": {
   "page": "17",
   "title": "Reframing Genericity in Design",

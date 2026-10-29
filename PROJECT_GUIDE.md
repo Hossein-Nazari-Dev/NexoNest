@@ -15,6 +15,15 @@ status: maintained
 
 # NexoNest - Architecture and Developer Handoff
 
+## Climora analysis and design-direction refresh — 2026-10-29
+
+The existing English Climora page at projects-pages/climora.html is updated in place, retaining catalogue ID p_climora, editorial ID climora, canonical URL, categories and the shared NexoNest tokens, dotted editorial layout and section renderer. No separate website or new palette is used. Content remains owned by js/project-page.js; SEO output is generated. The page-local renderer query is refreshed to avoid stale cached product copy.
+
+The current README and UI sources in the Climora application were reviewed: climate charts, comparison of up to four numeric variables with two units, psychrometrics, solar shading and ordered .cli autosave replace the former context/strategy-shortlist instructions. Architecture, landscape and urban design remain the product's broader direction; unimplemented recommendations are explicitly identified. Stable getting-started, palette-legend, project-files, methods and shortcuts anchors are retained. Unsupported historical menu shortcuts are removed from current instructions. The 2026-10-25 entry below is a historical implementation checkpoint, not current behavior.
+
+The new open-C/datum mark retains the application's geometry and uses NexoNest's existing dark accent #4b7c6e. The English introduction artwork is stored under assets/images/projects/climora/, used in the catalogue and in a labelled conceptual figure. It is not represented as a scientific result or application screenshot. The catalogue excerpt and generated search description reflect the same scope. No installer, quantified savings or public-release claim is added. Local verification: SEO generation/check and guide generation/check passed, as did JavaScript syntax and whitespace checks. Browser review confirmed the English page, matching shared template, sidebar section navigation and the loaded introduction image (1734px source width). No page-level horizontal overflow was observed at 1280px or 390px; mobile navigation was initially collapsed. These are local website checks, not desktop-app or live-deployment acceptance. No commit, push or production deployment was performed for this refresh.
+
+
 ## NexoRhino 1.1.1 editor updates — 2026-10-29
 
 The owner authorized Marketplace publication of both editor patches and this site
@@ -200,7 +209,7 @@ this new page has not been deployed. These checks do not establish publication.
 Added the development-preview product and user guide at [Climora](projects-pages/climora.html),
 with catalogue ID p_climora, editorial ID climora and Products / Data Analytics / Windows Apps membership.
 Content belongs to js/project-page.js; generated HTML, canonical URL and sitemap follow the existing SEO workflow.
-The shared SVG logo uses an open C, hourly bands and a rising green sun; the same source is used by the desktop app.
+At this historical checkpoint the SVG logo used an open C, hourly bands and a rising green sun. The 2026-10-29 refresh above supersedes that mark.
 No installer or public release is advertised. The page documents actual EPW inputs, percentile/manual scales,
 project files, output, shortcuts and screening limitations. It makes no predicted energy or comfort claims.
 
@@ -1638,9 +1647,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 204 application/configuration/integration/tool/asset files:
+SHA-256 of 205 application/configuration/integration/tool/asset files:
 
-`aac215ebaa186714a143d7a719508c80f0c22b017228b2bdaeb5fafe311f4cd0`
+`bfd9eb89fe90356911081d8abb593e6fd935b1f93bc5fcd3e5f08b6f54018ba2`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1683,7 +1692,7 @@ Source key: `climora`; shell: [projects-pages/climora.html](projects-pages/climo
 
 **Published content status:** Development preview.
 
-**Purpose:** Climate evidence.<br>Design decisions.
+**Purpose:** Read the climate.<br>Design with insight.
 
 **Role / period:** Product design & development / Hossein Nazari / 2026 — present.
 
@@ -1693,11 +1702,15 @@ Source key: `climora`; shell: [projects-pages/climora.html](projects-pages/climo
 | --- | --- |
 | A workspace around the evidence | `split` |
 | Getting started | `steps` |
-| Palette and legend | `table` |
+| Palette, period and legend | `table` |
 | Project files and figure output | `cards` |
 | Methods and limitations | `split` |
-| Keyboard shortcuts | `table` |
+| Keyboard and interaction | `table` |
 | About Climora | `honesty` |
+| Analysis and comparison | `cards` |
+| Architecture, landscape and urban design | `cards` |
+| From climate understanding to design strategies | `split` |
+| Read the climate. Design with insight. | `figure` |
 
 #### Reframing Genericity in Design
 
@@ -2094,7 +2107,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/icons/abm-bootcamp.svg](assets/icons/abm-bootcamp.svg) | 499 |
 | [assets/icons/alignment.png](assets/icons/alignment.png) | 83483 |
 | [assets/icons/archicast.svg](assets/icons/archicast.svg) | 330 |
-| [assets/icons/climora.svg](assets/icons/climora.svg) | 432 |
+| [assets/icons/climora.svg](assets/icons/climora.svg) | 324 |
 | [assets/icons/codejunkyard-session-00.svg](assets/icons/codejunkyard-session-00.svg) | 377 |
 | [assets/icons/codejunkyard.svg](assets/icons/codejunkyard.svg) | 360 |
 | [assets/icons/computational-thinking-workshop-1.svg](assets/icons/computational-thinking-workshop-1.svg) | 647 |
@@ -2129,6 +2142,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/buildingAlignment/mathod.png](assets/images/projects/buildingAlignment/mathod.png) | 566497 |
 | [assets/images/projects/buildingAlignment/shadowimpactfactor.png](assets/images/projects/buildingAlignment/shadowimpactfactor.png) | 61148 |
 | [assets/images/projects/buildingAlignment/validation.png](assets/images/projects/buildingAlignment/validation.png) | 177882 |
+| [assets/images/projects/climora/climora-introduction-en.png](assets/images/projects/climora/climora-introduction-en.png) | 1972634 |
 | [assets/images/projects/curvadapt/card.png](assets/images/projects/curvadapt/card.png) | 47041 |
 | [assets/images/projects/curvadapt/convergence.png](assets/images/projects/curvadapt/convergence.png) | 47941 |
 | [assets/images/projects/curvadapt/fig-chord-vs-segments.jpg](assets/images/projects/curvadapt/fig-chord-vs-segments.jpg) | 1315652 |
@@ -2194,7 +2208,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 4706 |
-| [data/projects-brief.json](data/projects-brief.json) | 11472 |
+| [data/projects-brief.json](data/projects-brief.json) | 11519 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
@@ -2229,7 +2243,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 133413 |
+| [js/project-page.js](js/project-page.js) | 135452 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2243,7 +2257,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
 | [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 11950 |
-| [projects-pages/climora.html](projects-pages/climora.html) | 15777 |
+| [projects-pages/climora.html](projects-pages/climora.html) | 19397 |
 | [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | 9293 |
 | [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 8972 |
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
