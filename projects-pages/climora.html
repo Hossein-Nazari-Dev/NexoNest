@@ -93,7 +93,7 @@
           <span>figures with source and period</span>
         </div>
     </div>
-    <section class="content-section project-editorial-section" data-nav-title="A workspace around the evidence">
+    <section class="content-section project-editorial-section" data-nav-title="A workspace around the evidence" id="section-1">
     <div class="section-heading-row">
       <span>01</span>
       <h2 class="section-title">A workspace around the evidence</h2>
@@ -160,7 +160,7 @@
       <h2 class="section-title">Methods and limitations</h2>
     </div>
       <div class="editorial-split">
-        <div class="prose"><p>EPW fields are used as supplied. Climate charts screen invalid values and preserve gaps. Station proximity does not establish representativeness: consider elevation, exposure, the source period and local conditions.</p><p>The psychrometric diagram uses temperature, humidity and EPW pressure. Its optional PMV reference region has explicit activity, clothing, relative-air-speed and radiant-temperature assumptions. An indoor reference over outdoor weather is not an outdoor comfort assessment or a compliance certificate.</p><p>Sun shading uses solar directions, facade orientation and window/overhang/fin dimensions. Its section and isometric drawings are fixed schematics, not dimensionally scaled geometry. Neighboring obstructions, diffuse shading, room clipping and energy loads are not calculated.</p></div>
+        <div class="prose"><p>EPW fields are used as supplied. Climate charts screen invalid values and preserve gaps. Station proximity does not establish representativeness: consider elevation, exposure, the source period and local conditions.</p><p>The psychrometric diagram uses temperature, humidity and EPW pressure. Its optional PMV reference region has explicit activity, clothing, relative-air-speed and radiant-temperature assumptions. An indoor reference over outdoor weather is not an outdoor comfort assessment or a compliance certificate.</p><p>Sun shading uses solar directions, facade orientation and window/overhang/fin dimensions. Its section and isometric views use a locked camera while dimension and angle edits update the geometry. Neighboring obstructions, diffuse shading, room clipping and energy loads are not calculated.</p></div>
         <aside class="margin-note">
           <span>Evidence before claims</span>
           <p>Climora does not establish predicted energy savings, building performance or guaranteed comfort. Evaluate design proposals with the additional models and project data appropriate to the question.</p>
@@ -175,7 +175,7 @@
           <thead><tr><th>Action</th><th>Control</th></tr></thead>
           <tbody><tr><td>Copy current chart</td><td>Ctrl+Shift+C in the chart workspace.</td></tr><tr><td>Inspect heatmap</td><td>Focus the heatmap, then use the arrow keys to inspect cells.</td></tr><tr><td>Leave station map</td><td>Escape returns from the map to the start screen.</td></tr><tr><td>Edit analysis inputs</td><td>Use the contextual left panel. Valid edits update the chart; incomplete numeric input keeps the last valid chart with an inline message.</td></tr></tbody>
         </table>
-      </div><p class="project-table-note">Use the visible controls for project actions and exports. Text fields retain their standard editing controls.</p></section><section class="content-section project-editorial-section" data-nav-title="About Climora">
+      </div><p class="project-table-note">Use the visible controls for project actions and exports. Text fields retain their standard editing controls.</p></section><section class="content-section project-editorial-section" data-nav-title="About Climora" id="section-7">
     <div class="section-heading-row">
       <span>07</span>
       <h2 class="section-title">About Climora</h2>
@@ -203,9 +203,65 @@
       <article class="project-info-card">
         <h3>Sun shading</h3>
         <p>Inspect the relationship between solar direction, a facade opening, an overhang and side fins through section, isometric and shading-mask views.</p>
-      </article></div></section><section class="content-section project-editorial-section" data-nav-title="Architecture, landscape and urban design" id="design-direction">
+      </article></div></section><section class="content-section project-editorial-section" data-nav-title="Annual temperature heatmap" id="screen-temperature-heatmap">
     <div class="section-heading-row">
       <span>09</span>
+      <h2 class="section-title">Annual temperature heatmap</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/climora/climora-temperature-heatmap.jpg" alt="Dry-bulb temperature across the year, with hours on the vertical axis, dates across the horizontal axis and the temperature scale below." width="1440" height="960" loading="lazy" decoding="async">
+        <figcaption>Browser preview of Climora using Tehran-Khomeini EPW TMYx 2011–2025: 8,760 valid hourly observations.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Monthly temperature summary" id="screen-monthly-temperature">
+    <div class="section-heading-row">
+      <span>10</span>
+      <h2 class="section-title">Monthly temperature summary</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/climora/climora-monthly-temperature.jpg" alt="Monthly mean dry-bulb temperature calculated from valid selected hourly observations, with the current weather source visible." width="1440" height="960" loading="lazy" decoding="async">
+        <figcaption>Monthly means for the same Tehran-Khomeini EPW study; this is a weather-data summary, not a building simulation.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Temperature and humidity in comparison" id="screen-variable-comparison">
+    <div class="section-heading-row">
+      <span>11</span>
+      <h2 class="section-title">Temperature and humidity in comparison</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/climora/climora-variable-comparison.jpg" alt="Daily dry-bulb and dew-point temperatures on the left Celsius axis, with relative humidity on the independent right percentage axis." width="1404" height="960" loading="lazy" decoding="async">
+        <figcaption>Three series with explicitly labelled units, shown in the current comparison interface.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Psychrometric distribution" id="screen-psychrometric">
+    <div class="section-heading-row">
+      <span>12</span>
+      <h2 class="section-title">Psychrometric distribution</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/climora/climora-psychrometric.jpg" alt="Hourly weather plotted on the psychrometric chart alongside editable PMV reference assumptions in the left panel." width="1404" height="960" loading="lazy" decoding="async">
+        <figcaption>The dashed PMV region is an indoor reference over outdoor EPW data; it is not an outdoor-comfort or building-performance result.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Sun shading: mask and reference geometry" id="screen-shading-mask">
+    <div class="section-heading-row">
+      <span>13</span>
+      <h2 class="section-title">Sun shading: mask and reference geometry</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/climora/climora-shading-mask.jpg" alt="Solar directions plotted with the shading mask, window section, isometric geometry and reference-date readouts." width="1404" height="960" loading="lazy" decoding="async">
+        <figcaption>Example south-facing opening at Tehran-Khomeini: 1.5 × 1.5 m window, 0.9 m sill, 0.15 m head gap and approximately 0.95 m overhang.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Sun shading: section view" id="screen-shading-section">
+    <div class="section-heading-row">
+      <span>14</span>
+      <h2 class="section-title">Sun shading: section view</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/climora/climora-shading-section.jpg" alt="Window section with overhang, opening and sill dimensions, a reference solar beam and seasonal floor-reach readouts." width="1404" height="960" loading="lazy" decoding="async">
+        <figcaption>Current interface with a locked camera and live geometry. Dimensions are example inputs; floor reach uses the stated ideal shading assumptions.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Sun shading: isometric view" id="screen-shading-isometric">
+    <div class="section-heading-row">
+      <span>15</span>
+      <h2 class="section-title">Sun shading: isometric view</h2>
+    </div>
+      <figure class="project-figure">
+        <img src="../assets/images/projects/climora/climora-shading-isometric.jpg" alt="Isometric view of the example window, overhang, wall and floor, alongside the same editable shading inputs." width="1404" height="960" loading="lazy" decoding="async">
+        <figcaption>A second view of the same example design, not a different validated project.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="Architecture, landscape and urban design" id="design-direction">
+    <div class="section-heading-row">
+      <span>16</span>
       <h2 class="section-title">Architecture, landscape and urban design</h2>
     </div><div class="project-card-grid">
       <article class="project-info-card">
@@ -221,7 +277,7 @@
         <p>Climate evidence can inform questions about spatial structure and networks of open spaces. Site-specific microclimate analysis requires additional models and data.</p>
       </article></div></section><section class="content-section project-editorial-section" data-nav-title="From climate understanding to design strategies" id="development">
     <div class="section-heading-row">
-      <span>10</span>
+      <span>17</span>
       <h2 class="section-title">From climate understanding to design strategies</h2>
     </div>
       <div class="editorial-split">
@@ -232,7 +288,7 @@
         </aside>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Read the climate. Design with insight." id="visual-identity">
     <div class="section-heading-row">
-      <span>11</span>
+      <span>18</span>
       <h2 class="section-title">Read the climate. Design with insight.</h2>
     </div>
       <figure class="project-figure">
@@ -250,7 +306,7 @@
       <footer class="project-footer"><div class="project-footer-editorial" id="projectPageFooter"></div></footer>
     </main>
   </div>
-  <script src="../js/project-page.js?v=20261029-climora-analysis-design"></script>
+  <script src="../js/project-page.js?v=20261029-climora-app-screens"></script>
   <script src="../js/project-navigation.js"></script>
   <script src="../js/ux.js" defer></script>
 </body>

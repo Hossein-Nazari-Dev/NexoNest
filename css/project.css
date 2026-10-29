@@ -1769,3 +1769,9 @@ body[data-project="printerra"] .pdf-spread canvas:nth-child(2) {
 body[data-project="printerra"] .pdf-spread[data-cover="true"] canvas:first-child {
   left: 25%;
 }
+
+/* Dimensioned editorial figures reserve their aspect ratio before lazy loading. */
+.project-figure img[width][height] { height: auto; }
+
+/* Real section heights keep deep links stable across this screenshot sequence. */
+body[data-project="climora"] .content-section { content-visibility: visible; contain-intrinsic-size: none; }

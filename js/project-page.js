@@ -70,7 +70,8 @@ const PROJECT_PAGE_DATA = {
       "aside": {
         "label": "Current availability",
         "text": "Climora is a development preview. This is its product overview and user guide; no public installer is provided here."
-      }
+      },
+      "id": "section-1"
     },
     {
       "id": "getting-started",
@@ -160,7 +161,7 @@ const PROJECT_PAGE_DATA = {
       "text": [
         "EPW fields are used as supplied. Climate charts screen invalid values and preserve gaps. Station proximity does not establish representativeness: consider elevation, exposure, the source period and local conditions.",
         "The psychrometric diagram uses temperature, humidity and EPW pressure. Its optional PMV reference region has explicit activity, clothing, relative-air-speed and radiant-temperature assumptions. An indoor reference over outdoor weather is not an outdoor comfort assessment or a compliance certificate.",
-        "Sun shading uses solar directions, facade orientation and window/overhang/fin dimensions. Its section and isometric drawings are fixed schematics, not dimensionally scaled geometry. Neighboring obstructions, diffuse shading, room clipping and energy loads are not calculated."
+        "Sun shading uses solar directions, facade orientation and window/overhang/fin dimensions. Its section and isometric views use a locked camera while dimension and angle edits update the geometry. Neighboring obstructions, diffuse shading, room clipping and energy loads are not calculated."
       ],
       "aside": {
         "label": "Evidence before claims",
@@ -199,7 +200,8 @@ const PROJECT_PAGE_DATA = {
       "title": "About Climora",
       "kind": "honesty",
       "label": "Version 0.1.0 · Development preview",
-      "text": "Designed and developed by Hossein Nazari / NexoNest. The current analytical tools and the broader design-strategy direction are described separately. This page does not imply public installer availability or validated performance results."
+      "text": "Designed and developed by Hossein Nazari / NexoNest. The current analytical tools and the broader design-strategy direction are described separately. This page does not imply public installer availability or validated performance results.",
+      "id": "section-7"
     },
     {
       "id": "analysis-comparison",
@@ -223,6 +225,76 @@ const PROJECT_PAGE_DATA = {
           "Inspect the relationship between solar direction, a facade opening, an overhang and side fins through section, isometric and shading-mask views."
         ]
       ]
+    },
+    {
+      "id": "screen-temperature-heatmap",
+      "title": "Annual temperature heatmap",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-temperature-heatmap.jpg",
+      "alt": "Dry-bulb temperature across the year, with hours on the vertical axis, dates across the horizontal axis and the temperature scale below.",
+      "caption": "Browser preview of Climora using Tehran-Khomeini EPW TMYx 2011–2025: 8,760 valid hourly observations.",
+      "width": 1440,
+      "height": 960
+    },
+    {
+      "id": "screen-monthly-temperature",
+      "title": "Monthly temperature summary",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-monthly-temperature.jpg",
+      "alt": "Monthly mean dry-bulb temperature calculated from valid selected hourly observations, with the current weather source visible.",
+      "caption": "Monthly means for the same Tehran-Khomeini EPW study; this is a weather-data summary, not a building simulation.",
+      "width": 1440,
+      "height": 960
+    },
+    {
+      "id": "screen-variable-comparison",
+      "title": "Temperature and humidity in comparison",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-variable-comparison.jpg",
+      "alt": "Daily dry-bulb and dew-point temperatures on the left Celsius axis, with relative humidity on the independent right percentage axis.",
+      "caption": "Three series with explicitly labelled units, shown in the current comparison interface.",
+      "width": 1404,
+      "height": 960
+    },
+    {
+      "id": "screen-psychrometric",
+      "title": "Psychrometric distribution",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-psychrometric.jpg",
+      "alt": "Hourly weather plotted on the psychrometric chart alongside editable PMV reference assumptions in the left panel.",
+      "caption": "The dashed PMV region is an indoor reference over outdoor EPW data; it is not an outdoor-comfort or building-performance result.",
+      "width": 1404,
+      "height": 960
+    },
+    {
+      "id": "screen-shading-mask",
+      "title": "Sun shading: mask and reference geometry",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-shading-mask.jpg",
+      "alt": "Solar directions plotted with the shading mask, window section, isometric geometry and reference-date readouts.",
+      "caption": "Example south-facing opening at Tehran-Khomeini: 1.5 × 1.5 m window, 0.9 m sill, 0.15 m head gap and approximately 0.95 m overhang.",
+      "width": 1404,
+      "height": 960
+    },
+    {
+      "id": "screen-shading-section",
+      "title": "Sun shading: section view",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-shading-section.jpg",
+      "alt": "Window section with overhang, opening and sill dimensions, a reference solar beam and seasonal floor-reach readouts.",
+      "caption": "Current interface with a locked camera and live geometry. Dimensions are example inputs; floor reach uses the stated ideal shading assumptions.",
+      "width": 1404,
+      "height": 960
+    },
+    {
+      "id": "screen-shading-isometric",
+      "title": "Sun shading: isometric view",
+      "kind": "figure",
+      "image": "../assets/images/projects/climora/climora-shading-isometric.jpg",
+      "alt": "Isometric view of the example window, overhang, wall and floor, alongside the same editable shading inputs.",
+      "caption": "A second view of the same example design, not a different validated project.",
+      "width": 1404,
+      "height": 960
     },
     {
       "id": "design-direction",
@@ -2213,9 +2285,10 @@ function renderSection(section, index, navGroups = {}) {
   }
 
   if (section.kind === "figure") {
+    const dimensions = Number.isInteger(section.width) && section.width > 0 && Number.isInteger(section.height) && section.height > 0 ? ` width="${section.width}" height="${section.height}"` : "";
     body = `
       <figure class="project-figure">
-        <img src="${escapeHtml(section.image)}" alt="${escapeHtml(section.alt)}" loading="lazy" decoding="async">
+        <img src="${escapeHtml(section.image)}" alt="${escapeHtml(section.alt)}"${dimensions} loading="lazy" decoding="async">
         <figcaption>${escapeHtml(section.caption)}</figcaption>
       </figure>`;
   }

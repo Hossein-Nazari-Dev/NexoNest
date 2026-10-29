@@ -15,13 +15,23 @@ status: maintained
 
 # NexoNest - Architecture and Developer Handoff
 
+## Climora original app mark and interface screenshots — 2026-10-29
+
+The product mark at assets/icons/climora.svg is copied byte for byte from the current Climora src/assets/climora.svg. Shape and teal #246A73 are not adapted to website colors. This retains the existing path for the page, favicon and catalogue. The page-local renderer query is refreshed.
+
+Seven unedited browser-preview screenshots are stored in assets/images/projects/climora/: temperature heatmap, monthly temperature, three-variable daily comparison, psychrometrics, shading mask, section and isometric views. They were captured from the running current app interface with the existing Tehran-Khomeini TMYx 2011–2025 EPW (8,760 valid selected hours), rather than generated artwork or older app screenshots. Captions identify the weather sample, reference assumptions and example shading geometry. Browser-preview captures do not establish native Windows host acceptance. The section/isometric method wording now reflects the current locked-camera/live-geometry implementation documented in the app README.
+
+Content remains in js/project-page.js using existing figure sections and shared CSS. Existing implicit section-1 and section-7 anchors are made explicit before inserting figures, preserving prior links. Generated static HTML/SEO and the guide inventory are refreshed through their normal tools. The conceptual introduction artwork remains separately labelled. No new library, gallery renderer, release or deployment is added. Figure data may supply positive integer width/height; the existing figure renderer emits them and shared CSS keeps their responsive height automatic. Climora screenshots declare their actual dimensions so lazy loading reserves image space during section navigation. Existing figures without these optional fields keep their previous rendering. Browser review exposed deep-link drift from the shared 520px content-visibility section estimate when inserting large figures. Only Climora sections now use visible content with real section heights; image loading remains lazy and other pages keep their existing containment policy.
+
+Local verification for the screenshot refresh: the copied SVG SHA-256 matches the application source, all seven screenshots were visually reviewed, and all eight figure images (including the separate conceptual artwork) loaded in the page. The gallery and shading section links were exercised. No page-level horizontal overflow was observed at desktop and 390px mobile width. SEO generation/check, guide generation/check, renderer syntax and whitespace checks passed. This remains a local website change; no production deployment is claimed.
+
 ## Climora analysis and design-direction refresh — 2026-10-29
 
 The existing English Climora page at projects-pages/climora.html is updated in place, retaining catalogue ID p_climora, editorial ID climora, canonical URL, categories and the shared NexoNest tokens, dotted editorial layout and section renderer. No separate website or new palette is used. Content remains owned by js/project-page.js; SEO output is generated. The page-local renderer query is refreshed to avoid stale cached product copy.
 
 The current README and UI sources in the Climora application were reviewed: climate charts, comparison of up to four numeric variables with two units, psychrometrics, solar shading and ordered .cli autosave replace the former context/strategy-shortlist instructions. Architecture, landscape and urban design remain the product's broader direction; unimplemented recommendations are explicitly identified. Stable getting-started, palette-legend, project-files, methods and shortcuts anchors are retained. Unsupported historical menu shortcuts are removed from current instructions. The 2026-10-25 entry below is a historical implementation checkpoint, not current behavior.
 
-The new open-C/datum mark retains the application's geometry and uses NexoNest's existing dark accent #4b7c6e. The English introduction artwork is stored under assets/images/projects/climora/, used in the catalogue and in a labelled conceptual figure. It is not represented as a scientific result or application screenshot. The catalogue excerpt and generated search description reflect the same scope. No installer, quantified savings or public-release claim is added. Local verification: SEO generation/check and guide generation/check passed, as did JavaScript syntax and whitespace checks. Browser review confirmed the English page, matching shared template, sidebar section navigation and the loaded introduction image (1734px source width). No page-level horizontal overflow was observed at 1280px or 390px; mobile navigation was initially collapsed. These are local website checks, not desktop-app or live-deployment acceptance. No commit, push or production deployment was performed for this refresh.
+The open-C/datum mark now uses the application's original SVG byte for byte, including teal #246A73; the earlier recoloring to the site accent was reverted at the owner's request. Shared page tokens and layout remain unchanged. The English introduction artwork is stored under assets/images/projects/climora/, used in the catalogue and in a labelled conceptual figure. It is not represented as a scientific result or application screenshot. The catalogue excerpt and generated search description reflect the same scope. No installer, quantified savings or public-release claim is added. Local verification: SEO generation/check and guide generation/check passed, as did JavaScript syntax and whitespace checks. Browser review confirmed the English page, matching shared template, sidebar section navigation and the loaded introduction image (1734px source width). No page-level horizontal overflow was observed at 1280px or 390px; mobile navigation was initially collapsed. These are local website checks, not desktop-app or live-deployment acceptance. No commit, push or production deployment was performed for this refresh.
 
 
 ## NexoRhino 1.1.1 editor updates — 2026-10-29
@@ -1647,9 +1657,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 205 application/configuration/integration/tool/asset files:
+SHA-256 of 212 application/configuration/integration/tool/asset files:
 
-`bfd9eb89fe90356911081d8abb593e6fd935b1f93bc5fcd3e5f08b6f54018ba2`
+`3ce52dd86dc75028881fc4add324eb1f9f6f82be25bfa95037b7031a464253c8`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1708,6 +1718,13 @@ Source key: `climora`; shell: [projects-pages/climora.html](projects-pages/climo
 | Keyboard and interaction | `table` |
 | About Climora | `honesty` |
 | Analysis and comparison | `cards` |
+| Annual temperature heatmap | `figure` |
+| Monthly temperature summary | `figure` |
+| Temperature and humidity in comparison | `figure` |
+| Psychrometric distribution | `figure` |
+| Sun shading: mask and reference geometry | `figure` |
+| Sun shading: section view | `figure` |
+| Sun shading: isometric view | `figure` |
 | Architecture, landscape and urban design | `cards` |
 | From climate understanding to design strategies | `split` |
 | Read the climate. Design with insight. | `figure` |
@@ -2143,6 +2160,13 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/buildingAlignment/shadowimpactfactor.png](assets/images/projects/buildingAlignment/shadowimpactfactor.png) | 61148 |
 | [assets/images/projects/buildingAlignment/validation.png](assets/images/projects/buildingAlignment/validation.png) | 177882 |
 | [assets/images/projects/climora/climora-introduction-en.png](assets/images/projects/climora/climora-introduction-en.png) | 1972634 |
+| [assets/images/projects/climora/climora-monthly-temperature.jpg](assets/images/projects/climora/climora-monthly-temperature.jpg) | 75317 |
+| [assets/images/projects/climora/climora-psychrometric.jpg](assets/images/projects/climora/climora-psychrometric.jpg) | 111808 |
+| [assets/images/projects/climora/climora-shading-isometric.jpg](assets/images/projects/climora/climora-shading-isometric.jpg) | 85302 |
+| [assets/images/projects/climora/climora-shading-mask.jpg](assets/images/projects/climora/climora-shading-mask.jpg) | 115955 |
+| [assets/images/projects/climora/climora-shading-section.jpg](assets/images/projects/climora/climora-shading-section.jpg) | 85509 |
+| [assets/images/projects/climora/climora-temperature-heatmap.jpg](assets/images/projects/climora/climora-temperature-heatmap.jpg) | 115768 |
+| [assets/images/projects/climora/climora-variable-comparison.jpg](assets/images/projects/climora/climora-variable-comparison.jpg) | 114070 |
 | [assets/images/projects/curvadapt/card.png](assets/images/projects/curvadapt/card.png) | 47041 |
 | [assets/images/projects/curvadapt/convergence.png](assets/images/projects/curvadapt/convergence.png) | 47941 |
 | [assets/images/projects/curvadapt/fig-chord-vs-segments.jpg](assets/images/projects/curvadapt/fig-chord-vs-segments.jpg) | 1315652 |
@@ -2203,7 +2227,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/podcast.css](css/podcast.css) | 5558 |
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 38038 |
 | [css/portfolio.css](css/portfolio.css) | 50287 |
-| [css/project.css](css/project.css) | 50664 |
+| [css/project.css](css/project.css) | 50995 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
@@ -2243,7 +2267,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 26556 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 135452 |
+| [js/project-page.js](js/project-page.js) | 137151 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 4767 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2257,7 +2281,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
 | [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 11950 |
-| [projects-pages/climora.html](projects-pages/climora.html) | 19397 |
+| [projects-pages/climora.html](projects-pages/climora.html) | 24707 |
 | [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | 9293 |
 | [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 8972 |
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
