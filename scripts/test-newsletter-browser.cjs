@@ -23,12 +23,13 @@ async function run() {
     const page = await browser.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    let scenario, requests = 0;
+    let scenario, requests = 0, payload;
     await page.route('**/*', async route => {
       const url = new URL(route.request().url());
       if (url.hostname === '127.0.0.1') return route.continue();
       if (url.hostname !== 'newsletter.test') return route.abort();
       requests++;
+      payload = JSON.parse(new URLSearchParams(route.request().postData()).get('payload'));
       if (scenario === 'network') return route.abort();
       if (scenario === 'json') return route.fulfill({contentType: 'text/plain', body: 'not-json'});
       if (scenario === 'http') return route.fulfill({status: 503, body: 'Unavailable'});
@@ -38,16 +39,13 @@ async function run() {
     for (const result of ['pending-confirmation', 'already-subscribed', 'rejected', 'network', 'json', 'http', 'unexpected']) {
       scenario = result;
       await page.goto(`http://127.0.0.1:${server.address().port}/newsletter.html`);
-      await page.locator('[name="fullName"]').fill('Test reader');
       await page.locator('[name="email"]').fill('reader@example.com');
-      await page.locator('[name="occupation"]').selectOption({label: 'Student'});
-      await page.locator('.choice-line label').filter({hasText: 'Undergraduate'}).click();
-      await page.locator('[name="fieldOfStudy"]').selectOption({label: 'Architecture'});
-      await page.locator('.interest-option').first().click();
       await page.locator('.consent').click();
       await page.locator('button[type="submit"]').click();
       await page.waitForFunction(() => !document.querySelector('button[type="submit"]').disabled);
       assert.equal(await page.locator('[name="email"]').inputValue(), 'reader@example.com');
+      assert.deepEqual(payload.interests, []);
+      assert.equal(payload.fullName, '');
       if (['pending-confirmation', 'already-subscribed'].includes(result)) {
         assert.equal(await page.locator('#submission-next').isVisible(), true);
         assert.equal(await page.locator('.confirmation-steps').isVisible(), result === 'pending-confirmation');
@@ -62,13 +60,44 @@ async function run() {
       }
       console.log('PASS newsletter browser: ' + result);
     }
+    await page.goto(`http://127.0.0.1:${server.address().port}/newsletter.html`);
+    await page.locator('button[type="submit"]').click();
+    assert.equal(requests, 7, 'Invalid email/consent must not reach the endpoint');
+    assert.equal(await page.locator('[name="email"]').getAttribute('aria-invalid'), 'true');
+    await page.locator('[name="email"]').fill('reader@example.com');
+    await page.locator('.consent').click();
+    await page.locator('.optional-profile summary').press('Enter');
+    await page.locator('[name="fullName"]').fill('Test reader');
+    await page.locator('[name="occupation"]').selectOption('Other');
+    await page.locator('.optional-profile summary').press('Enter');
+    await page.locator('button[type="submit"]').click();
+    assert.equal(requests, 7, 'Selected Other requires its description');
+    assert.equal(await page.locator('.optional-profile').getAttribute('open'), '');
+    await page.locator('[name="occupationOther"]').fill('Creative coder');
+    await page.locator('.choice-line label').filter({hasText: 'Undergraduate'}).click();
+    await page.locator('[name="fieldOfStudy"]').selectOption('Other');
+    await page.locator('[name="fieldOfStudyOther"]').fill('Spatial systems');
+    await page.locator('.interest-option').first().click();
+    scenario = 'network';
+    await page.locator('button[type="submit"]').click();
+    await page.waitForFunction(() => !document.querySelector('button[type="submit"]').disabled);
+    assert.equal(await page.locator('[name="occupationOther"]').inputValue(), 'Creative coder');
+    assert.equal(payload.occupation, 'Creative coder');
+    assert.equal(payload.fieldOfStudy, 'Spatial systems');
+    assert.equal(payload.interests.length, 1);
+    assert.equal(await page.locator('#submission-next').isVisible(), false);
+    scenario = 'pending-confirmation';
+    await page.locator('button[type="submit"]').click();
+    await page.locator('#change-email').waitFor({state: 'visible'});
+    await page.locator('#change-email').click();
+    assert.equal(await page.locator('[name="fullName"]').inputValue(), 'Test reader');
     await page.setViewportSize({width: 390, height: 844});
     assert.equal(await page.title(), 'NexoNest Newsletter');
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     fs.mkdirSync(path.join(root, 'tmp'), {recursive: true});
     await page.screenshot({path: path.join(root, 'tmp/newsletter-mobile.png'), fullPage: true});
     assert.deepEqual(errors, []);
-    assert.equal(requests, 7);
+    assert.equal(requests, 9);
     console.log('PASS mobile overflow/title and no browser errors. No external calls or real email.');
   } finally { await browser.close(); }
 }

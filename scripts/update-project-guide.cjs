@@ -50,7 +50,8 @@ function generate() {
   const source = read('js/project-page.js');
   const boundary = source.indexOf('const escapeHtml');
   if (boundary < 0) throw new Error('Editorial data boundary changed; update this extractor.');
-  const context = Object.create(null);
+  const context = {window: {}, URL};
+  vm.runInNewContext(read('js/product-status.js'), context, { timeout: 1000 });
   vm.runInNewContext(source.slice(0, boundary) + '\nthis.pages = PROJECT_PAGE_DATA; this.order = PROJECT_PAGE_ORDER;', context, { timeout: 1000 });
   const brief = JSON.parse(read('data/projects-brief.json'));
   const shells = files.filter(file => file.startsWith('projects-pages/') && file.endsWith('.html'));
@@ -89,7 +90,7 @@ function generate() {
     if (!routes.has(id)) throw new Error(`Missing HTML shell for ${id}`);
     lines.push(`#### ${project.title}`, '',
       `Source key: \`${id}\`; shell: ${link(routes.get(id))}; printed page label: \`${project.page}\`.`, '',
-      `**Published content status:** ${project.status}.`, '',
+      `**Published content status:** ${context.window.NexoNestProductStatus.get(id)?.releaseLabel || project.status}.`, '',
       `**Purpose:** ${project.subtitle}`, '',
       `**Role / period:** ${project.role} / ${project.period}.`, '',
       `**Stack:** ${Array.isArray(project.stack) ? project.stack.join(', ') : project.stack}.`, '',

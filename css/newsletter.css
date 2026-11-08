@@ -120,6 +120,23 @@
   border: 1px solid rgba(75, 124, 110, .25);
 }
 
+.optional-profile {
+  border-bottom: 1px dotted rgba(75, 124, 110, .35);
+}
+
+.optional-profile summary {
+  padding: 22px clamp(24px, 4vw, 48px);
+  color: var(--c-accent-nexo-dark);
+  cursor: pointer;
+}
+
+.optional-profile-note {
+  margin: 0;
+  padding-inline: clamp(24px, 4vw, 48px);
+  font-size: .75rem;
+  line-height: 1.6;
+}
+
 .panel-heading {
   min-height: 154px;
   padding: 32px clamp(28px, 4vw, 48px);
@@ -201,7 +218,7 @@
   display: grid;
   grid-template-columns: 42px 1fr;
   gap: 10px;
-+}
+}
 
 .confirmation-steps li > span {
   color: var(--c-accent-nexo-dark);

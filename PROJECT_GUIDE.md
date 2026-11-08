@@ -9,11 +9,299 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-10-29
+reviewed: 2026-11-08
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## CurvAdapt overview and Wiki ownership — 2026-11-08
+
+The product overview now retains brief component cards only. Every icon/name is
+a native link to its explicit tool anchor in curvadapt-wiki.html, in the same tab.
+The tool-groups contract is now {groups:[{title,tools:[{name,description,icon,href}]}]}.
+Detailed documentation objects have been removed from js/project-page.js; the
+static Wiki HTML is the sole authoring owner of all 20 explanations, Inputs,
+Outputs, formulas/logic and limits. There is no old disclosure renderer or
+initialization fallback that can restore the former inline documentation.
+
+The Wiki replaces its planned roadmap with a populated reference, grouped index,
+notation, per-tool permalinks and category navigation. Existing Wiki route and
+roadmap-title fragment remain; 20 explicit tool anchors are added. The supplied
+high-resolution logo is used on the Wiki too. Native links work with JS disabled,
+keyboard, browser history and direct fragment entry; no async data load, persistence
+or external math library is needed. The Wiki does not load shared reveal/transition
+assets; the overview opts out of cross-document transitions so repeated reference
+visits and history traversal do not race an animated document swap. Long formulas wrap on mobile; :target marks
+the linked entry. css/curvadapt-wiki.css owns this layout independently of the
+product template. Product styles no longer include disclosure/formula rules.
+
+The former sidebar Wiki link is removed. A same-tab Open CurvAdapt Wiki button
+appears in the final section-8 documentation/setup section, above the normal
+project footer. The existing credits renderer accepts optional action {label,url}
+for this explicit button; other pages without it preserve their prior behavior.
+Product, section and catalogue URLs/IDs remain unchanged. Generated initial HTML,
+renderer/style revision keys and SEO metadata are refreshed. This is a local source
+change, not a deployment or a new plugin release.
+Current verification: all 20 icon targets, corresponding Wiki formulas and ports,
+bottom button, keyboard activation, browser Back and direct fragments passed
+with and without JavaScript at 1440/390/320px. Real video playback, no horizontal
+overflow and no uncaught page errors passed. Product/Wiki captures were inspected.
+All-editorial SEO browser checks, syntax, SEO/guide freshness and whitespace checks
+passed. Previous inline-disclosure checks below are historical.
+
+## CurvAdapt component documentation disclosures — 2026-11-08
+
+Each tool icon/name is now the summary of a native HTML details disclosure.
+Briefs expand to explanation, Inputs, Outputs, Formula / logic and limitations.
+All 20 entries have authored documentation objects; the tool-groups contract adds
+`documentation {explanation,inputs,outputs,formula,notes}`. This content remains
+owned by the CurvAdapt record in js/project-page.js and is escaped by the renderer.
+Native details owns open/closed state: click, Enter and Space work without JS,
+there is no asynchronous fetch, persistence, competing toggle handler or fallback
+initialization. Multiple tools may remain open for comparison; open cards span
+the grid and stack their port descriptions on mobile. Existing section IDs and
+category metadata remain unchanged.
+
+Formula/logic descriptions were checked against the neighboring curvAdapt Core
+uniform/adaptive segmentation, polyline simplification, chord-error and intersection
+sources plus Common/CurvUtils and the GH adapters. Documentation distinguishes
+sampled curvature screening from recursive chord subdivision, local simplification
+from final global error, and sampled MCE from an exact continuous bound. Relative
+error is MCE/source arc length, not a percentage. Utility/HUB entries describe
+procedures rather than inventing geometric formulas. This is documentation of
+current local source, not fresh Rhino runtime acceptance.
+
+The owner-requested footer text has been removed from the animation frames and
+poster; the explanatory caption remains outside the video. New media query keys
+and renderer/style revisions prevent cached frames/content from obscuring the
+change. The animation remains a schematic with manual native playback controls.
+No plugin source, release status, backend or deployment was changed.
+Current verification: all 20 disclosures passed icon-click, Enter and Space tests
+with and without JavaScript at 1440/390/320px. Every disclosure has visible
+documentation and a formula/logic block when opened. Real regenerated WebM
+playback, no-autoplay, mobile overflow and uncaught page-error checks passed.
+Desktop video and mobile documentation captures were inspected; the removed
+footer is absent from the visible video frame. All-editorial SEO browser tests,
+source syntax, SEO freshness, guide freshness and whitespace checks passed.
+
+## CurvAdapt visual plugin guide — 2026-11-08
+
+Current presentation supersedes the earlier logo/content checkpoint below.
+The owner supplied 20 original PNG artboards (114–115px wide, 114px high). They are copied unchanged
+into assets/images/projects/curvadapt/components; artboard 1 is also the new
+assets/icons/curvadapt-plugin-hq.png for the page, favicon, catalogue and popup.
+Display sizes of 48px preserve source detail without upscaling the small runtime
+icon. The previous runtime bitmap remains available at its old asset URL.
+
+The library follows source constructors/resource registrations in curvAdapt/GH:
+Make (5), Clean (3), Check (2), Tools (9, including the continuity selector), and
+Help (HUB). These are UI tool names, not new implementation or release claims.
+The source-authored `tool-groups` section contains groups {title, tools[]}; each
+tool has name, description and icon. The shared renderer escapes strings and
+renders dimensioned lazy images with empty decorative alternatives beside names.
+Existing section-1 through section-8 anchors remain; workflow-diagram and
+curve-demo are additional explicit anchors. Catalogue product memberships remain
+Rhino Plugins and Grasshopper Plugins; public distribution is still unconfirmed.
+
+plugin-flow.svg is an original static manual-workflow diagram. The separate
+curve-demo.webm is an eight-second illustrative curve/chord animation, not a Rhino
+recording or a CurvAdapt solver/benchmark result. The `video` section contract is
+{video, poster, caption}; current renderer supports WebM with native controls,
+playsinline, loop and no autoplay, with preload=none and a static PNG poster.
+No timeline code or background task runs on page initialization. A missing video
+retains its poster/caption; the source link remains inside the video fallback.
+Both media sections are generated into initial HTML and work without JavaScript.
+The component grid stacks responsively; actual section heights keep anchors stable.
+Current verification: scripts/test-curvadapt-browser.cjs passes all 20 tool icons,
+5 groups, diagram decoding, preserved/additional anchors and real WebM playback,
+with and without JavaScript at 1440/390/320 pixels. Reduced-motion visual captures
+were inspected; all-editorial SEO browser checks passed without page errors.
+No external media service or dependency is introduced. The schematic generator
+was a local canvas recording; it does not invoke or modify the plugin project.
+
+## CurvAdapt plugin presentation — 2026-11-08
+
+The active CurvAdapt page now presents the implemented Grasshopper plugin,
+including segmentation, simplification, analysis, utilities and Windows Rhino
+8.30+ / .NET 8 setup. Source evidence is the neighboring curvAdapt README,
+csproj and Resources registration. Public stable distribution is not confirmed.
+The page contains no publication discussion or benchmark figures. Existing
+section-1 through section-8 anchors and public IDs/route are preserved.
+Brief JSON owns the synchronized availability/action and product-only taxonomy;
+CurvAdapt also belongs to Grasshopper Plugins. The previous entries below are
+historical. The original Resources/Utilties/Logo.png is copied byte for byte to
+assets/icons/curvadapt-plugin.png and used for sidebar, favicon, tile and popup.
+It is a small native bitmap; no invented vector or enlarged master is substituted.
+Old assets remain for existing direct links. SEO and shared metadata are regenerated.
+This is local source work; no deployment is performed.
+Current verification: exact source-logo SHA-256 and image decode, plugin-only copy,
+eight retained sections, desktop/mobile with and without JavaScript passed.
+Shared-product, independent grid and all-editorial SEO browser suites passed;
+SEO, guide freshness, JavaScript syntax and whitespace checks passed.
+
+## Reliable product discovery and request recovery — 2026-11-08
+
+Reviewed the affected current source before editing. The catalogue loader failure,
+empty-fragment history bug, stale ClimaNest copy, request-ID-only workshop replay
+and fixed/rolling-window documentation mismatch were confirmed. ClimaNest's
+catalogue membership was already correct: the stale browser fixture was wrong.
+The video helper lacked native-close cleanup, but no current renderer emits its
+dialog trigger; current media uses inline players/iframes. Dialog acceptance below
+therefore distinguishes helper fixtures from a production-page playback journey.
+
+Priority: restore a usable catalogue and protect registration identity, then
+correct navigation/content and add bounded product improvements. A framework,
+CMS migration, strict rolling limiter and bulk product-status migration were
+rejected as unnecessary for these verified failures. Existing routes, public IDs,
+editorial ownership and unrelated working-tree changes are preserved.
+
+| Requirement | Observable acceptance | Current verification source |
+| --- | --- | --- |
+| CAT-1 | Failure differs from empty; Retry fetches anew, normal calls deduplicate, stale responses cannot publish | `scripts/test-catalog-recovery.cjs` |
+| CAT-2 | Invalid structures cannot enable controls; direct links survive failure/empty/no JS; recovered filters agree | Recovery suite and independent grid fixtures |
+| NAV-1 | Bare/invalid fragments recover to Profile; Back/Forward synchronize URL/section/control without duplicate events | `scripts/test-portfolio-browser.cjs` |
+| CLIMA-1 | Implemented responses/report collection and annual scale reference are accurate; preview and scientific limits remain | App source review, grid and SEO browser suites |
+| REG-1 | Exact replay has no duplicate effects; changed identity conflicts; closed replay and explicit legacy recovery work | Workshop backend and browser suites |
+| MEDIA-1 | Every close path releases the source once; reopen/switch remains healthy | Video mock and actual local-MP4 fixture suites |
+| MAIL-1 | Fixed-window documentation and expiry behavior agree without resetting state | Public-email mock boundary case |
+| SIGNUP-1 | Email plus consent suffice; optional profile and old payloads work; uncertainty retains inputs | Public-email and newsletter browser suites |
+| STATUS-1 | Representative catalogue/popup/page facts share one owner, explicit action and evidence/date | Product-status and SEO browser suites |
+
+Changed implementation surfaces in this review:
+
+| Area | Files |
+| --- | --- |
+| Catalogue | `js/data.js`, `js/render.js`, `js/filter.js`, `js/nav.js`, `js/modal.js`, `nexonest.html`, `css/nexonest.css` |
+| Editorial/status | `js/project-page.js`, `js/product-status.js`, `data/projects-brief.json`, `css/product-status.css`, existing `projects-pages/*.html` shells/generated content |
+| Portfolio | `js/portfolio.js`, `portfolio.html` script revision |
+| Registration | `js/workshop.js`, `Workshop.gs`, `Workshop-README.md`, `CTworkshop01.html` script revision |
+| Newsletter | `newsletter.html`, `js/newsletter.js`, `css/newsletter.css`, `Code.gs` |
+| Backend contract | `PublicEmail.gs` explanatory comment, `MODULES.md`, integration `README.md`; limiter behavior/state unchanged |
+| Verification/docs | Targeted `scripts/test-*.cjs`, both existing update generators and this guide |
+
+Existing unrelated icon/image/license/gateway working-tree changes are preserved;
+this table does not attribute them to the current review.
+
+Content/status ownership follows the existing split: brief JSON owns taxonomy and
+optional product metadata; `project-page.js` owns editorial prose. Generated HTML
+and the marked metadata map are outputs. `render.js` alone owns catalogue
+readiness/recovery; `PortfolioApp` alone owns portfolio section navigation.
+`workshop.js` owns the in-memory attempted payload; the locked Apps Script service
+validates and stores the accepted request identity. `Code.gs` owns website signup
+and dispatch; `PublicEmail.gs` owns public mail reservation. The current complete
+backend module/source manifest is [MODULES.md](integrations/google-apps-script/MODULES.md).
+These ownership boundaries and failure paths are detailed in the sections below.
+
+ClimaNest claims were compared read-only with the neighboring climatic tools
+README, `src/data/passive-strategies.js`, `src/ui/strategy-workspace.js`,
+`src/core/study-selection.js`, `src/core/heatmap.js`,
+`src/core/report-collection.js` and `src/ui/report-workspace.js`. The implemented
+library contains 49 responses (20 Architecture, 15 Landscape, 14 Urban design).
+Collected reports preserve up to 30 captured entries with weather/context/settings;
+later study edits do not mutate them. Automatic heatmap P10/P90 bounds use the full
+annual EPW reference; time/condition filters mask observations without rescaling.
+Qualitative evidence, constraint screens and potential percentages do not establish
+building simulation results, comfort improvement or energy savings. Development
+preview, lack of a public installer and native-host verification limits remain.
+
+No publication, real email/subscription/registration, campaign, license operation,
+key change or live deployment inspection is part of this local change. Browser
+checks block external traffic. Current test results are recorded under
+[Verification and release](#verification-and-release); dated historical results
+elsewhere are not fresh executions. Repository SEO cannot establish AI purchase
+recommendation visibility, indexing, traffic or conversion.
+
+## ClimaNest Shelter logo selected — 2026-11-03
+
+The owner selected alternative **02 / Shelter** from the application's
+`design/climanest-logo-alternatives-2026-11-03/02-shelter.svg` exploration.
+The production mark is a protective C with a separate horizontal line inside
+its lower half: 64-unit canvas, 7-unit C stroke, 5-unit line, butt caps and round
+joins. The application's light, dark and one-color masters share this exact
+geometry; the existing palette and site layout remain unchanged.
+
+`assets/icons/climanest.svg` matches the new application master byte for byte.
+The legacy `assets/icons/climora.svg` URL is retained as an alias of the approved
+mark. The catalogue, page favicon and renderer carry a new asset revision so
+returning browsers request the matching logo and images. Page URLs, catalogue
+and editorial IDs, section fragments and license/backend contracts are unchanged.
+
+Seven screenshots were recaptured from the actual current browser-preview
+interface with Shelter, using the same EPW and example inputs documented below.
+The introduction illustration was edited with built-in ImageGen to replace only
+its old C-and-vertical-bar symbol with Shelter, retaining the ClimaNest wordmark
+and conceptual-art caption. Earlier dated design and website entries below are
+historical checkpoints and do not describe the current selected identity.
+
+Local validation: source syntax, SEO generation/check, documentation inventory
+generation/check, all eight page-image decodes, the catalogue and adjacent-page
+navigation, no-JavaScript fallback, and browser widths 1440/390/320 are checked
+in this change. Publication and live acceptance remain separate; no commit,
+push, production deployment, real mail or license administration is performed.
+
+
+## ClimaNest product name — 2026-11-03
+
+The climate application is now named **ClimaNest**, under the existing NexoNest
+brand. `js/project-page.js` owns the current English product name, sidebar label,
+copy, captions and image alternatives; `data/projects-brief.json` owns its catalogue
+title, icon and preview. The existing SEO generator refreshes initial HTML,
+Open Graph/Twitter text, CreativeWork JSON-LD and the no-JavaScript catalogue.
+All editorial shells refresh the shared renderer URL so cached previous/next
+labels cannot keep the old name.
+
+The public page remains `projects-pages/climora.html`, with catalogue ID
+`p_climora`, editorial/body ID `climora` and its existing fragments. This is a
+display-name update, not a route or identity migration: existing desktop help,
+bookmarks, category membership and inbound links continue to resolve. License
+product IDs, gateway configuration, subscriber records and backend behavior are
+outside this website-content change and remain unchanged.
+
+The current application SVG is copied to `assets/icons/climanest.svg` without
+changing its shape or colors. Seven real 1440 x 960 browser-preview screenshots
+under `assets/images/projects/climanest/` show the renamed application, using the
+same Tehran-Khomeini TMYx 2011–2025 EPW (8,760 observations). Comparison uses daily
+temperature/dew-point/humidity series. Shading uses an example south-facing
+1.5 x 1.5 m opening, 0.9 m sill, 0.15 m head gap, 0.95 m overhang and a March
+21 noon reference. These are example inputs, not optimization or native-host
+acceptance evidence. Existing captions retain their scientific limitations.
+
+The introduction bitmap was edited with built-in ImageGen to replace only the
+product wordmark with ClimaNest; it remains labelled conceptual artwork. Old
+image/icon files and dated historical guide entries are retained for provenance
+and existing direct asset links. Current public content uses the new assets.
+Development-preview status and the absence of a public installer are retained.
+
+Local verification passed: SEO generation/check covers 26 indexable pages;
+the guide fingerprint, renderer syntax and whitespace checks pass. Headless Edge
+verified the new heading/title/copy and single JSON-LD record, the unchanged
+canonical URL, all eight image decodes, adjacent-page navigation, the interactive
+catalogue and the no-JavaScript page/catalogue fallback. No page-level horizontal
+overflow appeared at 1440, 390 or 320 px. Desktop/mobile captures were inspected.
+This is a local source update; no production deployment, real mail, license
+administration or subscriber operation is claimed.
+
+
+## Local protected license gateway - 2026-10-31
+
+ADR-090 extends the existing .NET 8 facade for both climora and nexosolve. Admission has bounded per-IP/global/product/mail counters, IPv6 /64 grouping, exact trusted-proxy handling, eight processing slots with no queue, body/upstream deadlines and a circuit breaker. A server-only HMAC covers the exact payload, timestamp and random nonce. LicensingGateway.gs checks that proof and a durable bounded replay ledger before product/Sheet operations, under the existing script lock. Signed RSA leases and all account/voucher/trial contracts remain unchanged.
+
+GatewaySigningKey (gateway) and LICENSE_GATEWAY_HMAC_KEY (Script Properties) must contain the same 32 random bytes encoded as base64. Never embed this key in a desktop client. Origin enforcement is opt-in per product: LICENSE_CLIMORA_REQUIRE_GATEWAY or LICENSE_REQUIRE_GATEWAY set to true; absent/false retains current direct clients. Invalid policy values fail closed. These settings were exercised only in memory with mocks; no live key, property, deployment, endpoint, DNS, account, mail or voucher changed. Desktop builds still use their current endpoint; no new product EXE was built for this gateway work.
+
+Enforcement must follow a usable hosted gateway and compatible clients. Enabling it rejects legacy direct clients for that product; keeping direct access open is not origin protection. Google Apps Script remains a public invocation surface: rejected unsigned calls can still consume Google execution quota. Application throttling is not network DDoS protection; a protected edge and, for robust origin isolation, a private/authenticated origin are required. Limits are per process and reset on restart; multiple instances need shared or edge admission.
+
+Local checks: real loopback gateway/mock upstream, exact Apps Script guard, end-to-end RSA lease preservation, schema/size bounds, forged IPs, email aliases, bounded maps, bursts, slow bodies, timeout recovery, upstream failures and replay/tampering. Shared service/admin, independent Climora and website public-email/workshop regressions use fake services. No live or network-load acceptance is claimed. See the NexoSolve License Gateway runbook for configuration and cutover.
+
+
+## Local shared licensing security - 2026-10-31
+
+The common Licensing.gs module is synchronized with the locally hardened NexoSolve source: malformed email/code inputs cannot register devices; anonymous and authenticated request counters are separate and product-prefixed; new-device caps are product-scoped. Anonymous license mail is bounded through PUBLIC_MAIL_BUDGET_V1, preserving half the initial remaining quota for existing verified, device-bound accounts. Each active product receives a share of the bounded anonymous allocation; existing per-mailbox/device cooldown and daily limits still apply. This does not replace edge DDoS protection or prevent all abuse by authenticated accounts.
+
+The newer website Code.gs, verified Game Club, PublicEmail.gs, newsletter retry/consent and unsubscribe contracts are preserved. Its existing formula-safe Sheet writes are retained. The older NexoSolve dispatcher is not a replacement for this dispatcher. The new license-mail reservation helpers live in Licensing.gs so no duplicate helper or dispatcher copy is needed. PublicEmail.gs keeps its existing public-channel cap/reserve.
+
+The local shared-service regression, Climora security/isolation suite and 14 public-email checks passed with mocks; no real email, Google account, deployment, key, property, voucher or subscriber record changed. No website release was generated/published. The live deployment's exact module set and behavior remain separately unverified. Future rollouts must preserve this dispatcher and its companion public modules while applying the reviewed shared license module.
+
 
 ## Climora original app mark and interface screenshots — 2026-10-29
 
@@ -504,7 +792,28 @@ edit protection. Header values/formats were verified by connector readback.
 and guide checks passed. Browser visual QA remains blocked by the browser tool's
 local-URL policy; no responsive-rendering or real submission claim is made.
 
-Request UUIDs make retries idempotent. Upload MIME and magic bytes, form enums,
+Request UUIDs are bound to a versioned server SHA-256 fingerprint of validated,
+normalized fields, cohort, consent, the server-calculated effective fee and receipt
+MIME/content digest. A new accepted row retains the original 24 columns plus a
+hidden fingerprint in column 25, added only when a new request needs it. Existing
+header prefixes and administrative readers stay compatible; an occupied unknown
+column 25 fails rather than being overwritten. Exact replay returns the stored
+tracking/mail result before the open-registration check, with no new row/file/mail.
+Changed identity returns `request_conflict`. A legacy row without a fingerprint
+returns `request_identity_unverified` and needs support; its original identity is
+not guessed, reconstructed or overwritten. Missing historical receipts are not
+read or exported to invent that identity.
+
+The browser captures and locks an exact in-memory payload while sending. An
+uncertain HTTP/JSON/network/storage result keeps that payload/UUID and locks edits;
+Retry sends the same snapshot. The session UUID contains no participant data;
+a reload loses the private snapshot and can receive an explicit conflict/support
+response. Only a definitive pre-storage rejection with no prior uncertainty unlocks
+editing. Server `request_unknown` preserves uncertainty after writes begin. There
+is no claim of atomic Drive/Sheet/mail commits: an orphan receipt or pending mail
+may require owner reconciliation. A failed or cancelled file read before sending
+unlocks without claiming a submission. See Workshop-README for the legacy and
+migration policy. Upload MIME and magic bytes, form enums,
 consents and lengths are validated on the server. The module limits total
 registrations to 150 and daily new submissions to 30 as basic storage/mail abuse
 containment; distributed abuse can still exhaust this cap. Add a verified
@@ -526,7 +835,7 @@ launch. Publishing the site and deploying Apps Script are separate operations.
 | Location | Responsibility |
 | --- | --- |
 | Root HTML | Home, project index, portfolio, newsletter, CurvAdapt wiki, old template |
-| `projects-pages/` | Sixteen project pages; generated initial content, metadata, body project ID |
+| `projects-pages/` | Eighteen project pages; generated initial content, metadata, body project ID |
 | `licenses/` | Public NexoRhino software terms; separate from NexoSolve activation |
 | `js/` | Shared UI, project index, editorial renderer, portfolio and old renderer |
 | `css/` | Design tokens, reset/base, shared layout/components and page styles |
@@ -558,7 +867,7 @@ scratch directories are excluded from the maintained application snapshot.
 | [Project index](nexonest.html) | Six index modules and brief JSON | Filters and project popup, then real page navigation |
 | [Portfolio](portfolio.html) | HTML plus `portfolio.js`, deferred `journey.js` | Independent personal content; not populated from brief JSON |
 | [Newsletter](newsletter.html) | HTML form plus `newsletter.js` | Makes real backend submissions if used normally |
-| [CurvAdapt wiki](curvadapt-wiki.html) | Static HTML and dedicated CSS | A planned learning path, not a complete generated documentation portal |
+| [CurvAdapt wiki](curvadapt-wiki.html) | Static HTML and dedicated CSS | Complete reference for the 20 listed tools, with stable per-tool anchors; manual source review keeps it aligned |
 | [NexoRhino terms](licenses/nexorhino.html) | Static legal content and project navigation | Proprietary terms/attribution; not the licensing API |
 | [Old template](project-template.html) | Static sample content and project navigation | Demonstrates old content blocks; not the active shell generator |
 | `projects-pages/*.html` | `body[data-project]` selects `PROJECT_PAGE_DATA` | Full mapping and sections in generated reference |
@@ -649,11 +958,17 @@ new CSS is introduced. Product IDs, URLs and top-level memberships are unchanged
 
 | Product subcategory | Catalogue membership |
 | --- | --- |
-| Grasshopper Plugins (`grasshopper-plugins`) | NexoSolve, OctoMass, OctoLand, OctoCity |
+| Grasshopper Plugins (`grasshopper-plugins`) | NexoSolve, OctoMass, OctoLand, OctoCity, CurvAdapt |
 | Rhino Plugins (`rhino-plugins`) | NexoBreak, CurvAdapt |
-| Data Analytics (`data-analytics`) | OctoLand, OctoCity, TectoTrack |
-| Windows Apps (`windows-apps`) | NexoSolve companion desktop |
+| Data Analytics (`data-analytics`) | OctoLand, OctoCity, TectoTrack, ClimaNest |
+| Windows Apps (`windows-apps`) | NexoSolve companion desktop, ClimaNest |
 | Developer Tools (`developer-tools`) | NexoRhino, NexoNest Design Suite |
+
+Current membership reviewed 2026-11-08: 20 catalogue records, 11 products and
+26 tiles including six decorative slots. The table includes ClimaNest; the
+2026-10-19 counts and checks below are historical. Independent fixtures now assert
+all expected IDs and group memberships rather than deriving every expectation
+from the JSON under test.
 
 Classification follows published platform/workflow descriptions, including
 in-development products. Data Analytics describes analytical purpose, while
@@ -674,9 +989,28 @@ switch reset, retained Projects / Simulation and Analysis membership, and
 Developer Tools popup labels. All 24 grid tiles retained stable positions with
 no overlap or out-of-bounds tiles. These are local browser results, not deployment.
 
-`loadProjectsData()` fetches JSON using `cache: 'no-store'`, caches its promise and
-stores the result as `window.projectsData`. Failure is logged and resolves to an
-empty data object. It does not retry automatically during that page lifetime.
+`loadProjectsData({force:false})` fetches JSON with `cache: 'no-store'` and
+shares an in-flight/successful promise within the page. Rejection stays a rejection
+and evicts only the current promise. `force:true` starts a fresh request; a
+monotonic version prevents superseded success or failure from replacing current
+`window.projectsData` or clearing a newer cached request. Stale callers can still
+receive their own result; the render owner also checks data identity before display.
+
+Validation requires the three arrays, unique IDs, text fields, known taxonomy
+references with matching parents, HTTP(S) page/asset URLs and valid optional product
+metadata before publishing any data. Valid empty data is a distinct state. The
+loader does not persist data or personal information in browser storage.
+
+`render.js` alone starts loading and Retry, gates controls, renders the grid and
+reapplies state. Retry is disabled/guarded while pending, so rapid clicks deduplicate.
+`nav.js` binds independently without another fetch and ignores catalogue actions
+until ready. A rendering or initialization failure keeps the direct generated
+`#project-directory` visible, with an explicit error and Retry. Empty data keeps
+the directory and an empty-state message without Retry or decorative placeholders.
+Only a successful nonempty interactive render hides the directory. No automatic
+background retry or user cancellation is added; full navigation ends the page's
+request lifetime. Filter label maps rebuild when the validated data object changes.
+The generator maintains direct links in ordinary HTML, including without JavaScript.
 
 ### Interaction and ownership
 
@@ -700,7 +1034,7 @@ empty data object. It does not retry automatically during that page lifetime.
    marked aria-disabled and removed from keyboard tab order, rather than deleted.
 4. `nav.js` delegates clicks. A category click clears the subcategory; selecting a
    subcategory selects its parent category. Empty-space clicks clear filters.
-   Project clicks request the popup. Circle navigation has an 850 ms animation.
+   Project clicks request the popup only when ready and not aria-disabled. Circle navigation has an 850 ms animation.
 5. `modal.js` owns popup visibility, scroll locking, fallback imagery, SVG logo
    fitting, focus placement/return, Escape handling and Tab focus wrapping.
    Opening the selected project's URL uses a full page navigation.
@@ -736,6 +1070,46 @@ The fixed shuffle is explicitly intended to keep a playful composition stable
 between visits. This is a small catalogue, so repeated linear lookups are simple;
 they would become inefficient for a much larger catalogue.
 
+### Shared product availability contract
+
+The optional `product` object in `data/projects-brief.json` is the canonical owner
+for the initial three representative products: `p_climora`, `p_curvadapt` and
+`p_nexorhino`. Other records retain existing behavior pending evidence review.
+It contains `editorialId`, `release` (`development-preview`, `in-development`,
+`public-release`), optional qualified `releaseLabel`, nonempty `platforms[]`,
+`compatibility`, `primaryAction {label,url,kind}`, `verifiedOn` (ISO calendar date)
+and `evidence {kind,reference}`. Existing catalogue/editorial IDs stay distinct.
+
+`js/product-status.js` owns validation, escaped rendering, summary and action URL
+resolution. `update-seo.cjs` generates only its marked map from brief JSON and
+checks action destinations/editorial aliases; do not author the map separately.
+Classic scripts load the helper before the loader/popup/editorial renderer. Script
+revision queries are refreshed across index and editorial shells for this contract
+and video lifecycle, and on workshop/portfolio/newsletter entry points for their
+changed behavior. This is a cache revision, not a public route migration.
+
+Catalogue accessible names/tooltips, popup facts/action and the editorial hero's
+Status/panel use the shared contract. The popup still opens an existing page or
+specific guidance anchor; a release label alone never creates a download.
+Unreleased products cannot advertise marketplace/download actions, and a download
+requires explicit public-release evidence. All current dates are labelled
+**Source reviewed** with repository evidence, including the NexoRhino status
+supported by its existing dated release record; they are not new live release
+verification. No offers, ratings, sales metrics or availability guarantees are
+invented. The separate CreativeWork metadata remains evidence-bounded.
+
+Generated initial panels are visible without JavaScript. If the shared helper
+fails to initialize on an adopted page, the editorial renderer preserves the
+static content instead of rebuilding with superseded page-only status. Invalid
+metadata rejects catalogue readiness and retains direct links. A late failed
+image callback from an earlier popup cannot replace the current project's image.
+The dedicated `css/product-status.css` is shared by index and editorial shells;
+loading the full index component stylesheet on editorial pages would introduce
+unrelated selectors. Popup layout allocates space for compact facts on short and
+mobile screens. The ClimaNest shell owns its concise search description, refreshed
+for implemented strategies/report collection; the generator synchronizes its
+social metadata while preserving this explicit description.
+
 ## Editorial project pages
 
 Sources: [renderer and content](js/project-page.js),
@@ -764,6 +1138,8 @@ URLs also exist in HTML shells and hard-coded renderer mappings.
 | --- | --- | --- |
 | `split` | `text[]`, `aside {label,text}` | Prose and margin note |
 | `cards` | `items: [title,text][]` | Parallel feature/finding cards |
+| `tool-groups` | `groups: {title,tools:[name,description,icon,href]}[]` | Named component groups with supplied icons |
+| `video` | `video`, `poster`, `caption` | Native user-controlled WebM and static poster |
 | `steps` | `items: [number,title,text][]` | Numbered workflow |
 | `table` | `headers[]`, `rows[][]`, optional `note` | Data/programme table with an optional explanatory note |
 | `columns` | `columns: {title,items:[title,items[]][]}[]` | Grouped curriculum |
@@ -772,7 +1148,7 @@ URLs also exist in HTML shells and hard-coded renderer mappings.
 | `figure` | `image`, `alt`, `caption` | Evidence image |
 | `figure-text` | Figure fields plus `text` | Evidence with explanation |
 | `honesty` | `label`, `text` | Scope/maturity limitation |
-| `credits` | `text`, optional `links`, optional `groups` | Attribution/links; groups contain `label` and `[name,role][]` people |
+| `credits` | `text`, optional `links`, optional `action {label,url}`, optional `groups` | Attribution/links; groups contain `label` and `[name,role][]` people |
 
 Every section also has `title`. Unknown kinds currently yield a heading with
 empty body rather than a schema error. Adding a kind requires renderer, data,
@@ -905,6 +1281,24 @@ HTTP video URLs become lazy iframe embeds. Non-HTTP video sources use native
 video with metadata preloading. The active page largely references YouTube;
 archived MP4s in the repository should not be mistaken for current embed URLs.
 
+### Video dialog lifecycle
+
+`initProjectVideo` owns dialog title/source and button binding. Its independent,
+idempotent cleanup pauses playback, removes `src` and calls `load()` to release the
+resource. The close action calls cleanup before `dialog.close()`; cleanup itself
+never closes the dialog. Native `close` handles Escape and programmatic exits.
+A queued close from an earlier opening is ignored while the dialog is open again.
+A WeakSet prevents duplicate button listeners; switching sources cleans the old
+source first. Rejected `play()` does not remove the normal video controls.
+
+No current production renderer emits `.project-video-button`; inline/native and
+iframe media retain their existing behavior. The mock suite verifies exact
+cleanup counts and listener/switch races. The browser fixture invokes the
+production helper with an actual archived local MP4 and verifies advancing
+playback, button/backdrop/Escape/programmatic exits, reopening and source switching.
+That fixture is real media playback evidence, not a production-page dialog flow
+or external YouTube playback test.
+
 ## Portfolio and journey
 
 Sources: [portfolio page](portfolio.html), [application](js/portfolio.js),
@@ -919,11 +1313,14 @@ HTML; legacy project detail content also lives in `PortfolioApp` methods. It is
 independent of the index catalogue and editorial project descriptions.
 
 `PortfolioApp` initializes navigation, legacy project selection details, experience
-role selection, PDF-image preview,
-scroll indicator, smooth scrolling and tooltips. A second
-hash-aware navigation IIFE controls active sections and emits
-`portfolio:sectionchange`. Preserve this event when changing section navigation.
-These two navigation layers overlap; consolidation would need regression checks.
+role selection, PDF-image preview, scroll indicator, smooth scrolling and tooltips.
+Its `setupNavigation` / `switchSection` methods are now the sole section-navigation
+owner; the overlapping hash IIFE was removed. Empty hashes map to Profile. Unknown
+or malformed fragments replace the current URL with its bare path/query and show
+Profile. Valid fragments retain existing section IDs. Clicks push only a changed
+section; popstate/hashchange synchronize without pushing. Repeated native events
+for the same section do not duplicate `portfolio:sectionchange`, reset details or
+add history. That existing event remains the lazy journey/viewer contract.
 
 ### Local portfolio review — 2026-10-22
 
@@ -1042,9 +1439,17 @@ Payload fields: `fullName`, `email`, `occupation`, `organization`, `educationLev
 `submittedAt`. The occupation and field-of-study selects have conditional Other
 inputs. `website` is a honeypot; an occupied field prevents normal submission.
 
-Client validation checks required fields, email validity, education selection,
-at least one interest and consent. It displays field/group errors and manages
-submission/confirmation UI. A missing endpoint prevents submission.
+Initial membership requires only a valid email and explicit consent. An optional
+native details section contains name, occupation, education, field of study,
+interests and exploration; no conversion improvement is claimed without data.
+Choosing Other requires its explanation, and validation opens the details before
+focusing an invalid control. Client/server accept absent interests as an empty
+array. Old complete and product signup payloads remain valid, and a missing name
+does not erase an existing product user's name. The 17-column storage order is
+unchanged. Coordinate frontend and `Code.gs` in a future authorized rollout;
+local source does not establish that the live endpoint accepts minimal requests.
+The client displays field/group errors and manages submission/confirmation UI.
+A missing endpoint prevents submission.
 
 POST uses a CORS-readable, URL-encoded payload containing JSON with a 30-second
 browser timeout. Only a readable {ok:true,status} response with pending-confirmation
@@ -1086,13 +1491,18 @@ Formula-like user text is escaped before writing newsletter/user/profile cells.
 
 PublicEmail.gs owns public email controls in the separate PublicEmailState sheet
 (Key/JSON). Under the common script lock it reserves capacity before sending:
-three requests per mailbox/purpose per rolling day (Gmail dot/plus aliases share limits), one-minute minimum spacing,
-a shared public cap of 30 per rolling day (PUBLIC_EMAIL_DAILY_LIMIT), and a MailApp
-quota reserve of 20 (NEWSLETTER_EMAIL_RESERVE). Failed or uncertain sends consume
+three requests per mailbox/purpose (Gmail dot/plus aliases share limits), one-minute
+spacing within the window, and a shared public cap of 30
+(`PUBLIC_EMAIL_DAILY_LIMIT`) in independent fixed 24-hour windows beginning at each
+counter's `startedAt`. Expiry resets count and cooldown, permitting a boundary
+burst. There is no strict rolling-day guarantee or independent requirement for
+one; existing state/history is retained. A MailApp remaining-quota reserve of 20
+(`NEWSLETTER_EMAIL_RESERVE`) is separate from these application counters and
+Google's quota/reset policy. Failed or uncertain sends consume
 an attempt; they are never automatically resent. The cap covers newsletter
 confirmation and Game Club verification, not licensing OTP or workshop mail.
 It bounds mail/storage abuse but does not replace edge rate limiting or CAPTCHA.
-PublicEmailState contains mailbox hashes, rolling counters and hashed code state;
+PublicEmailState contains mailbox hashes, fixed-window counters and hashed code state;
 restrict spreadsheet access and include it in operational backups.
 
 Game Club now requires mailbox verification for every join/restore. The client
@@ -1201,7 +1611,7 @@ Sources: [Licensing.gs](integrations/google-apps-script/Licensing.gs),
 
 The product identifier is `nexosolve`; owner identity is
 `nexonest.contact@gmail.com`. This is separate from NexoRhino's public terms.
-Seven core service files, plus Workshop.gs for workshop registration, share one bound Apps Script project and the Code.gs dispatcher. PublicEmail.gs owns public mail limits, Game Club codes and newsletter unsubscribe. Licensing.gs owns authority/storage, LicensingProfile.gs owns name/consent, LicensingAdmin.gs owns owner-only operations, LicensingSheet.gs owns the generated AS_nexosolve view and NexoSolve Admin menu, and NewsletterDelivery.gs owns campaigns.
+The current 13 Apps Script files and one console HTML companion share one bound project. MODULES.md owns their exact current responsibilities; older seven-file installation lists are historical. Code.gs is the sole dispatcher and LicensingSheet.gs owns the sole onOpen. PublicEmail.gs owns public mail limits, Game Club codes and newsletter unsubscribe. Licensing.gs owns authority/storage, LicensingProfile.gs owns name/consent, LicensingAdmin.gs owns owner-only operations, LicensingSheet.gs owns the generated AS_nexosolve view and NexoSolve Admin menu, and NewsletterDelivery.gs owns campaigns.
 
 ### Storage and request contract
 
@@ -1321,7 +1731,7 @@ accumulated overrides, so the first occurrence is not necessarily effective.
 | `portfolio.css` | Original portfolio styling |
 | `portfolio-v2.css` | Later portfolio overrides; order matters |
 | `newsletter.css` | Form, conditional fields and confirmation panel |
-| `curvadapt-wiki.css` | Wiki/learning roadmap |
+| `curvadapt-wiki.css` | Static component reference, anchor navigation and formulas |
 | `nexorhino.css` | NexoRhino product and terms-specific styling |
 | `design-suite.css` | Present but not referenced by current HTML |
 | `ux.css` | Shared reveal/loading/motion effects |
@@ -1398,9 +1808,10 @@ SEO change does not open registration or decide its publication readiness.
 Run `node scripts/update-seo.cjs --check` before the guide refresh/check to detect
 stale output, missing/duplicate search titles and descriptions, canonical
 mismatches and missing social assets. The generator also synchronizes the existing
-catalogue noscript directory with all 18 brief records, checks local destinations,
-and escapes titles/URLs. This fixes the omitted NexoBreak and NexoSolve fallback
-links without changing the JavaScript-enabled index or its popup interaction.
+persistent catalogue directory with all 20 brief records, checks local destinations,
+and escapes titles/URLs. The directory remains available with disabled or failed
+JavaScript until interactive readiness. It also materializes the shared product
+metadata map and initial product facts; `--check` detects stale maps as well as HTML.
 
 Local verification on 2026-10-19: `scripts/test-seo-browser.cjs` passed in headless
 Edge for all 16 project routes with and without JavaScript: single matching H1,
@@ -1476,16 +1887,14 @@ Historical intent not supported by evidence is deliberately labelled inference.
 
 1. Content duplicates across index JSON, project JS, portfolio HTML/JS, metadata,
    route maps, sitemap and document assets. There is no single global CMS source.
-2. The filter normalization maps are cached on first use. Calling them before
-   data exists can freeze empty maps; normal current flow waits for data, but a
-   future startup refactor must preserve this sequencing.
-3. Dimmed catalogue buttons are marked aria-disabled, but navigation delegates
-   clicks without checking that flag. Do not assume filtering prevents all mouse
-   activation of dimmed projects.
+2. Catalogue correctness depends on schema validation and one readiness owner. Filter
+   maps now track validated data identity; keep recovery tests when changing startup.
+3. Dimmed catalogue buttons are aria-disabled and delegated navigation now checks
+   that state. Preserve both pointer and keyboard gating when changing filters.
 4. HTML interpolation and link schemes assume trusted repository content.
    `escapeHtml` is not URL validation or a complete user-content sanitizer.
-5. Portfolio has overlapping navigation layers and old renderer/style residue.
-   Avoid broad cleanup during a narrow feature change.
+5. Portfolio navigation is consolidated, while legacy project details/style residue
+   remains. Avoid unrelated cleanup and preserve sectionchange consumers.
 6. Newsletter requires a readable deployed endpoint response. CORS/redirect and
    real delivery acceptance remain unverified by local mocks. Public email caps
    contain abuse but a malicious caller can still exhaust the public allowance.
@@ -1579,6 +1988,52 @@ external NexoBreak code-entry UI first. Real email acceptance is a separate,
 explicitly authorized operation; local tests do not authorize it.
 
 
+### Current local verification — 2026-11-08
+
+Current source verification (not historical baseline counts):
+
+- `scripts/test-public-email.cjs`: 17 mocked checks, including the original 14,
+  email-only membership, optional-field/name compatibility and fixed-window expiry.
+- `scripts/test-workshop.cjs`: 27 mocked checks, including exact replay, changed
+  identity/effective fee/receipt, legacy recovery, uncertain append and locked overlap.
+- `scripts/test-catalog-recovery.cjs`: loader dedup/versioning/schema and browser
+  error/retry/empty/filter/direct-link recovery; decorative slots are not keyboard
+  or screen-reader content.
+- `scripts/test-project-grid-browser.cjs`: independent 20-entry/11-product fixtures,
+  exact type memberships and 26 stable tiles at 1440/820/390/320 px.
+- `scripts/test-portfolio-browser.cjs` and `scripts/test-workshop-browser.cjs`:
+  native history/keyboard and uncertain/exact-attempt/conflict/rejection form paths.
+- `scripts/test-newsletter-browser.cjs`: minimal signup, seven response outcomes,
+  optional Other/keyboard validation, retained input and change-email recovery.
+- `scripts/test-project-video.cjs` and `scripts/test-project-video-browser.cjs`:
+  separate mocked cleanup assertions and actual local-MP4 playback fixture.
+- `scripts/test-product-status.cjs`: independent representative metadata fixtures,
+  generated-map equality, invalid metadata/URL/date guards, catalogue-to-page actions,
+  no-JavaScript and failed-helper preservation at 1440/390/320 px.
+- `scripts/test-popup-browser.cjs`: 120 project/viewport combinations, including
+  compact shared facts and six viewport sizes.
+- `scripts/test-seo-browser.cjs`: all 18 editorial pages with/without JavaScript,
+  matching H1/lead/section/metadata, a single CreativeWork record, ClimaNest claims
+  and stable help anchors; representative pages at 1440/820/390/320 px without
+  horizontal overflow or uncaught page errors. The stale portfolio-error allowance
+  was removed. Generated directory contains 20 direct links.
+
+Edge required an unrestricted temporary browser profile after the restricted
+launch failed. Tests serve loopback content, substitute workshop/newsletter
+endpoints and block external requests. This does not validate Google scopes,
+CORS/redirects, provider quotas, native ClimaNest behavior, public releases or inbox
+delivery. Representative mobile catalogue-failure and ClimaNest, plus desktop
+newsletter captures were visually inspected. No live form was submitted.
+
+`update-seo.cjs --write/--check` covers 26 indexable pages and the shared product
+map. Source syntax and whitespace checks are part of this change. Guide inventory
+and fingerprint are regenerated after prose/source completion; freshness does not
+prove prose accuracy or publication. Remaining work, in priority order: separately
+authorized coordinated frontend/backend acceptance and deployment; verified public
+product releases/compatibility before expanding the metadata contract; external
+search/AI visibility measurement. No remaining local implementation is intentionally
+deferred in these requested slices.
+
 ### Local source checks
 
 ```powershell
@@ -1657,9 +2112,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 212 application/configuration/integration/tool/asset files:
+SHA-256 of 256 application/configuration/integration/tool/asset files:
 
-`3ce52dd86dc75028881fc4add324eb1f9f6f82be25bfa95037b7031a464253c8`
+`75c234f165957dba5fdd0f5015c96d0ac536d30659b8fbba08f627e63d8e54fb`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -1679,7 +2134,7 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 | p_octomass | octomass | [projects-pages/octoMass.html](projects-pages/octoMass.html) | products / grasshopper-plugins |
 | p_octoland | octoland | [projects-pages/octoLand.html](projects-pages/octoLand.html) | products / grasshopper-plugins, data-analytics |
 | p_octocity | octocity | [projects-pages/octoCity.html](projects-pages/octoCity.html) | products / grasshopper-plugins, data-analytics |
-| p_curvadapt | curvadapt | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | products, publications / rhino-plugins |
+| p_curvadapt | curvadapt | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | products / rhino-plugins, grasshopper-plugins |
 | p_reframing_genericity | reframing-genericity | [projects-pages/reframingGenericity.html](projects-pages/reframingGenericity.html) | publications /  |
 | p_geofactory | geofactory | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | products /  |
 | p_printerra | printerra | [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | projects / robot-io |
@@ -1696,7 +2151,7 @@ Editorial navigation order: `climora` → `tectotrack` → `curvadapt` → `refr
 
 Statuses below quote the current website content; they are not independent product release checks.
 
-#### Climora
+#### ClimaNest
 
 Source key: `climora`; shell: [projects-pages/climora.html](projects-pages/climora.html); printed page label: `18`.
 
@@ -1716,7 +2171,7 @@ Source key: `climora`; shell: [projects-pages/climora.html](projects-pages/climo
 | Project files and figure output | `cards` |
 | Methods and limitations | `split` |
 | Keyboard and interaction | `table` |
-| About Climora | `honesty` |
+| About ClimaNest | `honesty` |
 | Analysis and comparison | `cards` |
 | Annual temperature heatmap | `figure` |
 | Monthly temperature summary | `figure` |
@@ -1726,7 +2181,7 @@ Source key: `climora`; shell: [projects-pages/climora.html](projects-pages/climo
 | Sun shading: section view | `figure` |
 | Sun shading: isometric view | `figure` |
 | Architecture, landscape and urban design | `cards` |
-| From climate understanding to design strategies | `split` |
+| Design strategies: evidence and constraints | `split` |
 | Read the climate. Design with insight. | `figure` |
 
 #### Reframing Genericity in Design
@@ -1785,7 +2240,7 @@ Source key: `nexosolve`; shell: [projects-pages/nexoSolve.html](projects-pages/n
 
 Source key: `nexorhino`; shell: [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html); printed page label: `12`.
 
-**Published content status:** Version 1.1 / Rhino 8.
+**Published content status:** Public release.
 
 **Purpose:** Rhino Python<br>editor assistance
 
@@ -1856,23 +2311,26 @@ Source key: `tectotrack`; shell: [projects-pages/techtoTrack.html](projects-page
 
 Source key: `curvadapt`; shell: [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html); printed page label: `02`.
 
-**Published content status:** Manuscript under review / plugin in development.
+**Published content status:** Plugin in development.
 
-**Purpose:** Reliable geometry<br>for simulation
+**Purpose:** Curve tools for<br>Rhino + Grasshopper
 
-**Role / period:** Concept, algorithms, analysis & development / 2024 — present.
+**Role / period:** Plugin design & development / Hossein Nazari / 2024 — present.
 
-**Stack:** RhinoCommon / C# / BPS.
+**Stack:** Windows / Rhino 8.30+ / Grasshopper / .NET 8.
 
 | Section | Renderer kind |
 | --- | --- |
-| The weak link before simulation | `split` |
-| Reliability workflow | `steps` |
-| What the study found | `cards` |
-| Method trace | `figure` |
-| Evidence, not a magic threshold | `figure-text` |
-| Current boundary | `honesty` |
-| Research team | `credits` |
+| Curve preprocessing inside Grasshopper | `split` |
+| From input curve to checked output | `steps` |
+| How the tools connect | `figure` |
+| From a curve to discrete geometry | `video` |
+| The component library | `tool-groups` |
+| Tolerance-aware inputs | `split` |
+| Compatibility and setup | `steps` |
+| Start with a simple curve | `split` |
+| Availability and scope | `honesty` |
+| Documentation and setup | `credits` |
 
 #### Building Alignment
 
@@ -2097,7 +2555,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | File | Bytes |
 | --- | --- |
 | [CNAME](CNAME) | 12 |
-| [CTworkshop01.html](CTworkshop01.html) | 21824 |
+| [CTworkshop01.html](CTworkshop01.html) | 21852 |
 | [README.txt](README.txt) | 29 |
 | [archicast/season-01.html](archicast/season-01.html) | 12038 |
 | [assets/audio/archicast/season-01/episode-01.mp3](assets/audio/archicast/season-01/episode-01.mp3) | 30682636 |
@@ -2124,10 +2582,13 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/icons/abm-bootcamp.svg](assets/icons/abm-bootcamp.svg) | 499 |
 | [assets/icons/alignment.png](assets/icons/alignment.png) | 83483 |
 | [assets/icons/archicast.svg](assets/icons/archicast.svg) | 330 |
-| [assets/icons/climora.svg](assets/icons/climora.svg) | 324 |
+| [assets/icons/climanest.svg](assets/icons/climanest.svg) | 334 |
+| [assets/icons/climora.svg](assets/icons/climora.svg) | 334 |
 | [assets/icons/codejunkyard-session-00.svg](assets/icons/codejunkyard-session-00.svg) | 377 |
 | [assets/icons/codejunkyard.svg](assets/icons/codejunkyard.svg) | 360 |
 | [assets/icons/computational-thinking-workshop-1.svg](assets/icons/computational-thinking-workshop-1.svg) | 647 |
+| [assets/icons/curvadapt-plugin-hq.png](assets/icons/curvadapt-plugin-hq.png) | 4084 |
+| [assets/icons/curvadapt-plugin.png](assets/icons/curvadapt-plugin.png) | 930 |
 | [assets/icons/curvadapt.png](assets/icons/curvadapt.png) | 125490 |
 | [assets/icons/nexobreak.svg](assets/icons/nexobreak.svg) | 902 |
 | [assets/icons/nexorhino.svg](assets/icons/nexorhino.svg) | 977 |
@@ -2159,6 +2620,14 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/buildingAlignment/mathod.png](assets/images/projects/buildingAlignment/mathod.png) | 566497 |
 | [assets/images/projects/buildingAlignment/shadowimpactfactor.png](assets/images/projects/buildingAlignment/shadowimpactfactor.png) | 61148 |
 | [assets/images/projects/buildingAlignment/validation.png](assets/images/projects/buildingAlignment/validation.png) | 177882 |
+| [assets/images/projects/climanest/climanest-introduction-en.png](assets/images/projects/climanest/climanest-introduction-en.png) | 1881966 |
+| [assets/images/projects/climanest/climanest-monthly-temperature.jpg](assets/images/projects/climanest/climanest-monthly-temperature.jpg) | 115591 |
+| [assets/images/projects/climanest/climanest-psychrometric.jpg](assets/images/projects/climanest/climanest-psychrometric.jpg) | 127822 |
+| [assets/images/projects/climanest/climanest-shading-isometric.jpg](assets/images/projects/climanest/climanest-shading-isometric.jpg) | 118153 |
+| [assets/images/projects/climanest/climanest-shading-mask.jpg](assets/images/projects/climanest/climanest-shading-mask.jpg) | 170910 |
+| [assets/images/projects/climanest/climanest-shading-section.jpg](assets/images/projects/climanest/climanest-shading-section.jpg) | 112148 |
+| [assets/images/projects/climanest/climanest-temperature-heatmap.jpg](assets/images/projects/climanest/climanest-temperature-heatmap.jpg) | 195239 |
+| [assets/images/projects/climanest/climanest-variable-comparison.jpg](assets/images/projects/climanest/climanest-variable-comparison.jpg) | 169534 |
 | [assets/images/projects/climora/climora-introduction-en.png](assets/images/projects/climora/climora-introduction-en.png) | 1972634 |
 | [assets/images/projects/climora/climora-monthly-temperature.jpg](assets/images/projects/climora/climora-monthly-temperature.jpg) | 75317 |
 | [assets/images/projects/climora/climora-psychrometric.jpg](assets/images/projects/climora/climora-psychrometric.jpg) | 111808 |
@@ -2168,10 +2637,32 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/climora/climora-temperature-heatmap.jpg](assets/images/projects/climora/climora-temperature-heatmap.jpg) | 115768 |
 | [assets/images/projects/climora/climora-variable-comparison.jpg](assets/images/projects/climora/climora-variable-comparison.jpg) | 114070 |
 | [assets/images/projects/curvadapt/card.png](assets/images/projects/curvadapt/card.png) | 47041 |
+| [assets/images/projects/curvadapt/components/check-shape.png](assets/images/projects/curvadapt/components/check-shape.png) | 1992 |
+| [assets/images/projects/curvadapt/components/clean-angles.png](assets/images/projects/curvadapt/components/clean-angles.png) | 4132 |
+| [assets/images/projects/curvadapt/components/clean-overall.png](assets/images/projects/curvadapt/components/clean-overall.png) | 4006 |
+| [assets/images/projects/curvadapt/components/clean-shape.png](assets/images/projects/curvadapt/components/clean-shape.png) | 4380 |
+| [assets/images/projects/curvadapt/components/continuity.png](assets/images/projects/curvadapt/components/continuity.png) | 2211 |
+| [assets/images/projects/curvadapt/components/find-crossings.png](assets/images/projects/curvadapt/components/find-crossings.png) | 3023 |
+| [assets/images/projects/curvadapt/components/find-kinks.png](assets/images/projects/curvadapt/components/find-kinks.png) | 1681 |
+| [assets/images/projects/curvadapt/components/follow-bends.png](assets/images/projects/curvadapt/components/follow-bends.png) | 4009 |
+| [assets/images/projects/curvadapt/components/follow-shape.png](assets/images/projects/curvadapt/components/follow-shape.png) | 4447 |
+| [assets/images/projects/curvadapt/components/follow-turns.png](assets/images/projects/curvadapt/components/follow-turns.png) | 3389 |
+| [assets/images/projects/curvadapt/components/logo.png](assets/images/projects/curvadapt/components/logo.png) | 4084 |
+| [assets/images/projects/curvadapt/components/match-length.png](assets/images/projects/curvadapt/components/match-length.png) | 682 |
+| [assets/images/projects/curvadapt/components/points-to-t.png](assets/images/projects/curvadapt/components/points-to-t.png) | 1039 |
+| [assets/images/projects/curvadapt/components/read-json.png](assets/images/projects/curvadapt/components/read-json.png) | 1353 |
+| [assets/images/projects/curvadapt/components/sort-points.png](assets/images/projects/curvadapt/components/sort-points.png) | 1977 |
+| [assets/images/projects/curvadapt/components/space-evenly.png](assets/images/projects/curvadapt/components/space-evenly.png) | 3337 |
+| [assets/images/projects/curvadapt/components/split-at-points.png](assets/images/projects/curvadapt/components/split-at-points.png) | 1635 |
+| [assets/images/projects/curvadapt/components/step-evenly.png](assets/images/projects/curvadapt/components/step-evenly.png) | 3584 |
+| [assets/images/projects/curvadapt/components/t-to-points.png](assets/images/projects/curvadapt/components/t-to-points.png) | 987 |
+| [assets/images/projects/curvadapt/components/write-json.png](assets/images/projects/curvadapt/components/write-json.png) | 1550 |
 | [assets/images/projects/curvadapt/convergence.png](assets/images/projects/curvadapt/convergence.png) | 47941 |
+| [assets/images/projects/curvadapt/curve-demo-poster.png](assets/images/projects/curvadapt/curve-demo-poster.png) | 62898 |
 | [assets/images/projects/curvadapt/fig-chord-vs-segments.jpg](assets/images/projects/curvadapt/fig-chord-vs-segments.jpg) | 1315652 |
 | [assets/images/projects/curvadapt/fig-methodology.jpg](assets/images/projects/curvadapt/fig-methodology.jpg) | 1837080 |
 | [assets/images/projects/curvadapt/fig-validation.jpg](assets/images/projects/curvadapt/fig-validation.jpg) | 2344412 |
+| [assets/images/projects/curvadapt/plugin-flow.svg](assets/images/projects/curvadapt/plugin-flow.svg) | 2184 |
 | [assets/images/projects/nexobreak/daily-report.png](assets/images/projects/nexobreak/daily-report.png) | 119654 |
 | [assets/images/projects/nexobreak/dashboard.png](assets/images/projects/nexobreak/dashboard.png) | 645888 |
 | [assets/images/projects/nexobreak/duck-hunt.png](assets/images/projects/nexobreak/duck-hunt.png) | 613844 |
@@ -2212,27 +2703,29 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/bootcamp/GP09.mp4](assets/videos/bootcamp/GP09.mp4) | 5760032 |
 | [assets/videos/bootcamp/GP11.mp4](assets/videos/bootcamp/GP11.mp4) | 8377993 |
 | [assets/videos/bootcamp/GP12.mp4](assets/videos/bootcamp/GP12.mp4) | 6551259 |
+| [assets/videos/curvadapt/curve-demo.webm](assets/videos/curvadapt/curve-demo.webm) | 271181 |
 | [assets/videos/printerra/fifthtry1.mp4](assets/videos/printerra/fifthtry1.mp4) | 2984991 |
 | [assets/videos/printerra/seventhtry1.mp4](assets/videos/printerra/seventhtry1.mp4) | 15987813 |
 | [css/base.css](css/base.css) | 650 |
-| [css/components.css](css/components.css) | 12235 |
-| [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 4741 |
+| [css/components.css](css/components.css) | 12251 |
+| [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 4905 |
 | [css/design-suite.css](css/design-suite.css) | 8673 |
 | [css/home.css](css/home.css) | 5344 |
 | [css/layout.css](css/layout.css) | 4531 |
-| [css/newsletter.css](css/newsletter.css) | 12397 |
-| [css/nexonest.css](css/nexonest.css) | 25171 |
+| [css/newsletter.css](css/newsletter.css) | 12740 |
+| [css/nexonest.css](css/nexonest.css) | 27273 |
 | [css/nexorhino-learning.css](css/nexorhino-learning.css) | 5204 |
 | [css/nexorhino.css](css/nexorhino.css) | 554 |
 | [css/podcast.css](css/podcast.css) | 5558 |
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 38038 |
 | [css/portfolio.css](css/portfolio.css) | 50287 |
-| [css/project.css](css/project.css) | 50995 |
+| [css/product-status.css](css/product-status.css) | 923 |
+| [css/project.css](css/project.css) | 52722 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
-| [curvadapt-wiki.html](curvadapt-wiki.html) | 4706 |
-| [data/projects-brief.json](data/projects-brief.json) | 11519 |
+| [curvadapt-wiki.html](curvadapt-wiki.html) | 33332 |
+| [data/projects-brief.json](data/projects-brief.json) | 13710 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
@@ -2241,72 +2734,81 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [integrations/google-apps-script/ADMIN.md](integrations/google-apps-script/ADMIN.md) | 8751 |
 | [integrations/google-apps-script/AdminConsole.gs](integrations/google-apps-script/AdminConsole.gs) | 19794 |
 | [integrations/google-apps-script/AdminConsoleView.html](integrations/google-apps-script/AdminConsoleView.html) | 70549 |
-| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 22301 |
+| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 22759 |
 | [integrations/google-apps-script/GameClubEmail.gs](integrations/google-apps-script/GameClubEmail.gs) | 29481 |
-| [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 4184 |
-| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 25448 |
-| [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 55934 |
+| [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 8619 |
+| [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 27712 |
+| [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 60051 |
 | [integrations/google-apps-script/LicensingAdmin.gs](integrations/google-apps-script/LicensingAdmin.gs) | 11397 |
+| [integrations/google-apps-script/LicensingGateway.gs](integrations/google-apps-script/LicensingGateway.gs) | 2914 |
 | [integrations/google-apps-script/LicensingProducts.gs](integrations/google-apps-script/LicensingProducts.gs) | 5373 |
 | [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2384 |
 | [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9364 |
-| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 7303 |
+| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 10506 |
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
-| [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6336 |
-| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 10000 |
-| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 5339 |
-| [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 13326 |
+| [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6501 |
+| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 14490 |
+| [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 9123 |
+| [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 15955 |
 | [integrations/google-apps-script/WorkshopCatalog.gs](integrations/google-apps-script/WorkshopCatalog.gs) | 5036 |
-| [js/data.js](js/data.js) | 880 |
-| [js/filter.js](js/filter.js) | 4001 |
+| [js/data.js](js/data.js) | 3899 |
+| [js/filter.js](js/filter.js) | 4088 |
 | [js/journey.js](js/journey.js) | 30140 |
-| [js/modal.js](js/modal.js) | 5432 |
-| [js/nav.js](js/nav.js) | 4901 |
-| [js/newsletter.js](js/newsletter.js) | 7289 |
+| [js/modal.js](js/modal.js) | 5945 |
+| [js/nav.js](js/nav.js) | 4667 |
+| [js/newsletter.js](js/newsletter.js) | 6975 |
 | [js/nexorhino-learning.js](js/nexorhino-learning.js) | 2494 |
 | [js/podcast.js](js/podcast.js) | 605 |
-| [js/portfolio.js](js/portfolio.js) | 26556 |
+| [js/portfolio.js](js/portfolio.js) | 25404 |
+| [js/product-status.js](js/product-status.js) | 6899 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 137151 |
+| [js/project-page.js](js/project-page.js) | 152521 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
-| [js/render.js](js/render.js) | 4767 |
+| [js/render.js](js/render.js) | 7370 |
 | [js/state.js](js/state.js) | 3441 |
 | [js/ux.js](js/ux.js) | 4538 |
-| [js/workshop.js](js/workshop.js) | 5848 |
+| [js/workshop.js](js/workshop.js) | 7329 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
-| [newsletter.html](newsletter.html) | 12970 |
-| [nexonest.html](nexonest.html) | 8709 |
+| [newsletter.html](newsletter.html) | 13235 |
+| [nexonest.html](nexonest.html) | 9636 |
 | [nexorhino/geometry.html](nexorhino/geometry.html) | 3384755 |
-| [portfolio.html](portfolio.html) | 39218 |
+| [portfolio.html](portfolio.html) | 39246 |
 | [project-template.html](project-template.html) | 7556 |
-| [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24486 |
-| [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 11950 |
-| [projects-pages/climora.html](projects-pages/climora.html) | 24707 |
-| [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | 9293 |
-| [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 8972 |
-| [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 12314 |
-| [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 8900 |
-| [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19189 |
-| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 18173 |
-| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26431 |
-| [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11238 |
-| [projects-pages/octoCity.html](projects-pages/octoCity.html) | 8944 |
-| [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9348 |
-| [projects-pages/octoMass.html](projects-pages/octoMass.html) | 13995 |
-| [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | 16934 |
-| [projects-pages/reframingGenericity.html](projects-pages/reframingGenericity.html) | 10235 |
-| [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 9967 |
-| [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 12258 |
+| [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24720 |
+| [projects-pages/buildingAlignment.html](projects-pages/buildingAlignment.html) | 12183 |
+| [projects-pages/climora.html](projects-pages/climora.html) | 27447 |
+| [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | 9523 |
+| [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | 9202 |
+| [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 22947 |
+| [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 9132 |
+| [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19406 |
+| [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 19026 |
+| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26706 |
+| [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11470 |
+| [projects-pages/octoCity.html](projects-pages/octoCity.html) | 9176 |
+| [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9581 |
+| [projects-pages/octoMass.html](projects-pages/octoMass.html) | 14228 |
+| [projects-pages/prinTerra.html](projects-pages/prinTerra.html) | 17167 |
+| [projects-pages/reframingGenericity.html](projects-pages/reframingGenericity.html) | 10507 |
+| [projects-pages/sustainableDevelopment.html](projects-pages/sustainableDevelopment.html) | 10199 |
+| [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 12491 |
 | [robots.txt](robots.txt) | 66 |
-| [scripts/test-newsletter-browser.cjs](scripts/test-newsletter-browser.cjs) | 4802 |
+| [scripts/test-catalog-recovery.cjs](scripts/test-catalog-recovery.cjs) | 9636 |
+| [scripts/test-curvadapt-browser.cjs](scripts/test-curvadapt-browser.cjs) | 5639 |
+| [scripts/test-newsletter-browser.cjs](scripts/test-newsletter-browser.cjs) | 6705 |
 | [scripts/test-podcast-browser.cjs](scripts/test-podcast-browser.cjs) | 4846 |
 | [scripts/test-popup-browser.cjs](scripts/test-popup-browser.cjs) | 2865 |
-| [scripts/test-project-grid-browser.cjs](scripts/test-project-grid-browser.cjs) | 5077 |
-| [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 10992 |
-| [scripts/test-seo-browser.cjs](scripts/test-seo-browser.cjs) | 4006 |
-| [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 6761 |
-| [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8000 |
-| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 7463 |
+| [scripts/test-portfolio-browser.cjs](scripts/test-portfolio-browser.cjs) | 4412 |
+| [scripts/test-product-status.cjs](scripts/test-product-status.cjs) | 7778 |
+| [scripts/test-project-grid-browser.cjs](scripts/test-project-grid-browser.cjs) | 7895 |
+| [scripts/test-project-video-browser.cjs](scripts/test-project-video-browser.cjs) | 4513 |
+| [scripts/test-project-video.cjs](scripts/test-project-video.cjs) | 3409 |
+| [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 13085 |
+| [scripts/test-seo-browser.cjs](scripts/test-seo-browser.cjs) | 6097 |
+| [scripts/test-workshop-browser.cjs](scripts/test-workshop-browser.cjs) | 6283 |
+| [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 10118 |
+| [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8140 |
+| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 8787 |
 | [sitemap.xml](sitemap.xml) | 2015 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).

@@ -1045,3 +1045,78 @@ body.nexonest-theme {
 @media (max-width: 450px) {
     .nexonest-theme .projects-container { min-height: 480px; }
 }
+
+/* Keep the direct directory usable before the interactive catalogue is ready. */
+body.nexonest-theme:has([data-catalog-state]:not([data-catalog-state="ready"])) {
+    height: auto;
+    overflow-y: auto;
+}
+.nexonest-theme .container:has([data-catalog-state]:not([data-catalog-state="ready"])) {
+    height: auto;
+    min-height: 100svh;
+}
+.nexonest-theme .projects-container:not([data-catalog-state="ready"]) {
+    flex: 0 0 auto;
+    overflow: visible;
+}
+.nexonest-theme .projects-grid[hidden],
+.project-directory[hidden],
+#catalog-retry[hidden] {
+    display: none;
+}
+.catalog-status {
+    margin-top: 16px;
+    color: var(--color-text-light);
+    font-size: .8125rem;
+    line-height: 1.6;
+}
+.catalog-status p:empty { display: none; }
+[data-catalog-state="ready"] .catalog-status { margin: 0; }
+#catalog-retry {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: 1px solid var(--index-line);
+    border-radius: 7px;
+    color: var(--color-text);
+    background: var(--c-accent-weak);
+    font: inherit;
+    cursor: pointer;
+}
+.nexonest-theme .nav-link:disabled {
+    cursor: default;
+    opacity: .55;
+}
+.project-directory {
+    margin-top: 20px;
+    font-size: .8125rem;
+    line-height: 1.6;
+}
+.project-directory ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 8px 24px;
+    margin: 12px 0 8px;
+    padding-left: 20px;
+}
+.project-directory a {
+    color: var(--c-accent-dark);
+    overflow-wrap: anywhere;
+    text-underline-offset: 3px;
+}
+
+.nexonest-theme .popup-card:has([data-product-status]) {
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto auto auto;
+    gap: 8px;
+}
+.nexonest-theme .popup-card:has([data-product-status]) .popup-image {
+    height: clamp(28px, calc(100dvh - 650px), 220px);
+}
+@media (max-height: 500px) and (min-width: 600px) {
+    .nexonest-theme .popup-card:has([data-product-status]) {
+        grid-template-rows: auto auto minmax(0, 1fr) auto auto auto;
+    }
+    .nexonest-theme .popup-card:has([data-product-status]) .popup-image {
+        height: 100%;
+        max-height: 220px;
+    }
+}

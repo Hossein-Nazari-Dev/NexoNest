@@ -13,7 +13,7 @@ const boundary = source.indexOf('function renderProjectPage(');
 const templateStart = source.indexOf('  root.innerHTML = `', boundary);
 const templateEnd = source.indexOf('\n  const projectShowcase', templateStart);
 assert(boundary > 0 && templateStart > boundary && templateEnd > templateStart, 'Renderer contract changed');
-const context = vm.createContext({});
+const context = vm.createContext({window: {}, URL});
 vm.runInContext(source.slice(0, boundary), context, {timeout: 1000});
 const render = source.slice(templateStart, templateEnd).replace('  root.innerHTML = ', '');
 let changes = 0;
@@ -39,16 +39,35 @@ const urls = [];
 const titles = new Set();
 const descriptions = new Set();
 const catalogue = JSON.parse(read('data/projects-brief.json')).projects;
+const productRecords = Object.fromEntries(catalogue.filter(project => project.product).map(project =>
+  [project.id, {id: project.id, title: project.title, url: project.url, product: project.product}]));
+const productScript = read('js/product-status.js');
+const productBlock = /(\/\* product-status-data:start \*\/)[\s\S]*?(\/\* product-status-data:end \*\/)/;
+assert(productBlock.test(productScript), 'Missing generated product metadata boundary');
+const generatedProductScript = productScript.replace(productBlock, (_, start, end) =>
+  `${start}\n${JSON.stringify(productRecords, null, 2).replace(/</g, '\\u003c')}\n${end}`);
+vm.runInContext(generatedProductScript, context, {timeout: 1000});
+for (const record of Object.values(productRecords)) {
+  context.window.NexoNestProductStatus.validate(record);
+  context.productId = record.product.editorialId;
+  assert(vm.runInContext('Boolean(PROJECT_PAGE_DATA[productId])', context), `Unknown product editorial ID: ${record.id}`);
+  const actionUrl = record.product.primaryAction.url;
+  if (!/^https?:\/\//i.test(actionUrl)) {
+    const target = actionUrl.split(/[?#]/)[0];
+    assert(fs.existsSync(path.join(root, target)), `Missing product action: ${record.id}`);
+  }
+}
+save('js/product-status.js', generatedProductScript);
 for (const file of files) {
   let html = read(file);
   if (file === 'nexonest.html') {
-    // Keep the existing no-JavaScript route directory complete without changing the interactive design.
+    // Keep direct routes available without JavaScript and while interactive loading recovers.
     const links = catalogue.map(project => {
       assert(project.url && !project.url.startsWith('/') && !project.url.includes('..'), `Invalid catalogue route: ${project.id}`);
       assert(fs.existsSync(path.join(root, project.url)), `Missing catalogue page: ${project.url}`);
       return `                        <li><a href="${escape(project.url)}">${escape(project.title)}</a></li>`;
     }).join('\n');
-    const fallback = /(<noscript>[\s\S]*?<ul>)[\s\S]*?(<\/ul>[\s\S]*?<\/noscript>)/;
+    const fallback = /(<div\b[^>]*\bid="project-directory"[^>]*>[\s\S]*?<ul>)[\s\S]*?(<\/ul>[\s\S]*?<\/div>)/;
     assert(fallback.test(html), 'Missing catalogue fallback');
     html = html.replace(fallback, (_, open, close) => `${open}\n${links}\n                    ${close}`);
   }

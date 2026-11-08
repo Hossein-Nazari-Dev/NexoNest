@@ -4,6 +4,40 @@ const path=require('node:path');
 const http=require('node:http');
 const assert=require('node:assert/strict');
 const root=path.resolve(__dirname, '..');
+// Editorial expectations are independent fixtures: deriving these from the
+// catalogue would let missing products and incorrect memberships pass silently.
+const expectedProjects = [
+ 'p_climora','p_archicast_season_01','p_computational_thinking_workshop_1',
+ 'p_nexosolve','p_nexorhino','p_design_suite','p_nexobreak','p_octomass',
+ 'p_octoland','p_octocity','p_curvadapt','p_reframing_genericity','p_geofactory',
+ 'p_printerra','p_alignment','p_tectotrack','p_abm_bootcamp',
+ 'p_sustainable_development','p_code_junkyard','p_code_junkyard_session_00'
+];
+const expectedProducts = [
+ 'p_climora','p_nexosolve','p_nexorhino','p_design_suite','p_nexobreak',
+ 'p_octomass','p_octoland','p_octocity','p_curvadapt','p_geofactory','p_tectotrack'
+];
+const productGroups = {
+ 'grasshopper-plugins': ['p_nexosolve','p_octomass','p_octoland','p_octocity','p_curvadapt'],
+ 'rhino-plugins': ['p_nexobreak','p_curvadapt'],
+ 'data-analytics': ['p_climora','p_octoland','p_octocity','p_tectotrack'],
+ 'windows-apps': ['p_climora','p_nexosolve'],
+ 'developer-tools': ['p_nexorhino','p_design_suite']
+};
+const catalog = JSON.parse(fs.readFileSync(path.join(root,'data/projects-brief.json'),'utf8'));
+assert.equal(catalog.projects.length,20);
+assert.deepEqual(catalog.projects.map(item=>item.id).sort(),[...expectedProjects].sort());
+assert.deepEqual(catalog.projects.filter(item=>item.categories.includes('products')).map(item=>item.id).sort(),[...expectedProducts].sort());
+for(const [group,ids] of Object.entries(productGroups)) {
+ assert.deepEqual(catalog.projects.filter(item=>item.subcategories.includes(group)).map(item=>item.id).sort(),[...ids].sort(),`Catalogue membership: ${group}`);
+}
+const climanest = catalog.projects.find(item=>item.id==='p_climora');
+assert.equal(climanest.title,'ClimaNest');
+assert.equal(climanest.url,'projects-pages/climora.html');
+assert.match(climanest.excerpt,/Development preview/);
+assert.match(climanest.excerpt,/49 source-linked design responses/);
+assert.match(climanest.excerpt,/collected PDF reports/);
+assert.match(climanest.excerpt,/No public installer/);
 const out=path.join(root, 'tmp', 'podcast-check');
 fs.mkdirSync(out, {recursive:true});
 const server=http.createServer((req,res)=>{
@@ -24,18 +58,12 @@ const browser=await chromium.launch({channel:'msedge',headless:true});
 try{const page=await browser.newPage();await page.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
 for(const [width,height] of [[1440,900],[820,900],[390,844],[320,568]]){
 await page.setViewportSize({width,height});await page.goto(`http://127.0.0.1:${server.address().port}/nexonest.html`);await page.waitForSelector('.project-placeholder');
+assert.deepEqual((await page.locator('.project-icon').evaluateAll(els=>els.map(el=>el.dataset.id))).sort(),[...expectedProjects].sort(),`${width}: complete catalogue`);
 const result=await page.evaluate(()=>{const tiles=[...document.querySelectorAll('.projects-grid > *')].map(x=>{const r=x.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height}});return {count:tiles.length,placeholders:document.querySelectorAll('.project-placeholder').length,overlap:tiles.some((a,i)=>tiles.slice(i+1).some(b=>a.x<b.x+b.w&&b.x<a.x+a.w&&a.y<b.y+b.h&&b.y<a.y+a.h)),outside:tiles.some(a=>a.x<0||a.x+a.w>innerWidth||a.y<0||a.y+a.h>document.documentElement.scrollHeight)}});
 assert.equal(result.overlap,false,JSON.stringify({width,result}));assert.equal(result.outside,false,JSON.stringify({width,result}));assert.equal(result.placeholders,6);await page.screenshot({path:path.join(out,`grid-${width}.png`)});
 const position=()=>page.locator('.project-icon').first().evaluate(el=>[el.offsetLeft,el.offsetTop]);const before=await position();await page.locator('[data-category="products"]').click();assert.deepEqual(await position(),before);
-const productGroups = {
- 'grasshopper-plugins': ['p_nexosolve','p_octomass','p_octoland','p_octocity'],
- 'rhino-plugins': ['p_nexobreak','p_curvadapt'],
- 'data-analytics': ['p_octoland','p_octocity','p_tectotrack'],
- 'windows-apps': ['p_nexosolve'],
- 'developer-tools': ['p_nexorhino','p_design_suite']
-};
 assert.deepEqual(await page.locator('#subfilter-bar button').allTextContents(), ['Grasshopper Plugins','Rhino Plugins','Data Analytics','Windows Apps','Developer Tools']);
-assert.equal(await page.locator('.project-icon.active').count(),10);
+assert.deepEqual((await page.locator('.project-icon.active').evaluateAll(els=>els.map(el=>el.dataset.id))).sort(),[...expectedProducts].sort(),`${width}: products overview`);
 for (const [group, ids] of Object.entries(productGroups)) {
  const chip=page.locator(`[data-subcategory="${group}"]`);
  await chip.scrollIntoViewIfNeeded();
@@ -57,6 +85,15 @@ await page.locator('[data-subcategory="developer-tools"]').click();
 await page.locator('[data-id="p_nexorhino"]').click();
 assert.match(await page.locator('#popup-categories').innerText(),/Developer Tools/);
 assert.equal(await page.locator('#popup-title').innerText(),'NexoRhino');
+await page.locator('#popup-close').click();
+await page.waitForFunction(()=>getComputedStyle(document.querySelector('#popup-overlay')).opacity==='0');
+await page.locator('.filter-reset').click();
+await page.locator('[data-id="p_climora"]').click();
+assert.equal(await page.locator('#popup-title').innerText(),'ClimaNest');
+assert.match(await page.locator('#popup-categories').innerText(),/Data Analytics/);
+assert.match(await page.locator('#popup-categories').innerText(),/Windows Apps/);
+assert.match(await page.locator('#popup-excerpt').innerText(),/Development preview/);
+assert.match(await page.locator('#popup-excerpt').innerText(),/No public installer/);
 await page.locator('#popup-close').click();
 await page.waitForFunction(()=>getComputedStyle(document.querySelector('#popup-overlay')).opacity==='0');
 await page.screenshot({path:path.join(out,`product-groups-${width}.png`),fullPage:true});

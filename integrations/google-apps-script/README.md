@@ -1,16 +1,40 @@
 # NexoNest license service
 
-Deploy these seven core files together in the existing bound **NexoNest Subscriber Backend** project:
+## Local protected license gateway - 2026-10-31
 
-| File | Responsibility |
-|---|---|
-| `Code.gs` | Existing newsletter/Game Club routes and minimal license dispatch |
-| `Licensing.gs` | License API, storage helpers, trial/session rules and signed leases |
-| `LicensingProfile.gs` | Verified display-name onboarding and explicit optional newsletter consent |
-| `LicensingAdmin.gs` | Owner-only editor operations for vouchers, grants, revocation and transfer |
-| `LicensingSheet.gs` | Readable owner-only account view and spreadsheet administration menu |
-| `PublicEmail.gs` | Public mail limits, verified Game Club join/restore and signed newsletter unsubscribe |
-| `NewsletterDelivery.gs` | Quota reserve, campaign ledger and resumable delivery |
+ADR-090 extends the existing .NET 8 facade for both climora and nexosolve. Admission has bounded per-IP/global/product/mail counters, IPv6 /64 grouping, exact trusted-proxy handling, eight processing slots with no queue, body/upstream deadlines and a circuit breaker. A server-only HMAC covers the exact payload, timestamp and random nonce. LicensingGateway.gs checks that proof and a durable bounded replay ledger before product/Sheet operations, under the existing script lock. Signed RSA leases and all account/voucher/trial contracts remain unchanged.
+
+GatewaySigningKey (gateway) and LICENSE_GATEWAY_HMAC_KEY (Script Properties) must contain the same 32 random bytes encoded as base64. Never embed this key in a desktop client. Origin enforcement is opt-in per product: LICENSE_CLIMORA_REQUIRE_GATEWAY or LICENSE_REQUIRE_GATEWAY set to true; absent/false retains current direct clients. Invalid policy values fail closed. These settings were exercised only in memory with mocks; no live key, property, deployment, endpoint, DNS, account, mail or voucher changed. Desktop builds still use their current endpoint; no new product EXE was built for this gateway work.
+
+Enforcement must follow a usable hosted gateway and compatible clients. Enabling it rejects legacy direct clients for that product; keeping direct access open is not origin protection. Google Apps Script remains a public invocation surface: rejected unsigned calls can still consume Google execution quota. Application throttling is not network DDoS protection; a protected edge and, for robust origin isolation, a private/authenticated origin are required. Limits are per process and reset on restart; multiple instances need shared or edge admission.
+
+Local checks: real loopback gateway/mock upstream, exact Apps Script guard, end-to-end RSA lease preservation, schema/size bounds, forged IPs, email aliases, bounded maps, bursts, slow bodies, timeout recovery, upstream failures and replay/tampering. Shared service/admin, independent Climora and website public-email/workshop regressions use fake services. No live or network-load acceptance is claimed. See the NexoSolve License Gateway runbook for configuration and cutover.
+
+
+## Local shared licensing security - 2026-10-31
+
+The common Licensing.gs module is synchronized with the locally hardened NexoSolve source: malformed email/code inputs cannot register devices; anonymous and authenticated request counters are separate and product-prefixed; new-device caps are product-scoped. Anonymous license mail is bounded through PUBLIC_MAIL_BUDGET_V1, preserving half the initial remaining quota for existing verified, device-bound accounts. Each active product receives a share of the bounded anonymous allocation; existing per-mailbox/device cooldown and daily limits still apply. This does not replace edge DDoS protection or prevent all abuse by authenticated accounts.
+
+The newer website Code.gs, verified Game Club, PublicEmail.gs, newsletter retry/consent and unsubscribe contracts are preserved. Its existing formula-safe Sheet writes are retained. The older NexoSolve dispatcher is not a replacement for this dispatcher. The new license-mail reservation helpers live in Licensing.gs so no duplicate helper or dispatcher copy is needed. PublicEmail.gs keeps its existing public-channel cap/reserve.
+
+The local shared-service regression, Climora security/isolation suite and 14 public-email checks passed with mocks; no real email, Google account, deployment, key, property, voucher or subscriber record changed. No website release was generated/published. The live deployment's exact module set and behavior remain separately unverified. Future rollouts must preserve this dispatcher and its companion public modules while applying the reviewed shared license module.
+
+
+
+## Current module set — reviewed 2026-11-08
+
+Use the [current module manifest](MODULES.md#current-source-ownership--reviewed-2026-11-08):
+13 Apps Script files plus `AdminConsoleView.html`. The old seven-file subset is
+incomplete for the current integrated service. This repository owns the website
+`Code.gs` dispatcher; an older dispatcher from a product checkout must not replace
+it. Shared licensing modules require deliberate reconciliation while preserving
+website, workshop and Game Club routes. Current local source is not proof of the
+published module set. No live deployment, email or registration was performed.
+
+Newsletter signup now requires email and explicit consent, with profile fields
+optional. Coordinate `Code.gs` with `newsletter.html` / `js/newsletter.js` in a
+future authorized rollout; existing complete payloads remain accepted. See the
+manifest for unchanged confirmation, opt-out and storage contracts.
 
 There is one `doPost` and one `doGet`, both in `Code.gs`. Apps Script files share project scope; this is a responsibility split, not ES module loading. Private helpers end in `_`; administrative entry points are not API actions and check active/effective owner identity.
 
@@ -53,10 +77,15 @@ Local Apps Script source and owner menu now support 1/3/6/12-month grants, assig
 PublicEmail.gs must be added before deploying Code.gs. Workshop.gs remains an
 additional companion for the workshop route. Preserve the existing URL/owner and
 all tables. PublicEmailState is created lazily; it stores hashed mailbox counters
-and hashed Game Club codes. Defaults: three mail requests per mailbox/purpose per
-rolling day, at least 60 seconds apart, 30 total public sends per rolling day via
-PUBLIC_EMAIL_DAILY_LIMIT, and NEWSLETTER_EMAIL_RESERVE=20. These limits do not
-replace edge protection. Unknown sends consume an attempt. No auto resend.
+and hashed Game Club codes. Defaults: three mail reservations per mailbox/purpose and 30 total public
+reservations (`PUBLIC_EMAIL_DAILY_LIMIT`) in independent fixed 24-hour windows.
+Each window starts at its counter's first reservation (`startedAt`); it is neither
+a sliding window nor a calendar day. Within a mailbox window, reservations are at
+least 60 seconds apart. Expiry resets its count and cooldown, so sends can cluster
+across a boundary; this is intentionally not a strict rolling-day guarantee.
+`NEWSLETTER_EMAIL_RESERVE=20` separately preserves the MailApp remaining quota.
+These application limits do not describe Google's quota reset or network defense.
+This documentation correction does not reset or migrate any counter/history. Unknown sends consume an attempt. No auto resend.
 
 NexoBreak clients must implement nexobreak_request_code (email), then
 nexobreak_join (email, displayName, consent=true, code). Codes last ten minutes,

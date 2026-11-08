@@ -1,21 +1,62 @@
-# NexoNest license service
+# NexoNest shared backend modules
+
+## Current source ownership — reviewed 2026-11-08
+
+This checkout owns the integrated website dispatcher and the deployable shared
+source set below. There are **13 Apps Script files and one HTML companion**.
+`MODULES.md` is the module manifest; dated deployment notes below are historical.
+The current working tree includes later local revisions; no live module hashes,
+current deployment version, account settings or delivery were checked in this review.
+
+| File | Source responsibility |
+| --- | --- |
+| `Code.gs` | Sole `doPost` / `doGet`; website newsletter and Game Club dispatch, workshop/license routing; email-only newsletter validation and confirmation |
+| `PublicEmail.gs` | Fixed-window public mail admission, Game Club challenges, signed newsletter unsubscribe |
+| `GameClubEmail.gs` | Game Club verification message and legacy code-copy page |
+| `NewsletterDelivery.gs` | Owner-run campaigns, quota reserve and delivery ledger |
+| `Licensing.gs` | Shared license authority/storage and license mail admission; synchronized shared module, not a dispatcher |
+| `LicensingGateway.gs` | Optional gateway proof enforcement and durable replay protection |
+| `LicensingProducts.gs` | Product registry/context and storage isolation |
+| `LicensingProfile.gs` | Verified display name and optional newsletter consent |
+| `LicensingAdmin.gs` | Owner-only grants, vouchers, revocation, transfer and deletion |
+| `LicensingSheet.gs` | Sole `onOpen`, NexoNest Admin menu and generated support view |
+| `Workshop.gs` | Registration validation, request identity, receipts and review operations |
+| `WorkshopCatalog.gs` | Cohort registry and execution context |
+| `AdminConsole.gs` | Owner-only management-console operations |
+| `AdminConsoleView.html` | Console UI loaded by `AdminConsole.gs` |
+
+Apps Script shares global scope. `Code.gs` routes workshop and licensing before
+its own public-service lock; those services acquire their own lock. Public mail
+reservations, confirmation and opt-out mutations execute under the public lock.
+The workshop registry and console depend on the companion modules; do not install
+only an obsolete subset labelled “seven core files” in older notes.
+
+The integrated `Code.gs`, `PublicEmail.gs`, `GameClubEmail.gs` and newsletter
+contracts in NexoNest own the website routes. External product checkouts can own
+shared licensing changes, but their older dispatcher must never replace this one.
+Reconcile shared modules deliberately, verify exact bytes and module dependencies,
+and preserve unrelated routes, tables, keys, quota state and the existing endpoint.
+A local source revision, a historical published version and a freshly inspected
+live deployment are separate facts. No deployment or live mutation is part of this change.
+
+### Newsletter signup contract
+
+`email` and `consent=true` are required. Name, occupation, organization, education,
+field of study, interests and exploration are optional; absent interests normalize
+to an empty array. Existing complete and `nexobreak_newsletter` payloads remain
+accepted. Missing optional name does not erase an existing product user's name.
+The 17-column Newsletter schema, seven-day confirmation, pending-retry identity,
+opt-out and signed unsubscribe contracts remain unchanged. Release frontend and
+`Code.gs` together in a future authorized deployment; the live server may still
+require the older fields.
+
 
 ## Management console integration - 2026-10-19
 
 Deployed as version 17 on 2026-10-19 with explicit user approval. The source set contains LicensingProducts.gs, WorkshopCatalog.gs, AdminConsole.gs and AdminConsoleView.html, and update Licensing.gs, LicensingAdmin.gs, LicensingProfile.gs, LicensingSheet.gs and Workshop.gs together. Preserve Code.gs and all other service modules, properties and existing data. The unified NexoNest Admin menu opens the owner-only console. Shared-device deletion is scoped to selected accounts, with other users' limits retained. Separate product/cohort registries preserve the existing NexoSolve and workshop defaults. Course review in the console does not email or grant benefits. See [ADMIN.md](ADMIN.md) for configuration, exact contracts, tests and rollback. The older menu instructions below are historical; use the console for new administration.
 
 
-Deploy these seven core files together in the existing bound **NexoNest Subscriber Backend** project:
-
-| File | Responsibility |
-|---|---|
-| `Code.gs` | Existing newsletter/Game Club routes and minimal license dispatch |
-| `Licensing.gs` | License API, storage helpers, trial/session rules and signed leases |
-| `LicensingProfile.gs` | Verified display-name onboarding and explicit optional newsletter consent |
-| `LicensingAdmin.gs` | Owner-only editor operations for vouchers, grants, revocation and transfer |
-| `LicensingSheet.gs` | Readable owner-only account view and spreadsheet administration menu |
-| `PublicEmail.gs` | Public mail limits, verified Game Club join/restore and signed newsletter unsubscribe |
-| `NewsletterDelivery.gs` | Quota reserve, campaign ledger and resumable delivery |
+The older core-file subset below has been superseded by the current manifest.
 
 There is one `doPost` and one `doGet`, both in `Code.gs`. Apps Script files share project scope; this is a responsibility split, not ES module loading. Private helpers end in `_`; administrative entry points are not API actions and check active/effective owner identity.
 
@@ -48,10 +89,15 @@ Local tests use fake mail and simulate accepted/lost/ambiguous outcomes. Live re
 PublicEmail.gs must be added before deploying Code.gs. Workshop.gs remains an
 additional companion for the workshop route. Preserve the existing URL/owner and
 all tables. PublicEmailState is created lazily; it stores hashed mailbox counters
-and hashed Game Club codes. Defaults: three mail requests per mailbox/purpose per
-rolling day, at least 60 seconds apart, 30 total public sends per rolling day via
-PUBLIC_EMAIL_DAILY_LIMIT, and NEWSLETTER_EMAIL_RESERVE=20. These limits do not
-replace edge protection. Unknown sends consume an attempt. No auto resend.
+and hashed Game Club codes. Defaults: three mail reservations per mailbox/purpose and 30 total public
+reservations (`PUBLIC_EMAIL_DAILY_LIMIT`) in independent fixed 24-hour windows.
+Each window starts at its counter's first reservation (`startedAt`); it is neither
+a sliding window nor a calendar day. Within a mailbox window, reservations are at
+least 60 seconds apart. Expiry resets its count and cooldown, so sends can cluster
+across a boundary; this is intentionally not a strict rolling-day guarantee.
+`NEWSLETTER_EMAIL_RESERVE=20` separately preserves the MailApp remaining quota.
+These application limits do not describe Google's quota reset or network defense.
+This documentation correction does not reset or migrate any counter/history. Unknown sends consume an attempt. No auto resend.
 
 NexoBreak clients must implement nexobreak_request_code (email), then
 nexobreak_join (email, displayName, consent=true, code). Codes last ten minutes,

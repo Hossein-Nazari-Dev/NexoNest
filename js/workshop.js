@@ -7,6 +7,20 @@
   const button = form.querySelector('[type=submit]');
   const status = $('form-status');
   let busy = false;
+  let pendingPayload = null;
+  let unresolved = false;
+  const lockedFields = new Map();
+  function lockFields(locked) {
+    if (locked) {
+      form.querySelectorAll('input,select,textarea').forEach(field => {
+        if (!lockedFields.has(field)) lockedFields.set(field,field.disabled);
+        field.disabled = true;
+      });
+    } else {
+      lockedFields.forEach((disabled,field) => { field.disabled = disabled; });
+      lockedFields.clear();
+    }
+  }
   // Keep the same id for retries; no personal information is persisted.
   let requestId;
   try { requestId = sessionStorage.getItem('workshop-request-id'); } catch { /* Storage can be disabled. */ }
@@ -50,21 +64,43 @@
   form.addEventListener('submit', async event => {
     event.preventDefault(); if (busy || !endpoint) return;
     status.textContent = '';
+    let requestSent = false;
     try {
-      const file = validate(); busy = true; button.disabled = true; button.textContent = 'در حال ارسال؛ لطفاً صبر کنید…';
-      const values = Object.fromEntries(new FormData(form));
-      const payload = {...values,requestId,rulesVersion:'2026-10-v3',rulesAccepted:form.elements.rulesAccepted.checked,certificateAccepted:form.elements.certificateAccepted.checked,websiteConsent:form.elements.websiteConsent.checked,receipt:{type:file.type,base64:await readBase64(file)}};
-      const response = await fetch(endpoint, {method:'POST',body:new URLSearchParams({service:'workshop',payload:JSON.stringify(payload)}),signal:AbortSignal.timeout(90000)});
+      let file, values, consents;
+      if (!pendingPayload) {
+        file = validate();
+        values = Object.fromEntries(new FormData(form));
+        consents = {rulesAccepted:form.elements.rulesAccepted.checked,certificateAccepted:form.elements.certificateAccepted.checked,websiteConsent:form.elements.websiteConsent.checked};
+      }
+      busy = true; button.disabled = true; button.textContent = 'در حال ارسال؛ لطفاً صبر کنید…';
+      lockFields(true);
+      if (!pendingPayload) pendingPayload = {...values,requestId,rulesVersion:'2026-10-v3',...consents,receipt:{type:file.type,base64:await readBase64(file)}};
+      requestSent = true;
+      const response = await fetch(endpoint, {method:'POST',body:new URLSearchParams({service:'workshop',payload:JSON.stringify(pendingPayload)}),signal:AbortSignal.timeout(90000)});
       if (!response.ok) throw new Error('پاسخ سرور دریافت نشد.');
       const result = await response.json();
-      if (!result.ok || !/^NN-[A-F0-9]{16}$/.test(result.trackingCode || '')) throw new Error(result.error || 'پاسخ ثبت‌نام معتبر نبود.');
+      if (!result.ok) {
+        if (result.code === 'request_rejected' && !unresolved) {
+          pendingPayload = null;
+          lockFields(false);
+        } else {
+          unresolved = true;
+        }
+        const error = new Error(result.error || 'پاسخ ثبت‌نام معتبر نبود.');
+        error.definitive = result.code === 'request_rejected' || result.code === 'request_conflict' || result.code === 'request_identity_unverified';
+        throw error;
+      }
+      if (!/^NN-[A-F0-9]{16}$/.test(result.trackingCode || '')) throw new Error('پاسخ ثبت‌نام معتبر نبود.');
       $('tracking').textContent = result.trackingCode;
       $('mail-status').textContent = result.emailStatus === 'accepted' ? 'ایمیل دریافت درخواست ارسال شده است؛ پوشهٔ هرزنامه را هم بررسی کنید.' : 'درخواست ثبت شده، اما ارسال ایمیل نیاز به بررسی دارد. کد پیگیری را نگه دارید.';
       form.hidden = true; $('success').hidden = false; $('success').focus();
       try { sessionStorage.removeItem('workshop-request-id'); } catch { /* No data is stored in restricted browsers. */ }
     } catch(error) {
-      status.textContent = (error.name === 'TimeoutError' || error instanceof TypeError) ? 'ارتباط کامل نشد؛ ممکن است درخواست ثبت شده باشد. با همین صفحه دوباره ارسال کنید؛ کد درخواست برای جلوگیری از ثبت تکراری حفظ می‌شود.' : error.message;
-    } finally { busy = false; button.disabled = !endpoint; button.innerHTML = 'ارسال درخواست ثبت‌نام <span>←</span>'; }
+      if (requestSent && !error.definitive) unresolved = true;
+      if (unresolved && !error.definitive) status.textContent = 'نتیجهٔ ارسال روشن نیست؛ ممکن است درخواست ثبت شده باشد. اطلاعات ارسال‌شده برای جلوگیری از ثبت تکراری قفل شده است. تلاش مجدد دقیقاً همان درخواست را می‌فرستد؛ برای اصلاح اطلاعات با پشتیبانی تماس بگیرید.';
+      else status.textContent = error.message;
+      if (!pendingPayload) lockFields(false);
+    } finally { busy = false; button.disabled = !endpoint; button.innerHTML = unresolved ? 'تلاش مجدد همان درخواست <span>←</span>' : 'ارسال درخواست ثبت‌نام <span>←</span>'; }
   });
   if (endpoint) { $('availability').textContent = 'ثبت‌نام پس از بررسی فیش و اطلاعات شما قطعی خواهد شد.'; button.disabled = false; }
   updateType();

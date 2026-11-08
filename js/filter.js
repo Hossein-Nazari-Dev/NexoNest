@@ -12,17 +12,17 @@
     publication: 'publications',
   };
 
-  let mapsReady = false;
+  let mappedData;
   let catLabelToId, subLabelToId;
 
   function ensureMaps() {
-    if (mapsReady) return;
+    if (mappedData === window.projectsData && mappedData) return;
     const cats = Array.isArray(window.projectsData?.categories) ? window.projectsData.categories : [];
     const subs = Array.isArray(window.projectsData?.subcategories) ? window.projectsData.subcategories : [];
 
     catLabelToId = new Map(cats.map(c => [norm(c.label || c.id), c.id]));
     subLabelToId = new Map(subs.map(s => [norm(s.label || s.id), s.id]));
-    mapsReady = true;
+    mappedData = window.projectsData;
   }
 
   function toCatId(v) {
@@ -71,6 +71,7 @@
   // Public: apply filters
   // ---------------------------
   window.filterProjects = function filterProjects() {
+    if (!window.projectsData) return;
     const projects = window.projectsData?.projects || [];
     const icons = document.querySelectorAll('.project-icon');
     const activeCat = toCatId(window.state?.activeCategory);

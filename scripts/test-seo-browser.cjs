@@ -40,21 +40,51 @@ const server = http.createServer((req, res) => {
       const data = await page.locator('#projectStructuredData').textContent();
       assert.equal(JSON.parse(data).url, `https://nexonest.com/projects-pages/${file}`);
       assert.equal(await plain.locator('meta[name="description"]').getAttribute('content'), await page.locator('meta[name="description"]').getAttribute('content'), file);
+      if (['climora.html', 'curvAdapt.html', 'nexoRhino.html'].includes(file)) {
+        assert.equal(await page.locator('[data-product-status]').count(), 1, file);
+        assert.equal(await plain.locator('[data-product-status]').textContent(), await page.locator('[data-product-status]').textContent(), file);
+      }
+      if (file === 'climora.html') {
+        for (const view of [plain, page]) {
+          const text = await view.locator('#projectPageRoot').textContent();
+          assert.match(text, /49 source-linked responses/);
+          assert.match(text, /full annual EPW reference/);
+          assert.match(text, /filters mask observations without rescaling/);
+          assert.match(text, /up to 30 entries/);
+          assert.match(text, /Development preview/);
+          assert.match(text, /no public installer/i);
+          for (const id of ['getting-started', 'palette-legend', 'project-files', 'methods', 'shortcuts', 'development'])
+            assert.equal(await view.locator(`#${id}`).count(), 1);
+        }
+      }
     }
     assert.deepEqual(errors, [], 'Editorial pages must have no runtime errors');
     const observations = [];
-    for (const width of [1440,390]) {
+    await plain.goto(`${base}/nexonest.html`);
+    assert.equal(await plain.locator('#project-directory a').count(), 20);
+    assert.equal(await plain.locator('#project-directory a[href="projects-pages/climora.html"]').textContent(), 'ClimaNest');
+    for (const width of [1440,820,390,320]) {
       await page.setViewportSize({width,height:900});
-      for (const file of ['index.html','nexonest.html','portfolio.html','projects-pages/nexoBreak.html']) {
+      await plain.setViewportSize({width,height:900});
+      for (const file of ['index.html','nexonest.html','portfolio.html','newsletter.html','projects-pages/climora.html']) {
         await page.goto(`${base}/${file}`);
         await page.waitForTimeout(350);
-        observations.push({file,width,overflow:await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)});
+        const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+        assert.equal(overflow, false, `${file} at ${width}px`);
+        observations.push({file,width,overflow});
         await page.screenshot({path:path.join(out, `${width}-${file.replaceAll('/','-')}.png`),fullPage:false});
       }
+      await plain.goto(`${base}/projects-pages/climora.html`);
+      assert.equal(await plain.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Static ClimaNest at ${width}px`);
+      await plain.screenshot({path:path.join(out, `${width}-climanest-no-js.png`),fullPage:false});
     }
-    const unexpected = errors.filter(error => !error.url.endsWith('/portfolio.html') || error.message !== 'window.loadProjectsData is not a function');
-    assert.deepEqual(unexpected, []);
-    console.log(JSON.stringify({projects:files.length,knownPortfolioErrors:errors,observations},null,2));
+    await live.route('**/js/product-status.js*', route => route.abort());
+    await page.goto(`${base}/projects-pages/climora.html`);
+    assert.equal(await page.locator('[data-product-status]').count(), 1, 'Missing helper preserves generated product facts');
+    assert.match(await page.locator('[data-product-status]').textContent(), /Development preview/);
+    assert.equal(await page.locator('.product-primary-action').getAttribute('href'), '../projects-pages/climora.html#getting-started');
+    assert.deepEqual(errors, []);
+    console.log(JSON.stringify({projects:files.length,browserErrors:errors,observations},null,2));
   } finally {
     await browser?.close();
     server.close();

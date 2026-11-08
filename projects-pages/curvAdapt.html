@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="CurvAdapt — reliability-first curve segmentation and geometry preprocessing for building performance simulation.">
+  <meta name="description" content="CurvAdapt: a Grasshopper plugin for Rhino 8.30+ with curve segmentation, polyline simplification, chord-error analysis and geometry utilities.">
   <link rel="canonical" href="https://nexonest.com/projects-pages/curvAdapt.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="CurvAdapt | NexoNest">
-  <meta property="og:description" content="CurvAdapt — reliability-first curve segmentation and geometry preprocessing for building performance simulation.">
+  <meta property="og:description" content="CurvAdapt: a Grasshopper plugin for Rhino 8.30+ with curve segmentation, polyline simplification, chord-error analysis and geometry utilities.">
   <meta property="og:url" content="https://nexonest.com/projects-pages/curvAdapt.html">
   <title>CurvAdapt | NexoNest</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,18 +15,21 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/project.css">
+  <link rel="stylesheet" href="../css/product-status.css?v=20261108-curvadapt-wiki">
+  <link rel="stylesheet" href="../css/project.css?v=20261108-curvadapt-wiki">
   <link rel="stylesheet" href="../css/ux.css">
-<script type="application/ld+json" id="projectStructuredData">{"@context":"https://schema.org","@type":"CreativeWork","name":"CurvAdapt","description":"A reliability-first workflow for translating curved design geometry into simulation-ready polylines.","url":"https://nexonest.com/projects-pages/curvAdapt.html","author":{"@type":"Person","name":"Hossein Nazari"},"isPartOf":{"@type":"WebSite","name":"NexoNest","url":"https://nexonest.com/"}}</script>
+<script type="application/ld+json" id="projectStructuredData">{"@context":"https://schema.org","@type":"CreativeWork","name":"CurvAdapt","description":"Segment curves, simplify polylines and inspect geometric fidelity inside Rhino and Grasshopper.","url":"https://nexonest.com/projects-pages/curvAdapt.html","author":{"@type":"Person","name":"Hossein Nazari"},"isPartOf":{"@type":"WebSite","name":"NexoNest","url":"https://nexonest.com/"}}</script>
 <meta property="og:site_name" content="NexoNest">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://nexonest.com/assets/profile-formal-v2.png">
 <meta property="og:image:alt" content="Hossein Nazari — computational design and research">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CurvAdapt | NexoNest">
-<meta name="twitter:description" content="CurvAdapt — reliability-first curve segmentation and geometry preprocessing for building performance simulation.">
+<meta name="twitter:description" content="CurvAdapt: a Grasshopper plugin for Rhino 8.30+ with curve segmentation, polyline simplification, chord-error analysis and geometry utilities.">
 <meta name="twitter:image" content="https://nexonest.com/assets/profile-formal-v2.png">
 <meta name="twitter:image:alt" content="Hossein Nazari — computational design and research">
+<link rel="icon" href="../assets/icons/curvadapt-plugin-hq.png?v=20261108-visuals" type="image/png">
+<style>@view-transition { navigation: none; }</style>
 </head>
 <body class="project-theme nexonest-theme" data-project="curvadapt">
   <div class="project-layout">
@@ -39,7 +42,6 @@
         <div id="sidebarNav" class="sidebar-primary"></div>
         <div class="sidebar-separator"></div>
         <div class="sidebar-secondary">
-          <a href="../curvadapt-wiki.html" class="nav-link back-link">→ CurvAdapt Wiki</a>
           <a href="../nexonest.html" class="nav-link back-link">← NexoNest</a>
           <a href="../index.html" class="nav-link back-link">← Main overview</a>
         </div>
@@ -49,27 +51,33 @@
       <div class="project-content" id="projectPageRoot"><!-- seo-content:start -->
     <header class="project-editorial-hero">
       <div class="project-hero-dots" aria-hidden="true"></div>
-      <p class="project-eyebrow">Research software / Geometry preprocessing</p>
+      <p class="project-eyebrow">Grasshopper plugin / Curve preprocessing</p>
       <h1>CurvAdapt</h1>
-      <p class="project-lead">A reliability-first workflow for translating curved design geometry into simulation-ready polylines.</p>
+      <p class="project-lead">Segment curves, simplify polylines and inspect geometric fidelity inside Rhino and Grasshopper.</p>
       <dl class="project-meta">
-        <div><dt>Role</dt><dd>Concept, algorithms, analysis &amp; development</dd></div>
+        <div><dt>Role</dt><dd>Plugin design &amp; development / Hossein Nazari</dd></div>
         <div><dt>Period</dt><dd>2024 — present</dd></div>
-        <div><dt>Status</dt><dd>Manuscript under review / plugin in development</dd></div>
-        <div><dt>Stack</dt><dd>RhinoCommon / C# / BPS</dd></div>
+        <div><dt>Status</dt><dd>Plugin in development</dd></div>
+        <div><dt>Stack</dt><dd>Windows / Rhino 8.30+ / Grasshopper / .NET 8</dd></div>
       </dl>
-      <div class="project-tags" aria-label="Project topics"><span>Curve segmentation</span><span>MCE / rMCE</span><span>Verification</span><span>Radiation proxy</span></div>
+      <div class="project-tags" aria-label="Project topics"><span>Segmentation</span><span>Simplification</span><span>Chord error</span><span>Geometry utilities</span></div>
+      <aside class="product-status" data-product-status="p_curvadapt" aria-label="Product availability and compatibility">
+      <p class="product-status-line"><strong>Plugin in development</strong><span> · Rhino / Grasshopper</span></p>
+      <p class="product-compatibility">Windows, Rhino 8.30+ with .NET 8 and Grasshopper. No public stable package confirmed.</p>
+      <p class="product-review">Source reviewed <time datetime="2026-11-08">2026-11-08</time></p>
+      <a class="product-primary-action" href="../projects-pages/curvAdapt.html">Explore the plugin <span aria-hidden="true">↗</span></a>
+    </aside>
 
     </header>
 
     <section class="project-thesis" aria-label="Project question and response">
       <div>
         <span>Question</span>
-        <p>When a smooth curve becomes a polyline, how much geometric error is still safe for building-performance simulation?</p>
+        <p>How can a smooth curve become useful discrete geometry with an explicit approximation error?</p>
       </div>
       <div>
         <span>Response</span>
-        <p>CurvAdapt controls the deviation itself — using maximum chord error and relative MCE — instead of treating segment count as evidence of accuracy.</p>
+        <p>Choose uniform or adaptive segmentation, simplify where appropriate and inspect chord error before using the result downstream.</p>
       </div>
     </section>
 
@@ -77,109 +85,200 @@
     <div class="project-proof" aria-label="Project evidence">
 
         <div class="proof-item">
-          <strong>6</strong>
-          <span>representative curve profiles</span>
+          <strong>Uniform + adaptive</strong>
+          <span>segmentation methods</span>
         </div>
         <div class="proof-item">
-          <strong>5</strong>
-          <span>segmentation strategies</span>
+          <strong>3</strong>
+          <span>simplification families</span>
         </div>
         <div class="proof-item">
-          <strong>|r| ≈ .99</strong>
-          <span>radiation and annual EUI</span>
+          <strong>MCE / rMCE</strong>
+          <span>geometric fidelity</span>
         </div>
         <div class="proof-item">
-          <strong>G¹ aware</strong>
-          <span>critical breaks preserved</span>
+          <strong>JSON</strong>
+          <span>geometry exchange</span>
         </div>
     </div>
-    <section class="content-section project-editorial-section" data-nav-title="The weak link before simulation">
+    <section class="content-section project-editorial-section" data-nav-title="Curve preprocessing inside Grasshopper" id="section-1">
     <div class="section-heading-row">
       <span>01</span>
-      <h2 class="section-title">The weak link before simulation</h2>
+      <h2 class="section-title">Curve preprocessing inside Grasshopper</h2>
     </div>
       <div class="editorial-split">
-        <div class="prose"><p>NURBS geometry cannot enter many performance engines directly. It is discretized first, often with an arbitrary segment count. The model may look smooth while its deviation, topology, and simulation reliability remain unknown.</p><p>CurvAdapt separates segmentation from simplification, preserves real discontinuities, and reports geometric fidelity in a scale-aware form.</p></div>
+        <div class="prose"><p>CurvAdapt is a Grasshopper plugin for Rhino 8. Segment smooth curves, simplify polylines and measure chord error before passing discrete geometry to another tool.</p><p>Choose a method and tolerance for the geometry at hand. Inspect the resulting approximation instead of relying on segment count alone.</p></div>
         <aside class="margin-note">
-          <span>Small but consequential</span>
-          <p>A simulation can be numerically precise and still begin with unreliable geometry.</p>
+          <span>Geometry first</span>
+          <p>CurvAdapt prepares geometry. Downstream fabrication, robotics and simulation tools own their planning and analysis.</p>
         </aside>
-      </div></section><section class="content-section project-editorial-section" data-nav-title="Reliability workflow">
+      </div></section><section class="content-section project-editorial-section" data-nav-title="From input curve to checked output" id="section-2">
     <div class="section-heading-row">
       <span>02</span>
-      <h2 class="section-title">Reliability workflow</h2>
+      <h2 class="section-title">From input curve to checked output</h2>
     </div><ol class="project-process">
       <li>
         <span>01</span>
-        <div><h3>Prepare</h3><p>Detect domains, duplicate parameters, seams, kinks, and G¹ breakpoints.</p></div>
+        <div><h3>Choose the input</h3><p>Start with a smooth curve and select a segmentation component. The segmentation pipeline intentionally rejects polyline inputs.</p></div>
       </li>
       <li>
         <span>02</span>
-        <div><h3>Segment</h3><p>Compare uniform and adaptive routines across different curvature behaviours.</p></div>
+        <div><h3>Set the method</h3><p>Use uniform parameter or length spacing, or adaptive chord-error, curvature or tangent methods.</p></div>
       </li>
       <li>
         <span>03</span>
-        <div><h3>Verify geometry</h3><p>Measure MCE and normalize it as rMCE so fidelity can be compared across scale.</p></div>
+        <div><h3>Inspect fidelity</h3><p>Measure maximum and relative chord error. Check discontinuities and self-intersections where relevant.</p></div>
       </li>
       <li>
         <span>04</span>
-        <div><h3>Check performance</h3><p>Use fast incident-radiation convergence before committing to heavier daylight and energy runs.</p></div>
-      </li></ol></section><section class="content-section project-editorial-section" data-nav-title="What the study found">
+        <div><h3>Continue the workflow</h3><p>Use the resulting geometry and parameters in Grasshopper, or the JSON conversion utilities for exchange.</p></div>
+      </li></ol></section><section class="content-section project-editorial-section" data-nav-title="How the tools connect" id="workflow-diagram">
     <div class="section-heading-row">
       <span>03</span>
-      <h2 class="section-title">What the study found</h2>
-    </div><div class="project-card-grid">
-      <article class="project-info-card">
-        <h3>No universal best algorithm</h3>
-        <p>Uniform-by-length is efficient for smooth convex curves; adaptive-by-chord is more robust for hybrid and free-form profiles.</p>
-      </article>
-      <article class="project-info-card">
-        <h3>Segment count can mislead</h3>
-        <p>More segments do not guarantee a proportionally better approximation and may conceal false convergence.</p>
-      </article>
-      <article class="project-info-card">
-        <h3>Radiation is a useful diagnostic</h3>
-        <p>It retains sensitivity to geometry and strongly tracks annual energy convergence at a fraction of the computation.</p>
-      </article>
-      <article class="project-info-card">
-        <h3>Daylight needs extra care</h3>
-        <p>Sensor-grid allocation can introduce oscillations that are not caused by the curve itself.</p>
-      </article></div></section><section class="content-section project-editorial-section" data-nav-title="Method trace">
-    <div class="section-heading-row">
-      <span>04</span>
-      <h2 class="section-title">Method trace</h2>
+      <h2 class="section-title">How the tools connect</h2>
     </div>
       <figure class="project-figure">
-        <img src="../assets/images/projects/curvadapt/fig-methodology.jpg" alt="CurvAdapt geometry verification and building performance simulation workflow" loading="lazy" decoding="async">
-        <figcaption>Geometry is verified before performance accuracy is interpreted.</figcaption>
-      </figure></section><section class="content-section project-editorial-section" data-nav-title="Evidence, not a magic threshold">
+        <img src="../assets/images/projects/curvadapt/plugin-flow.svg" alt="Source curve and settings feed Make or Clean, then Check compares approximation with the original; adjust settings when needed and pass geometry to downstream tools." width="640" height="780" loading="lazy" decoding="async">
+        <figcaption>A suggested manual workflow, not an automatic all-in-one component. Keep the original curve available for fidelity checks.</figcaption>
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="From a curve to discrete geometry" id="curve-demo">
+    <div class="section-heading-row">
+      <span>04</span>
+      <h2 class="section-title">From a curve to discrete geometry</h2>
+    </div><figure class="project-figure project-demo">
+      <video controls playsinline muted loop preload="none" poster="../assets/images/projects/curvadapt/curve-demo-poster.png?v=20261108-clean-overlay" aria-label="From a curve to discrete geometry">
+        <source src="../assets/videos/curvadapt/curve-demo.webm?v=20261108-clean-overlay" type="video/webm">
+        <a href="../assets/videos/curvadapt/curve-demo.webm?v=20261108-clean-overlay">Open the animation</a>
+      </video><figcaption>Eight-second schematic: sample a smooth curve, connect points into chords and refine the approximation. This explains the workflow; it is not a recording of Rhino or a benchmark of a CurvAdapt algorithm.</figcaption>
+    </figure></section><section class="content-section project-editorial-section" data-nav-title="The component library" id="section-3">
     <div class="section-heading-row">
       <span>05</span>
-      <h2 class="section-title">Evidence, not a magic threshold</h2>
-    </div>
-      <div class="figure-text-layout">
-        <div class="prose"><p>The tested thresholds are evidence from specific curve families, not universal constants. The transferable contribution is the procedure for deriving an appropriate threshold for a new geometry and simulation objective.</p></div>
-        <figure class="project-figure">
-          <img src="../assets/images/projects/curvadapt/fig-validation.jpg" alt="Comparison of radiation, daylight and energy convergence" loading="lazy" decoding="async">
-          <figcaption>Radiation convergence anticipates energy stability; daylight also reflects its sensor discretization.</figcaption>
-        </figure>
-      </div></section><section class="content-section project-editorial-section" data-nav-title="Current boundary">
+      <h2 class="section-title">The component library</h2>
+    </div><div class="component-library">
+      <div class="component-group"><h3>Make / Segmentation</h3>
+      <div class="component-grid"><a class="component-card" href="../curvadapt-wiki.html#step-evenly">
+        <img src="../assets/images/projects/curvadapt/components/step-evenly.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Step Evenly <span aria-hidden="true">↗</span></h4><p>Equal parameter intervals.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#space-evenly">
+        <img src="../assets/images/projects/curvadapt/components/space-evenly.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Space Evenly <span aria-hidden="true">↗</span></h4><p>Equal arc-length intervals.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#follow-bends">
+        <img src="../assets/images/projects/curvadapt/components/follow-bends.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Follow Bends <span aria-hidden="true">↗</span></h4><p>Adaptive segmentation by curvature.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#follow-turns">
+        <img src="../assets/images/projects/curvadapt/components/follow-turns.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Follow Turns <span aria-hidden="true">↗</span></h4><p>Adaptive segmentation by tangent direction.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#follow-shape">
+        <img src="../assets/images/projects/curvadapt/components/follow-shape.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Follow Shape <span aria-hidden="true">↗</span></h4><p>Adaptive segmentation by chord error.</p></div>
+      </a></div></div>
+      <div class="component-group"><h3>Clean / Simplification</h3>
+      <div class="component-grid"><a class="component-card" href="../curvadapt-wiki.html#clean-angles">
+        <img src="../assets/images/projects/curvadapt/components/clean-angles.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Clean Angles <span aria-hidden="true">↗</span></h4><p>Simplify by angular change.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#clean-shape">
+        <img src="../assets/images/projects/curvadapt/components/clean-shape.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Clean Shape <span aria-hidden="true">↗</span></h4><p>Simplify with a chord-based method.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#clean-overall">
+        <img src="../assets/images/projects/curvadapt/components/clean-overall.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Clean Overall <span aria-hidden="true">↗</span></h4><p>Douglas-Peucker simplification.</p></div>
+      </a></div></div>
+      <div class="component-group"><h3>Check / Analysis</h3>
+      <div class="component-grid"><a class="component-card" href="../curvadapt-wiki.html#find-crossings">
+        <img src="../assets/images/projects/curvadapt/components/find-crossings.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Find Crossings <span aria-hidden="true">↗</span></h4><p>Inspect curve self-intersections.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#check-shape">
+        <img src="../assets/images/projects/curvadapt/components/check-shape.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Check Shape <span aria-hidden="true">↗</span></h4><p>Measure maximum and relative chord error against the source curve.</p></div>
+      </a></div></div>
+      <div class="component-group"><h3>Tools / Geometry and data</h3>
+      <div class="component-grid"><a class="component-card" href="../curvadapt-wiki.html#find-kinks">
+        <img src="../assets/images/projects/curvadapt/components/find-kinks.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Find Kinks <span aria-hidden="true">↗</span></h4><p>Locate continuity breaks and critical points.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#match-length">
+        <img src="../assets/images/projects/curvadapt/components/match-length.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Match Length <span aria-hidden="true">↗</span></h4><p>Scale a curve to a target arc length.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#t-to-points">
+        <img src="../assets/images/projects/curvadapt/components/t-to-points.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>t to Points <span aria-hidden="true">↗</span></h4><p>Evaluate curve points at parameters.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#points-to-t">
+        <img src="../assets/images/projects/curvadapt/components/points-to-t.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Points to t <span aria-hidden="true">↗</span></h4><p>Project points to curve parameters.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#write-json">
+        <img src="../assets/images/projects/curvadapt/components/write-json.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Write JSON <span aria-hidden="true">↗</span></h4><p>Record polyline geometry as JSON.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#read-json">
+        <img src="../assets/images/projects/curvadapt/components/read-json.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Read JSON <span aria-hidden="true">↗</span></h4><p>Read polyline geometry from JSON.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#sort-points">
+        <img src="../assets/images/projects/curvadapt/components/sort-points.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Sort Points <span aria-hidden="true">↗</span></h4><p>Merge and sort points along a curve.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#split-at-points">
+        <img src="../assets/images/projects/curvadapt/components/split-at-points.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Split at Points <span aria-hidden="true">↗</span></h4><p>Split a curve at projected points.</p></div>
+      </a><a class="component-card" href="../curvadapt-wiki.html#continuity">
+        <img src="../assets/images/projects/curvadapt/components/continuity.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>Continuity selector <span aria-hidden="true">↗</span></h4><p>Select the continuity type used by detection tools.</p></div>
+      </a></div></div>
+      <div class="component-group"><h3>Help / Community and learning</h3>
+      <div class="component-grid"><a class="component-card" href="../curvadapt-wiki.html#curvadapt-hub">
+        <img src="../assets/images/projects/curvadapt/components/logo.png" alt="" width="48" height="48" loading="lazy">
+        <div><h4>curvAdapt HUB <span aria-hidden="true">↗</span></h4><p>Open the learning guide, community signup or an on-demand update check.</p></div>
+      </a></div></div></div></section><section class="content-section project-editorial-section" data-nav-title="Tolerance-aware inputs" id="section-4">
     <div class="section-heading-row">
       <span>06</span>
-      <h2 class="section-title">Current boundary</h2>
+      <h2 class="section-title">Tolerance-aware inputs</h2>
     </div>
-      <div class="project-honesty">
-        <span>Under revision</span>
-        <p>The journal review recognized the workflow’s merit while asking for tighter terminology, broader climate testing, stronger sensitivity analysis, and a more modest novelty claim. The paper and plugin are being revised around that reliability-first contribution.</p>
-      </div></section><section class="content-section project-editorial-section" data-nav-title="Research team">
+      <div class="editorial-split">
+        <div class="prose"><p>Parameter handling includes domain checks, sorting, duplicate cleanup and tolerance-aware projection. Inspect warnings for off-curve inputs.</p><p>Open and closed curves require different treatment at seams and continuity breaks. Select settings for your geometry and verify the output.</p></div>
+        <aside class="margin-note">
+          <span>Explicit controls</span>
+          <p>A smaller geometric error does not by itself validate a downstream model or physical process.</p>
+        </aside>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Compatibility and setup" id="section-5">
     <div class="section-heading-row">
       <span>07</span>
-      <h2 class="section-title">Research team</h2>
+      <h2 class="section-title">Compatibility and setup</h2>
+    </div><ol class="project-process">
+      <li>
+        <span>01</span>
+        <div><h3>Check the host</h3><p>The current Windows build targets Rhino 8.30 or newer running .NET 8, with Grasshopper. Rhino 7 and .NET Framework are not targeted.</p></div>
+      </li>
+      <li>
+        <span>02</span>
+        <div><h3>Build from source</h3><p>The project includes a development install script that builds the plugin and registers a .ghlink file. A public stable package is not confirmed here.</p></div>
+      </li>
+      <li>
+        <span>03</span>
+        <div><h3>Open Grasshopper</h3><p>Find the CurvAdapt tab. Restart Rhino after rebuilding and avoid loading a second copy of the same plugin.</p></div>
+      </li></ol></section><section class="content-section project-editorial-section" data-nav-title="Start with a simple curve" id="section-6">
+    <div class="section-heading-row">
+      <span>08</span>
+      <h2 class="section-title">Start with a simple curve</h2>
+    </div>
+      <div class="editorial-split">
+        <div class="prose"><p>Connect a circle or smooth NURBS curve to Step Evenly in CurvAdapt &gt; Make. Adjust the segment input and inspect the output points and polyline.</p><p>The repository smoke-test example uses a radius-10 circle with 10 segments, expecting 11 points and one polyline. This is a starting check, not validation of every algorithm.</p></div>
+        <aside class="margin-note">
+          <span>Learn the tools</span>
+          <p>CurvAdapt HUB in CurvAdapt &gt; Help links to the learning guide, newsletter and an on-demand update check. It does not install updates automatically.</p>
+        </aside>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Availability and scope" id="section-7">
+    <div class="section-heading-row">
+      <span>09</span>
+      <h2 class="section-title">Availability and scope</h2>
+    </div>
+      <div class="project-honesty">
+        <span>Plugin in development</span>
+        <p>The geometry-processing components are implemented locally. No public stable package or installer is confirmed here. CurvAdapt does not perform robot motion planning, fabrication execution, building-energy simulation or predicted energy savings.</p>
+      </div></section><section class="content-section project-editorial-section" data-nav-title="Documentation and setup" id="section-8">
+    <div class="section-heading-row">
+      <span>10</span>
+      <h2 class="section-title">Documentation and setup</h2>
     </div>
       <div class="project-credits">
         <div class="project-credits-intro">
-          <p>Hossein Nazari — conceptualization, methodology, algorithms, data analysis and original draft. With Shadan Masoud, Abbas Tarkashvand and Mehdi Ghiai.</p>
-
+          <p>Designed and developed by Hossein Nazari / NexoNest.</p>
+          <div class="project-links"><a href="https://github.com/Hossein-Nazari-Dev/curvAdapt" target="_blank" rel="noopener noreferrer">Source and setup ↗</a></div>
+          <a class="project-docs-button" href="../curvadapt-wiki.html">Open CurvAdapt Wiki <span aria-hidden="true">→</span></a>
         </div>
 
       </div></section>
@@ -194,7 +293,8 @@
       <footer class="project-footer"><div class="project-footer-editorial" id="projectPageFooter"></div></footer>
     </main>
   </div>
-  <script src="../js/project-page.js"></script>
+  <script src="../js/product-status.js?v=20261108-curvadapt-wiki"></script>
+  <script src="../js/project-page.js?v=20261108-curvadapt-wiki"></script>
   <script src="../js/project-navigation.js"></script>
   <script src="../js/ux.js" defer></script>
 </body>

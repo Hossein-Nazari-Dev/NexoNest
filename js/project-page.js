@@ -22,13 +22,13 @@ const PROJECT_PAGE_ORDER = [
 const PROJECT_PAGE_DATA = {
   climora: {
   "page": "18",
-  "title": "Climora",
-  "shortTitle": "Climora",
+  "title": "ClimaNest",
+  "shortTitle": "ClimaNest",
   "subtitle": "Read the climate.<br>Design with insight.",
-  "icon": "../assets/icons/climora.svg",
-  "iconAlt": "Climora Readout: an open C and a vertical measurement datum",
+  "icon": "../assets/icons/climanest.svg?v=20261103-shelter-icon",
+  "iconAlt": "ClimaNest Shelter: a protective C and a sheltered horizontal line",
   "eyebrow": "NexoNest / Climate-responsive design",
-  "lead": "Read the climate. Design with insight. Climora is being developed to connect climate analysis and comparison with design strategies for architecture, landscape and urban design.",
+  "lead": "Read the climate. Design with insight. ClimaNest is a local Windows development preview connecting climate analysis, solar studies and evidence-led design responses for architecture, landscape and urban design.",
   "role": "Product design & development / Hossein Nazari",
   "period": "2026 — present",
   "status": "Development preview",
@@ -40,7 +40,7 @@ const PROJECT_PAGE_DATA = {
     "Local projects"
   ],
   "question": "How can reading a climate inform decisions across buildings, landscapes and urban spaces?",
-  "response": "Make weather patterns legible, compare relevant variables and examine solar exposure with explicit assumptions. The current workbench provides the analytical foundation; broader climate-responsive design strategies define the development direction.",
+  "response": "Read weather patterns, compare variables and examine solar exposure, then review 49 source-linked design responses against the available evidence and project constraints. Collect selected study views into a local PDF report with their assumptions and limitations.",
   "proof": [
     [
       "EPW",
@@ -55,8 +55,8 @@ const PROJECT_PAGE_DATA = {
       "window and shading studies"
     ],
     [
-      "SVG + PNG",
-      "figures with source and period"
+      "49",
+      "source-linked design responses"
     ]
   ],
   "sections": [
@@ -69,7 +69,7 @@ const PROJECT_PAGE_DATA = {
       ],
       "aside": {
         "label": "Current availability",
-        "text": "Climora is a development preview. This is its product overview and user guide; no public installer is provided here."
+        "text": "ClimaNest is a development preview. This is its product overview and user guide; no public installer is provided here."
       },
       "id": "section-1"
     },
@@ -90,13 +90,13 @@ const PROJECT_PAGE_DATA = {
         ],
         [
           "03",
-          "Choose an analysis",
-          "Select a climate variable, Compare variables, Psychrometric or Sun shading. Use the contextual left panel to adjust relevant inputs."
+          "Explore the workspace",
+          "Move freely between Project brief, Climate summary, Climatic charts, Solar study, Design strategies and Report. Set project constraints and screening thresholds explicitly; use the contextual inspector for chart inputs."
         ],
         [
           "04",
           "Refine and share",
-          "Select a time period, review coverage and display settings, then export SVG or PNG. Valid study changes save in order; a failed save is shown with a retry action."
+          "Review the selected period, input coverage and strategy constraints. Export SVG or PNG, or use Add to report to capture views for a local PDF. Valid study changes save in order; a failed save is shown with a retry action."
         ]
       ]
     },
@@ -115,7 +115,7 @@ const PROJECT_PAGE_DATA = {
         ],
         [
           "Automatic bounds",
-          "Heatmap defaults use the 10th and 90th percentiles of valid selected observations. End colors can clip the visual range without removing the original values."
+          "Heatmap automatic bounds use the 10th and 90th percentiles of valid values in the full annual EPW reference. Time and condition filters mask observations without rescaling that reference. If both percentiles collapse for nonconstant data, the full valid range is used. Values beyond the bounds use the end colors; original values remain intact."
         ],
         [
           "Manual bounds",
@@ -145,6 +145,10 @@ const PROJECT_PAGE_DATA = {
           "Export editable vector figures or raster images, with source, units, period and method metadata. Use Ctrl+Shift+C to copy the current chart."
         ],
         [
+          "Collected PDF report",
+          "Add to report captures the current period, conditions, settings, linked views and weather identity. Arrange up to 30 entries, edit titles and commentary, and export a local PDF with a cover. Later analysis edits do not update captured entries. The collection and cover persist in the .cli project; Complete study remains an alternative report mode."
+        ],
+        [
           "Project library",
           "Recent projects can be pinned. In Windows, Delete asks for confirmation and moves owned project files to the Recycle Bin; original source EPW files are preserved."
         ],
@@ -165,7 +169,7 @@ const PROJECT_PAGE_DATA = {
       ],
       "aside": {
         "label": "Evidence before claims",
-        "text": "Climora does not establish predicted energy savings, building performance or guaranteed comfort. Evaluate design proposals with the additional models and project data appropriate to the question."
+        "text": "ClimaNest does not establish predicted energy savings, building performance or guaranteed comfort. Evaluate design proposals with the additional models and project data appropriate to the question."
       }
     },
     {
@@ -197,10 +201,10 @@ const PROJECT_PAGE_DATA = {
       "note": "Use the visible controls for project actions and exports. Text fields retain their standard editing controls."
     },
     {
-      "title": "About Climora",
+      "title": "About ClimaNest",
       "kind": "honesty",
       "label": "Version 0.1.0 · Development preview",
-      "text": "Designed and developed by Hossein Nazari / NexoNest. The current analytical tools and the broader design-strategy direction are described separately. This page does not imply public installer availability or validated performance results.",
+      "text": "Designed and developed by Hossein Nazari / NexoNest. Climate analysis, the design-strategy workspace and collected reports are implemented locally. This development preview has no public installer here; implementation does not establish validated building performance or energy savings.",
       "id": "section-7"
     },
     {
@@ -230,9 +234,9 @@ const PROJECT_PAGE_DATA = {
       "id": "screen-temperature-heatmap",
       "title": "Annual temperature heatmap",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-temperature-heatmap.jpg",
+      "image": "../assets/images/projects/climanest/climanest-temperature-heatmap.jpg?v=20261103-shelter-icon",
       "alt": "Dry-bulb temperature across the year, with hours on the vertical axis, dates across the horizontal axis and the temperature scale below.",
-      "caption": "Browser preview of Climora using Tehran-Khomeini EPW TMYx 2011–2025: 8,760 valid hourly observations.",
+      "caption": "Browser preview of ClimaNest using Tehran-Khomeini EPW TMYx 2011–2025: 8,760 valid hourly observations.",
       "width": 1440,
       "height": 960
     },
@@ -240,7 +244,7 @@ const PROJECT_PAGE_DATA = {
       "id": "screen-monthly-temperature",
       "title": "Monthly temperature summary",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-monthly-temperature.jpg",
+      "image": "../assets/images/projects/climanest/climanest-monthly-temperature.jpg?v=20261103-shelter-icon",
       "alt": "Monthly mean dry-bulb temperature calculated from valid selected hourly observations, with the current weather source visible.",
       "caption": "Monthly means for the same Tehran-Khomeini EPW study; this is a weather-data summary, not a building simulation.",
       "width": 1440,
@@ -250,50 +254,50 @@ const PROJECT_PAGE_DATA = {
       "id": "screen-variable-comparison",
       "title": "Temperature and humidity in comparison",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-variable-comparison.jpg",
+      "image": "../assets/images/projects/climanest/climanest-variable-comparison.jpg?v=20261103-shelter-icon",
       "alt": "Daily dry-bulb and dew-point temperatures on the left Celsius axis, with relative humidity on the independent right percentage axis.",
       "caption": "Three series with explicitly labelled units, shown in the current comparison interface.",
-      "width": 1404,
+      "width": 1440,
       "height": 960
     },
     {
       "id": "screen-psychrometric",
       "title": "Psychrometric distribution",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-psychrometric.jpg",
+      "image": "../assets/images/projects/climanest/climanest-psychrometric.jpg?v=20261103-shelter-icon",
       "alt": "Hourly weather plotted on the psychrometric chart alongside editable PMV reference assumptions in the left panel.",
       "caption": "The dashed PMV region is an indoor reference over outdoor EPW data; it is not an outdoor-comfort or building-performance result.",
-      "width": 1404,
+      "width": 1440,
       "height": 960
     },
     {
       "id": "screen-shading-mask",
       "title": "Sun shading: mask and reference geometry",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-shading-mask.jpg",
+      "image": "../assets/images/projects/climanest/climanest-shading-mask.jpg?v=20261103-shelter-icon",
       "alt": "Solar directions plotted with the shading mask, window section, isometric geometry and reference-date readouts.",
       "caption": "Example south-facing opening at Tehran-Khomeini: 1.5 × 1.5 m window, 0.9 m sill, 0.15 m head gap and approximately 0.95 m overhang.",
-      "width": 1404,
+      "width": 1440,
       "height": 960
     },
     {
       "id": "screen-shading-section",
       "title": "Sun shading: section view",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-shading-section.jpg",
+      "image": "../assets/images/projects/climanest/climanest-shading-section.jpg?v=20261103-shelter-icon",
       "alt": "Window section with overhang, opening and sill dimensions, a reference solar beam and seasonal floor-reach readouts.",
       "caption": "Current interface with a locked camera and live geometry. Dimensions are example inputs; floor reach uses the stated ideal shading assumptions.",
-      "width": 1404,
+      "width": 1440,
       "height": 960
     },
     {
       "id": "screen-shading-isometric",
       "title": "Sun shading: isometric view",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-shading-isometric.jpg",
+      "image": "../assets/images/projects/climanest/climanest-shading-isometric.jpg?v=20261103-shelter-icon",
       "alt": "Isometric view of the example window, overhang, wall and floor, alongside the same editable shading inputs.",
       "caption": "A second view of the same example design, not a different validated project.",
-      "width": 1404,
+      "width": 1440,
       "height": 960
     },
     {
@@ -317,11 +321,12 @@ const PROJECT_PAGE_DATA = {
     },
     {
       "id": "development",
-      "title": "From climate understanding to design strategies",
+      "title": "Design strategies: evidence and constraints",
       "kind": "split",
       "text": [
-        "Climora's scope extends beyond displaying weather charts. Its development direction is to connect analysis and comparison with climate-responsive strategies across architecture, landscape and urban design.",
-        "The implemented foundation includes climate charts, variable comparison, psychrometrics, solar shading and local study output. Broader climate-responsive strategy recommendations remain a development direction."
+        "The implemented Design strategies workspace offers Read the climate, Explore responses and Selected solutions. Its searchable library contains 49 source-linked responses: 20 for Architecture, 15 for Landscape and 14 for Urban design. Review related alternatives, schematic mechanisms, evidence, constraints, unknowns and references before adding a response to the project's saved selection.",
+        "The screens provide qualitative evidence and constraint checks. Climatic-potential percentages count matching observations among valid observations, with a 90% joint-input coverage requirement; night-purge screens count paired days. These percentages are not comfort improvement, effectiveness or energy savings and must not be added across strategies. Editable screening thresholds are product assumptions rather than values validated by the linked references.",
+        "Mechanism diagrams and optional motion explain possible responses; they are not simulated flows or dimensioned construction details. Use project-specific building, landscape or microclimate models to assess a proposal. Selected strategy evidence and study views can be captured in the report without turning them into performance predictions."
       ],
       "aside": {
         "label": "Read the climate. Design with insight.",
@@ -332,9 +337,9 @@ const PROJECT_PAGE_DATA = {
       "id": "visual-identity",
       "title": "Read the climate. Design with insight.",
       "kind": "figure",
-      "image": "../assets/images/projects/climora/climora-introduction-en.png",
-      "alt": "Climora's open-C logo and climate-data ribbon above a building, landscape trees and urban blocks",
-      "caption": "Climora brand illustration across architecture, landscape and urban design. The ribbon is conceptual artwork, not a numerical simulation result."
+      "image": "../assets/images/projects/climanest/climanest-introduction-en.png?v=20261103-shelter-icon",
+      "alt": "ClimaNest's open-C logo and climate-data ribbon above a building, landscape trees and urban blocks",
+      "caption": "ClimaNest brand illustration across architecture, landscape and urban design. The ribbon is conceptual artwork, not a numerical simulation result."
     }
   ]
 },
@@ -1131,86 +1136,328 @@ const PROJECT_PAGE_DATA = {
   },
 
   curvadapt: {
-    page: "02",
-    title: "CurvAdapt",
-    shortTitle: "CurvAdapt",
-    subtitle: "Reliable geometry<br>for simulation",
-    icon: "../assets/icons/curvadapt.png",
-    iconAlt: "CurvAdapt mark",
-    eyebrow: "Research software / Geometry preprocessing",
-    lead: "A reliability-first workflow for translating curved design geometry into simulation-ready polylines.",
-    role: "Concept, algorithms, analysis & development",
-    period: "2024 — present",
-    status: "Manuscript under review / plugin in development",
-    stack: "RhinoCommon / C# / BPS",
-    tags: ["Curve segmentation", "MCE / rMCE", "Verification", "Radiation proxy"],
-    question: "When a smooth curve becomes a polyline, how much geometric error is still safe for building-performance simulation?",
-    response: "CurvAdapt controls the deviation itself — using maximum chord error and relative MCE — instead of treating segment count as evidence of accuracy.",
-    proof: [
-      ["6", "representative curve profiles"],
-      ["5", "segmentation strategies"],
-      ["|r| ≈ .99", "radiation and annual EUI"],
-      ["G¹ aware", "critical breaks preserved"]
+  "page": "02",
+  "title": "CurvAdapt",
+  "shortTitle": "CurvAdapt",
+  "subtitle": "Curve tools for<br>Rhino + Grasshopper",
+  "icon": "../assets/icons/curvadapt-plugin-hq.png?v=20261108-visuals",
+  "iconAlt": "CurvAdapt plugin logo",
+  "eyebrow": "Grasshopper plugin / Curve preprocessing",
+  "lead": "Segment curves, simplify polylines and inspect geometric fidelity inside Rhino and Grasshopper.",
+  "role": "Plugin design & development / Hossein Nazari",
+  "period": "2024 — present",
+  "status": "Plugin in development",
+  "stack": "Windows / Rhino 8.30+ / Grasshopper / .NET 8",
+  "tags": [
+    "Segmentation",
+    "Simplification",
+    "Chord error",
+    "Geometry utilities"
+  ],
+  "question": "How can a smooth curve become useful discrete geometry with an explicit approximation error?",
+  "response": "Choose uniform or adaptive segmentation, simplify where appropriate and inspect chord error before using the result downstream.",
+  "proof": [
+    [
+      "Uniform + adaptive",
+      "segmentation methods"
     ],
-    sections: [
-      {
-        title: "The weak link before simulation",
-        kind: "split",
-        text: [
-          "NURBS geometry cannot enter many performance engines directly. It is discretized first, often with an arbitrary segment count. The model may look smooth while its deviation, topology, and simulation reliability remain unknown.",
-          "CurvAdapt separates segmentation from simplification, preserves real discontinuities, and reports geometric fidelity in a scale-aware form."
-        ],
-        aside: { label: "Small but consequential", text: "A simulation can be numerically precise and still begin with unreliable geometry." }
-      },
-      {
-        title: "Reliability workflow",
-        kind: "steps",
-        items: [
-          ["01", "Prepare", "Detect domains, duplicate parameters, seams, kinks, and G¹ breakpoints."],
-          ["02", "Segment", "Compare uniform and adaptive routines across different curvature behaviours."],
-          ["03", "Verify geometry", "Measure MCE and normalize it as rMCE so fidelity can be compared across scale."],
-          ["04", "Check performance", "Use fast incident-radiation convergence before committing to heavier daylight and energy runs."]
-        ]
-      },
-      {
-        title: "What the study found",
-        kind: "cards",
-        items: [
-          ["No universal best algorithm", "Uniform-by-length is efficient for smooth convex curves; adaptive-by-chord is more robust for hybrid and free-form profiles."],
-          ["Segment count can mislead", "More segments do not guarantee a proportionally better approximation and may conceal false convergence."],
-          ["Radiation is a useful diagnostic", "It retains sensitivity to geometry and strongly tracks annual energy convergence at a fraction of the computation."],
-          ["Daylight needs extra care", "Sensor-grid allocation can introduce oscillations that are not caused by the curve itself."]
-        ]
-      },
-      {
-        title: "Method trace",
-        kind: "figure",
-        image: "../assets/images/projects/curvadapt/fig-methodology.jpg",
-        alt: "CurvAdapt geometry verification and building performance simulation workflow",
-        caption: "Geometry is verified before performance accuracy is interpreted."
-      },
-      {
-        title: "Evidence, not a magic threshold",
-        kind: "figure-text",
-        image: "../assets/images/projects/curvadapt/fig-validation.jpg",
-        alt: "Comparison of radiation, daylight and energy convergence",
-        caption: "Radiation convergence anticipates energy stability; daylight also reflects its sensor discretization.",
-        text: "The tested thresholds are evidence from specific curve families, not universal constants. The transferable contribution is the procedure for deriving an appropriate threshold for a new geometry and simulation objective."
-      },
-      {
-        title: "Current boundary",
-        kind: "honesty",
-        label: "Under revision",
-        text: "The journal review recognized the workflow’s merit while asking for tighter terminology, broader climate testing, stronger sensitivity analysis, and a more modest novelty claim. The paper and plugin are being revised around that reliability-first contribution."
-      },
-      {
-        title: "Research team",
-        kind: "credits",
-        text: "Hossein Nazari — conceptualization, methodology, algorithms, data analysis and original draft. With Shadan Masoud, Abbas Tarkashvand and Mehdi Ghiai.",
-        links: []
-      }
+    [
+      "3",
+      "simplification families"
+    ],
+    [
+      "MCE / rMCE",
+      "geometric fidelity"
+    ],
+    [
+      "JSON",
+      "geometry exchange"
     ]
-  },
+  ],
+  "sections": [
+    {
+      "title": "Curve preprocessing inside Grasshopper",
+      "kind": "split",
+      "text": [
+        "CurvAdapt is a Grasshopper plugin for Rhino 8. Segment smooth curves, simplify polylines and measure chord error before passing discrete geometry to another tool.",
+        "Choose a method and tolerance for the geometry at hand. Inspect the resulting approximation instead of relying on segment count alone."
+      ],
+      "aside": {
+        "label": "Geometry first",
+        "text": "CurvAdapt prepares geometry. Downstream fabrication, robotics and simulation tools own their planning and analysis."
+      },
+      "id": "section-1"
+    },
+    {
+      "title": "From input curve to checked output",
+      "kind": "steps",
+      "items": [
+        [
+          "01",
+          "Choose the input",
+          "Start with a smooth curve and select a segmentation component. The segmentation pipeline intentionally rejects polyline inputs."
+        ],
+        [
+          "02",
+          "Set the method",
+          "Use uniform parameter or length spacing, or adaptive chord-error, curvature or tangent methods."
+        ],
+        [
+          "03",
+          "Inspect fidelity",
+          "Measure maximum and relative chord error. Check discontinuities and self-intersections where relevant."
+        ],
+        [
+          "04",
+          "Continue the workflow",
+          "Use the resulting geometry and parameters in Grasshopper, or the JSON conversion utilities for exchange."
+        ]
+      ],
+      "id": "section-2"
+    },
+    {
+      "id": "workflow-diagram",
+      "title": "How the tools connect",
+      "kind": "figure",
+      "image": "../assets/images/projects/curvadapt/plugin-flow.svg",
+      "alt": "Source curve and settings feed Make or Clean, then Check compares approximation with the original; adjust settings when needed and pass geometry to downstream tools.",
+      "caption": "A suggested manual workflow, not an automatic all-in-one component. Keep the original curve available for fidelity checks.",
+      "width": 640,
+      "height": 780
+    },
+    {
+      "id": "curve-demo",
+      "title": "From a curve to discrete geometry",
+      "kind": "video",
+      "video": "../assets/videos/curvadapt/curve-demo.webm?v=20261108-clean-overlay",
+      "poster": "../assets/images/projects/curvadapt/curve-demo-poster.png?v=20261108-clean-overlay",
+      "caption": "Eight-second schematic: sample a smooth curve, connect points into chords and refine the approximation. This explains the workflow; it is not a recording of Rhino or a benchmark of a CurvAdapt algorithm."
+    },
+    {
+      "id": "section-3",
+      "title": "The component library",
+      "kind": "tool-groups",
+      "groups": [
+        {
+          "title": "Make / Segmentation",
+          "tools": [
+            {
+              "name": "Step Evenly",
+              "description": "Equal parameter intervals.",
+              "icon": "../assets/images/projects/curvadapt/components/step-evenly.png",
+              "href": "../curvadapt-wiki.html#step-evenly"
+            },
+            {
+              "name": "Space Evenly",
+              "description": "Equal arc-length intervals.",
+              "icon": "../assets/images/projects/curvadapt/components/space-evenly.png",
+              "href": "../curvadapt-wiki.html#space-evenly"
+            },
+            {
+              "name": "Follow Bends",
+              "description": "Adaptive segmentation by curvature.",
+              "icon": "../assets/images/projects/curvadapt/components/follow-bends.png",
+              "href": "../curvadapt-wiki.html#follow-bends"
+            },
+            {
+              "name": "Follow Turns",
+              "description": "Adaptive segmentation by tangent direction.",
+              "icon": "../assets/images/projects/curvadapt/components/follow-turns.png",
+              "href": "../curvadapt-wiki.html#follow-turns"
+            },
+            {
+              "name": "Follow Shape",
+              "description": "Adaptive segmentation by chord error.",
+              "icon": "../assets/images/projects/curvadapt/components/follow-shape.png",
+              "href": "../curvadapt-wiki.html#follow-shape"
+            }
+          ]
+        },
+        {
+          "title": "Clean / Simplification",
+          "tools": [
+            {
+              "name": "Clean Angles",
+              "description": "Simplify by angular change.",
+              "icon": "../assets/images/projects/curvadapt/components/clean-angles.png",
+              "href": "../curvadapt-wiki.html#clean-angles"
+            },
+            {
+              "name": "Clean Shape",
+              "description": "Simplify with a chord-based method.",
+              "icon": "../assets/images/projects/curvadapt/components/clean-shape.png",
+              "href": "../curvadapt-wiki.html#clean-shape"
+            },
+            {
+              "name": "Clean Overall",
+              "description": "Douglas-Peucker simplification.",
+              "icon": "../assets/images/projects/curvadapt/components/clean-overall.png",
+              "href": "../curvadapt-wiki.html#clean-overall"
+            }
+          ]
+        },
+        {
+          "title": "Check / Analysis",
+          "tools": [
+            {
+              "name": "Find Crossings",
+              "description": "Inspect curve self-intersections.",
+              "icon": "../assets/images/projects/curvadapt/components/find-crossings.png",
+              "href": "../curvadapt-wiki.html#find-crossings"
+            },
+            {
+              "name": "Check Shape",
+              "description": "Measure maximum and relative chord error against the source curve.",
+              "icon": "../assets/images/projects/curvadapt/components/check-shape.png",
+              "href": "../curvadapt-wiki.html#check-shape"
+            }
+          ]
+        },
+        {
+          "title": "Tools / Geometry and data",
+          "tools": [
+            {
+              "name": "Find Kinks",
+              "description": "Locate continuity breaks and critical points.",
+              "icon": "../assets/images/projects/curvadapt/components/find-kinks.png",
+              "href": "../curvadapt-wiki.html#find-kinks"
+            },
+            {
+              "name": "Match Length",
+              "description": "Scale a curve to a target arc length.",
+              "icon": "../assets/images/projects/curvadapt/components/match-length.png",
+              "href": "../curvadapt-wiki.html#match-length"
+            },
+            {
+              "name": "t to Points",
+              "description": "Evaluate curve points at parameters.",
+              "icon": "../assets/images/projects/curvadapt/components/t-to-points.png",
+              "href": "../curvadapt-wiki.html#t-to-points"
+            },
+            {
+              "name": "Points to t",
+              "description": "Project points to curve parameters.",
+              "icon": "../assets/images/projects/curvadapt/components/points-to-t.png",
+              "href": "../curvadapt-wiki.html#points-to-t"
+            },
+            {
+              "name": "Write JSON",
+              "description": "Record polyline geometry as JSON.",
+              "icon": "../assets/images/projects/curvadapt/components/write-json.png",
+              "href": "../curvadapt-wiki.html#write-json"
+            },
+            {
+              "name": "Read JSON",
+              "description": "Read polyline geometry from JSON.",
+              "icon": "../assets/images/projects/curvadapt/components/read-json.png",
+              "href": "../curvadapt-wiki.html#read-json"
+            },
+            {
+              "name": "Sort Points",
+              "description": "Merge and sort points along a curve.",
+              "icon": "../assets/images/projects/curvadapt/components/sort-points.png",
+              "href": "../curvadapt-wiki.html#sort-points"
+            },
+            {
+              "name": "Split at Points",
+              "description": "Split a curve at projected points.",
+              "icon": "../assets/images/projects/curvadapt/components/split-at-points.png",
+              "href": "../curvadapt-wiki.html#split-at-points"
+            },
+            {
+              "name": "Continuity selector",
+              "description": "Select the continuity type used by detection tools.",
+              "icon": "../assets/images/projects/curvadapt/components/continuity.png",
+              "href": "../curvadapt-wiki.html#continuity"
+            }
+          ]
+        },
+        {
+          "title": "Help / Community and learning",
+          "tools": [
+            {
+              "name": "curvAdapt HUB",
+              "description": "Open the learning guide, community signup or an on-demand update check.",
+              "icon": "../assets/images/projects/curvadapt/components/logo.png",
+              "href": "../curvadapt-wiki.html#curvadapt-hub"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tolerance-aware inputs",
+      "kind": "split",
+      "text": [
+        "Parameter handling includes domain checks, sorting, duplicate cleanup and tolerance-aware projection. Inspect warnings for off-curve inputs.",
+        "Open and closed curves require different treatment at seams and continuity breaks. Select settings for your geometry and verify the output."
+      ],
+      "aside": {
+        "label": "Explicit controls",
+        "text": "A smaller geometric error does not by itself validate a downstream model or physical process."
+      },
+      "id": "section-4"
+    },
+    {
+      "title": "Compatibility and setup",
+      "kind": "steps",
+      "items": [
+        [
+          "01",
+          "Check the host",
+          "The current Windows build targets Rhino 8.30 or newer running .NET 8, with Grasshopper. Rhino 7 and .NET Framework are not targeted."
+        ],
+        [
+          "02",
+          "Build from source",
+          "The project includes a development install script that builds the plugin and registers a .ghlink file. A public stable package is not confirmed here."
+        ],
+        [
+          "03",
+          "Open Grasshopper",
+          "Find the CurvAdapt tab. Restart Rhino after rebuilding and avoid loading a second copy of the same plugin."
+        ]
+      ],
+      "id": "section-5"
+    },
+    {
+      "title": "Start with a simple curve",
+      "kind": "split",
+      "text": [
+        "Connect a circle or smooth NURBS curve to Step Evenly in CurvAdapt > Make. Adjust the segment input and inspect the output points and polyline.",
+        "The repository smoke-test example uses a radius-10 circle with 10 segments, expecting 11 points and one polyline. This is a starting check, not validation of every algorithm."
+      ],
+      "aside": {
+        "label": "Learn the tools",
+        "text": "CurvAdapt HUB in CurvAdapt > Help links to the learning guide, newsletter and an on-demand update check. It does not install updates automatically."
+      },
+      "id": "section-6"
+    },
+    {
+      "title": "Availability and scope",
+      "kind": "honesty",
+      "label": "Plugin in development",
+      "text": "The geometry-processing components are implemented locally. No public stable package or installer is confirmed here. CurvAdapt does not perform robot motion planning, fabrication execution, building-energy simulation or predicted energy savings.",
+      "id": "section-7"
+    },
+    {
+      "title": "Documentation and setup",
+      "kind": "credits",
+      "text": "Designed and developed by Hossein Nazari / NexoNest.",
+      "links": [
+        [
+          "Source and setup",
+          "https://github.com/Hossein-Nazari-Dev/curvAdapt"
+        ]
+      ],
+      "id": "section-8",
+      "action": {
+        "label": "Open CurvAdapt Wiki",
+        "url": "../curvadapt-wiki.html"
+      }
+    }
+  ]
+},
 
   "building-alignment": {
     page: "03",
@@ -2237,6 +2484,24 @@ function renderSection(section, index, navGroups = {}) {
       </article>`).join("")}</div>`;
   }
 
+  if (section.kind === "tool-groups") {
+    body = `<div class="component-library">${section.groups.map(group => `
+      <div class="component-group"><h3>${escapeHtml(group.title)}</h3>
+      <div class="component-grid">${group.tools.map(tool => `<a class="component-card" href="${escapeHtml(tool.href)}">
+        <img src="${escapeHtml(tool.icon)}" alt="" width="48" height="48" loading="lazy">
+        <div><h4>${escapeHtml(tool.name)} <span aria-hidden="true">↗</span></h4><p>${escapeHtml(tool.description)}</p></div>
+      </a>`).join("")}</div></div>`).join("")}</div>`;
+  }
+
+  if (section.kind === "video") {
+    body = `<figure class="project-figure project-demo">
+      <video controls playsinline muted loop preload="none" poster="${escapeHtml(section.poster)}" aria-label="${escapeHtml(section.title)}">
+        <source src="${escapeHtml(section.video)}" type="video/webm">
+        <a href="${escapeHtml(section.video)}">Open the animation</a>
+      </video><figcaption>${escapeHtml(section.caption)}</figcaption>
+    </figure>`;
+  }
+
   if (section.kind === "steps") {
     body = `<ol class="project-process">${section.items.map(([number, title, text]) => `
       <li>
@@ -2335,6 +2600,7 @@ function renderSection(section, index, navGroups = {}) {
         <div class="project-credits-intro">
           <p>${escapeHtml(section.text)}</p>
           ${section.links?.length ? `<div class="project-links">${section.links.map(renderProjectLink).join("")}</div>` : ""}
+          ${section.action ? `<a class="project-docs-button" href="${escapeHtml(section.action.url)}">${escapeHtml(section.action.label)} <span aria-hidden="true">→</span></a>` : ""}
         </div>
         ${groups}
       </div>`;
@@ -2343,10 +2609,55 @@ function renderSection(section, index, navGroups = {}) {
   return `<section class="content-section project-editorial-section" data-nav-title="${escapeHtml(section.title)}"${section.id && /^[a-z][a-z0-9-]*$/.test(section.id) ? ` id="${section.id}"` : ""}${navGroup ? ` data-nav-group="${escapeHtml(navGroup)}"` : ""}>${heading}${body}</section>`;
 }
 
+function initProjectVideo(root) {
+  const dialog = root.querySelector("#projectVideoDialog");
+  const player = dialog?.querySelector(".project-video-player");
+  const title = dialog?.querySelector("#projectVideoTitle");
+  const boundButtons = new WeakSet();
+
+  // Releasing a source is independent of changing the dialog's open state.
+  // Repeated exit paths therefore do not reload or recursively close it.
+  const cleanup = () => {
+    if (!player?.hasAttribute("src")) return;
+    player.pause();
+    player.removeAttribute("src");
+    player.load();
+  };
+  const close = () => {
+    cleanup();
+    if (dialog?.open) dialog.close();
+  };
+  dialog?.querySelector(".project-video-close")?.addEventListener("click", close);
+  dialog?.addEventListener("click", event => { if (event.target === dialog) close(); });
+  dialog?.addEventListener("close", () => {
+    // Native close is queued. A close event from an earlier opening must not
+    // release a video that was opened again before that event was delivered.
+    if (!dialog.open) cleanup();
+  });
+
+  return function bindVideoButtons() {
+    root.querySelectorAll(".project-video-button").forEach(button => {
+      if (boundButtons.has(button)) return;
+      boundButtons.add(button);
+      button.addEventListener("click", () => {
+        if (!dialog || !player) return;
+        cleanup();
+        title.textContent = button.dataset.videoTitle || "Project animation";
+        player.src = button.dataset.video;
+        if (!dialog.open) dialog.showModal();
+        player.play().catch(() => {});
+      });
+    });
+  };
+}
+
 function renderProjectPage(projectId) {
   const project = PROJECT_PAGE_DATA[projectId];
   const root = document.getElementById("projectPageRoot");
   if (!project || !root) return;
+  // Preserve the generated, usable product facts if their shared owner fails
+  // to initialize; rebuilding must not reactivate superseded page-only copy.
+  if (root.querySelector("[data-product-status]") && !window.NexoNestProductStatus?.get(projectId)) return;
 
   document.title = `${project.title} | NexoNest`;
   document.documentElement.lang = "en";
@@ -2399,10 +2710,11 @@ function renderProjectPage(projectId) {
       <dl class="project-meta">
         <div><dt>Role</dt><dd>${escapeHtml(project.role)}</dd></div>
         <div><dt>Period</dt><dd>${escapeHtml(project.period)}</dd></div>
-        <div><dt>Status</dt><dd>${escapeHtml(project.status)}</dd></div>
+        <div><dt>Status</dt><dd>${escapeHtml(window.NexoNestProductStatus?.get(projectId)?.releaseLabel || project.status)}</dd></div>
         <div><dt>Stack</dt><dd>${escapeHtml(project.stack)}</dd></div>
       </dl>
       ${renderTags(project.tags)}
+      ${window.NexoNestProductStatus?.render(projectId) || ""}
       ${project.links?.length ? `<div class="project-links">${project.links.map(renderProjectLink).join("")}</div>` : ""}
     </header>
 
@@ -2442,23 +2754,9 @@ function renderProjectPage(projectId) {
     bindVideoButtons();
   }));
 
-  const videoDialog = document.getElementById("projectVideoDialog");
-  const videoPlayer = videoDialog?.querySelector(".project-video-player");
-  const videoTitle = videoDialog?.querySelector("#projectVideoTitle");
-  const closeVideo = () => { if (videoPlayer) { videoPlayer.pause(); videoPlayer.removeAttribute("src"); videoPlayer.load(); } videoDialog?.close(); };
-  function bindVideoButtons() {
-    root.querySelectorAll(".project-video-button").forEach(button => button.addEventListener("click", () => {
-    if (!videoDialog || !videoPlayer) return;
-    videoTitle.textContent = button.dataset.videoTitle || "Project animation";
-    videoPlayer.src = button.dataset.video;
-    videoDialog.showModal();
-    videoPlayer.play().catch(() => {});
-    }));
-  }
+  const bindVideoButtons = initProjectVideo(root);
   bindVideoButtons();
   initPdfViewers(root);
-  videoDialog?.querySelector(".project-video-close")?.addEventListener("click", closeVideo);
-  videoDialog?.addEventListener("click", event => { if (event.target === videoDialog) closeVideo(); });
   const zoomDialog = document.getElementById("pdfZoomDialog");
   const closeZoom = () => zoomDialog?.close();
   zoomDialog?.querySelector(".pdf-zoom-close")?.addEventListener("click", closeZoom);

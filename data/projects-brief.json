@@ -28,10 +28,19 @@
     "projects": [
 {
   "id": "p_climora",
-  "title": "Climora",
-  "excerpt": "Climate analysis, variable comparison and solar shading in a local Windows workbench, with design strategies for architecture, landscape and urban design as its development direction.",
+  "title": "ClimaNest",
+  "product": {
+    "editorialId": "climora",
+    "release": "development-preview",
+    "platforms": ["Windows"],
+    "compatibility": "Local desktop preview; no public installer. Native Windows acceptance remains unverified.",
+    "primaryAction": { "label": "Read the preview guide", "url": "projects-pages/climora.html#getting-started", "kind": "guide" },
+    "verifiedOn": "2026-11-08",
+    "evidence": { "kind": "repository", "reference": "climatic tools README.md and current strategy/reporting sources; NexoNest js/project-page.js" }
+  },
+  "excerpt": "Development preview for local Windows climate analysis, solar studies, 49 source-linked design responses and collected PDF reports. No public installer is available here.",
   "url": "projects-pages/climora.html",
-  "icon": "assets/icons/climora.svg",
+  "icon": "assets/icons/climanest.svg?v=20261103-shelter-icon",
   "categories": [
     "products"
   ],
@@ -39,7 +48,7 @@
     "data-analytics",
     "windows-apps"
   ],
-  "image": "assets/images/projects/climora/climora-introduction-en.png"
+  "image": "assets/images/projects/climanest/climanest-introduction-en.png?v=20261103-shelter-icon"
 },
 {
   "id": "p_archicast_season_01",
@@ -85,6 +94,15 @@
       {
         "id": "p_nexorhino",
         "title": "NexoRhino",
+        "product": {
+          "editorialId": "nexorhino",
+          "release": "public-release",
+          "platforms": ["VS Code", "PyCharm", "Python stubs"],
+          "compatibility": "Rhino 8 API assistance. VS Code 1.85+ with Python/Pylance; PyCharm 2023.3–2026.2.x. Execution requires Rhino.",
+          "primaryAction": { "label": "Read installation guidance", "url": "projects-pages/nexoRhino.html#release-1-1", "kind": "guide" },
+          "verifiedOn": "2026-11-08",
+          "evidence": { "kind": "repository", "reference": "NexoNest js/project-page.js release-1-1; PROJECT_GUIDE.md 2026-10-29 public editor verification" }
+        },
         "excerpt": "Educational RhinoCommon Python stubs for VS Code and PyCharm, providing code completion, signatures, and geometry documentation. Personal and commercial use is permitted with attribution to NexoNest.",
         "url": "projects-pages/nexoRhino.html",
         "icon": "assets/icons/nexorhino.svg?v=0.1.4",
@@ -145,12 +163,22 @@
       {
         "id": "p_curvadapt",
         "title": "CurvAdapt",
-        "excerpt": "A reliability-first geometry preprocessing workflow for curve segmentation, fidelity verification, and building performance simulation.",
+        "product": {
+          "editorialId": "curvadapt",
+          "release": "in-development",
+          "releaseLabel": "Plugin in development",
+          "platforms": ["Rhino", "Grasshopper"],
+          "compatibility": "Windows, Rhino 8.30+ with .NET 8 and Grasshopper. No public stable package confirmed.",
+          "primaryAction": { "label": "Explore the plugin", "url": "projects-pages/curvAdapt.html", "kind": "details" },
+          "verifiedOn": "2026-11-08",
+          "evidence": { "kind": "repository", "reference": "curvAdapt README.md, curvAdapt.csproj and plugin resource registration" }
+        },
+        "excerpt": "Grasshopper plugin for curve segmentation, polyline simplification, chord-error analysis and geometry utilities. In development for Rhino 8.30+.",
         "url": "projects-pages/curvAdapt.html",
-        "icon": "assets/icons/curvadapt.png",
-        "categories": ["products", "publications"],
-        "subcategories": ["rhino-plugins"],
-        "image": "assets/images/projects/curvadapt/card.png"
+        "icon": "assets/icons/curvadapt-plugin-hq.png?v=20261108-visuals",
+        "categories": ["products"],
+        "subcategories": ["rhino-plugins", "grasshopper-plugins"],
+        "image": "assets/icons/curvadapt-plugin-hq.png?v=20261108-visuals"
       },
       {
         "id": "p_reframing_genericity",

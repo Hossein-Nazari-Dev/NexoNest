@@ -1,5 +1,61 @@
 # Workshop registration
 
+## Request identity and recovery — local revision 2026-11-08
+
+This local revision changes `Workshop.gs` and `js/workshop.js`; it is not a new
+Apps Script deployment. The page's endpoint remains empty and registration stays
+disabled. The site's existing `Code.gs` dispatcher continues to own
+`service=workshop`; do not replace it with another checkout's dispatcher.
+
+The existing script lock owns validation, duplicate lookup, receipt storage and
+row append. A new row appends a SHA-256 fingerprint in hidden column 25, after
+the original 24 columns. Their order, Persian headers and meanings are unchanged;
+the owner console and existing review code continue to read the original columns.
+The first new accepted submission adds the fingerprint header, inserting a column
+if necessary. An unexpected existing column-25 header rejects the submission
+instead of overwriting it. This is additive metadata, not a rewrite of old rows.
+
+The versioned fingerprint includes the resolved cohort, validated and normalized
+name/email/phone, education and experience, registration type, **server-calculated
+effective fee**, applicable university or newsletter code, certificate, publication
+consent, accepted rules version/consents, and the validated receipt MIME type and
+content SHA-256. Trimming, email case, equivalent phone digits, receipt filename,
+irrelevant conditional fields and a client-supplied fee do not change this identity.
+The digest is computed on the server; a client hash is never trusted.
+
+The same UUID and fingerprint return the original tracking/email status before
+checking whether enrollment is now closed, without another receipt, row or email.
+A different fingerprint returns `request_conflict`: the changed form has **not**
+been accepted. Old rows without a fingerprint return
+`request_identity_unverified` and require owner-assisted recovery of the original
+tracking code. The server does not guess the old receipt or submission identity,
+backfill fingerprints, modify the original row, or automatically enroll again.
+
+After a transmission starts, the browser keeps an exact payload snapshot in memory.
+While sending and after an uncertain outcome, form inputs are locked; retry sends
+that same snapshot and UUID. A definitive pre-storage `request_rejected` unlocks
+the original inputs only if there was no earlier uncertain attempt. A conflict or
+unverifiable legacy identity shows an explicit unsaved-change/support message,
+never the success panel. No UUID is silently rotated after uncertainty. Reloading
+loses the in-memory snapshot and selected file; only the existing UUID is retained
+in session storage, so changed reload submissions may require support rather than
+being reported as an earlier success. No personal values or receipt are persisted
+in browser storage.
+
+`request_unknown` means storage may have started; the browser must retain its
+snapshot. If append succeeded but its acknowledgement failed, retry returns the
+stored row. A receipt created before a failed/uncertain append can remain an orphan
+for owner reconciliation, as before. A pending or unknown email is not retried
+automatically, and MailApp acceptance does not establish inbox delivery.
+
+Current checks: `node scripts/test-workshop.cjs` passes 27 mocked backend checks,
+including changed email/type/effective fee/receipt, normalized replay, closed
+enrollment, unknown append/mail, legacy rows and overlapping lock admission.
+`node scripts/test-workshop-browser.cjs` checks the disabled real endpoint and
+mocked keyboard submission, uncertain snapshot recovery, repeat-click admission,
+conflict feedback and input preservation after a definitive rejection. Neither
+test sends real mail or verifies a deployed Google service.
+
 ## Management console integration - 2026-10-19
 
 Deployed as version 17 on 2026-10-19 with explicit user approval. The source set contains LicensingProducts.gs, WorkshopCatalog.gs, AdminConsole.gs and AdminConsoleView.html, and update Licensing.gs, LicensingAdmin.gs, LicensingProfile.gs, LicensingSheet.gs and Workshop.gs together. Preserve Code.gs and all other service modules, properties and existing data. The unified NexoNest Admin menu opens the owner-only console. Shared-device deletion is scoped to selected accounts, with other users' limits retained. Separate product/cohort registries preserve the existing NexoSolve and workshop defaults. Course review in the console does not email or grant benefits. See [ADMIN.md](ADMIN.md) for configuration, exact contracts, tests and rollback. The older menu instructions below are historical; use the console for new administration.

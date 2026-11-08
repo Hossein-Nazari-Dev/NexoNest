@@ -1,12 +1,8 @@
-// nav.js — Navigation click delegation, project popup, data init, circle animation
+// nav.js — Navigation click delegation, project popup and circle animation
 (function () {
-  /* ------------------------------------------------------------------------
-   * Load project data
-   * ---------------------------------------------------------------------- */
-  async function ensureProjectsData() {
-    if (window.projectsData?.projects?.length) return window.projectsData;
-
-    return window.loadProjectsData();
+  function catalogueReady() {
+    const section = document.querySelector('[data-catalog-state]');
+    return !section || section.dataset.catalogState === 'ready';
   }
 
   /* ------------------------------------------------------------------------
@@ -90,6 +86,7 @@
       const catEl = t.closest('[data-category]');
       if (catEl) {
         e.preventDefault();
+        if (!catalogueReady()) return;
         const val = catEl.getAttribute('data-category');
         window.setActiveCategory?.(val);
         window.setActiveSubcategory?.(null);
@@ -100,6 +97,7 @@
       const subEl = t.closest('[data-subcategory]');
       if (subEl) {
         e.preventDefault();
+        if (!catalogueReady()) return;
         const subVal = subEl.getAttribute('data-subcategory');
         const parentId = subParentId(subVal) || window.state?.activeCategory || 'all';
         window.setActiveCategory?.(parentId);
@@ -110,6 +108,7 @@
       // Project card / icon
       const card = t.closest('.project-card, .project-icon');
       if (card) {
+        if (!catalogueReady() || card.getAttribute('aria-disabled') === 'true') return;
         const project = findProjectByEl(card);
         if (project && typeof window.openPopup === 'function') {
           e.preventDefault();
@@ -120,6 +119,7 @@
 
       // Empty-space click is a second, direct way to return to the full index.
       if (
+        catalogueReady() &&
         !isPopupOpen() &&
         !clickIsInsideUI(t) &&
         !t.closest('a, button, input, select, textarea, [role="button"]')
@@ -132,15 +132,7 @@
   /* ------------------------------------------------------------------------
    * Initialization
    * ---------------------------------------------------------------------- */
-  document.addEventListener('DOMContentLoaded', async () => {
-    await ensureProjectsData();
+  document.addEventListener('DOMContentLoaded', () => {
     setupNavClicks();
-
-    if (typeof window.filterProjects === 'function') {
-      window.filterProjects();
-    }
-
-    const allEl = document.querySelector('[data-category="all"]');
-    if (allEl) allEl.classList.add('active');
   });
 })();

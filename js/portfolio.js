@@ -1,7 +1,7 @@
 // Portfolio Application
 class PortfolioApp {
     constructor() {
-        this.currentSection = 'profile';
+        this.currentSection = null;
         this.activeProject = null;
         this.init();
     }
@@ -18,37 +18,47 @@ class PortfolioApp {
 
     // Navigation Setup
     setupNavigation() {
-        const navButtons = document.querySelectorAll('.nav-button[data-section]');
-        
-        navButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const sectionId = e.currentTarget.dataset.section;
-                this.switchSection(sectionId);
-            });
+        this.sections = Array.from(document.querySelectorAll('.portfolio-section'));
+        this.defaultSection = this.sections.find(section => section.id === 'profile') || this.sections[0];
+        const syncLocation = () => {
+            let id;
+            try { id = decodeURIComponent(location.hash.slice(1)); } catch { id = null; }
+            const target = this.sections.find(section => section.id === id);
+            // Replace invalid fragments without adding an entry or triggering another event.
+            if (location.hash && !target) history.replaceState(null, '', location.pathname + location.search);
+            this.switchSection(target?.id || this.defaultSection?.id, { push: false });
+        };
+        document.addEventListener('click', event => {
+            const control = event.target.closest('.nav-button[data-section], a[data-section-link]');
+            if (!control) return;
+            event.preventDefault();
+            this.switchSection(control.dataset.section || control.hash.slice(1));
         });
+        window.addEventListener('popstate', syncLocation);
+        window.addEventListener('hashchange', syncLocation);
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        syncLocation();
     }
 
-    switchSection(sectionId) {
-        if (!sectionId || !document.getElementById(sectionId)) return;
+    switchSection(sectionId, { push = true } = {}) {
+        const target = this.sections.find(section => section.id === sectionId);
+        if (!target || this.currentSection === target.id) return;
 
-        // Update active nav button
-        document.querySelectorAll('.nav-button').forEach(btn => {
-            btn.classList.remove('active');
+        if (push && location.hash !== `#${target.id}`) history.pushState({ section: target.id }, '', `#${target.id}`);
+        document.querySelectorAll('.nav-button[data-section]').forEach(button => {
+            const active = button.dataset.section === target.id;
+            button.classList.toggle('active', active);
+            if (active) button.setAttribute('aria-current', 'true');
+            else button.removeAttribute('aria-current');
         });
-        document.querySelector(`[data-section="${sectionId}"]`)?.classList.add('active');
-
-        // Update active section
-        document.querySelectorAll('.portfolio-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
-
-        this.currentSection = sectionId;
+        this.sections.forEach(section => section.classList.toggle('active', section === target));
+        this.currentSection = target.id;
         
         // Reset active states when switching sections
         this.resetActiveStates();
         document.querySelector('.content-scrollable')?.scrollTo({ top: 0, behavior: 'auto' });
         requestAnimationFrame(() => this.updateScrollIndicator?.());
+        document.dispatchEvent(new CustomEvent('portfolio:sectionchange', { detail: { id: target.id } }));
     }
 
     resetActiveStates() {
@@ -539,63 +549,6 @@ document.addEventListener('DOMContentLoaded', () => {
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.style.setProperty('--transition', 'none');
 }
-
-// --- Hash-aware section nav for Portfolio (add at the end of portfolio.js)
-(function () {
-  const scroller = document.querySelector('.content-scrollable');
-  const buttons  = Array.from(document.querySelectorAll('.nav-button[data-section]'));
-  const sections = Array.from(document.querySelectorAll('.portfolio-section'));
-
-  function getSection(id) {
-    return sections.find(s => s.id === id);
-  }
-
-  function setActiveButton(id) {
-    buttons.forEach(b => b.classList.toggle('active', b.dataset.section === id));
-  }
-
-  function showSection(id, { push = true, smooth = true } = {}) {
-    const target = getSection(id) || sections[0];
-    if (!target) return;
-
-    // فعال/غیرفعال
-    sections.forEach(s => s.classList.toggle('active', s === target));
-    setActiveButton(target.id);
-
-    // اسکرول داخل .content-scrollable (scrollIntoView نزدیک‌ترین والد اسکرولی را انتخاب می‌کند)
-    target.scrollIntoView({ behavior: 'auto', block: 'start' });
-    document.dispatchEvent(new CustomEvent('portfolio:sectionchange', { detail: { id: target.id } }));
-
-    // به‌روزرسانی URL hash
-    if (push) {
-      const h = `#${target.id}`;
-      if (location.hash !== h) history.pushState({ section: target.id }, '', h);
-    }
-  }
-
-  // کلیک روی دکمه‌های سایدبار
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.nav-button[data-section], a[data-section-link]');
-    if (!btn) return;
-    e.preventDefault();
-    showSection(btn.dataset.section || btn.hash.slice(1), { push: true, smooth: true });
-  });
-
-  // پشتیبانی از Back/Forward
-  window.addEventListener('hashchange', () => {
-    const id = (location.hash || '').slice(1);
-    if (id) showSection(id, { push: false, smooth: true });
-  });
-
-  // بارگذاری اولیه (deep link مثل #projects را رعایت کن)
-  document.addEventListener('DOMContentLoaded', () => {
-    const initial = (location.hash || '').slice(1) || (buttons[0] && buttons[0].dataset.section);
-    showSection(initial, { push: false, smooth: false });
-  });
-
-  // کنترل اسکرول مرورگر (چون اسکرول اصلی داخل کانتینر است)
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-})();
 
 // Compact portfolio index for tablet and mobile.
 (function () {

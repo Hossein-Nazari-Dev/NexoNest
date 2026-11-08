@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/product-status.css?v=20261108-curvadapt-visuals" />
     <link rel="stylesheet" href="css/nexonest.css" />
     <link rel="stylesheet" href="css/ux.css" />
 <meta property="og:locale" content="en_US">
@@ -49,44 +50,48 @@
             <nav class="nav-pill" aria-label="Filter project index">
                 <span class="filter-label">Filter index</span>
                 <div class="nav-item">
-                    <button type="button" class="nav-link active" data-category="all" aria-pressed="true">All</button>
+                    <button type="button" class="nav-link active" disabled data-category="all" aria-pressed="true">All</button>
                 </div>
                 <div class="nav-item">
-                    <button type="button" class="nav-link" data-category="education" aria-pressed="false">Education</button>
+                    <button type="button" class="nav-link" disabled data-category="education" aria-pressed="false">Education</button>
                 </div>
                 <div class="nav-item">
-                    <button type="button" class="nav-link" data-category="projects" aria-pressed="false">Projects</button>
+                    <button type="button" class="nav-link" disabled data-category="projects" aria-pressed="false">Projects</button>
                 </div>
                 <div class="nav-item">
-                    <button type="button" class="nav-link" data-category="products" aria-pressed="false">Products</button>
+                    <button type="button" class="nav-link" disabled data-category="products" aria-pressed="false">Products</button>
                 </div>
                 <div class="nav-item">
-                    <button type="button" class="nav-link" data-category="events" aria-pressed="false">Events</button>
+                    <button type="button" class="nav-link" disabled data-category="events" aria-pressed="false">Events</button>
                 </div>
                 <div class="nav-item">
-                    <button type="button" class="nav-link" data-category="publications" aria-pressed="false">Publications</button>
+                    <button type="button" class="nav-link" disabled data-category="publications" aria-pressed="false">Publications</button>
                 </div>
-                <div class="nav-item"><button type="button" class="nav-link" data-category="podcast" aria-pressed="false">Archicast</button></div>
+                <div class="nav-item"><button type="button" class="nav-link" disabled data-category="podcast" aria-pressed="false">Archicast</button></div>
             </nav>
             <div class="subfilter-bar" id="subfilter-bar" aria-label="Refine project filter" hidden></div>
             <div class="filter-feedback" aria-live="polite">
-                <button type="button" class="filter-reset" data-category="all" hidden>Clear filter</button>
+                <button type="button" class="filter-reset" disabled data-category="all" hidden>Clear filter</button>
             </div>
         </div>
 
         <div class="content-area">
-            <section class="projects-container" aria-labelledby="project-index-title">
+            <section class="projects-container" aria-labelledby="project-index-title" data-catalog-state="loading">
                 <div class="projects-heading">
                     <div>
                         <span class="section-index">01 / Project index</span>
                         <h2 id="project-index-title">Choose a project</h2>
                     </div>
                 </div>
-                <div class="projects-grid" id="projects-grid"></div>
-                <noscript>
-                    <p>Enable JavaScript for the interactive index, or browse the projects directly:</p>
+                <div class="catalog-status">
+                    <p id="catalog-message" role="status" aria-live="polite">Browse projects directly below. The interactive index requires JavaScript.</p>
+                    <button type="button" id="catalog-retry" hidden>Retry</button>
+                </div>
+                <div class="projects-grid" id="projects-grid" hidden></div>
+                <div class="project-directory" id="project-directory" aria-label="Project directory">
+                    <p>Browse projects directly:</p>
                     <ul>
-                        <li><a href="projects-pages/climora.html">Climora</a></li>
+                        <li><a href="projects-pages/climora.html">ClimaNest</a></li>
                         <li><a href="archicast/season-01.html">Archicast</a></li>
                         <li><a href="CTworkshop01.html">Computational Thinking Workshop 1</a></li>
                         <li><a href="projects-pages/nexoSolve.html">NexoSolve</a></li>
@@ -107,7 +112,7 @@
                         <li><a href="projects-pages/codeJunkyard.html">CodeJunkYard</a></li>
                         <li><a href="projects-pages/codeJunkyardSession00.html">CJY-Session-00</a></li>
                     </ul>
-                </noscript>
+                </div>
             </section>
 
             <div class="baseline-container">
@@ -125,18 +130,20 @@
             <p class="popup-excerpt" id="popup-excerpt">Project description goes here.</p>
             <div class="popup-image" id="popup-image">Project Image</div>
             <div class="popup-categories" id="popup-categories">Categories: Products, Projects</div>
+            <div id="popup-product-status" hidden></div>
             <div class="popup-actions">
                 <button class="popup-button" id="popup-button">Open project</button>
             </div>
         </div>
     </div>
 
-    <script src="js/filter.js"></script>
+    <script src="js/product-status.js?v=20261108-curvadapt-visuals"></script>
+    <script src="js/filter.js?v=20261108-product-recovery"></script>
     <script src="js/state.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/nav.js"></script>
-    <script src="js/modal.js"></script>
-    <script src="js/render.js"></script>
+    <script src="js/data.js?v=20261108-product-recovery"></script>
+    <script src="js/nav.js?v=20261108-product-recovery"></script>
+    <script src="js/modal.js?v=20261108-product-recovery"></script>
+    <script src="js/render.js?v=20261108-product-recovery"></script>
     <script src="js/ux.js" defer></script>
 </body>
 </html>

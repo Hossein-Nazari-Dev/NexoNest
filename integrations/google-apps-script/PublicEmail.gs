@@ -29,6 +29,8 @@ function reservePublicMail_(purpose, email) {
   const mailboxEmail = /@(gmail|googlemail)\.com$/.test(email) ?
     email.split('@')[0].split('+')[0].replace(/\./g, '') + '@gmail.com' : email;
   const key = 'mail:' + purpose + ':' + hash_(mailboxEmail);
+  // Independent fixed 24-hour windows start at each counter's first reservation.
+  // Expiry resets the count and cooldown, permitting a burst across the boundary.
   const fresh = () => ({ startedAt: now, lastAt: 0, count: 0 });
   let mailbox = publicEmailState_(key), global = publicEmailState_('mail:global');
   if (!mailbox || now - mailbox.startedAt >= day) mailbox = fresh();

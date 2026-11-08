@@ -38,15 +38,6 @@
       valid = false;
     });
 
-    if (!form.querySelector('input[name="educationLevel"]:checked')) {
-      form.querySelector('[data-error-for="educationLevel"]').textContent = 'Choose one education level.';
-      valid = false;
-    }
-    if (!form.querySelectorAll('input[name="interests"]:checked').length) {
-      form.querySelector('[data-error-for="interests"]').textContent = 'Choose at least one area.';
-      valid = false;
-    }
-
     const consent = form.querySelector('input[name="consent"]');
     if (!consent.checked) {
       consent.setAttribute('aria-invalid', 'true');
@@ -55,6 +46,7 @@
     }
 
     if (!valid) {
+      form.querySelector('[aria-invalid="true"]')?.closest('details')?.setAttribute('open', '');
       form.querySelector('[aria-invalid="true"]')?.focus();
       setStatus('Some required information is missing.', 'error');
     }
@@ -85,7 +77,7 @@
     if (submitButton.disabled) return;
     submitButton.disabled = true;
     submitButton.querySelector('span').textContent = 'Submitting…';
-    setStatus('Submitting your introduction…', 'pending');
+    setStatus('Requesting your confirmation email…', 'pending');
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 30000);

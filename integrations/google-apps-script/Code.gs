@@ -60,7 +60,7 @@ function subscribeNewsletter_(data) {
   const row = consentRow || newsletter.getLastRow() + 1;
   newsletter.getRange(row, 1, 1, 17).setValues([record.map(sheetText_)]);
   SpreadsheetApp.flush();
-  sendConfirmation_(pending ? 'there' : data.fullName, email, token, newsletterUnsubscribeUrl_(record));
+  sendConfirmation_(pending ? 'there' : clean_(data.fullName, 120) || 'there', email, token, newsletterUnsubscribeUrl_(record));
   return json_({ ok: true, status: 'pending-confirmation' });
 }
 
@@ -160,7 +160,8 @@ function upsertUser_(users, email, displayName) {
   const row = findRow_(users, 3, email);
   const now = new Date();
   if (row) {
-    users.getRange(row, 4).setValue(sheetText_(clean_(displayName, 120)));
+    // An email-only signup must not erase a name supplied through another product.
+    if (clean_(displayName, 120)) users.getRange(row, 4).setValue(sheetText_(clean_(displayName, 120)));
     users.getRange(row, 6).setValue(now);
     users.getRange(row, 7).setValue('active');
     return { userId: String(users.getRange(row, 1).getValue()), row: row };
@@ -218,11 +219,16 @@ function findRow_(sheet, column, value) {
 }
 
 function validateNewsletter_(data) {
-  const minimalSignup = data.subscriptionType === 'nexobreak_newsletter';
-  if (!data.fullName || data.consent !== true || (!minimalSignup && (!data.occupation || !data.educationLevel)))
-    throw new Error('Required information is missing.');
-  if (!Array.isArray(data.interests) || !data.interests.length) throw new Error('Interests are missing.');
+  if (data.consent !== true) throw new Error('Consent is required.');
   email_(data.email);
+  // Profile fields are optional; existing complete and product signup payloads remain valid.
+  ['fullName', 'occupation', 'educationLevel', 'fieldOfStudy', 'organization', 'currentExploration'].forEach(function(key) {
+    if (data[key] != null && typeof data[key] !== 'string') throw new Error('Invalid profile field.');
+  });
+  if (data.interests == null) data.interests = [];
+  if (!Array.isArray(data.interests) || data.interests.length > 15 ||
+      data.interests.some(function(value) { return typeof value !== 'string' || value.length > 80; }))
+    throw new Error('Invalid interests.');
 }
 
 function email_(value) {

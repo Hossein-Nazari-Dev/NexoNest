@@ -3,80 +3,196 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="CurvAdapt Wiki: technical documentation for curve segmentation, geometric fidelity, and simulation-ready geometry preprocessing." />
+  <meta name="description" content="CurvAdapt component reference: inputs, outputs, formulas and practical limits for Make, Clean, Check, Tools and HUB." />
   <meta name="author" content="Hossein Nazari" />
   <link rel="canonical" href="https://nexonest.com/curvadapt-wiki.html" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="CurvAdapt Wiki | Geometry Preprocessing Documentation">
-  <meta property="og:description" content="CurvAdapt Wiki: technical documentation for curve segmentation, geometric fidelity, and simulation-ready geometry preprocessing.">
+  <meta property="og:title" content="CurvAdapt Wiki | Component Reference">
+  <meta property="og:description" content="CurvAdapt component reference: inputs, outputs, formulas and practical limits for Make, Clean, Check, Tools and HUB.">
   <meta property="og:url" content="https://nexonest.com/curvadapt-wiki.html">
-  <title>CurvAdapt Wiki | Geometry Preprocessing Documentation</title>
+  <title>CurvAdapt Wiki | Component Reference</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/curvadapt-wiki.css" />
-  <link rel="stylesheet" href="css/ux.css" />
+  <link rel="stylesheet" href="css/curvadapt-wiki.css?v=20261108-component-reference" />
 <meta property="og:site_name" content="NexoNest">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://nexonest.com/assets/profile-formal-v2.png">
 <meta property="og:image:alt" content="Hossein Nazari — computational design and research">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CurvAdapt Wiki | Geometry Preprocessing Documentation">
-<meta name="twitter:description" content="CurvAdapt Wiki: technical documentation for curve segmentation, geometric fidelity, and simulation-ready geometry preprocessing.">
+<meta name="twitter:title" content="CurvAdapt Wiki | Component Reference">
+<meta name="twitter:description" content="CurvAdapt component reference: inputs, outputs, formulas and practical limits for Make, Clean, Check, Tools and HUB.">
 <meta name="twitter:image" content="https://nexonest.com/assets/profile-formal-v2.png">
 <meta name="twitter:image:alt" content="Hossein Nazari — computational design and research">
+<link rel="icon" href="assets/icons/curvadapt-plugin-hq.png" type="image/png">
 </head>
 <body class="wiki-page nexonest-theme">
-  <header class="wiki-header">
-    <a class="wiki-brand" href="projects-pages/curvAdapt.html" aria-label="Return to CurvAdapt project page">
-      <img src="assets/icons/curvadapt.png" alt="" />
-      <span><strong>CurvAdapt</strong><small>Wiki</small></span>
-    </a>
-    <nav aria-label="Wiki links">
-      <a href="projects-pages/curvAdapt.html">Project page <span aria-hidden="true">↗</span></a>
-      <a href="nexonest.html">NexoNest <span aria-hidden="true">↗</span></a>
-    </nav>
-  </header>
-
-  <main class="wiki-main">
-    <aside class="wiki-index" aria-label="Planned documentation structure">
-      <p>Documentation map</p>
-      <ol>
-        <li class="is-current"><span>00</span>Overview</li>
-        <li><span>01</span>Getting started</li>
-        <li><span>02</span>Core concepts</li>
-        <li><span>03</span>Components</li>
-        <li><span>04</span>Workflows</li>
-        <li><span>05</span>Examples</li>
-        <li><span>06</span>Troubleshooting</li>
-      </ol>
-    </aside>
-
-    <article class="wiki-content">
-      <div class="wiki-kicker"><span>00 / Overview</span><i>Structure in progress</i></div>
-      <h1>Reliable geometry,<br />explained step by step.</h1>
-      <p class="wiki-lede">The CurvAdapt Wiki will be the educational layer of the project: from maximum chord error and curve segmentation to verified, simulation-ready workflows.</p>
-
-      <div class="wiki-status">
-        <span aria-hidden="true"></span>
-        <div>
-          <strong>The page is in place.</strong>
-          <p>Lessons and technical references will be published here as they reach a usable state.</p>
-        </div>
-      </div>
-
-      <section class="wiki-roadmap" aria-labelledby="roadmap-title">
-        <header><span>Planned learning path</span><h2 id="roadmap-title">From principle to application</h2></header>
-        <div class="roadmap-line">
-          <article><small>01 / Understand</small><h3>Why geometry fidelity matters</h3><p>Concepts, assumptions, error measures, and the relationship between model geometry and simulation.</p></article>
-          <article><small>02 / Operate</small><h3>Build a controlled workflow</h3><p>Component inputs, segmentation strategies, tolerances, diagnostics, and verification.</p></article>
-          <article><small>03 / Apply</small><h3>Read complete examples</h3><p>Small reproducible cases leading toward energy, radiation, and daylight applications.</p></article>
-        </div>
-      </section>
-    </article>
-  </main>
-
-  <footer class="wiki-footer"><span>CurvAdapt / NexoNest</span><span>Documentation field · v0</span></footer>
-  <script src="js/ux.js" defer></script>
-</body>
-</html>
+<header class="wiki-header"><a class="wiki-brand" href="projects-pages/curvAdapt.html"><img src="assets/icons/curvadapt-plugin-hq.png" alt="" width="42" height="42"><span><strong>CurvAdapt</strong><small>Component reference</small></span></a><nav aria-label="Wiki links"><a href="projects-pages/curvAdapt.html">Plugin overview ↗</a><a href="nexonest.html">NexoNest ↗</a></nav></header>
+<main class="wiki-main"><nav class="wiki-index" aria-label="Documentation sections"><p>Documentation</p><ol><li><a href="#overview">Overview and notation</a></li><li><a href="#components">Component index</a></li><li><a href="#make">Make / Segmentation</a></li><li><a href="#clean">Clean / Simplification</a></li><li><a href="#check">Check / Analysis</a></li><li><a href="#tools">Tools / Geometry and data</a></li><li><a href="#help">Help / Community and learning</a></li></ol></nav>
+<article class="wiki-content"><header id="overview"><p class="wiki-kicker">CURVADAPT / DOCUMENTATION</p><h1>Component reference.</h1><p class="wiki-lede">Inputs, outputs and method details for the tools in CurvAdapt. Choose a component below, or follow its icon from the plugin overview.</p><p class="wiki-note">C(t) is the source curve on [t₀, t₁]; Pᵢ are polyline vertices; L is source arc length; d(P,[A,B]) is distance to a finite segment. Distance tolerances use model units unless stated otherwise. Sampling-based error tests are estimates, not exact continuous bounds.</p></header>
+<section id="components" class="wiki-component-index"><h2 id="roadmap-title">Find a component</h2><div><h3>Make / Segmentation</h3><a href="#step-evenly"><img src="assets/images/projects/curvadapt/components/step-evenly.png" alt="" width="32" height="32" loading="lazy"><span>Step Evenly</span></a><a href="#space-evenly"><img src="assets/images/projects/curvadapt/components/space-evenly.png" alt="" width="32" height="32" loading="lazy"><span>Space Evenly</span></a><a href="#follow-bends"><img src="assets/images/projects/curvadapt/components/follow-bends.png" alt="" width="32" height="32" loading="lazy"><span>Follow Bends</span></a><a href="#follow-turns"><img src="assets/images/projects/curvadapt/components/follow-turns.png" alt="" width="32" height="32" loading="lazy"><span>Follow Turns</span></a><a href="#follow-shape"><img src="assets/images/projects/curvadapt/components/follow-shape.png" alt="" width="32" height="32" loading="lazy"><span>Follow Shape</span></a></div><div><h3>Clean / Simplification</h3><a href="#clean-angles"><img src="assets/images/projects/curvadapt/components/clean-angles.png" alt="" width="32" height="32" loading="lazy"><span>Clean Angles</span></a><a href="#clean-shape"><img src="assets/images/projects/curvadapt/components/clean-shape.png" alt="" width="32" height="32" loading="lazy"><span>Clean Shape</span></a><a href="#clean-overall"><img src="assets/images/projects/curvadapt/components/clean-overall.png" alt="" width="32" height="32" loading="lazy"><span>Clean Overall</span></a></div><div><h3>Check / Analysis</h3><a href="#find-crossings"><img src="assets/images/projects/curvadapt/components/find-crossings.png" alt="" width="32" height="32" loading="lazy"><span>Find Crossings</span></a><a href="#check-shape"><img src="assets/images/projects/curvadapt/components/check-shape.png" alt="" width="32" height="32" loading="lazy"><span>Check Shape</span></a></div><div><h3>Tools / Geometry and data</h3><a href="#find-kinks"><img src="assets/images/projects/curvadapt/components/find-kinks.png" alt="" width="32" height="32" loading="lazy"><span>Find Kinks</span></a><a href="#match-length"><img src="assets/images/projects/curvadapt/components/match-length.png" alt="" width="32" height="32" loading="lazy"><span>Match Length</span></a><a href="#t-to-points"><img src="assets/images/projects/curvadapt/components/t-to-points.png" alt="" width="32" height="32" loading="lazy"><span>t to Points</span></a><a href="#points-to-t"><img src="assets/images/projects/curvadapt/components/points-to-t.png" alt="" width="32" height="32" loading="lazy"><span>Points to t</span></a><a href="#write-json"><img src="assets/images/projects/curvadapt/components/write-json.png" alt="" width="32" height="32" loading="lazy"><span>Write JSON</span></a><a href="#read-json"><img src="assets/images/projects/curvadapt/components/read-json.png" alt="" width="32" height="32" loading="lazy"><span>Read JSON</span></a><a href="#sort-points"><img src="assets/images/projects/curvadapt/components/sort-points.png" alt="" width="32" height="32" loading="lazy"><span>Sort Points</span></a><a href="#split-at-points"><img src="assets/images/projects/curvadapt/components/split-at-points.png" alt="" width="32" height="32" loading="lazy"><span>Split at Points</span></a><a href="#continuity"><img src="assets/images/projects/curvadapt/components/continuity.png" alt="" width="32" height="32" loading="lazy"><span>Continuity selector</span></a></div><div><h3>Help / Community and learning</h3><a href="#curvadapt-hub"><img src="assets/images/projects/curvadapt/components/logo.png" alt="" width="32" height="32" loading="lazy"><span>curvAdapt HUB</span></a></div></section>
+<section class="wiki-group" id="make"><h2>Make / Segmentation</h2><nav class="wiki-tool-index" aria-label="Make / Segmentation components"><a href="#step-evenly">Step Evenly</a><a href="#space-evenly">Space Evenly</a><a href="#follow-bends">Follow Bends</a><a href="#follow-turns">Follow Turns</a><a href="#follow-shape">Follow Shape</a></nav><section class="wiki-tool" id="step-evenly" aria-labelledby="step-evenly-title">
+      <header><img src="assets/images/projects/curvadapt/components/step-evenly.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="step-evenly-title">Step Evenly</h3><p>Equal parameter intervals.</p></div><a class="wiki-permalink" href="#step-evenly" aria-label="Link to Step Evenly">#</a></header>
+      <p>Distribute parameters uniformly across the curve domain. Equal parameter steps do not generally create equal-length segments.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve C; segment count n ≥ 3; Include Kinks; Custom Points; Min Length.</dd></div><div><dt>Outputs</dt><dd>Sorted parameters, evaluated points and a polyline.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>tᵢ = t₀ + i(t₁ − t₀)/n,  i = 0…n
+Pᵢ = C(tᵢ)</code></pre>
+      <p class="wiki-note">Custom points and optional C1 breaks enter the shared priority merge, so the final segment count can differ from n.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="space-evenly" aria-labelledby="space-evenly-title">
+      <header><img src="assets/images/projects/curvadapt/components/space-evenly.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="space-evenly-title">Space Evenly</h3><p>Equal arc-length intervals.</p></div><a class="wiki-permalink" href="#space-evenly" aria-label="Link to Space Evenly">#</a></header>
+      <p>Divide the source by equal arc length using Rhino DivideByCount, then apply the shared segmentation pipeline.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve C; segment count n ≥ 3; Include Kinks; Custom Points; Min Length.</dd></div><div><dt>Outputs</dt><dd>Parameters, points and a polyline.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>s(tᵢ) = iL/n
+s(t) = ∫[t₀,t] ‖C′(u)‖ du;  L = s(t₁)</code></pre>
+      <p class="wiki-note">Custom points, kinks and minimum-length merging can modify the final equal-spacing pattern.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="follow-bends" aria-labelledby="follow-bends-title">
+      <header><img src="assets/images/projects/curvadapt/components/follow-bends.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="follow-bends-title">Follow Bends</h3><p>Adaptive segmentation by curvature.</p></div><a class="wiki-permalink" href="#follow-bends" aria-label="Link to Follow Bends">#</a></header>
+      <p>Sample the parameter domain and retain samples whose curvature magnitude reaches the threshold. This is a threshold screen, not recursive error control.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; curvature threshold κmin ≥ 0; Sample Count N ≥ 3; shared segmentation controls.</dd></div><div><dt>Outputs</dt><dd>Retained parameters, points and polyline.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>tᵢ = t₀ + i(t₁ − t₀)/N
+keep tᵢ when ‖CurvatureAt(tᵢ)‖ ≥ κmin</code></pre>
+      <p class="wiki-note">Domain ends are included. Curvature has inverse-length units; a dense enough sample grid is needed to detect short bends.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="follow-turns" aria-labelledby="follow-turns-title">
+      <header><img src="assets/images/projects/curvadapt/components/follow-turns.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="follow-turns-title">Follow Turns</h3><p>Adaptive segmentation by tangent direction.</p></div><a class="wiki-permalink" href="#follow-turns" aria-label="Link to Follow Turns">#</a></header>
+      <p>Compare each sampled unit tangent with the tangent at the last accepted sample. Accept and update the reference when the angle reaches the threshold.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; angle threshold; Sample Count N ≥ 3; shared segmentation controls.</dd></div><div><dt>Outputs</dt><dd>Parameters, points and polyline.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>θ = acos(clamp(Tref · T(t), −1, 1))
+keep t when θ ≥ θmin; then Tref ← T(t)</code></pre>
+      <p class="wiki-note">T denotes a unit tangent. The angle input supports Grasshopper degree/radian settings; internal comparisons use radians. Sampling can miss changes between candidates.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="follow-shape" aria-labelledby="follow-shape-title">
+      <header><img src="assets/images/projects/curvadapt/components/follow-shape.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="follow-shape-title">Follow Shape</h3><p>Adaptive segmentation by chord error.</p></div><a class="wiki-permalink" href="#follow-shape" aria-label="Link to Follow Shape">#</a></header>
+      <p>Recursively compare sampled curve points with the finite chord of the current interval. Split at the sample with greatest deviation.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; error tolerance ε &gt; 0; Sample Count ≥ 3 per interval; Min Length; shared segmentation controls.</dd></div><div><dt>Outputs</dt><dd>Subdivision parameters, points and polyline.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>e(a,b) = maxⱼ d(C(a + j(b−a)/N), [C(a), C(b)])
+if e &gt; ε: split at the largest-error sample</code></pre>
+      <p class="wiki-note">d is distance to a finite line segment. Recursion also stops at the minimum-length/parameter guard. The sampled test is not a proven continuous maximum bound.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section></section><section class="wiki-group" id="clean"><h2>Clean / Simplification</h2><nav class="wiki-tool-index" aria-label="Clean / Simplification components"><a href="#clean-angles">Clean Angles</a><a href="#clean-shape">Clean Shape</a><a href="#clean-overall">Clean Overall</a></nav><section class="wiki-tool" id="clean-angles" aria-labelledby="clean-angles-title">
+      <header><img src="assets/images/projects/curvadapt/components/clean-angles.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="clean-angles-title">Clean Angles</h3><p>Simplify by angular change.</p></div><a class="wiki-permalink" href="#clean-angles" aria-label="Link to Clean Angles">#</a></header>
+      <p>Keep vertices where the angle between neighboring edge directions reaches the threshold. Short adjacent edges are protected.</p>
+      <dl><div><dt>Inputs</dt><dd>Polyline with at least 3 distinct vertices; positive angle threshold; nonnegative minimum segment length.</dd></div><div><dt>Outputs</dt><dd>Simplified polyline, removed-vertex count and reduction percentage.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>θᵢ = angle(Pᵢ − Pᵢ₋₁, Pᵢ₊₁ − Pᵢ)
+keep Pᵢ if θᵢ ≥ θmin
+Reduction (%) = 100(Nold − Nnew)/Nold</code></pre>
+      <p class="wiki-note">Tests use original neighboring vertices. End vertices and at least one interior vertex remain; closed output is reclosed. This is not a global chord-error guarantee.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="clean-shape" aria-labelledby="clean-shape-title">
+      <header><img src="assets/images/projects/curvadapt/components/clean-shape.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="clean-shape-title">Clean Shape</h3><p>Simplify with a chord-based method.</p></div><a class="wiki-permalink" href="#clean-shape" aria-label="Link to Clean Shape">#</a></header>
+      <p>Test each interior vertex against the finite chord joining its original neighbors; keep it when the local distance exceeds tolerance.</p>
+      <dl><div><dt>Inputs</dt><dd>Polyline; distance tolerance ε ≥ 0; minimum segment length ≥ 0.</dd></div><div><dt>Outputs</dt><dd>Simplified polyline, removed count and reduction percentage.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>eᵢ = d(Pᵢ, [Pᵢ₋₁, Pᵢ₊₁])
+keep Pᵢ if eᵢ &gt; ε
+Reduction (%) = 100(Nold − Nnew)/Nold</code></pre>
+      <p class="wiki-note">Vertices beside protected short edges are retained. Local decisions do not guarantee the final polyline stays within ε of every removed vertex.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="clean-overall" aria-labelledby="clean-overall-title">
+      <header><img src="assets/images/projects/curvadapt/components/clean-overall.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="clean-overall-title">Clean Overall</h3><p>Douglas-Peucker simplification.</p></div><a class="wiki-permalink" href="#clean-overall" aria-label="Link to Clean Overall">#</a></header>
+      <p>Apply Douglas-Peucker subdivision: find the original interior vertex farthest from an interval chord, retain it if over tolerance and recurse on both sides.</p>
+      <dl><div><dt>Inputs</dt><dd>Polyline with at least 3 distinct vertices; distance tolerance ε ≥ 0.</dd></div><div><dt>Outputs</dt><dd>Simplified polyline, removed count and reduction percentage.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>j* = argmax[a&lt;j&lt;b] d(Pⱼ, [Pₐ, Pᵦ])
+if d(Pⱼ*, [Pₐ, Pᵦ]) &gt; ε: retain j* and recurse</code></pre>
+      <p class="wiki-note">The implementation retains end vertices and at least one interior vertex, and restores closure. Tolerance is tested on the input polyline vertices, not against a separate smooth source curve.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section></section><section class="wiki-group" id="check"><h2>Check / Analysis</h2><nav class="wiki-tool-index" aria-label="Check / Analysis components"><a href="#find-crossings">Find Crossings</a><a href="#check-shape">Check Shape</a></nav><section class="wiki-tool" id="find-crossings" aria-labelledby="find-crossings-title">
+      <header><img src="assets/images/projects/curvadapt/components/find-crossings.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="find-crossings-title">Find Crossings</h3><p>Inspect curve self-intersections.</p></div><a class="wiki-permalink" href="#find-crossings" aria-label="Link to Find Crossings">#</a></header>
+      <p>Use Rhino self-intersection events to identify point crossings and overlap endpoints.</p>
+      <dl><div><dt>Inputs</dt><dd>A valid curve; the active Rhino model tolerance.</dd></div><div><dt>Outputs</dt><dd>Intersection points, event parameters and a HasIntersection boolean.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>events = CurveSelf(C, tolerance)
+HasIntersection = (reported point count &gt; 0)</code></pre>
+      <p class="wiki-note">Overlap events contribute their endpoints. Detection depends on model tolerance; the segmentation pipeline rejects self-intersecting input.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="check-shape" aria-labelledby="check-shape-title">
+      <header><img src="assets/images/projects/curvadapt/components/check-shape.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="check-shape-title">Check Shape</h3><p>Measure maximum and relative chord error against the source curve.</p></div><a class="wiki-permalink" href="#check-shape" aria-label="Link to Check Shape">#</a></header>
+      <p>Split the source curve at polyline vertices, sample each matched span by arc length and measure distance to its corresponding finite chord.</p>
+      <dl><div><dt>Inputs</dt><dd>Original curve; ordered approximation polyline; Samples per Segment.</dd></div><div><dt>Outputs</dt><dd>Maximum error, relative error, local errors, source subcurves and error-point pairs.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>eᵢ = max[t in sampled span i] d(C(t), [Pᵢ, Pᵢ₊₁])
+MCE = maxᵢ eᵢ
+rMCE = MCE / Lsource</code></pre>
+      <p class="wiki-note">Polyline vertices must lie on the source within the active model tolerance and follow its order. MCE has model-length units; rMCE is a dimensionless ratio, not a percentage. Sampling is not an exact continuous supremum.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section></section><section class="wiki-group" id="tools"><h2>Tools / Geometry and data</h2><nav class="wiki-tool-index" aria-label="Tools / Geometry and data components"><a href="#find-kinks">Find Kinks</a><a href="#match-length">Match Length</a><a href="#t-to-points">t to Points</a><a href="#points-to-t">Points to t</a><a href="#write-json">Write JSON</a><a href="#read-json">Read JSON</a><a href="#sort-points">Sort Points</a><a href="#split-at-points">Split at Points</a><a href="#continuity">Continuity selector</a></nav><section class="wiki-tool" id="find-kinks" aria-labelledby="find-kinks-title">
+      <header><img src="assets/images/projects/curvadapt/components/find-kinks.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="find-kinks-title">Find Kinks</h3><p>Locate continuity breaks and critical points.</p></div><a class="wiki-permalink" href="#find-kinks" aria-label="Link to Find Kinks">#</a></header>
+      <p>Find parameters where the selected Rhino continuity condition fails. The selector determines which kind of discontinuity is searched.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; Type code; Include Ends; positive Step Tolerance.</dd></div><div><dt>Outputs</dt><dd>Critical parameters and evaluated curve points.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>Find t where the chosen continuity condition fails
+P = C(t)</code></pre>
+      <p class="wiki-note">C1 is the usual kink-preservation choice. C1 compares first derivatives; G1 compares tangent direction. Locus variants change endpoint treatment through Rhino continuity rules.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="match-length" aria-labelledby="match-length-title">
+      <header><img src="assets/images/projects/curvadapt/components/match-length.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="match-length-title">Match Length</h3><p>Scale a curve to a target arc length.</p></div><a class="wiki-permalink" href="#match-length" aria-label="Link to Match Length">#</a></header>
+      <p>Scale uniformly about the curve start point. An optional Plane first aligns a planar curve normal with the target plane normal.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; Target Length; optional Plane.</dd></div><div><dt>Outputs</dt><dd>Scaled curve and scale factor.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>k = Ltarget / Lcurrent
+P′ = A + k(P − A),  A = curve start</code></pre>
+      <p class="wiki-note">Current and target lengths must exceed the model tolerance. Optional rotation precedes scaling; the anchor remains the start point.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="t-to-points" aria-labelledby="t-to-points-title">
+      <header><img src="assets/images/projects/curvadapt/components/t-to-points.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="t-to-points-title">t to Points</h3><p>Evaluate curve points at parameters.</p></div><a class="wiki-permalink" href="#t-to-points" aria-label="Link to t to Points">#</a></header>
+      <p>Evaluate accepted parameters on the source curve. Tolerance widens the accepted domain interval; the current implementation does not clamp accepted values to its ends.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; parameter list; nonnegative domain tolerance δ.</dd></div><div><dt>Outputs</dt><dd>Evaluated points and rejected OffDomain parameters.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>accept t when t₀ − δ ≤ t ≤ t₁ + δ
+P = C(t)</code></pre>
+      <p class="wiki-note">This tolerance is in parameter units, not model distance. Values outside the accepted range are reported, not silently replaced.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="points-to-t" aria-labelledby="points-to-t-title">
+      <header><img src="assets/images/projects/curvadapt/components/points-to-t.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="points-to-t-title">Points to t</h3><p>Project points to curve parameters.</p></div><a class="wiki-permalink" href="#points-to-t" aria-label="Link to Points to t">#</a></header>
+      <p>Project each point to its closest location on the curve and accept it only if its distance is within tolerance.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; point list; nonnegative distance tolerance τ.</dd></div><div><dt>Outputs</dt><dd>Accepted curve parameters and rejected OffCurve points.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>t* = closest curve parameter to P
+accept when ‖P − C(t*)‖ ≤ τ</code></pre>
+      <p class="wiki-note">OffCurve points are reported separately. Distance tolerance uses model-length units; projection does not preserve the original point order along the curve.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="write-json" aria-labelledby="write-json-title">
+      <header><img src="assets/images/projects/curvadapt/components/write-json.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="write-json-title">Write JSON</h3><p>Record polyline geometry as JSON.</p></div><a class="wiki-permalink" href="#write-json" aria-label="Link to Write JSON">#</a></header>
+      <p>Keep unique input polylines in the component session and write the full collection beside the saved Grasshopper document.</p>
+      <dl><div><dt>Inputs</dt><dd>Polyline; file name; Reset switch.</dd></div><div><dt>Outputs</dt><dd>Identifiers, vertex tree, JSON dictionary and output path.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>same(A,B) ⇔ same vertex count and
+‖Aᵢ − Bᵢ‖ ≤ model tolerance for every ordered pair</code></pre>
+      <p class="wiki-note">This is data serialization, not a geometry formula. A saved Grasshopper document provides the output folder. Same-order matching matters; Reset clears memory and the JSON file.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="read-json" aria-labelledby="read-json-title">
+      <header><img src="assets/images/projects/curvadapt/components/read-json.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="read-json-title">Read JSON</h3><p>Read polyline geometry from JSON.</p></div><a class="wiki-permalink" href="#read-json" aria-label="Link to Read JSON">#</a></header>
+      <p>Read the recorded polyline dictionary, select an entry by index and reconstruct a polyline from its stored ordered vertices.</p>
+      <dl><div><dt>Inputs</dt><dd>JSON file path; entry index.</dd></div><div><dt>Outputs</dt><dd>Polyline, points, identifier and total entry count.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>JSON entry → ordered vertices [P₀,…,Pₙ] → Polyline</code></pre>
+      <p class="wiki-note">No geometric formula is applied. A valid compatible file and an in-range index are required; reading JSON does not regenerate the original NURBS curve.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="sort-points" aria-labelledby="sort-points-title">
+      <header><img src="assets/images/projects/curvadapt/components/sort-points.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="sort-points-title">Sort Points</h3><p>Merge and sort points along a curve.</p></div><a class="wiki-permalink" href="#sort-points" aria-label="Link to Sort Points">#</a></header>
+      <p>Project up to three priority point sets onto the curve. Sort by parameter and merge nearby candidates using distance along the curve.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; Priority 1/2/3 point lists; Point Tolerance; Merge Tolerance.</dd></div><div><dt>Outputs</dt><dd>Merged sorted parameters and corresponding curve points.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>dcurve(a,b) = length(C restricted to [min(a,b),max(a,b)])
+merge when dcurve ≤ Merge Tolerance
+Priority 1 &gt; Priority 2 &gt; Priority 3</code></pre>
+      <p class="wiki-note">Off-curve points are ignored with a warning. Higher priority wins a merge; equal priority retains the previously accepted candidate. Merge distance is arc length, not raw parameter difference.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="split-at-points" aria-labelledby="split-at-points-title">
+      <header><img src="assets/images/projects/curvadapt/components/split-at-points.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="split-at-points-title">Split at Points</h3><p>Split a curve at projected points.</p></div><a class="wiki-permalink" href="#split-at-points" aria-label="Link to Split at Points">#</a></header>
+      <p>Project valid split points, clean and sort their parameters, then trim successive source intervals.</p>
+      <dl><div><dt>Inputs</dt><dd>Curve; split points; Point Tolerance.</dd></div><div><dt>Outputs</dt><dd>Curve segments and their arc lengths.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>tᵢ = accepted, sorted split parameters
+segmentᵢ = C restricted to [tᵢ, tᵢ₊₁]</code></pre>
+      <p class="wiki-note">Off-curve points are reported. Duplicate/seam parameters are cleaned and closed curves require wrap-around handling. No valid split candidates can produce no segments.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section><section class="wiki-tool" id="continuity" aria-labelledby="continuity-title">
+      <header><img src="assets/images/projects/curvadapt/components/continuity.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="continuity-title">Continuity selector</h3><p>Select the continuity type used by detection tools.</p></div><a class="wiki-permalink" href="#continuity" aria-label="Link to Continuity selector">#</a></header>
+      <p>Pick the Rhino continuity condition sent to Find Kinks. This is a value-list control, not a curve solver.</p>
+      <dl><div><dt>Inputs</dt><dd>Select a continuity option from the dropdown.</dd></div><div><dt>Outputs</dt><dd>Integer Type code for Find Kinks.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>C0: matching position
+C1: matching first derivative; C2: also second derivative
+G1: matching tangent direction; G2: curvature continuity</code></pre>
+      <p class="wiki-note">Pick Continuity defaults to C1. Codes 0…9 cover C0/C1/C2/G1/G2 and their locus variants; Rhino evaluates these with its continuity rules.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section></section><section class="wiki-group" id="help"><h2>Help / Community and learning</h2><nav class="wiki-tool-index" aria-label="Help / Community and learning components"><a href="#curvadapt-hub">curvAdapt HUB</a></nav><section class="wiki-tool" id="curvadapt-hub" aria-labelledby="curvadapt-hub-title">
+      <header><img src="assets/images/projects/curvadapt/components/logo.png" alt="" width="48" height="48" loading="lazy"><div><h3 id="curvadapt-hub-title">curvAdapt HUB</h3><p>Open the learning guide, community signup or an on-demand update check.</p></div><a class="wiki-permalink" href="#curvadapt-hub" aria-label="Link to curvAdapt HUB">#</a></header>
+      <p>Open the learning guide or newsletter, or run an on-demand public-release version check.</p>
+      <dl><div><dt>Inputs</dt><dd>Click Learn CurvAdapt, Join Community or Check Update.</dd></div><div><dt>Outputs</dt><dd>A browser page or update-status message.</dd></div></dl>
+      <h4>Formula / logic</h4><pre class="wiki-formula"><code>No geometric formula: explicit user action → selected service</code></pre>
+      <p class="wiki-note">The HUB does not install updates, collect email addresses or make update requests during Grasshopper solutions. An unavailable release endpoint is not proof that the local build is current.</p>
+      <a class="wiki-back-top" href="#components">Back to component index ↑</a>
+    </section></section><p class="wiki-scope">This reference describes the current development source for Windows, Rhino 8.30+ and Grasshopper on .NET 8. A public stable package is not confirmed. For the workflow, setup and availability, return to the <a href="projects-pages/curvAdapt.html">plugin overview</a>.</p></article></main>
+<footer class="wiki-footer"><span>CurvAdapt / NexoNest</span><a href="projects-pages/curvAdapt.html">Back to plugin overview →</a></footer></body></html>

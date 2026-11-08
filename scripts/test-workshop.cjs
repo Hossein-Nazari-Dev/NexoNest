@@ -2,23 +2,27 @@ const fs=require('node:fs'), vm=require('node:vm'), assert=require('node:assert/
 const path=require('node:path');
 const directory=path.resolve(__dirname,'../integrations/google-apps-script');
 const code=['LicensingProducts.gs','WorkshopCatalog.gs','Workshop.gs'].map(name=>fs.readFileSync(path.join(directory,name),'utf8')).join('\n');
-let rows=[],mails=0,files=0,enabled=true,failMail=false,owner='nexonest.contact@gmail.com';
+let rows=[],mails=0,files=0,enabled=true,failMail=false,owner='nexonest.contact@gmail.com',fingerprintHeader='',locked=false,duringAppend=null,failAfterAppend=false;
 let privateFolder=true;
 const sheet={
  getLastRow:()=>rows.length+1,
- appendRow:row=>rows.push(row),
+ appendRow:row=>{if(duringAppend)duringAppend();rows.push(row);if(failAfterAppend)throw new Error('sheet outcome unknown');},
+ getMaxColumns:()=>26,
+ hideColumns:()=>{},
  getName:()=> 'Workshop_Registrations',
  getActiveRange:()=>({getRow:()=>2,getNumRows:()=>1}),
- getRange:(r,c,n=1,width=1)=>({getValues:()=>r===1?[vm.runInContext('WORKSHOP_HEADERS',ctx)]:rows.slice(r-2,r-2+n).map(row=>row.slice(c-1,c-1+width)),getValue:()=>rows[r-2][c-1],setValue:v=>{rows[r-2][c-1]=v;},setValues:values=>{values.forEach((cells,i)=>cells.forEach((v,j)=>rows[r-2+i][c-1+j]=v));}})
+ getRange:(r,c,n=1,width=1)=>({getValues:()=>r===1?[vm.runInContext('WORKSHOP_HEADERS',ctx)]:rows.slice(r-2,r-2+n).map(row=>row.slice(c-1,c-1+width)),getValue:()=>r===1?fingerprintHeader:rows[r-2][c-1],setValue:v=>{if(r===1)fingerprintHeader=v;else rows[r-2][c-1]=v;},setValues:values=>{values.forEach((cells,i)=>cells.forEach((v,j)=>rows[r-2+i][c-1+j]=v));}})
 };
 const ctx=vm.createContext({console,Date,JSON,Object,String,Error,Session:{getActiveUser:()=>({getEmail:()=>owner})},LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})},PropertiesService:{getScriptProperties:()=>({getProperty:()=>enabled?'true':'false'})},SpreadsheetApp:{getActiveSpreadsheet:()=>({getSheetByName:()=>null}),openById:()=>({getSheetByName:()=>sheet}),flush:()=>{}},Utilities:{getUuid:()=>require('node:crypto').randomUUID(),base64Decode:s=>[...Buffer.from(s,'base64')],newBlob:(...a)=>a},DriveApp:{Access:{PRIVATE:'private'},Permission:{NONE:'none'},getFolderById:()=>({getSharingAccess:()=>privateFolder?'private':'anyone',createFile:()=>{files++;return {setSharing:()=>{},getUrl:()=>`https://drive.google.com/file/d/test-${files}`};}})},MailApp:{sendEmail:()=>{mails++;if(failMail)throw new Error('delivery outcome unknown');}},json_:v=>v});
+ctx.Utilities.DigestAlgorithm={SHA_256:'sha256'};
+ctx.Utilities.computeDigest=(algorithm,value)=>[...require('node:crypto').createHash(algorithm).update(typeof value==='string'?value:Buffer.from(value)).digest()];
 vm.runInContext(code,ctx);
 ctx.Session.getEffectiveUser=()=>({getEmail:()=>owner});
 const base={fullName:'آزمون',email:'test@example.com',phone:'۰۹۱۲۱۲۳۴۵۶۷',requestId:'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa',educationLevel:'master',rhinoExperience:'beginner',grasshopperExperience:'none',registrationType:'standard',certificateType:'attendance',rulesAccepted:true,certificateAccepted:true,websiteConsent:false,rulesVersion:'2026-10-v3',receipt:{type:'application/pdf',base64:Buffer.from('%PDF-1.7 test').toString('base64')}};
 let count=0;
 function test(name,fn){fn();count++;console.log('PASS '+name);}
 function post(data){return ctx.workshopPost_({parameter:{payload:JSON.stringify(data)}});}
-function reset(){rows=[];mails=0;files=0;enabled=true;failMail=false;privateFolder=true;}
+function reset(){rows=[];mails=0;files=0;enabled=true;failMail=false;privateFolder=true;fingerprintHeader='';locked=false;duringAppend=null;failAfterAppend=false;}
 test('server calculates all prices',()=>{for(const [type,fee] of Object.entries({standard:2900000,student:2610000,newsletter:2320000}))assert.equal(ctx.workshopValidate_({...base,registrationType:type,university:'دانشگاه',newsletterCode:'TEST',fee:1}).fee,fee);});
 test('Persian phone digits normalize',()=>assert.equal(ctx.workshopValidate_(base).phone,'09121234567'));
 test('all consents enforced',()=>{for(const k of ['rulesAccepted','certificateAccepted'])assert.throws(()=>ctx.workshopValidate_({...base,[k]:false}));});
@@ -31,16 +35,23 @@ test('oversize receipt rejected',()=>assert.throws(()=>ctx.workshopReceipt_({typ
 test('formula injection escaped',()=>assert.equal(ctx.workshopSafe_('=IMPORTXML("x")'),'\'=IMPORTXML("x")'));
 test('closed registration has no side effects',()=>{reset();enabled=false;assert.equal(post(base).ok,false);assert.equal(files+mails+rows.length,0);});
 test('private receipt and idempotent retry',()=>{reset();const a=post(base),b=post(base);assert.equal(a.ok,true);assert.equal(a.trackingCode,b.trackingCode);assert.match(a.trackingCode,/^NN-[A-F0-9]{16}$/);assert.equal(files,1);assert.equal(rows.length,1);assert.equal(mails,1);});
+test('fingerprint is additive and includes only a digest',()=>{assert.match(rows[0][24],/^[a-f0-9]{64}$/);assert.equal(rows[0][23],base.requestId);assert.equal(fingerprintHeader,ctx.WORKSHOP_FINGERPRINT_HEADER||'اثر انگشت درخواست');});
+test('normalized identical retry preserves original result',()=>{const first=post(base);const replay=post({...base,fullName:'  آزمون ',email:' TEST@EXAMPLE.COM ',phone:'0912 1234567',receipt:{...base.receipt,name:'renamed.pdf'},fee:1,university:'ignored',newsletterCode:'ignored'});assert.equal(replay.ok,true);assert.equal(replay.trackingCode,first.trackingCode);assert.equal(rows.length,1);assert.equal(files,1);assert.equal(mails,1);});
+test('changed semantic payload conflicts without side effects',()=>{for(const change of [{fullName:'نام دیگر'},{email:'changed@example.com'},{registrationType:'student',university:'دانشگاه'},{websiteConsent:true},{certificateType:'completion'},{receipt:{type:'application/pdf',base64:Buffer.from('%PDF-1.7 changed').toString('base64')}}]) {const result=post({...base,...change});assert.equal(result.ok,false);assert.equal(result.code,'request_conflict');}assert.equal(rows.length,1);assert.equal(files,1);assert.equal(mails,1);});
+test('server effective fee changes conflict and client fee is ignored',()=>{const resolve=ctx.workshopResolveCourse_;ctx.workshopResolveCourse_=id=>{const course=resolve(id);return {...course,fees:{...course.fees,standard:1}};};assert.equal(post(base).code,'request_conflict');ctx.workshopResolveCourse_=resolve;assert.equal(post({...base,fee:1}).ok,true);assert.equal(rows[0][9],2900000);});
 test('retry survives closing registration',()=>{enabled=false;assert.equal(post(base).ok,true);assert.equal(mails,1);});
 test('same email new request rejected',()=>{enabled=true;assert.equal(post({...base,requestId:'bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb'}).ok,false);assert.equal(files,1);});
 test('non-private folder rejected',()=>{reset();privateFolder=false;assert.equal(post(base).ok,false);assert.equal(files,0);});
 test('uncertain email does not duplicate on retry',()=>{reset();failMail=true;const a=post(base);assert.equal(a.ok,true);assert.equal(a.emailStatus,'unknown');post(base);assert.equal(mails,1);});
+test('legacy row without fingerprint requires manual recovery',()=>{reset();post(base);rows[0]=rows[0].slice(0,24);const before=JSON.stringify(rows[0]);assert.equal(post(base).code,'request_identity_unverified');assert.equal(JSON.stringify(rows[0]),before);assert.equal(files,1);assert.equal(mails,1);});
+test('uncertain append replays the stored accepted request',()=>{reset();failAfterAppend=true;assert.equal(post(base).code,'request_unknown');failAfterAppend=false;const replay=post(base);assert.equal(replay.ok,true);assert.equal(replay.emailStatus,'pending');assert.equal(rows.length,1);assert.equal(files,1);assert.equal(mails,0);});
 test('admin identity checked',()=>{owner='other@example.com';assert.throws(()=>ctx.workshopOwner_());owner='nexonest.contact@gmail.com';ctx.workshopOwner_();});
 test('daily quota enforced',()=>{reset();rows=Array.from({length:30},(_,i)=>['OLD'+i,new Date().toISOString(),'','other'+i+'@example.com']);assert.equal(post(base).ok,false);assert.equal(files,0);});
 ctx.SpreadsheetApp.getActiveSpreadsheet=()=>({getSheetByName:()=>null,getId:()=> '1V3-9pdWyaSNJXYUTJqsqESKI-G9JrCiggMaW3M16Bls',getActiveSheet:()=>sheet});
 ctx.SpreadsheetApp.getUi=()=>({ButtonSet:{OK_CANCEL:1},Button:{OK:1},prompt:()=>({getSelectedButton:()=>1,getResponseText:()=> 'فیش و کد بررسی شد'})});
-ctx.LockService.getScriptLock=()=>({tryLock:()=>true,waitLock:()=>{},releaseLock:()=>{}});
+ctx.LockService.getScriptLock=()=>({tryLock:()=>{if(locked)return false;locked=true;return true;},waitLock:()=>{assert.equal(locked,false);locked=true;},releaseLock:()=>{locked=false;}});
 ctx.PropertiesService.getScriptProperties=()=>({getProperty:key=>key==='WORKSHOP_ENABLED'?(enabled?'true':'false'):''});
 test('approval is recorded and confirmation sends once',()=>{reset();post(base);ctx.approveWorkshopRegistration();assert.equal(rows[0][17],'تأیید شده');assert.equal(rows[0][22],'accepted');assert.equal(mails,2);assert.throws(()=>ctx.approveWorkshopRegistration());assert.equal(mails,2);});
 test('rejection keeps record and sends no confirmation',()=>{reset();post(base);ctx.rejectWorkshopRegistration();assert.equal(rows[0][17],'رد شده');assert.equal(mails,1);assert.throws(()=>ctx.approveWorkshopRegistration());});
+test('overlapping attempts serialize and later retry is idempotent',()=>{reset();let overlap;duringAppend=()=>{overlap=post(base);};const accepted=post(base);duringAppend=null;assert.equal(accepted.ok,true);assert.equal(overlap.code,'request_rejected');assert.equal(post(base).trackingCode,accepted.trackingCode);assert.equal(rows.length,1);assert.equal(files,1);assert.equal(mails,1);assert.equal(locked,false);});
 console.log(`${count} backend checks passed. No external calls or real email.`);

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupImage      = document.getElementById('popup-image');
   const popupCategories = document.getElementById('popup-categories');
   const popupButton     = document.getElementById('popup-button');
+  const popupStatus     = document.getElementById('popup-product-status');
 
   let currentProject = null;
   let triggerElement = null;
@@ -42,6 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Title / excerpt
     popupTitle.textContent   = currentProject.title   || 'Untitled';
     popupExcerpt.textContent = currentProject.excerpt || '';
+    if (popupStatus) {
+      popupStatus.innerHTML = window.NexoNestProductStatus?.render(currentProject, { compact: true, includeAction: false, prefix: '' }) || '';
+      popupStatus.hidden = !popupStatus.firstElementChild;
+    }
 
     // Categories + subcategories as labels
     const { catLabels, subLabels } = idsToLabels(
@@ -66,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         img.classList.add('popup-image-element--logo');
       }
       img.onerror = () => {
+        if (!popupImage.contains(img)) return;
         popupImage.innerHTML = 'Image not available';
         popupImage.style.display = 'grid';
         popupImage.style.placeItems = 'center';
@@ -80,13 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Read More
-    const hasUrl = !!currentProject.url;
-    popupButton.textContent = hasUrl ? 'Open project' : 'Details coming soon';
+    const primaryAction = window.NexoNestProductStatus?.action(currentProject);
+    const targetURL = primaryAction?.url || currentProject.url;
+    const hasUrl = !!targetURL;
+    popupButton.textContent = primaryAction?.label || (hasUrl ? 'Open project' : 'Details coming soon');
     popupButton.disabled = !hasUrl;
     popupButton.setAttribute('aria-disabled', String(!hasUrl));
     popupButton.onclick = () => {
       if (hasUrl) {
-        window.location.assign(resolveURL(currentProject.url));
+        window.location.assign(resolveURL(targetURL));
       }
     };
 

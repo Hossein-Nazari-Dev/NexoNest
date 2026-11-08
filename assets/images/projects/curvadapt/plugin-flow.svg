@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="780" viewBox="0 0 640 780" role="img" aria-labelledby="title desc">
+<title id="title">CurvAdapt workflow</title><desc id="desc">Keep the source curve. Make a polyline or clean an existing one, check fidelity, adjust settings and use the output downstream.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#087f8c" stroke-width="2"/></marker></defs>
+<rect width="640" height="780" fill="#e8f1f0"/>
+<g font-family="monospace" fill="#252525"><text x="32" y="46" font-size="18" fill="#087f8c">CURVADAPT / A MANUAL WORKFLOW</text>
+<g fill="#f4f8f7" stroke="#087f8c" stroke-width="2"><rect x="80" y="78" width="480" height="100" rx="12"/><rect x="36" y="250" width="270" height="135" rx="12"/><rect x="334" y="250" width="270" height="135" rx="12"/><rect x="80" y="468" width="480" height="110" rx="12"/><rect x="80" y="650" width="480" height="90" rx="12"/></g>
+<g font-size="26" font-weight="bold" text-anchor="middle"><text x="320" y="119">SOURCE + SETTINGS</text><text x="171" y="291">MAKE</text><text x="469" y="291">CLEAN</text><text x="320" y="508">CHECK</text><text x="320" y="689">USE THE OUTPUT</text></g>
+<g font-size="19" text-anchor="middle"><text x="320" y="151">Keep the original curve</text><text x="171" y="326">Smooth curve</text><text x="171" y="354">→ polyline</text><text x="469" y="326">Existing polyline</text><text x="469" y="354">→ fewer vertices</text><text x="320" y="543">Chord error / crossings</text><text x="320" y="719">Geometry / parameters / JSON</text></g>
+<text x="320" y="424" font-size="17" text-anchor="middle">Choose the relevant path; tools can combine.</text>
+<text x="320" y="615" font-size="17" text-anchor="middle">Adjust settings when fidelity is insufficient.</text>
+</g><g fill="none" stroke="#087f8c" stroke-width="2.5" marker-end="url(#arrow)"><path d="M320 178V210H171V242"/><path d="M320 210H469V242"/><path d="M171 385V445H320V460"/><path d="M469 385V445H320" marker-end="none"/><path d="M320 578V642"/><path d="M80 524H18V210H155" stroke-dasharray="7 6"/></g>
+</svg>

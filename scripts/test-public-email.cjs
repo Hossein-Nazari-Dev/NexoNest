@@ -41,7 +41,7 @@ const ctx = vm.createContext({ console: {log() {}, error() {}}, Date: TestDate,
   ContentService: {MimeType: {JSON: 'json'}, createTextOutput: value => ({setMimeType: () => JSON.parse(value)})},
   HtmlService: {createHtmlOutput: html => html}
 });
-for (const file of ['Code.gs', 'PublicEmail.gs', 'GameClubEmail.gs', 'LicensingProfile.gs', 'Licensing.gs', 'LicensingProducts.gs', 'NewsletterDelivery.gs'])
+for (const file of ['Code.gs', 'PublicEmail.gs', 'GameClubEmail.gs', 'LicensingProfile.gs', 'Licensing.gs', 'LicensingGateway.gs', 'LicensingProducts.gs', 'NewsletterDelivery.gs'])
   vm.runInContext(fs.readFileSync(path.join(__dirname, '../integrations/google-apps-script', file), 'utf8'), ctx, {filename: file});
 function reset() {
   clock = Date.UTC(2026, 9, 18); quota = 100; mailFailure = false; locked = false;
@@ -183,6 +183,44 @@ test('invalid/oversized/unknown requests and lock contention fail closed', () =>
     assert.equal(post(data).ok, false);
   locked = true;
   assert.equal(post(signup).ok, false);
+  assert.equal(sent.length, 0);
+});
+
+test('email and explicit consent suffice; optional profile fields stay empty', () => {
+  assert.equal(post({email: 'minimal@example.com', consent: true}).status, 'pending-confirmation');
+  assert.equal(record()[2], 'minimal@example.com');
+  assert.deepEqual(record().slice(8, 14), ['', '', '', '', '', '']);
+  assert.match(sent[0].htmlBody, /Hello there,/);
+  assert.equal(record()[5], 'pending');
+  assert.match(ctx.doGet({parameter: {confirm: record()[14]}}), /Subscription confirmed/);
+});
+
+test('minimal signup preserves an existing product display name and validates optional types', () => {
+  tables.Users.rows.push(['usr_existing', '', 'reader@example.com', 'Existing reader', clock, clock, 'active']);
+  assert.equal(post({email: 'reader@example.com', consent: true}).ok, true);
+  assert.equal(tables.Users.rows[1][3], 'Existing reader');
+  for (const data of [{email: 'bad'}, {email: 'valid@example.com'},
+    {email: 'valid@example.com', consent: true, interests: 'Research'},
+    {email: 'valid@example.com', consent: true, occupation: {role: 'Designer'}}])
+    assert.equal(post(data).ok, false);
+  assert.equal(sent.length, 1);
+});
+
+test('public counters use fixed 24-hour windows with explicit boundary bursts', () => {
+  const start = clock;
+  properties.PUBLIC_EMAIL_DAILY_LIMIT = '3';
+  ctx.reservePublicMail_('newsletter', 'boundary@example.com');
+  clock = start + 86400000 - 60001;
+  ctx.reservePublicMail_('newsletter', 'boundary@example.com');
+  clock += 60000;
+  ctx.reservePublicMail_('newsletter', 'boundary@example.com');
+  assert.throws(() => ctx.reservePublicMail_('newsletter', 'other@example.com'));
+  assert.equal(ctx.publicEmailState_('mail:global').startedAt, start);
+  clock++;
+  ctx.reservePublicMail_('newsletter', 'boundary@example.com');
+  assert.equal(ctx.publicEmailState_('mail:global').startedAt, clock);
+  assert.equal(ctx.publicEmailState_('mail:global').count, 1);
+  assert.throws(() => ctx.reservePublicMail_('newsletter', 'boundary@example.com'));
   assert.equal(sent.length, 0);
 });
 console.log(`${count} public email checks passed. No external calls or real email.`);

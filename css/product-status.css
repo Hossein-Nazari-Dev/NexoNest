@@ -1,0 +1,30 @@
+/* The same product contract appears in editorial pages and catalogue briefs. */
+.product-status {
+    margin: 20px 0;
+    padding: 14px 16px;
+    border: 1px dotted var(--c-accent-dark);
+    border-radius: 8px;
+    color: var(--color-text-light);
+    font-size: .8125rem;
+    line-height: 1.55;
+}
+.product-status p { margin: 0; }
+.product-status p + p { margin-top: 5px; }
+.product-status-line strong { color: var(--color-text); }
+.product-review { color: var(--color-muted); font-size: .6875rem; }
+.product-primary-action {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--c-accent-dark);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.product-status--compact {
+    margin: 0;
+    padding: 8px 10px;
+    font-size: .6875rem;
+    line-height: 1.4;
+}
+.product-status--compact p + p { margin-top: 3px; }
+.product-status--compact .product-review { font-size: .625rem; }
+

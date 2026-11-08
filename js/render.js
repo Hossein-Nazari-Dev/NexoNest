@@ -1,13 +1,60 @@
-// Dynamic content rendering
-document.addEventListener('DOMContentLoaded', () => {
-    window.loadProjectsData().then(renderProjects);
-});
+// This controller alone owns catalogue loading, recovery and interactive readiness.
+(function () {
+    document.addEventListener('DOMContentLoaded', () => {
+        const section = document.querySelector('[data-catalog-state]');
+        if (!section) return;
+        const message = document.getElementById('catalog-message');
+        const retry = document.getElementById('catalog-retry');
+        const directory = document.getElementById('project-directory');
+        const grid = document.getElementById('projects-grid');
+        let loading = false;
+        let viewVersion = 0;
 
-function renderProjects() {
+        function setStatus(status, text) {
+            section.dataset.catalogState = status;
+            section.setAttribute('aria-busy', String(status === 'loading'));
+            message.textContent = text;
+            retry.hidden = status !== 'error';
+            retry.disabled = status === 'loading';
+            directory.hidden = status === 'ready';
+            grid.hidden = status !== 'ready';
+            document.querySelectorAll('[data-category], [data-subcategory]').forEach(button => {
+                button.disabled = status !== 'ready';
+            });
+        }
+
+        async function loadCatalogue(force = false) {
+            if (loading) return;
+            loading = true;
+            const version = ++viewVersion;
+            setStatus('loading', 'Loading the interactive index. You can browse projects directly below.');
+            try {
+                const data = await window.loadProjectsData({ force });
+                if (version !== viewVersion || data !== window.projectsData) return;
+                renderProjects(data);
+                // Rebuild subfilters and pressed states from the same validated data.
+                window.setActiveCategory(window.state.activeCategory);
+                setStatus(data.projects.length ? 'ready' : 'empty', data.projects.length ? '' : 'The project catalogue is currently empty. Browse the direct links below.');
+            } catch (error) {
+                if (version !== viewVersion) return;
+                console.error('Project data could not be loaded:', error);
+                grid.replaceChildren();
+                setStatus('error', 'The interactive index could not be loaded. Try again or use the project links below.');
+            } finally {
+                if (version === viewVersion) loading = false;
+            }
+        }
+
+        retry.addEventListener('click', () => loadCatalogue(true));
+        loadCatalogue();
+    });
+})();
+
+function renderProjects(data) {
     const projectsGrid = document.getElementById('projects-grid');
     if (!projectsGrid) return;
 
-    const projects = window.projectsData?.projects || [];
+    const projects = data.projects;
     
     projectsGrid.innerHTML = '';
     
@@ -42,8 +89,9 @@ function renderProjects() {
         iconEl.type = 'button';
         iconEl.className = 'project-icon';
         iconEl.setAttribute('data-id', project.id);
-        iconEl.setAttribute('aria-label', `Read the ${project.title} project brief`);
-        iconEl.title = project.title;
+        const productSummary = window.NexoNestProductStatus?.summary(project);
+        iconEl.setAttribute('aria-label', `Read the ${project.title} project brief${productSummary ? `. ${productSummary}` : ''}`);
+        iconEl.title = productSummary ? `${project.title} — ${productSummary}` : project.title;
 
         const symbolEl = document.createElement('span');
         symbolEl.className = 'project-symbol';
@@ -87,12 +135,11 @@ function renderProjects() {
         'Your impossible brief goes here.'
     ];
 
-    futureMessages.forEach(message => {
+    // Decorative future slots never stand in for an empty or unavailable catalogue.
+    (projects.length ? futureMessages : []).forEach(message => {
         const placeholder = document.createElement('span');
         placeholder.className = 'project-placeholder';
-        placeholder.setAttribute('role', 'note');
-        placeholder.setAttribute('aria-label', message);
-        placeholder.setAttribute('tabindex', '0');
+        placeholder.setAttribute('aria-hidden', 'true');
         placeholder.dataset.message = message;
         placeholder.textContent = '+';
         projectsGrid.appendChild(placeholder);

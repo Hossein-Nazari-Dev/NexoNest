@@ -4,6 +4,8 @@ const WORKSHOP_OWNER = 'nexonest.contact@gmail.com';
 const WORKSHOP_FOLDER = '1hb740CcyVYDRTJyD857Ee2pS44bOf1bo';
 const WORKSHOP_TAB = 'Workshop_Registrations';
 const WORKSHOP_HEADERS = ['کد پیگیری','زمان ثبت','نام و نام خانوادگی','ایمیل','شماره تماس','مقطع تحصیلی','تجربه راینو','تجربه گرس‌هاپر','نوع ثبت‌نام','مبلغ ـ تومان','دانشگاه','کد خبرنامه','گواهینامه','رضایت انتشار در سایت','نسخه قوانین','پذیرش قوانین','فیش واریزی','وضعیت','بررسی‌کننده','زمان بررسی','یادداشت مدیر','ایمیل دریافت','ایمیل تأیید','شناسه درخواست'];
+const WORKSHOP_FINGERPRINT_COLUMN = 25;
+const WORKSHOP_FINGERPRINT_HEADER = 'اثر انگشت درخواست';
 
 function workshopOwner_() {
   if (Session.getActiveUser().getEmail().toLowerCase() !== WORKSHOP_OWNER) throw new Error('این عملیات فقط برای مدیر مجاز است.');
@@ -66,40 +68,68 @@ function workshopReceipt_(receipt) {
   return {bytes,type:receipt.type,ext:format.ext};
 }
 function workshopSafe_(value) { return typeof value === 'string' && /^[=+@\-\t\r]/.test(value) ? "'"+value : value; }
+function workshopDigest_(value) {
+  return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,value).map(byte => ('0'+((byte+256)%256).toString(16)).slice(-2)).join('');
+}
+function workshopFingerprint_(data, valid, course, receipt) {
+  // Versioned canonical identity uses only validated values, including the server-calculated price.
+  return workshopDigest_(JSON.stringify(['v1',course.id,valid.name,valid.email,valid.phone,valid.education,valid.rhino,valid.gh,valid.type,valid.fee,valid.university,valid.code,valid.certificate,data.websiteConsent,data.rulesVersion,true,true,receipt ? [receipt.type,workshopDigest_(receipt.bytes)] : null]));
+}
+function workshopPrepareFingerprintColumn_(sheet) {
+  const columns = sheet.getMaxColumns();
+  if (columns < WORKSHOP_FINGERPRINT_COLUMN) sheet.insertColumnsAfter(columns,WORKSHOP_FINGERPRINT_COLUMN-columns);
+  const header = sheet.getRange(1,WORKSHOP_FINGERPRINT_COLUMN).getValue();
+  if (header && header !== WORKSHOP_FINGERPRINT_HEADER) throw new Error('ستون اثر انگشت درخواست نیاز به بررسی مدیر دارد.');
+  if (!header) {
+    sheet.getRange(1,WORKSHOP_FINGERPRINT_COLUMN).setValue(WORKSHOP_FINGERPRINT_HEADER);
+    sheet.hideColumns(WORKSHOP_FINGERPRINT_COLUMN);
+    SpreadsheetApp.flush();
+  }
+}
 function workshopPost_(event) {
   const lock = LockService.getScriptLock();
-  if (!lock.tryLock(15000)) return json_({ok:false,error:'سامانه مشغول است؛ دوباره تلاش کنید.'});
+  if (!lock.tryLock(15000)) return json_({ok:false,code:'request_rejected',error:'سامانه مشغول است؛ دوباره تلاش کنید.'});
+  let storageStarted = false;
   try {
     if (Session.getEffectiveUser().getEmail().toLowerCase() !== WORKSHOP_OWNER) throw new Error('حساب اجرایی ثبت‌نام نیاز به تنظیم دارد.');
     const raw = event && event.parameter && event.parameter.payload;
     if (!raw || raw.length > 7100000) throw new Error('حجم درخواست معتبر نیست.');
     const data = JSON.parse(raw), course = workshopResolveCourse_(data.courseId), valid = workshopValidate_(data, course), sheet = workshopSheet_(course);
     const rows = sheet.getLastRow()>1 ? sheet.getRange(2,1,sheet.getLastRow()-1,24).getValues() : [];
-    const previous = rows.find(row => String(row[23]) === data.requestId);
-    if (previous) return json_({ok:true,trackingCode:previous[0],emailStatus:previous[21]});
+    const previousIndex = rows.findIndex(row => String(row[23]) === data.requestId);
+    const receipt = valid.fee > 0 ? workshopReceipt_(data.receipt) : null;
+    const fingerprint = workshopFingerprint_(data,valid,course,receipt);
+    if (previousIndex !== -1) {
+      const stored = sheet.getMaxColumns() >= WORKSHOP_FINGERPRINT_COLUMN ? String(sheet.getRange(previousIndex+2,WORKSHOP_FINGERPRINT_COLUMN).getValue() || '') : '';
+      if (!stored) return json_({ok:false,code:'request_identity_unverified',error:'این درخواست قبلاً ثبت شده، اما هویت کامل نسخهٔ قدیمی قابل تأیید نیست. تغییرات فرم پذیرفته نشده است؛ برای بازیابی کد پیگیری با پشتیبانی تماس بگیرید.'});
+      if (stored !== fingerprint) return json_({ok:false,code:'request_conflict',error:'این شناسه قبلاً با اطلاعات دیگری ثبت شده است. تغییرات فعلی ذخیره نشده است؛ برای اصلاح درخواست قبلی با پشتیبانی تماس بگیرید.'});
+      return json_({ok:true,trackingCode:rows[previousIndex][0],emailStatus:rows[previousIndex][21]});
+    }
     if (course.state !== 'open' || (course.id === 'workshop-2026-10' && PropertiesService.getScriptProperties().getProperty('WORKSHOP_ENABLED') !== 'true')) throw new Error('ثبت‌نام هنوز فعال نیست. فعلاً وجهی واریز نکنید.');
     if (rows.some(row=>String(row[3]).toLowerCase()===valid.email)) throw new Error('برای این ایمیل قبلاً درخواست ثبت شده است. برای پیگیری با پشتیبانی تماس بگیرید.');
     // Hard quotas bound public-upload abuse; this is not a replacement for CAPTCHA at larger scale.
     if (rows.length >= course.capacity || rows.filter(row=>String(row[1]).slice(0,10)===new Date().toISOString().slice(0,10)).length>=course.dailyLimit) throw new Error('ظرفیت دریافت درخواست فعلاً تکمیل است؛ با پشتیبانی تماس بگیرید.');
-    const receipt = valid.fee > 0 ? workshopReceipt_(data.receipt) : null;
+    workshopPrepareFingerprintColumn_(sheet);
     const tracking = 'NN-'+Utilities.getUuid().replace(/-/g,'').slice(0,16).toUpperCase();
     let receiptUrl = '';
     if (receipt) {
       const folder = DriveApp.getFolderById(WORKSHOP_FOLDER);
       if (folder.getSharingAccess() !== DriveApp.Access.PRIVATE) throw new Error('ذخیره‌سازی امن فیش در حال بررسی است.');
+      storageStarted = true;
       const file = folder.createFile(Utilities.newBlob(receipt.bytes,receipt.type,tracking+'.'+receipt.ext));
       file.setSharing(DriveApp.Access.PRIVATE,DriveApp.Permission.NONE);
       receiptUrl = file.getUrl();
     }
     // Preserve receipt on uncertain sheet-write outcome; the owner can reconcile an orphan.
-    sheet.appendRow([tracking,new Date().toISOString(),valid.name,valid.email,valid.phone,valid.education,valid.rhino,valid.gh,valid.type,valid.fee,valid.university,valid.code,valid.certificate,data.websiteConsent?'بله':'خیر',data.rulesVersion,'بله',receiptUrl,'در انتظار بررسی','','','','pending','pending',data.requestId].map(workshopSafe_));
+    storageStarted = true;
+    sheet.appendRow([tracking,new Date().toISOString(),valid.name,valid.email,valid.phone,valid.education,valid.rhino,valid.gh,valid.type,valid.fee,valid.university,valid.code,valid.certificate,data.websiteConsent?'بله':'خیر',data.rulesVersion,'بله',receiptUrl,'در انتظار بررسی','','','','pending','pending',data.requestId,fingerprint].map(workshopSafe_));
     const row=sheet.getLastRow(); SpreadsheetApp.flush();
     workshopMail_(sheet,row,22,valid.email,'دریافت درخواست ثبت‌نام کارگاه',valid.name+' عزیز،\nدرخواست شما برای '+course.name+' دریافت شد.\nکد پیگیری: '+tracking+'\nثبت‌نام در انتظار بررسی فیش و اطلاعات است و هنوز قطعی نیست. نتیجه از طریق ایمیل اعلام می‌شود.\nآکادمی نکسونست');
     return json_({ok:true,trackingCode:tracking,emailStatus:sheet.getRange(row,22).getValue()});
   } catch(error) {
     console.error('Workshop request failed: '+error.message);
     const publicMessage = /^[\u0600-\u06ff]/.test(error.message) ? error.message : 'ثبت درخواست کامل نشد. با همین فرم دوباره تلاش کنید؛ در صورت تکرار با پشتیبانی تماس بگیرید.';
-    return json_({ok:false,error:publicMessage});
+    return json_({ok:false,code:storageStarted?'request_unknown':'request_rejected',error:publicMessage});
   } finally { lock.releaseLock(); }
 }
 function workshopMail_(sheet,row,column,email,subject,body) {

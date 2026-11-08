@@ -1,5 +1,16 @@
 # Licensing deployment
 
+## Local protected license gateway - 2026-10-31
+
+ADR-090 extends the existing .NET 8 facade for both climora and nexosolve. Admission has bounded per-IP/global/product/mail counters, IPv6 /64 grouping, exact trusted-proxy handling, eight processing slots with no queue, body/upstream deadlines and a circuit breaker. A server-only HMAC covers the exact payload, timestamp and random nonce. LicensingGateway.gs checks that proof and a durable bounded replay ledger before product/Sheet operations, under the existing script lock. Signed RSA leases and all account/voucher/trial contracts remain unchanged.
+
+GatewaySigningKey (gateway) and LICENSE_GATEWAY_HMAC_KEY (Script Properties) must contain the same 32 random bytes encoded as base64. Never embed this key in a desktop client. Origin enforcement is opt-in per product: LICENSE_CLIMORA_REQUIRE_GATEWAY or LICENSE_REQUIRE_GATEWAY set to true; absent/false retains current direct clients. Invalid policy values fail closed. These settings were exercised only in memory with mocks; no live key, property, deployment, endpoint, DNS, account, mail or voucher changed. Desktop builds still use their current endpoint; no new product EXE was built for this gateway work.
+
+Enforcement must follow a usable hosted gateway and compatible clients. Enabling it rejects legacy direct clients for that product; keeping direct access open is not origin protection. Google Apps Script remains a public invocation surface: rejected unsigned calls can still consume Google execution quota. Application throttling is not network DDoS protection; a protected edge and, for robust origin isolation, a private/authenticated origin are required. Limits are per process and reset on restart; multiple instances need shared or edge admission.
+
+Local checks: real loopback gateway/mock upstream, exact Apps Script guard, end-to-end RSA lease preservation, schema/size bounds, forged IPs, email aliases, bounded maps, bursts, slow bodies, timeout recovery, upstream failures and replay/tampering. Shared service/admin, independent Climora and website public-email/workshop regressions use fake services. No live or network-load acceptance is claimed. See the NexoSolve License Gateway runbook for configuration and cutover.
+
+
 ## Management console integration - 2026-10-19
 
 Deployed as version 17 on 2026-10-19 with explicit user approval. The source set contains LicensingProducts.gs, WorkshopCatalog.gs, AdminConsole.gs and AdminConsoleView.html, and update Licensing.gs, LicensingAdmin.gs, LicensingProfile.gs, LicensingSheet.gs and Workshop.gs together. Preserve Code.gs and all other service modules, properties and existing data. The unified NexoNest Admin menu opens the owner-only console. Shared-device deletion is scoped to selected accounts, with other users' limits retained. Separate product/cohort registries preserve the existing NexoSolve and workshop defaults. Course review in the console does not email or grant benefits. See [ADMIN.md](ADMIN.md) for configuration, exact contracts, tests and rollback. The older menu instructions below are historical; use the console for new administration.
