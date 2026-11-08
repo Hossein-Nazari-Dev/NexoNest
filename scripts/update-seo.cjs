@@ -32,7 +32,7 @@ function meta(html, name, content, property = false) {
 function escape(value) {
   return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'}[ch]));
 }
-const files = ['index.html', 'nexonest.html', 'portfolio.html', 'newsletter.html', 'curvadapt-wiki.html',
+const files = ['index.html', 'nexonest.html', 'portfolio.html', 'newsletter.html', 'curvadapt-wiki.html', 'nexosolve-wiki.html',
   'licenses/nexorhino.html', 'archicast/season-01.html', 'nexorhino/geometry.html',
   ...fs.readdirSync(path.join(root, 'projects-pages')).filter(f => f.endsWith('.html')).sort().map(f => `projects-pages/${f}`)];
 const urls = [];

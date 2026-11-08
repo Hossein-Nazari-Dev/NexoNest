@@ -15,6 +15,64 @@ status: maintained
 
 # NexoNest - Architecture and Developer Handoff
 
+## NexoSolve overview and component Wiki — 2026-11-08
+
+The existing projects-pages/nexoSolve.html route remains the product overview:
+benefits, existing app screenshots, supported setup, access, questions and purchase
+routes. Its original 18 section anchors are now explicit and retained. A new
+components section has brief cards linked in the same tab to eight active tools
+in nexosolve-wiki.html. The final Get NexoSolve section has an Open NexoSolve Wiki
+button. Existing food4Rhino/Club installation and manual voucher routes remain;
+this change does not verify public publication, issue licenses or modify pricing.
+Screenshot captions explicitly identify earlier-build controls and direct readers
+to the current-source Wiki, rather than implying new interface capture.
+Pause wording now describes the single supported Pause action rather than a
+separate Stop button. Recovery details belong to the Wiki; overview copy summarizes
+user benefits. Editorial source remains js/project-page.js.
+
+The static Wiki owns workflow, finite enumeration, per-component explanations,
+ports and formula/logic, pause/resume/domain reuse, local records and analysis.
+Source was reviewed read-only in neighboring NexoSolve README, the active GH
+adapters, ComponentIcons, BruteForcePlan and LocalAnalysis/Web/enhancements.js.
+The active groups are Study (Variable, Custom Variable, Output, Shape, Screenshot),
+Connect (Connector and Run Results Analysis) and Help (Club). Legacy Installer and
+Samples and hidden Decision Variable/Response prototypes are explicitly separated,
+not promoted into the active finite-study route. Optimizer drafts remain outside
+this workflow. Stable tool anchors are defined in the Wiki; no documentation-fetch
+or page initialization fallback duplicates the reference in the product overview.
+
+Seven component icons are copied unchanged from the plugin's embedded PNG
+resources; the Screenshot SVG follows the actual runtime camera drawing in
+ComponentIcons.cs. This is source artwork, not a new icon system. The existing
+product logo and connection diagram are reused. The nine-second finite-study
+WebM uses the toy function Area = Width × Height over a 3×3 domain, with a static
+poster and native controls, no autoplay and preload=none. Its caption identifies
+it as a schematic rather than a Rhino recording, building simulation or timing
+benchmark. It illustrates serial evaluation and local saves, not scientific
+performance. The Wiki is readable and navigable without JavaScript. No external
+backend or native plugin executes when visiting it.
+
+Both Wikis now load css/component-wiki.css as their single generic style owner.
+The former css/curvadapt-wiki.css URL remains as a one-line compatibility import;
+it is not a second style source. Native tool links, direct fragments and browser
+history remain authoritative. The NexoSolve overview opts out of cross-document
+transitions for reliable reference round trips, like CurvAdapt. Real section
+heights keep the newly added card section from destabilizing existing anchors.
+
+update-seo.cjs explicitly includes the new Wiki in metadata validation and the
+sitemap: 27 indexable pages. No extra top-level catalogue record or public product
+ID is created. Neither app source, executable, backend, key nor service setting
+changed. Existing unrelated working-tree changes remain intact. The implementation
+and browser evidence below concern local source, not deployment or host acceptance.
+Current verification: scripts/test-nexosolve-browser.cjs passed eight component
+links, decoded source icons, native Wiki anchors, preserved 18 section IDs, bottom
+CTA, keyboard and Back navigation, finite-study/legacy scope and real WebM playback
+with and without JavaScript at 1440/390/320px. No horizontal overflow or uncaught
+page errors were observed. CurvAdapt regression and all 18 editorial SEO browser
+checks passed after sharing the Wiki stylesheet. Captures of the component cards,
+mobile reference and schematic were inspected. Source syntax, whitespace, SEO
+freshness for 27 indexable pages and guide inventory/fingerprint checks passed.
+
 ## CurvAdapt overview and Wiki ownership — 2026-11-08
 
 The product overview now retains brief component cards only. Every icon/name is
@@ -867,7 +925,8 @@ scratch directories are excluded from the maintained application snapshot.
 | [Project index](nexonest.html) | Six index modules and brief JSON | Filters and project popup, then real page navigation |
 | [Portfolio](portfolio.html) | HTML plus `portfolio.js`, deferred `journey.js` | Independent personal content; not populated from brief JSON |
 | [Newsletter](newsletter.html) | HTML form plus `newsletter.js` | Makes real backend submissions if used normally |
-| [CurvAdapt wiki](curvadapt-wiki.html) | Static HTML and dedicated CSS | Complete reference for the 20 listed tools, with stable per-tool anchors; manual source review keeps it aligned |
+| [CurvAdapt wiki](curvadapt-wiki.html) | Static HTML and shared component-wiki.css | Complete reference for the 20 listed tools, with stable per-tool anchors; manual source review keeps it aligned |
+| [NexoSolve wiki](nexosolve-wiki.html) | Static HTML and shared component-wiki.css | Workflow and eight active tool references, separate legacy scope, native schematic video |
 | [NexoRhino terms](licenses/nexorhino.html) | Static legal content and project navigation | Proprietary terms/attribution; not the licensing API |
 | [Old template](project-template.html) | Static sample content and project navigation | Demonstrates old content blocks; not the active shell generator |
 | `projects-pages/*.html` | `body[data-project]` selects `PROJECT_PAGE_DATA` | Full mapping and sections in generated reference |
@@ -1195,7 +1254,7 @@ A local SVG connection diagram, using the existing figure renderer, shows both
 process boundaries and the two-way input/result flow. Its full-height responsive
 presentation preserves readable labels; the adjacent caption explains the flow.
 
-The hero and closing CTA download the Windows app ZIP directly from
+At the historical 2026-10-19 checkpoint, the hero and closing CTA downloaded the Windows app ZIP directly from
 `https://raw.githubusercontent.com/Hossein-Nazari-Dev/NexoNest---Products/main/nexosolve/NexoSolve-Windows-x64.zip`.
 This URL was read from the public product latest.json (0.0.4 Beta) and returned
 HTTP 200 with Content-Type application/zip on 2026-10-19. It opens no GitHub page.
@@ -1731,7 +1790,8 @@ accumulated overrides, so the first occurrence is not necessarily effective.
 | `portfolio.css` | Original portfolio styling |
 | `portfolio-v2.css` | Later portfolio overrides; order matters |
 | `newsletter.css` | Form, conditional fields and confirmation panel |
-| `curvadapt-wiki.css` | Static component reference, anchor navigation and formulas |
+| `component-wiki.css` | Shared static reference, anchor navigation, formulas and native media |
+| `curvadapt-wiki.css` | Compatibility import for the former stylesheet URL |
 | `nexorhino.css` | NexoRhino product and terms-specific styling |
 | `design-suite.css` | Present but not referenced by current HTML |
 | `ux.css` | Shared reveal/loading/motion effects |
@@ -2025,7 +2085,7 @@ CORS/redirects, provider quotas, native ClimaNest behavior, public releases or i
 delivery. Representative mobile catalogue-failure and ClimaNest, plus desktop
 newsletter captures were visually inspected. No live form was submitted.
 
-`update-seo.cjs --write/--check` covers 26 indexable pages and the shared product
+`update-seo.cjs --write/--check` now covers 27 indexable pages and the shared product
 map. Source syntax and whitespace checks are part of this change. Guide inventory
 and fingerprint are regenerated after prose/source completion; freshness does not
 prove prose accuracy or publication. Remaining work, in priority order: separately
@@ -2112,9 +2172,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 256 application/configuration/integration/tool/asset files:
+SHA-256 of 269 application/configuration/integration/tool/asset files:
 
-`75c234f165957dba5fdd0f5015c96d0ac536d30659b8fbba08f627e63d8e54fb`
+`1f5f31203ad36af06819e04e7f845b7413b7eca8f0b666e6b07cdd173c0712a8`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2220,6 +2280,7 @@ Source key: `nexosolve`; shell: [projects-pages/nexoSolve.html](projects-pages/n
 | What you gain | `cards` |
 | How NexoSolve connects to Grasshopper | `figure` |
 | Your study workspace | `figure-text` |
+| Grasshopper components | `tool-groups` |
 | From definition to saved results | `steps` |
 | Choose the values you actually need | `figure-text` |
 | Review before you run | `figure-text` |
@@ -2668,8 +2729,17 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/nexobreak/duck-hunt.png](assets/images/projects/nexobreak/duck-hunt.png) | 613844 |
 | [assets/images/projects/nexobreak/settings-backups.png](assets/images/projects/nexobreak/settings-backups.png) | 698579 |
 | [assets/images/projects/nexobreak/viewport-launcher.png](assets/images/projects/nexobreak/viewport-launcher.png) | 708127 |
+| [assets/images/projects/nexosolve/components/community.png](assets/images/projects/nexosolve/components/community.png) | 437 |
+| [assets/images/projects/nexosolve/components/connector.png](assets/images/projects/nexosolve/components/connector.png) | 443 |
+| [assets/images/projects/nexosolve/components/custom-variable.png](assets/images/projects/nexosolve/components/custom-variable.png) | 207 |
+| [assets/images/projects/nexosolve/components/data-analysis.png](assets/images/projects/nexosolve/components/data-analysis.png) | 359 |
+| [assets/images/projects/nexosolve/components/output.png](assets/images/projects/nexosolve/components/output.png) | 408 |
+| [assets/images/projects/nexosolve/components/screenshot.svg](assets/images/projects/nexosolve/components/screenshot.svg) | 227 |
+| [assets/images/projects/nexosolve/components/shape.png](assets/images/projects/nexosolve/components/shape.png) | 623 |
+| [assets/images/projects/nexosolve/components/slider.png](assets/images/projects/nexosolve/components/slider.png) | 269 |
 | [assets/images/projects/nexosolve/custom-variable-light.png](assets/images/projects/nexosolve/custom-variable-light.png) | 16117 |
 | [assets/images/projects/nexosolve/desktop-grasshopper-connection.svg](assets/images/projects/nexosolve/desktop-grasshopper-connection.svg) | 2414 |
+| [assets/images/projects/nexosolve/finite-study-poster.png](assets/images/projects/nexosolve/finite-study-poster.png) | 52398 |
 | [assets/images/projects/nexosolve/nexosolve-icon.png](assets/images/projects/nexosolve/nexosolve-icon.png) | 25803 |
 | [assets/images/projects/nexosolve/study-paused-dark.png](assets/images/projects/nexosolve/study-paused-dark.png) | 65838 |
 | [assets/images/projects/nexosolve/study-resume-light.png](assets/images/projects/nexosolve/study-resume-light.png) | 65541 |
@@ -2704,11 +2774,13 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/bootcamp/GP11.mp4](assets/videos/bootcamp/GP11.mp4) | 8377993 |
 | [assets/videos/bootcamp/GP12.mp4](assets/videos/bootcamp/GP12.mp4) | 6551259 |
 | [assets/videos/curvadapt/curve-demo.webm](assets/videos/curvadapt/curve-demo.webm) | 271181 |
+| [assets/videos/nexosolve/finite-study.webm](assets/videos/nexosolve/finite-study.webm) | 602403 |
 | [assets/videos/printerra/fifthtry1.mp4](assets/videos/printerra/fifthtry1.mp4) | 2984991 |
 | [assets/videos/printerra/seventhtry1.mp4](assets/videos/printerra/seventhtry1.mp4) | 15987813 |
 | [css/base.css](css/base.css) | 650 |
+| [css/component-wiki.css](css/component-wiki.css) | 5474 |
 | [css/components.css](css/components.css) | 12251 |
-| [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 4905 |
+| [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 108 |
 | [css/design-suite.css](css/design-suite.css) | 8673 |
 | [css/home.css](css/home.css) | 5344 |
 | [css/layout.css](css/layout.css) | 4531 |
@@ -2720,11 +2792,11 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/portfolio-v2.css](css/portfolio-v2.css) | 38038 |
 | [css/portfolio.css](css/portfolio.css) | 50287 |
 | [css/product-status.css](css/product-status.css) | 923 |
-| [css/project.css](css/project.css) | 52722 |
+| [css/project.css](css/project.css) | 52836 |
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
-| [curvadapt-wiki.html](curvadapt-wiki.html) | 33332 |
+| [curvadapt-wiki.html](curvadapt-wiki.html) | 33327 |
 | [data/projects-brief.json](data/projects-brief.json) | 13710 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
@@ -2762,7 +2834,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/portfolio.js](js/portfolio.js) | 25404 |
 | [js/product-status.js](js/product-status.js) | 6899 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 152521 |
+| [js/project-page.js](js/project-page.js) | 155696 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 7370 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2772,6 +2844,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [newsletter.html](newsletter.html) | 13235 |
 | [nexonest.html](nexonest.html) | 9636 |
 | [nexorhino/geometry.html](nexorhino/geometry.html) | 3384755 |
+| [nexosolve-wiki.html](nexosolve-wiki.html) | 22572 |
 | [portfolio.html](portfolio.html) | 39246 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24720 |
@@ -2783,7 +2856,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 9132 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19406 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 19026 |
-| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 26706 |
+| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 30213 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11470 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 9176 |
 | [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9581 |
@@ -2796,6 +2869,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-catalog-recovery.cjs](scripts/test-catalog-recovery.cjs) | 9636 |
 | [scripts/test-curvadapt-browser.cjs](scripts/test-curvadapt-browser.cjs) | 5639 |
 | [scripts/test-newsletter-browser.cjs](scripts/test-newsletter-browser.cjs) | 6705 |
+| [scripts/test-nexosolve-browser.cjs](scripts/test-nexosolve-browser.cjs) | 6593 |
 | [scripts/test-podcast-browser.cjs](scripts/test-podcast-browser.cjs) | 4846 |
 | [scripts/test-popup-browser.cjs](scripts/test-popup-browser.cjs) | 2865 |
 | [scripts/test-portfolio-browser.cjs](scripts/test-portfolio-browser.cjs) | 4412 |
@@ -2808,8 +2882,8 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-workshop-browser.cjs](scripts/test-workshop-browser.cjs) | 6283 |
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 10118 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8140 |
-| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 8787 |
-| [sitemap.xml](sitemap.xml) | 2015 |
+| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 8810 |
+| [sitemap.xml](sitemap.xml) | 2080 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

@@ -480,7 +480,8 @@ const PROJECT_PAGE_DATA = {
     "Questions": "About",
     "Early-access status": "About",
     "Get NexoSolve": "About",
-    "How NexoSolve connects to Grasshopper": "Features"
+    "How NexoSolve connects to Grasshopper": "Features",
+    "Grasshopper components": "Features"
   },
   "question": "How can you explore a finite design space without losing progress, results, or the calculation context?",
   "response": "Work in the NexoSolve Windows app. Its Grasshopper plugin connects the app to your definition: inputs go in, calculated results come back, and the app saves each case locally.",
@@ -513,7 +514,7 @@ const PROJECT_PAGE_DATA = {
         ],
         [
           "Recover your progress",
-          "Pause or stop at a saved case boundary, then resume with recorded progress and execution settings."
+          "Pause at a saved case boundary, then resume with recorded progress and execution settings."
         ],
         [
           "Keep an audit trail",
@@ -523,22 +524,95 @@ const PROJECT_PAGE_DATA = {
           "Avoid compatible reruns",
           "Reuse matching successful cases when you expand a domain and the underlying calculation is still compatible."
         ]
-      ]
+      ],
+      "id": "section-1"
     },
     {
       "title": "How NexoSolve connects to Grasshopper",
       "kind": "figure",
       "image": "../assets/images/projects/nexosolve/desktop-grasshopper-connection.svg",
       "alt": "Standalone NexoSolve Windows app sends case inputs to the connector inside Rhino and Grasshopper. The Grasshopper definition calculates geometry, simulation and numeric outputs. Results return through the connector to the app for local storage.",
-      "caption": "Work in the separate Windows app. The Grasshopper plugin is the connection layer; your definition owns the analysis. Both run on your computer, and Rhino with Grasshopper must remain open during a study."
+      "caption": "Work in the separate Windows app. The Grasshopper plugin is the connection layer; your definition owns the analysis. Both run on your computer, and Rhino with Grasshopper must remain open during a study.",
+      "id": "section-2"
     },
     {
       "title": "Your study workspace",
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-running-dark.png",
       "alt": "NexoSolve study progress, saved cases and pause controls in dark mode",
-      "caption": "Actual NexoSolve interface with demonstration study data.",
-      "text": "See completed, failed and remaining cases, active time and estimated time remaining in one workspace. NexoSolve runs cases serially; geometry, simulation and evaluation stay in your Grasshopper definition."
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "text": "See completed, failed and remaining cases, active time and estimated time remaining in one workspace. NexoSolve runs cases serially; geometry, simulation and evaluation stay in your Grasshopper definition.",
+      "id": "section-3"
+    },
+    {
+      "id": "components",
+      "title": "Grasshopper components",
+      "kind": "tool-groups",
+      "groups": [
+        {
+          "title": "Study / Inputs and records",
+          "tools": [
+            {
+              "name": "Nexo Variable",
+              "description": "Register a native slider and its metadata.",
+              "icon": "../assets/images/projects/nexosolve/components/slider.png",
+              "href": "../nexosolve-wiki.html#nexo-variable"
+            },
+            {
+              "name": "Nexo Custom Variable",
+              "description": "Define an ordered list of actual study values.",
+              "icon": "../assets/images/projects/nexosolve/components/custom-variable.png",
+              "href": "../nexosolve-wiki.html#custom-variable"
+            },
+            {
+              "name": "Nexo Output",
+              "description": "Register one scalar numeric result.",
+              "icon": "../assets/images/projects/nexosolve/components/output.png",
+              "href": "../nexosolve-wiki.html#nexo-output"
+            },
+            {
+              "name": "Nexo Shape",
+              "description": "Record optional meshes with each case.",
+              "icon": "../assets/images/projects/nexosolve/components/shape.png",
+              "href": "../nexosolve-wiki.html#nexo-shape"
+            },
+            {
+              "name": "Nexo Screenshot",
+              "description": "Save a Rhino camera for per-case images.",
+              "icon": "../assets/images/projects/nexosolve/components/screenshot.svg",
+              "href": "../nexosolve-wiki.html#nexo-screenshot"
+            }
+          ]
+        },
+        {
+          "title": "Connect / Run and review",
+          "tools": [
+            {
+              "name": "NexoSolve Connector",
+              "description": "Connect the desktop to this Grasshopper model.",
+              "icon": "../assets/images/projects/nexosolve/components/connector.png",
+              "href": "../nexosolve-wiki.html#connector"
+            },
+            {
+              "name": "Run Results Analysis",
+              "description": "Open a read-only analysis of saved results.",
+              "icon": "../assets/images/projects/nexosolve/components/data-analysis.png",
+              "href": "../nexosolve-wiki.html#results-analysis"
+            }
+          ]
+        },
+        {
+          "title": "Help / Setup and samples",
+          "tools": [
+            {
+              "name": "NexoSolve Club",
+              "description": "Install/update the desktop, browse samples and open help.",
+              "icon": "../assets/images/projects/nexosolve/components/community.png",
+              "href": "../nexosolve-wiki.html#nexosolve-club"
+            }
+          ]
+        }
+      ]
     },
     {
       "title": "From definition to saved results",
@@ -546,75 +620,69 @@ const PROJECT_PAGE_DATA = {
       "items": [
         [
           "01",
-          "Model",
-          "Register connected number sliders or explicit numeric lists, numeric outputs, optional meshes and viewport captures."
+          "Connect",
+          "Register the model inputs and outputs with the Grasshopper connector."
         ],
         [
           "02",
-          "Project",
-          "Choose a local project destination. NexoSolve keeps the study with its recorded model context."
+          "Review",
+          "Choose a local project, review the finite case count and confirm settings in the Windows app."
         ],
         [
           "03",
-          "Execution",
-          "Set case timing, active run budget and completion behavior."
-        ],
-        [
-          "04",
-          "Review and run",
-          "Confirm the variables, case count and destination before starting exhaustive enumeration."
-        ],
-        [
-          "05",
-          "Completion",
-          "Inspect locally saved results, export numeric data and reopen the study when needed."
+          "Run and inspect",
+          "Run serially, keep saved results and inspect the completed study. See the Wiki for the detailed workflow."
         ]
-      ]
+      ],
+      "id": "section-4"
     },
     {
       "title": "Choose the values you actually need",
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/custom-variable-light.png",
       "alt": "Custom variable editor with name, units and allowed numeric values",
-      "caption": "Actual NexoSolve interface with demonstration study data.",
-      "text": "Name your variables, add units and descriptions, and preserve the order of custom values. Use connected sliders or explicit numeric lists to define the finite domain."
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "text": "Name your variables, add units and descriptions, and preserve the order of custom values. Use connected sliders or explicit numeric lists to define the finite domain.",
+      "id": "section-5"
     },
     {
       "title": "Review before you run",
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-review-light.png",
       "alt": "Study summary and confirmation before Run",
-      "caption": "Actual NexoSolve interface with demonstration study data.",
-      "text": "Check the full case count, project destination, timing and completion settings before starting. Exhaustive enumeration grows with the product of the variable value counts; choose a manageable domain."
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "text": "Check the full case count, project destination, timing and completion settings before starting. Exhaustive enumeration grows with the product of the variable value counts; choose a manageable domain.",
+      "id": "section-6"
     },
     {
       "title": "Pause safely. Continue later.",
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-paused-dark.png",
       "alt": "Paused study with saved progress and resume controls",
-      "caption": "Actual NexoSolve interface with demonstration study data.",
-      "text": "Pause or stop after the current case is saved. Resume a saved study with its recorded progress and execution settings. Synchronous Grasshopper components may need to return before a pause or timeout can take effect."
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "text": "Pause after the active case finishes and saves, then reopen the same compatible study later. The Wiki explains recovery and host limits.",
+      "id": "section-7"
     },
     {
       "title": "Reuse compatible results",
       "kind": "split",
       "text": [
-        "Expand or change a study domain without recalculating matching successful cases when the underlying calculation remains compatible.",
-        "Saved model copies and calculation signatures help keep the study context available for comparison and recovery.",
-        "Changes to the calculation can block reuse. External data and solver changes require an explicit revision so earlier results are not silently treated as equivalent."
+        "Reuse successful cases for a compatible changed domain. Calculation changes block reuse; the Wiki explains the matching and recovery rules."
       ],
       "aside": {
         "label": "Calculation ownership",
         "text": "NexoSolve manages the sequence and persistence. Validate the analysis and registered outputs on your own Grasshopper definition."
-      }
+      },
+      "id": "section-8"
     },
     {
       "title": "Keep results on your computer",
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-resume-light.png",
       "alt": "Saved study summary with recorded progress ready to resume",
-      "caption": "Actual NexoSolve interface with demonstration study data.",
-      "text": "Each committed case is saved locally. Reopen the study to review progress and continue when needed. Export numeric results as CSV, with per-scenario result and geometry files and optional viewport images. Model backups support recovery and comparison. The licensing service handles account and activation information; it does not receive your models or study results."
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "text": "Each committed case is saved locally. Reopen the study to review progress and continue when needed. Export numeric results as CSV, with per-scenario result and geometry files and optional viewport images. Model backups support recovery and comparison. The licensing service handles account and activation information; it does not receive your models or study results.",
+      "id": "section-9"
     },
     {
       "title": "Light and dark workspaces",
@@ -628,7 +696,8 @@ const PROJECT_PAGE_DATA = {
           "Dark theme",
           "Switch to a darker workspace while keeping the same study controls and workflow."
         ]
-      ]
+      ],
+      "id": "section-10"
     },
     {
       "title": "Requirements",
@@ -654,7 +723,8 @@ const PROJECT_PAGE_DATA = {
           "Connection",
           "Internet required for first activation and email sign-in"
         ]
-      ]
+      ],
+      "id": "section-11"
     },
     {
       "title": "Trial and licensing",
@@ -680,7 +750,8 @@ const PROJECT_PAGE_DATA = {
           "Course voucher",
           "Redeem an eligible participant code inside Account & License"
         ]
-      ]
+      ],
+      "id": "section-12"
     },
     {
       "title": "Pricing",
@@ -712,7 +783,8 @@ const PROJECT_PAGE_DATA = {
           "15,900,000 IRR"
         ]
       ],
-      "note": "Each option is a prepaid voucher for one user and one active device. No recurring billing. To purchase and receive your selected voucher, email nexonest.contact@gmail.com. Voucher issuance is handled manually after payment confirmation."
+      "note": "Each option is a prepaid voucher for one user and one active device. No recurring billing. To purchase and receive your selected voucher, email nexonest.contact@gmail.com. Voucher issuance is handled manually after payment confirmation.",
+      "id": "section-13"
     },
     {
       "title": "Account and offline access",
@@ -724,7 +796,8 @@ const PROJECT_PAGE_DATA = {
       "aside": {
         "label": "Licensing enquiries",
         "text": "Choose a 1, 3, 6 or 12-month voucher from the Pricing section. Email nexonest.contact@gmail.com to purchase and receive it; issuance is manual after payment confirmation. Newsletter subscription is optional."
-      }
+      },
+      "id": "section-14"
     },
     {
       "title": "Install the complete package",
@@ -750,7 +823,8 @@ const PROJECT_PAGE_DATA = {
           "Connect and work in NexoSolve",
           "Keep Rhino and your Grasshopper definition open. On Nexo Connector, click Open NexoSolve to launch the installed Windows app. Configure and run your study there while Grasshopper calculates the results. Start with a small study to check the connection and outputs."
         ]
-      ]
+      ],
+      "id": "section-15"
     },
     {
       "title": "Questions",
@@ -780,13 +854,15 @@ const PROJECT_PAGE_DATA = {
           "Can I move to another computer?",
           "Contact support for a device transfer. Trial history and license expiry remain unchanged."
         ]
-      ]
+      ],
+      "id": "section-16"
     },
     {
       "title": "Early-access status",
       "kind": "honesty",
       "label": "Release checks remain",
-      "text": "Version 0.0.4 Beta is available for Windows x64. Screenshots show the actual application with demonstration study data. Broader native Rhino acceptance remains ongoing; automated checks do not establish the validity of your simulation."
+      "text": "Version 0.0.4 Beta is available for Windows x64. Screenshots show the actual application with demonstration study data. Broader native Rhino acceptance remains ongoing; automated checks do not establish the validity of your simulation.",
+      "id": "section-17"
     },
     {
       "title": "Get NexoSolve",
@@ -801,7 +877,12 @@ const PROJECT_PAGE_DATA = {
           "Email to request a voucher",
           "mailto:nexonest.contact@gmail.com?subject=NexoSolve%20voucher%20request"
         ]
-      ]
+      ],
+      "id": "section-18",
+      "action": {
+        "label": "Open NexoSolve Wiki",
+        "url": "../nexosolve-wiki.html"
+      }
     }
   ]
 },

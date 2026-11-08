@@ -1791,3 +1791,5 @@ body[data-project="curvadapt"] .content-section { content-visibility: visible; c
 .component-card:focus-visible, .project-docs-button:focus-visible { outline: 2px solid var(--c-accent-dark); outline-offset: 3px; }
 .project-docs-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 28px; padding: 18px 24px; border: 1px solid var(--c-accent-dark); border-radius: 6px; background: var(--color-surface); color: var(--color-text); text-decoration: none; font-size: .875rem; }
 .project-docs-button:hover { background: var(--c-accent-weak); }
+
+body[data-project="nexosolve"] .content-section { content-visibility: visible; contain-intrinsic-size: none; }
