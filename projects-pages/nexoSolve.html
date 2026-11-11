@@ -125,20 +125,29 @@
       <figure class="project-figure">
         <img src="../assets/images/projects/nexosolve/desktop-grasshopper-connection.svg" alt="Standalone NexoSolve Windows app sends case inputs to the connector inside Rhino and Grasshopper. The Grasshopper definition calculates geometry, simulation and numeric outputs. Results return through the connector to the app for local storage." loading="lazy" decoding="async">
         <figcaption>Work in the separate Windows app. The Grasshopper plugin is the connection layer; your definition owns the analysis. Both run on your computer, and Rhino with Grasshopper must remain open during a study.</figcaption>
-      </figure></section><section class="content-section project-editorial-section" data-nav-title="Your study workspace" id="section-3" data-nav-group="Features">
+      </figure></section><section class="content-section project-editorial-section" data-nav-title="A finite study in nine cases" id="finite-study-demo" data-nav-group="Features">
     <div class="section-heading-row">
       <span>03</span>
+      <h2 class="section-title">A finite study in nine cases</h2>
+    </div><figure class="project-figure project-demo">
+      <video controls playsinline muted loop preload="none" poster="../assets/images/projects/nexosolve/finite-study-poster.png" aria-label="A finite study in nine cases">
+        <source src="../assets/videos/nexosolve/finite-study.webm" type="video/webm">
+        <a href="../assets/videos/nexosolve/finite-study.webm">Open the animation</a>
+      </video><figcaption>A short schematic using the toy calculation Area = Width × Height over a 3×3 domain. It illustrates nine serial cases and local saves; it is not a Rhino recording, a building simulation or measured runtime.</figcaption>
+    </figure></section><section class="content-section project-editorial-section" data-nav-title="Your study workspace" id="section-3" data-nav-group="Features">
+    <div class="section-heading-row">
+      <span>04</span>
       <h2 class="section-title">Your study workspace</h2>
     </div>
       <div class="figure-text-layout">
         <div class="prose"><p>See completed, failed and remaining cases, active time and estimated time remaining in one workspace. NexoSolve runs cases serially; geometry, simulation and evaluation stay in your Grasshopper definition.</p></div>
         <figure class="project-figure">
           <img src="../assets/images/projects/nexosolve/study-running-dark.png" alt="NexoSolve study progress, saved cases and pause controls in dark mode" loading="lazy" decoding="async">
-          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.</figcaption>
+          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.</figcaption>
         </figure>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Grasshopper components" id="components" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>04</span>
+      <span>05</span>
       <h2 class="section-title">Grasshopper components</h2>
     </div><div class="component-library">
       <div class="component-group"><h3>Study / Inputs and records</h3>
@@ -172,7 +181,7 @@
         <div><h4>NexoSolve Club <span aria-hidden="true">↗</span></h4><p>Install/update the desktop, browse samples and open help.</p></div>
       </a></div></div></div></section><section class="content-section project-editorial-section" data-nav-title="From definition to saved results" id="section-4" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>05</span>
+      <span>06</span>
       <h2 class="section-title">From definition to saved results</h2>
     </div><ol class="project-process">
       <li>
@@ -185,65 +194,65 @@
       </li>
       <li>
         <span>03</span>
-        <div><h3>Run and inspect</h3><p>Run serially, keep saved results and inspect the completed study. See the Wiki for the detailed workflow.</p></div>
+        <div><h3>Run and inspect</h3><p>Run serially, keep saved results and inspect the completed study. See the component Wiki for registration and connector wiring.</p></div>
       </li></ol></section><section class="content-section project-editorial-section" data-nav-title="Choose the values you actually need" id="section-5" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>06</span>
+      <span>07</span>
       <h2 class="section-title">Choose the values you actually need</h2>
     </div>
       <div class="figure-text-layout">
         <div class="prose"><p>Name your variables, add units and descriptions, and preserve the order of custom values. Use connected sliders or explicit numeric lists to define the finite domain.</p></div>
         <figure class="project-figure">
           <img src="../assets/images/projects/nexosolve/custom-variable-light.png" alt="Custom variable editor with name, units and allowed numeric values" loading="lazy" decoding="async">
-          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.</figcaption>
+          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.</figcaption>
         </figure>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Review before you run" id="section-6" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>07</span>
+      <span>08</span>
       <h2 class="section-title">Review before you run</h2>
     </div>
       <div class="figure-text-layout">
         <div class="prose"><p>Check the full case count, project destination, timing and completion settings before starting. Exhaustive enumeration grows with the product of the variable value counts; choose a manageable domain.</p></div>
         <figure class="project-figure">
           <img src="../assets/images/projects/nexosolve/study-review-light.png" alt="Study summary and confirmation before Run" loading="lazy" decoding="async">
-          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.</figcaption>
+          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.</figcaption>
         </figure>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Pause safely. Continue later." id="section-7" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>08</span>
+      <span>09</span>
       <h2 class="section-title">Pause safely. Continue later.</h2>
     </div>
       <div class="figure-text-layout">
-        <div class="prose"><p>Pause after the active case finishes and saves, then reopen the same compatible study later. The Wiki explains recovery and host limits.</p></div>
+        <div class="prose"><p>Pause finishes and saves the active case before restoring the controlled values. Wait for the saved confirmation before closing the apps. Reopen the same compatible Grasshopper model and study to continue at the first unrecorded case. Synchronous Grasshopper calculations must return before pausing can finish.</p></div>
         <figure class="project-figure">
           <img src="../assets/images/projects/nexosolve/study-paused-dark.png" alt="Paused study with saved progress and resume controls" loading="lazy" decoding="async">
-          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.</figcaption>
+          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.</figcaption>
         </figure>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Reuse compatible results" id="section-8" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>09</span>
+      <span>10</span>
       <h2 class="section-title">Reuse compatible results</h2>
     </div>
       <div class="editorial-split">
-        <div class="prose"><p>Reuse successful cases for a compatible changed domain. Calculation changes block reuse; the Wiki explains the matching and recovery rules.</p></div>
+        <div class="prose"><p>Update domain can reuse successful cases with matching variable IDs, values and calculation signature; failed cases are retried. Calculation changes block reuse. Update the Connector external revision when external files, APIs, solver settings or random-state dependencies change. Resume keeps the original plan and execution settings.</p></div>
         <aside class="margin-note">
           <span>Calculation ownership</span>
           <p>NexoSolve manages the sequence and persistence. Validate the analysis and registered outputs on your own Grasshopper definition.</p>
         </aside>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Keep results on your computer" id="section-9" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>10</span>
+      <span>11</span>
       <h2 class="section-title">Keep results on your computer</h2>
     </div>
       <div class="figure-text-layout">
         <div class="prose"><p>Each committed case is saved locally. Reopen the study to review progress and continue when needed. Export numeric results as CSV, with per-scenario result and geometry files and optional viewport images. Model backups support recovery and comparison. The licensing service handles account and activation information; it does not receive your models or study results.</p></div>
         <figure class="project-figure">
           <img src="../assets/images/projects/nexosolve/study-resume-light.png" alt="Saved study summary with recorded progress ready to resume" loading="lazy" decoding="async">
-          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.</figcaption>
+          <figcaption>Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.</figcaption>
         </figure>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Light and dark workspaces" id="section-10" data-nav-group="Features">
     <div class="section-heading-row">
-      <span>11</span>
+      <span>12</span>
       <h2 class="section-title">Light and dark workspaces</h2>
     </div><div class="project-card-grid">
       <article class="project-info-card">
@@ -255,7 +264,7 @@
         <p>Switch to a darker workspace while keeping the same study controls and workflow.</p>
       </article></div></section><section class="content-section project-editorial-section" data-nav-title="Requirements" id="section-11" data-nav-group="Getting started">
     <div class="section-heading-row">
-      <span>12</span>
+      <span>13</span>
       <h2 class="section-title">Requirements</h2>
     </div>
       <div class="project-table-wrap">
@@ -265,7 +274,7 @@
         </table>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Trial and licensing" id="section-12" data-nav-group="Getting started">
     <div class="section-heading-row">
-      <span>13</span>
+      <span>14</span>
       <h2 class="section-title">Trial and licensing</h2>
     </div>
       <div class="project-table-wrap">
@@ -275,7 +284,7 @@
         </table>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Pricing" id="section-13" data-nav-group="Getting started">
     <div class="section-heading-row">
-      <span>14</span>
+      <span>15</span>
       <h2 class="section-title">Pricing</h2>
     </div>
       <div class="project-table-wrap">
@@ -285,7 +294,7 @@
         </table>
       </div><p class="project-table-note">Each option is a prepaid voucher for one user and one active device. No recurring billing. To purchase and receive your selected voucher, email nexonest.contact@gmail.com. Voucher issuance is handled manually after payment confirmation.</p></section><section class="content-section project-editorial-section" data-nav-title="Account and offline access" id="section-14" data-nav-group="Getting started">
     <div class="section-heading-row">
-      <span>15</span>
+      <span>16</span>
       <h2 class="section-title">Account and offline access</h2>
     </div>
       <div class="editorial-split">
@@ -296,7 +305,7 @@
         </aside>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Install the complete package" id="section-15" data-nav-group="Getting started">
     <div class="section-heading-row">
-      <span>16</span>
+      <span>17</span>
       <h2 class="section-title">Install the complete package</h2>
     </div><ol class="project-process">
       <li>
@@ -316,7 +325,7 @@
         <div><h3>Connect and work in NexoSolve</h3><p>Keep Rhino and your Grasshopper definition open. On Nexo Connector, click Open NexoSolve to launch the installed Windows app. Configure and run your study there while Grasshopper calculates the results. Start with a small study to check the connection and outputs.</p></div>
       </li></ol></section><section class="content-section project-editorial-section" data-nav-title="Questions" id="section-16" data-nav-group="About">
     <div class="section-heading-row">
-      <span>17</span>
+      <span>18</span>
       <h2 class="section-title">Questions</h2>
     </div><div class="project-card-grid">
       <article class="project-info-card">
@@ -344,7 +353,7 @@
         <p>Contact support for a device transfer. Trial history and license expiry remain unchanged.</p>
       </article></div></section><section class="content-section project-editorial-section" data-nav-title="Early-access status" id="section-17" data-nav-group="About">
     <div class="section-heading-row">
-      <span>18</span>
+      <span>19</span>
       <h2 class="section-title">Early-access status</h2>
     </div>
       <div class="project-honesty">
@@ -352,7 +361,7 @@
         <p>Version 0.0.4 Beta is available for Windows x64. Screenshots show the actual application with demonstration study data. Broader native Rhino acceptance remains ongoing; automated checks do not establish the validity of your simulation.</p>
       </div></section><section class="content-section project-editorial-section" data-nav-title="Get NexoSolve" id="section-18" data-nav-group="About">
     <div class="section-heading-row">
-      <span>19</span>
+      <span>20</span>
       <h2 class="section-title">Get NexoSolve</h2>
     </div>
       <div class="project-credits">

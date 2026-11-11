@@ -481,6 +481,7 @@ const PROJECT_PAGE_DATA = {
     "Early-access status": "About",
     "Get NexoSolve": "About",
     "How NexoSolve connects to Grasshopper": "Features",
+    "A finite study in nine cases": "Features",
     "Grasshopper components": "Features"
   },
   "question": "How can you explore a finite design space without losing progress, results, or the calculation context?",
@@ -536,11 +537,19 @@ const PROJECT_PAGE_DATA = {
       "id": "section-2"
     },
     {
+      "id": "finite-study-demo",
+      "title": "A finite study in nine cases",
+      "kind": "video",
+      "video": "../assets/videos/nexosolve/finite-study.webm",
+      "poster": "../assets/images/projects/nexosolve/finite-study-poster.png",
+      "caption": "A short schematic using the toy calculation Area = Width × Height over a 3×3 domain. It illustrates nine serial cases and local saves; it is not a Rhino recording, a building simulation or measured runtime."
+    },
+    {
       "title": "Your study workspace",
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-running-dark.png",
       "alt": "NexoSolve study progress, saved cases and pause controls in dark mode",
-      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.",
       "text": "See completed, failed and remaining cases, active time and estimated time remaining in one workspace. NexoSolve runs cases serially; geometry, simulation and evaluation stay in your Grasshopper definition.",
       "id": "section-3"
     },
@@ -631,7 +640,7 @@ const PROJECT_PAGE_DATA = {
         [
           "03",
           "Run and inspect",
-          "Run serially, keep saved results and inspect the completed study. See the Wiki for the detailed workflow."
+          "Run serially, keep saved results and inspect the completed study. See the component Wiki for registration and connector wiring."
         ]
       ],
       "id": "section-4"
@@ -641,7 +650,7 @@ const PROJECT_PAGE_DATA = {
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/custom-variable-light.png",
       "alt": "Custom variable editor with name, units and allowed numeric values",
-      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.",
       "text": "Name your variables, add units and descriptions, and preserve the order of custom values. Use connected sliders or explicit numeric lists to define the finite domain.",
       "id": "section-5"
     },
@@ -650,7 +659,7 @@ const PROJECT_PAGE_DATA = {
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-review-light.png",
       "alt": "Study summary and confirmation before Run",
-      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.",
       "text": "Check the full case count, project destination, timing and completion settings before starting. Exhaustive enumeration grows with the product of the variable value counts; choose a manageable domain.",
       "id": "section-6"
     },
@@ -659,15 +668,15 @@ const PROJECT_PAGE_DATA = {
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-paused-dark.png",
       "alt": "Paused study with saved progress and resume controls",
-      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
-      "text": "Pause after the active case finishes and saves, then reopen the same compatible study later. The Wiki explains recovery and host limits.",
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.",
+      "text": "Pause finishes and saves the active case before restoring the controlled values. Wait for the saved confirmation before closing the apps. Reopen the same compatible Grasshopper model and study to continue at the first unrecorded case. Synchronous Grasshopper calculations must return before pausing can finish.",
       "id": "section-7"
     },
     {
       "title": "Reuse compatible results",
       "kind": "split",
       "text": [
-        "Reuse successful cases for a compatible changed domain. Calculation changes block reuse; the Wiki explains the matching and recovery rules."
+        "Update domain can reuse successful cases with matching variable IDs, values and calculation signature; failed cases are retried. Calculation changes block reuse. Update the Connector external revision when external files, APIs, solver settings or random-state dependencies change. Resume keeps the original plan and execution settings."
       ],
       "aside": {
         "label": "Calculation ownership",
@@ -680,7 +689,7 @@ const PROJECT_PAGE_DATA = {
       "kind": "figure-text",
       "image": "../assets/images/projects/nexosolve/study-resume-light.png",
       "alt": "Saved study summary with recorded progress ready to resume",
-      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. Follow the Wiki for the current source workflow.",
+      "caption": "Interface capture with demonstration study data; some controls reflect an earlier build. See the component Wiki for current Grasshopper inputs, outputs and wiring.",
       "text": "Each committed case is saved locally. Reopen the study to review progress and continue when needed. Export numeric results as CSV, with per-scenario result and geometry files and optional viewport images. Model backups support recovery and comparison. The licensing service handles account and activation information; it does not receive your models or study results.",
       "id": "section-9"
     },

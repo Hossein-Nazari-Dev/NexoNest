@@ -65,25 +65,31 @@ const server = http.createServer((req,res) => {
       }
       await page.locator('#section-18 .project-docs-button').click();
       await page.waitForURL(base+'/nexosolve-wiki.html');
-      assert.equal(await page.locator('.wiki-formula').count(),10);
-      assert.match(await page.locator('#study-plan').innerText(), /N = ∏ᵢ nᵢ/);
+      assert.equal(await page.locator('.wiki-formula').count(),8);
+      assert.equal(await page.locator('.wiki-content figure, .wiki-content video, #workflow, #study-plan, #recovery, #analysis').count(),0);
+      assert.equal(await page.locator('.wiki-component-index h3').count(),3);
       assert.match(await page.locator('#legacy').innerText(), /hidden compatibility/);
-      assert.match(await page.locator('#legacy').innerText(), /not current desktop modes/);
-      const video = page.locator('.wiki-demo video');
+      for (const href of await page.locator('a[href^="#"]').evaluateAll(links => links.map(link => link.getAttribute('href'))))
+        assert.equal(await page.locator(href).count(),1);
+      await page.locator('.wiki-tool img').evaluateAll(async images => { for(const image of images) {image.loading='eager'; await image.decode();} });
+
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
+      await page.goto(base + '/projects-pages/nexoSolve.html');
+      await page.locator('#section-2 img').evaluate(image => image.decode());
+      const video = page.locator('#finite-study-demo video');
+      assert.equal(await video.count(),1);
       assert.equal(await video.getAttribute('autoplay'),null);
       assert.equal(await video.getAttribute('preload'),'none');
       if (javaScriptEnabled && width===1440) {
         await video.scrollIntoViewIfNeeded(); await video.evaluate(node=>node.play());
-        await page.waitForFunction(()=>document.querySelector('.wiki-demo video').currentTime>0.3);
+        await page.waitForFunction(()=>document.querySelector('#finite-study-demo video').currentTime>0.3);
         await video.evaluate(node=>node.pause());
-        await page.screenshot({path:path.join(root,'tmp/nexosolve-wiki-demo.png')});
+        await page.screenshot({path:path.join(root,'tmp/nexosolve-product-demo.png')});
       }
-      await page.locator('.wiki-tool img').evaluateAll(async images => { for(const image of images) {image.loading='eager'; await image.decode();} });
-
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
       assert.deepEqual(errors,[]);
       await page.close();
     }
-    console.log('PASS: 8 active NexoSolve component anchors, 18 retained section anchors, Wiki workflow/logic, hidden-component limits, bottom CTA, keyboard/history and real schematic playback; JS/no-JS at 1440/390/320 without overflow or page errors.');
+    console.log('PASS: 8 active NexoSolve component anchors, 18 retained section anchors, component-only Wiki, grouped index, product diagram/animation, hidden-component limits, bottom CTA, keyboard/history and real schematic playback; JS/no-JS at 1440/390/320 without overflow or page errors.');
   } finally { await browser?.close(); server.close(); }
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -9,13 +9,48 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-11-08
+reviewed: 2026-11-11
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
 
+## Shared component Wiki structure — 2026-11-11
+
+Both static Wikis use the same reference structure: a short scope header, grouped
+component index with icon/name anchor links, category navigation, and component
+entries containing explanation, Inputs, Outputs, Formula / logic, limits,
+permalink and return-to-index link. CurvAdapt retains 20 entries in five groups;
+NexoSolve has eight active entries in three groups and a short legacy-component
+status section. CurvAdapt notation supports the component formulas. Neither Wiki
+contains general workflow diagrams, demo videos or standalone desktop guides.
+The static HTML owns the reference; css/component-wiki.css remains the shared
+style owner. Native links work without JavaScript; no loading fallback is added.
+
+The NexoSolve connection diagram remains in the product overview at section-2.
+The existing finite-study WebM and poster move from the Wiki to the overview's
+new finite-study-demo section, using the existing video renderer. Manual controls,
+preload=none and the schematic/non-benchmark caption are preserved. General
+first-study, enumeration, recovery and analysis sections are removed from the
+Wiki; the overview owns desktop workflow copy, including pause/reuse limits.
+Overview captions no longer promise a desktop workflow guide in the Wiki.
+Both product pages retain their linked component cards and final Wiki button.
+Product routes, IDs, existing 18 NexoSolve section anchors and all component
+anchors remain unchanged. Former general-guide Wiki fragments are retired;
+no internal links to those removed sections remain. The decision follows the
+owner's request to reserve Wikis for component technical reference.
+
+Current verification: source syntax, generated SEO freshness, static component
+counts, all local fragment destinations, overview-to-component links and media
+ownership passed. Browser scripts were updated for the new boundaries, but could
+not run in this environment because the Playwright module is unavailable. Prior
+browser results below are historical, not verification of this change. No site
+publication, native plugin execution or external service action was performed.
+
 ## NexoSolve overview and component Wiki — 2026-11-08
+
+Historical checkpoint; Wiki scope and media ownership are superseded by the
+2026-11-11 section above.
 
 The existing projects-pages/nexoSolve.html route remains the product overview:
 benefits, existing app screenshots, supported setup, access, questions and purchase
@@ -91,8 +126,8 @@ keyboard, browser history and direct fragment entry; no async data load, persist
 or external math library is needed. The Wiki does not load shared reveal/transition
 assets; the overview opts out of cross-document transitions so repeated reference
 visits and history traversal do not race an animated document swap. Long formulas wrap on mobile; :target marks
-the linked entry. css/curvadapt-wiki.css owns this layout independently of the
-product template. Product styles no longer include disclosure/formula rules.
+the linked entry. css/component-wiki.css now owns this layout independently of the
+product template; css/curvadapt-wiki.css is a compatibility import. Product styles no longer include disclosure/formula rules.
 
 The former sidebar Wiki link is removed. A same-tab Open CurvAdapt Wiki button
 appears in the final section-8 documentation/setup section, above the normal
@@ -2174,7 +2209,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 269 application/configuration/integration/tool/asset files:
 
-`1f5f31203ad36af06819e04e7f845b7413b7eca8f0b666e6b07cdd173c0712a8`
+`0ea249ab5075d4e5e98c51754d5989ecd92e05161b3e78dfc8d6e305e582872b`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2279,6 +2314,7 @@ Source key: `nexosolve`; shell: [projects-pages/nexoSolve.html](projects-pages/n
 | --- | --- |
 | What you gain | `cards` |
 | How NexoSolve connects to Grasshopper | `figure` |
+| A finite study in nine cases | `video` |
 | Your study workspace | `figure-text` |
 | Grasshopper components | `tool-groups` |
 | From definition to saved results | `steps` |
@@ -2796,7 +2832,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/tokens.css](css/tokens.css) | 2693 |
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
-| [curvadapt-wiki.html](curvadapt-wiki.html) | 33327 |
+| [curvadapt-wiki.html](curvadapt-wiki.html) | 33334 |
 | [data/projects-brief.json](data/projects-brief.json) | 13710 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
@@ -2834,7 +2870,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/portfolio.js](js/portfolio.js) | 25404 |
 | [js/product-status.js](js/product-status.js) | 6899 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 155696 |
+| [js/project-page.js](js/project-page.js) | 156761 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 7370 |
 | [js/state.js](js/state.js) | 3441 |
@@ -2844,7 +2880,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [newsletter.html](newsletter.html) | 13235 |
 | [nexonest.html](nexonest.html) | 9636 |
 | [nexorhino/geometry.html](nexorhino/geometry.html) | 3384755 |
-| [nexosolve-wiki.html](nexosolve-wiki.html) | 22572 |
+| [nexosolve-wiki.html](nexosolve-wiki.html) | 16779 |
 | [portfolio.html](portfolio.html) | 39246 |
 | [project-template.html](project-template.html) | 7556 |
 | [projects-pages/abmBootcamp.html](projects-pages/abmBootcamp.html) | 24720 |
@@ -2856,7 +2892,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 9132 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19406 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 19026 |
-| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 30213 |
+| [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 31686 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11470 |
 | [projects-pages/octoCity.html](projects-pages/octoCity.html) | 9176 |
 | [projects-pages/octoLand.html](projects-pages/octoLand.html) | 9581 |
@@ -2867,9 +2903,9 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/techtoTrack.html](projects-pages/techtoTrack.html) | 12491 |
 | [robots.txt](robots.txt) | 66 |
 | [scripts/test-catalog-recovery.cjs](scripts/test-catalog-recovery.cjs) | 9636 |
-| [scripts/test-curvadapt-browser.cjs](scripts/test-curvadapt-browser.cjs) | 5639 |
+| [scripts/test-curvadapt-browser.cjs](scripts/test-curvadapt-browser.cjs) | 6002 |
 | [scripts/test-newsletter-browser.cjs](scripts/test-newsletter-browser.cjs) | 6705 |
-| [scripts/test-nexosolve-browser.cjs](scripts/test-nexosolve-browser.cjs) | 6593 |
+| [scripts/test-nexosolve-browser.cjs](scripts/test-nexosolve-browser.cjs) | 7173 |
 | [scripts/test-podcast-browser.cjs](scripts/test-podcast-browser.cjs) | 4846 |
 | [scripts/test-popup-browser.cjs](scripts/test-popup-browser.cjs) | 2865 |
 | [scripts/test-portfolio-browser.cjs](scripts/test-portfolio-browser.cjs) | 4412 |

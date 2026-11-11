@@ -71,6 +71,9 @@ const server = http.createServer((req,res) => {
       await page.locator('#section-8 .project-docs-button').click();
       await page.waitForURL(base+'/curvadapt-wiki.html');
       assert.equal(await page.locator('.wiki-formula').count(),20);
+      assert.equal(await page.locator('.wiki-content figure, .wiki-content video').count(),0);
+      for (const href of await page.locator('a[href^="#"]').evaluateAll(links => links.map(link => link.getAttribute('href'))))
+        assert.equal(await page.locator(href).count(),1);
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
       assert.deepEqual(errors,[]);
       await page.close();
