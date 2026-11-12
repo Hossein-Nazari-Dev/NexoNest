@@ -17,51 +17,72 @@ status: maintained
 
 ## Evergreen events page and webinar pre-registration — 2026-11-13
 
-`events/index.html` is the permanent NexoNest Events destination at
+`events/index.html` is the single editable NexoNest Events destination at
 https://nexonest.com/events/. The current event is Introduction to Sustainable
-Development in the Built Environment, presented by Hossein Nazari. The page and
-1080 × 1920 story carry Upcoming Event without a scheduled date or a fee promise.
-The page owns the current public copy and event ID; css/events.css and js/events.js
-own its responsive presentation and transport. The approved modular ecosystem
-cover is reused unchanged. The story is assets/webinars/sustainable-development/story.png.
+Development in the Built Environment, presented by Hossein Nazari. Page and story
+use Upcoming Event without a scheduled date. Both language titles are bold; body,
+labels and form controls use larger readable type. The approved ecosystem cover
+is reused. Public copy is limited to event information, choices, actions and result
+states; do not expose storage/provider names, integration details or production
+commentary in pages, emails or promotional materials.
 
-Keep one editable page for the current event. Each event retains an immutable ID.
-Share the current event specifically with `?event=sustainable-development-introduction`;
-an old/unrecognized event query hides the current signup form instead of silently
-registering a visitor for the next event. The generic /events/ URL shows the current
-event. Future events require a deliberate backend allowlist/catalog change; never
-repurpose an existing ID or reinterpret earlier registrant consent.
+The page owns current public copy and event ID; css/events.css and js/events.js
+own responsive presentation and transport. Story and email images live in
+assets/webinars/sustainable-development/. The local 1080 × 1920 story source is
+maintained with the course materials; story.png is its published website copy.
+A specific share link uses `?event=sustainable-development-introduction`. Old or
+unknown event queries hide the current form instead of silently enrolling visitors
+in the next event. Retain event IDs and catalogue rows when updating this page.
 
-Webinars.gs is additive to the shared bound Apps Script. Code.gs remains the sole
-public dispatcher: service=webinar routes POST to webinarPost_, GET to webinarInfo_,
-and webinarConfirm tokens to webinarConfirm_. Preserve every unrelated module,
-property, deployment URL, executing identity, access setting, newsletter record,
-workshop registration and license ledger. Do not replace the full live project
-from this checkout: its live ClimoraSetup.gs companion is outside this source set.
+Webinars.gs is additive to the existing bound Apps Script. Code.gs remains the
+sole dispatcher: POST service=webinar, GET service=webinar and webinarConfirm.
+The existing URL, executing identity, access settings and unrelated modules remain.
+The live ClimoraSetup.gs companion is outside this checkout and must be preserved.
 
-The separate WebinarRegistrations table has the fixed header:
-RegistrationId, EventId, Email, FullName, ConsentVersion, Status, Token, SubmittedAt,
-ConfirmedAt, MailState. It is created lazily by the service and fails closed on an
-unexpected schema. Email is normalized per event, user-controlled sheet text is
-formula-escaped, and name/email/event/consent are validated server-side. Consent
-`webinar-prereg-v1` covers this event's confirmation and event notices only; no
-newsletter subscription, user account, license, payment or guaranteed seat is created.
+WebinarEvents is in the same existing Spreadsheet. Columns: EventId, TitleFa,
+TitleEn, SubtitleFa, Presenter, Status, PageUrl, ConsentVersion, UpdatedAt. The
+current event is seeded only if absent, never overwritten. Event emails read its
+stored title. Upcoming catalogue rows are eligible for registration; confirmation
+looks up each registration's original event, preserving earlier event links.
+Current frontend/meta event ID and the backend current-info ID must be coordinated
+when changing the featured event. No competing spreadsheet or database is created.
 
-Confirmation uses an unguessable seven-day token and existing send-only MailApp
-plus shared public-email admission under the script lock. A pending retry preserves
-the challenge and sends no duplicate email. Confirmed retries remain confirmed.
-Expired pending registrations can request a fresh challenge. MailState records
-sending/sent/unknown; an ambiguous send is not automatically retried. These states
-record sender API results, not recipient inbox delivery. The client requires readable
-JSON and known statuses, retains inputs on uncertainty and never treats no-cors
-transport as success. The confirmation token is restricted to the private Sheet and
-mail recipient; it is never included in public logs or documentation.
+WebinarRegistrations columns are RegistrationId, EventId, Email, FullName,
+ConsentVersion, Status, Token, SubmittedAt, ConfirmedAt, MailState, Occupation,
+SustainabilityFamiliarity, NewsletterOptIn, NewsletterRequestedAt, Phone, EducationLevel. The migration
+appends missing profile/choice/contact headers to an exact legacy ten- or fourteen-column
+schema; existing records/IDs/tokens/statuses remain. Unexpected schemas fail closed.
+The profile selects, phone and education are optional and server-validated. Phone
+digits normalize from Persian/Arabic to Latin; the stored phone is formula-safe. Names and email are
+validated and formula-safe. Email is unique per event under the shared script lock.
 
-Verification: 34 isolated backend checks passed with mock email; page submit and
-old-event guards passed with mocked transport at 1440/390/320px, with no horizontal
-overflow or page errors. Source syntax passed. Live deployment, actual send and
-confirmation acceptance are recorded separately after execution; these local checks
-do not establish Google service or inbox delivery.
+Event consent webinar-prereg-v1 covers this event's confirmation and notices. The
+unchecked optional newsletter choice is separate: after accepted event registration,
+the client calls the unchanged newsletter_subscribe route with consent=true only
+when checked. Existing newsletter double opt-in and unsubscribe remain authoritative.
+The webinar row records the submitted preference, not newsletter membership status.
+A newsletter error cannot undo or misreport the event result; UI explains the
+remaining user action. No automatic account, license, payment or seat is created.
+
+Confirmation uses a seven-day token, existing send-only MailApp and shared mail
+admission. Ordinary pending retries do not resend. Explicit resend=true reuses the
+same unexpired challenge/SubmittedAt under normal limits; it does not invalidate an
+already delivered link. Confirmed retries stay confirmed. Expired requests renew
+in place. MailState sending/sent/unknown describes sender API outcome, not delivery.
+No automatic retry follows an ambiguous send. User inputs survive uncertain transport.
+
+The graphic confirmation uses a table layout, public raster ecosystem illustration,
+bold Persian/English titles, Tahoma/Arial fallbacks, a large confirmation action and
+plain-text alternative. Web-font delivery is not assumed in mail clients. Tokens
+stay in the private Sheet and intended recipient mail, never docs or public logs.
+
+Verification: 57 isolated backend checks passed with mock email, including legacy
+migration, catalogue/profile validation, unchanged resend token and graphic mail.
+Browser checks cover 1440/390/320px, default-off newsletter, successful optional
+newsletter request, newsletter failure isolation and old-event guards. Real sends,
+receipt, confirmation, persisted metadata and published versions are recorded below
+only after execution. Earlier deployment 18 and the first website release passed
+live endpoint/form checks; the enhanced version is pending publication at this point.
 
 ## Shared component Wiki structure — 2026-11-11
 
@@ -2255,9 +2276,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 276 application/configuration/integration/tool/asset files:
+SHA-256 of 277 application/configuration/integration/tool/asset files:
 
-`d44712f4affccbff7b1cf1a1196e2d60b488df3f0a8c69008126cb989b3b53ed`
+`429f2a003eedf080449026c8e3d88b03cf8b900f324462ccbc130c4ccf6da8e2`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2862,13 +2883,14 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/printerra/fifthtry1.mp4](assets/videos/printerra/fifthtry1.mp4) | 2984991 |
 | [assets/videos/printerra/seventhtry1.mp4](assets/videos/printerra/seventhtry1.mp4) | 15987813 |
 | [assets/webinars/sustainable-development/cover.svg](assets/webinars/sustainable-development/cover.svg) | 338465 |
-| [assets/webinars/sustainable-development/story.png](assets/webinars/sustainable-development/story.png) | 126875 |
+| [assets/webinars/sustainable-development/email-cover.png](assets/webinars/sustainable-development/email-cover.png) | 38300 |
+| [assets/webinars/sustainable-development/story.png](assets/webinars/sustainable-development/story.png) | 127897 |
 | [css/base.css](css/base.css) | 650 |
 | [css/component-wiki.css](css/component-wiki.css) | 5474 |
 | [css/components.css](css/components.css) | 12251 |
 | [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 108 |
 | [css/design-suite.css](css/design-suite.css) | 8673 |
-| [css/events.css](css/events.css) | 3529 |
+| [css/events.css](css/events.css) | 4918 |
 | [css/home.css](css/home.css) | 5344 |
 | [css/layout.css](css/layout.css) | 4531 |
 | [css/newsletter.css](css/newsletter.css) | 12740 |
@@ -2887,7 +2909,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [data/projects-brief.json](data/projects-brief.json) | 13710 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
-| [events/index.html](events/index.html) | 5200 |
+| [events/index.html](events/index.html) | 6914 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
 | [files/Portfolio_Academic.pdf](files/Portfolio_Academic.pdf) | 131441 |
 | [index.html](index.html) | 3666 |
@@ -2904,16 +2926,16 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [integrations/google-apps-script/LicensingProducts.gs](integrations/google-apps-script/LicensingProducts.gs) | 5373 |
 | [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2384 |
 | [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9364 |
-| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 10966 |
+| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 11057 |
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
 | [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6501 |
 | [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 15239 |
-| [integrations/google-apps-script/Webinars.gs](integrations/google-apps-script/Webinars.gs) | 7528 |
+| [integrations/google-apps-script/Webinars.gs](integrations/google-apps-script/Webinars.gs) | 12122 |
 | [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 9123 |
 | [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 15955 |
 | [integrations/google-apps-script/WorkshopCatalog.gs](integrations/google-apps-script/WorkshopCatalog.gs) | 5036 |
 | [js/data.js](js/data.js) | 3899 |
-| [js/events.js](js/events.js) | 3014 |
+| [js/events.js](js/events.js) | 4915 |
 | [js/filter.js](js/filter.js) | 4088 |
 | [js/journey.js](js/journey.js) | 30140 |
 | [js/modal.js](js/modal.js) | 5945 |
@@ -2969,7 +2991,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-project-video.cjs](scripts/test-project-video.cjs) | 3409 |
 | [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 13085 |
 | [scripts/test-seo-browser.cjs](scripts/test-seo-browser.cjs) | 6097 |
-| [scripts/test-webinar.cjs](scripts/test-webinar.cjs) | 4385 |
+| [scripts/test-webinar.cjs](scripts/test-webinar.cjs) | 6267 |
 | [scripts/test-workshop-browser.cjs](scripts/test-workshop-browser.cjs) | 6283 |
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 10118 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8140 |

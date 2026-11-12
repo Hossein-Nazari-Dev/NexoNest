@@ -11,7 +11,7 @@ current deployment version, account settings or delivery were checked in this re
 | File | Source responsibility |
 | --- | --- |
 | `Code.gs` | Sole `doPost` / `doGet`; website newsletter and Game Club dispatch, workshop/license routing; email-only newsletter validation and confirmation |
-| `Webinars.gs` | Event-only double opt-in, separate WebinarRegistrations table; no newsletter or license mutation |
+| `Webinars.gs` | Event catalogue and registrations in WebinarEvents/WebinarRegistrations, optional profile and newsletter-request preference, graphic confirmation; no direct newsletter or license mutation |
 | `PublicEmail.gs` | Fixed-window public mail admission, Game Club challenges, signed newsletter unsubscribe |
 | `GameClubEmail.gs` | Game Club verification message and legacy code-copy page |
 | `NewsletterDelivery.gs` | Owner-run campaigns, quota reserve and delivery ledger |

@@ -37,3 +37,8 @@ with mocks unless live tests are expressly authorized.
 The current project pages use `js/project-page.js`; the old JSON renderer is not
 their source of truth. Preserve page URLs, project IDs and serialized contracts
 unless an explicit migration is part of the task.
+
+
+## Public-facing copy
+
+Pages, emails and promotional materials should present event/product information, user choices, actions and result states. Do not expose storage/provider names, integration details, implementation notes or commentary about how the work was produced. Keep required operational contracts in this internal developer guide instead of the public interface.
