@@ -108,18 +108,22 @@ function webinarMessage_(name,email,token,event) {
   const url=ScriptApp.getService().getUrl()+'?webinarConfirm='+encodeURIComponent(token);
   const safe=value=>escape_(String(value));
   const title=event.titleFa+' '+event.subtitleFa;
-  const html='<!doctype html><html><body style="margin:0;background:#e7efed"><table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="padding:24px 12px">'+
-    '<table role="presentation" width="600" cellspacing="0" cellpadding="0" style="width:100%;max-width:600px;background:#f3f7f6;color:#10123c;font-family:Tahoma,Arial,sans-serif">'+
+  const font='Vazir,Tahoma,Arial,sans-serif';
+  const html='<!doctype html><html lang="fa"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<style>@font-face{font-family:Vazir;font-style:normal;font-weight:400;src:url(https://nexonest.com/assets/fonts/Vazir-Regular.woff2) format("woff2")}@font-face{font-family:Vazir;font-style:normal;font-weight:700;src:url(https://nexonest.com/assets/fonts/Vazir-Bold.woff2) format("woff2")}@media screen and (max-width:480px){.email-content{padding:28px 24px 32px!important}.email-title{font-size:27px!important;line-height:44px!important}}</style>'+
+    '<!--[if mso]><style>body,table,td,p,a,h1{font-family:Tahoma,Arial,sans-serif!important}</style><![endif]--></head>'+
+    '<body style="margin:0;background:#e7efed;-webkit-text-size-adjust:100%;font-family:'+font+'"><table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="padding:24px 12px">'+
+    '<table role="presentation" width="600" cellspacing="0" cellpadding="0" style="width:100%;max-width:600px;background:#f3f7f6;color:#10123c;font-family:'+font+'">'+
     '<tr><td style="padding:28px 30px 16px;font-size:13px;letter-spacing:2px;color:#315e52" dir="ltr">NEXONEST <span style="float:right;font-size:11px">UPCOMING EVENT</span></td></tr>'+
     '<tr><td><img src="https://nexonest.com/assets/webinars/sustainable-development/email-cover.png" width="600" alt="زمین، اکوسیستم و محیط ساخته‌شده" style="display:block;width:100%;height:auto;border:0"></td></tr>'+
-    '<tr><td dir="rtl" style="padding:22px 32px 32px;text-align:right;font-size:17px;line-height:1.95">'+
-    '<h1 style="font-size:29px;line-height:1.6;margin:0;font-weight:bold">'+safe(event.titleFa)+'</h1><p style="margin:2px 0 12px;color:#315e52;font-size:20px">'+safe(event.subtitleFa)+'</p>'+
-    '<p dir="ltr" style="font-size:18px;line-height:1.5;margin:0 0 28px;font-weight:bold;text-align:right">'+safe(event.titleEn)+'</p>'+
-    '<p style="margin:0 0 14px">سلام '+safe(name)+'،</p><p style="margin:0 0 24px">درخواستت دریافت شد. برای تأیید نشانی ایمیل و تکمیل پیش‌ثبت‌نام، دکمهٔ زیر را بزن.</p>'+
-    '<table role="presentation" cellspacing="0" cellpadding="0"><tr><td bgcolor="#10123c" style="padding:14px 24px"><a href="'+safe(url)+'" style="font-family:Tahoma,Arial,sans-serif;font-size:18px;font-weight:bold;color:#ffffff;text-decoration:none;display:inline-block">تأیید پیش‌ثبت‌نام ←</a></td></tr></table>'+
-    '<p style="margin:26px 0 12px;padding-top:20px;border-top:1px solid #bfd5ce">جزئیات برگزاری را پس از نهایی‌شدن با ایمیل اطلاع می‌دهیم.</p><p style="font-size:14px;color:#596761;margin:0">این لینک هفت روز اعتبار دارد. پیش‌ثبت‌نام به معنی پرداخت یا رزرو قطعی نیست. اگر این درخواست را نفرستاده‌ای، ایمیل را نادیده بگیر.</p>'+
-    '<p dir="ltr" style="font-size:12px;color:#596761;text-align:left;margin:28px 0 0">NEXONEST · EVENTS</p></td></tr></table></td></tr></table></body></html>';
-  return {to:email,name:'NexoNest',subject:'تأیید پیش‌ثبت‌نام وبینار | '+event.titleFa,body:'سلام '+name+'\nبرای تأیید پیش‌ثبت‌نام «'+title+'» این لینک را باز کنید:\n'+url+'\nاین لینک هفت روز اعتبار دارد. جزئیات برگزاری پس از نهایی‌شدن با ایمیل اطلاع داده می‌شود. پیش‌ثبت‌نام به معنی پرداخت یا رزرو قطعی نیست.',htmlBody:html};
+    '<tr><td class="email-content" dir="rtl" style="padding:32px 36px 36px;text-align:right;font-family:'+font+';font-size:18px;line-height:36px;font-weight:400">'+
+    '<h1 class="email-title" style="font-family:'+font+';font-size:30px;line-height:48px;margin:0 0 4px;font-weight:bold">'+safe(event.titleFa)+'</h1><p style="margin:0 0 12px;color:#315e52;font-size:20px;line-height:36px">'+safe(event.subtitleFa)+'</p>'+
+    '<p dir="ltr" style="font-family:Arial,sans-serif;font-size:18px;line-height:28px;margin:0 0 36px;font-weight:bold;text-align:right">'+safe(event.titleEn)+'</p>'+
+    '<p style="margin:0 0 16px">سلام '+safe(name)+'،</p><p style="margin:0 0 28px">درخواستت دریافت شد. برای تأیید نشانی ایمیل و تکمیل پیش‌ثبت‌نام، دکمهٔ زیر را بزن.</p>'+
+    '<table role="presentation" cellspacing="0" cellpadding="0"><tr><td bgcolor="#10123c" style="padding:14px 24px"><a href="'+safe(url)+'" style="font-family:'+font+';font-size:18px;line-height:30px;font-weight:bold;color:#ffffff;text-decoration:none;display:inline-block">تأیید پیش‌ثبت‌نام ←</a></td></tr></table>'+
+    '<p style="margin:32px 0 16px;padding-top:24px;border-top:1px solid #bfd5ce;font-size:17px;line-height:34px">جزئیات برگزاری را پس از نهایی‌شدن با ایمیل اطلاع می‌دهیم.</p><p style="font-size:15px;line-height:30px;color:#596761;margin:0">این لینک هفت روز اعتبار دارد. اگر این درخواست را نفرستاده‌ای، ایمیل را نادیده بگیر.</p>'+
+    '<p dir="ltr" style="font-family:Arial,sans-serif;font-size:12px;line-height:20px;color:#596761;text-align:left;margin:32px 0 0">NEXONEST · EVENTS</p></td></tr></table></td></tr></table></body></html>';
+  return {to:email,name:'NexoNest',subject:'تأیید پیش‌ثبت‌نام وبینار | '+event.titleFa,body:'سلام '+name+'\nبرای تأیید پیش‌ثبت‌نام «'+title+'» این لینک را باز کنید:\n'+url+'\nاین لینک هفت روز اعتبار دارد. جزئیات برگزاری پس از نهایی‌شدن با ایمیل اطلاع داده می‌شود.',htmlBody:html};
 }
 
 function webinarConfirm_(token) {
@@ -139,7 +143,7 @@ function webinarConfirm_(token) {
     table.getRange(row,6).setValue('confirmed');
     table.getRange(row,9).setValue(new Date());
     SpreadsheetApp.flush();
-    return page_('Pre-registration confirmed','Your email is confirmed for '+event.titleEn+'. Event details will be emailed when available. This is not a paid booking.',true);
+    return page_('Pre-registration confirmed','Your email is confirmed for '+event.titleEn+'. Event details will be emailed when available.',true);
   } catch (error) {
     return page_('Please try again','We could not confirm your pre-registration. Open the same link again later.',false);
   } finally { lock.releaseLock(); }

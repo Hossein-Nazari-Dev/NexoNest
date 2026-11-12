@@ -15,12 +15,43 @@ status: maintained
 
 # NexoNest - Architecture and Developer Handoff
 
+## Single authoritative data workbook - 2026-11-13
+
+The existing Subscribers workbook is the sole operational NexoNest database.
+Locate it in the NexoNest business account; preserve the current bound project.
+Keep workshop registrations/catalogue, product license ledgers, newsletter data,
+and WebinarEvents/WebinarRegistrations in this workbook. Separate worksheet tabs
+are domain tables, not additional databases. Preserve workbook and sheet IDs.
+Workshop.gs explicitly selects this workbook; licensing, public email and webinar
+modules use the same bound project's active workbook. The website newsletter,
+events and NexoBreak Game Club client share the existing deployed endpoint.
+
+Audit: the other workbook, formerly NexoNest Subscriber Store, was created on
+2026-09-05. Its private file identifier is intentionally omitted here.
+A bounded full-grid read of its five 1000-by-12 domain tabs found header rows only:
+Users, ProductSubscriptions, Newsletter, NexoBreak and NexoBreakTasks. Schema
+contains documentation, not participant records. There were no records to migrate.
+No reference to that workbook ID was found in the checked local repositories;
+NexoBreak's subscriber-store wording describes the shared service, not that ID.
+The GitHub-wide search encountered an unrelated inaccessible ModelFold cache;
+targeted NexoNest/NexoBreak searches completed. This is not proof about unknown
+external consumers. The live primary workbook's metadata confirms workshop,
+NexoSolve/Climora license and webinar tables coexist there.
+
+The empty workbook was renamed ARCHIVED - Empty Template - NexoNest Subscriber
+Store, and the new title was verified through Drive metadata. It is retained only
+as a historical empty template, not a second supported database. No records,
+permissions, IDs, deployments, license states or email subscriptions were changed.
+Do not configure new integrations against the archived workbook or create another
+operational workbook for events. This audit did not publish a new Apps Script version.
+
 ## Evergreen events page and webinar pre-registration — 2026-11-13
 
 `events/index.html` is the single editable NexoNest Events destination at
 https://nexonest.com/events/. The current event is Introduction to Sustainable
 Development in the Built Environment, presented by Hossein Nazari. Page and story
-use Upcoming Event without a scheduled date. Both language titles are bold; body,
+use Upcoming Event without a scheduled date. Required name/email/event-email consent controls carry visible asterisks; contact,
+education, activity and familiarity stay optional. Both language titles are bold; body,
 labels and form controls use larger readable type. The approved ecosystem cover
 is reused. Public copy is limited to event information, choices, actions and result
 states; do not expose storage/provider names, integration details or production
@@ -72,8 +103,17 @@ in place. MailState sending/sent/unknown describes sender API outcome, not deliv
 No automatic retry follows an ambiguous send. User inputs survive uncertain transport.
 
 The graphic confirmation uses a table layout, public raster ecosystem illustration,
-bold Persian/English titles, Tahoma/Arial fallbacks, a large confirmation action and
-plain-text alternative. Web-font delivery is not assumed in mail clients. Tokens
+bold Persian/English titles, self-hosted Vazir Regular/Bold (v30.1.0, SIL OFL),
+Tahoma/Arial fallbacks, a large confirmation action and
+plain-text alternative. Body type is 18px/36px, the Persian heading 30px/48px
+(27px/44px on narrow screens), helper text 15px/30px, and content padding 36px
+(24px on mobile). Persian text has no letter spacing; English headings use Arial.
+Web fonts are progressive enhancement: clients that strip font-face still get inline
+sizes/spacing and Tahoma/Arial. An MSO-only rule avoids Outlook custom-font fallback
+issues. Do not claim universal Vazir rendering or rasterize actionable email text.
+The licensed font files live in assets/fonts and are served by the existing site.
+Desktop and 390/320px local previews loaded Vazir without horizontal overflow.
+Live activation of this typography update is recorded after deployment. Tokens
 stay in the private Sheet and intended recipient mail, never docs or public logs.
 
 Verification: 57 isolated backend checks passed with mock email, including legacy
@@ -81,8 +121,12 @@ migration, catalogue/profile validation, unchanged resend token and graphic mail
 Browser checks cover 1440/390/320px, default-off newsletter, successful optional
 newsletter request, newsletter failure isolation and old-event guards. Real sends,
 receipt, confirmation, persisted metadata and published versions are recorded below
-only after execution. Earlier deployment 18 and the first website release passed
-live endpoint/form checks; the enhanced version is pending publication at this point.
+only after execution. Live deployment 19 was published on the same owner, endpoint and Anyone access;
+its public event-info response read the stored catalogue title/status successfully.
+A controlled resend to the user-designated mailbox returned pending-confirmation
+and MailState=sent, preserving the original challenge. The enhanced website build
+b3b3dbb is published. Inbox receipt and confirmation acceptance are recorded below
+after the final check.
 
 ## Shared component Wiki structure — 2026-11-11
 
@@ -2276,9 +2320,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 277 application/configuration/integration/tool/asset files:
+SHA-256 of 280 application/configuration/integration/tool/asset files:
 
-`429f2a003eedf080449026c8e3d88b03cf8b900f324462ccbc130c4ccf6da8e2`
+`d6fc832b5e26045e6b3872bf1b941a544ec8dd1b165513d8db1f7dd9211bf39f`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2741,7 +2785,10 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/documents/bootcamp/GP10.pdf](assets/documents/bootcamp/GP10.pdf) | 8613005 |
 | [assets/documents/bootcamp/GP11.pdf](assets/documents/bootcamp/GP11.pdf) | 3331541 |
 | [assets/documents/printerra/printerra-project-book.pdf](assets/documents/printerra/printerra-project-book.pdf) | 21903363 |
+| [assets/fonts/OFL-Vazir.txt](assets/fonts/OFL-Vazir.txt) | 4480 |
 | [assets/fonts/OFL-Vazirmatn.txt](assets/fonts/OFL-Vazirmatn.txt) | 4391 |
+| [assets/fonts/Vazir-Bold.woff2](assets/fonts/Vazir-Bold.woff2) | 44272 |
+| [assets/fonts/Vazir-Regular.woff2](assets/fonts/Vazir-Regular.woff2) | 43440 |
 | [assets/fonts/Vazirmatn-Bold.ttf](assets/fonts/Vazirmatn-Bold.ttf) | 123036 |
 | [assets/fonts/Vazirmatn-Regular.ttf](assets/fonts/Vazirmatn-Regular.ttf) | 122752 |
 | [assets/icons/GeoFactory.png](assets/icons/GeoFactory.png) | 129035 |
@@ -2930,12 +2977,12 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
 | [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6501 |
 | [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 15239 |
-| [integrations/google-apps-script/Webinars.gs](integrations/google-apps-script/Webinars.gs) | 12122 |
+| [integrations/google-apps-script/Webinars.gs](integrations/google-apps-script/Webinars.gs) | 12948 |
 | [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 9123 |
 | [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 15955 |
 | [integrations/google-apps-script/WorkshopCatalog.gs](integrations/google-apps-script/WorkshopCatalog.gs) | 5036 |
 | [js/data.js](js/data.js) | 3899 |
-| [js/events.js](js/events.js) | 4915 |
+| [js/events.js](js/events.js) | 4922 |
 | [js/filter.js](js/filter.js) | 4088 |
 | [js/journey.js](js/journey.js) | 30140 |
 | [js/modal.js](js/modal.js) | 5945 |

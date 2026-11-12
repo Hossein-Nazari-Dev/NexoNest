@@ -24,7 +24,7 @@
       if(data.newsletterConsent){
         const newsletterController=new AbortController(),newsletterTimer=setTimeout(()=>newsletterController.abort(),30000);
         try{
-          const newsletterResponse=await fetch(endpoint,{method:'POST',mode:'cors',credentials:'omit',signal:newsletterController.signal,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:new URLSearchParams({payload:JSON.stringify({action:'newsletter_subscribe',email:data.email,fullName:data.fullName,occupation:data.occupation,educationLevel:data.educationLevel,consent:true,source:'nexonest.com/events/'+eventId,interests:['Sustainability']})})});
+          const newsletterResponse=await fetch(endpoint,{method:'POST',mode:'cors',credentials:'omit',signal:newsletterController.signal,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:new URLSearchParams({payload:JSON.stringify({action:'newsletter_subscribe',email:data.email,fullName:data.fullName,occupation:data.occupation,educationLevel:data.educationLevel,consent:true,source:'nexonest.com/events/?event='+eventId,interests:['Sustainability']})})});
           if(!newsletterResponse.ok)throw new Error('newsletter-unconfirmed');
           const newsletterResult=await newsletterResponse.json();
           if(newsletterResult.ok!==true || !['pending-confirmation','already-subscribed'].includes(newsletterResult.status))throw new Error('newsletter-unconfirmed');
