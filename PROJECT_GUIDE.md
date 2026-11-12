@@ -113,7 +113,11 @@ sizes/spacing and Tahoma/Arial. An MSO-only rule avoids Outlook custom-font fall
 issues. Do not claim universal Vazir rendering or rasterize actionable email text.
 The licensed font files live in assets/fonts and are served by the existing site.
 Desktop and 390/320px local previews loaded Vazir without horizontal overflow.
-Live activation of this typography update is recorded after deployment. Tokens
+Typography activation: version 21 was published on 2026-11-13 on the same
+existing deployment; the UI confirmed deployment successfully updated. Version 20
+remains the preceding rollback. Website font assets were published in a629ae8,
+and the Pages build completed. This update was verified with desktop/mobile local
+previews and mock email tests; no new real message was sent for the font change. Tokens
 stay in the private Sheet and intended recipient mail, never docs or public logs.
 
 Verification: 57 isolated backend checks passed with mock email, including legacy
