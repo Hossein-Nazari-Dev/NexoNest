@@ -5,6 +5,7 @@ const NEXOBREAK = 'NexoBreak';
 const TOKEN_VALID_DAYS = 7;
 
 function doPost(event) {
+  if (event && event.parameter && event.parameter.service === 'webinar') return webinarPost_(event);
   if (event && event.parameter && event.parameter.service === 'workshop') return workshopPost_(event);
   if (event && event.parameter && event.parameter.service === 'licensing') return licensingPost_(event);
   const lock = LockService.getScriptLock();
@@ -132,6 +133,8 @@ function syncNexoBreak_(data) {
 }
 
 function doGet(event) {
+  if (event && event.parameter && event.parameter.webinarConfirm) return webinarConfirm_(event.parameter.webinarConfirm);
+  if (event && event.parameter && event.parameter.service === 'webinar') return webinarInfo_();
   if (event && event.parameter && event.parameter.view === 'nexobreak-code') return gameClubCopyPage_();
   if (event && event.parameter && event.parameter.unsubscribe) return newsletterUnsubscribe_(event.parameter, false);
   const token = clean_(event && event.parameter && event.parameter.confirm, 100);

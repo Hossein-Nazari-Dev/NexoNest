@@ -3,7 +3,7 @@
 ## Current source ownership — reviewed 2026-11-08
 
 This checkout owns the integrated website dispatcher and the deployable shared
-source set below. There are **13 Apps Script files and one HTML companion**.
+source set below. There are **14 Apps Script files and one HTML companion**.
 `MODULES.md` is the module manifest; dated deployment notes below are historical.
 The current working tree includes later local revisions; no live module hashes,
 current deployment version, account settings or delivery were checked in this review.
@@ -11,6 +11,7 @@ current deployment version, account settings or delivery were checked in this re
 | File | Source responsibility |
 | --- | --- |
 | `Code.gs` | Sole `doPost` / `doGet`; website newsletter and Game Club dispatch, workshop/license routing; email-only newsletter validation and confirmation |
+| `Webinars.gs` | Event-only double opt-in, separate WebinarRegistrations table; no newsletter or license mutation |
 | `PublicEmail.gs` | Fixed-window public mail admission, Game Club challenges, signed newsletter unsubscribe |
 | `GameClubEmail.gs` | Game Club verification message and legacy code-copy page |
 | `NewsletterDelivery.gs` | Owner-run campaigns, quota reserve and delivery ledger |
@@ -116,3 +117,8 @@ confirmation token. Preserve/back up NEWSLETTER_TOKEN_SECRET (created lazily).
 Never rotate it casually. Campaign filtering and desktop consent respect opt-out.
 Previously sent mail cannot be amended. Product/registration emails are separate.
 No deployment, real email or live acceptance is claimed by this update.
+
+
+## Webinar routing — 2026-11-13
+
+Code.gs additionally routes service=webinar and webinarConfirm to Webinars.gs. The current event ID is sustainable-development-introduction. See PROJECT_GUIDE.md for schema, consent, retry and deployment boundaries. The live project also contains its existing ClimoraSetup.gs companion; preserve it.

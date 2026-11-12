@@ -9,11 +9,59 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-11-11
+reviewed: 2026-11-13
 status: maintained
 ---
 
 # NexoNest - Architecture and Developer Handoff
+
+## Evergreen events page and webinar pre-registration — 2026-11-13
+
+`events/index.html` is the permanent NexoNest Events destination at
+https://nexonest.com/events/. The current event is Introduction to Sustainable
+Development in the Built Environment, presented by Hossein Nazari. The page and
+1080 × 1920 story carry Upcoming Event without a scheduled date or a fee promise.
+The page owns the current public copy and event ID; css/events.css and js/events.js
+own its responsive presentation and transport. The approved modular ecosystem
+cover is reused unchanged. The story is assets/webinars/sustainable-development/story.png.
+
+Keep one editable page for the current event. Each event retains an immutable ID.
+Share the current event specifically with `?event=sustainable-development-introduction`;
+an old/unrecognized event query hides the current signup form instead of silently
+registering a visitor for the next event. The generic /events/ URL shows the current
+event. Future events require a deliberate backend allowlist/catalog change; never
+repurpose an existing ID or reinterpret earlier registrant consent.
+
+Webinars.gs is additive to the shared bound Apps Script. Code.gs remains the sole
+public dispatcher: service=webinar routes POST to webinarPost_, GET to webinarInfo_,
+and webinarConfirm tokens to webinarConfirm_. Preserve every unrelated module,
+property, deployment URL, executing identity, access setting, newsletter record,
+workshop registration and license ledger. Do not replace the full live project
+from this checkout: its live ClimoraSetup.gs companion is outside this source set.
+
+The separate WebinarRegistrations table has the fixed header:
+RegistrationId, EventId, Email, FullName, ConsentVersion, Status, Token, SubmittedAt,
+ConfirmedAt, MailState. It is created lazily by the service and fails closed on an
+unexpected schema. Email is normalized per event, user-controlled sheet text is
+formula-escaped, and name/email/event/consent are validated server-side. Consent
+`webinar-prereg-v1` covers this event's confirmation and event notices only; no
+newsletter subscription, user account, license, payment or guaranteed seat is created.
+
+Confirmation uses an unguessable seven-day token and existing send-only MailApp
+plus shared public-email admission under the script lock. A pending retry preserves
+the challenge and sends no duplicate email. Confirmed retries remain confirmed.
+Expired pending registrations can request a fresh challenge. MailState records
+sending/sent/unknown; an ambiguous send is not automatically retried. These states
+record sender API results, not recipient inbox delivery. The client requires readable
+JSON and known statuses, retains inputs on uncertainty and never treats no-cors
+transport as success. The confirmation token is restricted to the private Sheet and
+mail recipient; it is never included in public logs or documentation.
+
+Verification: 34 isolated backend checks passed with mock email; page submit and
+old-event guards passed with mocked transport at 1440/390/320px, with no horizontal
+overflow or page errors. Source syntax passed. Live deployment, actual send and
+confirmation acceptance are recorded separately after execution; these local checks
+do not establish Google service or inbox delivery.
 
 ## Shared component Wiki structure — 2026-11-11
 
@@ -2207,9 +2255,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 269 application/configuration/integration/tool/asset files:
+SHA-256 of 276 application/configuration/integration/tool/asset files:
 
-`0ea249ab5075d4e5e98c51754d5989ecd92e05161b3e78dfc8d6e305e582872b`
+`d44712f4affccbff7b1cf1a1196e2d60b488df3f0a8c69008126cb989b3b53ed`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2813,15 +2861,18 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/nexosolve/finite-study.webm](assets/videos/nexosolve/finite-study.webm) | 602403 |
 | [assets/videos/printerra/fifthtry1.mp4](assets/videos/printerra/fifthtry1.mp4) | 2984991 |
 | [assets/videos/printerra/seventhtry1.mp4](assets/videos/printerra/seventhtry1.mp4) | 15987813 |
+| [assets/webinars/sustainable-development/cover.svg](assets/webinars/sustainable-development/cover.svg) | 338465 |
+| [assets/webinars/sustainable-development/story.png](assets/webinars/sustainable-development/story.png) | 126875 |
 | [css/base.css](css/base.css) | 650 |
 | [css/component-wiki.css](css/component-wiki.css) | 5474 |
 | [css/components.css](css/components.css) | 12251 |
 | [css/curvadapt-wiki.css](css/curvadapt-wiki.css) | 108 |
 | [css/design-suite.css](css/design-suite.css) | 8673 |
+| [css/events.css](css/events.css) | 3529 |
 | [css/home.css](css/home.css) | 5344 |
 | [css/layout.css](css/layout.css) | 4531 |
 | [css/newsletter.css](css/newsletter.css) | 12740 |
-| [css/nexonest.css](css/nexonest.css) | 27273 |
+| [css/nexonest.css](css/nexonest.css) | 28413 |
 | [css/nexorhino-learning.css](css/nexorhino-learning.css) | 5204 |
 | [css/nexorhino.css](css/nexorhino.css) | 554 |
 | [css/podcast.css](css/podcast.css) | 5558 |
@@ -2836,13 +2887,14 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [data/projects-brief.json](data/projects-brief.json) | 13710 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
+| [events/index.html](events/index.html) | 5200 |
 | [files/CV.pdf](files/CV.pdf) | 319151 |
 | [files/Portfolio_Academic.pdf](files/Portfolio_Academic.pdf) | 131441 |
 | [index.html](index.html) | 3666 |
 | [integrations/google-apps-script/ADMIN.md](integrations/google-apps-script/ADMIN.md) | 8751 |
 | [integrations/google-apps-script/AdminConsole.gs](integrations/google-apps-script/AdminConsole.gs) | 19794 |
 | [integrations/google-apps-script/AdminConsoleView.html](integrations/google-apps-script/AdminConsoleView.html) | 70549 |
-| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 22759 |
+| [integrations/google-apps-script/Code.gs](integrations/google-apps-script/Code.gs) | 23085 |
 | [integrations/google-apps-script/GameClubEmail.gs](integrations/google-apps-script/GameClubEmail.gs) | 29481 |
 | [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 8619 |
 | [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 27712 |
@@ -2852,14 +2904,16 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [integrations/google-apps-script/LicensingProducts.gs](integrations/google-apps-script/LicensingProducts.gs) | 5373 |
 | [integrations/google-apps-script/LicensingProfile.gs](integrations/google-apps-script/LicensingProfile.gs) | 2384 |
 | [integrations/google-apps-script/LicensingSheet.gs](integrations/google-apps-script/LicensingSheet.gs) | 9364 |
-| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 10506 |
+| [integrations/google-apps-script/MODULES.md](integrations/google-apps-script/MODULES.md) | 10966 |
 | [integrations/google-apps-script/NewsletterDelivery.gs](integrations/google-apps-script/NewsletterDelivery.gs) | 2283 |
 | [integrations/google-apps-script/PublicEmail.gs](integrations/google-apps-script/PublicEmail.gs) | 6501 |
-| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 14490 |
+| [integrations/google-apps-script/README.md](integrations/google-apps-script/README.md) | 15239 |
+| [integrations/google-apps-script/Webinars.gs](integrations/google-apps-script/Webinars.gs) | 7528 |
 | [integrations/google-apps-script/Workshop-README.md](integrations/google-apps-script/Workshop-README.md) | 9123 |
 | [integrations/google-apps-script/Workshop.gs](integrations/google-apps-script/Workshop.gs) | 15955 |
 | [integrations/google-apps-script/WorkshopCatalog.gs](integrations/google-apps-script/WorkshopCatalog.gs) | 5036 |
 | [js/data.js](js/data.js) | 3899 |
+| [js/events.js](js/events.js) | 3014 |
 | [js/filter.js](js/filter.js) | 4088 |
 | [js/journey.js](js/journey.js) | 30140 |
 | [js/modal.js](js/modal.js) | 5945 |
@@ -2878,7 +2932,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/workshop.js](js/workshop.js) | 7329 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 13235 |
-| [nexonest.html](nexonest.html) | 9636 |
+| [nexonest.html](nexonest.html) | 9748 |
 | [nexorhino/geometry.html](nexorhino/geometry.html) | 3384755 |
 | [nexosolve-wiki.html](nexosolve-wiki.html) | 16779 |
 | [portfolio.html](portfolio.html) | 39246 |
@@ -2915,11 +2969,12 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-project-video.cjs](scripts/test-project-video.cjs) | 3409 |
 | [scripts/test-public-email.cjs](scripts/test-public-email.cjs) | 13085 |
 | [scripts/test-seo-browser.cjs](scripts/test-seo-browser.cjs) | 6097 |
+| [scripts/test-webinar.cjs](scripts/test-webinar.cjs) | 4385 |
 | [scripts/test-workshop-browser.cjs](scripts/test-workshop-browser.cjs) | 6283 |
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 10118 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8140 |
-| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 8810 |
-| [sitemap.xml](sitemap.xml) | 2080 |
+| [scripts/update-seo.cjs](scripts/update-seo.cjs) | 9078 |
+| [sitemap.xml](sitemap.xml) | 2133 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->

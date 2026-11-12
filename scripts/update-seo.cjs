@@ -32,7 +32,7 @@ function meta(html, name, content, property = false) {
 function escape(value) {
   return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'}[ch]));
 }
-const files = ['index.html', 'nexonest.html', 'portfolio.html', 'newsletter.html', 'curvadapt-wiki.html', 'nexosolve-wiki.html',
+const files = ['index.html', 'nexonest.html', 'portfolio.html', 'newsletter.html', 'events/index.html', 'curvadapt-wiki.html', 'nexosolve-wiki.html',
   'licenses/nexorhino.html', 'archicast/season-01.html', 'nexorhino/geometry.html',
   ...fs.readdirSync(path.join(root, 'projects-pages')).filter(f => f.endsWith('.html')).sort().map(f => `projects-pages/${f}`)];
 const urls = [];
@@ -72,7 +72,7 @@ for (const file of files) {
     html = html.replace(fallback, (_, open, close) => `${open}\n${links}\n                    ${close}`);
   }
   assert(!/name="robots"[^>]*noindex/i.test(html), `Unexpected index exclusion: ${file}`);
-  const url = `https://nexonest.com/${file === 'index.html' ? '' : file}`;
+  const url = `https://nexonest.com/${file === 'index.html' ? '' : file === 'events/index.html' ? 'events/' : file}`;
   const canonical = html.match(/rel="canonical" href="([^"]+)"/);
   assert.equal(canonical?.[1], url, `Canonical mismatch: ${file}`);
   urls.push(url);
@@ -115,12 +115,12 @@ for (const file of files) {
   const socialImage = image && !/\.svg(?:\?|$)/i.test(image) ? image : 'https://nexonest.com/assets/profile-formal-v2.png';
   assert(fs.existsSync(path.join(root, new URL(socialImage).pathname)), `Missing social image: ${file}`);
   html = meta(html, 'og:image', socialImage, true);
-  html = meta(html, 'og:image:alt', 'Hossein Nazari — computational design and research', true);
+  html = meta(html, 'og:image:alt', file === 'events/index.html' ? 'NexoNest upcoming webinar: Introduction to Sustainable Development' : 'Hossein Nazari — computational design and research', true);
   html = meta(html, 'twitter:card', 'summary');
   html = meta(html, 'twitter:title', decode(title));
   html = meta(html, 'twitter:description', decode(description));
   html = meta(html, 'twitter:image', socialImage);
-  html = meta(html, 'twitter:image:alt', 'Hossein Nazari — computational design and research');
+  html = meta(html, 'twitter:image:alt', file === 'events/index.html' ? 'NexoNest upcoming webinar: Introduction to Sustainable Development' : 'Hossein Nazari — computational design and research');
   save(file, html);
 }
 let template = read('project-template.html');

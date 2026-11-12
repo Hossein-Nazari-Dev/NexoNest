@@ -121,3 +121,8 @@ using nexonest.contact@gmail.com with URL/account/access preserved. The owner
 confirmed both test emails and HTML rendering. At the owner's request, version 15
 removes the redirecting copy link. Source readback matched and deployment success
 was verified. No third email or newsletter campaign was sent.
+
+
+## Events page and webinar — 2026-11-13
+
+Add Webinars.gs to the existing bound project, then add only the webinar dispatch lines to its current Code.gs. Preserve all current live companion modules and deployment settings. Publish a new version of the same deployment; do not create a competing endpoint or overwrite unrelated local/live revisions. The module uses the existing send-only MailApp scope and shared public mail cap. GET service=webinar exposes only the public event ID and consent version. The separate WebinarRegistrations sheet is created lazily; confirmation is event-only and never subscribes to the newsletter. Local source checks are not deployment or real-email evidence. See PROJECT_GUIDE.md for the complete contract.
