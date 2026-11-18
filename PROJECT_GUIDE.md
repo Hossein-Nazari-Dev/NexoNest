@@ -2344,7 +2344,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 288 application/configuration/integration/tool/asset files:
 
-`03b0f18da2d4be0ffeace1df856601edfbb19f29789eedbaa4f597849252d823`
+`dcd0d989943f4877dd6eeab2919981fc270f1ccd78afdb5ddfbc2e1dfdd85cae`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -3066,7 +3066,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 22947 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 9132 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19406 |
-| [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | 14722 |
+| [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | 14581 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 19026 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 31686 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11470 |
