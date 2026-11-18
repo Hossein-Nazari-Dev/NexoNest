@@ -27,7 +27,9 @@ state-based media, not a continuous screen recording or a performance benchmark.
 The website uses a separate 1920 x 1080 landscape video and poster, capped at
 880 CSS pixels with a responsive 16:9 player. The vertical Persian Reel remains
 a separate downloadable asset. The NexoPider icon uses a pale background and
-dark teal outlines to match the product grid.
+dark teal outlines to match the product grid. The page renderer and icon URLs
+are versioned for this update so cached portrait media and dark icons are not
+reused after a page reload.
 
 The video section now chooses MP4 or WebM MIME type from the source extension.
 The page explicitly distinguishes standalone-file Internalize (32 MiB limit),
@@ -2438,7 +2440,7 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 
 SHA-256 of 290 application/configuration/integration/tool/asset files:
 
-`d775705dc2d7ec0cdf02c741d8cf5d9d9351d701da77c0aadd6e357991be55e2`
+`ec12092fc14f7b836a91880d11ef0359f57b32b10d0df1b19d151e22127ce98c`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -3101,7 +3103,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 33334 |
-| [data/projects-brief.json](data/projects-brief.json) | 14749 |
+| [data/projects-brief.json](data/projects-brief.json) | 14767 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [events/index.html](events/index.html) | 6914 |
@@ -3141,7 +3143,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/portfolio.js](js/portfolio.js) | 25404 |
 | [js/product-status.js](js/product-status.js) | 7647 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 162851 |
+| [js/project-page.js](js/project-page.js) | 162869 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 7370 |
 | [js/state.js](js/state.js) | 3441 |
@@ -3162,7 +3164,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 22947 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 9132 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19406 |
-| [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | 14706 |
+| [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | 14714 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 19026 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 31686 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11470 |

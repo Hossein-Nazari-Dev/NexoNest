@@ -26,7 +26,7 @@ const PROJECT_PAGE_DATA = {
   "title": "NexoPider",
   "shortTitle": "NexoPider",
   "subtitle": "Find the part.<br>Follow the connections.",
-  "icon": "../assets/icons/nexopider.svg",
+  "icon": "../assets/icons/nexopider.svg?v=20261118-light2",
   "iconAlt": "Connected Pods",
   "eyebrow": "NexoNest / Grasshopper workflow",
   "lead": "Large Grasshopper definitions should stay readable. NexoPider brings named Pods, a connected Podnet map, tagged version history and portable Podbox packages to your Grasshopper workspace.",

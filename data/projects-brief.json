@@ -31,7 +31,7 @@
   "title": "NexoPider",
   "excerpt": "A Grasshopper development preview for named Pods, connected navigation, tagged history and portable project packages.",
   "url": "projects-pages/nexoPider.html",
-  "icon": "assets/icons/nexopider.svg",
+  "icon": "assets/icons/nexopider.svg?v=20261118-light2",
   "categories": [
     "products"
   ],
