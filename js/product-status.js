@@ -2,6 +2,31 @@
 (function () {
   const records = /* product-status-data:start */
 {
+  "p_nexopider": {
+    "id": "p_nexopider",
+    "title": "NexoPider",
+    "url": "projects-pages/nexoPider.html",
+    "product": {
+      "editorialId": "nexopider",
+      "release": "development-preview",
+      "platforms": [
+        "Rhino 8",
+        "Grasshopper",
+        "Windows"
+      ],
+      "compatibility": "Development preview for Rhino 8 and Grasshopper on Windows. No public installer.",
+      "primaryAction": {
+        "label": "Explore the workflow",
+        "url": "projects-pages/nexoPider.html#workflow",
+        "kind": "guide"
+      },
+      "verifiedOn": "2026-11-18",
+      "evidence": {
+        "kind": "repository",
+        "reference": "NexoPider 0.7.4 local host demonstration and captured UI states"
+      }
+    }
+  },
   "p_climora": {
     "id": "p_climora",
     "title": "ClimaNest",

@@ -7,6 +7,7 @@ const PROJECT_PAGE_ORDER = [
   "design-suite",
   "nexobreak",
   "nexosolve",
+  "nexopider",
   "octomass",
   "octoland",
   "octocity",
@@ -20,6 +21,150 @@ const PROJECT_PAGE_ORDER = [
 ];
 
 const PROJECT_PAGE_DATA = {
+  nexopider: {
+  "page": "19",
+  "title": "NexoPider",
+  "shortTitle": "NexoPider",
+  "subtitle": "Find the part.<br>Follow the connections.",
+  "icon": "../assets/icons/nexopider.svg",
+  "iconAlt": "Connected Pods",
+  "eyebrow": "NexoNest / Grasshopper workflow",
+  "lead": "Large Grasshopper definitions should stay readable. NexoPider brings named Pods, a connected Podnet map, tagged version history and portable Podbox packages to your Grasshopper workspace.",
+  "role": "Product design & development / Hossein Nazari",
+  "period": "2026 — present",
+  "status": "Development preview",
+  "stack": "Rhino 8 / Grasshopper / Windows",
+  "tags": [
+    "Grasshopper plugin",
+    "Canvas navigation",
+    "Version history",
+    "Project packaging"
+  ],
+  "links": [
+    [
+      "See it in Grasshopper",
+      "#demo"
+    ],
+    [
+      "Explore the workflow",
+      "#workflow"
+    ]
+  ],
+  "question": "How do you keep a large Grasshopper definition understandable as its components, versions and external files multiply?",
+  "response": "Give each part a name, keep its connections visible, and carry the selected project files and saved versions together. Work on the same canvas.",
+  "proof": [
+    [
+      "Pod",
+      "named parts"
+    ],
+    [
+      "Podnet",
+      "connected overview"
+    ],
+    [
+      "History",
+      "tagged versions"
+    ],
+    [
+      "Podbox",
+      "portable ZIP"
+    ]
+  ],
+  "sections": [
+    {
+      "id": "demo",
+      "title": "Inside Grasshopper",
+      "kind": "video",
+      "video": "../assets/videos/nexopider/nexopider-demo-fa.mp4",
+      "poster": "../assets/images/projects/nexopider/NexoPider-cover.png",
+      "caption": "30-second Persian introduction. The middle sequence shows actual Grasshopper captures: zoom-dependent Pods, double-click navigation and version history. Opening and packaging diagrams are explanatory animations."
+    },
+    {
+      "id": "workspace",
+      "title": "Your definition, with a readable overview",
+      "kind": "figure",
+      "image": "../assets/images/projects/nexopider/podnet.png",
+      "alt": "NexoPider Podnet panel below a Grasshopper definition, showing Source, Prepare, Analyze, Merge and Report connections",
+      "caption": "A small demonstration definition in Rhino 8. Podnet follows the connections between named parts."
+    },
+    {
+      "id": "workflow",
+      "title": "From a crowded canvas to named parts",
+      "kind": "steps",
+      "items": [
+        [
+          "01",
+          "Create a Pod",
+          "Select components, then create a Pod from the context menu. Give it a name and tags. Add or remove selected members as the definition evolves."
+        ],
+        [
+          "02",
+          "Navigate through Podnet",
+          "Find a name or tag, follow the links between Pods, and double-click a Pod to focus it on the canvas while keeping the map open."
+        ],
+        [
+          "03",
+          "Move between overview and detail",
+          "Zoom out for compact Pods. Zoom in to see and edit the components on the same Grasshopper canvas."
+        ],
+        [
+          "04",
+          "Keep a named milestone",
+          "Save a version with a name and tags. Browse History and open a saved version as a copy."
+        ]
+      ]
+    },
+    {
+      "id": "compact",
+      "title": "Same canvas. Different levels of detail.",
+      "kind": "figure",
+      "image": "../assets/images/projects/nexopider/compact.png",
+      "alt": "Grasshopper at 50 percent zoom with compact named Pods and Podnet panel",
+      "caption": "The same demonstration definition at 50% zoom; the Podnet map stays available."
+    },
+    {
+      "id": "files",
+      "title": "PodPath and Podbox",
+      "kind": "cards",
+      "items": [
+        [
+          "PodPath",
+          "Keep an input file linked, or internalize a supported standalone file in the definition. Register selected dependency files and folders for packaging."
+        ],
+        [
+          "Podbox",
+          "Make one ZIP containing the current Grasshopper definition, saved history and registered dependencies. Send the package instead of collecting these files separately."
+        ],
+        [
+          "External scripts",
+          "Include a script file together with the dependency files and folders you select. Save changes in your external editor before packaging."
+        ]
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Saved versions, with context",
+      "kind": "figure",
+      "image": "../assets/images/projects/nexopider/history.png",
+      "alt": "NexoPider History panel with Baseline, Clean inputs, Merge fix and Review milestones",
+      "caption": "Named snapshots and tags make earlier decisions easier to find. History is a local snapshot workflow; it does not claim automatic branch merging."
+    },
+    {
+      "id": "sharing",
+      "title": "What travels with the project?",
+      "kind": "split",
+      "text": [
+        "Package the project to carry its definition, saved history and selected dependencies in one ZIP. A folder registered as a dependency is copied with its contents; dependencies are not automatically discovered from script imports.",
+        "Internalize is for a supported standalone input file, up to 32 MiB. Selected dependency folders travel in Podbox rather than being embedded inside the Grasshopper definition.",
+        "Recipients need NexoPider to use its custom components and history, plus any other plugins required by the definition. A plain .gh alone does not carry the complete external project history."
+      ],
+      "aside": {
+        "label": "Development preview",
+        "text": "NexoPider is under active development for Rhino 8 and Grasshopper on Windows. This page previews the workflow; no public installer is offered here."
+      }
+    }
+  ]
+},
   climora: {
   "page": "18",
   "title": "ClimaNest",
@@ -2586,7 +2731,7 @@ function renderSection(section, index, navGroups = {}) {
   if (section.kind === "video") {
     body = `<figure class="project-figure project-demo">
       <video controls playsinline muted loop preload="none" poster="${escapeHtml(section.poster)}" aria-label="${escapeHtml(section.title)}">
-        <source src="${escapeHtml(section.video)}" type="video/webm">
+        <source src="${escapeHtml(section.video)}" type="${/\.mp4(?:[?#]|$)/i.test(section.video) ? "video/mp4" : "video/webm"}">
         <a href="${escapeHtml(section.video)}">Open the animation</a>
       </video><figcaption>${escapeHtml(section.caption)}</figcaption>
     </figure>`;
@@ -2772,7 +2917,7 @@ function renderProjectPage(projectId) {
     "@type": "CreativeWork",
     "name": project.title,
     "description": description,
-    "url": `https://nexonest.com/projects-pages/${({"reframing-genericity":"reframingGenericity.html", "building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", climora:"climora.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", nexosolve:"nexoSolve.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
+    "url": `https://nexonest.com/projects-pages/${({"reframing-genericity":"reframingGenericity.html", "building-alignment":"buildingAlignment.html", "design-suite":"nexonestDesignSuite.html", "abm-bootcamp":"abmBootcamp.html", "sustainable-design":"sustainableDevelopment.html", "code-junkyard":"codeJunkyard.html", "code-junkyard-session-00":"codeJunkyardSession00.html", climora:"climora.html", tectotrack:"techtoTrack.html", curvadapt:"curvAdapt.html", nexobreak:"nexoBreak.html", nexosolve:"nexoSolve.html", nexopider:"nexoPider.html", octomass:"octoMass.html", octoland:"octoLand.html", octocity:"octoCity.html", geofactory:"geoFactory.html", printerra:"prinTerra.html", nexorhino:"nexoRhino.html"})[projectId]}`,
     "author": {"@type":"Person", "name":"Hossein Nazari" },
     "isPartOf": {"@type":"WebSite", "name":"NexoNest", "url":"https://nexonest.com/"}
   };
@@ -2870,6 +3015,7 @@ function renderProjectPage(projectId) {
     "design-suite": "nexonestDesignSuite.html",
     nexobreak: "nexoBreak.html",
     nexosolve: "nexoSolve.html",
+    nexopider: "nexoPider.html",
     octomass: "octoMass.html",
     octoland: "octoLand.html",
     octocity: "octoCity.html",

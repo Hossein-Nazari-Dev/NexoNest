@@ -15,6 +15,24 @@ status: maintained
 
 # NexoNest - Architecture and Developer Handoff
 
+## NexoPider product preview — 2026-11-18
+
+`projects-pages/nexoPider.html` uses the existing `js/project-page.js` renderer.
+The catalogue adds `p_nexopider` as a Grasshopper development preview, with no
+public installer or stable-release claim. Its media combines explanatory motion
+with consecutive authentic Rhino 8 / Grasshopper screenshots from the local
+0.7.4 demonstration: zoom-dependent Pods, Podnet focus and History. This is edited
+state-based media, not a continuous screen recording or a performance benchmark.
+
+The video section now chooses MP4 or WebM MIME type from the source extension.
+The page explicitly distinguishes standalone-file Internalize (32 MiB limit),
+selected dependency folders in Podbox, required recipient plugins and local
+snapshot history. It does not claim automatic dependency discovery or merging.
+Assets are under `assets/images/projects/nexopider`, `assets/videos/nexopider`
+and `assets/icons/nexopider.svg`. Existing backend changes remain outside this task.
+
+
+
 ## Single authoritative data workbook - 2026-11-13
 
 The existing Subscribers workbook is the sole operational NexoNest database.
@@ -2324,9 +2342,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 280 application/configuration/integration/tool/asset files:
+SHA-256 of 288 application/configuration/integration/tool/asset files:
 
-`d6fc832b5e26045e6b3872bf1b941a544ec8dd1b165513d8db1f7dd9211bf39f`
+`03b0f18da2d4be0ffeace1df856601edfbb19f29789eedbaa4f597849252d823`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -2336,6 +2354,7 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 
 | Catalogue ID | Editorial ID | Page | Categories / subcategories |
 | --- | --- | --- | --- |
+| p_nexopider | nexopider | [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | products / grasshopper-plugins |
 | p_climora | climora | [projects-pages/climora.html](projects-pages/climora.html) | products / data-analytics, windows-apps |
 | p_archicast_season_01 | Standalone podcast season | [archicast/season-01.html](archicast/season-01.html) | podcast / archicast-season-01 |
 | p_computational_thinking_workshop_1 | Standalone registration | [CTworkshop01.html](CTworkshop01.html) | events, education / workshop |
@@ -2357,11 +2376,33 @@ This is a content fingerprint, not a Git commit or deployment identifier.
 | p_code_junkyard | code-junkyard | [projects-pages/codeJunkyard.html](projects-pages/codeJunkyard.html) | education / code-junkyard, programming, comp-geo |
 | p_code_junkyard_session_00 | code-junkyard-session-00 | [projects-pages/codeJunkyardSession00.html](projects-pages/codeJunkyardSession00.html) | education / code-junkyard, programming, comp-geo |
 
-Editorial navigation order: `climora` → `tectotrack` → `curvadapt` → `reframing-genericity` → `building-alignment` → `design-suite` → `nexobreak` → `nexosolve` → `octomass` → `octoland` → `octocity` → `geofactory` → `printerra` → `abm-bootcamp` → `sustainable-design` → `code-junkyard` → `code-junkyard-session-00` → `nexorhino`.
+Editorial navigation order: `climora` → `tectotrack` → `curvadapt` → `reframing-genericity` → `building-alignment` → `design-suite` → `nexobreak` → `nexosolve` → `nexopider` → `octomass` → `octoland` → `octocity` → `geofactory` → `printerra` → `abm-bootcamp` → `sustainable-design` → `code-junkyard` → `code-junkyard-session-00` → `nexorhino`.
 
 ### Every editorial project and section
 
 Statuses below quote the current website content; they are not independent product release checks.
+
+#### NexoPider
+
+Source key: `nexopider`; shell: [projects-pages/nexoPider.html](projects-pages/nexoPider.html); printed page label: `19`.
+
+**Published content status:** Development preview.
+
+**Purpose:** Find the part.<br>Follow the connections.
+
+**Role / period:** Product design & development / Hossein Nazari / 2026 — present.
+
+**Stack:** Rhino 8 / Grasshopper / Windows.
+
+| Section | Renderer kind |
+| --- | --- |
+| Inside Grasshopper | `video` |
+| Your definition, with a readable overview | `figure` |
+| From a crowded canvas to named parts | `steps` |
+| Same canvas. Different levels of detail. | `figure` |
+| PodPath and Podbox | `cards` |
+| Saved versions, with context | `figure` |
+| What travels with the project? | `split` |
 
 #### ClimaNest
 
@@ -2808,6 +2849,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/icons/curvadapt-plugin.png](assets/icons/curvadapt-plugin.png) | 930 |
 | [assets/icons/curvadapt.png](assets/icons/curvadapt.png) | 125490 |
 | [assets/icons/nexobreak.svg](assets/icons/nexobreak.svg) | 902 |
+| [assets/icons/nexopider.svg](assets/icons/nexopider.svg) | 384 |
 | [assets/icons/nexorhino.svg](assets/icons/nexorhino.svg) | 977 |
 | [assets/icons/octocity.png](assets/icons/octocity.png) | 87461 |
 | [assets/icons/octoland.png](assets/icons/octoland.png) | 83944 |
@@ -2885,6 +2927,11 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/nexobreak/duck-hunt.png](assets/images/projects/nexobreak/duck-hunt.png) | 613844 |
 | [assets/images/projects/nexobreak/settings-backups.png](assets/images/projects/nexobreak/settings-backups.png) | 698579 |
 | [assets/images/projects/nexobreak/viewport-launcher.png](assets/images/projects/nexobreak/viewport-launcher.png) | 708127 |
+| [assets/images/projects/nexopider/NexoPider-cover.png](assets/images/projects/nexopider/NexoPider-cover.png) | 158540 |
+| [assets/images/projects/nexopider/compact.png](assets/images/projects/nexopider/compact.png) | 97640 |
+| [assets/images/projects/nexopider/focus.png](assets/images/projects/nexopider/focus.png) | 128846 |
+| [assets/images/projects/nexopider/history.png](assets/images/projects/nexopider/history.png) | 127501 |
+| [assets/images/projects/nexopider/podnet.png](assets/images/projects/nexopider/podnet.png) | 127611 |
 | [assets/images/projects/nexosolve/components/community.png](assets/images/projects/nexosolve/components/community.png) | 437 |
 | [assets/images/projects/nexosolve/components/connector.png](assets/images/projects/nexosolve/components/connector.png) | 443 |
 | [assets/images/projects/nexosolve/components/custom-variable.png](assets/images/projects/nexosolve/components/custom-variable.png) | 207 |
@@ -2930,6 +2977,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/bootcamp/GP11.mp4](assets/videos/bootcamp/GP11.mp4) | 8377993 |
 | [assets/videos/bootcamp/GP12.mp4](assets/videos/bootcamp/GP12.mp4) | 6551259 |
 | [assets/videos/curvadapt/curve-demo.webm](assets/videos/curvadapt/curve-demo.webm) | 271181 |
+| [assets/videos/nexopider/nexopider-demo-fa.mp4](assets/videos/nexopider/nexopider-demo-fa.mp4) | 2001711 |
 | [assets/videos/nexosolve/finite-study.webm](assets/videos/nexosolve/finite-study.webm) | 602403 |
 | [assets/videos/printerra/fifthtry1.mp4](assets/videos/printerra/fifthtry1.mp4) | 2984991 |
 | [assets/videos/printerra/seventhtry1.mp4](assets/videos/printerra/seventhtry1.mp4) | 15987813 |
@@ -2957,7 +3005,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [css/ux.css](css/ux.css) | 1930 |
 | [css/workshop.css](css/workshop.css) | 11555 |
 | [curvadapt-wiki.html](curvadapt-wiki.html) | 33334 |
-| [data/projects-brief.json](data/projects-brief.json) | 13710 |
+| [data/projects-brief.json](data/projects-brief.json) | 14749 |
 | [data/projects-jsons/curvadapt.json](data/projects-jsons/curvadapt.json) | 5705 |
 | [data/projects-jsons/tectotrack.json](data/projects-jsons/tectotrack.json) | 3026 |
 | [events/index.html](events/index.html) | 6914 |
@@ -2971,7 +3019,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [integrations/google-apps-script/GameClubEmail.gs](integrations/google-apps-script/GameClubEmail.gs) | 29481 |
 | [integrations/google-apps-script/LICENSE_GATEWAY.md](integrations/google-apps-script/LICENSE_GATEWAY.md) | 8619 |
 | [integrations/google-apps-script/LICENSING.md](integrations/google-apps-script/LICENSING.md) | 27712 |
-| [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 60051 |
+| [integrations/google-apps-script/Licensing.gs](integrations/google-apps-script/Licensing.gs) | 67231 |
 | [integrations/google-apps-script/LicensingAdmin.gs](integrations/google-apps-script/LicensingAdmin.gs) | 11397 |
 | [integrations/google-apps-script/LicensingGateway.gs](integrations/google-apps-script/LicensingGateway.gs) | 2914 |
 | [integrations/google-apps-script/LicensingProducts.gs](integrations/google-apps-script/LicensingProducts.gs) | 5373 |
@@ -2995,9 +3043,9 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/nexorhino-learning.js](js/nexorhino-learning.js) | 2494 |
 | [js/podcast.js](js/podcast.js) | 605 |
 | [js/portfolio.js](js/portfolio.js) | 25404 |
-| [js/product-status.js](js/product-status.js) | 6899 |
+| [js/product-status.js](js/product-status.js) | 7647 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 156761 |
+| [js/project-page.js](js/project-page.js) | 162856 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 7370 |
 | [js/state.js](js/state.js) | 3441 |
@@ -3005,7 +3053,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/workshop.js](js/workshop.js) | 7329 |
 | [licenses/nexorhino.html](licenses/nexorhino.html) | 5564 |
 | [newsletter.html](newsletter.html) | 13235 |
-| [nexonest.html](nexonest.html) | 9748 |
+| [nexonest.html](nexonest.html) | 9835 |
 | [nexorhino/geometry.html](nexorhino/geometry.html) | 3384755 |
 | [nexosolve-wiki.html](nexosolve-wiki.html) | 16779 |
 | [portfolio.html](portfolio.html) | 39246 |
@@ -3018,6 +3066,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 22947 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 9132 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19406 |
+| [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | 14722 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 19026 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 31686 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11470 |
@@ -3047,7 +3096,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [scripts/test-workshop.cjs](scripts/test-workshop.cjs) | 10118 |
 | [scripts/update-project-guide.cjs](scripts/update-project-guide.cjs) | 8140 |
 | [scripts/update-seo.cjs](scripts/update-seo.cjs) | 9078 |
-| [sitemap.xml](sitemap.xml) | 2133 |
+| [sitemap.xml](sitemap.xml) | 2208 |
 
 Root handoff files excluded from the fingerprint: [README.md](README.md), [AGENTS.md](AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md).
 <!-- generated-reference:end -->
