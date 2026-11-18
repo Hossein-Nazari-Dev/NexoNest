@@ -134,12 +134,15 @@ function licensingPost_(event) {
     const raw = event.parameter.payload || (event.postData && event.postData.contents) || '{}';
     if (typeof raw !== 'string' || raw.length > 8192) licenseFail_('invalid_request', 'Request is too large.');
     const request = JSON.parse(raw);
+    licenseValidateNonce_(request);
     const now = Date.now();
     licenseGatewayGuard_(event.parameter, request && request.product, raw, now);
     try { licenseContext_ = licenseResolveProduct_(request.product, true); }
     catch (_) { licenseFail_('invalid_product', 'Unknown or unavailable product.'); }
     const props = PropertiesService.getScriptProperties();
     if (!props.getProperty(licenseProperty_('PRIVATE_KEY')) || !props.getProperty(licenseProperty_('TOKEN_SECRET'))) licenseFail_('unconfigured', 'License service is not configured.', true);
+    const mailGrace = licenseMailGrace_(request, now);
+    if (mailGrace) return json_(Object.assign({ ok: true }, licenseBindResponse_(mailGrace, request)));
     licenseAdmitRequest_(request, now);
     action = request.action;
     const device = request.action === 'guest' ? licenseDevice_(request.device, now) : licenseGet_('Devices', request.device);
@@ -170,7 +173,7 @@ function licensingPost_(event) {
     }
     if (['verify_code', 'profile', 'redeem'].includes(request.action)) licenseRefreshAdminSafely_();
     console.info('License ' + licenseProduct_() + ' ' + action + ': ok');
-    return json_(Object.assign({ ok: true }, result));
+    return json_(Object.assign({ ok: true }, licenseBindResponse_(result, request)));
   } catch (error) {
     console.warn('License ' + licenseProduct_() + ' ' + action + ': ' + (error.code || 'service_error'));
     if (!error.code) console.error('License service failure. Inspect execution diagnostics without logging request credentials.');
@@ -219,7 +222,31 @@ function licenseSendCode_(request, now) {
   return { challenge: challenge, deliveryStatus: record.deliveryStatus, retryAfterSeconds: 60 };
 }
 
+// Transactional ClimaNest sign-in email. No remote images or tracking requests.
+function licenseClimaNestCodeEmail_(email, code) {
+  code = String(code);
+  if (!/^\d{6}$/.test(code)) throw new Error('Invalid sign-in code.');
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="format-detection" content="telephone=no"><title>Your ClimaNest sign-in code</title></head>
+<body style="margin:0;padding:0;background:#eaf2f3;color:#172e34;font-family:Segoe UI,Arial,sans-serif">
+<div style="display:none;max-height:0;overflow:hidden">Your one-time ClimaNest sign-in code. Valid for 10 minutes.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eaf2f3"><tr><td align="center" style="padding:32px 16px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background:#ffffff;border:1px solid #cedfe1;border-radius:16px">
+<tr><td style="padding:24px 28px;border-bottom:1px solid #e0eaec"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="font-size:18px;font-weight:600;letter-spacing:-.4px">NexoNest</td><td align="right" style="font-size:11px;color:#416b72;letter-spacing:1.5px">ACCOUNT ACCESS</td></tr></table></td></tr>
+<tr><td style="padding:32px 28px"><div style="font-size:13px;font-weight:600;color:#32767f;letter-spacing:1.4px">CLIMANEST</div>
+<h1 style="margin:14px 0 16px;font-size:28px;line-height:1.25;font-weight:600;letter-spacing:-.6px">Your sign-in code</h1>
+<p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:#4d646a">Enter this code in ClimaNest to finish signing in.</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:24px 12px;border:1px solid #a8cdd1;border-radius:12px;background:#edf7f8;font:600 36px/1.3 Consolas,monospace;letter-spacing:7px;color:#205b64">${code}</td></tr></table>
+<p style="margin:14px 0 26px;text-align:center;font-size:13px;line-height:1.7;color:#4d646a">Select and copy the six digits, then paste them into ClimaNest.<br>Expires in <strong>10 minutes</strong>.</p>
+<div style="padding-top:20px;border-top:1px solid #e0eaec;font-size:12px;line-height:1.8;color:#60777d">Never share this code. If you did not request it, you can safely ignore this email.</div>
+</td></tr><tr><td style="padding:18px 28px;background:#f4f8f9;border-radius:0 0 16px 16px;font-size:11px;line-height:1.8;color:#60777d">ClimaNest by NexoNest<br>Need help? <a href="mailto:nexonest.contact@gmail.com" style="color:#32767f;text-decoration:underline">Contact NexoNest</a></td></tr>
+</table></td></tr></table></body></html>`;
+  return { to: email, subject: 'Your ClimaNest sign-in code', name: 'NexoNest', replyTo: LICENSE_OWNER,
+    body: 'Your ClimaNest sign-in code is ' + code + '.\nIt expires in 10 minutes. Do not share it. If you did not request it, ignore this email.',
+    htmlBody: html };
+}
+
 function licenseCodeEmail_(email, code) {
+  if (licenseProduct_() === 'climora') return licenseClimaNestCodeEmail_(email, code);
   if (licenseProduct_() !== 'nexosolve') return { to: email, subject: 'Your ' + licenseProductName_() + ' sign-in code', name: 'NexoNest', replyTo: LICENSE_OWNER,
     body: 'Your ' + licenseProductName_() + ' sign-in code is ' + code + '.\nIt expires in 10 minutes. Do not share it. If you did not request it, ignore this email.' };
   const html = '<!doctype html><html><body style="margin:0;background:#EDF5FB;font-family:Arial,sans-serif;color:#17344F">' +
@@ -372,4 +399,68 @@ function licensePublicMailReservation_(channel, email, now, knownAccount) {
 }
 function licensePublicMailFail_(code, message) {
   const error = new Error(message); error.code = code; error.retryable = true; throw error;
+}
+
+function licenseMailGrace_(request, now) {
+  if (licenseProduct_() !== 'climora' || !request || request.product !== 'climora' ||
+      !['check', 'send_code', 'logout'].includes(request.action) ||
+      typeof request.device !== 'string' || !/^[a-f0-9]{64}$/.test(request.device) ||
+      typeof request.session !== 'string' || request.session.length < 20 || request.session.length > 200) return null;
+  const session = licenseGet_('Sessions', licenseHash_(request.session));
+  if (!session || session.revoked || session.device !== request.device ||
+      !Number.isFinite(session.expiresAt) || now > session.expiresAt + 30 * LICENSE_DAY) return null;
+  const account = licenseGet_('Accounts', session.account);
+  const device = licenseGet_('Devices', request.device);
+  if (!account || account.disabled || account.device !== request.device || !device ||
+      device.hash !== request.device || licenseHash_(account.email) !== session.account) return null;
+  // An expired but proven session must still be revocable during emergency access.
+  if (request.action === 'logout') {
+    licenseAdmission_(licenseProperty_('AUTH_REQUEST_MINUTE'), now, 60000, 300);
+    session.revoked = true;
+    licensePut_('Sessions', licenseHash_(request.session), session);
+    SpreadsheetApp.flush();
+    return {};
+  }
+  if (request.action === 'send_code' && (typeof request.email !== 'string' || licenseEmail_(request.email) !== account.email)) return null;
+  if (request.action === 'send_code' && MailApp.getRemainingDailyQuota() !== 0) return null;
+  // A valid session already supplies normal access; do not spend its emergency grant on refresh.
+  if (request.action === 'check' && now < session.expiresAt) return null;
+  let end = account.mailGraceEndsAt;
+  if (end !== undefined) {
+    if (!Number.isFinite(end) || !Number.isFinite(account.mailGraceStartedAt) ||
+        end !== account.mailGraceStartedAt + 2 * LICENSE_DAY || now < account.mailGraceStartedAt || now >= end) return null;
+  } else {
+    // Only an observed exhausted provider quota qualifies, never timeout/cooldown or local UI state.
+    if (MailApp.getRemainingDailyQuota() !== 0) return null;
+    end = now + 2 * LICENSE_DAY;
+  }
+  licenseAdmission_(licenseProperty_('AUTH_REQUEST_MINUTE'), now, 60000, 300);
+  if (account.mailGraceEndsAt === undefined) {
+    account.mailGraceStartedAt = now; account.mailGraceEndsAt = end;
+    licensePut_('Accounts', session.account, account);
+  }
+  device.lastLeaseUntil = Math.max(device.lastLeaseUntil || 0, end);
+  licensePut_('Devices', device.hash, device);
+  SpreadsheetApp.flush();
+  const payload = JSON.stringify({ schema: 1, product: licenseProduct_(), device: device.hash,
+    account: account.id, email: account.email, displayName: account.displayName || '',
+    profileComplete: !!(account.profileCompletedAt && account.displayName), newsletterOptIn: !!account.newsletterOptIn,
+    kind: 'license', allowed: true, reason: 'email_capacity_grace', issuedAt: now, expiresAt: end, entitlementEndsAt: end });
+  const key = PropertiesService.getScriptProperties().getProperty(licenseProperty_('PRIVATE_KEY')).replace(/\\n/g, '\n');
+  const signature = Utilities.base64Encode(Utilities.computeRsaSha256Signature(payload, key, Utilities.Charset.UTF_8));
+  return { lease: { payload: payload, signature: signature }, emailCapacityGrace: true };
+}
+
+function licenseValidateNonce_(request) {
+  if (request && request.nonce !== undefined && (typeof request.nonce !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(request.nonce))) licenseFail_('invalid_request', 'Invalid verification request.');
+}
+function licenseBindResponse_(result, request) {
+  if (!result.lease || request.nonce === undefined) return result;
+  licenseValidateNonce_(request);
+  const lease = JSON.parse(result.lease.payload);
+  lease.nonce = request.nonce; lease.action = request.action;
+  const payload = JSON.stringify(lease);
+  const key = PropertiesService.getScriptProperties().getProperty(licenseProperty_('PRIVATE_KEY')).replace(/\\n/g, '\n');
+  result.lease = {payload: payload, signature: Utilities.base64Encode(Utilities.computeRsaSha256Signature(payload, key, Utilities.Charset.UTF_8))};
+  return result;
 }

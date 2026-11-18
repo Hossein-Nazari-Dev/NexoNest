@@ -9,7 +9,7 @@ tags:
   - developer-handoff
   - documentation
 created: 2026-10-09
-reviewed: 2026-11-13
+reviewed: 2026-11-18
 status: maintained
 ---
 
@@ -32,6 +32,95 @@ Assets are under `assets/images/projects/nexopider`, `assets/videos/nexopider`
 and `assets/icons/nexopider.svg`. Existing backend changes remain outside this task.
 
 
+## ClimaNest online proof and offline policy - 2026-11-18
+
+Live version 25 was confirmed in Apps Script on November 18, 2026. It binds the optional 43-character base64url request nonce and action into the RSA-signed lease, including emergency leases. Malformed nonces fail before admission or account/device mutation. Older clients without nonce retain compatibility; current ClimaNest requires matching nonce/action for every online acceptance. Existing seven-day lease and fixed 48-hour mail-grace deadlines are unchanged. Deployment URL, owner, access settings, product identities and account records were preserved. Rollback is version 24. Only the bounded proof patch was deployed; other local-only gateway changes remain unpublished.
+
+The new ClimaNest client retains offline work until signed expiry, checks Windows-protected cache checkpoints, and distinguishes verification-due from entitlement expiry. A cache migrated from older builds requires one online verification. Offline revocation is necessarily delayed until reconnection or lease expiry; local source is still shipped, so this does not make patched executables uncrackable.
+
+## ClimaNest mail capacity and emergency access — 2026-11-18
+
+ClimaNest has a once-per-account, fixed 48-hour emergency lease when the actual
+provider mail quota is zero. A previously issued session secret must match its
+stored, non-revoked session, active account and registered device. An expired
+session is eligible only within 30 days of expiry. Unknown/new users and disabled
+accounts cannot receive this fallback. The account row stores mailGraceStartedAt
+and mailGraceEndsAt; repeats never extend or reset them. Session/account storage
+keys remain unchanged. Device lastLeaseUntil includes the emergency lease, so a
+transfer cannot ignore its remaining offline life. A proven expired session can
+still be revoked by logout. Profile/voucher changes retain normal authentication.
+
+An active emergency lease can be recovered until its fixed expiry after quota
+recovers. A send-code request then resumes real email verification. Normal valid
+session checks do not spend the one-time grace or shorten paid access. The signed
+schema remains compatible (kind license, reason email_capacity_grace); the updated
+ClimaNest client checks its 48-hour bound and displays the temporary-access state.
+The grace path is ClimaNest-only; other product identities remain unchanged.
+
+The local Licensing.gs includes this helper/call but still contains earlier
+gateway and capacity work absent from production. The bounded live delta uses
+the existing PublicEmail.gs reservation (shared anonymous cap, remaining-quota
+reserve and canonical-mailbox cooldown) for new sign-ins. Existing accounts on
+their bound device keep the existing per-account/device limits and can use the
+reserved capacity. Rejected sends no longer create device records; pending codes
+are flushed before mail submission. Do not overwrite production with the local
+full module. Publication result is recorded separately in climatic tools under
+output/security-audit-2026-11-18. Apps Script confirmed v24 deployed on 2026-11-18 at 11:57 AM (UI time), at the unchanged URL, execution identity and access settings. Initial deployment failed; a subsequent attempt succeeded. Version 23 is the rollback target. Saved editor readback matched; two live invalid requests returned invalid_email and invalid_device without a lease or mail. The emergency branch was tested using fake mail and real ephemeral RSA signing, not a real quota outage.
+
+Tests use fake mail/Sheets and ephemeral RSA keys; no real quota exhaustion or
+account mutation is used as a live test. The checked live-module reconstruction
+passed sign-in, signature, account-key, expiry, recovery, logout and repeat-grant
+tests. This does not resolve public-origin availability, caller-chosen guest
+identities, renderer-held calculations, or the missing Windows publisher certificate.
+
+## Licensing admission hardening — 2026-11-18
+
+The existing Apps Script deployment was updated from version 22 to version 23
+at the same exec URL, executing identity and Anyone access. Version 22 remains
+the rollback. Only licenseAdmitRequest_ in live Licensing.gs was replaced;
+surrounding content was preserved apart from CRLF normalization. Saved editor
+readback matched after reload. No setup, account administration or valid email
+send was executed.
+
+The deployed admission now validates email/challenge/code before consuming
+registration budgets or creating a device, namespaces request/device budgets by
+product, and reserves an independent request budget for verified sessions.
+Unknown-device verification cannot register a device. Five targeted mock tests
+passed; one malformed live request returned invalid_email without sending mail.
+Patch, tests and evidence live in the climatic tools checkout under
+scripts/security/license-admission-patch.mjs, tests/license-admission-patch.test.mjs
+and output/security-audit-2026-11-18/live-v23.json.
+
+This is narrower than the locally checked-out full Licensing.gs. Anonymous mail
+reservation, gateway work and other local changes have not been deployed by
+this update. Preserve that distinction; do not overwrite the live dispatcher or
+license module from the local full copy. Guest-trial policy and signed entitlement
+rules are unchanged. This is not full security-remediation completion.
+
+## ClimaNest email and display name — 2026-11-17
+
+The existing NexoNest Subscriber Backend deployment was updated from version 21
+to version 22 with the ClimaNest-branded HTML sign-in email and plain-text fallback.
+Only licenseClimaNestCodeEmail_ and its climora dispatch branch were added to the
+live Licensing.gs; the rest of that live module was preserved byte-for-byte.
+The local full module was not uploaded because it contains separate gateway
+work not present in the live project. Saved editor readback matched after reload.
+Apps Script confirmed deployment successfully updated on the same exec URL,
+executing identity and Anyone access. Version 21 is the preceding rollback.
+Mock checks confirmed six-digit/leading-zero output, syntax and unchanged mail
+for other products. No real test email was sent; inbox rendering remains unverified.
+Evidence is in the climatic tools checkout: output/email-preview/live-deployment-v22.png.
+
+Admin_Products!B2 had the existing climora product named Climora. A bounded exact
+cell replacement changed only its display name to ClimaNest and updatedAt; readback
+verified the same id and active state. No accounts, leases, keys, trial limits,
+worksheet names or access permissions were changed. The live ClimoraSetup.gs
+was not rerun or replaced. Its legacy module name is an internal compatibility label.
+
+The desktop client now allows one 180-second send-code request and a three-minute
+explicit resend interval. Six code boxes accept paste/autofill immediately and
+preserve input during delayed/uncertain delivery. Server code validity remains ten
+minutes and the existing server rate limit is unchanged.
 
 ## Single authoritative data workbook - 2026-11-13
 
@@ -3140,3 +3229,17 @@ The synchronized Licensing.gs, LicensingAdmin.gs and LicensingSheet.gs now issue
 Three fixed Script-property counters bound licensing requests to 300/minute and anonymous device registrations to 60/hour and 200/day. Validate action and identity before device registration; authenticated calls never register missing devices. These bound mutations and storage, not upstream denial-of-service traffic. Logs contain only action/result codes. Preserve existing signing properties, schemas, trial/device history and other products. Pricing proposals are separate from permitted voucher issuance.
 
 Read-only inspection confirmed active Google deployment 15 on the owner account, same exec URL and Anyone access; its licensing modules still have the previous 6/12-month behavior. This source update is not deployed. A future authorized rollout must update only these three files in the shared project, retaining the latest Code.gs dispatcher, Workshop.gs, PublicEmail.gs, GameClubEmail.gs and the conditional workshop menu hook. Never replace the complete shared project from an older NexoSolve copy. Keep version 15 as rollback and update the server before distributing the new Desktop. No live emails, account/voucher mutations, publication, commit or push were performed for this update. Native/authenticated acceptance remains outstanding; local mocks are not live acceptance.
+
+
+## ClimaNest sign-in email presentation - 2026-11-16
+
+The common Licensing.gs now routes stable product ID `climora` to a self-contained
+ClimaNest HTML sign-in email, with a six-digit code, ten-minute expiry notice,
+copy/paste instructions, plain-text fallback and the existing sender/reply-to.
+The visible product name is ClimaNest even when an older registry row says Climora.
+The table layout and inline CSS match the existing NexoNest transactional mail;
+no remote image, tracking pixel or new companion dependency is introduced.
+NexoSolve and other product message branches are preserved. Shared local copies
+are synchronized; no Google source/deployment/property, recipient data, rate
+limit, trial, quota or live send is changed. Local mock checks and browser preview
+are required before handoff; real Gmail/Outlook delivery is separate acceptance.
