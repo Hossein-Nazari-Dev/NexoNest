@@ -24,6 +24,11 @@ with consecutive authentic Rhino 8 / Grasshopper screenshots from the local
 0.7.4 demonstration: zoom-dependent Pods, Podnet focus and History. This is edited
 state-based media, not a continuous screen recording or a performance benchmark.
 
+The website uses a separate 1920 x 1080 landscape video and poster, capped at
+880 CSS pixels with a responsive 16:9 player. The vertical Persian Reel remains
+a separate downloadable asset. The NexoPider icon uses a pale background and
+dark teal outlines to match the product grid.
+
 The video section now chooses MP4 or WebM MIME type from the source extension.
 The page explicitly distinguishes standalone-file Internalize (32 MiB limit),
 selected dependency folders in Podbox, required recipient plugins and local
@@ -2431,9 +2436,9 @@ Automatic realtime prose maintenance is not guaranteed by a Markdown file.
 <!-- generated-reference:start -->
 ### Source snapshot
 
-SHA-256 of 288 application/configuration/integration/tool/asset files:
+SHA-256 of 290 application/configuration/integration/tool/asset files:
 
-`dcd0d989943f4877dd6eeab2919981fc270f1ccd78afdb5ddfbc2e1dfdd85cae`
+`d775705dc2d7ec0cdf02c741d8cf5d9d9351d701da77c0aadd6e357991be55e2`
 
 Includes current working-tree bytes, including local backend changes and media.
 Excludes this guide, root README/AGENTS, hidden internals and scratch directories.
@@ -3021,6 +3026,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/images/projects/nexopider/focus.png](assets/images/projects/nexopider/focus.png) | 128846 |
 | [assets/images/projects/nexopider/history.png](assets/images/projects/nexopider/history.png) | 127501 |
 | [assets/images/projects/nexopider/podnet.png](assets/images/projects/nexopider/podnet.png) | 127611 |
+| [assets/images/projects/nexopider/web-poster.jpg](assets/images/projects/nexopider/web-poster.jpg) | 252363 |
 | [assets/images/projects/nexosolve/components/community.png](assets/images/projects/nexosolve/components/community.png) | 437 |
 | [assets/images/projects/nexosolve/components/connector.png](assets/images/projects/nexosolve/components/connector.png) | 443 |
 | [assets/images/projects/nexosolve/components/custom-variable.png](assets/images/projects/nexosolve/components/custom-variable.png) | 207 |
@@ -3067,6 +3073,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [assets/videos/bootcamp/GP12.mp4](assets/videos/bootcamp/GP12.mp4) | 6551259 |
 | [assets/videos/curvadapt/curve-demo.webm](assets/videos/curvadapt/curve-demo.webm) | 271181 |
 | [assets/videos/nexopider/nexopider-demo-fa.mp4](assets/videos/nexopider/nexopider-demo-fa.mp4) | 2001711 |
+| [assets/videos/nexopider/nexopider-web-landscape.mp4](assets/videos/nexopider/nexopider-web-landscape.mp4) | 1258110 |
 | [assets/videos/nexosolve/finite-study.webm](assets/videos/nexosolve/finite-study.webm) | 602403 |
 | [assets/videos/printerra/fifthtry1.mp4](assets/videos/printerra/fifthtry1.mp4) | 2984991 |
 | [assets/videos/printerra/seventhtry1.mp4](assets/videos/printerra/seventhtry1.mp4) | 15987813 |
@@ -3134,7 +3141,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [js/portfolio.js](js/portfolio.js) | 25404 |
 | [js/product-status.js](js/product-status.js) | 7647 |
 | [js/project-navigation.js](js/project-navigation.js) | 5870 |
-| [js/project-page.js](js/project-page.js) | 162856 |
+| [js/project-page.js](js/project-page.js) | 162851 |
 | [js/project-renderer.js](js/project-renderer.js) | 17760 |
 | [js/render.js](js/render.js) | 7370 |
 | [js/state.js](js/state.js) | 3441 |
@@ -3155,7 +3162,7 @@ All non-hidden, non-scratch repository files are listed. Inventory inclusion doe
 | [projects-pages/curvAdapt.html](projects-pages/curvAdapt.html) | 22947 |
 | [projects-pages/geoFactory.html](projects-pages/geoFactory.html) | 9132 |
 | [projects-pages/nexoBreak.html](projects-pages/nexoBreak.html) | 19406 |
-| [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | 14581 |
+| [projects-pages/nexoPider.html](projects-pages/nexoPider.html) | 14706 |
 | [projects-pages/nexoRhino.html](projects-pages/nexoRhino.html) | 19026 |
 | [projects-pages/nexoSolve.html](projects-pages/nexoSolve.html) | 31686 |
 | [projects-pages/nexonestDesignSuite.html](projects-pages/nexonestDesignSuite.html) | 11470 |

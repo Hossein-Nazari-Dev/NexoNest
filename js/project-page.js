@@ -75,9 +75,9 @@ const PROJECT_PAGE_DATA = {
       "id": "demo",
       "title": "Inside Grasshopper",
       "kind": "video",
-      "video": "../assets/videos/nexopider/nexopider-demo-fa.mp4",
-      "poster": "../assets/images/projects/nexopider/NexoPider-cover.png",
-      "caption": "30-second Persian introduction. The middle sequence shows actual Grasshopper captures: zoom-dependent Pods, double-click navigation and version history. Opening and packaging diagrams are explanatory animations."
+      "video": "../assets/videos/nexopider/nexopider-web-landscape.mp4",
+      "poster": "../assets/images/projects/nexopider/web-poster.jpg",
+      "caption": "A 30-second overview inside Grasshopper: compact Pods, connected navigation and tagged history. Edited from actual interface states; Podbox collects the definition, saved history and selected dependencies."
     },
     {
       "id": "workspace",
